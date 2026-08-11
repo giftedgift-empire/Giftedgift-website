@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Categories | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 25px 20px;
+    }
+
+    header h1 {
+      color: #f2bd16;
+      margin: 0 0 20px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #f2bd16;
+    }
+
+    .hero {
+      text-align: center;
+      background: white;
+      padding: 50px 20px 35px;
+    }
+
+    .hero h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #555;
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    .categories {
+      max-width: 1100px;
+      margin: auto;
+      padding: 45px 20px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .category-card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .category-card h3 {
+      font-size: 24px;
+      margin-top: 0;
+      color: #123a8c;
+    }
+
+    .category-card p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .category-card a {
+      display: inline-block;
+      margin-top: 12px;
+      background: #f2bd16;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 11px 18px;
+      border-radius: 7px;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>GiftedGift Empire</h1>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="categories.html">Categories</a>
+    <a href="blog.html">Blog</a>
+    <a href="deals.html">Deals</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Shop by Category</h2>
+
+  <p>
+    Browse products by category and discover useful items,
+    digital products, lifestyle finds and recommendations.
+  </p>
+</section>
+
+<main class="categories">
+
+  <div class="category-grid">
+
+    <div class="category-card">
+      <h3>Home & Living</h3>
+      <p>
+        Practical products designed to make everyday life easier,
+        more comfortable and more organized.
+      </p>
+      <a href="shop.html">Shop Now</a>
+    </div>
+
+    <div class="category-card">
+      <h3>Beauty & Lifestyle</h3>
+      <p>
+        Explore carefully selected beauty, personal-care and
+        lifestyle products.
+      </p>
+      <a href="shop.html">Shop Now</a>
+    </div>
+
+    <div class="category-card">
+      <h3>Fashion & Accessories</h3>
+      <p>
+        Discover stylish clothing, accessories and useful
+        fashion finds.
+      </p>
+      <a href="shop.html">Shop Now</a>
+    </div>
+
+    <div class="category-card">
+      <h3>Useful Finds</h3>
+      <p>
+        Discover gift ideas, practical products and smart finds
+        worth exploring.
+      </p>
+      <a href="shop.html">Shop Now</a>
+    </div>
+
+    <div class="category-card">
+      <h3>Digital Products</h3>
+      <p>
+        Browse ebooks, guides, printables and other digital
+        resources from GiftedGift Empire.
+      </p>
+      <a href="shop.html">Shop Now</a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>GiftedGift Empire</strong></p>
+  <p>© 2026 GiftedGift Empire. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
