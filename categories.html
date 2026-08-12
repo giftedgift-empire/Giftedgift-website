@@ -82,6 +82,14 @@
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
+    .category-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 18px;
+    }
+
     .category-card h3 {
       font-size: 24px;
       margin-top: 0;
@@ -102,6 +110,14 @@
       font-weight: bold;
       padding: 11px 18px;
       border-radius: 7px;
+    }
+
+    .loading-message {
+      text-align: center;
+      grid-column: 1 / -1;
+      font-weight: bold;
+      color: #555;
+      padding: 30px;
     }
 
     footer {
@@ -142,53 +158,10 @@
 
 <main class="categories">
 
-  <div class="category-grid">
-
-    <div class="category-card">
-      <h3>Home & Living</h3>
-      <p>
-        Practical products designed to make everyday life easier,
-        more comfortable and more organized.
-      </p>
-      <a href="shop.html?category=Home%20%26%20Living">Shop Now</a>
+  <div id="category-grid" class="category-grid">
+    <div class="loading-message">
+      Loading categories...
     </div>
-
-    <div class="category-card">
-      <h3>Beauty & Lifestyle</h3>
-      <p>
-        Explore carefully selected beauty, personal-care and
-        lifestyle products.
-      </p>
-      <a href="shop.html?category=Beauty%20%26%20Lifestyle">Shop Now</a>
-    </div>
-
-    <div class="category-card">
-      <h3>Fashion & Accessories</h3>
-      <p>
-        Discover stylish clothing, accessories and useful
-        fashion finds.
-      </p>
-      <a href="shop.html?category=Fashion">Shop Now</a>
-    </div>
-
-    <div class="category-card">
-      <h3>Useful Finds</h3>
-      <p>
-        Discover gift ideas, practical products and smart finds
-        worth exploring.
-      </p>
-      <a href="shop.html?category=Useful%20Finds">Shop Now</a>
-    </div>
-
-    <div class="category-card">
-      <h3>Digital Products</h3>
-      <p>
-        Browse ebooks, guides, printables and other digital
-        resources from GiftedGift Empire.
-      </p>
-      <a href="shop.html?category=Digital%20Products">Shop Now</a>
-    </div>
-
   </div>
 
 </main>
@@ -198,5 +171,147 @@
   <p>© 2026 GiftedGift Empire. All rights reserved.</p>
 </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+/* PASTE YOUR sb_publishable_ KEY BETWEEN THE QUOTES BELOW */
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+async function loadCategories() {
+
+  const grid =
+    document.getElementById("category-grid");
+
+  const { data: categories, error } =
+    await supabaseClient
+      .from("categories")
+      .select("*")
+      .order("created_at", {
+        ascending: true
+      });
+
+
+  if (error) {
+
+    console.error(
+      "Error loading categories:",
+      error
+    );
+
+    grid.innerHTML = `
+      <div class="loading-message">
+        Categories could not be loaded.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if (!categories || categories.length === 0) {
+
+    grid.innerHTML = `
+      <div class="loading-message">
+        No categories are available yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML = "";
+
+
+  categories.forEach(category => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "category-card";
+
+
+    const categoryName =
+      category.name || "Category";
+
+
+    const description =
+      category.description || "";
+
+
+    const shopLink =
+      "shop.html?category=" +
+      encodeURIComponent(categoryName);
+
+
+    let imageHTML = "";
+
+    if (category.image_url) {
+
+      imageHTML = `
+        <img
+          src="${escapeHTML(category.image_url)}"
+          alt="${escapeHTML(categoryName)}"
+        >
+      `;
+    }
+
+
+    card.innerHTML = `
+      ${imageHTML}
+
+      <h3>
+        ${escapeHTML(categoryName)}
+      </h3>
+
+      <p>
+        ${escapeHTML(description)}
+      </p>
+
+      <a href="${shopLink}">
+        Shop Now
+      </a>
+    `;
+
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+function escapeHTML(value) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    value == null
+      ? ""
+      : String(value);
+
+  return div.innerHTML;
+}
+
+
+loadCategories();
+
+</script>
+
 </body>
-</html>           
+</html>
