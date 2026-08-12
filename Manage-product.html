@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Products | GiftedGift Empire</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+header {
+  background: #123a8c;
+  color: white;
+  padding: 22px 20px;
+}
+
+header h1 {
+  margin: 0 0 5px;
+  color: #f2bd16;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 25px 18px;
+}
+
+.top-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #123a8c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  margin-bottom: 25px;
+}
+
+.panel h2 {
+  color: #123a8c;
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.checkbox-row input {
+  width: auto;
+}
+
+button {
+  margin-top: 20px;
+  background: #f2bd16;
+  color: #111;
+  border: none;
+  padding: 13px 18px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.product-item {
+  border-bottom: 1px solid #ddd;
+  padding: 18px 0;
+}
+
+.product-item:last-child {
+  border-bottom: none;
+}
+
+.product-item h3 {
+  margin: 0 0 8px;
+}
+
+.small {
+  color: #666;
+  font-size: 14px;
+}
+
+.actions button {
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.delete-btn {
+  background: #ddd;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#status {
+  text-align: center;
+  padding: 50px 20px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="status">
+  Checking admin login...
+</div>
+
+<div id="page" style="display:none;">
+
+<header>
+  <h1>GiftedGift Empire</h1>
+  <p>Manage Products</p>
+</header>
+
+<main class="container">
+
+<a href="dashboard.html" class="top-link">
+  ← Back to Dashboard
+</a>
+
+<div class="panel">
+
+<h2 id="form-title">Add Product</h2>
+
+<form id="product-form">
+
+<input type="hidden" id="product-id">
+
+<label for="name">Product Name</label>
+<input type="text" id="name" required>
+
+<label for="description">Description</label>
+<textarea id="description"></textarea>
+
+<label for="price">Price (€)</label>
+<input type="number" id="price" step="0.01" min="0">
+
+<label for="category">Category</label>
+<select id="category" required>
+  <option value="">Select category</option>
+  <option value="Home & Living">Home & Living</option>
+  <option value="Beauty & Lifestyle">Beauty & Lifestyle</option>
+  <option value="Fashion">Fashion & Accessories</option>
+  <option value="Useful Finds">Useful Finds</option>
+  <option value="Digital Products">Digital Products</option>
+</select>
+
+<label for="image_url">Product Image URL</label>
+<input
+  type="url"
+  id="image_url"
+  placeholder="https://..."
+>
+
+<label for="product_url">Product / Buy Link</label>
+<input
+  type="url"
+  id="product_url"
+  placeholder="https://..."
+>
+
+<label for="rating">Rating</label>
+<input
+  type="number"
+  id="rating"
+  step="0.1"
+  min="0"
+  max="5"
+>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="featured">
+  <label for="featured">Featured Product</label>
+</div>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="in_stock" checked>
+  <label for="in_stock">In Stock</label>
+</div>
+
+<button type="submit" id="save-button">
+  Save Product
+</button>
+
+<button
+  type="button"
+  id="cancel-edit"
+  style="display:none; background:#ddd;"
+>
+  Cancel Edit
+</button>
+
+<p id="form-message" class="message"></p>
+
+</form>
+
+</div>
+
+
+<div class="panel">
+
+<h2>Existing Products</h2>
+
+<div id="product-list">
+  Loading products...
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+async function protectPage() {
+
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error || !data.session) {
+    window.location.replace("admin.html");
+    return;
+  }
+
+  document.getElementById("status").style.display =
+    "none";
+
+  document.getElementById("page").style.display =
+    "block";
+
+  loadProducts();
+}
+
+
+async function loadProducts() {
+
+  const list =
+    document.getElementById("product-list");
+
+  list.textContent = "Loading products...";
+
+  const { data: products, error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+  if (error) {
+    console.error(error);
+    list.textContent =
+      "Products could not be loaded.";
+    return;
+  }
+
+  if (!products || products.length === 0) {
+    list.textContent =
+      "No products have been added yet.";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  products.forEach(product => {
+
+    const item =
+      document.createElement("div");
+
+    item.className = "product-item";
+
+    item.innerHTML = `
+      <h3>${escapeHTML(product.name || "Product")}</h3>
+
+      <p class="small">
+        ${escapeHTML(product.category || "")}
+      </p>
+
+      <p>
+        ${
+          product.price !== null &&
+          product.price !== undefined
+          ? "€" + Number(product.price).toFixed(2)
+          : "No price"
+        }
+      </p>
+
+      <div class="actions">
+
+        <button
+          type="button"
+          onclick="editProduct(${product.id})">
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="delete-btn"
+          onclick="deleteProduct(${product.id})">
+          Delete
+        </button>
+
+      </div>
+    `;
+
+    list.appendChild(item);
+  });
+}
+
+
+document
+  .getElementById("product-form")
+  .addEventListener("submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    const message =
+      document.getElementById("form-message");
+
+    message.textContent = "Saving...";
+
+    const id =
+      document.getElementById("product-id").value;
+
+    const productData = {
+
+      name:
+        document.getElementById("name").value.trim(),
+
+      description:
+        document.getElementById("description").value.trim(),
+
+      price:
+        document.getElementById("price").value
+        ? Number(
+            document.getElementById("price").value
+          )
+        : null,
+
+      category:
+        document.getElementById("category").value,
+
+      image_url:
+        document.getElementById("image_url").value.trim()
+        || null,
+
+      product_url:
+        document.getElementById("product_url").value.trim()
+        || null,
+
+      rating:
+        document.getElementById("rating").value
+        ? Number(
+            document.getElementById("rating").value
+          )
+        : null,
+
+      featured:
+        document.getElementById("featured").checked,
+
+      in_stock:
+        document.getElementById("in_stock").checked
+    };
+
+
+    let error;
+
+    if (id) {
+
+      const result =
+        await supabaseClient
+          .from("products")
+          .update(productData)
+          .eq("id", id);
+
+      error = result.error;
+
+    } else {
+
+      const result =
+        await supabaseClient
+          .from("products")
+          .insert(productData);
+
+      error = result.error;
+    }
+
+
+    if (error) {
+
+      console.error(error);
+
+      message.textContent =
+        "Product could not be saved.";
+
+      return;
+    }
+
+
+    message.textContent =
+      id
+      ? "Product updated successfully."
+      : "Product added successfully.";
+
+    resetForm();
+
+    loadProducts();
+
+  });
+
+
+async function editProduct(id) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+  if (error || !data) {
+    alert("Product could not be opened.");
+    return;
+  }
+
+  document.getElementById("product-id").value =
+    data.id;
+
+  document.getElementById("name").value =
+    data.name || "";
+
+  document.getElementById("description").value =
+    data.description || "";
+
+  document.getElementById("price").value =
+    data.price ?? "";
+
+  document.getElementById("category").value =
+    data.category || "";
+
+  document.getElementById("image_url").value =
+    data.image_url || "";
+
+  document.getElementById("product_url").value =
+    data.product_url || "";
+
+  document.getElementById("rating").value =
+    data.rating ?? "";
+
+  document.getElementById("featured").checked =
+    Boolean(data.featured);
+
+  document.getElementById("in_stock").checked =
+    Boolean(data.in_stock);
+
+  document.getElementById("form-title").textContent =
+    "Edit Product";
+
+  document.getElementById("save-button").textContent =
+    "Update Product";
+
+  document.getElementById("cancel-edit").style.display =
+    "inline-block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+async function deleteProduct(id) {
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to delete this product?"
+    );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient
+      .from("products")
+      .delete()
+      .eq("id", id);
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "Product could not be deleted."
+    );
+
+    return;
+  }
+
+  loadProducts();
+}
+
+
+document
+  .getElementById("cancel-edit")
+  .addEventListener("click", resetForm);
+
+
+function resetForm() {
+
+  document
+    .getElementById("product-form")
+    .reset();
+
+  document.getElementById("product-id").value =
+    "";
+
+  document.getElementById("in_stock").checked =
+    true;
+
+  document.getElementById("form-title").textContent =
+    "Add Product";
+
+  document.getElementById("save-button").textContent =
+    "Save Product";
+
+  document.getElementById("cancel-edit").style.display =
+    "none";
+}
+
+
+function escapeHTML(value) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    value == null ? "" : String(value);
+
+  return div.innerHTML;
+}
+
+
+protectPage();
+
+</script>
+
+</body>
+  </html>
