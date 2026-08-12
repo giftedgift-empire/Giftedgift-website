@@ -136,16 +136,6 @@
       border-radius: 7px;
     }
 
-    .out-of-stock {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 18px;
-      background: #ddd;
-      color: #555;
-      font-weight: bold;
-      border-radius: 7px;
-    }
-
     .message {
       text-align: center;
       padding: 30px;
@@ -191,9 +181,9 @@
 </header>
 
 <section class="hero">
-  <h2>Shop GiftedGift Empire</h2>
+  <h2 id="shop-title">Shop GiftedGift Empire</h2>
 
-  <p>
+  <p id="shop-description">
     Discover carefully selected products, useful finds and recommendations
     designed to make everyday shopping easier.
   </p>
@@ -228,7 +218,7 @@
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
   const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
   const supabaseClient = supabase.createClient(
     SUPABASE_URL,
@@ -238,11 +228,28 @@
   async function loadProducts() {
 
     const container = document.getElementById("products");
+    const title = document.getElementById("shop-title");
+    const description = document.getElementById("shop-description");
 
-    const { data: products, error } = await supabaseClient
+    const params = new URLSearchParams(window.location.search);
+    const selectedCategory = params.get("category");
+
+    if (selectedCategory) {
+      title.textContent = selectedCategory;
+      description.textContent =
+        `Browse products in the ${selectedCategory} category.`;
+    }
+
+    let query = supabaseClient
       .from("products")
       .select("*")
-      .eq("in_stock", true)
+      .eq("in_stock", true);
+
+    if (selectedCategory) {
+      query = query.eq("category", selectedCategory);
+    }
+
+    const { data: products, error } = await query
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -256,7 +263,7 @@
 
     if (!products || products.length === 0) {
       container.innerHTML =
-        '<p class="message">No products are available yet. Please check back soon.</p>';
+        '<p class="message">No products are available in this category yet.</p>';
 
       return;
     }
@@ -266,7 +273,6 @@
     products.forEach(product => {
 
       const card = document.createElement("div");
-
       card.className = "product";
 
       const image = product.image_url
@@ -306,17 +312,13 @@
 
       card.innerHTML = `
         ${image}
-
         ${category}
 
         <h3>${escapeHTML(product.name || "Product")}</h3>
 
         ${description}
-
         ${price}
-
         ${rating}
-
         ${button}
       `;
 
@@ -334,4 +336,4 @@
 </script>
 
 </body>
-</html>     
+</html>
