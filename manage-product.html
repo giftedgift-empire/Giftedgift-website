@@ -1541,13 +1541,60 @@ document
 function resetForm() {
 
   document
-    .getElementById(
-      "product-form"
-    )
+    .getElementById("product-form")
     .reset();
 
+  document
+    .getElementById("product-id")
+    .value = "";
 
   document
-    .getElementById(
-      "product-id"
-    )
+    .getElementById("current-image-url")
+    .value = "";
+
+  document
+    .getElementById("in_stock")
+    .checked = true;
+
+  showImagePreview("");
+
+  document
+    .getElementById("form-title")
+    .textContent = "Add Product";
+
+  document
+    .getElementById("save-button")
+    .textContent = "Save Product";
+
+  document
+    .getElementById("cancel-edit")
+    .style.display = "none";
+}
+
+
+function escapeHTML(value) {
+
+  return String(
+    value == null ? "" : value
+  )
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttribute(value) {
+
+  return escapeHTML(value);
+
+}
+
+
+protectPage();
+
+</script>
+
+</body>
+</html>
