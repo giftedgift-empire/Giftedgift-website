@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Digital Products | GiftedGift Empire</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+header {
+  background: #123a8c;
+  color: white;
+  padding: 22px 20px;
+}
+
+header h1 {
+  margin: 0 0 5px;
+  color: #f2bd16;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 25px 18px;
+}
+
+.top-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #123a8c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  margin-bottom: 25px;
+}
+
+.panel h2 {
+  margin-top: 0;
+  color: #123a8c;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+input[type="file"] {
+  background: #f7f7f7;
+}
+
+.help {
+  color: #666;
+  font-size: 14px;
+  margin-top: 7px;
+}
+
+.image-preview {
+  display: none;
+  margin-top: 15px;
+}
+
+.image-preview img {
+  width: 100%;
+  max-width: 320px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.file-status {
+  padding: 12px;
+  background: #f4f6f8;
+  border-radius: 7px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.checkbox-row input {
+  width: auto;
+}
+
+.checkbox-row label {
+  margin: 0;
+}
+
+button {
+  margin-top: 20px;
+  background: #f2bd16;
+  color: #111;
+  border: none;
+  padding: 13px 18px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.digital-item {
+  border-bottom: 1px solid #ddd;
+  padding: 18px 0;
+}
+
+.digital-item:last-child {
+  border-bottom: none;
+}
+
+.digital-item img {
+  width: 140px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 9px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.digital-item h3 {
+  margin: 0 0 8px;
+  color: #123a8c;
+}
+
+.small {
+  color: #666;
+  font-size: 14px;
+}
+
+.actions button {
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.delete-btn {
+  background: #ddd;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#status {
+  text-align: center;
+  padding: 50px 20px;
+  font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="status">
+  Checking admin login...
+</div>
+
+<div id="page" style="display:none;">
+
+<header>
+  <h1>GiftedGift Empire</h1>
+  <p>Manage Digital Products</p>
+</header>
+
+<main class="container">
+
+<a href="dashboard.html" class="top-link">
+  ← Back to Dashboard
+</a>
+
+<div class="panel">
+
+<h2 id="form-title">
+  Add Digital Product
+</h2>
+
+<form id="digital-form">
+
+<input type="hidden" id="digital-id">
+
+<input type="hidden" id="current-image-url">
+
+<input type="hidden" id="current-file-path">
+
+<input type="hidden" id="current-file-name">
+
+
+<label for="name">
+  Product Name
+</label>
+
+<input
+  type="text"
+  id="name"
+  required
+>
+
+
+<label for="description">
+  Description
+</label>
+
+<textarea
+  id="description"
+  placeholder="Describe this digital product..."
+></textarea>
+
+
+<label for="price">
+  Price (€)
+</label>
+
+<input
+  type="number"
+  id="price"
+  step="0.01"
+  min="0"
+>
+
+
+<label for="product-type">
+  Product Type
+</label>
+
+<select id="product-type" required>
+
+  <option value="paid">
+    Paid
+  </option>
+
+  <option value="free">
+    Free
+  </option>
+
+</select>
+
+
+<label for="category">
+  Category
+</label>
+
+<select id="category" required>
+
+  <option value="">
+    Loading categories...
+  </option>
+
+</select>
+
+
+<label for="cover-image">
+  Cover Image
+</label>
+
+<input
+  type="file"
+  id="cover-image"
+  accept="image/*"
+>
+
+<p class="help">
+  Choose the product cover image from your phone.
+</p>
+
+<div
+  id="image-preview"
+  class="image-preview"
+>
+  <img
+    id="preview-img"
+    alt="Digital product cover preview"
+  >
+</div>
+
+
+<label for="digital-file">
+  Digital File
+</label>
+
+<input
+  type="file"
+  id="digital-file"
+  accept=".pdf,.epub,.zip,.doc,.docx,.txt"
+>
+
+<p class="help">
+  Upload the PDF, ebook or other digital file. Maximum 6 MB for now.
+</p>
+
+<div
+  id="file-status"
+  class="file-status"
+>
+  No digital file selected.
+</div>
+
+
+<label for="checkout-url">
+  Checkout / Payment Link
+</label>
+
+<input
+  type="url"
+  id="checkout-url"
+  placeholder="https://..."
+>
+
+<p class="help">
+  You can leave this empty until your payment system is connected.
+</p>
+
+
+<label for="rating">
+  Rating
+</label>
+
+<input
+  type="number"
+  id="rating"
+  step="0.1"
+  min="0"
+  max="5"
+  placeholder="Example: 4.5"
+>
+
+
+<div class="checkbox-row">
+
+  <input
+    type="checkbox"
+    id="featured"
+  >
+
+  <label for="featured">
+    Featured Digital Product
+  </label>
+
+</div>
+
+
+<div class="checkbox-row">
+
+  <input
+    type="checkbox"
+    id="active"
+    checked
+  >
+
+  <label for="active">
+    Active
+  </label>
+
+</div>
+
+
+<button
+  type="submit"
+  id="save-button"
+>
+  Save Digital Product
+</button>
+
+
+<button
+  type="button"
+  id="cancel-edit"
+  style="display:none; background:#ddd;"
+>
+  Cancel Edit
+</button>
+
+
+<p
+  id="form-message"
+  class="message"
+></p>
+
+</form>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+  Existing Digital Products
+</h2>
+
+<div id="digital-list">
+  Loading digital products...
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+const IMAGE_BUCKET =
+  "product-images";
+
+const DIGITAL_BUCKET =
+  "digital-files";
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+const MAX_IMAGE_SIZE =
+  5 * 1024 * 1024;
+
+const MAX_DIGITAL_SIZE =
+  6 * 1024 * 1024;
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+  if (
+    error ||
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !== ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+    return;
+  }
+
+  document
+    .getElementById("status")
+    .style.display =
+      "none";
+
+  document
+    .getElementById("page")
+    .style.display =
+      "block";
+
+  await loadCategoryOptions();
+
+  await loadDigitalProducts();
+}
+
+
+async function loadCategoryOptions() {
+
+  const select =
+    document.getElementById(
+      "category"
+    );
+
+  select.innerHTML =
+    `<option value="">Select category</option>`;
+
+  const {
+    data: categories,
+    error
+  } =
+    await supabaseClient
+      .from("categories")
+      .select("name")
+      .order(
+        "name",
+        {
+          ascending: true
+        }
+      );
+
+  if (error) {
+
+    console.error(error);
+
+    select.innerHTML =
+      `<option value="">Categories could not be loaded</option>`;
+
+    return;
+  }
+
+  if (
+    !categories ||
+    categories.length === 0
+  ) {
+
+    select.innerHTML =
+      `<option value="">No categories available</option>`;
+
+    return;
+  }
+
+  categories.forEach(
+    category => {
+
+      if (!category.name) {
+        return;
+      }
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        category.name;
+
+      option.textContent =
+        category.name;
+
+      select.appendChild(
+        option
+      );
+    }
+  );
+}
+
+
+document
+  .getElementById("cover-image")
+  .addEventListener(
+    "change",
+    function(event) {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      if (
+        !file.type ||
+        !file.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        alert(
+          "Please choose an image file."
+        );
+
+        event.target.value =
+          "";
+
+        return;
+      }
+
+      if (
+        file.size >
+        MAX_IMAGE_SIZE
+      ) {
+
+        alert(
+          "Please choose an image smaller than 5 MB."
+        );
+
+        event.target.value =
+          "";
+
+        return;
+      }
+
+      const temporaryURL =
+        URL.createObjectURL(
+          file
+        );
+
+      showImagePreview(
+        temporaryURL
+      );
+    }
+  );
+
+
+document
+  .getElementById("digital-file")
+  .addEventListener(
+    "change",
+    function(event) {
+
+      const file =
+        event.target.files[0];
+
+      const status =
+        document.getElementById(
+          "file-status"
+        );
+
+      if (!file) {
+
+        status.textContent =
+          "No digital file selected.";
+
+        return;
+      }
+
+      if (
+        file.size >
+        MAX_DIGITAL_SIZE
+      ) {
+
+        alert(
+          "Please choose a digital file smaller than 6 MB."
+        );
+
+        event.target.value =
+          "";
+
+        status.textContent =
+          "No digital file selected.";
+
+        return;
+      }
+
+      status.textContent =
+        "Selected file: " +
+        file.name;
+    }
+  );
+
+
+function showImagePreview(url) {
+
+  const preview =
+    document.getElementById(
+      "image-preview"
+    );
+
+  const image =
+    document.getElementById(
+      "preview-img"
+    );
+
+  if (!url) {
+
+    preview.style.display =
+      "none";
+
+    image.removeAttribute(
+      "src"
+    );
+
+    return;
+  }
+
+  image.src =
+    url;
+
+  preview.style.display =
+    "block";
+}
+
+
+async function verifyAdminSession() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+  if (
+    error ||
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !== ADMIN_USER_ID
+  ) {
+
+    throw new Error(
+      "Admin login could not be verified."
+    );
+  }
+}
+
+
+function makeSafeFileName(
+  originalName,
+  fallback
+) {
+
+  const parts =
+    originalName.split(".");
+
+  let extension =
+    parts.length > 1
+      ? parts.pop()
+      : "";
+
+  extension =
+    extension
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
+
+  let safeName =
+    parts
+      .join("-")
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9_-]+/g,
+        "-"
+      )
+      .replace(
+        /^-+|-+$/g,
+        ""
+      );
+
+  if (!safeName) {
+    safeName =
+      fallback;
+  }
+
+  return {
+    safeName,
+    extension
+  };
+}
+
+
+async function uploadCoverImage(file) {
+
+  await verifyAdminSession();
+
+  const originalName =
+    file.name ||
+    "digital-cover.jpg";
+
+  const fileInfo =
+    makeSafeFileName(
+      originalName,
+      "digital-cover"
+    );
+
+  let extension =
+    fileInfo.extension ||
+    "jpg";
+
+  const randomPart =
+    Math.random()
+      .toString(36)
+      .slice(2, 10);
+
+  const filePath =
+    "digital-covers/" +
+    Date.now() +
+    "-" +
+    randomPart +
+    "-" +
+    fileInfo.safeName +
+    "." +
+    extension;
+
+  const {
+    data: uploadData,
+    error: uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        IMAGE_BUCKET
+      )
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl:
+            "3600",
+
+          upsert:
+            false,
+
+          contentType:
+            file.type ||
+            undefined
+        }
+      );
+
+  if (uploadError) {
+
+    console.error(
+      uploadError
+    );
+
+    throw uploadError;
+  }
+
+  const uploadedPath =
+    uploadData &&
+    uploadData.path
+      ? uploadData.path
+      : filePath;
+
+  const {
+    data: publicURLData
+  } =
+    supabaseClient
+      .storage
+      .from(
+        IMAGE_BUCKET
+      )
+      .getPublicUrl(
+        uploadedPath
+      );
+
+  if (
+    !publicURLData ||
+    !publicURLData.publicUrl
+  ) {
+
+    throw new Error(
+      "Cover image URL could not be created."
+    );
+  }
+
+  return publicURLData.publicUrl;
+}
+
+
+async function uploadDigitalFile(
+  file
+) {
+
+  await verifyAdminSession();
+
+  const originalName =
+    file.name ||
+    "digital-file";
+
+  const fileInfo =
+    makeSafeFileName(
+      originalName,
+      "digital-file"
+    );
+
+  const randomPart =
+    Math.random()
+      .toString(36)
+      .slice(2, 10);
+
+  let filePath =
+    "digital-products/" +
+    Date.now() +
+    "-" +
+    randomPart +
+    "-" +
+    fileInfo.safeName;
+
+  if (
+    fileInfo.extension
+  ) {
+
+    filePath +=
+      "." +
+      fileInfo.extension;
+  }
+
+  const {
+    data: uploadData,
+    error: uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        DIGITAL_BUCKET
+      )
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl:
+            "3600",
+
+          upsert:
+            false,
+
+          contentType:
+            file.type ||
+            undefined
+        }
+      );
+
+  if (uploadError) {
+
+    console.error(
+      uploadError
+    );
+
+    throw uploadError;
+  }
+
+  return {
+    path:
+      uploadData &&
+      uploadData.path
+        ? uploadData.path
+        : filePath,
+
+    name:
+      originalName
+  };
+}
+
+
+async function loadDigitalProducts() {
+
+  const list =
+    document.getElementById(
+      "digital-list"
+    );
+
+  list.textContent =
+    "Loading digital products...";
+
+  const {
+    data: products,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "digital_products"
+      )
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+  if (error) {
+
+    console.error(error);
+
+    list.textContent =
+      "Digital products could not be loaded.";
+
+    return;
+  }
+
+  if (
+    !products ||
+    products.length === 0
+  ) {
+
+    list.textContent =
+      "No digital products have been added yet.";
+
+    return;
+  }
+
+  list.innerHTML =
+    "";
+
+  products.forEach(
+    product => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "digital-item";
+
+      let imageHTML =
+        "";
+
+      if (
+        product.image_url
+      ) {
+
+        imageHTML = `
+          <img
+            src="${escapeAttribute(product.image_url)}"
+            alt="${escapeAttribute(product.name || "Digital Product")}"
+          >
+        `;
+      }
+
+      const priceHTML =
+        product.product_type ===
+        "free"
+          ? "Free"
+          :
+            product.price !== null &&
+            product.price !== undefined
+              ? "€" +
+                Number(
+                  product.price
+                ).toFixed(2)
+              : "No price";
+
+      const statusHTML =
+        product.active
+          ? "Active"
+          : "Inactive";
+
+      item.innerHTML = `
+
+        ${imageHTML}
+
+        <h3>
+          ${escapeHTML(
+            product.name ||
+            "Digital Product"
+          )}
+        </h3>
+
+        <p class="small">
+          Category:
+          ${escapeHTML(
+            product.category ||
+            ""
+          )}
+        </p>
+
+        <p>
+          ${escapeHTML(
+            priceHTML
+          )}
+        </p>
+
+        <p class="small">
+          Type:
+          ${escapeHTML(
+            product.product_type ||
+            "paid"
+          )}
+        </p>
+
+        <p class="small">
+          File:
+          ${escapeHTML(
+            product.file_name ||
+            "No file"
+          )}
+        </p>
+
+        <p class="small">
+          Status:
+          ${escapeHTML(
+            statusHTML
+          )}
+        </p>
+
+        <div class="actions">
+
+          <button
+            type="button"
+            onclick="editDigitalProduct(${product.id})"
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            class="delete-btn"
+            onclick="deleteDigitalProduct(${product.id})"
+          >
+            Delete
+          </button>
+
+        </div>
+      `;
+
+      list.appendChild(
+        item
+      );
+    }
+  );
+}
+
+
+document
+  .getElementById(
+    "digital-form"
+  )
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      const message =
+        document.getElementById(
+          "form-message"
+        );
+
+      const saveButton =
+        document.getElementById(
+          "save-button"
+        );
+
+      saveButton.disabled =
+        true;
+
+      message.textContent =
+        "Saving...";
+
+      try {
+
+        const id =
+          document.getElementById(
+            "digital-id"
+          ).value;
+
+        let imageURL =
+          document.getElementById(
+            "current-image-url"
+          ).value ||
+          null;
+
+        let filePath =
+          document.getElementById(
+            "current-file-path"
+          ).value ||
+          null;
+
+        let fileName =
+          document.getElementById(
+            "current-file-name"
+          ).value ||
+          null;
+
+        const imageInput =
+          document.getElementById(
+            "cover-image"
+          );
+
+        const fileInput =
+          document.getElementById(
+            "digital-file"
+          );
+
+        const selectedImage =
+          imageInput.files &&
+          imageInput.files.length > 0
+            ? imageInput.files[0]
+            : null;
+
+        const selectedFile =
+          fileInput.files &&
+          fileInput.files.length > 0
+            ? fileInput.files[0]
+            : null;
+
+        if (selectedImage) {
+
+          message.textContent =
+            "Uploading cover image...";
+
+          imageURL =
+            await uploadCoverImage(
+              selectedImage
+            );
+        }
+
+        if (selectedFile) {
+
+          message.textContent =
+            "Uploading digital file...";
+
+          const uploadedFile =
+            await uploadDigitalFile(
+              selectedFile
+            );
+
+          filePath =
+            uploadedFile.path;
+
+          fileName =
+            uploadedFile.name;
+        }
+
+        if (!filePath) {
+
+          throw new Error(
+            "Please choose a digital file."
+          );
+        }
+
+        message.textContent =
+          "Saving digital product...";
+
+        const digitalData = {
+
+          name:
+            document
+              .getElementById(
+                "name"
+              )
+              .value
+              .trim(),
+
+          description:
+            document
+              .getElementById(
+                "description"
+              )
+              .value
+              .trim(),
+
+          price:
+            document
+              .getElementById(
+                "price"
+              )
+              .value
+              ? Number(
+                  document
+                    .getElementById(
+                      "price"
+                    )
+                    .value
+                )
+              : null,
+
+          product_type:
+            document
+              .getElementById(
+                "product-type"
+              )
+              .value,
+
+          category:
+            document
+              .getElementById(
+                "category"
+              )
+              .value,
+
+          image_url:
+            imageURL,
+
+          file_path:
+            filePath,
+
+          file_name:
+            fileName,
+
+          checkout_url:
+            document
+              .getElementById(
+                "checkout-url"
+              )
+              .value
+              .trim()
+            || null,
+
+          rating:
+            document
+              .getElementById(
+                "rating"
+              )
+              .value
+              ? Number(
+                  document
+                    .getElementById(
+                      "rating"
+                    )
+                    .value
+                )
+              : null,
+
+          featured:
+            document
+              .getElementById(
+                "featured"
+              )
+              .checked,
+
+          active:
+            document
+              .getElementById(
+                "active"
+              )
+              .checked
+          };
+
+
+        let saveError;
+
+
+        if (id) {
+
+          const result =
+            await supabaseClient
+              .from(
+                "digital_products"
+              )
+              .update(
+                digitalData
+              )
+              .eq(
+                "id",
+                id
+              );
+
+          saveError =
+            result.error;
+
+        } else {
+
+          const result =
+            await supabaseClient
+              .from(
+                "digital_products"
+              )
+              .insert(
+                digitalData
+              );
+
+          saveError =
+            result.error;
+        }
+
+
+        if (saveError) {
+
+          console.error(
+            saveError
+          );
+
+          throw saveError;
+        }
+
+
+        message.textContent =
+          id
+            ? "Digital product updated successfully."
+            : "Digital product added successfully.";
+
+
+        resetForm();
+
+        await loadDigitalProducts();
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+        message.textContent =
+          error.message ||
+          "Digital product could not be saved.";
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+      }
+
+    }
+  );
+
+
+
+async function editDigitalProduct(id) {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "digital_products"
+      )
+      .select("*")
+      .eq(
+        "id",
+        id
+      )
+      .single();
+
+
+  if (
+    error ||
+    !data
+  ) {
+
+    alert(
+      "Digital product could not be opened."
+    );
+
+    return;
+  }
+
+
+  document.getElementById(
+    "digital-id"
+  ).value =
+    data.id;
+
+
+  document.getElementById(
+    "name"
+  ).value =
+    data.name || "";
+
+
+  document.getElementById(
+    "description"
+  ).value =
+    data.description || "";
+
+
+  document.getElementById(
+    "price"
+  ).value =
+    data.price ?? "";
+
+
+  document.getElementById(
+    "product-type"
+  ).value =
+    data.product_type || "paid";
+
+
+  ensureCategoryOption(
+    data.category || ""
+  );
+
+
+  document.getElementById(
+    "category"
+  ).value =
+    data.category || "";
+
+
+  document.getElementById(
+    "current-image-url"
+  ).value =
+    data.image_url || "";
+
+
+  document.getElementById(
+    "current-file-path"
+  ).value =
+    data.file_path || "";
+
+
+  document.getElementById(
+    "current-file-name"
+  ).value =
+    data.file_name || "";
+
+
+  document.getElementById(
+    "cover-image"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "digital-file"
+  ).value =
+    "";
+
+
+  showImagePreview(
+    data.image_url || ""
+  );
+
+
+  document.getElementById(
+    "file-status"
+  ).textContent =
+    data.file_name
+      ? "Current file: " +
+        data.file_name
+      : "No digital file saved.";
+
+
+  document.getElementById(
+    "checkout-url"
+  ).value =
+    data.checkout_url || "";
+
+
+  document.getElementById(
+    "rating"
+  ).value =
+    data.rating ?? "";
+
+
+  document.getElementById(
+    "featured"
+  ).checked =
+    Boolean(
+      data.featured
+    );
+
+
+  document.getElementById(
+    "active"
+  ).checked =
+    Boolean(
+      data.active
+    );
+
+
+  document.getElementById(
+    "form-title"
+  ).textContent =
+    "Edit Digital Product";
+
+
+  document.getElementById(
+    "save-button"
+  ).textContent =
+    "Update Digital Product";
+
+
+  document.getElementById(
+    "cancel-edit"
+  ).style.display =
+    "inline-block";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+
+function ensureCategoryOption(categoryName) {
+
+  if (!categoryName) {
+    return;
+  }
+
+
+  const select =
+    document.getElementById(
+      "category"
+    );
+
+
+  const exists =
+    Array
+      .from(
+        select.options
+      )
+      .some(
+        option =>
+          option.value ===
+          categoryName
+      );
+
+
+  if (!exists) {
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value =
+      categoryName;
+
+
+    option.textContent =
+      categoryName +
+      " (existing category)";
+
+
+    select.appendChild(
+      option
+    );
+  }
+}
+
+
+
+async function deleteDigitalProduct(id) {
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to delete this digital product?"
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "digital_products"
+      )
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (error) {
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      "Digital product could not be deleted."
+    );
+
+    return;
+  }
+
+
+  await loadDigitalProducts();
+}
+
+
+
+document
+  .getElementById(
+    "cancel-edit"
+  )
+  .addEventListener(
+    "click",
+    resetForm
+  );
+
+
+
+function resetForm() {
+
+  document
+    .getElementById(
+      "digital-form"
+    )
+    .reset();
+
+
+  document.getElementById(
+    "digital-id"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "current-image-url"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "current-file-path"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "current-file-name"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "product-type"
+  ).value =
+    "paid";
+
+
+  document.getElementById(
+    "active"
+  ).checked =
+    true;
+
+
+  document.getElementById(
+    "file-status"
+  ).textContent =
+    "No digital file selected.";
+
+
+  showImagePreview("");
+
+
+  document.getElementById(
+    "form-title"
+  ).textContent =
+    "Add Digital Product";
+
+
+  document.getElementById(
+    "save-button"
+  ).textContent =
+    "Save Digital Product";
+
+
+  document.getElementById(
+    "cancel-edit"
+  ).style.display =
+    "none";
+}
+
+
+
+function escapeHTML(value) {
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+
+function escapeAttribute(value) {
+
+  return escapeHTML(value);
+}
+
+
+
+protectPage();
+
+</script>
+
+</body>
+</html>
