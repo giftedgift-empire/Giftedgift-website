@@ -74,9 +74,33 @@ textarea {
   font-size: 16px;
 }
 
+input[type="file"] {
+  background: #f7f7f7;
+}
+
 textarea {
   min-height: 100px;
   resize: vertical;
+}
+
+.image-help {
+  font-size: 14px;
+  color: #666;
+  margin-top: 7px;
+}
+
+.image-preview {
+  display: none;
+  margin-top: 15px;
+}
+
+.image-preview img {
+  width: 100%;
+  max-width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
 button {
@@ -92,6 +116,11 @@ button {
 
 button:hover {
   opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .cancel-button {
@@ -111,6 +140,15 @@ button:hover {
 
 .category-item:last-child {
   border-bottom: none;
+}
+
+.category-item img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
 }
 
 .category-item h3 {
@@ -179,6 +217,11 @@ button:hover {
   id="category-id"
 >
 
+<input
+  type="hidden"
+  id="current-image-url"
+>
+
 
 <label for="name">
   Category Name
@@ -202,15 +245,30 @@ button:hover {
 ></textarea>
 
 
-<label for="image_url">
-  Category Image URL
+<label for="category-image">
+  Category Image
 </label>
 
 <input
-  type="url"
-  id="image_url"
-  placeholder="https://..."
+  type="file"
+  id="category-image"
+  accept="image/*"
 >
+
+<p class="image-help">
+  Tap Choose File to select an image from your phone.
+</p>
+
+
+<div
+  id="image-preview"
+  class="image-preview"
+>
+  <img
+    id="preview-img"
+    alt="Category image preview"
+  >
+</div>
 
 
 <label for="slug">
@@ -284,6 +342,12 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
+const STORAGE_BUCKET =
+  "product-images";
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
 
 const supabaseClient =
   supabase.createClient(
@@ -298,9 +362,12 @@ async function protectPage() {
   const { data, error } =
     await supabaseClient.auth.getSession();
 
+
   if (
     error ||
-    !data.session
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !== ADMIN_USER_ID
   ) {
 
     window.location.replace(
@@ -313,15 +380,263 @@ async function protectPage() {
 
   document
     .getElementById("status")
-    .style.display = "none";
+    .style.display =
+      "none";
 
 
   document
     .getElementById("page")
-    .style.display = "block";
+    .style.display =
+      "block";
 
 
   loadCategories();
+}
+
+
+
+document
+  .getElementById("category-image")
+  .addEventListener(
+    "change",
+    function(event) {
+
+      const file =
+        event.target.files[0];
+
+
+      if (!file) {
+        return;
+      }
+
+
+      if (
+        !file.type ||
+        !file.type.startsWith("image/")
+      ) {
+
+        alert(
+          "Please choose an image file."
+        );
+
+        event.target.value = "";
+
+        return;
+      }
+
+
+      if (
+        file.size >
+        5 * 1024 * 1024
+      ) {
+
+        alert(
+          "Please choose an image smaller than 5 MB."
+        );
+
+        event.target.value = "";
+
+        return;
+      }
+
+
+      const temporaryURL =
+        URL.createObjectURL(file);
+
+
+      showImagePreview(
+        temporaryURL
+      );
+
+    }
+  );
+
+
+
+function showImagePreview(url) {
+
+  const preview =
+    document.getElementById(
+      "image-preview"
+    );
+
+  const image =
+    document.getElementById(
+      "preview-img"
+    );
+
+
+  if (!url) {
+
+    preview.style.display =
+      "none";
+
+    image.removeAttribute("src");
+
+    return;
+  }
+
+
+  image.src = url;
+
+  preview.style.display =
+    "block";
+}
+
+
+
+async function uploadCategoryImage(file) {
+
+  if (!file) {
+    return null;
+  }
+
+
+  const {
+    data: userData,
+    error: userError
+  } =
+    await supabaseClient
+      .auth
+      .getUser();
+
+
+  if (
+    userError ||
+    !userData.user ||
+    userData.user.id !== ADMIN_USER_ID
+  ) {
+
+    throw new Error(
+      "Admin login could not be verified."
+    );
+  }
+
+
+  const originalName =
+    file.name || "image.jpg";
+
+
+  const parts =
+    originalName.split(".");
+
+
+  let extension =
+    parts.length > 1
+      ? parts.pop()
+      : "jpg";
+
+
+  extension =
+    extension
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
+
+
+  if (!extension) {
+    extension = "jpg";
+  }
+
+
+  let safeName =
+    parts
+      .join("-")
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9_-]+/g,
+        "-"
+      )
+      .replace(
+        /^-+|-+$/g,
+        ""
+      );
+
+
+  if (!safeName) {
+    safeName = "category";
+  }
+
+
+  const randomPart =
+    Math.random()
+      .toString(36)
+      .slice(2, 10);
+
+
+  const filePath =
+    "categories/" +
+    Date.now() +
+    "-" +
+    randomPart +
+    "-" +
+    safeName +
+    "." +
+    extension;
+
+
+  const {
+    data: uploadData,
+    error: uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from(STORAGE_BUCKET)
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType:
+            file.type || undefined
+        }
+      );
+
+
+  if (uploadError) {
+
+    console.error(
+      "Image upload error:",
+      uploadError
+    );
+
+    throw uploadError;
+  }
+
+
+  const uploadedPath =
+    uploadData &&
+    uploadData.path
+      ? uploadData.path
+      : filePath;
+
+
+  const {
+    data: publicURLData
+  } =
+    supabaseClient
+      .storage
+      .from(STORAGE_BUCKET)
+      .getPublicUrl(
+        uploadedPath
+      );
+
+
+  if (
+    !publicURLData ||
+    !publicURLData.publicUrl
+  ) {
+
+    throw new Error(
+      "The image uploaded, but its public URL could not be created."
+    );
+  }
+
+
+  return publicURLData.publicUrl;
 }
 
 
@@ -347,7 +662,9 @@ async function loadCategories() {
       .select("*")
       .order(
         "created_at",
-        { ascending: false }
+        {
+          ascending: false
+        }
       );
 
 
@@ -381,25 +698,45 @@ async function loadCategories() {
     category => {
 
       const item =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
       item.className =
         "category-item";
 
 
+      let imageHTML = "";
+
+
+      if (category.image_url) {
+
+        imageHTML = `
+          <img
+            src="${escapeAttribute(category.image_url)}"
+            alt="${escapeAttribute(category.name || "Category")}"
+          >
+        `;
+      }
+
+
       item.innerHTML = `
+
+        ${imageHTML}
 
         <h3>
           ${escapeHTML(
-            category.name || "Category"
+            category.name ||
+            "Category"
           )}
         </h3>
 
 
         <p>
           ${escapeHTML(
-            category.description || ""
+            category.description ||
+            ""
           )}
         </p>
 
@@ -407,7 +744,8 @@ async function loadCategories() {
         <p class="slug">
           Slug:
           ${escapeHTML(
-            category.slug || ""
+            category.slug ||
+            ""
           )}
         </p>
 
@@ -431,7 +769,10 @@ async function loadCategories() {
       `;
 
 
-      list.appendChild(item);
+      list.appendChild(
+        item
+      );
+
     }
   );
 }
@@ -455,114 +796,173 @@ document
         );
 
 
+      const saveButton =
+        document.getElementById(
+          "save-button"
+        );
+
+
       message.textContent =
         "Saving...";
 
 
-      const id =
-        document.getElementById(
-          "category-id"
-        ).value;
+      saveButton.disabled =
+        true;
 
 
-      const name =
-        document.getElementById(
-          "name"
-        ).value.trim();
+      try {
+
+        const id =
+          document.getElementById(
+            "category-id"
+          ).value;
 
 
-      let slug =
-        document.getElementById(
-          "slug"
-        ).value.trim();
+        const name =
+          document.getElementById(
+            "name"
+          ).value.trim();
 
 
-      if (!slug) {
-        slug = createSlug(name);
-      }
+        let slug =
+          document.getElementById(
+            "slug"
+          ).value.trim();
 
 
-      const categoryData = {
+        if (!slug) {
 
-        name: name,
+          slug =
+            createSlug(
+              name
+            );
 
-        description:
-          document
-            .getElementById(
-              "description"
-            )
-            .value
-            .trim(),
-
-        image_url:
-          document
-            .getElementById(
-              "image_url"
-            )
-            .value
-            .trim()
-          || null,
-
-        slug: slug
-
-      };
+        }
 
 
-      let error;
+        let imageURL =
+          document.getElementById(
+            "current-image-url"
+          ).value || null;
 
 
-      if (id) {
+        const imageInput =
+          document.getElementById(
+            "category-image"
+          );
 
-        const result =
-          await supabaseClient
-            .from("categories")
-            .update(
-              categoryData
-            )
-            .eq(
-              "id",
-              id
+
+        const selectedFile =
+          imageInput.files &&
+          imageInput.files.length > 0
+            ? imageInput.files[0]
+            : null;
+
+
+        if (selectedFile) {
+
+          message.textContent =
+            "Uploading image...";
+
+
+          imageURL =
+            await uploadCategoryImage(
+              selectedFile
             );
 
 
-        error =
-          result.error;
-
-      } else {
-
-        const result =
-          await supabaseClient
-            .from("categories")
-            .insert(
-              categoryData
-            );
+          message.textContent =
+            "Saving category...";
+        }
 
 
-        error =
-          result.error;
-      }
+        const categoryData = {
+
+          name: name,
+
+          description:
+            document
+              .getElementById(
+                "description"
+              )
+              .value
+              .trim(),
+
+          image_url:
+            imageURL,
+
+          slug:
+            slug
+
+        };
 
 
-      if (error) {
+        let error;
+
+
+        if (id) {
+
+          const result =
+            await supabaseClient
+              .from("categories")
+              .update(
+                categoryData
+              )
+              .eq(
+                "id",
+                id
+              );
+
+
+          error =
+            result.error;
+
+        } else {
+
+          const result =
+            await supabaseClient
+              .from("categories")
+              .insert(
+                categoryData
+              );
+
+
+          error =
+            result.error;
+        }
+
+
+        if (error) {
+
+          console.error(error);
+
+          throw error;
+        }
+
+
+        message.textContent =
+          id
+            ? "Category updated successfully."
+            : "Category added successfully.";
+
+
+        resetForm();
+
+        await loadCategories();
+
+      } catch (error) {
 
         console.error(error);
 
         message.textContent =
-          "Category could not be saved.";
+          "Category could not be saved. Please check your login and image, then try again.";
 
-        return;
+      } finally {
+
+        saveButton.disabled =
+          false;
+
       }
-
-
-      message.textContent =
-        id
-          ? "Category updated successfully."
-          : "Category added successfully.";
-
-
-      resetForm();
-
-      loadCategories();
 
     }
   );
@@ -624,7 +1024,15 @@ async function editCategory(id) {
 
   document
     .getElementById(
-      "image_url"
+      "slug"
+    )
+    .value =
+      data.slug || "";
+
+
+  document
+    .getElementById(
+      "current-image-url"
     )
     .value =
       data.image_url || "";
@@ -632,10 +1040,14 @@ async function editCategory(id) {
 
   document
     .getElementById(
-      "slug"
+      "category-image"
     )
-    .value =
-      data.slug || "";
+    .value = "";
+
+
+  showImagePreview(
+    data.image_url || ""
+  );
 
 
   document
@@ -739,6 +1151,16 @@ function resetForm() {
 
   document
     .getElementById(
+      "current-image-url"
+    )
+    .value = "";
+
+
+  showImagePreview("");
+
+
+  document
+    .getElementById(
       "form-title"
     )
     .textContent =
@@ -786,19 +1208,26 @@ function createSlug(value) {
 
 function escapeHTML(value) {
 
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.textContent =
+  return String(
     value == null
       ? ""
-      : String(value);
+      : value
+  )
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 
-  return div.innerHTML;
+
+function escapeAttribute(value) {
+
+  return escapeHTML(
+    value
+  );
+
 }
 
 
@@ -808,4 +1237,4 @@ protectPage();
 </script>
 
 </body>
-  </html>
+</html>
