@@ -387,7 +387,6 @@ button:disabled {
 </div>
 
 
-
 <div class="panel">
 
 <h2>
@@ -403,7 +402,6 @@ button:disabled {
 </main>
 
 </div>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -442,13 +440,14 @@ async function protectPage() {
   } =
     await supabaseClient
       .auth
-      .getUser();
+      .getSession();
 
 
   if (
     error ||
-    !data.user ||
-    data.user.id !== ADMIN_USER_ID
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !== ADMIN_USER_ID
   ) {
 
     window.location.replace(
@@ -585,15 +584,12 @@ document
 
       if (
         !file.type ||
-        !file.type.startsWith(
-          "image/"
-        )
+        !file.type.startsWith("image/")
       ) {
 
         alert(
           "Please choose an image file."
         );
-
 
         event.target.value =
           "";
@@ -610,7 +606,6 @@ document
         alert(
           "Please choose an image smaller than 5 MB."
         );
-
 
         event.target.value =
           "";
@@ -653,11 +648,9 @@ function showImagePreview(url) {
     preview.style.display =
       "none";
 
-
     image.removeAttribute(
       "src"
     );
-
 
     return;
   }
@@ -687,18 +680,20 @@ async function uploadProductImage(file) {
   } =
     await supabaseClient
       .auth
-      .getUser();
+      .getSession();
 
 
   if (
     error ||
-    !data.user ||
-    data.user.id !== ADMIN_USER_ID
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !== ADMIN_USER_ID
   ) {
 
     throw new Error(
       "Admin login could not be verified."
     );
+
   }
 
 
@@ -800,7 +795,6 @@ async function uploadProductImage(file) {
       uploadError
     );
 
-
     throw uploadError;
   }
 
@@ -833,6 +827,7 @@ async function uploadProductImage(file) {
     throw new Error(
       "Image uploaded but its public URL could not be created."
     );
+
   }
 
 
@@ -871,12 +866,13 @@ async function loadProducts() {
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     list.textContent =
       "Products could not be loaded.";
-
 
     return;
   }
@@ -889,7 +885,6 @@ async function loadProducts() {
 
     list.textContent =
       "No products have been added yet.";
-
 
     return;
   }
@@ -1222,7 +1217,6 @@ document
             productError
           );
 
-
           throw productError;
         }
 
@@ -1284,7 +1278,6 @@ async function editProduct(id) {
     alert(
       "Product could not be opened."
     );
-
 
     return;
   }
@@ -1524,7 +1517,6 @@ async function deleteProduct(id) {
       "Product could not be deleted."
     );
 
-
     return;
   }
 
@@ -1559,10 +1551,3 @@ function resetForm() {
     .getElementById(
       "product-id"
     )
-    .value =
-      "";
-
-
-  document
-    .getElementById(
-      "c
