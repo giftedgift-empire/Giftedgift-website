@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Settings | GiftedGift Empire</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#222}
+header{background:#123a8c;color:#fff;padding:22px 20px}
+header h1{margin:0 0 5px;color:#f2bd16}
+.container{max-width:900px;margin:auto;padding:25px 18px}
+.top-link{display:inline-block;margin-bottom:20px;color:#123a8c;text-decoration:none;font-weight:bold}
+.panel{background:#fff;padding:24px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.08);margin-bottom:25px}
+.panel h2{margin-top:0;color:#123a8c}
+label{display:block;margin:15px 0 7px;font-weight:bold}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:7px;font-size:16px}
+textarea{min-height:95px;resize:vertical}
+.checkbox-row{display:flex;align-items:center;gap:10px;margin-top:18px}
+.checkbox-row input{width:auto}
+.checkbox-row label{margin:0}
+button{margin-top:18px;background:#f2bd16;color:#111;border:0;padding:13px 18px;border-radius:7px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6}
+.delete-btn{background:#ddd}
+.zone-item{padding:18px 0;border-bottom:1px solid #ddd}
+.zone-item:last-child{border-bottom:0}
+.zone-item h3{margin:0 0 8px;color:#123a8c}
+.small{font-size:14px;color:#666;line-height:1.5}
+.actions button{margin-right:8px;margin-top:10px}
+.message{font-weight:bold;margin-top:14px}
+.note{background:#f4f6f8;padding:14px;border-radius:8px;color:#555;line-height:1.5}
+#status{text-align:center;padding:50px 20px;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<div id="status">Checking admin login...</div>
+
+<div id="page" style="display:none">
+
+<header>
+  <h1>GiftedGift Empire</h1>
+  <p>Shop, Shipping & Tax Settings</p>
+</header>
+
+<main class="container">
+
+<a href="dashboard.html" class="top-link">← Back to Dashboard</a>
+
+<div class="panel">
+  <h2>Shop Settings</h2>
+
+  <form id="settings-form">
+
+    <label for="store-currency">Store Currency</label>
+    <select id="store-currency">
+      <option value="EUR">EUR (€)</option>
+      <option value="GBP">GBP (£)</option>
+      <option value="USD">USD ($)</option>
+    </select>
+
+    <label for="shop-notice">Shop Notice</label>
+    <textarea id="shop-notice" placeholder="Example: Free delivery on qualifying orders."></textarea>
+
+    <label for="affiliate-disclosure">Affiliate Disclosure</label>
+    <textarea id="affiliate-disclosure" placeholder="Affiliate disclosure shown to customers."></textarea>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="digital-products-enabled" checked>
+      <label for="digital-products-enabled">Enable Digital Products</label>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="deals-enabled" checked>
+      <label for="deals-enabled">Enable Deals</label>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="reviews-enabled" checked>
+      <label for="reviews-enabled">Enable Reviews</label>
+    </div>
+
+    <hr style="margin:25px 0;border:0;border-top:1px solid #ddd">
+
+    <h2>Tax Settings</h2>
+
+    <div class="note">
+      Leave tax disabled until you are ready to use your confirmed VAT/tax setup.
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="tax-enabled">
+      <label for="tax-enabled">Enable Tax / VAT</label>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="prices-include-tax">
+      <label for="prices-include-tax">Product Prices Already Include Tax</label>
+    </div>
+
+    <label for="default-tax-rate">Default Tax Rate (%)</label>
+    <input type="number" id="default-tax-rate" min="0" max="100" step="0.001" placeholder="Example: 20">
+
+    <hr style="margin:25px 0;border:0;border-top:1px solid #ddd">
+
+    <h2>Free Shipping</h2>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="free-shipping-enabled">
+      <label for="free-shipping-enabled">Enable Global Free Shipping Threshold</label>
+    </div>
+
+    <label for="free-shipping-threshold">Free Shipping From</label>
+    <input type="number" id="free-shipping-threshold" min="0" step="0.01" placeholder="Example: 80">
+
+    <button type="submit" id="settings-save">Save Shop Settings</button>
+
+    <p id="settings-message" class="message"></p>
+
+  </form>
+</div>
+
+
+<div class="panel">
+
+  <h2 id="zone-form-title">Add Shipping Option</h2>
+
+  <div class="note">
+    You can create more than one delivery option for the same country.
+    Example: <b>Chronopost France</b> and <b>GLS France</b>.
+    Use two-letter country codes such as <b>FR</b>, <b>DE</b>, <b>BE</b>.
+    Use <b>*</b> later as a fallback international option.
+  </div>
+
+  <form id="zone-form">
+
+    <input type="hidden" id="zone-id">
+
+    <label for="zone-name">Shipping Option / Carrier Name</label>
+    <input type="text" id="zone-name" required placeholder="Example: Chronopost France">
+
+    <label for="zone-countries">Countries</label>
+    <input type="text" id="zone-countries" required placeholder="Example: FR or DE,BE,NL">
+
+    <label for="shipping-fee">Delivery Fee</label>
+    <input type="number" id="shipping-fee" min="0" step="0.01" required placeholder="Example: 6.99">
+
+    <label for="zone-free-threshold">Free Shipping From (optional)</label>
+    <input type="number" id="zone-free-threshold" min="0" step="0.01" placeholder="Example: 80">
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="zone-active" checked>
+      <label for="zone-active">Active</label>
+    </div>
+
+    <button type="submit" id="zone-save">Save Shipping Option</button>
+
+    <button type="button" id="zone-cancel" class="delete-btn" style="display:none">
+      Cancel Edit
+    </button>
+
+    <p id="zone-message" class="message"></p>
+
+  </form>
+</div>
+
+
+<div class="panel">
+  <h2>Existing Shipping Options</h2>
+  <div id="zone-list">Loading shipping options...</div>
+</div>
+
+</main>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+let settingsId = null;
+
+
+async function protectPage() {
+
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (
+    error ||
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !== ADMIN_USER_ID
+  ) {
+    window.location.replace("admin.html");
+    return;
+  }
+
+  document.getElementById("status").style.display = "none";
+  document.getElementById("page").style.display = "block";
+
+  await loadSettings();
+  await loadShippingZones();
+}
+
+
+function currencySymbol(code) {
+  if (code === "GBP") return "£";
+  if (code === "USD") return "$";
+  return "€";
+}
+
+
+async function loadSettings() {
+
+  const { data, error } =
+    await supabaseClient
+      .from("shop_settings")
+      .select("*")
+      .order("id", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+  if (error) {
+    console.error(error);
+    document.getElementById("settings-message").textContent =
+      "Shop settings could not be loaded.";
+    return;
+  }
+
+  if (!data) {
+    return;
+  }
+
+  settingsId = data.id;
+
+  document.getElementById("store-currency").value =
+    data.store_currency || data.currency_code || "EUR";
+
+  document.getElementById("shop-notice").value =
+    data.shop_notice || "";
+
+  document.getElementById("affiliate-disclosure").value =
+    data.affiliate_disclosure || "";
+
+  document.getElementById("digital-products-enabled").checked =
+    data.digital_products_enabled !== false;
+
+  document.getElementById("deals-enabled").checked =
+    data.deals_enabled !== false;
+
+  document.getElementById("reviews-enabled").checked =
+    data.reviews_enabled !== false;
+
+  document.getElementById("tax-enabled").checked =
+    Boolean(data.tax_enabled);
+
+  document.getElementById("prices-include-tax").checked =
+    Boolean(data.prices_include_tax);
+
+  document.getElementById("default-tax-rate").value =
+    data.default_tax_rate ?? 0;
+
+  document.getElementById("free-shipping-enabled").checked =
+    Boolean(data.free_shipping_enabled);
+
+  document.getElementById("free-shipping-threshold").value =
+    data.free_shipping_threshold ?? "";
+}
+
+
+document
+  .getElementById("settings-form")
+  .addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const message =
+      document.getElementById("settings-message");
+
+    const button =
+      document.getElementById("settings-save");
+
+    button.disabled = true;
+    message.textContent = "Saving...";
+
+    const currency =
+      document.getElementById("store-currency").value;
+
+    const values = {
+
+      store_currency: currency,
+      currency_code: currency,
+      currency_symbol: currencySymbol(currency),
+
+      shop_notice:
+        document.getElementById("shop-notice").value.trim() || null,
+
+      affiliate_disclosure:
+        document.getElementById("affiliate-disclosure").value.trim() || null,
+
+      digital_products_enabled:
+        document.getElementById("digital-products-enabled").checked,
+
+      deals_enabled:
+        document.getElementById("deals-enabled").checked,
+
+      reviews_enabled:
+        document.getElementById("reviews-enabled").checked,
+
+      tax_enabled:
+        document.getElementById("tax-enabled").checked,
+
+      prices_include_tax:
+        document.getElementById("prices-include-tax").checked,
+
+      default_tax_rate:
+        Number(document.getElementById("default-tax-rate").value || 0),
+
+      free_shipping_enabled:
+        document.getElementById("free-shipping-enabled").checked,
+
+      free_shipping_threshold:
+        document.getElementById("free-shipping-threshold").value
+          ? Number(document.getElementById("free-shipping-threshold").value)
+          : null,
+
+      updated_at:
+        new Date().toISOString()
+    };
+
+    let error;
+
+    if (settingsId !== null) {
+
+      const result =
+        await supabaseClient
+          .from("shop_settings")
+          .update(values)
+          .eq("id", settingsId);
+
+      error = result.error;
+
+    } else {
+
+      const result =
+        await supabaseClient
+          .from("shop_settings")
+          .insert({
+            id: 1,
+            ...values
+          });
+
+      error = result.error;
+
+      if (!error) {
+        settingsId = 1;
+      }
+    }
+
+    if (error) {
+      console.error(error);
+      message.textContent =
+        "Shop settings could not be saved.";
+    } else {
+      message.textContent =
+        "Shop settings saved successfully.";
+    }
+
+    button.disabled = false;
+  });
+
+
+function parseCountries(value) {
+
+  return value
+    .split(",")
+    .map(code => code.trim().toUpperCase())
+    .filter(Boolean);
+}
+
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+async function loadShippingZones() {
+
+  const list =
+    document.getElementById("zone-list");
+
+  list.textContent =
+    "Loading shipping options...";
+
+  const { data: zones, error } =
+    await supabaseClient
+      .from("shipping_zones")
+      .select("*")
+      .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error(error);
+    list.textContent =
+      "Shipping options could not be loaded.";
+    return;
+  }
+
+  if (!zones || zones.length === 0) {
+    list.textContent =
+      "No shipping options have been added yet.";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  zones.forEach(zone => {
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "zone-item";
+
+    const countries =
+      Array.isArray(zone.countries)
+        ? zone.countries.join(", ")
+        : "";
+
+    const fee =
+      Number(zone.shipping_fee || 0).toFixed(2);
+
+    const threshold =
+      zone.free_shipping_threshold !== null &&
+      zone.free_shipping_threshold !== undefined
+        ? Number(zone.free_shipping_threshold).toFixed(2)
+        : "Not set";
+
+    div.innerHTML = `
+      <h3>${escapeHTML(zone.name)}</h3>
+
+      <p class="small">
+        Countries: ${escapeHTML(countries)}
+      </p>
+
+      <p>
+        Delivery fee: €${escapeHTML(fee)}
+      </p>
+
+      <p class="small">
+        Free shipping from: ${escapeHTML(threshold)}
+      </p>
+
+      <p class="small">
+        Status: ${zone.active ? "Active" : "Inactive"}
+      </p>
+
+      <div class="actions">
+        <button
+          type="button"
+          onclick="editZone(${zone.id})">
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="delete-btn"
+          onclick="deleteZone(${zone.id})">
+          Delete
+        </button>
+      </div>
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+
+document
+  .getElementById("zone-form")
+  .addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const message =
+      document.getElementById("zone-message");
+
+    const button =
+      document.getElementById("zone-save");
+
+    button.disabled = true;
+    message.textContent = "Saving...";
+
+    const id =
+      document.getElementById("zone-id").value;
+
+    const countries =
+      parseCountries(
+        document.getElementById("zone-countries").value
+      );
+
+    if (countries.length === 0) {
+      message.textContent =
+        "Please enter at least one country code.";
+      button.disabled = false;
+      return;
+    }
+
+    const values = {
+
+      name:
+        document.getElementById("zone-name").value.trim(),
+
+      countries,
+
+      shipping_fee:
+        Number(document.getElementById("shipping-fee").value || 0),
+
+      free_shipping_threshold:
+        document.getElementById("zone-free-threshold").value
+          ? Number(document.getElementById("zone-free-threshold").value)
+          : null,
+
+      active:
+        document.getElementById("zone-active").checked
+    };
+
+    let error;
+
+    if (id) {
+
+      const result =
+        await supabaseClient
+          .from("shipping_zones")
+          .update(values)
+          .eq("id", id);
+
+      error = result.error;
+
+    } else {
+
+      const result =
+        await supabaseClient
+          .from("shipping_zones")
+          .insert(values);
+
+      error = result.error;
+    }
+
+    if (error) {
+      console.error(error);
+      message.textContent =
+        "Shipping option could not be saved.";
+    } else {
+
+      message.textContent =
+        id
+          ? "Shipping option updated successfully."
+          : "Shipping option added successfully.";
+
+      resetZoneForm();
+
+      await loadShippingZones();
+    }
+
+    button.disabled = false;
+  });
+
+
+async function editZone(id) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("shipping_zones")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+  if (error || !data) {
+    alert("Shipping option could not be opened.");
+    return;
+  }
+
+  document.getElementById("zone-id").value =
+    data.id;
+
+  document.getElementById("zone-name").value =
+    data.name || "";
+
+  document.getElementById("zone-countries").value =
+    Array.isArray(data.countries)
+      ? data.countries.join(",")
+      : "";
+
+  document.getElementById("shipping-fee").value =
+    data.shipping_fee ?? "";
+
+  document.getElementById("zone-free-threshold").value =
+    data.free_shipping_threshold ?? "";
+
+  document.getElementById("zone-active").checked =
+    Boolean(data.active);
+
+  document.getElementById("zone-form-title").textContent =
+    "Edit Shipping Option";
+
+  document.getElementById("zone-save").textContent =
+    "Update Shipping Option";
+
+  document.getElementById("zone-cancel").style.display =
+    "inline-block";
+
+  window.scrollTo({
+    top: document.body.scrollHeight / 2,
+    behavior: "smooth"
+  });
+}
+
+
+async function deleteZone(id) {
+
+  if (!confirm(
+    "Are you sure you want to delete this shipping option?"
+  )) {
+    return;
+  }
+
+  const { error } =
+    await supabaseClient
+      .from("shipping_zones")
+      .delete()
+      .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    alert("Shipping option could not be deleted.");
+    return;
+  }
+
+  await loadShippingZones();
+}
+
+
+document
+  .getElementById("zone-cancel")
+  .addEventListener("click", resetZoneForm);
+
+
+function resetZoneForm() {
+
+  document.getElementById("zone-form").reset();
+
+  document.getElementById("zone-id").value = "";
+
+  document.getElementById("zone-active").checked = true;
+
+  document.getElementById("zone-form-title").textContent =
+    "Add Shipping Option";
+
+  document.getElementById("zone-save").textContent =
+    "Save Shipping Option";
+
+  document.getElementById("zone-cancel").style.display =
+    "none";
+}
+
+
+protectPage();
+
+</script>
+
+</body>
+  </html>
