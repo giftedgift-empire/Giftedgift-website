@@ -573,7 +573,9 @@ async function createPayPalOrder() {
   }
 
 
-return data.id;
+return {
+  orderId: data.id
+};
 }
 
 
