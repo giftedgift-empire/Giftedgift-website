@@ -433,7 +433,96 @@
 
       await loadDeals();
     }
+    async function loadItemOptions(itemType, selectedId = "") {
 
+  const select =
+    document.getElementById("item-id");
+
+  select.disabled = true;
+
+  if (!itemType) {
+    select.innerHTML =
+      '<option value="">First select an item type</option>';
+    return;
+  }
+
+  const tableMap = {
+    product: "products",
+    digital_product: "digital_products",
+    affiliate_product: "affiliate_products"
+  };
+
+  const tableName =
+    tableMap[itemType];
+
+  if (!tableName) {
+    select.innerHTML =
+      '<option value="">Invalid item type</option>';
+    return;
+  }
+
+  select.innerHTML =
+    '<option value="">Loading products...</option>';
+
+  const { data, error } =
+    await supabaseClient
+      .from(tableName)
+      .select("*")
+      .order("id", {
+        ascending: true
+      });
+
+  if (error) {
+
+    console.error(error);
+
+    select.innerHTML =
+      '<option value="">Could not load products</option>';
+
+    return;
+  }
+
+  select.innerHTML =
+    '<option value="">Select product</option>';
+
+  data.forEach(item => {
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      item.id;
+
+    option.textContent =
+      item.name ||
+      item.title ||
+      item.product_name ||
+      `Item #${item.id}`;
+
+    select.appendChild(option);
+  });
+
+  select.disabled = false;
+
+  if (selectedId) {
+    select.value =
+      String(selectedId);
+  }
+}
+
+
+document
+  .getElementById("item-type")
+  .addEventListener(
+    "change",
+    async function() {
+
+      await loadItemOptions(
+        this.value
+      );
+
+    }
+  );
 
     async function loadDeals() {
 
@@ -969,19 +1058,16 @@
 
 
       document
-        .getElementById(
-          "item-type"
-        )
-        .value =
-          data.item_type || "";
+  .getElementById(
+    "item-type"
+  )
+  .value =
+    data.item_type || "";
 
-
-      document
-        .getElementById(
-          "item-id"
-        )
-        .value =
-          data.item_id || "";
+await loadItemOptions(
+  data.item_type || "",
+  data.item_id || ""
+);
 
 
       document
