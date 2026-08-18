@@ -6,7 +6,9 @@
   <title>Manage Deals | GiftedGift Empire</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -27,7 +29,9 @@
       color: #f2bd16;
     }
 
-    header p { margin: 0; }
+    header p {
+      margin: 0;
+    }
 
     .container {
       max-width: 900px;
@@ -47,7 +51,7 @@
       background: white;
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
       margin-bottom: 25px;
     }
 
@@ -71,11 +75,47 @@
       border: 1px solid #ccc;
       border-radius: 7px;
       font-size: 16px;
+      background: white;
+    }
+
+    input[readonly] {
+      background: #f4f6f8;
+      color: #444;
     }
 
     textarea {
       min-height: 110px;
       resize: vertical;
+    }
+
+    .help {
+      margin: 7px 0 0;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .product-preview {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      background: #f7f8fa;
+      border-radius: 9px;
+    }
+
+    .product-preview img {
+      display: block;
+      width: 160px;
+      max-width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 9px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .product-preview p {
+      margin: 4px 0;
     }
 
     .checkbox-row {
@@ -85,8 +125,13 @@
       margin-top: 18px;
     }
 
-    .checkbox-row input { width: auto; }
-    .checkbox-row label { margin: 0; }
+    .checkbox-row input {
+      width: auto;
+    }
+
+    .checkbox-row label {
+      margin: 0;
+    }
 
     button {
       margin-top: 20px;
@@ -115,7 +160,9 @@
       padding: 18px 0;
     }
 
-    .deal-item:last-child { border-bottom: none; }
+    .deal-item:last-child {
+      border-bottom: none;
+    }
 
     .deal-item img {
       width: 160px;
@@ -162,7 +209,9 @@
 
 <body>
 
-  <div id="status">Checking admin login...</div>
+  <div id="status">
+    Checking admin login...
+  </div>
 
   <div id="page" style="display:none;">
 
@@ -179,58 +228,175 @@
 
       <div class="panel">
 
-        <h2 id="form-title">Add Deal</h2>
+        <h2 id="form-title">
+          Add Deal
+        </h2>
 
         <form id="deal-form">
 
-          <input type="hidden" id="deal-id">
+          <input
+            type="hidden"
+            id="deal-id"
+          >
 
-          <label for="title">Deal Title</label>
-          <input type="text" id="title" required>
+          <label for="title">
+            Deal Title
+          </label>
 
-          <label for="description">Description</label>
-          <textarea id="description" placeholder="Describe this deal..."></textarea>
+          <input
+            type="text"
+            id="title"
+            required
+          >
 
-          <label for="item-type">Item Type</label>
-          <select id="item-type" required>
-            <option value="">Select item type</option>
-            <option value="product">Physical Product</option>
-            <option value="digital_product">Digital Product</option>
-            <option value="affiliate_product">Affiliate Product</option>
+          <label for="description">
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            placeholder="Describe this deal..."
+          ></textarea>
+
+          <label for="item-type">
+            Item Type
+          </label>
+
+          <select
+            id="item-type"
+            required
+          >
+            <option value="">
+              Select item type
+            </option>
+
+            <option value="product">
+              Physical Product
+            </option>
+
+            <option value="digital_product">
+              Digital Product
+            </option>
+
+            <option value="affiliate_product">
+              Affiliate Product
+            </option>
           </select>
 
-          <label for="item-id">Choose Product</label>
-          <select id="item-id" required disabled>
-            <option value="">First select an item type</option>
+          <label for="item-id">
+            Choose Product
+          </label>
+
+          <select
+            id="item-id"
+            required
+            disabled
+          >
+            <option value="">
+              First select an item type
+            </option>
           </select>
 
-          <label for="original-price">Original Price (€)</label>
-          <input type="number" id="original-price" min="0" step="0.01" required>
+          <div
+            id="product-preview"
+            class="product-preview"
+          >
 
-          <label for="deal-price">Deal Price (€)</label>
-          <input type="number" id="deal-price" min="0" step="0.01" required>
+            <img
+              id="product-preview-image"
+              alt="Selected product image"
+            >
 
-          <label for="badge">Deal Badge</label>
-          <input type="text" id="badge" placeholder="Example: 20% OFF">
+            <p>
+              <strong id="product-preview-name"></strong>
+            </p>
 
-          <label for="image-url">Image URL</label>
-          <input type="url" id="image-url" placeholder="https://...">
+            <p id="product-preview-price"></p>
 
-          <label for="deal-url">Deal / Buy Link</label>
-          <input type="url" id="deal-url" placeholder="https://...">
+            <p class="help">
+              This image is inherited from the selected product.
+              You do not upload it again here.
+            </p>
 
-          <label for="starts-at">Deal Starts</label>
-          <input type="datetime-local" id="starts-at">
-
-          <label for="ends-at">Deal Ends</label>
-          <input type="datetime-local" id="ends-at">
-
-          <div class="checkbox-row">
-            <input type="checkbox" id="active" checked>
-            <label for="active">Active Deal</label>
           </div>
 
-          <button type="submit" id="save-button">Save Deal</button>
+          <label for="original-price">
+            Original Price (€)
+          </label>
+
+          <input
+            type="number"
+            id="original-price"
+            min="0"
+            step="0.01"
+            readonly
+            required
+          >
+
+          <p class="help">
+            The original price is taken automatically from the selected product.
+          </p>
+
+          <label for="deal-price">
+            Deal Price (€)
+          </label>
+
+          <input
+            type="number"
+            id="deal-price"
+            min="0"
+            step="0.01"
+            required
+          >
+
+          <label for="badge">
+            Deal Badge
+          </label>
+
+          <input
+            type="text"
+            id="badge"
+            placeholder="Example: 20% OFF"
+          >
+
+          <label for="starts-at">
+            Deal Starts
+          </label>
+
+          <input
+            type="datetime-local"
+            id="starts-at"
+          >
+
+          <label for="ends-at">
+            Deal Ends
+          </label>
+
+          <input
+            type="datetime-local"
+            id="ends-at"
+          >
+
+          <div class="checkbox-row">
+
+            <input
+              type="checkbox"
+              id="active"
+              checked
+            >
+
+            <label for="active">
+              Active Deal
+            </label>
+
+          </div>
+
+          <button
+            type="submit"
+            id="save-button"
+          >
+            Save Deal
+          </button>
 
           <button
             type="button"
@@ -240,30 +406,46 @@
             Cancel Edit
           </button>
 
-          <p id="form-message" class="message"></p>
+          <p
+            id="form-message"
+            class="message"
+          ></p>
 
         </form>
+
       </div>
 
       <div class="panel">
-        <h2>Existing Deals</h2>
-        <div id="deal-list">Loading deals...</div>
+
+        <h2>
+          Existing Deals
+        </h2>
+
+        <div id="deal-list">
+          Loading deals...
+        </div>
+
       </div>
 
     </main>
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
+
     const SUPABASE_URL =
       "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
 
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
+
     const ADMIN_USER_ID =
       "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
 
     const supabaseClient =
       supabase.createClient(
@@ -271,13 +453,16 @@
         SUPABASE_PUBLISHABLE_KEY
       );
 
+
     const itemCache = {
       product: [],
       digital_product: [],
       affiliate_product: []
     };
 
+
     function tableForType(itemType) {
+
       const tableMap = {
         product: "products",
         digital_product: "digital_products",
@@ -287,17 +472,21 @@
       return tableMap[itemType] || null;
     }
 
+
     function typeLabel(itemType) {
-      const labelMap = {
+
+      const labels = {
         product: "Physical Product",
         digital_product: "Digital Product",
         affiliate_product: "Affiliate Product"
       };
 
-      return labelMap[itemType] || "Not set";
+      return labels[itemType] || "Not set";
     }
 
+
     function itemName(item) {
+
       return (
         item.name ||
         item.title ||
@@ -307,9 +496,53 @@
       );
     }
 
+
+    function itemPrice(item) {
+
+      const possiblePrices = [
+        item.price,
+        item.current_price,
+        item.sale_price,
+        item.regular_price,
+        item.original_price
+      ];
+
+      for (const value of possiblePrices) {
+
+        if (
+          value !== null &&
+          value !== undefined &&
+          value !== "" &&
+          !Number.isNaN(Number(value))
+        ) {
+
+          return Number(value);
+        }
+      }
+
+      return null;
+    }
+
+
+    function itemImage(item) {
+
+      return (
+        item.image_url ||
+        item.image ||
+        item.cover_image ||
+        item.cover_url ||
+        ""
+      );
+    }
+
+
     async function protectPage() {
+
       const { data, error } =
-        await supabaseClient.auth.getSession();
+        await supabaseClient
+          .auth
+          .getSession();
+
 
       if (
         error ||
@@ -317,144 +550,463 @@
         !data.session.user ||
         data.session.user.id !== ADMIN_USER_ID
       ) {
-        window.location.replace("admin.html");
+
+        window.location.replace(
+          "admin.html"
+        );
+
         return;
       }
 
-      document.getElementById("status").style.display = "none";
-      document.getElementById("page").style.display = "block";
+
+      document
+        .getElementById("status")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("page")
+        .style.display =
+          "block";
+
 
       await loadDeals();
     }
 
-    async function loadItemsForType(itemType) {
-      const tableName = tableForType(itemType);
+
+    async function loadItemsForType(
+      itemType,
+      forceReload = false
+    ) {
+
+      const tableName =
+        tableForType(itemType);
+
 
       if (!tableName) {
         return [];
       }
 
-      if (itemCache[itemType] && itemCache[itemType].length > 0) {
+
+      if (
+        !forceReload &&
+        itemCache[itemType] &&
+        itemCache[itemType].length > 0
+      ) {
+
         return itemCache[itemType];
       }
+
 
       const { data, error } =
         await supabaseClient
           .from(tableName)
-          .select("*")
-          .order("created_at", { ascending: false });
+          .select("*");
+
 
       if (error) {
-        console.error("Could not load products:", error);
+
+        console.error(
+          "Could not load products:",
+          error
+        );
+
         throw error;
       }
 
-      itemCache[itemType] = data || [];
-      return itemCache[itemType];
+
+      const items =
+        data || [];
+
+
+      items.sort(
+        (a, b) =>
+          itemName(a)
+            .localeCompare(
+              itemName(b)
+            )
+      );
+
+
+      itemCache[itemType] =
+        items;
+
+
+      return items;
     }
 
-    async function loadItemOptions(itemType, selectedId = "") {
-      const select =
-        document.getElementById("item-id");
 
-      select.disabled = true;
+    async function loadItemOptions(
+      itemType,
+      selectedId = ""
+    ) {
+
+      const select =
+        document.getElementById(
+          "item-id"
+        );
+
+
+      clearSelectedProductInfo();
+
+
+      select.disabled =
+        true;
+
 
       if (!itemType) {
+
         select.innerHTML =
           '<option value="">First select an item type</option>';
+
         return;
       }
+
 
       select.innerHTML =
         '<option value="">Loading products...</option>';
 
-      try {
-        const items =
-          await loadItemsForType(itemType);
 
-        if (!items || items.length === 0) {
+      try {
+
+        const items =
+          await loadItemsForType(
+            itemType,
+            true
+          );
+
+
+        if (!items.length) {
+
           select.innerHTML =
             '<option value="">No products found</option>';
+
           return;
         }
+
 
         select.innerHTML =
           '<option value="">Select product</option>';
 
-        items.forEach(item => {
-          const option =
-            document.createElement("option");
 
-          option.value =
-            String(item.id);
+        items.forEach(
+          item => {
 
-          option.textContent =
-            itemName(item);
+            const option =
+              document.createElement(
+                "option"
+              );
 
-          select.appendChild(option);
-        });
 
-        select.disabled = false;
+            option.value =
+              String(
+                item.id
+              );
+
+
+            option.textContent =
+              itemName(
+                item
+              );
+
+
+            select.appendChild(
+              option
+            );
+          }
+        );
+
+
+        select.disabled =
+          false;
+
 
         if (
           selectedId !== "" &&
           selectedId !== null &&
           selectedId !== undefined
         ) {
+
           select.value =
-            String(selectedId);
+            String(
+              selectedId
+            );
+
+
+          updateSelectedProductInfo();
         }
 
+
       } catch (error) {
+
         select.innerHTML =
           '<option value="">Could not load products</option>';
       }
     }
 
+
+    function getSelectedProduct() {
+
+      const itemType =
+        document
+          .getElementById(
+            "item-type"
+          )
+          .value;
+
+
+      const itemId =
+        document
+          .getElementById(
+            "item-id"
+          )
+          .value;
+
+
+      if (
+        !itemType ||
+        !itemId
+      ) {
+
+        return null;
+      }
+
+
+      const items =
+        itemCache[itemType] ||
+        [];
+
+
+      return (
+        items.find(
+          item =>
+            String(item.id) ===
+            String(itemId)
+        ) ||
+        null
+      );
+    }
+
+
+    function updateSelectedProductInfo() {
+
+      const product =
+        getSelectedProduct();
+
+
+      if (!product) {
+
+        clearSelectedProductInfo();
+
+        return;
+      }
+
+
+      const price =
+        itemPrice(
+          product
+        );
+
+
+      const imageUrl =
+        itemImage(
+          product
+        );
+
+
+      document
+        .getElementById(
+          "original-price"
+        )
+        .value =
+          price !== null
+            ? price
+            : "";
+
+
+      const preview =
+        document.getElementById(
+          "product-preview"
+        );
+
+
+      const previewImage =
+        document.getElementById(
+          "product-preview-image"
+        );
+
+
+      document
+        .getElementById(
+          "product-preview-name"
+        )
+        .textContent =
+          itemName(
+            product
+          );
+
+
+      document
+        .getElementById(
+          "product-preview-price"
+        )
+        .textContent =
+          price !== null
+            ? `Normal price: €${price.toFixed(2)}`
+            : "Normal price is not saved on this product.";
+
+
+      if (imageUrl) {
+
+        previewImage.src =
+          imageUrl;
+
+
+        previewImage.style.display =
+          "block";
+
+      } else {
+
+        previewImage.removeAttribute(
+          "src"
+        );
+
+
+        previewImage.style.display =
+          "none";
+      }
+
+
+      preview.style.display =
+        "block";
+    }
+
+
+    function clearSelectedProductInfo() {
+
+      document
+        .getElementById(
+          "original-price"
+        )
+        .value =
+          "";
+
+
+      const preview =
+        document.getElementById(
+          "product-preview"
+        );
+
+
+      const previewImage =
+        document.getElementById(
+          "product-preview-image"
+        );
+
+
+      preview.style.display =
+        "none";
+
+
+      previewImage.removeAttribute(
+        "src"
+      );
+
+
+      document
+        .getElementById(
+          "product-preview-name"
+        )
+        .textContent =
+          "";
+
+
+      document
+        .getElementById(
+          "product-preview-price"
+        )
+        .textContent =
+          "";
+    }
+
+
     document
-      .getElementById("item-type")
+      .getElementById(
+        "item-type"
+      )
       .addEventListener(
         "change",
         async function() {
-          await loadItemOptions(this.value);
+
+          await loadItemOptions(
+            this.value
+          );
         }
       );
 
-    async function resolveItemName(itemType, itemId) {
+
+    document
+      .getElementById(
+        "item-id"
+      )
+      .addEventListener(
+        "change",
+        updateSelectedProductInfo
+      );
+
+
+    async function resolveItem(
+      itemType,
+      itemId
+    ) {
+
       if (
         !itemType ||
         itemId === null ||
         itemId === undefined
       ) {
-        return "Not set";
+
+        return null;
       }
 
-      try {
-        const items =
-          await loadItemsForType(itemType);
 
-        const match =
+      try {
+
+        const items =
+          await loadItemsForType(
+            itemType
+          );
+
+
+        return (
           items.find(
             item =>
               String(item.id) ===
               String(itemId)
-          );
+          ) ||
+          null
+        );
 
-        return match
-          ? itemName(match)
-          : `Item #${itemId}`;
 
       } catch (error) {
-        return `Item #${itemId}`;
+
+        return null;
       }
     }
 
+
     async function loadDeals() {
+
       const list =
-        document.getElementById("deal-list");
+        document.getElementById(
+          "deal-list"
+        );
+
 
       list.innerHTML =
         "Loading deals...";
+
 
       const { data, error } =
         await supabaseClient
@@ -462,111 +1014,215 @@
           .select("*")
           .order(
             "created_at",
-            { ascending: false }
+            {
+              ascending: false
+            }
           );
 
+
       if (error) {
-        console.error(error);
+
+        console.error(
+          error
+        );
+
+
         list.innerHTML =
           "Could not load deals.";
+
+
         return;
       }
 
-      if (!data || data.length === 0) {
+
+      if (
+        !data ||
+        data.length === 0
+      ) {
+
         list.innerHTML =
           "<p>No deals have been added yet.</p>";
+
+
         return;
       }
 
-      list.innerHTML = "";
 
-      for (const deal of data) {
+      list.innerHTML =
+        "";
+
+
+      for (
+        const deal of data
+      ) {
+
+        const linkedProduct =
+          await resolveItem(
+            deal.item_type,
+            deal.item_id
+          );
+
+
+        const productName =
+          linkedProduct
+            ? itemName(
+                linkedProduct
+              )
+            : `Item #${deal.item_id || ""}`;
+
+
+        const inheritedImage =
+          linkedProduct
+            ? itemImage(
+                linkedProduct
+              )
+            : (
+                deal.image_url ||
+                ""
+              );
+
+
         const item =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         item.className =
           "deal-item";
 
+
         const image =
-          deal.image_url
+          inheritedImage
             ? `
               <img
-                src="${escapeAttribute(deal.image_url)}"
-                alt="${escapeAttribute(deal.title || "Deal")}"
+                src="${escapeAttribute(inheritedImage)}"
+                alt="${escapeAttribute(productName)}"
               >
             `
             : "";
+
 
         const badge =
           deal.badge
             ? `
               <div class="badge">
-                ${escapeHTML(deal.badge)}
+                ${escapeHTML(
+                  deal.badge
+                )}
               </div>
             `
             : "";
+
 
         const originalPrice =
           deal.original_price ??
           deal.old_price ??
           "";
 
+
         const dealPrice =
           deal.deal_price ??
           deal.price ??
           "";
 
-        const productName =
-          await resolveItemName(
-            deal.item_type,
-            deal.item_id
-          );
 
         item.innerHTML = `
+
           ${image}
+
           ${badge}
 
           <h3>
-            ${escapeHTML(deal.title || "")}
+            ${escapeHTML(
+              deal.title ||
+              ""
+            )}
           </h3>
 
           <p>
-            ${escapeHTML(deal.description || "")}
+            ${escapeHTML(
+              deal.description ||
+              ""
+            )}
           </p>
 
           <p class="meta">
-            <strong>Product:</strong>
-            ${escapeHTML(productName)}
+            <strong>
+              Product:
+            </strong>
+
+            ${escapeHTML(
+              productName
+            )}
           </p>
 
           <p class="meta">
-            <strong>Type:</strong>
-            ${escapeHTML(typeLabel(deal.item_type))}
+            <strong>
+              Type:
+            </strong>
+
+            ${escapeHTML(
+              typeLabel(
+                deal.item_type
+              )
+            )}
           </p>
 
           <p class="meta">
-            <strong>Original price:</strong>
-            €${escapeHTML(originalPrice)}
+            <strong>
+              Original price:
+            </strong>
+
+            €${escapeHTML(
+              originalPrice
+            )}
           </p>
 
           <p class="meta">
-            <strong>Deal price:</strong>
-            €${escapeHTML(dealPrice)}
+            <strong>
+              Deal price:
+            </strong>
+
+            €${escapeHTML(
+              dealPrice
+            )}
           </p>
 
           <p class="meta">
-            <strong>Starts:</strong>
-            ${escapeHTML(formatDateTime(deal.starts_at))}
+            <strong>
+              Starts:
+            </strong>
+
+            ${escapeHTML(
+              formatDateTime(
+                deal.starts_at
+              )
+            )}
           </p>
 
           <p class="meta">
-            <strong>Ends:</strong>
-            ${escapeHTML(formatDateTime(deal.ends_at))}
+            <strong>
+              Ends:
+            </strong>
+
+            ${escapeHTML(
+              formatDateTime(
+                deal.ends_at
+              )
+            )}
           </p>
 
           <p class="meta">
-            <strong>Status:</strong>
-            ${deal.active ? "Active" : "Inactive"}
+            <strong>
+              Status:
+            </strong>
+
+            ${
+              deal.active
+                ? "Active"
+                : "Inactive"
+            }
           </p>
 
           <button
@@ -585,300 +1241,585 @@
           </button>
         `;
 
-        list.appendChild(item);
+
+        list.appendChild(
+          item
+        );
       }
     }
 
+
     document
-      .getElementById("deal-form")
+      .getElementById(
+        "deal-form"
+      )
       .addEventListener(
         "submit",
         async function(event) {
+
           event.preventDefault();
 
+
           const message =
-            document.getElementById("form-message");
+            document.getElementById(
+              "form-message"
+            );
+
 
           const saveButton =
-            document.getElementById("save-button");
+            document.getElementById(
+              "save-button"
+            );
 
-          message.textContent = "";
-          saveButton.disabled = true;
+
+          message.textContent =
+            "";
+
+
+          saveButton.disabled =
+            true;
+
 
           const id =
-            document.getElementById("deal-id").value;
+            document
+              .getElementById(
+                "deal-id"
+              )
+              .value;
+
 
           const title =
-            document.getElementById("title").value.trim();
+            document
+              .getElementById(
+                "title"
+              )
+              .value
+              .trim();
+
 
           const description =
-            document.getElementById("description").value.trim();
+            document
+              .getElementById(
+                "description"
+              )
+              .value
+              .trim();
+
 
           const itemType =
-            document.getElementById("item-type").value;
+            document
+              .getElementById(
+                "item-type"
+              )
+              .value;
+
 
           const itemIdValue =
-            document.getElementById("item-id").value;
+            document
+              .getElementById(
+                "item-id"
+              )
+              .value;
+
 
           const originalPriceValue =
-            document.getElementById("original-price").value;
+            document
+              .getElementById(
+                "original-price"
+              )
+              .value;
+
 
           const dealPriceValue =
-            document.getElementById("deal-price").value;
+            document
+              .getElementById(
+                "deal-price"
+              )
+              .value;
+
 
           const badge =
-            document.getElementById("badge").value.trim();
+            document
+              .getElementById(
+                "badge"
+              )
+              .value
+              .trim();
 
-          const imageUrl =
-            document.getElementById("image-url").value.trim();
-
-          const dealUrl =
-            document.getElementById("deal-url").value.trim();
 
           const startsAt =
-            document.getElementById("starts-at").value;
+            document
+              .getElementById(
+                "starts-at"
+              )
+              .value;
+
 
           const endsAt =
-            document.getElementById("ends-at").value;
+            document
+              .getElementById(
+                "ends-at"
+              )
+              .value;
+
 
           const active =
-            document.getElementById("active").checked;
+            document
+              .getElementById(
+                "active"
+              )
+              .checked;
+
 
           if (!title) {
+
             message.textContent =
               "Please enter a deal title.";
-            saveButton.disabled = false;
+
+
+            saveButton.disabled =
+              false;
+
+
             return;
           }
 
-          if (!itemType || !itemIdValue) {
+
+          if (
+            !itemType ||
+            !itemIdValue
+          ) {
+
             message.textContent =
               "Please choose an item type and product.";
-            saveButton.disabled = false;
+
+
+            saveButton.disabled =
+              false;
+
+
             return;
           }
+
+
+          const selectedProduct =
+            getSelectedProduct();
+
+
+          if (!selectedProduct) {
+
+            message.textContent =
+              "The selected product could not be found. Please choose it again.";
+
+
+            saveButton.disabled =
+              false;
+
+
+            return;
+          }
+
 
           const originalPrice =
             originalPriceValue
-              ? Number(originalPriceValue)
+              ? Number(
+                  originalPriceValue
+                )
               : null;
+
 
           const dealPrice =
             dealPriceValue
-              ? Number(dealPriceValue)
+              ? Number(
+                  dealPriceValue
+                )
               : null;
 
+
           if (
-            originalPrice === null ||
-            dealPrice === null
+            originalPrice === null
           ) {
+
             message.textContent =
-              "Please enter both the original price and deal price.";
-            saveButton.disabled = false;
+              "This product has no normal price saved. Add its price in the product manager first.";
+
+
+            saveButton.disabled =
+              false;
+
+
             return;
           }
 
-          if (dealPrice >= originalPrice) {
+
+          if (
+            dealPrice === null
+          ) {
+
             message.textContent =
-              "Deal price should be lower than the original price.";
-            saveButton.disabled = false;
+              "Please enter the deal price.";
+
+
+            saveButton.disabled =
+              false;
+
+
             return;
           }
+
+
+          if (
+            dealPrice >=
+            originalPrice
+          ) {
+
+            message.textContent =
+              "Deal price should be lower than the original price.";
+
+
+            saveButton.disabled =
+              false;
+
+
+            return;
+          }
+
 
           if (
             startsAt &&
             endsAt &&
-            new Date(endsAt) <= new Date(startsAt)
+            new Date(endsAt) <=
+            new Date(startsAt)
           ) {
+
             message.textContent =
               "Deal end time must be later than the start time.";
-            saveButton.disabled = false;
+
+
+            saveButton.disabled =
+              false;
+
+
             return;
           }
 
+
+          const inheritedImage =
+            itemImage(
+              selectedProduct
+            ) ||
+            null;
+
+
           const payload = {
-            title: title,
+
+            title:
+              title,
+
             description:
-              description || null,
+              description ||
+              null,
+
             item_type:
               itemType,
+
             item_id:
-              Number(itemIdValue),
+              Number(
+                itemIdValue
+              ),
+
             original_price:
               originalPrice,
+
             deal_price:
               dealPrice,
+
             old_price:
               originalPrice,
+
             price:
               dealPrice,
+
             badge:
-              badge || null,
+              badge ||
+              null,
+
             image_url:
-              imageUrl || null,
+              inheritedImage,
+
             deal_url:
-              dealUrl || null,
+              null,
+
             starts_at:
               startsAt
-                ? new Date(startsAt).toISOString()
+                ? new Date(
+                    startsAt
+                  ).toISOString()
                 : null,
+
             ends_at:
               endsAt
-                ? new Date(endsAt).toISOString()
+                ? new Date(
+                    endsAt
+                  ).toISOString()
                 : null,
+
             active:
               active
           };
 
+
           let result;
 
+
           if (id) {
+
             result =
               await supabaseClient
-                .from("deals")
-                .update(payload)
+                .from(
+                  "deals"
+                )
+                .update(
+                  payload
+                )
                 .eq(
                   "id",
                   Number(id)
                 );
+
           } else {
+
             result =
               await supabaseClient
-                .from("deals")
-                .insert(payload);
+                .from(
+                  "deals"
+                )
+                .insert(
+                  payload
+                );
           }
 
-          if (result.error) {
-            console.error(result.error);
+
+          if (
+            result.error
+          ) {
+
+            console.error(
+              result.error
+            );
+
 
             message.textContent =
               "Could not save deal: " +
               result.error.message;
 
-            saveButton.disabled = false;
+
+            saveButton.disabled =
+              false;
+
+
             return;
           }
+
 
           const successText =
             id
               ? "Deal updated successfully."
               : "Deal added successfully.";
 
+
           resetForm();
+
+
           await loadDeals();
 
+
           document
-            .getElementById("form-message")
+            .getElementById(
+              "form-message"
+            )
             .textContent =
               successText;
 
-          saveButton.disabled = false;
+
+          saveButton.disabled =
+            false;
         }
       );
 
+
     async function editDeal(id) {
+
       const { data, error } =
         await supabaseClient
-          .from("deals")
-          .select("*")
-          .eq("id", id)
+          .from(
+            "deals"
+          )
+          .select(
+            "*"
+          )
+          .eq(
+            "id",
+            id
+          )
           .single();
 
-      if (error || !data) {
-        console.error(error);
+
+      if (
+        error ||
+        !data
+      ) {
+
+        console.error(
+          error
+        );
+
+
         alert(
           "Could not load this deal."
         );
+
+
         return;
       }
 
+
       document
-        .getElementById("deal-id")
+        .getElementById(
+          "deal-id"
+        )
         .value =
           data.id;
 
-      document
-        .getElementById("title")
-        .value =
-          data.title || "";
 
       document
-        .getElementById("description")
+        .getElementById(
+          "title"
+        )
         .value =
-          data.description || "";
+          data.title ||
+          "";
+
 
       document
-        .getElementById("item-type")
+        .getElementById(
+          "description"
+        )
         .value =
-          data.item_type || "";
+          data.description ||
+          "";
+
+
+      document
+        .getElementById(
+          "item-type"
+        )
+        .value =
+          data.item_type ||
+          "";
+
 
       await loadItemOptions(
-        data.item_type || "",
-        data.item_id ?? ""
+        data.item_type ||
+        "",
+        data.item_id ??
+        ""
       );
 
+
       document
-        .getElementById("original-price")
+        .getElementById(
+          "original-price"
+        )
         .value =
           data.original_price ??
           data.old_price ??
-          "";
+          document
+            .getElementById(
+              "original-price"
+            )
+            .value;
+
 
       document
-        .getElementById("deal-price")
+        .getElementById(
+          "deal-price"
+        )
         .value =
           data.deal_price ??
           data.price ??
           "";
 
-      document
-        .getElementById("badge")
-        .value =
-          data.badge || "";
 
       document
-        .getElementById("image-url")
+        .getElementById(
+          "badge"
+        )
         .value =
-          data.image_url || "";
+          data.badge ||
+          "";
+
 
       document
-        .getElementById("deal-url")
+        .getElementById(
+          "starts-at"
+        )
         .value =
-          data.deal_url || "";
+          toLocalDateTime(
+            data.starts_at
+          );
+
 
       document
-        .getElementById("starts-at")
+        .getElementById(
+          "ends-at"
+        )
         .value =
-          toLocalDateTime(data.starts_at);
+          toLocalDateTime(
+            data.ends_at
+          );
+
 
       document
-        .getElementById("ends-at")
-        .value =
-          toLocalDateTime(data.ends_at);
-
-      document
-        .getElementById("active")
+        .getElementById(
+          "active"
+        )
         .checked =
-          data.active !== false;
+          data.active !==
+          false;
+
 
       document
-        .getElementById("form-title")
+        .getElementById(
+          "form-title"
+        )
         .textContent =
           "Edit Deal";
 
+
       document
-        .getElementById("save-button")
+        .getElementById(
+          "save-button"
+        )
         .textContent =
           "Update Deal";
 
+
       document
-        .getElementById("cancel-edit")
+        .getElementById(
+          "cancel-edit"
+        )
         .style.display =
           "inline-block";
 
+
       document
-        .getElementById("form-message")
-        .textContent = "";
+        .getElementById(
+          "form-message"
+        )
+        .textContent =
+          "";
+
 
       window.scrollTo({
         top: 0,
@@ -886,146 +1827,258 @@
       });
     }
 
+
     async function deleteDeal(id) {
+
       const confirmed =
         confirm(
           "Are you sure you want to delete this deal?"
         );
 
+
       if (!confirmed) {
         return;
       }
 
+
       const { error } =
         await supabaseClient
-          .from("deals")
+          .from(
+            "deals"
+          )
           .delete()
-          .eq("id", id);
+          .eq(
+            "id",
+            id
+          );
+
 
       if (error) {
-        console.error(error);
+
+        console.error(
+          error
+        );
+
 
         document
-          .getElementById("form-message")
+          .getElementById(
+            "form-message"
+          )
           .textContent =
             "Could not delete deal: " +
             error.message;
 
+
         return;
       }
 
+
       resetForm();
+
+
       await loadDeals();
 
+
       document
-        .getElementById("form-message")
+        .getElementById(
+          "form-message"
+        )
         .textContent =
           "Deal deleted successfully.";
     }
 
+
     document
-      .getElementById("cancel-edit")
+      .getElementById(
+        "cancel-edit"
+      )
       .addEventListener(
         "click",
         function() {
+
           resetForm();
 
+
           document
-            .getElementById("form-message")
-            .textContent = "";
+            .getElementById(
+              "form-message"
+            )
+            .textContent =
+              "";
         }
       );
 
+
     function resetForm() {
+
       document
-        .getElementById("deal-form")
+        .getElementById(
+          "deal-form"
+        )
         .reset();
 
-      document
-        .getElementById("deal-id")
-        .value = "";
 
       document
-        .getElementById("active")
-        .checked = true;
+        .getElementById(
+          "deal-id"
+        )
+        .value =
+          "";
+
 
       document
-        .getElementById("form-title")
+        .getElementById(
+          "active"
+        )
+        .checked =
+          true;
+
+
+      document
+        .getElementById(
+          "form-title"
+        )
         .textContent =
           "Add Deal";
 
+
       document
-        .getElementById("save-button")
+        .getElementById(
+          "save-button"
+        )
         .textContent =
           "Save Deal";
 
+
       document
-        .getElementById("cancel-edit")
+        .getElementById(
+          "cancel-edit"
+        )
         .style.display =
           "none";
 
-      const productSelect =
-        document.getElementById("item-id");
 
-      productSelect.disabled = true;
+      const productSelect =
+        document.getElementById(
+          "item-id"
+        );
+
+
+      productSelect.disabled =
+        true;
+
 
       productSelect.innerHTML =
         '<option value="">First select an item type</option>';
+
+
+      clearSelectedProductInfo();
     }
 
+
     function toLocalDateTime(value) {
+
       if (!value) {
         return "";
       }
 
+
       const date =
-        new Date(value);
+        new Date(
+          value
+        );
+
 
       const offset =
         date.getTimezoneOffset();
 
+
       const local =
         new Date(
           date.getTime() -
-          offset * 60 * 1000
+          offset *
+          60 *
+          1000
         );
+
 
       return local
         .toISOString()
-        .slice(0, 16);
+        .slice(
+          0,
+          16
+        );
     }
 
+
     function formatDateTime(value) {
+
       if (!value) {
         return "Not set";
       }
 
-      const date =
-        new Date(value);
 
-      if (Number.isNaN(date.getTime())) {
+      const date =
+        new Date(
+          value
+        );
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
         return "Not set";
       }
 
-      return date.toLocaleString();
+
+      return date
+        .toLocaleString();
     }
+
 
     function escapeHTML(value) {
+
       return String(
-        value == null ? "" : value
+        value == null
+          ? ""
+          : value
       )
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
     }
+
 
     function escapeAttribute(value) {
-      return escapeHTML(value);
+
+      return escapeHTML(
+        value
+      );
     }
 
+
     protectPage();
+
   </script>
 
 </body>
