@@ -792,17 +792,17 @@ function getDestination(
   */
 
   if (
-    deal.item_type ===
-    "digital_product"
-  ) {
-
-    return (
-      "checkout.html?product_id=" +
-      encodeURIComponent(
-        deal.item_id
-      )
-    );
-  }
+  deal.item_type ===
+  "digital_product"
+) {
+  return (
+    "checkout.html?product_id=" +
+    encodeURIComponent(deal.item_id) +
+    "&deal_id=" +
+    encodeURIComponent(deal.id)
+  );
+}
+    
 
 
   /*
