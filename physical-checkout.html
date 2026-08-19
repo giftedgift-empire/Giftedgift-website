@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Checkout | GiftedGift Empire</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    .top-line {
+      height: 14px;
+      background: #123c8c;
+    }
+
+    .hero {
+      background: white;
+      text-align: center;
+      padding: 65px 20px 55px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: 42px;
+      color: #111;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      font-size: 20px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 22px 80px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #164799;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 35px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    }
+
+    h2 {
+      color: #164799;
+      margin-top: 0;
+      margin-bottom: 28px;
+      font-size: 34px;
+    }
+
+    .product {
+      padding: 20px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .product:last-child {
+      border-bottom: none;
+    }
+
+    .product-name {
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .product-details {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      font-size: 19px;
+    }
+
+    .summary-row strong {
+      text-align: right;
+    }
+
+    .divider {
+      border-top: 1px solid #ddd;
+      margin: 15px 0;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 17px;
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .total-row span:last-child {
+      color: #164799;
+    }
+
+    .address-line {
+      margin: 7px 0;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .shipping-name {
+      font-size: 21px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .shipping-price {
+      font-size: 24px;
+      color: #164799;
+      font-weight: 800;
+    }
+
+    .notice {
+      padding: 18px;
+      border-radius: 14px;
+      background: #fff8dd;
+      margin-top: 25px;
+      line-height: 1.6;
+    }
+
+    .paypal-button {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 25px;
+      font-size: 21px;
+      font-weight: 800;
+      background: #d5d5d5;
+      color: #777;
+      cursor: not-allowed;
+    }
+
+    .status {
+      padding: 18px;
+      border-radius: 14px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .status.error {
+      display: block;
+      background: #fdeaea;
+      color: #9b1c1c;
+    }
+
+    footer {
+      background: #123c8c;
+      color: white;
+      text-align: center;
+      padding: 45px 20px;
+      font-size: 18px;
+    }
+
+    footer strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .card {
+        padding: 28px 22px;
+      }
+
+      h2 {
+        font-size: 29px;
+      }
+
+      .summary-row {
+        font-size: 17px;
+      }
+
+      .total-row {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-line"></div>
+
+  <section class="hero">
+    <h1>Checkout</h1>
+    <p>
+      Review your physical order, delivery information and final amount
+      before payment.
+    </p>
+  </section>
+
+  <main class="page">
+
+    <a href="shipping.html" class="back-link">
+      ← Back to Shipping
+    </a>
+
+    <div id="status" class="status"></div>
+
+    <section class="card">
+      <h2>Your Items</h2>
+      <div id="products">
+        Loading order...
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Delivery</h2>
+
+      <div id="shipping-info">
+        Loading shipping information...
+      </div>
+
+      <div id="address-info" style="margin-top: 25px;"></div>
+    </section>
+
+    <section class="card">
+      <h2>Order Total</h2>
+
+      <div class="summary-row">
+        <span>Product subtotal</span>
+        <strong id="subtotal">€0.00</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping</span>
+        <strong id="shipping-total">€0.00</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>VAT charged by store</span>
+        <strong>€0.00</strong>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="total-row">
+        <span>Total</span>
+        <span id="grand-total">€0.00</span>
+      </div>
+
+      <div class="notice">
+        VAT is currently set to €0.00 for this checkout.
+        The PayPal payment connection will be added in the next stage.
+      </div>
+
+      <button class="paypal-button" type="button" disabled>
+        PayPal Checkout — Next
+      </button>
+    </section>
+
+  </main>
+
+  <footer>
+    <strong>GiftedGift Empire</strong>
+    © 2026 GiftedGift Empire. All rights reserved.
+  </footer>
+
+
+  <script>
+    const SUPABASE_URL =
+      "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const CART_KEY = "giftedgift_physical_cart";
+    const SHIPPING_KEY = "giftedgift_shipping_selection";
+
+    const productsBox = document.getElementById("products");
+    const shippingBox = document.getElementById("shipping-info");
+    const addressBox = document.getElementById("address-info");
+    const statusBox = document.getElementById("status");
+
+    function money(value) {
+      return "€" + Number(value || 0).toFixed(2);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function showError(message) {
+      statusBox.className = "status error";
+      statusBox.textContent = message;
+    }
+
+    function getStoredCart() {
+      try {
+        const data = JSON.parse(
+          localStorage.getItem(CART_KEY) || "[]"
+        );
+
+        return Array.isArray(data) ? data : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function getStoredShipping() {
+      try {
+        return JSON.parse(
+          localStorage.getItem(SHIPPING_KEY) || "null"
+        );
+      } catch {
+        return null;
+      }
+    }
+
+    function extractShippingRate(shipping) {
+      if (!shipping) return null;
+
+      return (
+        shipping.rate ||
+        shipping.selectedRate ||
+        shipping.selected_rate ||
+        shipping.shippingRate ||
+        shipping.shipping_rate ||
+        null
+      );
+    }
+
+    function extractAddress(shipping) {
+      if (!shipping) return {};
+
+      return (
+        shipping.address ||
+        shipping.deliveryAddress ||
+        shipping.delivery_address ||
+        {}
+      );
+    }
+
+    function getShippingPrice(shipping, rate) {
+      const possiblePrice =
+        rate?.price ??
+        shipping?.shipping_price ??
+        shipping?.shippingPrice ??
+        shipping?.price;
+
+      const number = Number(possiblePrice);
+
+      return Number.isFinite(number) ? number : 0;
+    }
+
+    async function loadCheckout() {
+
+      const cart = getStoredCart();
+      const shipping = getStoredShipping();
+
+      if (!cart.length) {
+        showError(
+          "Your physical cart is empty. Please return to the shop and add a product."
+        );
+        productsBox.innerHTML = "";
+        return;
+      }
+
+      if (!shipping) {
+        showError(
+          "No shipping option has been saved. Please return to Shipping and calculate your delivery."
+        );
+        shippingBox.innerHTML = "";
+        return;
+      }
+
+      const productIds = [
+        ...new Set(
+          cart.map(item => Number(item.product_id))
+              .filter(Boolean)
+        )
+      ];
+
+      const { data: products, error } = await db
+        .from("products")
+        .select("id,name,price,in_stock,weight_kg")
+        .in("id", productIds);
+
+      if (error) {
+        console.error(error);
+
+        showError(
+          "We could not load the current product information."
+        );
+
+        return;
+      }
+
+      let subtotal = 0;
+      let totalWeight = 0;
+      let totalItems = 0;
+      let html = "";
+
+      for (const cartItem of cart) {
+
+        const product = products.find(
+          p => Number(p.id) === Number(cartItem.product_id)
+        );
+
+        if (!product) {
+          showError(
+            "One of the products in your cart is no longer available."
+          );
+          return;
+        }
+
+        if (!product.in_stock) {
+          showError(
+            product.name + " is currently out of stock."
+          );
+          return;
+        }
+
+        const quantity = Math.max(
+          1,
+          Number(cartItem.quantity) || 1
+        );
+
+        const price = Number(product.price);
+        const weight = Number(product.weight_kg);
+
+        if (!Number.isFinite(price) || price < 0) {
+          showError(
+            "A product in your cart has an invalid price."
+          );
+          return;
+        }
+
+        if (!Number.isFinite(weight) || weight <= 0) {
+          showError(
+            product.name + " does not have a valid shipping weight."
+          );
+          return;
+        }
+
+        const itemTotal = price * quantity;
+        const itemWeight = weight * quantity;
+
+        subtotal += itemTotal;
+        totalWeight += itemWeight;
+        totalItems += quantity;
+
+        html += `
+          <div class="product">
+            <div class="product-name">
+              ${escapeHtml(product.name)}
+            </div>
+
+            <div class="product-details">
+              ${quantity} × ${money(price)}
+              <br>
+              Item total: <strong>${money(itemTotal)}</strong>
+              <br>
+              Weight: ${itemWeight.toFixed(2).replace(/\.00$/, "")} kg
+            </div>
+          </div>
+        `;
+      }
+
+      productsBox.innerHTML = html;
+
+      const rate = extractShippingRate(shipping);
+      const address = extractAddress(shipping);
+
+      const shippingPrice = getShippingPrice(
+        shipping,
+        rate
+      );
+
+      const carrier =
+        rate?.carrier ||
+        shipping?.carrier ||
+        "Shipping";
+
+      const service =
+        rate?.service_name ||
+        shipping?.service_name ||
+        shipping?.serviceName ||
+        "";
+
+      shippingBox.innerHTML = `
+        <div class="shipping-name">
+          ${escapeHtml(carrier)}
+          ${service ? " — " + escapeHtml(service) : ""}
+        </div>
+
+        <div class="shipping-price">
+          ${money(shippingPrice)}
+        </div>
+
+        <div style="margin-top:12px;color:#666;">
+          Shipment weight:
+          ${totalWeight.toFixed(2).replace(/\.00$/, "")} kg
+        </div>
+      `;
+
+      const fullName =
+        address.full_name ||
+        address.fullName ||
+        address.name ||
+        "";
+
+      const email =
+        address.email || "";
+
+      const phone =
+        address.phone || "";
+
+      const line1 =
+        address.address1 ||
+        address.address_1 ||
+        address.address ||
+        "";
+
+      const line2 =
+        address.address2 ||
+        address.address_2 ||
+        address.apartment ||
+        "";
+
+      const postalCode =
+        address.postal_code ||
+        address.postalCode ||
+        address.zip ||
+        "";
+
+      const city =
+        address.city || "";
+
+      const country =
+        address.country_name ||
+        address.countryName ||
+        address.country ||
+        "France";
+
+      addressBox.innerHTML = `
+        <div class="address-line">
+          <strong>${escapeHtml(fullName)}</strong>
+        </div>
+
+        ${email ? `
+          <div class="address-line">
+            ${escapeHtml(email)}
+          </div>
+        ` : ""}
+
+        ${phone ? `
+          <div class="address-line">
+            ${escapeHtml(phone)}
+          </div>
+        ` : ""}
+
+        ${line1 ? `
+          <div class="address-line">
+            ${escapeHtml(line1)}
+          </div>
+        ` : ""}
+
+        ${line2 ? `
+          <div class="address-line">
+            ${escapeHtml(line2)}
+          </div>
+        ` : ""}
+
+        <div class="address-line">
+          ${escapeHtml(postalCode)}
+          ${escapeHtml(city)}
+        </div>
+
+        <div class="address-line">
+          ${escapeHtml(country)}
+        </div>
+      `;
+
+      const vat = 0;
+
+      const grandTotal =
+        subtotal + shippingPrice + vat;
+
+      document.getElementById("subtotal").textContent =
+        money(subtotal);
+
+      document.getElementById("shipping-total").textContent =
+        money(shippingPrice);
+
+      document.getElementById("grand-total").textContent =
+        money(grandTotal);
+    }
+
+    loadCheckout();
+  </script>
+
+</body>
+</html>
