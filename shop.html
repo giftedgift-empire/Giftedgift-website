@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Shop | GiftedGift Empire</title>
 
@@ -53,42 +58,103 @@
 
     .hero h2 {
       font-size: 38px;
-      margin-bottom: 15px;
+      margin: 0 0 15px;
     }
 
     .hero p {
-      max-width: 650px;
+      max-width: 720px;
       margin: auto;
       line-height: 1.7;
       color: #555;
     }
 
     .shop {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: auto;
-      padding: 45px 20px;
+      padding: 35px 20px 55px;
     }
 
-    .shop h2 {
+    .filter-section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    }
+
+    .filter-title {
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-button {
+      border: 1px solid #d5d5d5;
+      background: white;
+      color: #222;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .filter-button:hover,
+    .filter-button.active {
+      background: #123a8c;
+      color: white;
+      border-color: #123a8c;
+    }
+
+    .category-line {
+      margin-top: 18px;
+    }
+
+    .category-link {
+      display: inline-block;
+      margin: 4px 7px 4px 0;
+      text-decoration: none;
+      color: #123a8c;
+      background: #eef3ff;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .category-link.active {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .shop-heading {
       text-align: center;
-      font-size: 32px;
-      margin-bottom: 35px;
+      font-size: 31px;
+      margin: 0 0 30px;
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
     }
 
     .product {
+      position: relative;
       background: white;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
     }
 
-    .product img {
+    .product-image {
       width: 100%;
       height: 250px;
       object-fit: contain;
@@ -96,38 +162,60 @@
       background: #f7f7f7;
     }
 
-    .product h3 {
-      margin-top: 20px;
-      margin-bottom: 8px;
-      font-size: 22px;
+    .type-badge {
+      display: inline-block;
+      width: fit-content;
+      margin-top: 14px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #123a8c;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    .product p {
-      line-height: 1.6;
-      color: #555;
+    .affiliate-badge {
+      background: #6a3dad;
+    }
+
+    .digital-badge {
+      background: #146c43;
     }
 
     .category {
+      margin: 10px 0 0;
       font-size: 14px;
       font-weight: bold;
       color: #123a8c;
+    }
+
+    .product h3 {
+      margin: 14px 0 8px;
+      font-size: 22px;
+    }
+
+    .description {
+      line-height: 1.6;
+      color: #555;
+      flex-grow: 1;
     }
 
     .price {
       font-size: 21px;
       font-weight: bold;
       color: #111;
-      margin: 12px 0;
+      margin: 12px 0 5px;
     }
 
     .rating {
-      margin: 8px 0;
+      margin: 7px 0;
       font-weight: bold;
     }
 
     .product-button {
       display: inline-block;
-      margin-top: 12px;
+      text-align: center;
+      margin-top: 14px;
       padding: 12px 18px;
       background: #f2bd16;
       color: #111;
@@ -136,9 +224,25 @@
       border-radius: 7px;
     }
 
+    .product-button:hover {
+      opacity: 0.9;
+    }
+
+    .disabled-button {
+      background: #ddd;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    .affiliate-note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #777;
+    }
+
     .message {
       text-align: center;
-      padding: 30px;
+      padding: 40px 20px;
       color: #555;
       grid-column: 1 / -1;
     }
@@ -152,6 +256,7 @@
     }
 
     @media (max-width: 600px) {
+
       .hero h2 {
         font-size: 30px;
       }
@@ -159,180 +264,1160 @@
       nav {
         gap: 12px;
       }
+
+      .shop {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
     }
   </style>
 </head>
 
+
 <body>
 
 <header>
+
   <h1>GiftedGift Empire</h1>
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="categories.html">Categories</a>
-    <a href="blog.html">Blog</a>
-    <a href="deals.html">Deals</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
+
+    <a href="shop.html">
+      Shop
+    </a>
+
+    <a href="categories.html">
+      Categories
+    </a>
+
+    <a href="blog.html">
+      Blog
+    </a>
+
+    <a href="deals.html">
+      Deals
+    </a>
+
+    <a href="about.html">
+      About
+    </a>
+
+    <a href="contact.html">
+      Contact
+    </a>
+
+    <a href="cart.html">
+      🛒 Cart
+    </a>
   </nav>
+
 </header>
 
+
 <section class="hero">
-  <h2 id="shop-title">Shop GiftedGift Empire</h2>
+
+  <h2 id="shop-title">
+    Shop GiftedGift Empire
+  </h2>
 
   <p id="shop-description">
-    Discover carefully selected products, useful finds and recommendations
-    designed to make everyday shopping easier.
+    Shop physical products, digital products and
+    carefully selected affiliate recommendations
+    in one place.
   </p>
+
 </section>
+
 
 <main class="shop">
 
-  <h2>Our Products</h2>
+  <section class="filter-section">
 
-  <div id="products" class="products">
-    <p class="message">Loading products...</p>
+    <div class="filter-title">
+      Product Type
+    </div>
+
+    <div class="filters">
+
+      <button
+        class="filter-button active"
+        data-type="all"
+        type="button"
+      >
+        All Products
+      </button>
+
+      <button
+        class="filter-button"
+        data-type="physical"
+        type="button"
+      >
+        Physical
+      </button>
+
+      <button
+        class="filter-button"
+        data-type="digital"
+        type="button"
+      >
+        Digital
+      </button>
+
+      <button
+        class="filter-button"
+        data-type="affiliate"
+        type="button"
+      >
+        Affiliate
+      </button>
+
+    </div>
+
+
+    <div class="category-line">
+
+      <div class="filter-title">
+        Categories
+      </div>
+
+      <a
+        class="category-link"
+        href="shop.html"
+      >
+        All Categories
+      </a>
+
+      <a
+        class="category-link"
+        data-category="Home & Living"
+        href="shop.html?category=Home%20%26%20Living"
+      >
+        Home & Living
+      </a>
+
+      <a
+        class="category-link"
+        data-category="Fashion & Accessories"
+        href="shop.html?category=Fashion%20%26%20Accessories"
+      >
+        Fashion & Accessories
+      </a>
+
+      <a
+        class="category-link"
+        data-category="Useful Finds"
+        href="shop.html?category=Useful%20Finds"
+      >
+        Useful Finds
+      </a>
+
+      <a
+        class="category-link"
+        data-category="Beauty & Lifestyle"
+        href="shop.html?category=Beauty%20%26%20Lifestyle"
+      >
+        Beauty & Lifestyle
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <h2
+    id="products-heading"
+    class="shop-heading"
+  >
+    All Products
+  </h2>
+
+
+  <div
+    id="products"
+    class="products"
+  >
+    <p class="message">
+      Loading products...
+    </p>
   </div>
 
 </main>
 
+
 <footer>
-  <p><strong>GiftedGift Empire</strong></p>
 
   <p>
-    Some links on this website may be affiliate links. We may earn a
-    commission when you make a purchase through certain links, at no
-    additional cost to you.
+    <strong>
+      GiftedGift Empire
+    </strong>
   </p>
 
-  <p>© 2026 GiftedGift Empire. All rights reserved.</p>
+  <p>
+    Some products on this website contain affiliate
+    links. We may earn a commission when you purchase
+    through certain links, at no extra cost to you.
+  </p>
+
+  <p>
+    © 2026 GiftedGift Empire.
+    All rights reserved.
+  </p>
+
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
 
 <script>
+
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  /*
+    Put the SAME publishable key that is already
+    inside your current shop.html between the quotes.
+  */
 
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
-  const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
 
-  async function loadProducts() {
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
 
-    const container = document.getElementById("products");
-    const title = document.getElementById("shop-title");
-    const description = document.getElementById("shop-description");
 
-    const params = new URLSearchParams(window.location.search);
-    const selectedCategory = params.get("category");
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
-    if (selectedCategory) {
-      title.textContent = selectedCategory;
-      description.textContent =
-        `Browse products in the ${selectedCategory} category.`;
-    }
 
-    let query = supabaseClient
-      .from("products")
-      .select("*")
-      .eq("in_stock", true);
+  const selectedCategory =
+    params.get("category");
 
-    if (selectedCategory) {
-      query = query.eq("category", selectedCategory);
-    }
 
-    const { data: products, error } = await query
-      .order("created_at", { ascending: false });
+  let selectedType =
+    "all";
 
-    if (error) {
-      console.error(error);
 
-      container.innerHTML =
-        '<p class="message">Products could not be loaded right now.</p>';
+  let allProducts =
+    [];
 
-      return;
-    }
 
-    if (!products || products.length === 0) {
-      container.innerHTML =
-        '<p class="message">No products are available in this category yet.</p>';
+  function firstValue(
+    object,
+    names
+  ) {
 
-      return;
-    }
+    for (
+      const name
+      of names
+    ) {
 
-    container.innerHTML = "";
+      const value =
+        object?.[name];
 
-    products.forEach(product => {
 
-      const card = document.createElement("div");
-      card.className = "product";
+      if (
+        value !== undefined &&
+        value !== null &&
+        value !== ""
+      ) {
 
-      const image = product.image_url
-        ? `<img src="${escapeHTML(product.image_url)}"
-                alt="${escapeHTML(product.name || "GiftedGift Empire product")}">`
-        : "";
-
-      const category = product.category
-        ? `<p class="category">${escapeHTML(product.category)}</p>`
-        : "";
-
-      const description = product.description
-        ? `<p>${escapeHTML(product.description)}</p>`
-        : "";
-
-      const price =
-        product.price !== null && product.price !== undefined
-        ? `<p class="price">€${Number(product.price).toFixed(2)}</p>`
-        : "";
-
-      const rating =
-        product.rating !== null && product.rating !== undefined
-        ? `<p class="rating">⭐ ${escapeHTML(String(product.rating))} / 5</p>`
-        : "";
-
-      let button = "";
-
-      if (product.product_url) {
-        button =
-          `<a class="product-button"
-              href="${escapeHTML(product.product_url)}"
-              target="_blank"
-              rel="noopener sponsored">
-              View Product
-           </a>`;
+        return value;
       }
+    }
 
-      card.innerHTML = `
-        ${image}
-        ${category}
 
-        <h3>${escapeHTML(product.name || "Product")}</h3>
-
-        ${description}
-        ${price}
-        ${rating}
-        ${button}
-      `;
-
-      container.appendChild(card);
-    });
+    return null;
   }
 
-  function escapeHTML(value) {
-    const div = document.createElement("div");
-    div.textContent = value;
+
+  function escapeHTML(
+    value
+  ) {
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+    div.textContent =
+      value ?? "";
+
     return div.innerHTML;
   }
 
-  loadProducts();
+
+  function validPrice(
+    value
+  ) {
+
+    const number =
+      Number(value);
+
+    return (
+      Number.isFinite(number) &&
+      number >= 0
+    );
+  }
+
+
+  function normalizePhysical(
+    product
+  ) {
+
+    return {
+
+      id:
+        product.id,
+
+      type:
+        "physical",
+
+      typeLabel:
+        "Physical Product",
+
+      name:
+        firstValue(
+          product,
+          [
+            "name",
+            "title"
+          ]
+        ) || "Product",
+
+      description:
+        firstValue(
+          product,
+          [
+            "description",
+            "short_description"
+          ]
+        ) || "",
+
+      category:
+        firstValue(
+          product,
+          [
+            "category"
+          ]
+        ) || "",
+
+      image:
+        firstValue(
+          product,
+          [
+            "image_url",
+            "image"
+          ]
+        ) || "",
+
+      price:
+        firstValue(
+          product,
+          [
+            "price"
+          ]
+        ),
+
+      rating:
+        firstValue(
+          product,
+          [
+            "rating"
+          ]
+        ),
+
+      createdAt:
+        product.created_at || "",
+
+      available:
+        product.in_stock === true
+    };
+  }
+
+
+  function normalizeDigital(
+    product
+  ) {
+
+    return {
+
+      id:
+        product.id,
+
+      type:
+        "digital",
+
+      typeLabel:
+        "Digital Product",
+
+      name:
+        firstValue(
+          product,
+          [
+            "name",
+            "title"
+          ]
+        ) || "Digital Product",
+
+      description:
+        firstValue(
+          product,
+          [
+            "description",
+            "short_description"
+          ]
+        ) || "",
+
+      category:
+        firstValue(
+          product,
+          [
+            "category"
+          ]
+        ) || "",
+
+      image:
+        firstValue(
+          product,
+          [
+            "image_url",
+            "cover_url",
+            "image"
+          ]
+        ) || "",
+
+      price:
+        firstValue(
+          product,
+          [
+            "price"
+          ]
+        ),
+
+      rating:
+        firstValue(
+          product,
+          [
+            "rating"
+          ]
+        ),
+
+      productType:
+        firstValue(
+          product,
+          [
+            "product_type"
+          ]
+        ) || "paid",
+
+      checkoutUrl:
+        firstValue(
+          product,
+          [
+            "checkout_url",
+            "product_url",
+            "url"
+          ]
+        ),
+
+      createdAt:
+        product.created_at || "",
+
+      available:
+        product.active === true
+    };
+  }
+
+
+  function normalizeAffiliate(
+    product
+  ) {
+
+    return {
+
+      id:
+        product.id,
+
+      type:
+        "affiliate",
+
+      typeLabel:
+        "Affiliate Product",
+
+      name:
+        firstValue(
+          product,
+          [
+            "name",
+            "title",
+            "product_name"
+          ]
+        ) || "Affiliate Product",
+
+      description:
+        firstValue(
+          product,
+          [
+            "description",
+            "short_description"
+          ]
+        ) || "",
+
+      category:
+        firstValue(
+          product,
+          [
+            "category"
+          ]
+        ) || "",
+
+      image:
+        firstValue(
+          product,
+          [
+            "image_url",
+            "image",
+            "product_image"
+          ]
+        ) || "",
+
+      price:
+        firstValue(
+          product,
+          [
+            "price",
+            "current_price"
+          ]
+        ),
+
+      rating:
+        firstValue(
+          product,
+          [
+            "rating"
+          ]
+        ),
+
+      affiliateUrl:
+        firstValue(
+          product,
+          [
+            "affiliate_link",
+            "affiliate_url",
+            "product_url",
+            "buy_url",
+            "url"
+          ]
+        ),
+
+      createdAt:
+        product.created_at || "",
+
+      available:
+        product.active !== false &&
+        product.in_stock !== false
+    };
+  }
+
+
+  async function getTableRows(
+    tableName
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(tableName)
+        .select("*");
+
+
+    if (error) {
+
+      console.error(
+        `Could not load ${tableName}:`,
+        error
+      );
+
+      return [];
+    }
+
+
+    return Array.isArray(data)
+      ? data
+      : [];
+  }
+
+
+  async function loadAllProducts() {
+
+    const container =
+      document.getElementById(
+        "products"
+      );
+
+
+    try {
+
+      const [
+        physicalRows,
+        digitalRows,
+        affiliateRows
+      ] =
+        await Promise.all([
+
+          getTableRows(
+            "products"
+          ),
+
+          getTableRows(
+            "digital_products"
+          ),
+
+          getTableRows(
+            "affiliate_products"
+          )
+
+        ]);
+
+
+      const physical =
+        physicalRows
+          .map(
+            normalizePhysical
+          )
+          .filter(
+            item =>
+              item.available
+          );
+
+
+      const digital =
+        digitalRows
+          .map(
+            normalizeDigital
+          )
+          .filter(
+            item =>
+              item.available
+          );
+
+
+      const affiliate =
+        affiliateRows
+          .map(
+            normalizeAffiliate
+          )
+          .filter(
+            item =>
+              item.available
+          );
+
+
+      allProducts = [
+        ...physical,
+        ...digital,
+        ...affiliate
+      ];
+
+
+      allProducts.sort(
+        (a, b) => {
+
+          const aTime =
+            new Date(
+              a.createdAt || 0
+            ).getTime();
+
+
+          const bTime =
+            new Date(
+              b.createdAt || 0
+            ).getTime();
+
+
+          return bTime - aTime;
+        }
+      );
+
+
+      applyFilters();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      container.innerHTML = `
+        <p class="message">
+          Products could not be loaded right now.
+        </p>
+      `;
+    }
+  }
+
+
+  function applyFilters() {
+
+    let visibleProducts =
+      [...allProducts];
+
+
+    if (
+      selectedType !==
+      "all"
+    ) {
+
+      visibleProducts =
+        visibleProducts.filter(
+          item =>
+            item.type ===
+            selectedType
+        );
+    }
+
+
+    if (
+      selectedCategory
+    ) {
+
+      const wantedCategory =
+        selectedCategory
+          .trim()
+          .toLowerCase();
+
+
+      visibleProducts =
+        visibleProducts.filter(
+          item =>
+            String(
+              item.category || ""
+            )
+              .trim()
+              .toLowerCase() ===
+            wantedCategory
+        );
+    }
+
+
+    updateHeadings();
+
+    renderProducts(
+      visibleProducts
+    );
+  }
+
+
+  function updateHeadings() {
+
+    const title =
+      document.getElementById(
+        "shop-title"
+      );
+
+
+    const description =
+      document.getElementById(
+        "shop-description"
+      );
+
+
+    const heading =
+      document.getElementById(
+        "products-heading"
+      );
+
+
+    if (
+      selectedCategory
+    ) {
+
+      title.textContent =
+        selectedCategory;
+
+
+      description.textContent =
+        `Browse products in the ${selectedCategory} category.`;
+
+    } else {
+
+      title.textContent =
+        "Shop GiftedGift Empire";
+
+
+      description.textContent =
+        "Shop physical products, digital products and carefully selected affiliate recommendations in one place.";
+    }
+
+
+    const labels = {
+
+      all:
+        "All Products",
+
+      physical:
+        "Physical Products",
+
+      digital:
+        "Digital Products",
+
+      affiliate:
+        "Affiliate Products"
+
+    };
+
+
+    heading.textContent =
+      labels[selectedType] ||
+      "All Products";
+  }
+
+
+  function getProductButton(
+    product
+  ) {
+
+    if (
+      product.type ===
+      "physical"
+    ) {
+
+      return `
+        <a
+          class="product-button"
+          href="product.html?id=${encodeURIComponent(product.id)}"
+        >
+          View Product
+        </a>
+      `;
+    }
+
+
+    if (
+      product.type ===
+      "digital"
+    ) {
+
+      if (
+        String(
+          product.productType
+        ).toLowerCase() ===
+        "paid"
+      ) {
+
+        return `
+          <a
+            class="product-button"
+            href="checkout.html?product_id=${encodeURIComponent(product.id)}"
+          >
+            Buy Digital Product
+          </a>
+        `;
+      }
+
+
+      if (
+        product.checkoutUrl
+      ) {
+
+        return `
+          <a
+            class="product-button"
+            href="${escapeHTML(product.checkoutUrl)}"
+          >
+            Get Digital Product
+          </a>
+        `;
+      }
+
+
+      return `
+        <span
+          class="product-button disabled-button"
+        >
+          Currently Unavailable
+        </span>
+      `;
+    }
+
+
+    if (
+      product.type ===
+      "affiliate"
+    ) {
+
+      if (
+        product.affiliateUrl
+      ) {
+
+        return `
+          <a
+            class="product-button"
+            href="${escapeHTML(product.affiliateUrl)}"
+            target="_blank"
+            rel="noopener sponsored"
+          >
+            Shop Now
+          </a>
+
+          <div class="affiliate-note">
+            Affiliate link
+          </div>
+        `;
+      }
+
+
+      return `
+        <span
+          class="product-button disabled-button"
+        >
+          Link Unavailable
+        </span>
+      `;
+    }
+
+
+    return "";
+  }
+
+
+  function renderProducts(
+    products
+  ) {
+
+    const container =
+      document.getElementById(
+        "products"
+      );
+
+
+    if (
+      !products ||
+      products.length === 0
+    ) {
+
+      container.innerHTML = `
+        <p class="message">
+          No products are available here yet.
+        </p>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML =
+      "";
+
+
+    products.forEach(
+      product => {
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+
+        card.className =
+          "product";
+
+
+        const image =
+          product.image
+            ? `
+              <img
+                class="product-image"
+                src="${escapeHTML(product.image)}"
+                alt="${escapeHTML(product.name)}"
+              >
+            `
+            : "";
+
+
+        let badgeClass =
+          "";
+
+
+        if (
+          product.type ===
+          "digital"
+        ) {
+
+          badgeClass =
+            "digital-badge";
+        }
+
+
+        if (
+          product.type ===
+          "affiliate"
+        ) {
+
+          badgeClass =
+            "affiliate-badge";
+        }
+
+
+        const category =
+          product.category
+            ? `
+              <p class="category">
+                ${escapeHTML(product.category)}
+              </p>
+            `
+            : "";
+
+
+        const description =
+          product.description
+            ? `
+              <p class="description">
+                ${escapeHTML(product.description)}
+              </p>
+            `
+            : `
+              <p class="description"></p>
+            `;
+
+
+        const price =
+          validPrice(
+            product.price
+          )
+            ? `
+              <p class="price">
+                €${Number(product.price).toFixed(2)}
+              </p>
+            `
+            : "";
+
+
+        const rating =
+          product.rating !== null &&
+          product.rating !== undefined &&
+          product.rating !== ""
+            ? `
+              <p class="rating">
+                ⭐ ${escapeHTML(String(product.rating))} / 5
+              </p>
+            `
+            : "";
+
+
+        card.innerHTML = `
+          ${image}
+
+          <span
+            class="type-badge ${badgeClass}"
+          >
+            ${escapeHTML(product.typeLabel)}
+          </span>
+
+          ${category}
+
+          <h3>
+            ${escapeHTML(product.name)}
+          </h3>
+
+          ${description}
+
+          ${price}
+
+          ${rating}
+
+          ${getProductButton(product)}
+        `;
+
+
+        container.appendChild(
+          card
+        );
+      }
+    );
+  }
+
+
+  document
+    .querySelectorAll(
+      ".filter-button"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            selectedType =
+              button.dataset.type ||
+              "all";
+
+
+            document
+              .querySelectorAll(
+                ".filter-button"
+              )
+              .forEach(
+                item =>
+                  item.classList.remove(
+                    "active"
+                  )
+              );
+
+
+            button.classList.add(
+              "active"
+            );
+
+
+            applyFilters();
+          }
+        );
+      }
+    );
+
+
+  if (
+    selectedCategory
+  ) {
+
+    document
+      .querySelectorAll(
+        ".category-link"
+      )
+      .forEach(
+        link => {
+
+          if (
+            link.dataset.category ===
+            selectedCategory
+          ) {
+
+            link.classList.add(
+              "active"
+            );
+          }
+        }
+      );
+  }
+
+
+  loadAllProducts();
+
 </script>
 
 </body>
