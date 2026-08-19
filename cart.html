@@ -171,7 +171,22 @@
     .item-price {
       font-size: 19px;
       font-weight: bold;
-      margin: 8px 0 15px;
+      margin: 8px 0 10px;
+    }
+
+    .item-weight {
+      color: #555;
+      font-size: 14px;
+      margin: 7px 0 12px;
+    }
+
+    .weight-warning {
+      margin: 8px 0 12px;
+      padding: 10px;
+      border-radius: 7px;
+      background: #fff4d6;
+      color: #805b00;
+      font-size: 14px;
     }
 
     .quantity-row {
@@ -211,6 +226,13 @@
       font-size: 20px;
       font-weight: bold;
       color: #123a8c;
+    }
+
+    .item-weight-total {
+      margin-top: 7px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #555;
     }
 
     .remove-button {
@@ -267,6 +289,17 @@
       margin-top: 15px;
       color: #666;
       line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .weight-alert {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fff4d6;
+      color: #805b00;
+      line-height: 1.5;
       font-size: 14px;
     }
 
@@ -375,33 +408,19 @@
 
   <nav>
 
-    <a href="index.html">
-      Home
-    </a>
+    <a href="index.html">Home</a>
 
-    <a href="shop.html">
-      Shop
-    </a>
+    <a href="shop.html">Shop</a>
 
-    <a href="categories.html">
-      Categories
-    </a>
+    <a href="categories.html">Categories</a>
 
-    <a href="blog.html">
-      Blog
-    </a>
+    <a href="blog.html">Blog</a>
 
-    <a href="deals.html">
-      Deals
-    </a>
+    <a href="deals.html">Deals</a>
 
-    <a href="about.html">
-      About
-    </a>
+    <a href="about.html">About</a>
 
-    <a href="contact.html">
-      Contact
-    </a>
+    <a href="contact.html">Contact</a>
 
     <a href="cart.html">
       🛒 Cart
@@ -420,8 +439,8 @@
   </h2>
 
   <p>
-    Review your physical products and quantities
-    before continuing to shipping and checkout.
+    Review your physical products, quantities and
+    total shipment weight before checkout.
   </p>
 
 </section>
@@ -498,6 +517,19 @@
       </div>
 
 
+      <div class="summary-line">
+
+        <span>
+          Total shipment weight
+        </span>
+
+        <strong id="summary-weight">
+          0 g
+        </strong>
+
+      </div>
+
+
       <div
         class="summary-line summary-total"
       >
@@ -513,10 +545,19 @@
       </div>
 
 
+      <div
+        id="weight-alert"
+        class="weight-alert"
+      >
+        One or more products do not have a valid weight.
+        Add the product weight before shipping.
+      </div>
+
+
       <p class="summary-note">
         Shipping and VAT are not included yet.
-        We will calculate them in the next stages
-        using the product weight and delivery address.
+        The next stage will use the total shipment
+        weight and delivery address to calculate shipping.
       </p>
 
 
@@ -640,6 +681,44 @@
     return (
       "€" +
       Number(value).toFixed(2)
+    );
+  }
+
+
+  function formatWeight(
+    kg
+  ) {
+
+    const number =
+      Number(kg);
+
+
+    if (
+      !Number.isFinite(number)
+    ) {
+
+      return "Weight unavailable";
+    }
+
+
+    if (
+      number < 1
+    ) {
+
+      return (
+        Math.round(
+          number * 1000
+        ) +
+        " g"
+      );
+    }
+
+
+    return (
+      Number(
+        number.toFixed(3)
+      ) +
+      " kg"
     );
   }
 
@@ -1085,8 +1164,16 @@
       0;
 
 
+    let totalWeightKg =
+      0;
+
+
     let validItemCount =
       0;
+
+
+    let missingWeight =
+      false;
 
 
     cart.forEach(
@@ -1124,6 +1211,19 @@
           );
 
 
+        const unitWeightKg =
+          Number(
+            product.weight_kg
+          );
+
+
+        const validWeight =
+          Number.isFinite(
+            unitWeightKg
+          ) &&
+          unitWeightKg > 0;
+
+
         const stockLimit =
           getStockLimit(
             product
@@ -1158,6 +1258,15 @@
             : 0;
 
 
+        const itemWeightKg =
+          validWeight
+
+            ? unitWeightKg *
+              safeQuantity
+
+            : 0;
+
+
         if (
           available
         ) {
@@ -1168,6 +1277,20 @@
 
           subtotal +=
             itemTotal;
+
+
+          if (
+            validWeight
+          ) {
+
+            totalWeightKg +=
+              itemWeightKg;
+
+          } else {
+
+            missingWeight =
+              true;
+          }
         }
 
 
@@ -1217,6 +1340,26 @@
             `;
 
 
+        const weightHTML =
+          validWeight
+
+            ? `
+              <div class="item-weight">
+                Weight each:
+                ${formatWeight(
+                  unitWeightKg
+                )}
+              </div>
+            `
+
+            : `
+              <div class="weight-warning">
+                Shipping weight has not been set
+                for this product yet.
+              </div>
+            `;
+
+
         card.innerHTML = `
 
           <div class="item-image-box">
@@ -1257,6 +1400,9 @@
                   : "Price unavailable"
               }
             </div>
+
+
+            ${weightHTML}
 
 
             ${
@@ -1310,6 +1456,22 @@
                       itemTotal
                     )}
                   </div>
+
+
+                  ${
+                    validWeight
+
+                      ? `
+                        <div class="item-weight-total">
+                          Total item weight:
+                          ${formatWeight(
+                            itemWeightKg
+                          )}
+                        </div>
+                      `
+
+                      : ""
+                  }
                 `
 
                 : unavailable
@@ -1360,6 +1522,23 @@
       formatPrice(
         subtotal
       );
+
+
+    document.getElementById(
+      "summary-weight"
+    ).textContent =
+      formatWeight(
+        totalWeightKg
+      );
+
+
+    document.getElementById(
+      "weight-alert"
+    ).style.display =
+      missingWeight
+
+        ? "block"
+        : "none";
 
 
     container
@@ -1497,11 +1676,6 @@
       );
 
 
-      /*
-        Remove product IDs that no longer exist
-        in Supabase.
-      */
-
       const cleanedCart =
         cart.filter(
           item =>
@@ -1583,4 +1757,4 @@
 
 </body>
 
-  </html>
+</html>
