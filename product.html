@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Product | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 25px 20px;
+    }
+
+    header h1 {
+      color: #f2bd16;
+      margin: 0 0 20px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #f2bd16;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 20px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .product-layout {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .image-area {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .product-image {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #f7f7f7;
+    }
+
+    .image-placeholder {
+      display: none;
+      width: 100%;
+      min-height: 350px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: #f1f1f1;
+      color: #888;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .category {
+      color: #123a8c;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .product-name {
+      font-size: 36px;
+      margin: 0 0 15px;
+    }
+
+    .rating {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .description {
+      line-height: 1.7;
+      color: #555;
+      white-space: pre-line;
+    }
+
+    .price {
+      font-size: 31px;
+      font-weight: bold;
+      margin: 22px 0 10px;
+    }
+
+    .stock {
+      display: inline-block;
+      margin: 12px 0 25px;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .in-stock {
+      background: #e7f6eb;
+      color: #21753a;
+    }
+
+    .out-of-stock {
+      background: #ffe8e8;
+      color: #a12626;
+    }
+
+    .quantity-section {
+      margin-top: 10px;
+    }
+
+    .quantity-label {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .quantity-button {
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .quantity-button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .quantity-value {
+      min-width: 48px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .total-box {
+      background: #f2f5fb;
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .total-label {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .selected-total {
+      margin-top: 5px;
+      font-size: 28px;
+      color: #123a8c;
+      font-weight: bold;
+    }
+
+    .add-button {
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 9px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .add-button:hover {
+      opacity: 0.92;
+    }
+
+    .add-button:disabled {
+      background: #ccc;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 9px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #e9f8ed;
+      border: 1px solid #b7e1c1;
+      color: #17652d;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      border: 1px solid #efb9b9;
+      color: #9c1d1d;
+    }
+
+    .view-cart {
+      display: inline-block;
+      margin-top: 18px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px 20px;
+      text-align: center;
+      background: #123a8c;
+      color: white;
+    }
+
+    @media (max-width: 760px) {
+
+      .product-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 20px;
+      }
+
+      .product-name {
+        font-size: 29px;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .image-placeholder {
+        min-height: 260px;
+      }
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+<header>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
+
+  <nav>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="shop.html">
+      Shop
+    </a>
+
+    <a href="categories.html">
+      Categories
+    </a>
+
+    <a href="blog.html">
+      Blog
+    </a>
+
+    <a href="deals.html">
+      Deals
+    </a>
+
+    <a href="about.html">
+      About
+    </a>
+
+    <a href="contact.html">
+      Contact
+    </a>
+
+    <a href="cart.html">
+      🛒 Cart
+      (<span id="cart-count">0</span>)
+    </a>
+
+  </nav>
+
+</header>
+
+
+<main class="page">
+
+  <a
+    class="back-link"
+    href="shop.html"
+  >
+    ← Back to Shop
+  </a>
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading product...
+  </div>
+
+
+  <section
+    id="product-content"
+    class="product-layout"
+  >
+
+    <div class="image-area">
+
+      <img
+        id="product-image"
+        class="product-image"
+        alt="GiftedGift Empire product"
+      >
+
+      <div
+        id="image-placeholder"
+        class="image-placeholder"
+      >
+        Product image coming soon
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div
+        id="product-category"
+        class="category"
+      ></div>
+
+
+      <h1
+        id="product-name"
+        class="product-name"
+      ></h1>
+
+
+      <div
+        id="product-rating"
+        class="rating"
+      ></div>
+
+
+      <div
+        id="product-description"
+        class="description"
+      ></div>
+
+
+      <div
+        id="product-price"
+        class="price"
+      ></div>
+
+
+      <div
+        id="stock-status"
+        class="stock"
+      ></div>
+
+
+      <div
+        id="quantity-section"
+        class="quantity-section"
+      >
+
+        <div class="quantity-label">
+          Quantity
+        </div>
+
+
+        <div class="quantity-control">
+
+          <button
+            id="minus-button"
+            class="quantity-button"
+            type="button"
+          >
+            −
+          </button>
+
+
+          <span
+            id="quantity-value"
+            class="quantity-value"
+          >
+            1
+          </span>
+
+
+          <button
+            id="plus-button"
+            class="quantity-button"
+            type="button"
+          >
+            +
+          </button>
+
+        </div>
+
+
+        <div class="total-box">
+
+          <div class="total-label">
+            Total for selected quantity
+          </div>
+
+          <div
+            id="selected-total"
+            class="selected-total"
+          >
+            €0.00
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="add-to-cart"
+        class="add-button"
+        type="button"
+      >
+        Add to Cart
+      </button>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+
+      <a
+        href="cart.html"
+        class="view-cart"
+      >
+        View Cart →
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <p>
+    <strong>
+      GiftedGift Empire
+    </strong>
+  </p>
+
+  <p>
+    © 2026 GiftedGift Empire.
+    All rights reserved.
+  </p>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+    This cart is specifically for physical products.
+
+    Digital products keep their existing digital
+    checkout and secure-download system.
+
+    Affiliate products continue using their
+    affiliate links.
+  */
+
+  const CART_KEY =
+    "giftedgift_physical_cart";
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const productId =
+    Number(
+      params.get("id")
+    );
+
+
+  let currentProduct =
+    null;
+
+
+  let selectedQuantity =
+    1;
+
+
+  let maxQuantity =
+    99;
+
+
+  function getCart() {
+
+    try {
+
+      const parsed =
+        JSON.parse(
+          localStorage.getItem(
+            CART_KEY
+          ) || "[]"
+        );
+
+
+      return Array.isArray(parsed)
+        ? parsed
+        : [];
+
+    } catch (error) {
+
+      console.error(
+        "Could not read cart:",
+        error
+      );
+
+
+      return [];
+    }
+  }
+
+
+  function saveCart(
+    cart
+  ) {
+
+    localStorage.setItem(
+      CART_KEY,
+      JSON.stringify(cart)
+    );
+  }
+
+
+  function updateCartCount() {
+
+    const cart =
+      getCart();
+
+
+    const count =
+      cart.reduce(
+        (
+          total,
+          item
+        ) => {
+
+          const quantity =
+            Number(
+              item.quantity
+            );
+
+
+          return total +
+            (
+              Number.isInteger(
+                quantity
+              ) &&
+              quantity > 0
+
+                ? quantity
+                : 0
+            );
+
+        },
+        0
+      );
+
+
+    document.getElementById(
+      "cart-count"
+    ).textContent =
+      String(count);
+  }
+
+
+  function formatPrice(
+    value
+  ) {
+
+    return (
+      "€" +
+      Number(value).toFixed(2)
+    );
+  }
+
+
+  /*
+    If a real stock-quantity field exists,
+    the page will use it.
+
+    Otherwise an in-stock product temporarily
+    allows up to 99 pieces.
+
+    We can connect exact inventory quantities
+    when we build the inventory/order stage.
+  */
+
+  function getStockLimit(
+    product
+  ) {
+
+    const candidates = [
+
+      product.stock_quantity,
+
+      product.inventory_quantity,
+
+      product.quantity_in_stock,
+
+      product.available_quantity
+
+    ];
+
+
+    for (
+      const value
+      of candidates
+    ) {
+
+      const number =
+        Number(value);
+
+
+      if (
+        Number.isInteger(
+          number
+        ) &&
+        number >= 0
+      ) {
+
+        return number;
+      }
+    }
+
+
+    return product.in_stock === true
+      ? 99
+      : 0;
+  }
+
+
+  function showMessage(
+    text,
+    type = "success"
+  ) {
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    message.className =
+      `message ${type}`;
+
+
+    message.textContent =
+      text;
+  }
+
+
+  function clearMessage() {
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    message.className =
+      "message";
+
+
+    message.textContent =
+      "";
+  }
+
+
+  function updateQuantityUI() {
+
+    if (
+      !currentProduct
+    ) {
+
+      return;
+    }
+
+
+    const price =
+      Number(
+        currentProduct.price
+      );
+
+
+    const total =
+      price *
+      selectedQuantity;
+
+
+    document.getElementById(
+      "quantity-value"
+    ).textContent =
+      String(
+        selectedQuantity
+      );
+
+
+    document.getElementById(
+      "selected-total"
+    ).textContent =
+      formatPrice(
+        total
+      );
+
+
+    document.getElementById(
+      "minus-button"
+    ).disabled =
+      selectedQuantity <= 1;
+
+
+    document.getElementById(
+      "plus-button"
+    ).disabled =
+      selectedQuantity >=
+      maxQuantity;
+  }
+
+
+  function changeQuantity(
+    change
+  ) {
+
+    clearMessage();
+
+
+    const next =
+      selectedQuantity +
+      change;
+
+
+    if (
+      next < 1 ||
+      next > maxQuantity
+    ) {
+
+      return;
+    }
+
+
+    selectedQuantity =
+      next;
+
+
+    updateQuantityUI();
+  }
+
+
+  function addToCart() {
+
+    clearMessage();
+
+
+    if (
+      !currentProduct ||
+      currentProduct.in_stock !==
+        true
+    ) {
+
+      showMessage(
+        "This product is currently out of stock.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const price =
+      Number(
+        currentProduct.price
+      );
+
+
+    if (
+      !Number.isFinite(
+        price
+      ) ||
+      price <= 0
+    ) {
+
+      showMessage(
+        "This product does not have a valid price.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const cart =
+      getCart();
+
+
+    const existingItem =
+      cart.find(
+        item =>
+          Number(
+            item.product_id
+          ) ===
+          Number(
+            currentProduct.id
+          )
+      );
+
+
+    const existingQuantity =
+      existingItem
+        ? Number(
+            existingItem.quantity
+          ) || 0
+        : 0;
+
+
+    const remaining =
+      maxQuantity -
+      existingQuantity;
+
+
+    if (
+      remaining <= 0
+    ) {
+
+      showMessage(
+        "The maximum available quantity is already in your cart.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const quantityToAdd =
+      Math.min(
+        selectedQuantity,
+        remaining
+      );
+
+
+    if (
+      existingItem
+    ) {
+
+      existingItem.quantity =
+        existingQuantity +
+        quantityToAdd;
+
+    } else {
+
+      /*
+        We deliberately store only:
+        product ID + quantity.
+
+        The cart will fetch the current price,
+        weight and product details directly
+        from Supabase.
+
+        This is safer than trusting prices
+        stored in the customer's browser.
+      */
+
+      cart.push({
+
+        product_id:
+          Number(
+            currentProduct.id
+          ),
+
+        quantity:
+          quantityToAdd
+
+      });
+    }
+
+
+    saveCart(
+      cart
+    );
+
+
+    updateCartCount();
+
+
+    showMessage(
+      `${quantityToAdd} ${
+        quantityToAdd === 1
+          ? "item"
+          : "items"
+      } added to your cart.`
+    );
+  }
+
+
+  function renderProduct(
+    product
+  ) {
+
+    const image =
+      document.getElementById(
+        "product-image"
+      );
+
+
+    const placeholder =
+      document.getElementById(
+        "image-placeholder"
+      );
+
+
+    if (
+      product.image_url
+    ) {
+
+      image.src =
+        product.image_url;
+
+
+      image.alt =
+        product.name ||
+        "GiftedGift Empire product";
+
+
+      image.style.display =
+        "block";
+
+
+      placeholder.style.display =
+        "none";
+
+    } else {
+
+      image.style.display =
+        "none";
+
+
+      placeholder.style.display =
+        "flex";
+    }
+
+
+    document.getElementById(
+      "product-category"
+    ).textContent =
+      product.category ||
+      "Physical Product";
+
+
+    document.getElementById(
+      "product-name"
+    ).textContent =
+      product.name ||
+      "Product";
+
+
+    document.getElementById(
+      "product-description"
+    ).textContent =
+      product.description ||
+      "";
+
+
+    const price =
+      Number(
+        product.price
+      );
+
+
+    document.getElementById(
+      "product-price"
+    ).textContent =
+      Number.isFinite(
+        price
+      ) &&
+      price > 0
+
+        ? formatPrice(
+            price
+          )
+
+        : "Price unavailable";
+
+
+    const rating =
+      document.getElementById(
+        "product-rating"
+      );
+
+
+    if (
+      product.rating !== null &&
+      product.rating !== undefined &&
+      product.rating !== ""
+    ) {
+
+      rating.textContent =
+        `⭐ ${product.rating} / 5`;
+
+
+      rating.style.display =
+        "block";
+
+    } else {
+
+      rating.style.display =
+        "none";
+    }
+
+
+    const stockStatus =
+      document.getElementById(
+        "stock-status"
+      );
+
+
+    const quantitySection =
+      document.getElementById(
+        "quantity-section"
+      );
+
+
+    const addButton =
+      document.getElementById(
+        "add-to-cart"
+      );
+
+
+    maxQuantity =
+      getStockLimit(
+        product
+      );
+
+
+    if (
+      product.in_stock === true &&
+      maxQuantity > 0 &&
+      Number.isFinite(
+        price
+      ) &&
+      price > 0
+    ) {
+
+      stockStatus.textContent =
+        maxQuantity === 99
+
+          ? "In stock"
+
+          : `${maxQuantity} available`;
+
+
+      stockStatus.className =
+        "stock in-stock";
+
+
+      quantitySection.style.display =
+        "block";
+
+
+      addButton.disabled =
+        false;
+
+
+      addButton.textContent =
+        "Add to Cart";
+
+
+      selectedQuantity =
+        1;
+
+
+      updateQuantityUI();
+
+    } else {
+
+      stockStatus.textContent =
+        "Out of stock";
+
+
+      stockStatus.className =
+        "stock out-of-stock";
+
+
+      quantitySection.style.display =
+        "none";
+
+
+      addButton.disabled =
+        true;
+
+
+      addButton.textContent =
+        "Out of Stock";
+    }
+  }
+
+
+  async function loadProduct() {
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+
+    const content =
+      document.getElementById(
+        "product-content"
+      );
+
+
+    if (
+      !Number.isInteger(
+        productId
+      ) ||
+      productId <= 0
+    ) {
+
+      loading.textContent =
+        "This product link is invalid.";
+
+      return;
+    }
+
+
+    const {
+      data: product,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "products"
+        )
+        .select("*")
+        .eq(
+          "id",
+          productId
+        )
+        .single();
+
+
+    if (
+      error ||
+      !product
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      loading.textContent =
+        "This product could not be found.";
+
+      return;
+    }
+
+
+    currentProduct =
+      product;
+
+
+    renderProduct(
+      product
+    );
+
+
+    loading.style.display =
+      "none";
+
+
+    content.style.display =
+      "grid";
+  }
+
+
+  document.getElementById(
+    "minus-button"
+  ).addEventListener(
+    "click",
+    () => {
+
+      changeQuantity(
+        -1
+      );
+    }
+  );
+
+
+  document.getElementById(
+    "plus-button"
+  ).addEventListener(
+    "click",
+    () => {
+
+      changeQuantity(
+        1
+      );
+    }
+  );
+
+
+  document.getElementById(
+    "add-to-cart"
+  ).addEventListener(
+    "click",
+    addToCart
+  );
+
+
+  updateCartCount();
+
+  loadProduct();
+
+</script>
+
+</body>
+
+        </html>
