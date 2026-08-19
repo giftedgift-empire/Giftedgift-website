@@ -385,16 +385,21 @@
     }
 
     function getShippingPrice(shipping, rate) {
-      const possiblePrice =
-        rate?.price ??
-        shipping?.shipping_price ??
-        shipping?.shippingPrice ??
-        shipping?.price;
+  const possiblePrice =
+    rate?.price ??
+    rate?.shipping_fee ??
+    rate?.shipping_price ??
+    shipping?.shipping_fee ??
+    shipping?.shipping_price ??
+    shipping?.shippingPrice ??
+    shipping?.price ??
+    shipping?.amount ??
+    shipping?.cost;
 
-      const number = Number(possiblePrice);
+  const number = Number(possiblePrice);
 
-      return Number.isFinite(number) ? number : 0;
-    }
+  return Number.isFinite(number) ? number : 0;
+}
 
     async function loadCheckout() {
 
