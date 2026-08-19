@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Shipping | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 25px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 20px;
+      color: #f2bd16;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #f2bd16;
+    }
+
+    .hero {
+      background: white;
+      padding: 50px 20px 35px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      margin: 0 0 15px;
+      font-size: 36px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .page {
+      max-width: 950px;
+      margin: auto;
+      padding: 35px 18px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #123a8c;
+      font-size: 24px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 13px 0;
+    }
+
+    .summary-line strong {
+      text-align: right;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    .calculate-button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .shipping-options {
+      display: none;
+    }
+
+    .shipping-option {
+      display: block;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 13px;
+      cursor: pointer;
+    }
+
+    .shipping-option:hover {
+      border-color: #123a8c;
+    }
+
+    .shipping-option input {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .shipping-name {
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .shipping-price {
+      margin-top: 7px;
+      color: #123a8c;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .shipping-note {
+      margin-top: 7px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message {
+      display: none;
+      padding: 13px;
+      border-radius: 8px;
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      color: #951d1d;
+      border: 1px solid #efbbbb;
+    }
+
+    .message.success {
+      display: block;
+      background: #e8f7ec;
+      color: #17652d;
+      border: 1px solid #b8dfc0;
+    }
+
+    .next-button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #123a8c;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .next-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 30px 20px;
+      background: #123a8c;
+      color: white;
+      text-align: center;
+    }
+
+    @media (max-width: 650px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<header>
+
+  <h1>GiftedGift Empire</h1>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="categories.html">Categories</a>
+    <a href="deals.html">Deals</a>
+    <a href="cart.html">🛒 Cart</a>
+  </nav>
+
+</header>
+
+
+<section class="hero">
+
+  <h2>
+    Shipping
+  </h2>
+
+  <p>
+    Enter your delivery address and we will calculate
+    the available shipping options using the total
+    weight of your physical order.
+  </p>
+
+</section>
+
+
+<main class="page">
+
+  <a
+    class="back-link"
+    href="cart.html"
+  >
+    ← Back to Cart
+  </a>
+
+
+  <section class="card">
+
+    <h3>
+      Order Summary
+    </h3>
+
+    <div class="summary-line">
+
+      <span>
+        Total items
+      </span>
+
+      <strong id="total-items">
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="summary-line">
+
+      <span>
+        Product subtotal
+      </span>
+
+      <strong id="subtotal">
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="summary-line">
+
+      <span>
+        Shipment weight
+      </span>
+
+      <strong id="total-weight">
+        —
+      </strong>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h3>
+      Delivery Address
+    </h3>
+
+
+    <div class="form-grid">
+
+      <div class="field full">
+
+        <label for="full-name">
+          Full name
+        </label>
+
+        <input
+          id="full-name"
+          type="text"
+          autocomplete="name"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="phone">
+          Phone
+        </label>
+
+        <input
+          id="phone"
+          type="tel"
+          autocomplete="tel"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="address1">
+          Address
+        </label>
+
+        <input
+          id="address1"
+          type="text"
+          autocomplete="address-line1"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="address2">
+          Apartment / building
+          (optional)
+        </label>
+
+        <input
+          id="address2"
+          type="text"
+          autocomplete="address-line2"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="postal-code">
+          Postal code
+        </label>
+
+        <input
+          id="postal-code"
+          type="text"
+          autocomplete="postal-code"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="city">
+          City
+        </label>
+
+        <input
+          id="city"
+          type="text"
+          autocomplete="address-level2"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="country">
+          Country
+        </label>
+
+        <select
+          id="country"
+          required
+        >
+          <option value="">
+            Loading available countries...
+          </option>
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="calculate-button"
+      class="calculate-button"
+      type="button"
+    >
+      Calculate Shipping
+    </button>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+  </section>
+
+
+  <section
+    id="shipping-options"
+    class="card shipping-options"
+  >
+
+    <h3>
+      Shipping Options
+    </h3>
+
+
+    <div id="rates"></div>
+
+
+    <button
+      id="next-button"
+      class="next-button"
+      type="button"
+      disabled
+    >
+      Continue to VAT & Checkout — Next
+    </button>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <p>
+    <strong>
+      GiftedGift Empire
+    </strong>
+  </p>
+
+  <p>
+    © 2026 GiftedGift Empire.
+    All rights reserved.
+  </p>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+
+<script>
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  const CART_KEY =
+    "giftedgift_physical_cart";
+
+
+  const SHIPPING_KEY =
+    "giftedgift_shipping_selection";
+
+
+  let cartSummary = null;
+
+  let activeZones = [];
+
+  let selectedShippingRate = null;
+
+
+  function getCart() {
+
+    try {
+
+      const cart =
+        JSON.parse(
+          localStorage.getItem(
+            CART_KEY
+          ) || "[]"
+        );
+
+
+      return Array.isArray(cart)
+        ? cart
+        : [];
+
+    } catch {
+
+      return [];
+    }
+  }
+
+
+  function formatPrice(
+    amount
+  ) {
+
+    return (
+      "€" +
+      Number(amount).toFixed(2)
+    );
+  }
+
+
+  function formatWeight(
+    kg
+  ) {
+
+    const weight =
+      Number(kg);
+
+
+    if (
+      weight < 1
+    ) {
+
+      return (
+        Math.round(
+          weight * 1000
+        ) +
+        " g"
+      );
+    }
+
+
+    return (
+      Number(
+        weight.toFixed(3)
+      ) +
+      " kg"
+    );
+  }
+
+
+  function showMessage(
+    text,
+    type = "error"
+  ) {
+
+    const box =
+      document.getElementById(
+        "message"
+      );
+
+
+    box.textContent =
+      text;
+
+
+    box.className =
+      `message ${type}`;
+  }
+
+
+  function clearMessage() {
+
+    const box =
+      document.getElementById(
+        "message"
+      );
+
+
+    box.textContent =
+      "";
+
+
+    box.className =
+      "message";
+  }
+
+
+  async function calculateCartSummary() {
+
+    const cart =
+      getCart();
+
+
+    if (
+      cart.length === 0
+    ) {
+
+      throw new Error(
+        "Your physical cart is empty."
+      );
+    }
+
+
+    const ids =
+      cart.map(
+        item =>
+          Number(
+            item.product_id
+          )
+      );
+
+
+    const {
+      data: products,
+      error
+    } =
+      await supabaseClient
+        .from("products")
+        .select(
+          "id,name,price,in_stock,weight_kg"
+        )
+        .in(
+          "id",
+          ids
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(error);
+
+      throw new Error(
+        "Your cart products could not be loaded."
+      );
+    }
+
+
+    const productMap =
+      new Map();
+
+
+    (
+      products || []
+    ).forEach(
+      product => {
+
+        productMap.set(
+          Number(product.id),
+          product
+        );
+      }
+    );
+
+
+    let totalItems =
+      0;
+
+
+    let subtotal =
+      0;
+
+
+    let totalWeightKg =
+      0;
+
+
+    for (
+      const item
+      of cart
+    ) {
+
+      const product =
+        productMap.get(
+          Number(
+            item.product_id
+          )
+        );
+
+
+      if (
+        !product
+      ) {
+
+        throw new Error(
+          "One of the products in your cart no longer exists."
+        );
+      }
+
+
+      if (
+        product.in_stock !== true
+      ) {
+
+        throw new Error(
+          `${product.name} is currently out of stock.`
+        );
+      }
+
+
+      const quantity =
+        Number(
+          item.quantity
+        );
+
+
+      const price =
+        Number(
+          product.price
+        );
+
+
+      const weight =
+        Number(
+          product.weight_kg
+        );
+
+
+      if (
+        !Number.isInteger(quantity) ||
+        quantity <= 0
+      ) {
+
+        throw new Error(
+          "One of the cart quantities is invalid."
+        );
+      }
+
+
+      if (
+        !Number.isFinite(price) ||
+        price <= 0
+      ) {
+
+        throw new Error(
+          `${product.name} does not have a valid price.`
+        );
+      }
+
+
+      if (
+        !Number.isFinite(weight) ||
+        weight <= 0
+      ) {
+
+        throw new Error(
+          `${product.name} does not have a valid shipping weight.`
+        );
+      }
+
+
+      totalItems +=
+        quantity;
+
+
+      subtotal +=
+        price * quantity;
+
+
+      totalWeightKg +=
+        weight * quantity;
+    }
+
+
+    return {
+
+      totalItems,
+
+      subtotal,
+
+      totalWeightKg
+
+    };
+  }
+
+
+  async function loadCountries() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "shipping_zones"
+        )
+        .select(
+          "id,name,countries"
+        )
+        .eq(
+          "active",
+          true
+        )
+        .order(
+          "id",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(error);
+
+      throw new Error(
+        "Shipping destinations could not be loaded."
+      );
+    }
+
+
+    activeZones =
+      Array.isArray(data)
+        ? data
+        : [];
+
+
+    const select =
+      document.getElementById(
+        "country"
+      );
+
+
+    select.innerHTML = `
+      <option value="">
+        Select delivery country
+      </option>
+    `;
+
+
+    let regionNames = null;
+
+
+    try {
+
+      regionNames =
+        new Intl.DisplayNames(
+          ["en"],
+          {
+            type: "region"
+          }
+        );
+
+    } catch {
+
+      regionNames =
+        null;
+    }
+
+
+    activeZones.forEach(
+      zone => {
+
+        const countries =
+          Array.isArray(
+            zone.countries
+          )
+            ? zone.countries
+            : [];
+
+
+        countries.forEach(
+          code => {
+
+            const option =
+              document.createElement(
+                "option"
+              );
+
+
+            option.value =
+              String(code)
+                .toUpperCase();
+
+
+            option.dataset.zoneId =
+              String(zone.id);
+
+
+            option.textContent =
+              regionNames
+                ? regionNames.of(
+                    String(code)
+                      .toUpperCase()
+                  )
+                : String(code)
+                    .toUpperCase();
+
+
+            select.appendChild(
+              option
+            );
+          }
+        );
+      }
+    );
+
+
+    if (
+      select.options.length === 1
+    ) {
+
+      select.innerHTML = `
+        <option value="">
+          No shipping countries are active yet
+        </option>
+      `;
+    }
+  }
+
+
+  function validateAddress() {
+
+    const requiredIds = [
+
+      "full-name",
+      "email",
+      "phone",
+      "address1",
+      "postal-code",
+      "city",
+      "country"
+
+    ];
+
+
+    for (
+      const id
+      of requiredIds
+    ) {
+
+      const input =
+        document.getElementById(
+          id
+        );
+
+
+      if (
+        !String(
+          input.value || ""
+        ).trim()
+      ) {
+
+        showMessage(
+          "Please complete all required delivery information."
+        );
+
+
+        input.focus();
+
+
+        return false;
+      }
+    }
+
+
+    const email =
+      document.getElementById(
+        "email"
+      );
+
+
+    if (
+      !email.checkValidity()
+    ) {
+
+      showMessage(
+        "Please enter a valid email address."
+      );
+
+
+      email.focus();
+
+
+      return false;
+    }
+
+
+    return true;
+  }
+
+
+  function getAddress() {
+
+    return {
+
+      full_name:
+        document.getElementById(
+          "full-name"
+        ).value.trim(),
+
+      email:
+        document.getElementById(
+          "email"
+        ).value.trim(),
+
+      phone:
+        document.getElementById(
+          "phone"
+        ).value.trim(),
+
+      address1:
+        document.getElementById(
+          "address1"
+        ).value.trim(),
+
+      address2:
+        document.getElementById(
+          "address2"
+        ).value.trim(),
+
+      postal_code:
+        document.getElementById(
+          "postal-code"
+        ).value.trim(),
+
+      city:
+        document.getElementById(
+          "city"
+        ).value.trim(),
+
+      country:
+        document.getElementById(
+          "country"
+        ).value
+
+    };
+  }
+
+
+  async function getShippingRates(
+    zoneId,
+    weightKg
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "shipping_rates"
+        )
+        .select(
+          "id,carrier,service_name,min_weight_kg,max_weight_kg,price"
+        )
+        .eq(
+          "zone_id",
+          zoneId
+        )
+        .eq(
+          "active",
+          true
+        )
+        .order(
+          "max_weight_kg",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(error);
+
+      throw new Error(
+        "Shipping prices could not be loaded."
+      );
+    }
+
+
+    return (
+      data || []
+    ).filter(
+      rate => {
+
+        const min =
+          Number(
+            rate.min_weight_kg
+          );
+
+
+        const max =
+          Number(
+            rate.max_weight_kg
+          );
+
+
+        /*
+          Important:
+
+          > minimum
+          <= maximum
+
+          This means exactly 2 kg uses
+          the 1–2 kg rate, not the 2–5 kg rate.
+        */
+
+        return (
+          weightKg > min &&
+          weightKg <= max
+        );
+      }
+    );
+  }
+
+
+  function renderRates(
+    rates
+  ) {
+
+    const wrapper =
+      document.getElementById(
+        "shipping-options"
+      );
+
+
+    const container =
+      document.getElementById(
+        "rates"
+      );
+
+
+    const nextButton =
+      document.getElementById(
+        "next-button"
+      );
+
+
+    selectedShippingRate =
+      null;
+
+
+    nextButton.disabled =
+      true;
+
+
+    if (
+      !rates.length
+    ) {
+
+      container.innerHTML = `
+        <p>
+          No shipping service is available
+          for this weight and destination yet.
+        </p>
+      `;
+
+
+      wrapper.style.display =
+        "block";
+
+
+      return;
+    }
+
+
+    container.innerHTML =
+      "";
+
+
+    rates.forEach(
+      rate => {
+
+        const label =
+          document.createElement(
+            "label"
+          );
+
+
+        label.className =
+          "shipping-option";
+
+
+        label.innerHTML = `
+
+          <div>
+
+            <input
+              type="radio"
+              name="shipping-rate"
+              value="${rate.id}"
+            >
+
+            <span class="shipping-name">
+              ${rate.carrier}
+              ${rate.service_name
+                ? " — " + rate.service_name
+                : ""}
+            </span>
+
+          </div>
+
+
+          <div class="shipping-price">
+            ${formatPrice(
+              rate.price
+            )}
+          </div>
+
+
+          <div class="shipping-note">
+            Shipping base rate.
+            VAT/final tax treatment will be
+            calculated at checkout.
+          </div>
+        `;
+
+
+        const radio =
+          label.querySelector(
+            "input"
+          );
+
+
+        radio.addEventListener(
+          "change",
+          () => {
+
+            selectedShippingRate =
+              rate;
+
+
+            nextButton.disabled =
+              false;
+          }
+        );
+
+
+        container.appendChild(
+          label
+        );
+      }
+    );
+
+
+    wrapper.style.display =
+      "block";
+  }
+
+
+  async function calculateShipping() {
+
+    clearMessage();
+
+
+    if (
+      !validateAddress()
+    ) {
+
+      return;
+    }
+
+
+    if (
+      !cartSummary
+    ) {
+
+      showMessage(
+        "Your cart could not be calculated."
+      );
+
+
+      return;
+    }
+
+
+    const country =
+      document.getElementById(
+        "country"
+      );
+
+
+    const option =
+      country.options[
+        country.selectedIndex
+      ];
+
+
+    const zoneId =
+      Number(
+        option.dataset.zoneId
+      );
+
+
+    if (
+      !Number.isInteger(
+        zoneId
+      )
+    ) {
+
+      showMessage(
+        "This delivery country is not currently available."
+      );
+
+
+      return;
+    }
+
+
+    try {
+
+      const rates =
+        await getShippingRates(
+          zoneId,
+          cartSummary.totalWeightKg
+        );
+
+
+      renderRates(
+        rates
+      );
+
+
+      if (
+        rates.length
+      ) {
+
+        showMessage(
+          "Shipping options calculated successfully.",
+          "success"
+        );
+      }
+
+
+    } catch (error) {
+
+      showMessage(
+        error instanceof Error
+          ? error.message
+          : "Shipping could not be calculated."
+      );
+    }
+  }
+
+
+  function saveShippingSelection() {
+
+    if (
+      !selectedShippingRate ||
+      !cartSummary
+    ) {
+
+      return;
+    }
+
+
+    const country =
+      document.getElementById(
+        "country"
+      );
+
+
+    const option =
+      country.options[
+        country.selectedIndex
+      ];
+
+
+    const selection = {
+
+      rate_id:
+        Number(
+          selectedShippingRate.id
+        ),
+
+      zone_id:
+        Number(
+          option.dataset.zoneId
+        ),
+
+      country_code:
+        country.value,
+
+      carrier:
+        selectedShippingRate.carrier,
+
+      service_name:
+        selectedShippingRate.service_name,
+
+      shipping_base_price:
+        Number(
+          selectedShippingRate.price
+        ),
+
+      total_weight_kg:
+        Number(
+          cartSummary.totalWeightKg
+        ),
+
+      address:
+        getAddress()
+
+    };
+
+
+    localStorage.setItem(
+      SHIPPING_KEY,
+      JSON.stringify(
+        selection
+      )
+    );
+
+
+    /*
+      This is only the customer's selected quote.
+
+      When we build physical PayPal checkout,
+      the server will independently recalculate
+      products, weight and shipping before charging.
+      The browser price will NOT be trusted.
+    */
+
+
+    alert(
+      "Shipping saved successfully. VAT and physical checkout are next."
+    );
+  }
+
+
+  async function initialise() {
+
+    try {
+
+      cartSummary =
+        await calculateCartSummary();
+
+
+      document.getElementById(
+        "total-items"
+      ).textContent =
+        String(
+          cartSummary.totalItems
+        );
+
+
+      document.getElementById(
+        "subtotal"
+      ).textContent =
+        formatPrice(
+          cartSummary.subtotal
+        );
+
+
+      document.getElementById(
+        "total-weight"
+      ).textContent =
+        formatWeight(
+          cartSummary.totalWeightKg
+        );
+
+
+      await loadCountries();
+
+
+    } catch (error) {
+
+      showMessage(
+        error instanceof Error
+          ? error.message
+          : "Shipping could not be loaded."
+      );
+    }
+  }
+
+
+  document.getElementById(
+    "calculate-button"
+  ).addEventListener(
+    "click",
+    calculateShipping
+  );
+
+
+  document.getElementById(
+    "next-button"
+  ).addEventListener(
+    "click",
+    saveShippingSelection
+  );
+
+
+  initialise();
+
+</script>
+
+</body>
+</html>
