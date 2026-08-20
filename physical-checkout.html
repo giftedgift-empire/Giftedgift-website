@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -129,6 +130,7 @@
       margin: 7px 0;
       font-size: 18px;
       line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
     .shipping-name {
@@ -138,9 +140,15 @@
     }
 
     .shipping-price {
-      font-size: 24px;
+      font-size: 25px;
       color: #164799;
       font-weight: 800;
+    }
+
+    .shipping-detail {
+      margin-top: 12px;
+      color: #666;
+      line-height: 1.6;
     }
 
     .notice {
@@ -226,6 +234,7 @@
 
   <section class="hero">
     <h1>Checkout</h1>
+
     <p>
       Review your physical order, delivery information and final amount
       before payment.
@@ -242,6 +251,7 @@
 
     <section class="card">
       <h2>Your Items</h2>
+
       <div id="products">
         Loading order...
       </div>
@@ -258,6 +268,7 @@
     </section>
 
     <section class="card">
+
       <h2>Order Total</h2>
 
       <div class="summary-row">
@@ -284,12 +295,18 @@
 
       <div class="notice">
         VAT is currently set to €0.00 for this checkout.
-        The PayPal payment connection will be added in the next stage.
+        PayPal payment will be connected after the checkout totals
+        have been verified.
       </div>
 
-      <button class="paypal-button" type="button" disabled>
+      <button
+        class="paypal-button"
+        type="button"
+        disabled
+      >
         PayPal Checkout — Next
       </button>
+
     </section>
 
   </main>
@@ -301,6 +318,7 @@
 
 
   <script>
+
     const SUPABASE_URL =
       "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
@@ -312,19 +330,41 @@
       SUPABASE_KEY
     );
 
-    const CART_KEY = "giftedgift_physical_cart";
-    const SHIPPING_KEY = "giftedgift_shipping_selection";
 
-    const productsBox = document.getElementById("products");
-    const shippingBox = document.getElementById("shipping-info");
-    const addressBox = document.getElementById("address-info");
-    const statusBox = document.getElementById("status");
+    const CART_KEY =
+      "giftedgift_physical_cart";
+
+    const SHIPPING_KEY =
+      "giftedgift_shipping_selection";
+
+
+    const productsBox =
+      document.getElementById("products");
+
+    const shippingBox =
+      document.getElementById("shipping-info");
+
+    const addressBox =
+      document.getElementById("address-info");
+
+    const statusBox =
+      document.getElementById("status");
+
 
     function money(value) {
-      return "€" + Number(value || 0).toFixed(2);
+
+      const number = Number(value);
+
+      if (!Number.isFinite(number)) {
+        return "€0.00";
+      }
+
+      return "€" + number.toFixed(2);
     }
 
+
     function escapeHtml(value) {
+
       return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -333,35 +373,56 @@
         .replaceAll("'", "&#039;");
     }
 
+
     function showError(message) {
-      statusBox.className = "status error";
-      statusBox.textContent = message;
+
+      statusBox.className =
+        "status error";
+
+      statusBox.textContent =
+        message;
     }
 
+
     function getStoredCart() {
+
       try {
+
         const data = JSON.parse(
           localStorage.getItem(CART_KEY) || "[]"
         );
 
-        return Array.isArray(data) ? data : [];
-      } catch {
+        return Array.isArray(data)
+          ? data
+          : [];
+
+      } catch (error) {
+
         return [];
       }
     }
 
+
     function getStoredShipping() {
+
       try {
+
         return JSON.parse(
           localStorage.getItem(SHIPPING_KEY) || "null"
         );
-      } catch {
+
+      } catch (error) {
+
         return null;
       }
     }
 
+
     function extractShippingRate(shipping) {
-      if (!shipping) return null;
+
+      if (!shipping) {
+        return null;
+      }
 
       return (
         shipping.rate ||
@@ -373,8 +434,12 @@
       );
     }
 
+
     function extractAddress(shipping) {
-      if (!shipping) return {};
+
+      if (!shipping) {
+        return {};
+      }
 
       return (
         shipping.address ||
@@ -384,58 +449,404 @@
       );
     }
 
-    function getShippingPrice(shipping, rate) {
-  const possiblePrice =
-    rate?.price ??
-    rate?.shipping_fee ??
-    rate?.shipping_price ??
-    shipping?.shipping_fee ??
-    shipping?.shipping_price ??
-    shipping?.shippingPrice ??
-    shipping?.price ??
-    shipping?.amount ??
-    shipping?.cost;
 
-  const number = Number(possiblePrice);
+    function normalizeCountryCode(value) {
 
-  return Number.isFinite(number) ? number : 0;
-}
+      const country =
+        String(value || "")
+          .trim()
+          .toUpperCase();
+
+      if (country === "FRANCE") {
+        return "FR";
+      }
+
+      if (country === "UNITED KINGDOM") {
+        return "GB";
+      }
+
+      return country;
+    }
+
+
+    function getSavedCarrier(shipping, rate) {
+
+      return (
+        rate?.carrier ||
+        shipping?.carrier ||
+        shipping?.shipping_carrier ||
+        ""
+      );
+    }
+
+
+    function getSavedService(shipping, rate) {
+
+      return (
+        rate?.service_name ||
+        rate?.serviceName ||
+        shipping?.service_name ||
+        shipping?.serviceName ||
+        shipping?.shipping_service ||
+        ""
+      );
+    }
+
+
+    function getSavedRateId(shipping, rate) {
+
+      const value =
+        rate?.id ??
+        shipping?.rate_id ??
+        shipping?.shipping_rate_id ??
+        shipping?.selected_rate_id ??
+        null;
+
+      const number =
+        Number(value);
+
+      return Number.isFinite(number)
+        ? number
+        : null;
+    }
+
+
+    function getSavedZoneId(shipping, rate) {
+
+      const value =
+        rate?.zone_id ??
+        shipping?.zone_id ??
+        shipping?.shipping_zone_id ??
+        null;
+
+      const number =
+        Number(value);
+
+      return Number.isFinite(number)
+        ? number
+        : null;
+    }
+
+
+    async function findZoneId(
+      shipping,
+      rate,
+      countryCode
+    ) {
+
+      const savedZoneId =
+        getSavedZoneId(
+          shipping,
+          rate
+        );
+
+      if (savedZoneId) {
+        return savedZoneId;
+      }
+
+
+      const { data: zones, error } =
+        await db
+          .from("shipping_zones")
+          .select("id,name,countries")
+          .eq("active", true);
+
+
+      if (error) {
+
+        console.error(error);
+
+        throw new Error(
+          "Could not load shipping zones."
+        );
+      }
+
+
+      const matchingZone =
+        (zones || []).find(zone => {
+
+          if (!Array.isArray(zone.countries)) {
+            return false;
+          }
+
+          return zone.countries.some(code =>
+
+            String(code)
+              .trim()
+              .toUpperCase() ===
+            countryCode
+
+          );
+        });
+
+
+      if (!matchingZone) {
+
+        throw new Error(
+          "No active shipping zone was found for this delivery country."
+        );
+      }
+
+
+      return Number(
+        matchingZone.id
+      );
+    }
+
+
+    function rateMatchesWeight(
+      rate,
+      weightKg
+    ) {
+
+      const min =
+        Number(rate.min_weight_kg);
+
+      const max =
+        Number(rate.max_weight_kg);
+
+
+      if (
+        !Number.isFinite(min) ||
+        !Number.isFinite(max)
+      ) {
+        return false;
+      }
+
+
+      return (
+        weightKg > min &&
+        weightKg <= max
+      );
+    }
+
+
+    async function getVerifiedShippingRate(
+      shipping,
+      address,
+      weightKg
+    ) {
+
+      const savedRate =
+        extractShippingRate(
+          shipping
+        );
+
+
+      const savedRateId =
+        getSavedRateId(
+          shipping,
+          savedRate
+        );
+
+
+      const carrier =
+        getSavedCarrier(
+          shipping,
+          savedRate
+        );
+
+
+      const service =
+        getSavedService(
+          shipping,
+          savedRate
+        );
+
+
+      const countryCode =
+        normalizeCountryCode(
+
+          address.country_code ||
+          address.countryCode ||
+          address.country ||
+
+          shipping.country_code ||
+          shipping.countryCode ||
+          shipping.country
+
+        );
+
+
+      /*
+        If the selected shipping rate ID
+        was saved, first try to verify
+        that exact database row.
+      */
+
+      if (savedRateId) {
+
+        const { data, error } =
+          await db
+            .from("shipping_rates")
+            .select(
+              "id,zone_id,carrier,service_name,min_weight_kg,max_weight_kg,price,active"
+            )
+            .eq("id", savedRateId)
+            .eq("active", true)
+            .maybeSingle();
+
+
+        if (
+          !error &&
+          data &&
+          rateMatchesWeight(
+            data,
+            weightKg
+          )
+        ) {
+
+          return data;
+        }
+      }
+
+
+      /*
+        Otherwise find the correct zone
+        using the delivery country.
+      */
+
+      const zoneId =
+        await findZoneId(
+          shipping,
+          savedRate,
+          countryCode
+        );
+
+
+      let query =
+        db
+          .from("shipping_rates")
+          .select(
+            "id,zone_id,carrier,service_name,min_weight_kg,max_weight_kg,price,active"
+          )
+          .eq("zone_id", zoneId)
+          .eq("active", true);
+
+
+      if (carrier) {
+
+        query =
+          query.eq(
+            "carrier",
+            carrier
+          );
+      }
+
+
+      if (service) {
+
+        query =
+          query.eq(
+            "service_name",
+            service
+          );
+      }
+
+
+      const { data: rates, error } =
+        await query;
+
+
+      if (error) {
+
+        console.error(error);
+
+        throw new Error(
+          "Could not load the current shipping price."
+        );
+      }
+
+
+      const matchingRate =
+        (rates || []).find(rate =>
+          rateMatchesWeight(
+            rate,
+            weightKg
+          )
+        );
+
+
+      if (!matchingRate) {
+
+        throw new Error(
+          "No shipping rate is available for this shipment weight."
+        );
+      }
+
+
+      return matchingRate;
+    }
+
 
     async function loadCheckout() {
 
-      const cart = getStoredCart();
-      const shipping = getStoredShipping();
+      const cart =
+        getStoredCart();
+
+      const shipping =
+        getStoredShipping();
+
 
       if (!cart.length) {
+
         showError(
           "Your physical cart is empty. Please return to the shop and add a product."
         );
+
         productsBox.innerHTML = "";
+
         return;
       }
 
+
       if (!shipping) {
+
         showError(
           "No shipping option has been saved. Please return to Shipping and calculate your delivery."
         );
+
         shippingBox.innerHTML = "";
+
         return;
       }
 
+
       const productIds = [
+
         ...new Set(
-          cart.map(item => Number(item.product_id))
-              .filter(Boolean)
+
+          cart
+            .map(item =>
+              Number(item.product_id)
+            )
+            .filter(Boolean)
+
         )
+
       ];
 
-      const { data: products, error } = await db
-        .from("products")
-        .select("id,name,price,in_stock,weight_kg")
-        .in("id", productIds);
 
-      if (error) {
-        console.error(error);
+      const {
+        data: products,
+        error: productError
+      } =
+        await db
+          .from("products")
+          .select(
+            "id,name,price,in_stock,weight_kg"
+          )
+          .in(
+            "id",
+            productIds
+          );
+
+
+      if (productError) {
+
+        console.error(
+          productError
+        );
 
         showError(
           "We could not load the current product information."
@@ -444,113 +855,251 @@
         return;
       }
 
+
       let subtotal = 0;
       let totalWeight = 0;
       let totalItems = 0;
-      let html = "";
+      let productHtml = "";
 
-      for (const cartItem of cart) {
 
-        const product = products.find(
-          p => Number(p.id) === Number(cartItem.product_id)
-        );
+      for (
+        const cartItem of cart
+      ) {
+
+        const product =
+          products.find(
+            item =>
+              Number(item.id) ===
+              Number(cartItem.product_id)
+          );
+
 
         if (!product) {
+
           showError(
             "One of the products in your cart is no longer available."
           );
+
           return;
         }
+
 
         if (!product.in_stock) {
+
           showError(
-            product.name + " is currently out of stock."
+            product.name +
+            " is currently out of stock."
           );
+
           return;
         }
 
-        const quantity = Math.max(
-          1,
-          Number(cartItem.quantity) || 1
-        );
 
-        const price = Number(product.price);
-        const weight = Number(product.weight_kg);
-
-        if (!Number.isFinite(price) || price < 0) {
-          showError(
-            "A product in your cart has an invalid price."
+        const quantity =
+          Math.max(
+            1,
+            Number(
+              cartItem.quantity
+            ) || 1
           );
+
+
+        const price =
+          Number(
+            product.price
+          );
+
+
+        const weight =
+          Number(
+            product.weight_kg
+          );
+
+
+        if (
+          !Number.isFinite(price) ||
+          price < 0
+        ) {
+
+          showError(
+            product.name +
+            " has an invalid price."
+          );
+
           return;
         }
 
-        if (!Number.isFinite(weight) || weight <= 0) {
+
+        if (
+          !Number.isFinite(weight) ||
+          weight <= 0
+        ) {
+
           showError(
-            product.name + " does not have a valid shipping weight."
+            product.name +
+            " does not have a valid shipping weight."
           );
+
           return;
         }
 
-        const itemTotal = price * quantity;
-        const itemWeight = weight * quantity;
 
-        subtotal += itemTotal;
-        totalWeight += itemWeight;
-        totalItems += quantity;
+        const itemTotal =
+          price * quantity;
 
-        html += `
+
+        const itemWeight =
+          weight * quantity;
+
+
+        subtotal +=
+          itemTotal;
+
+
+        totalWeight +=
+          itemWeight;
+
+
+        totalItems +=
+          quantity;
+
+
+        productHtml += `
           <div class="product">
+
             <div class="product-name">
               ${escapeHtml(product.name)}
             </div>
 
             <div class="product-details">
-              ${quantity} × ${money(price)}
+
+              ${quantity}
+              ×
+              ${money(price)}
+
               <br>
-              Item total: <strong>${money(itemTotal)}</strong>
+
+              Item total:
+              <strong>
+                ${money(itemTotal)}
+              </strong>
+
               <br>
-              Weight: ${itemWeight.toFixed(2).replace(/\.00$/, "")} kg
+
+              Weight:
+              ${itemWeight
+                .toFixed(2)
+                .replace(/\.00$/, "")}
+              kg
+
             </div>
+
           </div>
         `;
       }
 
-      productsBox.innerHTML = html;
 
-      const rate = extractShippingRate(shipping);
-      const address = extractAddress(shipping);
+      productsBox.innerHTML =
+        productHtml;
 
-      const shippingPrice = getShippingPrice(
-        shipping,
-        rate
-      );
+
+      const address =
+        extractAddress(
+          shipping
+        );
+
+
+      let verifiedRate;
+
+
+      try {
+
+        verifiedRate =
+          await getVerifiedShippingRate(
+            shipping,
+            address,
+            totalWeight
+          );
+
+      } catch (shippingError) {
+
+        console.error(
+          shippingError
+        );
+
+        showError(
+          shippingError.message
+        );
+
+        return;
+      }
+
+
+      const shippingPrice =
+        Number(
+          verifiedRate.price
+        );
+
+
+      if (
+        !Number.isFinite(
+          shippingPrice
+        ) ||
+        shippingPrice < 0
+      ) {
+
+        showError(
+          "The selected shipping rate has an invalid price."
+        );
+
+        return;
+      }
+
 
       const carrier =
-        rate?.carrier ||
-        shipping?.carrier ||
+        verifiedRate.carrier ||
         "Shipping";
 
+
       const service =
-        rate?.service_name ||
-        shipping?.service_name ||
-        shipping?.serviceName ||
+        verifiedRate.service_name ||
         "";
 
+
       shippingBox.innerHTML = `
+
         <div class="shipping-name">
+
           ${escapeHtml(carrier)}
-          ${service ? " — " + escapeHtml(service) : ""}
+
+          ${
+            service
+              ? " — " +
+                escapeHtml(service)
+              : ""
+          }
+
         </div>
+
 
         <div class="shipping-price">
+
           ${money(shippingPrice)}
+
         </div>
 
-        <div style="margin-top:12px;color:#666;">
+
+        <div class="shipping-detail">
+
           Shipment weight:
-          ${totalWeight.toFixed(2).replace(/\.00$/, "")} kg
+          ${totalWeight
+            .toFixed(2)
+            .replace(/\.00$/, "")}
+          kg
+
         </div>
       `;
+
 
       const fullName =
         address.full_name ||
@@ -558,11 +1107,16 @@
         address.name ||
         "";
 
+
       const email =
-        address.email || "";
+        address.email ||
+        "";
+
 
       const phone =
-        address.phone || "";
+        address.phone ||
+        "";
+
 
       const line1 =
         address.address1 ||
@@ -570,11 +1124,13 @@
         address.address ||
         "";
 
+
       const line2 =
         address.address2 ||
         address.address_2 ||
         address.apartment ||
         "";
+
 
       const postalCode =
         address.postal_code ||
@@ -582,70 +1138,136 @@
         address.zip ||
         "";
 
+
       const city =
-        address.city || "";
+        address.city ||
+        "";
+
 
       const country =
         address.country_name ||
         address.countryName ||
         address.country ||
-        "France";
+        "";
+
 
       addressBox.innerHTML = `
+
+        ${
+          fullName
+            ? `
+              <div class="address-line">
+                <strong>
+                  ${escapeHtml(fullName)}
+                </strong>
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          email
+            ? `
+              <div class="address-line">
+                ${escapeHtml(email)}
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          phone
+            ? `
+              <div class="address-line">
+                ${escapeHtml(phone)}
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          line1
+            ? `
+              <div class="address-line">
+                ${escapeHtml(line1)}
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          line2
+            ? `
+              <div class="address-line">
+                ${escapeHtml(line2)}
+              </div>
+            `
+            : ""
+        }
+
+
         <div class="address-line">
-          <strong>${escapeHtml(fullName)}</strong>
-        </div>
 
-        ${email ? `
-          <div class="address-line">
-            ${escapeHtml(email)}
-          </div>
-        ` : ""}
-
-        ${phone ? `
-          <div class="address-line">
-            ${escapeHtml(phone)}
-          </div>
-        ` : ""}
-
-        ${line1 ? `
-          <div class="address-line">
-            ${escapeHtml(line1)}
-          </div>
-        ` : ""}
-
-        ${line2 ? `
-          <div class="address-line">
-            ${escapeHtml(line2)}
-          </div>
-        ` : ""}
-
-        <div class="address-line">
           ${escapeHtml(postalCode)}
+
+          ${postalCode && city ? " " : ""}
+
           ${escapeHtml(city)}
+
         </div>
 
-        <div class="address-line">
-          ${escapeHtml(country)}
-        </div>
+
+        ${
+          country
+            ? `
+              <div class="address-line">
+                ${escapeHtml(country)}
+              </div>
+            `
+            : ""
+        }
       `;
 
-      const vat = 0;
+
+      /*
+        Store VAT is currently zero.
+      */
+
+      const vat =
+        0;
+
 
       const grandTotal =
-        subtotal + shippingPrice + vat;
+        subtotal +
+        shippingPrice +
+        vat;
 
-      document.getElementById("subtotal").textContent =
-        money(subtotal);
 
-      document.getElementById("shipping-total").textContent =
-        money(shippingPrice);
+      document
+        .getElementById("subtotal")
+        .textContent =
+          money(subtotal);
 
-      document.getElementById("grand-total").textContent =
-        money(grandTotal);
+
+      document
+        .getElementById("shipping-total")
+        .textContent =
+          money(shippingPrice);
+
+
+      document
+        .getElementById("grand-total")
+        .textContent =
+          money(grandTotal);
     }
 
+
     loadCheckout();
+
   </script>
 
 </body>
