@@ -9,6 +9,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+  <!-- PayPal Sandbox SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AQEwW30fuW09fPr4dtGUuWD0S3tlKblHPpZffcy0POvsuPhSI3b400ykmO893Fp4dO2yXtHR8Ey8nDGI&currency=EUR&intent=capture"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -159,24 +162,11 @@
       line-height: 1.6;
     }
 
-    .paypal-button {
-      width: 100%;
-      border: none;
-      border-radius: 14px;
-      padding: 20px;
-      margin-top: 25px;
-      font-size: 21px;
-      font-weight: 800;
-      background: #d5d5d5;
-      color: #777;
-      cursor: not-allowed;
-    }
-
     .status {
       padding: 18px;
       border-radius: 14px;
       margin-bottom: 25px;
-      line-height: 1.5;
+      line-height: 1.6;
       display: none;
     }
 
@@ -184,6 +174,41 @@
       display: block;
       background: #fdeaea;
       color: #9b1c1c;
+    }
+
+    .status.success {
+      display: block;
+      background: #e7f7ec;
+      color: #176b31;
+    }
+
+    .paypal-area {
+      margin-top: 28px;
+    }
+
+    #paypal-button-container {
+      min-height: 50px;
+    }
+
+    .payment-loading {
+      text-align: center;
+      color: #666;
+      padding: 15px;
+    }
+
+    .success-card {
+      display: none;
+      background: #e7f7ec;
+      border-radius: 18px;
+      padding: 25px;
+      margin-top: 25px;
+      color: #176b31;
+      line-height: 1.7;
+    }
+
+    .success-card h3 {
+      margin-top: 0;
+      font-size: 25px;
     }
 
     footer {
@@ -236,8 +261,8 @@
     <h1>Checkout</h1>
 
     <p>
-      Review your physical order, delivery information and final amount
-      before payment.
+      Review your physical order, delivery information
+      and final amount before payment.
     </p>
   </section>
 
@@ -264,7 +289,10 @@
         Loading shipping information...
       </div>
 
-      <div id="address-info" style="margin-top: 25px;"></div>
+      <div
+        id="address-info"
+        style="margin-top:25px;"
+      ></div>
     </section>
 
     <section class="card">
@@ -294,18 +322,32 @@
       </div>
 
       <div class="notice">
-        VAT is currently set to €0.00 for this checkout.
-        PayPal payment will be connected after the checkout totals
-        have been verified.
+        Please review your order carefully before paying.
+        The final payment amount is verified securely on
+        the server before PayPal creates the order.
       </div>
 
-      <button
-        class="paypal-button"
-        type="button"
-        disabled
-      >
-        PayPal Checkout — Next
-      </button>
+      <div class="paypal-area">
+
+        <div
+          id="payment-loading"
+          class="payment-loading"
+        >
+          Preparing secure PayPal checkout...
+        </div>
+
+        <div id="paypal-button-container"></div>
+
+        <div
+          id="success-card"
+          class="success-card"
+        >
+          <h3>Payment successful ✅</h3>
+
+          <div id="success-message"></div>
+        </div>
+
+      </div>
 
     </section>
 
@@ -325,10 +367,22 @@
     const SUPABASE_KEY =
       "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
-    const db = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+
+    const CREATE_ORDER_URL =
+      SUPABASE_URL +
+      "/functions/v1/physical-paypal-create-order";
+
+
+    const CAPTURE_ORDER_URL =
+      SUPABASE_URL +
+      "/functions/v1/physical-paypal-capture-order";
+
+
+    const db =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
 
 
     const CART_KEY =
@@ -350,16 +404,33 @@
     const statusBox =
       document.getElementById("status");
 
+    const paymentLoading =
+      document.getElementById("payment-loading");
+
+    const paypalContainer =
+      document.getElementById("paypal-button-container");
+
+    const successCard =
+      document.getElementById("success-card");
+
+    const successMessage =
+      document.getElementById("success-message");
+
+
+    let checkoutState = null;
+
 
     function money(value) {
 
-      const number = Number(value);
+      const number =
+        Number(value);
 
       if (!Number.isFinite(number)) {
         return "€0.00";
       }
 
-      return "€" + number.toFixed(2);
+      return "€" +
+        number.toFixed(2);
     }
 
 
@@ -381,6 +452,27 @@
 
       statusBox.textContent =
         message;
+
+      statusBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+
+
+    function showSuccess(message) {
+
+      statusBox.className =
+        "status success";
+
+      statusBox.textContent =
+        message;
+    }
+
+
+    function clearStatus() {
+      statusBox.className = "status";
+      statusBox.textContent = "";
     }
 
 
@@ -388,16 +480,17 @@
 
       try {
 
-        const data = JSON.parse(
-          localStorage.getItem(CART_KEY) || "[]"
-        );
+        const data =
+          JSON.parse(
+            localStorage.getItem(CART_KEY) ||
+            "[]"
+          );
 
         return Array.isArray(data)
           ? data
           : [];
 
-      } catch (error) {
-
+      } catch {
         return [];
       }
     }
@@ -408,11 +501,12 @@
       try {
 
         return JSON.parse(
-          localStorage.getItem(SHIPPING_KEY) || "null"
+          localStorage.getItem(
+            SHIPPING_KEY
+          ) || "null"
         );
 
-      } catch (error) {
-
+      } catch {
         return null;
       }
     }
@@ -469,7 +563,10 @@
     }
 
 
-    function getSavedCarrier(shipping, rate) {
+    function getSavedCarrier(
+      shipping,
+      rate
+    ) {
 
       return (
         rate?.carrier ||
@@ -480,7 +577,10 @@
     }
 
 
-    function getSavedService(shipping, rate) {
+    function getSavedService(
+      shipping,
+      rate
+    ) {
 
       return (
         rate?.service_name ||
@@ -493,7 +593,10 @@
     }
 
 
-    function getSavedRateId(shipping, rate) {
+    function getSavedRateId(
+      shipping,
+      rate
+    ) {
 
       const value =
         rate?.id ??
@@ -511,7 +614,10 @@
     }
 
 
-    function getSavedZoneId(shipping, rate) {
+    function getSavedZoneId(
+      shipping,
+      rate
+    ) {
 
       const value =
         rate?.zone_id ??
@@ -545,7 +651,10 @@
       }
 
 
-      const { data: zones, error } =
+      const {
+        data: zones,
+        error
+      } =
         await db
           .from("shipping_zones")
           .select("id,name,countries")
@@ -565,17 +674,20 @@
       const matchingZone =
         (zones || []).find(zone => {
 
-          if (!Array.isArray(zone.countries)) {
+          if (
+            !Array.isArray(
+              zone.countries
+            )
+          ) {
             return false;
           }
 
-          return zone.countries.some(code =>
-
-            String(code)
-              .trim()
-              .toUpperCase() ===
-            countryCode
-
+          return zone.countries.some(
+            code =>
+              String(code)
+                .trim()
+                .toUpperCase() ===
+              countryCode
           );
         });
 
@@ -600,10 +712,14 @@
     ) {
 
       const min =
-        Number(rate.min_weight_kg);
+        Number(
+          rate.min_weight_kg
+        );
 
       const max =
-        Number(rate.max_weight_kg);
+        Number(
+          rate.max_weight_kg
+        );
 
 
       if (
@@ -668,22 +784,25 @@
         );
 
 
-      /*
-        If the selected shipping rate ID
-        was saved, first try to verify
-        that exact database row.
-      */
-
       if (savedRateId) {
 
-        const { data, error } =
+        const {
+          data,
+          error
+        } =
           await db
             .from("shipping_rates")
             .select(
               "id,zone_id,carrier,service_name,min_weight_kg,max_weight_kg,price,active"
             )
-            .eq("id", savedRateId)
-            .eq("active", true)
+            .eq(
+              "id",
+              savedRateId
+            )
+            .eq(
+              "active",
+              true
+            )
             .maybeSingle();
 
 
@@ -695,16 +814,10 @@
             weightKg
           )
         ) {
-
           return data;
         }
       }
 
-
-      /*
-        Otherwise find the correct zone
-        using the delivery country.
-      */
 
       const zoneId =
         await findZoneId(
@@ -720,8 +833,14 @@
           .select(
             "id,zone_id,carrier,service_name,min_weight_kg,max_weight_kg,price,active"
           )
-          .eq("zone_id", zoneId)
-          .eq("active", true);
+          .eq(
+            "zone_id",
+            zoneId
+          )
+          .eq(
+            "active",
+            true
+          );
 
 
       if (carrier) {
@@ -744,7 +863,10 @@
       }
 
 
-      const { data: rates, error } =
+      const {
+        data: rates,
+        error
+      } =
         await query;
 
 
@@ -759,11 +881,12 @@
 
 
       const matchingRate =
-        (rates || []).find(rate =>
-          rateMatchesWeight(
-            rate,
-            weightKg
-          )
+        (rates || []).find(
+          rate =>
+            rateMatchesWeight(
+              rate,
+              weightKg
+            )
         );
 
 
@@ -781,6 +904,8 @@
 
     async function loadCheckout() {
 
+      clearStatus();
+
       const cart =
         getStoredCart();
 
@@ -794,7 +919,8 @@
           "Your physical cart is empty. Please return to the shop and add a product."
         );
 
-        productsBox.innerHTML = "";
+        paymentLoading.style.display =
+          "none";
 
         return;
       }
@@ -803,27 +929,27 @@
       if (!shipping) {
 
         showError(
-          "No shipping option has been saved. Please return to Shipping and calculate your delivery."
+          "No shipping option has been saved. Please return to Shipping first."
         );
 
-        shippingBox.innerHTML = "";
+        paymentLoading.style.display =
+          "none";
 
         return;
       }
 
 
       const productIds = [
-
         ...new Set(
-
           cart
-            .map(item =>
-              Number(item.product_id)
+            .map(
+              item =>
+                Number(
+                  item.product_id
+                )
             )
             .filter(Boolean)
-
         )
-
       ];
 
 
@@ -852,13 +978,15 @@
           "We could not load the current product information."
         );
 
+        paymentLoading.style.display =
+          "none";
+
         return;
       }
 
 
       let subtotal = 0;
       let totalWeight = 0;
-      let totalItems = 0;
       let productHtml = "";
 
 
@@ -870,7 +998,9 @@
           products.find(
             item =>
               Number(item.id) ===
-              Number(cartItem.product_id)
+              Number(
+                cartItem.product_id
+              )
           );
 
 
@@ -896,12 +1026,23 @@
 
 
         const quantity =
-          Math.max(
-            1,
-            Number(
-              cartItem.quantity
-            ) || 1
+          Number(
+            cartItem.quantity
           );
+
+
+        if (
+          !Number.isInteger(quantity) ||
+          quantity < 1 ||
+          quantity > 99
+        ) {
+
+          showError(
+            "Invalid product quantity."
+          );
+
+          return;
+        }
 
 
         const price =
@@ -958,10 +1099,6 @@
 
         totalWeight +=
           itemWeight;
-
-
-        totalItems +=
-          quantity;
 
 
         productHtml += `
@@ -1021,15 +1158,16 @@
             totalWeight
           );
 
-      } catch (shippingError) {
+      } catch (error) {
 
-        console.error(
-          shippingError
-        );
+        console.error(error);
 
         showError(
-          shippingError.message
+          error.message
         );
+
+        paymentLoading.style.display =
+          "none";
 
         return;
       }
@@ -1041,41 +1179,25 @@
         );
 
 
-      if (
-        !Number.isFinite(
-          shippingPrice
-        ) ||
-        shippingPrice < 0
-      ) {
-
-        showError(
-          "The selected shipping rate has an invalid price."
-        );
-
-        return;
-      }
-
-
-      const carrier =
-        verifiedRate.carrier ||
-        "Shipping";
-
-
-      const service =
-        verifiedRate.service_name ||
-        "";
+      const grandTotal =
+        subtotal +
+        shippingPrice;
 
 
       shippingBox.innerHTML = `
 
         <div class="shipping-name">
 
-          ${escapeHtml(carrier)}
+          ${escapeHtml(
+            verifiedRate.carrier
+          )}
 
           ${
-            service
+            verifiedRate.service_name
               ? " — " +
-                escapeHtml(service)
+                escapeHtml(
+                  verifiedRate.service_name
+                )
               : ""
           }
 
@@ -1084,7 +1206,9 @@
 
         <div class="shipping-price">
 
-          ${money(shippingPrice)}
+          ${money(
+            shippingPrice
+          )}
 
         </div>
 
@@ -1165,7 +1289,6 @@
             : ""
         }
 
-
         ${
           email
             ? `
@@ -1175,7 +1298,6 @@
             `
             : ""
         }
-
 
         ${
           phone
@@ -1187,7 +1309,6 @@
             : ""
         }
 
-
         ${
           line1
             ? `
@@ -1197,7 +1318,6 @@
             `
             : ""
         }
-
 
         ${
           line2
@@ -1209,17 +1329,19 @@
             : ""
         }
 
-
         <div class="address-line">
 
           ${escapeHtml(postalCode)}
 
-          ${postalCode && city ? " " : ""}
+          ${
+            postalCode && city
+              ? " "
+              : ""
+          }
 
           ${escapeHtml(city)}
 
         </div>
-
 
         ${
           country
@@ -1233,20 +1355,6 @@
       `;
 
 
-      /*
-        Store VAT is currently zero.
-      */
-
-      const vat =
-        0;
-
-
-      const grandTotal =
-        subtotal +
-        shippingPrice +
-        vat;
-
-
       document
         .getElementById("subtotal")
         .textContent =
@@ -1254,15 +1362,306 @@
 
 
       document
-        .getElementById("shipping-total")
+        .getElementById(
+          "shipping-total"
+        )
         .textContent =
           money(shippingPrice);
 
 
       document
-        .getElementById("grand-total")
+        .getElementById(
+          "grand-total"
+        )
         .textContent =
           money(grandTotal);
+
+
+      checkoutState = {
+        cart,
+        shipping,
+        address,
+        subtotal,
+        shippingPrice,
+        totalWeight,
+        grandTotal
+      };
+
+
+      initialisePayPal();
+    }
+
+
+    function initialisePayPal() {
+
+      if (
+        !checkoutState
+      ) {
+        return;
+      }
+
+
+      if (
+        !window.paypal
+      ) {
+
+        paymentLoading.style.display =
+          "none";
+
+        showError(
+          "PayPal could not load. Please refresh the page and try again."
+        );
+
+        return;
+      }
+
+
+      paymentLoading.style.display =
+        "none";
+
+
+      paypal.Buttons({
+
+        style: {
+          layout: "vertical",
+          shape: "rect",
+          label: "paypal"
+        },
+
+
+        createOrder:
+          async function () {
+
+            clearStatus();
+
+
+            try {
+
+              const response =
+                await fetch(
+                  CREATE_ORDER_URL,
+                  {
+                    method: "POST",
+
+                    headers: {
+                      "Content-Type":
+                        "application/json"
+                    },
+
+                    body:
+                      JSON.stringify({
+                        cart:
+                          checkoutState.cart,
+
+                        shipping:
+                          checkoutState.shipping,
+
+                        address:
+                          checkoutState.address
+                      })
+                  }
+                );
+
+
+              const result =
+                await response.json();
+
+
+              if (
+                !response.ok ||
+                !result.paypal_order_id
+              ) {
+
+                throw new Error(
+                  result.error ||
+                  "Could not start PayPal checkout."
+                );
+              }
+
+
+              return result.paypal_order_id;
+
+            } catch (error) {
+
+              console.error(error);
+
+              showError(
+                error.message ||
+                "Could not start PayPal checkout."
+              );
+
+              throw error;
+            }
+          },
+
+
+        onApprove:
+          async function (data) {
+
+            clearStatus();
+
+
+            showSuccess(
+              "PayPal approved the payment. Confirming your order..."
+            );
+
+
+            try {
+
+              const response =
+                await fetch(
+                  CAPTURE_ORDER_URL,
+                  {
+                    method: "POST",
+
+                    headers: {
+                      "Content-Type":
+                        "application/json"
+                    },
+
+                    body:
+                      JSON.stringify({
+                        paypal_order_id:
+                          data.orderID
+                      })
+                  }
+                );
+
+
+              const result =
+                await response.json();
+
+
+              if (
+                !response.ok ||
+                !result.success
+              ) {
+
+                throw new Error(
+                  result.error ||
+                  "Payment could not be confirmed."
+                );
+              }
+
+
+              /*
+                Payment is confirmed.
+                Now the customer's cart
+                can safely be cleared.
+              */
+
+              localStorage.removeItem(
+                CART_KEY
+              );
+
+              localStorage.removeItem(
+                SHIPPING_KEY
+              );
+
+
+              statusBox.className =
+                "status";
+
+
+              statusBox.textContent =
+                "";
+
+
+              paypalContainer.style.display =
+                "none";
+
+
+              successCard.style.display =
+                "block";
+
+
+              successMessage.innerHTML = `
+
+                Thank you for your order.
+
+                <br><br>
+
+                <strong>
+                  Order number:
+                </strong>
+
+                ${escapeHtml(
+                  result.physical_order_id
+                )}
+
+                <br>
+
+                <strong>
+                  Amount paid:
+                </strong>
+
+                ${money(
+                  result.total
+                )}
+
+                <br>
+
+                <strong>
+                  Payment status:
+                </strong>
+
+                Paid
+
+              `;
+
+
+              successCard.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+              });
+
+            } catch (error) {
+
+              console.error(error);
+
+              statusBox.className =
+                "status error";
+
+              statusBox.textContent =
+                error.message ||
+                "There was a problem confirming the payment. Please do not try to pay again until the order is checked.";
+
+              /*
+                IMPORTANT:
+                Do not clear the cart here.
+                PayPal may already have
+                captured the payment.
+              */
+            }
+          },
+
+
+        onCancel:
+          function () {
+
+            showError(
+              "PayPal checkout was cancelled. Your cart has not been changed."
+            );
+          },
+
+
+        onError:
+          function (error) {
+
+            console.error(
+              "PayPal error:",
+              error
+            );
+
+            showError(
+              "PayPal encountered an error. No successful payment has been confirmed."
+            );
+          }
+
+      })
+      .render(
+        "#paypal-button-container"
+      );
     }
 
 
