@@ -78,27 +78,32 @@
     .category-card {
       background: white;
       border-radius: 14px;
-      padding: 28px 22px;
+      overflow: hidden;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
     .category-card img {
       width: 100%;
-      height: 180px;
+      height: 210px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 18px;
+      display: block;
+    }
+
+    .category-content {
+      padding: 28px 22px;
     }
 
     .category-card h3 {
       font-size: 24px;
       margin-top: 0;
+      margin-bottom: 12px;
       color: #123a8c;
     }
 
     .category-card p {
       color: #555;
       line-height: 1.6;
+      min-height: 52px;
     }
 
     .category-card a {
@@ -110,6 +115,11 @@
       font-weight: bold;
       padding: 11px 18px;
       border-radius: 7px;
+    }
+
+    .foodstuff-card a {
+      background: #25D366;
+      color: white;
     }
 
     .loading-message {
@@ -126,6 +136,20 @@
       color: white;
       text-align: center;
       padding: 30px 20px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 32px;
+      }
+
+      .categories {
+        padding: 35px 16px;
+      }
+
+      .category-card img {
+        height: 240px;
+      }
     }
   </style>
 </head>
@@ -147,28 +171,43 @@
   </nav>
 </header>
 
+
 <section class="hero">
+
   <h2>Shop by Category</h2>
 
   <p>
     Browse products by category and discover useful items,
-    digital products, lifestyle finds and recommendations.
+    digital products, lifestyle finds, African foodstuffs
+    and carefully selected recommendations.
   </p>
+
 </section>
+
 
 <main class="categories">
 
   <div id="category-grid" class="category-grid">
+
     <div class="loading-message">
       Loading categories...
     </div>
+
   </div>
 
 </main>
 
+
 <footer>
-  <p><strong>GiftedGift Empire</strong></p>
-  <p>© 2026 GiftedGift Empire. All rights reserved.</p>
+
+  <p>
+    <strong>GiftedGift Empire</strong>
+  </p>
+
+  <p>
+    © 2026 GiftedGift Empire. All rights reserved.
+  </p>
+
 </footer>
 
 
@@ -179,16 +218,15 @@
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
-/* PASTE YOUR sb_publishable_ KEY BETWEEN THE QUOTES BELOW */
-
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
 
 async function loadCategories() {
@@ -196,13 +234,20 @@ async function loadCategories() {
   const grid =
     document.getElementById("category-grid");
 
-  const { data: categories, error } =
+
+  const {
+    data: categories,
+    error
+  } =
     await supabaseClient
       .from("categories")
       .select("*")
-      .order("created_at", {
-        ascending: true
-      });
+      .order(
+        "created_at",
+        {
+          ascending: true
+        }
+      );
 
 
   if (error) {
@@ -222,7 +267,90 @@ async function loadCategories() {
   }
 
 
-  if (!categories || categories.length === 0) {
+  grid.innerHTML = "";
+
+
+  if (
+    categories &&
+    categories.length
+  ) {
+
+    categories.forEach(category => {
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "category-card";
+
+
+      const categoryName =
+        category.name ||
+        "Category";
+
+
+      const description =
+        category.description ||
+        "";
+
+
+      const shopLink =
+        "shop.html?category=" +
+        encodeURIComponent(
+          categoryName
+        );
+
+
+      let imageHTML = "";
+
+
+      if (category.image_url) {
+
+        imageHTML = `
+          <img
+            src="${escapeHTML(category.image_url)}"
+            alt="${escapeHTML(categoryName)}"
+          >
+        `;
+      }
+
+
+      card.innerHTML = `
+
+        ${imageHTML}
+
+        <div class="category-content">
+
+          <h3>
+            ${escapeHTML(categoryName)}
+          </h3>
+
+          <p>
+            ${escapeHTML(description)}
+          </p>
+
+          <a href="${shopLink}">
+            Shop Now
+          </a>
+
+        </div>
+      `;
+
+
+      grid.appendChild(card);
+
+    });
+
+  }
+
+
+  await addAfricanFoodstuffsCard(
+    grid
+  );
+
+
+  if (!grid.children.length) {
 
     grid.innerHTML = `
       <div class="loading-message">
@@ -230,69 +358,117 @@ async function loadCategories() {
       </div>
     `;
 
-    return;
+  }
+
+}
+
+
+
+async function addAfricanFoodstuffsCard(
+  grid
+) {
+
+  /*
+    Get one real foodstuff image
+    automatically from Supabase.
+  */
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("foodstuffs")
+      .select(
+        "image_url"
+      )
+      .eq(
+        "active",
+        true
+      )
+      .not(
+        "image_url",
+        "is",
+        null
+      )
+      .order(
+        "sort_order",
+        {
+          ascending: true
+        }
+      )
+      .limit(1);
+
+
+  if (error) {
+
+    console.warn(
+      "Could not load foodstuff category image:",
+      error
+    );
+
   }
 
 
-  grid.innerHTML = "";
+  const imageUrl =
+    data &&
+    data.length
+      ? data[0].image_url
+      : null;
 
 
-  categories.forEach(category => {
-
-    const card =
-      document.createElement("div");
-
-    card.className = "category-card";
+  const card =
+    document.createElement("div");
 
 
-    const categoryName =
-      category.name || "Category";
+  card.className =
+    "category-card foodstuff-card";
 
 
-    const description =
-      category.description || "";
+  let imageHTML = "";
 
 
-    const shopLink =
-      "shop.html?category=" +
-      encodeURIComponent(categoryName);
+  if (imageUrl) {
+
+    imageHTML = `
+      <img
+        src="${escapeHTML(imageUrl)}"
+        alt="African Foodstuffs"
+      >
+    `;
+
+  }
 
 
-    let imageHTML = "";
+  card.innerHTML = `
 
-    if (category.image_url) {
+    ${imageHTML}
 
-      imageHTML = `
-        <img
-          src="${escapeHTML(category.image_url)}"
-          alt="${escapeHTML(categoryName)}"
-        >
-      `;
-    }
-
-
-    card.innerHTML = `
-      ${imageHTML}
+    <div class="category-content">
 
       <h3>
-        ${escapeHTML(categoryName)}
+        African Foodstuffs
       </h3>
 
       <p>
-        ${escapeHTML(description)}
+        Shop well-dried goat meat,
+        Panla/Kpanla fish, catfish,
+        Mangala fish, dried prawns,
+        dried shrimp and more.
       </p>
 
-      <a href="${shopLink}">
+      <a href="foodstuffs.html">
         Shop Now
       </a>
-    `;
+
+    </div>
+  `;
 
 
-    grid.appendChild(card);
-
-  });
+  grid.appendChild(card);
 
 }
+
 
 
 function escapeHTML(value) {
@@ -300,12 +476,15 @@ function escapeHTML(value) {
   const div =
     document.createElement("div");
 
+
   div.textContent =
     value == null
       ? ""
       : String(value);
 
+
   return div.innerHTML;
+
 }
 
 
