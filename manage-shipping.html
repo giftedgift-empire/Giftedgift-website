@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Shipping | GiftedGift Empire</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+header {
+  background: #123a8c;
+  color: white;
+  text-align: center;
+  padding: 24px 18px;
+}
+
+header h1 {
+  margin: 0 0 7px;
+  color: #f2bd16;
+}
+
+header p {
+  margin: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px 18px 70px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.actions a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.back {
+  background: #123a8c;
+  color: white;
+}
+
+.website {
+  background: #f2bd16;
+  color: #111;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  color: #123a8c;
+  margin-top: 0;
+}
+
+.card p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.message {
+  display: none;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
+.message.success {
+  display: block;
+  background: #e4f6e8;
+  color: #176b31;
+}
+
+.message.error {
+  display: block;
+  background: #fdeaea;
+  color: #9b1c1c;
+}
+
+.zone {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+.zone-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.zone-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #123a8c;
+}
+
+.zone-country {
+  color: #666;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+.badge {
+  display: inline-block;
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.active {
+  background: #e4f6e8;
+  color: #176b31;
+}
+
+.inactive {
+  background: #eee;
+  color: #666;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary {
+  background: #123a8c;
+  color: white;
+}
+
+.gold {
+  background: #f2bd16;
+  color: #111;
+}
+
+.danger {
+  background: #eee;
+  color: #9b1c1c;
+}
+
+.rate {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+.rate h3 {
+  color: #123a8c;
+  margin-top: 0;
+}
+
+.rate-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.rate-actions {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.form-grid label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.full-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  font-size: 16px;
+}
+
+#loading {
+  text-align: center;
+  padding: 50px 20px;
+  font-weight: bold;
+}
+
+.empty {
+  padding: 25px;
+  text-align: center;
+  background: #f8f9fb;
+  border-radius: 10px;
+}
+
+.note {
+  background: #fff8dd;
+  border-radius: 10px;
+  padding: 15px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+
+  header h1 {
+    font-size: 28px;
+  }
+
+  .container {
+    padding: 20px 14px 60px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="loading">
+  Checking admin login...
+</div>
+
+<div id="page" style="display:none;">
+
+<header>
+  <h1>Manage Shipping</h1>
+  <p>Shipping zones, carriers and weight-based rates</p>
+</header>
+
+<main class="container">
+
+  <div class="actions">
+
+    <a
+      href="dashboard.html"
+      class="back"
+    >
+      ← Back to Dashboard
+    </a>
+
+    <a
+      href="index.html"
+      target="_blank"
+      class="website"
+    >
+      🌐 View Website
+    </a>
+
+  </div>
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <section class="card">
+
+    <h2>Shipping Zones</h2>
+
+    <p>
+      Turn a destination zone on or off.
+      A zone cannot be activated unless at least
+      one shipping rate has been added to it.
+    </p>
+
+    <div id="zones">
+      Loading zones...
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Shipping Rates</h2>
+
+    <p>
+      Change prices, weight bands and availability.
+      These are the rates used by your physical checkout.
+    </p>
+
+    <div id="rates">
+      Loading rates...
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Add Shipping Rate</h2>
+
+    <p>
+      Use this later for GLS or any additional
+      Chronopost service.
+    </p>
+
+    <div class="form-grid">
+
+      <div>
+        <label for="new-zone">
+          Shipping Zone
+        </label>
+
+        <select id="new-zone"></select>
+      </div>
+
+
+      <div>
+        <label for="new-carrier">
+          Carrier
+        </label>
+
+        <input
+          id="new-carrier"
+          type="text"
+          placeholder="Example: GLS"
+        >
+      </div>
+
+
+      <div>
+        <label for="new-service">
+          Service Name
+        </label>
+
+        <input
+          id="new-service"
+          type="text"
+          placeholder="Example: GLS Home"
+        >
+      </div>
+
+
+      <div>
+        <label for="new-min">
+          Minimum Weight (kg)
+        </label>
+
+        <input
+          id="new-min"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="0"
+        >
+      </div>
+
+
+      <div>
+        <label for="new-max">
+          Maximum Weight (kg)
+        </label>
+
+        <input
+          id="new-max"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="1"
+        >
+      </div>
+
+
+      <div>
+        <label for="new-price">
+          Customer Shipping Price (€)
+        </label>
+
+        <input
+          id="new-price"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="0.00"
+        >
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="gold full-button"
+      onclick="addRate()"
+    >
+      Add Shipping Rate
+    </button>
+
+    <div class="note">
+      Do not add guessed GLS prices.
+      When we add GLS, we will use the actual rates
+      you choose or receive from GLS.
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+const loading =
+  document.getElementById("loading");
+
+const page =
+  document.getElementById("page");
+
+const zonesBox =
+  document.getElementById("zones");
+
+const ratesBox =
+  document.getElementById("rates");
+
+const messageBox =
+  document.getElementById("message");
+
+const newZoneSelect =
+  document.getElementById("new-zone");
+
+
+let zones = [];
+let rates = [];
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function money(value) {
+
+  return "€" +
+    Number(value || 0).toFixed(2);
+}
+
+
+function showMessage(
+  text,
+  type = "success"
+) {
+
+  messageBox.className =
+    "message " + type;
+
+  messageBox.textContent =
+    text;
+
+  messageBox.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+
+  setTimeout(() => {
+
+    messageBox.className =
+      "message";
+
+    messageBox.textContent =
+      "";
+
+  }, 4000);
+}
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  const session =
+    data?.session;
+
+
+  if (
+    error ||
+    !session ||
+    session.user.id !== ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+    return false;
+  }
+
+
+  loading.style.display =
+    "none";
+
+  page.style.display =
+    "block";
+
+
+  return true;
+}
+
+
+async function loadShipping() {
+
+  const {
+    data: zoneData,
+    error: zoneError
+  } =
+    await supabaseClient
+      .from("shipping_zones")
+      .select("*")
+      .order("id", {
+        ascending: true
+      });
+
+
+  if (zoneError) {
+
+    console.error(zoneError);
+
+    showMessage(
+      "Could not load shipping zones.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const {
+    data: rateData,
+    error: rateError
+  } =
+    await supabaseClient
+      .from("shipping_rates")
+      .select("*")
+      .order("zone_id", {
+        ascending: true
+      })
+      .order("carrier", {
+        ascending: true
+      })
+      .order("max_weight_kg", {
+        ascending: true
+      });
+
+
+  if (rateError) {
+
+    console.error(rateError);
+
+    showMessage(
+      "Could not load shipping rates.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  zones =
+    zoneData || [];
+
+  rates =
+    rateData || [];
+
+
+  renderZones();
+
+  renderRates();
+
+  fillZoneSelect();
+}
+
+
+function renderZones() {
+
+  if (!zones.length) {
+
+    zonesBox.innerHTML = `
+      <div class="empty">
+        No shipping zones found.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  zonesBox.innerHTML =
+    zones.map(zone => {
+
+      const countries =
+        Array.isArray(zone.countries)
+          ? zone.countries.join(", ")
+          : "";
+
+
+      return `
+
+        <div class="zone">
+
+          <div class="zone-top">
+
+            <div>
+
+              <div class="zone-name">
+                ${escapeHtml(zone.name)}
+              </div>
+
+              <div class="zone-country">
+                ${
+                  countries
+                    ? escapeHtml(countries)
+                    : "No country codes assigned"
+                }
+              </div>
+
+            </div>
+
+
+            <span class="badge ${
+              zone.active
+                ? "active"
+                : "inactive"
+            }">
+
+              ${
+                zone.active
+                  ? "Active"
+                  : "Inactive"
+              }
+
+            </span>
+
+          </div>
+
+
+          <div style="margin-top:15px;">
+
+            <button
+              type="button"
+              class="${
+                zone.active
+                  ? "danger"
+                  : "primary"
+              }"
+              onclick="toggleZone(
+                ${Number(zone.id)},
+                ${zone.active ? "false" : "true"}
+              )"
+            >
+
+              ${
+                zone.active
+                  ? "Deactivate Zone"
+                  : "Activate Zone"
+              }
+
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+
+function renderRates() {
+
+  if (!rates.length) {
+
+    ratesBox.innerHTML = `
+      <div class="empty">
+        No shipping rates found.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  ratesBox.innerHTML =
+    rates.map(rate => {
+
+      const zone =
+        zones.find(
+          item =>
+            Number(item.id) ===
+            Number(rate.zone_id)
+        );
+
+
+      return `
+
+        <div class="rate">
+
+          <h3>
+
+            ${escapeHtml(rate.carrier)}
+
+            ${
+              rate.service_name
+                ? " — " +
+                  escapeHtml(
+                    rate.service_name
+                  )
+                : ""
+            }
+
+          </h3>
+
+
+          <p>
+
+            Zone:
+            <strong>
+              ${
+                zone
+                  ? escapeHtml(zone.name)
+                  : "Unknown"
+              }
+            </strong>
+
+          </p>
+
+
+          <div class="rate-grid">
+
+
+            <div class="field">
+
+              <label>
+                Minimum kg
+              </label>
+
+              <input
+                id="min-${rate.id}"
+                type="number"
+                step="0.01"
+                min="0"
+                value="${escapeHtml(
+                  rate.min_weight_kg
+                )}"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Maximum kg
+              </label>
+
+              <input
+                id="max-${rate.id}"
+                type="number"
+                step="0.01"
+                min="0.01"
+                value="${escapeHtml(
+                  rate.max_weight_kg
+                )}"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Price (€)
+              </label>
+
+              <input
+                id="price-${rate.id}"
+                type="number"
+                step="0.01"
+                min="0"
+                value="${escapeHtml(
+                  rate.price
+                )}"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Status
+              </label>
+
+              <select
+                id="active-${rate.id}"
+              >
+
+                <option
+                  value="true"
+                  ${
+                    rate.active
+                      ? "selected"
+                      : ""
+                  }
+                >
+                  Active
+                </option>
+
+                <option
+                  value="false"
+                  ${
+                    !rate.active
+                      ? "selected"
+                      : ""
+                  }
+                >
+                  Inactive
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="rate-actions">
+
+            <button
+              type="button"
+              class="primary"
+              onclick="saveRate(
+                ${Number(rate.id)}
+              )"
+            >
+              Save Changes
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+
+function fillZoneSelect() {
+
+  newZoneSelect.innerHTML =
+    zones.map(zone => `
+
+      <option value="${Number(zone.id)}">
+        ${escapeHtml(zone.name)}
+      </option>
+
+    `).join("");
+}
+
+
+async function toggleZone(
+  zoneId,
+  turnOn
+) {
+
+  /*
+    Safety:
+    do not activate a zone
+    without at least one rate.
+  */
+
+  if (turnOn) {
+
+    const zoneRates =
+      rates.filter(
+        rate =>
+          Number(rate.zone_id) ===
+          Number(zoneId)
+      );
+
+
+    if (!zoneRates.length) {
+
+      showMessage(
+        "Add at least one shipping rate before activating this zone.",
+        "error"
+      );
+
+      return;
+    }
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("shipping_zones")
+      .update({
+        active: turnOn
+      })
+      .eq(
+        "id",
+        zoneId
+      );
+
+
+  if (error) {
+
+    console.error(error);
+
+    showMessage(
+      "Could not update the shipping zone.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showMessage(
+    turnOn
+      ? "Shipping zone activated."
+      : "Shipping zone deactivated."
+  );
+
+
+  await loadShipping();
+}
+
+
+async function saveRate(rateId) {
+
+  const min =
+    Number(
+      document
+        .getElementById(
+          "min-" + rateId
+        )
+        .value
+    );
+
+
+  const max =
+    Number(
+      document
+        .getElementById(
+          "max-" + rateId
+        )
+        .value
+    );
+
+
+  const price =
+    Number(
+      document
+        .getElementById(
+          "price-" + rateId
+        )
+        .value
+    );
+
+
+  const active =
+    document
+      .getElementById(
+        "active-" + rateId
+      )
+      .value === "true";
+
+
+  if (
+    !Number.isFinite(min) ||
+    !Number.isFinite(max) ||
+    !Number.isFinite(price)
+  ) {
+
+    showMessage(
+      "Please enter valid numbers.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (
+    min < 0 ||
+    max <= min ||
+    price < 0
+  ) {
+
+    showMessage(
+      "Please check the weight range and price.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("shipping_rates")
+      .update({
+        min_weight_kg:
+          min,
+
+        max_weight_kg:
+          max,
+
+        price:
+          price,
+
+        active:
+          active
+      })
+      .eq(
+        "id",
+        rateId
+      );
+
+
+  if (error) {
+
+    console.error(error);
+
+    showMessage(
+      "Could not save this shipping rate.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showMessage(
+    "Shipping rate saved successfully."
+  );
+
+
+  await loadShipping();
+}
+
+
+async function addRate() {
+
+  const zoneId =
+    Number(
+      newZoneSelect.value
+    );
+
+
+  const carrier =
+    document
+      .getElementById(
+        "new-carrier"
+      )
+      .value
+      .trim();
+
+
+  const service =
+    document
+      .getElementById(
+        "new-service"
+      )
+      .value
+      .trim();
+
+
+  const min =
+    Number(
+      document
+        .getElementById(
+          "new-min"
+        )
+        .value
+    );
+
+
+  const max =
+    Number(
+      document
+        .getElementById(
+          "new-max"
+        )
+        .value
+    );
+
+
+  const price =
+    Number(
+      document
+        .getElementById(
+          "new-price"
+        )
+        .value
+    );
+
+
+  if (!zoneId) {
+
+    showMessage(
+      "Please choose a shipping zone.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!carrier) {
+
+    showMessage(
+      "Please enter the carrier name.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (
+    !Number.isFinite(min) ||
+    !Number.isFinite(max) ||
+    !Number.isFinite(price)
+  ) {
+
+    showMessage(
+      "Please enter valid weight and price values.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (
+    min < 0 ||
+    max <= min ||
+    price < 0
+  ) {
+
+    showMessage(
+      "Maximum weight must be greater than minimum weight.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("shipping_rates")
+      .insert({
+
+        zone_id:
+          zoneId,
+
+        carrier:
+          carrier,
+
+        service_name:
+          service || null,
+
+        min_weight_kg:
+          min,
+
+        max_weight_kg:
+          max,
+
+        price:
+          price,
+
+        active:
+          true
+
+      });
+
+
+  if (error) {
+
+    console.error(error);
+
+    showMessage(
+      "Could not add this shipping rate.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  document
+    .getElementById(
+      "new-carrier"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "new-service"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "new-min"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "new-max"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "new-price"
+    )
+    .value = "";
+
+
+  showMessage(
+    "New shipping rate added successfully."
+  );
+
+
+  await loadShipping();
+}
+
+
+async function start() {
+
+  const allowed =
+    await protectPage();
+
+
+  if (!allowed) {
+    return;
+  }
+
+
+  await loadShipping();
+}
+
+
+start();
+
+</script>
+
+</body>
+</html>
