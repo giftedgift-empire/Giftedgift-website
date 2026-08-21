@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 <title>Admin Dashboard | GiftedGift Empire</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -49,7 +51,8 @@ header p {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
@@ -102,6 +105,7 @@ header p {
 }
 
 @media (max-width: 600px) {
+
   header h1 {
     font-size: 28px;
   }
@@ -109,17 +113,22 @@ header p {
   .container {
     padding: 22px 15px;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
+
 <div id="status">
   Checking admin login...
 </div>
 
+
 <div id="dashboard" style="display:none;">
+
 
 <header style="text-align:center;">
 
@@ -140,223 +149,381 @@ header p {
   <h1>GiftedGift Empire</h1>
 
   <p>Admin Dashboard</p>
+  <a
+  href="index.html"
+  target="_blank"
+  style="
+    display:inline-block;
+    margin-top:15px;
+    background:#f2bd16;
+    color:#111;
+    text-decoration:none;
+    padding:11px 20px;
+    border-radius:8px;
+    font-weight:bold;
+  "
+>
+  🌐 View Website
+</a>
 
 </header>
 
+
 <main class="container">
 
+
   <div class="welcome">
-    <h2>Welcome to your dashboard</h2>
+
+    <h2>
+      Welcome to your dashboard
+    </h2>
 
     <p>
-      Manage your GiftedGift Empire website from one place.
+      Manage your GiftedGift Empire website
+      from one place.
     </p>
+
   </div>
+
 
   <div class="dashboard-grid">
 
+
+    <!-- PRODUCTS -->
+
     <div class="card">
+
       <h2>Products</h2>
 
       <p>
-        Add, edit and manage products in your online shop.
+        Add, edit and manage products
+        in your online shop.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-product.html')">
+        onclick="goTo('manage-product.html')"
+      >
         Manage Products
       </button>
+
     </div>
 
 
+
+    <!-- ORDERS -->
+
     <div class="card">
+
+      <h2>Orders</h2>
+
+      <p>
+        View physical customer orders,
+        payment status, delivery details
+        and shipping progress.
+      </p>
+
+      <button
+        type="button"
+        onclick="goTo('manage-orders.html')"
+      >
+        Manage Orders
+      </button>
+
+    </div>
+
+
+
+    <!-- AFFILIATE PRODUCTS -->
+
+    <div class="card">
+
       <h2>Affiliate Products</h2>
 
       <p>
-        Add affiliate products together with your affiliate marketing links.
+        Add affiliate products together
+        with your affiliate marketing links.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-affiliates.html')">
+        onclick="goTo('manage-affiliates.html')"
+      >
         Manage Affiliate Products
       </button>
+
     </div>
 
 
+
+    <!-- DIGITAL PRODUCTS -->
+
     <div class="card">
+
       <h2>Digital Products</h2>
 
       <p>
-        Add ebooks, guides, printables and other digital products.
+        Add ebooks, guides, printables
+        and other digital products.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-digital-products.html')">
+        onclick="goTo('manage-digital-products.html')"
+      >
         Manage Digital Products
       </button>
+
     </div>
 
 
+
+    <!-- CATEGORIES -->
+
     <div class="card">
+
       <h2>Categories</h2>
 
       <p>
-        Add, rename and manage the categories used throughout your shop.
+        Add, rename and manage the
+        categories used throughout your shop.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-categories.html')">
+        onclick="goTo('manage-categories.html')"
+      >
         Manage Categories
       </button>
+
     </div>
 
 
+
+    <!-- BLOG -->
+
     <div class="card">
+
       <h2>Blog</h2>
 
       <p>
-        Create, edit and publish articles on your website.
+        Create, edit and publish
+        articles on your website.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-blog.html')">
+        onclick="goTo('manage-blog.html')"
+      >
         Manage Blog
       </button>
+
     </div>
 
 
+
+    <!-- DEALS -->
+
     <div class="card">
+
       <h2>Deals</h2>
 
       <p>
-        Add special offers, promotions and recommended deals.
+        Add special offers,
+        promotions and recommended deals.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-deals.html')">
+        onclick="goTo('manage-deals.html')"
+      >
         Manage Deals
       </button>
+
     </div>
 
 
+
+    <!-- ABOUT -->
+
     <div class="card">
+
       <h2>About</h2>
 
       <p>
-        Edit information displayed on your About page.
+        Edit information displayed
+        on your About page.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-about.html')">
+        onclick="goTo('manage-about.html')"
+      >
         Manage About
       </button>
+
     </div>
 
 
+
+    <!-- CONTACT -->
+
     <div class="card">
+
       <h2>Contact</h2>
 
       <p>
-        Manage your contact information and business contact details.
+        Manage your contact information
+        and business contact details.
       </p>
 
       <button
         type="button"
-        onclick="goTo('manage-contact.html')">
+        onclick="goTo('manage-contact.html')"
+      >
         Manage Contact
       </button>
+
     </div>
 
 
+
+    <!-- WEBSITE SETTINGS -->
+
     <div class="card">
+
       <h2>Website Settings</h2>
 
       <p>
-        Manage general GiftedGift Empire website settings.
+        Manage general GiftedGift Empire
+        website settings.
       </p>
 
       <button
         type="button"
-        onclick="goTo('website-settings.html')">
+        onclick="goTo('website-settings.html')"
+      >
         Website Settings
       </button>
+
     </div>
+
 
   </div>
 
-  <button id="logout" class="logout">
+
+  <button
+    id="logout"
+    class="logout"
+  >
     Log Out
   </button>
+
 
 </main>
 
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+</script>
+
 
 <script>
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
 
 
 async function protectDashboard() {
 
-  const { data, error } =
-    await supabaseClient.auth.getSession();
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
 
-  const session = data?.session;
 
-  if (error || !session) {
+  const session =
+    data?.session;
 
-    window.location.replace("admin.html");
+
+  if (
+    error ||
+    !session
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
 
     return;
   }
 
-  document.getElementById("status").style.display =
-    "none";
 
-  document.getElementById("dashboard").style.display =
-    "block";
+  document
+    .getElementById("status")
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById("dashboard")
+    .style.display =
+      "block";
 }
+
 
 
 function goTo(page) {
-  window.location.href = page;
+
+  window.location.href =
+    page;
+
 }
+
 
 
 document
   .getElementById("logout")
-  .addEventListener("click", async function() {
+  .addEventListener(
+    "click",
+    async function() {
 
-    await supabaseClient.auth.signOut();
+      await supabaseClient
+        .auth
+        .signOut();
 
-    window.location.replace("admin.html");
-  });
+
+      window.location.replace(
+        "admin.html"
+      );
+
+    }
+  );
+
 
 
 protectDashboard();
 
 </script>
+
 
 </body>
 </html>
