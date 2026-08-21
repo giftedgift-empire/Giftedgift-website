@@ -1,352 +1,2653 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>GiftedGift Empire | Smart Finds & Recommendations</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <meta name="description" content="Discover useful products, smart recommendations, buying guides and carefully selected finds from GiftedGift Empire.">
+  <title>
+    GiftedGift Empire | Smart Finds & Recommendations
+  </title>
+
+  <meta
+    name="description"
+    content="Discover useful products, African foodstuffs, digital products, smart recommendations, deals and carefully selected finds from GiftedGift Empire."
+  >
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+  </script>
+
 
   <style>
+
+    :root {
+      --blue: #123a8c;
+      --dark-blue: #0a2463;
+      --gold: #f2bd16;
+      --gold-dark: #d8a90e;
+      --white: #ffffff;
+      --light: #f6f7f9;
+      --text: #20242a;
+      --muted: #68707a;
+      --green: #25d366;
+      --border: #e6e8ec;
+    }
+
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
     body {
-      font-family: Arial, sans-serif;
-      color: #222;
-      background: #ffffff;
-      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.5;
     }
 
-    header {
-      background: #123C8C;
+
+    img {
+      max-width: 100%;
+    }
+
+
+    a {
+      color: inherit;
+    }
+
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .site-header {
+      background: var(--blue);
       color: white;
-      padding: 18px 7%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.13);
+    }
+
+
+    .header-main {
+      max-width: 1250px;
+      margin: auto;
+      min-height: 84px;
+      padding: 13px 22px;
+
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #D4AF37;
+
+    .menu-button {
+      width: 44px;
+      height: 44px;
+
+      border: none;
+      background: transparent;
+      color: white;
+
+      font-size: 31px;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    nav a {
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      text-decoration: none;
+
+      min-width: 0;
+    }
+
+
+    .brand img {
+      width: 62px;
+      height: 62px;
+
+      object-fit: contain;
+
+      background: white;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: var(--gold);
+    }
+
+
+    .header-actions {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+
+    .header-icon {
+      width: 44px;
+      height: 44px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+      color: white;
+
+      border-radius: 50%;
+
+      font-size: 24px;
+      position: relative;
+    }
+
+
+    .header-icon:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+
+    .cart-count {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+
+      width: 21px;
+      height: 21px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--gold);
+      color: #111;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav-wrapper {
+      border-top: 1px solid rgba(255, 255, 255, 0.13);
+    }
+
+
+    .main-nav {
+      max-width: 1250px;
+      margin: auto;
+      padding: 0 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+
+    .main-nav a {
+      display: block;
+
       color: white;
       text-decoration: none;
-      margin-left: 18px;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      padding: 14px 16px 12px;
+
+      border-bottom: 3px solid transparent;
     }
+
+
+    .main-nav a:hover {
+      color: var(--gold);
+    }
+
+
+    .main-nav a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
-      padding: 80px 7%;
-      text-align: center;
-      background: #f3f4f6;
+      background:
+        linear-gradient(
+          115deg,
+          #ffffff 0%,
+          #fffdf5 55%,
+          #f8f3df 100%
+        );
+
+      overflow: hidden;
     }
+
+
+    .hero-inner {
+      max-width: 1250px;
+      margin: auto;
+
+      padding: 58px 22px;
+
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+
+    .hero-copy {
+      padding: 25px 5px;
+    }
+
+
+    .eyebrow {
+      display: inline-block;
+
+      color: var(--blue);
+      background: #edf3ff;
+
+      padding: 7px 13px;
+      border-radius: 30px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      margin-bottom: 18px;
+    }
+
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-      color: #111827;
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.05;
+
+      margin-bottom: 20px;
+
+      color: #131820;
     }
+
+
+    .hero h1 span {
+      color: var(--gold-dark);
+    }
+
 
     .hero p {
-      max-width: 650px;
-      margin: auto;
-      font-size: 18px;
-      color: #4b5563;
+      max-width: 600px;
+
+      font-size: 19px;
+      line-height: 1.75;
+
+      color: #555e68;
     }
 
-    .button {
-      display: inline-block;
-      margin-top: 25px;
-      background: #D4AF37;
-      color: #111827;
-      padding: 14px 25px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-weight: bold;
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      margin-top: 28px;
     }
+
+
+    .primary-button,
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 52px;
+
+      padding: 13px 22px;
+
+      border-radius: 10px;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      text-decoration: none;
+    }
+
+
+    .primary-button {
+      background: var(--gold);
+      color: #111;
+    }
+
+
+    .primary-button:hover {
+      background: var(--gold-dark);
+    }
+
+
+    .secondary-button {
+      background: var(--blue);
+      color: white;
+    }
+
+
+    .secondary-button:hover {
+      background: var(--dark-blue);
+    }
+
+
+
+    /* HERO IMAGES */
+
+    .hero-showcase {
+      min-height: 500px;
+
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+    }
+
+
+    .hero-photo {
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 22px;
+
+      background: #ececec;
+
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.11);
+
+      text-decoration: none;
+    }
+
+
+    .hero-photo:first-child {
+      grid-row: 1 / 3;
+    }
+
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+      transition: transform 0.3s ease;
+    }
+
+
+    .hero-photo:hover img {
+      transform: scale(1.03);
+    }
+
+
+    .hero-photo-label {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+
+      padding: 8px 12px;
+
+      border-radius: 8px;
+
+      background: rgba(18, 58, 140, 0.92);
+      color: white;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+
+    /* =========================
+       TRUST STRIP
+    ========================= */
+
+    .trust-section {
+      max-width: 1250px;
+      margin: -12px auto 0;
+
+      position: relative;
+      z-index: 3;
+
+      padding: 0 22px;
+    }
+
+
+    .trust-grid {
+      background: white;
+
+      border-radius: 18px;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      overflow: hidden;
+
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.09);
+      border: 1px solid var(--border);
+    }
+
+
+    .trust-item {
+      text-align: center;
+
+      padding: 24px 15px;
+
+      border-right: 1px solid var(--border);
+    }
+
+
+    .trust-item:last-child {
+      border-right: none;
+    }
+
+
+    .trust-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+
+    .trust-title {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+
+    .trust-text {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
 
     .section {
-      padding: 60px 7%;
-      max-width: 1200px;
+      max-width: 1250px;
       margin: auto;
+      padding: 72px 22px;
     }
 
-    .section h2 {
+
+    .section-heading {
       text-align: center;
       margin-bottom: 35px;
-      font-size: 30px;
     }
 
-    .cards {
+
+    .section-kicker {
+      color: var(--gold-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+
+    .section-heading h2 {
+      color: #15191f;
+
+      font-size: clamp(31px, 5vw, 44px);
+
+      line-height: 1.15;
+    }
+
+
+    .section-heading p {
+      max-width: 680px;
+      margin: 12px auto 0;
+
+      color: var(--muted);
+
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories-section {
+      background: #fbfbfc;
+    }
+
+
+    .category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 22px;
+    }
+
+
+    .category-card {
+      background: white;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+
+    .category-card:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .category-image {
+      width: 100%;
+      height: 245px;
+
+      background: #ececec;
+
+      overflow: hidden;
+    }
+
+
+    .category-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+
+    .category-content {
+      padding: 22px;
+    }
+
+
+    .category-content h3 {
+      color: var(--blue);
+
+      font-size: 22px;
+      line-height: 1.25;
+
+      margin-bottom: 9px;
+    }
+
+
+    .category-content p {
+      color: var(--muted);
+
+      line-height: 1.6;
+
+      min-height: 52px;
+    }
+
+
+    .category-link {
+      display: inline-block;
+
+      margin-top: 16px;
+
+      background: var(--gold);
+      color: #111;
+
+      padding: 10px 16px;
+
+      border-radius: 8px;
+
+      text-decoration: none;
+
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+
+    .category-link:hover {
+      background: var(--gold-dark);
+    }
+
+
+    .foodstuff-card .category-link {
+      background: var(--green);
+      color: white;
+    }
+
+
+
+    /* =========================
+       FEATURED PRODUCTS
+    ========================= */
+
+    .featured-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      gap: 20px;
+
+      margin-bottom: 28px;
+    }
+
+
+    .featured-top h2 {
+      font-size: 36px;
+      line-height: 1.1;
+    }
+
+
+    .view-all {
+      display: inline-block;
+
+      background: var(--gold);
+      color: #111;
+
+      text-decoration: none;
+
+      padding: 11px 18px;
+
+      border-radius: 9px;
+
+      font-weight: 800;
+
+      white-space: nowrap;
+    }
+
+
+    .product-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
       gap: 20px;
     }
 
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 25px;
+
+    .product-card {
       background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 17px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.05);
     }
 
-    .card h3 {
-      margin-bottom: 10px;
+
+    .product-image {
+      height: 235px;
+
+      background: #f2f3f5;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
     }
 
-    .about {
-      background: #f9fafb;
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+
+    .product-placeholder {
+      color: #7b8088;
+      font-weight: 700;
+    }
+
+
+    .product-content {
+      padding: 18px;
+    }
+
+
+    .product-category {
+      color: var(--gold-dark);
+
+      font-size: 12px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      margin-bottom: 6px;
+    }
+
+
+    .product-name {
+      color: #1e2329;
+
+      font-size: 19px;
+      font-weight: 800;
+
+      line-height: 1.35;
+
+      margin-bottom: 9px;
+    }
+
+
+    .product-price {
+      color: var(--blue);
+
+      font-size: 21px;
+      font-weight: 800;
+
+      margin-bottom: 13px;
+    }
+
+
+    .product-button {
+      display: block;
+
+      text-align: center;
+
+      background: var(--blue);
+      color: white;
+
+      text-decoration: none;
+
+      padding: 11px 14px;
+
+      border-radius: 8px;
+
+      font-weight: 800;
+    }
+
+
+
+    /* =========================
+       DISCOVER / LINKS
+    ========================= */
+
+    .discover-section {
+      background: var(--dark-blue);
+      color: white;
+    }
+
+
+    .discover-section .section-heading h2 {
+      color: white;
+    }
+
+
+    .discover-section .section-heading p {
+      color: #d8e1f3;
+    }
+
+
+    .discover-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+
+    .discover-card {
+      padding: 28px 23px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255, 255, 255, 0.08);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.12);
+    }
+
+
+    .discover-icon {
+      font-size: 33px;
+      margin-bottom: 12px;
+    }
+
+
+    .discover-card h3 {
+      color: var(--gold);
+      font-size: 23px;
+      margin-bottom: 9px;
+    }
+
+
+    .discover-card p {
+      color: #dce4f2;
+      line-height: 1.65;
+    }
+
+
+    .discover-card a {
+      display: inline-block;
+
+      margin-top: 17px;
+
+      color: #111;
+      background: var(--gold);
+
+      padding: 9px 14px;
+
+      border-radius: 7px;
+
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-section {
+      background: #f7f8fa;
+    }
+
+
+    .about-box {
+      max-width: 900px;
+      margin: auto;
+
       text-align: center;
     }
 
-    .about p {
-      max-width: 750px;
-      margin: auto;
+
+    .about-box h2 {
+      color: var(--blue);
+
+      font-size: 34px;
+
+      margin-bottom: 15px;
     }
+
+
+    .about-box p {
+      color: #5e6670;
+
+      font-size: 17px;
+
+      line-height: 1.8;
+    }
+
+
+    .about-buttons {
+      margin-top: 24px;
+
+      display: flex;
+      justify-content: center;
+
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
-      background: #0A2463;
+      background: #071e52;
       color: white;
+    }
+
+
+    .footer-inner {
+      max-width: 1250px;
+      margin: auto;
+
+      padding: 48px 22px 28px;
+
+      display: grid;
+
+      grid-template-columns: 1.4fr 1fr 1fr;
+
+      gap: 40px;
+    }
+
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 16px;
+    }
+
+
+    .footer-brand img {
+      width: 48px;
+      height: 48px;
+
+      object-fit: contain;
+
+      background: white;
+      border-radius: 50%;
+    }
+
+
+    .footer-brand strong {
+      font-size: 22px;
+    }
+
+
+    .footer-copy {
+      color: #ced8ed;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+
+    .footer-column h3 {
+      color: var(--gold);
+
+      margin-bottom: 13px;
+    }
+
+
+    .footer-column a {
+      display: block;
+
+      color: white;
+
+      text-decoration: none;
+
+      margin: 8px 0;
+    }
+
+
+    .footer-column a:hover {
+      color: var(--gold);
+    }
+
+
+    .footer-bottom {
+      max-width: 1250px;
+      margin: auto;
+
+      padding: 20px 22px 30px;
+
+      border-top:
+        1px solid rgba(255, 255, 255, 0.12);
+
+      color: #c9d3e8;
+
+      font-size: 14px;
+
       text-align: center;
-      padding: 30px 7%;
     }
 
-    footer p {
-      margin: 7px 0;
+
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading-box {
+      grid-column: 1 / -1;
+
+      padding: 35px 20px;
+
+      text-align: center;
+
+      color: #6e747c;
+
+      background: white;
+
+      border-radius: 14px;
+
+      border: 1px solid var(--border);
     }
 
-    @media (max-width: 600px) {
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+
+      .hero-copy {
+        text-align: center;
+      }
+
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+
+      .hero-showcase {
+        min-height: 420px;
+      }
+
+
+      .category-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+
+      .product-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+
+      .discover-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+
+
+    @media (max-width: 720px) {
+
+      .header-main {
+        min-height: 74px;
+        padding: 10px 13px;
+        gap: 7px;
+      }
+
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+      }
+
+
+      .brand-name {
+        font-size: 20px;
+      }
+
+
+      .header-actions {
+        gap: 1px;
+      }
+
+
+      .header-icon {
+        width: 39px;
+        height: 39px;
+      }
+
+
+      .main-nav {
+        display: none;
+
+        padding: 8px 14px 16px;
+
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+
+      .main-nav.open {
+        display: flex;
+      }
+
+
+      .main-nav a {
+        padding: 11px 8px;
+
+        border-bottom: none;
+
+        border-radius: 7px;
+      }
+
+
+      .main-nav a.active {
+        background:
+          rgba(255, 255, 255, 0.08);
+
+        border-bottom: none;
+      }
+
+
+      .hero-inner {
+        padding: 38px 16px 46px;
+        gap: 28px;
+      }
+
+
       .hero h1 {
-        font-size: 32px;
+        font-size: 43px;
       }
 
-      nav {
-        margin-top: 10px;
-        width: 100%;
+
+      .hero p {
+        font-size: 17px;
       }
 
-      nav a {
-        margin: 0 12px 0 0;
+
+      .hero-showcase {
+        min-height: 330px;
+        gap: 8px;
       }
+
+
+      .hero-photo {
+        border-radius: 15px;
+      }
+
+
+      .trust-section {
+        padding: 0 12px;
+      }
+
+
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+
+      .trust-item {
+        border-bottom: 1px solid var(--border);
+      }
+
+
+      .trust-item:nth-child(2) {
+        border-right: none;
+      }
+
+
+      .section {
+        padding: 55px 15px;
+      }
+
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .category-image {
+        height: 280px;
+      }
+
+
+      .featured-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .product-image {
+        height: 300px;
+      }
+
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
     }
+
+
+
+    @media (max-width: 430px) {
+
+      .brand-name {
+        font-size: 18px;
+      }
+
+
+      .menu-button {
+        width: 34px;
+      }
+
+
+      .header-icon {
+        width: 35px;
+      }
+
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+
+      .hero-showcase {
+        min-height: 290px;
+      }
+
+
+      .hero-photo-label {
+        font-size: 10px;
+      }
+
+    }
+
   </style>
+
 </head>
+
+
 
 <body>
 
-<header>
-  <div class="logo" style="display:flex; align-items:center; gap:10px;">
-  <img src="my-logo.png"
-       alt="GiftedGift Empire Logo"
-       style="width:48px; height:48px; object-fit:contain; border-radius:50%; background:white;">
-  <span style="color:white;">
-  GiftedGift <span style="color:#f2bd16;">Empire</span>
-</span>
-</div>
 
- <nav>
-    <a href="#home">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="categories.html">Categories</a>
-    <a href="#blog">Blog</a>
-    <a href="#deals">Deals</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <a href="#cart">🛒 Cart</a>
- </nav>
-</header>
+<!-- =========================
+     HEADER
+========================= -->
 
-<section class="hero" id="home">
-  <h1>Smart Finds for Everyday Life</h1>
+<header class="site-header">
 
-  <p>
-    Discover useful products, helpful buying guides and carefully selected
-    recommendations designed to help you shop with confidence.
-  </p>
+  <div class="header-main">
 
-  <a class="button" href="categories.html">
-    Explore Our Picks
-  </a>
-</section>
+    <button
+      id="menu-button"
+      class="menu-button"
+      type="button"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
 
-<section class="section" id="shop">
-  <h2>Shop Our Products</h2>
-
-  <div class="cards">
-
-    <div class="card">
-      <img src="When The Enemy Lives Close.jpg"
-           alt="When The Enemy Lives Close ebook cover"
-           style="width:100%; max-width:280px; border-radius:10px; margin-bottom:15px;">
-
-      <h3>When The Enemy Lives Close</h3>
-
-      <p><strong>Digital Ebook</strong></p>
-
-      <p>
-        A faith-based book about recognizing hidden opposition,
-        protecting your peace, and responding with wisdom.
-      </p>
-
-      <p><strong>COMING SOON</strong></p>
-    </div>
-
-  </div>
-</section>
-  
-<section class="section" id="categories">
-
-  <h2>Shop by Category</h2>
-
-  <div class="cards">
-
-    <div class="card">
-      <h3>Home & Living</h3>
-      <p>
-        Discover practical products that can make everyday life easier,
-        more comfortable and more organized.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Beauty & Lifestyle</h3>
-      <p>
-        Explore carefully selected beauty, personal-care and lifestyle finds.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Fashion & Accessories</h3>
-      <p>
-        Find stylish clothing, accessories and useful fashion recommendations.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Useful Finds</h3>
-      <p>
-        See interesting products, gift ideas and smart finds worth discovering.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<section class="section about" id="about">
-
-  <h2>About GiftedGift Empire</h2>
-
-  <p>
-    GiftedGift Empire helps shoppers discover useful products and make
-    informed purchasing decisions. We research and share recommendations,
-    product discoveries and helpful shopping information in one convenient
-    place.
-  </p>
-
-</section>
-
-<section class="section" id="contact">
-
-  <h2>Contact Us</h2>
-
-  <p style="text-align:center;">
-    Questions, suggestions or business enquiries? We'd love to hear from you.
-  </p>
-
-</section>
-  <!-- AFRICAN FOODSTUFFS -->
-
-<section style="
-  max-width:1100px;
-  margin:45px auto;
-  padding:0 18px;
-">
-
-  <div style="
-    background:white;
-    border-radius:20px;
-    padding:35px 25px;
-    text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-  ">
-
-    <div style="
-      font-size:46px;
-      margin-bottom:12px;
-    ">
-      🥘
-    </div>
-
-    <h2 style="
-      color:#123a8c;
-      font-size:32px;
-      margin:0 0 15px;
-    ">
-      African Foodstuffs
-    </h2>
-
-    <p style="
-      max-width:650px;
-      margin:0 auto 22px;
-      color:#555;
-      font-size:18px;
-      line-height:1.6;
-    ">
-      Shop well-dried goat meat, Panla/Kpanla fish,
-      catfish, Mangala fish, dried prawns, dried shrimp
-      and more.
-    </p>
-
-    <p style="
-      color:#176b31;
-      font-weight:bold;
-      margin-bottom:22px;
-    ">
-      Available to order directly through WhatsApp
-    </p>
 
     <a
-      href="foodstuffs.html"
-      style="
-        display:inline-block;
-        background:#f2bd16;
-        color:#111;
-        text-decoration:none;
-        padding:15px 28px;
-        border-radius:10px;
-        font-size:18px;
-        font-weight:bold;
-      "
+      href="index.html"
+      class="brand"
     >
-      Shop African Foodstuffs
+
+      <img
+        src="my-logo.png"
+        alt="GiftedGift Empire Logo"
+      >
+
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <div class="header-actions">
+
+      <a
+        href="shop.html"
+        class="header-icon"
+        aria-label="Search products"
+        title="Search products"
+      >
+        🔍
+      </a>
+
+
+      <a
+        href="cart.html"
+        class="header-icon"
+        aria-label="Shopping cart"
+        title="Shopping cart"
+      >
+
+        🛒
+
+        <span
+          id="cart-count"
+          class="cart-count"
+        >
+          0
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="nav-wrapper">
+
+    <nav
+      id="main-nav"
+      class="main-nav"
+    >
+
+      <a
+        href="index.html"
+        class="active"
+      >
+        Home
+      </a>
+
+      <a href="shop.html">
+        Shop
+      </a>
+
+      <a href="categories.html">
+        Categories
+      </a>
+
+      <a href="blog.html">
+        Blog
+      </a>
+
+      <a href="deals.html">
+        Deals
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div class="hero-copy">
+
+      <div class="eyebrow">
+        GIFTEDGIFT EMPIRE
+      </div>
+
+
+      <h1>
+
+        Smart Finds for
+
+        <span>
+          Everyday Life
+        </span>
+
+      </h1>
+
+
+      <p>
+
+        Discover useful products, digital resources,
+        lifestyle finds, African foodstuffs and carefully
+        selected recommendations designed to help you
+        shop with confidence.
+
+      </p>
+
+
+      <div class="hero-buttons">
+
+        <a
+          href="categories.html"
+          class="primary-button"
+        >
+          Explore Our Picks →
+        </a>
+
+
+        <a
+          href="shop.html"
+          class="secondary-button"
+        >
+          Shop All Products
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="hero-showcase"
+      class="hero-showcase"
+    >
+
+      <div class="loading-box">
+        Loading our picks...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     TRUST
+========================= -->
+
+<section class="trust-section">
+
+  <div class="trust-grid">
+
+    <div class="trust-item">
+
+      <div class="trust-icon">
+        🚚
+      </div>
+
+      <div class="trust-title">
+        Useful Products
+      </div>
+
+      <div class="trust-text">
+        Practical finds for everyday life
+      </div>
+
+    </div>
+
+
+    <div class="trust-item">
+
+      <div class="trust-icon">
+        🛡️
+      </div>
+
+      <div class="trust-title">
+        Trusted Recommendations
+      </div>
+
+      <div class="trust-text">
+        Carefully selected finds
+      </div>
+
+    </div>
+
+
+    <div class="trust-item">
+
+      <div class="trust-icon">
+        🏷️
+      </div>
+
+      <div class="trust-title">
+        Best Deals
+      </div>
+
+      <div class="trust-text">
+        Offers worth discovering
+      </div>
+
+    </div>
+
+
+    <div class="trust-item">
+
+      <div class="trust-icon">
+        🔒
+      </div>
+
+      <div class="trust-title">
+        Shop with Confidence
+      </div>
+
+      <div class="trust-text">
+        Secure checkout where available
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     CATEGORIES
+========================= -->
+
+<section class="categories-section">
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <div class="section-kicker">
+        Shop by Category
+      </div>
+
+      <h2>
+        Explore Our Picks
+      </h2>
+
+      <p>
+        Browse our main shopping categories and find
+        products that suit your needs.
+      </p>
+
+    </div>
+
+
+    <div
+      id="homepage-categories"
+      class="category-grid"
+    >
+
+      <div class="loading-box">
+        Loading categories...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     FEATURED PRODUCTS
+========================= -->
+
+<section class="section">
+
+  <div class="featured-top">
+
+    <div>
+
+      <div class="section-kicker">
+        Handpicked for You
+      </div>
+
+      <h2>
+        🔥 Featured Products
+      </h2>
+
+    </div>
+
+
+    <a
+      href="shop.html"
+      class="view-all"
+    >
+      View All →
     </a>
 
   </div>
 
+
+  <div
+    id="featured-products"
+    class="product-grid"
+  >
+
+    <div class="loading-box">
+      Loading products...
+    </div>
+
+  </div>
+
 </section>
+
+
+
+<!-- =========================
+     DISCOVER MORE
+========================= -->
+
+<section class="discover-section">
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <div class="section-kicker">
+        More to Discover
+      </div>
+
+      <h2>
+        Explore GiftedGift Empire
+      </h2>
+
+      <p>
+        Find special offers, helpful articles and
+        shopping information across the website.
+      </p>
+
+    </div>
+
+
+    <div class="discover-grid">
+
+      <div class="discover-card">
+
+        <div class="discover-icon">
+          🏷️
+        </div>
+
+        <h3>
+          Deals
+        </h3>
+
+        <p>
+          Discover special offers and reduced-price
+          products currently available.
+        </p>
+
+        <a href="deals.html">
+          View Deals
+        </a>
+
+      </div>
+
+
+      <div class="discover-card">
+
+        <div class="discover-icon">
+          ✍️
+        </div>
+
+        <h3>
+          Blog
+        </h3>
+
+        <p>
+          Read helpful guides, recommendations,
+          shopping tips and useful information.
+        </p>
+
+        <a href="blog.html">
+          Read Blog
+        </a>
+
+      </div>
+
+
+      <div class="discover-card">
+
+        <div class="discover-icon">
+          🥘
+        </div>
+
+        <h3>
+          African Foodstuffs
+        </h3>
+
+        <p>
+          Browse African food products and submit
+          your order directly through WhatsApp.
+        </p>
+
+        <a href="foodstuffs.html">
+          Shop Foodstuffs
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="about-section">
+
+  <div class="section">
+
+    <div class="about-box">
+
+      <h2>
+        About GiftedGift Empire
+      </h2>
+
+      <p>
+
+        GiftedGift Empire brings together useful products,
+        digital resources, lifestyle finds, African
+        foodstuffs, deals and recommendations in one
+        convenient shopping destination.
+
+      </p>
+
+
+      <div class="about-buttons">
+
+        <a
+          href="about.html"
+          class="secondary-button"
+        >
+          About Us
+        </a>
+
+
+        <a
+          href="contact.html"
+          class="primary-button"
+        >
+          Contact Us
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-  <p><strong>GiftedGift Empire</strong></p>
+  <div class="footer-inner">
 
-  <p>
-    Some links on this website may be affiliate links. We may earn a
-    commission when you make a purchase through certain links, at no
-    additional cost to you.
-  </p>
+    <div>
 
-  <p>© 2026 GiftedGift Empire. All rights reserved.</p>
+      <div class="footer-brand">
+
+        <img
+          src="my-logo.png"
+          alt="GiftedGift Empire"
+        >
+
+        <strong>
+          GiftedGift Empire
+        </strong>
+
+      </div>
+
+
+      <p class="footer-copy">
+
+        Smart finds, useful products, digital resources,
+        African foodstuffs and carefully selected
+        recommendations in one place.
+
+      </p>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <h3>
+        Shop
+      </h3>
+
+      <a href="shop.html">
+        All Products
+      </a>
+
+      <a href="categories.html">
+        Categories
+      </a>
+
+      <a href="foodstuffs.html">
+        African Foodstuffs
+      </a>
+
+      <a href="deals.html">
+        Deals
+      </a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <h3>
+        Information
+      </h3>
+
+      <a href="blog.html">
+        Blog
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="cart.html">
+        Cart
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <p>
+
+      Some links on this website may be affiliate links.
+      We may earn a commission when you make a purchase
+      through certain links, at no additional cost to you.
+
+    </p>
+
+    <br>
+
+    <p>
+      © 2026 GiftedGift Empire. All rights reserved.
+    </p>
+
+  </div>
 
 </footer>
+
+
+
+<script>
+
+  /* =========================
+     SUPABASE
+  ========================= */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+
+  /* =========================
+     MENU
+  ========================= */
+
+  const menuButton =
+    document.getElementById(
+      "menu-button"
+    );
+
+
+  const mainNav =
+    document.getElementById(
+      "main-nav"
+    );
+
+
+  menuButton.addEventListener(
+    "click",
+    function () {
+
+      mainNav.classList.toggle(
+        "open"
+      );
+
+    }
+  );
+
+
+
+  /* =========================
+     ESCAPE HTML
+  ========================= */
+
+  function escapeHTML(value) {
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.textContent =
+      value == null
+        ? ""
+        : String(value);
+
+
+    return div.innerHTML;
+
+  }
+
+
+
+  /* =========================
+     MONEY
+  ========================= */
+
+  function money(value) {
+
+    const number =
+      Number(value || 0);
+
+
+    return "€" +
+      number.toFixed(2);
+
+  }
+
+
+
+  /* =========================
+     CATEGORY LINK
+  ========================= */
+
+  function getCategoryLink(
+    category
+  ) {
+
+    const name =
+      String(
+        category.name || ""
+      );
+
+
+    const slug =
+      String(
+        category.slug || ""
+      ).toLowerCase();
+
+
+    const isFoodstuffs =
+      slug ===
+        "african-foodstuffs" ||
+      name
+        .toLowerCase()
+        .trim() ===
+        "african foodstuffs";
+
+
+    if (isFoodstuffs) {
+
+      return "foodstuffs.html";
+
+    }
+
+
+    return (
+      "shop.html?category=" +
+      encodeURIComponent(name)
+    );
+
+  }
+
+
+
+  /* =========================
+     LOAD CATEGORIES
+  ========================= */
+
+  async function loadCategories() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("categories")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Category error:",
+        error
+      );
+
+
+      document
+        .getElementById(
+          "homepage-categories"
+        )
+        .innerHTML = `
+
+          <div class="loading-box">
+            Categories could not be loaded.
+          </div>
+        `;
+
+
+      document
+        .getElementById(
+          "hero-showcase"
+        )
+        .innerHTML = "";
+
+
+      return;
+
+    }
+
+
+    const categories =
+      data || [];
+
+
+    renderHero(
+      categories
+    );
+
+
+    renderCategories(
+      categories
+    );
+
+  }
+
+
+
+  /* =========================
+     HERO IMAGES
+  ========================= */
+
+  function renderHero(
+    categories
+  ) {
+
+    const box =
+      document.getElementById(
+        "hero-showcase"
+      );
+
+
+    const withImages =
+      categories.filter(
+        category =>
+          Boolean(
+            category.image_url
+          )
+      );
+
+
+    if (!withImages.length) {
+
+      box.innerHTML = `
+        <div class="loading-box">
+          Category images will appear here.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    /*
+      Prefer these categories
+      for the hero.
+    */
+
+    const preferredNames = [
+      "Home & Living",
+      "Fashion & Accessories",
+      "Beauty & Lifestyle"
+    ];
+
+
+    let selected = [];
+
+
+    preferredNames.forEach(
+      preferredName => {
+
+        const match =
+          withImages.find(
+            category =>
+              String(
+                category.name || ""
+              ).toLowerCase() ===
+              preferredName.toLowerCase()
+          );
+
+
+        if (
+          match &&
+          !selected.includes(match)
+        ) {
+
+          selected.push(match);
+
+        }
+
+      }
+    );
+
+
+    withImages.forEach(
+      category => {
+
+        if (
+          selected.length < 3 &&
+          !selected.includes(
+            category
+          )
+        ) {
+
+          selected.push(
+            category
+          );
+
+        }
+
+      }
+    );
+
+
+    selected =
+      selected.slice(
+        0,
+        3
+      );
+
+
+    box.innerHTML =
+      selected.map(
+        category => `
+
+          <a
+            class="hero-photo"
+            href="${getCategoryLink(category)}"
+          >
+
+            <img
+              src="${escapeHTML(category.image_url)}"
+              alt="${escapeHTML(category.name)}"
+            >
+
+            <span class="hero-photo-label">
+              ${escapeHTML(category.name)}
+            </span>
+
+          </a>
+
+        `
+      ).join("");
+
+  }
+
+
+
+  /* =========================
+     CATEGORY CARDS
+  ========================= */
+
+  function renderCategories(
+    categories
+  ) {
+
+    const box =
+      document.getElementById(
+        "homepage-categories"
+      );
+
+
+    if (!categories.length) {
+
+      box.innerHTML = `
+
+        <div class="loading-box">
+          No categories are currently available.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    box.innerHTML =
+      categories.map(
+        category => {
+
+          const name =
+            category.name ||
+            "Category";
+
+
+          const slug =
+            String(
+              category.slug || ""
+            ).toLowerCase();
+
+
+          const isFoodstuffs =
+            slug ===
+              "african-foodstuffs" ||
+            String(name)
+              .toLowerCase()
+              .trim() ===
+              "african foodstuffs";
+
+
+          const imageHTML =
+            category.image_url
+              ? `
+
+                <div class="category-image">
+
+                  <img
+                    src="${escapeHTML(category.image_url)}"
+                    alt="${escapeHTML(name)}"
+                  >
+
+                </div>
+
+              `
+              : `
+
+                <div class="category-image"></div>
+
+              `;
+
+
+          return `
+
+            <article
+              class="category-card ${
+                isFoodstuffs
+                  ? "foodstuff-card"
+                  : ""
+              }"
+            >
+
+              ${imageHTML}
+
+
+              <div class="category-content">
+
+                <h3>
+                  ${escapeHTML(name)}
+                </h3>
+
+
+                <p>
+                  ${escapeHTML(
+                    category.description ||
+                    "Explore products in this category."
+                  )}
+                </p>
+
+
+                <a
+                  class="category-link"
+                  href="${getCategoryLink(category)}"
+                >
+                  Shop Now →
+                </a>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+
+  /* =========================
+     FEATURED PHYSICAL PRODUCTS
+  ========================= */
+
+  async function loadFeaturedProducts() {
+
+    const box =
+      document.getElementById(
+        "featured-products"
+      );
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("products")
+        .select("*")
+        .eq(
+          "in_stock",
+          true
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        )
+        .limit(4);
+
+
+    if (error) {
+
+      console.error(
+        "Product error:",
+        error
+      );
+
+
+      box.innerHTML = `
+
+        <div class="loading-box">
+          Featured products could not be loaded.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const products =
+      data || [];
+
+
+    if (!products.length) {
+
+      box.innerHTML = `
+
+        <div class="loading-box">
+
+          Products will appear here
+          when they are added to the shop.
+
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    box.innerHTML =
+      products.map(
+        product => {
+
+          const imageHTML =
+            product.image_url
+              ? `
+
+                <img
+                  src="${escapeHTML(product.image_url)}"
+                  alt="${escapeHTML(product.name)}"
+                >
+
+              `
+              : `
+
+                <div class="product-placeholder">
+                  Product Image
+                </div>
+
+              `;
+
+
+          return `
+
+            <article class="product-card">
+
+              <div class="product-image">
+                ${imageHTML}
+              </div>
+
+
+              <div class="product-content">
+
+                <div class="product-category">
+
+                  ${escapeHTML(
+                    product.category ||
+                    "Product"
+                  )}
+
+                </div>
+
+
+                <div class="product-name">
+
+                  ${escapeHTML(
+                    product.name ||
+                    "Product"
+                  )}
+
+                </div>
+
+
+                <div class="product-price">
+
+                  ${money(
+                    product.price
+                  )}
+
+                </div>
+
+
+                <a
+                  class="product-button"
+                  href="product.html?id=${encodeURIComponent(product.id)}"
+                >
+                  View Product
+                </a>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+
+  /* =========================
+     CART COUNT
+  ========================= */
+
+  function updateCartCount() {
+
+    let cart = [];
+
+
+    try {
+
+      cart =
+        JSON.parse(
+          localStorage.getItem(
+            "giftedgift_physical_cart"
+          ) || "[]"
+        );
+
+    } catch {
+
+      cart = [];
+
+    }
+
+
+    if (
+      !Array.isArray(cart)
+    ) {
+
+      cart = [];
+
+    }
+
+
+    const count =
+      cart.reduce(
+        (total, item) =>
+          total +
+          Math.max(
+            0,
+            Number(
+              item.quantity
+            ) || 0
+          ),
+        0
+      );
+
+
+    document
+      .getElementById(
+        "cart-count"
+      )
+      .textContent =
+        count;
+
+  }
+
+
+
+  /* =========================
+     START
+  ========================= */
+
+  loadCategories();
+
+  loadFeaturedProducts();
+
+  updateCartCount();
+
+</script>
+
 
 </body>
 </html>
