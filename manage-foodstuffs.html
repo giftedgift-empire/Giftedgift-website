@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Foodstuffs | GiftedGift Empire</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+header {
+  background: #123a8c;
+  color: white;
+  text-align: center;
+  padding: 24px 18px;
+}
+
+header h1 {
+  color: #f2bd16;
+  margin: 0 0 7px;
+}
+
+header p {
+  margin: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px 16px 70px;
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.top-actions a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.back-button {
+  background: #123a8c;
+  color: white;
+}
+
+.website-button {
+  background: #f2bd16;
+  color: #111;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  color: #123a8c;
+  margin-top: 0;
+}
+
+.note {
+  background: #fff8dd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.message {
+  display: none;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.message.success {
+  display: block;
+  background: #e4f6e8;
+  color: #176b31;
+}
+
+.message.error {
+  display: block;
+  background: #fdeaea;
+  color: #9b1c1c;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.primary {
+  background: #123a8c;
+  color: white;
+}
+
+.gold {
+  background: #f2bd16;
+  color: #111;
+}
+
+.full-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  font-size: 17px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 22px;
+  background: white;
+}
+
+.product-image-area {
+  width: 100%;
+  min-height: 220px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image-area img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  display: block;
+}
+
+.no-image {
+  padding: 45px 20px;
+  text-align: center;
+  color: #777;
+  font-weight: bold;
+}
+
+.product-body {
+  padding: 20px;
+}
+
+.product-title {
+  font-size: 22px;
+  color: #123a8c;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.price-preview {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #123a8c;
+}
+
+.status-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.badge {
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.in-stock {
+  background: #e4f6e8;
+  color: #176b31;
+}
+
+.out-stock {
+  background: #fdeaea;
+  color: #9b1c1c;
+}
+
+.visible {
+  background: #e7eefc;
+  color: #123a8c;
+}
+
+.hidden {
+  background: #eee;
+  color: #666;
+}
+
+.image-input {
+  margin-top: 10px;
+}
+
+.image-input input {
+  width: 100%;
+}
+
+.save-button {
+  width: 100%;
+  margin-top: 18px;
+}
+
+#loading {
+  text-align: center;
+  padding: 50px 20px;
+  font-weight: bold;
+}
+
+.empty {
+  padding: 30px;
+  background: #f8f9fb;
+  border-radius: 10px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 28px;
+  }
+
+  .container {
+    padding: 20px 13px 60px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .product-body {
+    padding: 17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">
+  Checking admin login...
+</div>
+
+
+<div id="page" style="display:none;">
+
+<header>
+  <h1>Manage Foodstuffs</h1>
+  <p>African foodstuffs and WhatsApp-order products</p>
+</header>
+
+
+<main class="container">
+
+  <div class="top-actions">
+
+    <a
+      href="dashboard.html"
+      class="back-button"
+    >
+      ← Back to Dashboard
+    </a>
+
+    <a
+      href="index.html"
+      target="_blank"
+      class="website-button"
+    >
+      🌐 View Website
+    </a>
+
+  </div>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <div class="note">
+    Upload each food picture directly from your phone.
+    You can change prices, switch products
+    In Stock / Out of Stock, hide products,
+    and add new foodstuffs whenever you get more.
+  </div>
+
+
+  <section class="card">
+
+    <h2>Add New Foodstuff</h2>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Product Name</label>
+
+        <input
+          id="new-name"
+          type="text"
+          placeholder="Example: Dried Stockfish"
+        >
+      </div>
+
+
+      <div class="field">
+        <label>Price (€)</label>
+
+        <input
+          id="new-price"
+          type="number"
+          step="0.01"
+          min="0"
+          placeholder="0.00"
+        >
+      </div>
+
+
+      <div class="field">
+        <label>Selling Unit</label>
+
+        <input
+          id="new-unit"
+          type="text"
+          value="per pack"
+          placeholder="per pack"
+        >
+      </div>
+
+
+      <div class="field">
+        <label>Stock</label>
+
+        <select id="new-stock">
+
+          <option value="true">
+            In Stock
+          </option>
+
+          <option value="false">
+            Out of Stock
+          </option>
+
+        </select>
+      </div>
+
+
+      <div class="field">
+        <label>Website Visibility</label>
+
+        <select id="new-active">
+
+          <option value="true">
+            Active / Show
+          </option>
+
+          <option value="false">
+            Hidden
+          </option>
+
+        </select>
+      </div>
+
+
+      <div class="field">
+        <label>Display Order</label>
+
+        <input
+          id="new-sort"
+          type="number"
+          step="1"
+          min="0"
+          value="0"
+        >
+      </div>
+
+
+      <div class="field full-width">
+        <label>Description (optional)</label>
+
+        <textarea
+          id="new-description"
+          placeholder="Short description of this foodstuff"
+        ></textarea>
+      </div>
+
+
+      <div class="field full-width">
+        <label>Product Picture</label>
+
+        <input
+          id="new-image"
+          type="file"
+          accept="image/*"
+        >
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="gold full-button"
+      onclick="addFoodstuff()"
+    >
+      Add Foodstuff
+    </button>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Your Foodstuffs</h2>
+
+    <div id="products">
+      Loading foodstuffs...
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+const IMAGE_BUCKET =
+  "foodstuff-images";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+const loadingBox =
+  document.getElementById("loading");
+
+const pageBox =
+  document.getElementById("page");
+
+const productsBox =
+  document.getElementById("products");
+
+const messageBox =
+  document.getElementById("message");
+
+
+let foodstuffs = [];
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function money(value) {
+
+  const number =
+    Number(value || 0);
+
+  return "€" + number.toFixed(2);
+}
+
+
+function showMessage(
+  text,
+  type = "success"
+) {
+
+  messageBox.className =
+    "message " + type;
+
+  messageBox.textContent =
+    text;
+
+  messageBox.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+
+  setTimeout(() => {
+
+    messageBox.className =
+      "message";
+
+    messageBox.textContent =
+      "";
+
+  }, 4500);
+}
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  const session =
+    data?.session;
+
+
+  if (
+    error ||
+    !session ||
+    session.user.id !== ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+    return false;
+  }
+
+
+  loadingBox.style.display =
+    "none";
+
+  pageBox.style.display =
+    "block";
+
+
+  return true;
+}
+
+
+function safeFileName(name) {
+
+  return String(name || "food")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 50);
+}
+
+
+async function uploadImage(
+  file,
+  productName
+) {
+
+  if (!file) {
+    return null;
+  }
+
+
+  if (!file.type.startsWith("image/")) {
+
+    throw new Error(
+      "Please choose an image file."
+    );
+  }
+
+
+  const extension =
+    file.name.includes(".")
+      ? file.name.split(".").pop().toLowerCase()
+      : "jpg";
+
+
+  const filePath =
+    safeFileName(productName) +
+    "-" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .slice(2, 8) +
+    "." +
+    extension;
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(IMAGE_BUCKET)
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl: "3600",
+          upsert: false
+        }
+      );
+
+
+  if (error) {
+
+    console.error(error);
+
+    throw new Error(
+      "The picture could not be uploaded."
+    );
+  }
+
+
+  const {
+    data
+  } =
+    supabaseClient
+      .storage
+      .from(IMAGE_BUCKET)
+      .getPublicUrl(filePath);
+
+
+  return data.publicUrl;
+}
+
+
+function getStoragePath(imageUrl) {
+
+  if (!imageUrl) {
+    return null;
+  }
+
+
+  const marker =
+    "/storage/v1/object/public/" +
+    IMAGE_BUCKET +
+    "/";
+
+
+  const index =
+    imageUrl.indexOf(marker);
+
+
+  if (index === -1) {
+    return null;
+  }
+
+
+  return decodeURIComponent(
+    imageUrl.substring(
+      index + marker.length
+    )
+  );
+}
+
+
+async function removeOldImage(imageUrl) {
+
+  const path =
+    getStoragePath(imageUrl);
+
+
+  if (!path) {
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(IMAGE_BUCKET)
+      .remove([path]);
+
+
+  if (error) {
+    console.warn(
+      "Old image could not be removed:",
+      error
+    );
+  }
+}
+
+
+async function loadFoodstuffs() {
+
+  productsBox.innerHTML =
+    "<div class='empty'>Loading foodstuffs...</div>";
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("foodstuffs")
+      .select("*")
+      .order(
+        "sort_order",
+        {
+          ascending: true
+        }
+      )
+      .order(
+        "id",
+        {
+          ascending: true
+        }
+      );
+
+
+  if (error) {
+
+    console.error(error);
+
+    productsBox.innerHTML =
+      "<div class='empty'>Could not load foodstuffs.</div>";
+
+    return;
+  }
+
+
+  foodstuffs =
+    data || [];
+
+
+  renderFoodstuffs();
+}
+
+
+function renderFoodstuffs() {
+
+  if (!foodstuffs.length) {
+
+    productsBox.innerHTML = `
+      <div class="empty">
+        No foodstuffs have been added yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  productsBox.innerHTML =
+    foodstuffs
+      .map(product => {
+
+        const imageHtml =
+          product.image_url
+            ? `
+              <img
+                src="${escapeHtml(product.image_url)}"
+                alt="${escapeHtml(product.name)}"
+              >
+            `
+            : `
+              <div class="no-image">
+                No picture uploaded yet
+              </div>
+            `;
+
+
+        return `
+
+          <div class="product-card">
+
+            <div class="product-image-area">
+              ${imageHtml}
+            </div>
+
+
+            <div class="product-body">
+
+              <div class="product-title">
+                ${escapeHtml(product.name)}
+              </div>
+
+
+              <div class="status-row">
+
+                <span class="badge ${
+                  product.in_stock
+                    ? "in-stock"
+                    : "out-stock"
+                }">
+
+                  ${
+                    product.in_stock
+                      ? "In Stock"
+                      : "Out of Stock"
+                  }
+
+                </span>
+
+
+                <span class="badge ${
+                  product.active
+                    ? "visible"
+                    : "hidden"
+                }">
+
+                  ${
+                    product.active
+                      ? "Visible"
+                      : "Hidden"
+                  }
+
+                </span>
+
+              </div>
+
+
+              <div class="price-preview">
+
+                ${money(product.price)}
+                ${escapeHtml(product.unit)}
+
+              </div>
+
+
+              <div
+                class="form-grid"
+                style="margin-top:20px;"
+              >
+
+
+                <div class="field">
+
+                  <label>
+                    Product Name
+                  </label>
+
+                  <input
+                    id="name-${product.id}"
+                    type="text"
+                    value="${escapeHtml(product.name)}"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    Price (€)
+                  </label>
+
+                  <input
+                    id="price-${product.id}"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value="${escapeHtml(product.price)}"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    Selling Unit
+                  </label>
+
+                  <input
+                    id="unit-${product.id}"
+                    type="text"
+                    value="${escapeHtml(product.unit)}"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    Stock
+                  </label>
+
+                  <select
+                    id="stock-${product.id}"
+                  >
+
+                    <option
+                      value="true"
+                      ${
+                        product.in_stock
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      In Stock
+                    </option>
+
+                    <option
+                      value="false"
+                      ${
+                        !product.in_stock
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Out of Stock
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    Website Visibility
+                  </label>
+
+                  <select
+                    id="active-${product.id}"
+                  >
+
+                    <option
+                      value="true"
+                      ${
+                        product.active
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Active / Show
+                    </option>
+
+                    <option
+                      value="false"
+                      ${
+                        !product.active
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Hidden
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    Display Order
+                  </label>
+
+                  <input
+                    id="sort-${product.id}"
+                    type="number"
+                    step="1"
+                    min="0"
+                    value="${escapeHtml(product.sort_order)}"
+                  >
+
+                </div>
+
+
+                <div class="field full-width">
+
+                  <label>
+                    Description
+                  </label>
+
+                  <textarea
+                    id="description-${product.id}"
+                    placeholder="Optional description"
+                  >${escapeHtml(product.description || "")}</textarea>
+
+                </div>
+
+
+                <div class="field full-width image-input">
+
+                  <label>
+                    Replace / Upload Product Picture
+                  </label>
+
+                  <input
+                    id="image-${product.id}"
+                    type="file"
+                    accept="image/*"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <button
+                id="save-${product.id}"
+                type="button"
+                class="primary save-button"
+                onclick="saveFoodstuff(${Number(product.id)})"
+              >
+                Save Changes
+              </button>
+
+            </div>
+
+          </div>
+        `;
+
+      })
+      .join("");
+}
+
+
+async function saveFoodstuff(id) {
+
+  const product =
+    foodstuffs.find(
+      item =>
+        Number(item.id) ===
+        Number(id)
+    );
+
+
+  if (!product) {
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById(
+        "name-" + id
+      )
+      .value
+      .trim();
+
+
+  const price =
+    Number(
+      document
+        .getElementById(
+          "price-" + id
+        )
+        .value
+    );
+
+
+  const unit =
+    document
+      .getElementById(
+        "unit-" + id
+      )
+      .value
+      .trim();
+
+
+  const inStock =
+    document
+      .getElementById(
+        "stock-" + id
+      )
+      .value === "true";
+
+
+  const active =
+    document
+      .getElementById(
+        "active-" + id
+      )
+      .value === "true";
+
+
+  const sortOrder =
+    Number(
+      document
+        .getElementById(
+          "sort-" + id
+        )
+        .value
+    );
+
+
+  const description =
+    document
+      .getElementById(
+        "description-" + id
+      )
+      .value
+      .trim();
+
+
+  const imageInput =
+    document
+      .getElementById(
+        "image-" + id
+      );
+
+
+  const button =
+    document
+      .getElementById(
+        "save-" + id
+      );
+
+
+  if (!name) {
+
+    showMessage(
+      "Product name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (
+    !Number.isFinite(price) ||
+    price < 0
+  ) {
+
+    showMessage(
+      "Please enter a valid price.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!unit) {
+
+    showMessage(
+      "Please enter the selling unit.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Saving...";
+
+
+  let imageUrl =
+    product.image_url;
+
+
+  let newImageUrl =
+    null;
+
+
+  try {
+
+    if (
+      imageInput.files &&
+      imageInput.files[0]
+    ) {
+
+      newImageUrl =
+        await uploadImage(
+          imageInput.files[0],
+          name
+        );
+
+
+      imageUrl =
+        newImageUrl;
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("foodstuffs")
+        .update({
+
+          name:
+            name,
+
+          price:
+            price,
+
+          unit:
+            unit,
+
+          description:
+            description || null,
+
+          image_url:
+            imageUrl,
+
+          in_stock:
+            inStock,
+
+          active:
+            active,
+
+          sort_order:
+            Number.isFinite(sortOrder)
+              ? sortOrder
+              : 0,
+
+          updated_at:
+            new Date().toISOString()
+
+        })
+        .eq(
+          "id",
+          id
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    if (
+      newImageUrl &&
+      product.image_url &&
+      product.image_url !== newImageUrl
+    ) {
+
+      await removeOldImage(
+        product.image_url
+      );
+    }
+
+
+    showMessage(
+      name +
+      " saved successfully."
+    );
+
+
+    await loadFoodstuffs();
+
+  } catch (error) {
+
+    console.error(error);
+
+    showMessage(
+      error.message ||
+      "Could not save this foodstuff.",
+      "error"
+    );
+
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Save Changes";
+  }
+}
+
+
+async function addFoodstuff() {
+
+  const name =
+    document
+      .getElementById(
+        "new-name"
+      )
+      .value
+      .trim();
+
+
+  const price =
+    Number(
+      document
+        .getElementById(
+          "new-price"
+        )
+        .value
+    );
+
+
+  const unit =
+    document
+      .getElementById(
+        "new-unit"
+      )
+      .value
+      .trim();
+
+
+  const inStock =
+    document
+      .getElementById(
+        "new-stock"
+      )
+      .value === "true";
+
+
+  const active =
+    document
+      .getElementById(
+        "new-active"
+      )
+      .value === "true";
+
+
+  const sortOrder =
+    Number(
+      document
+        .getElementById(
+          "new-sort"
+        )
+        .value
+    );
+
+
+  const description =
+    document
+      .getElementById(
+        "new-description"
+      )
+      .value
+      .trim();
+
+
+  const imageInput =
+    document
+      .getElementById(
+        "new-image"
+      );
+
+
+  if (!name) {
+
+    showMessage(
+      "Please enter the product name.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (
+    !Number.isFinite(price) ||
+    price < 0
+  ) {
+
+    showMessage(
+      "Please enter a valid price.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!unit) {
+
+    showMessage(
+      "Please enter the selling unit.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  let imageUrl =
+    null;
+
+
+  try {
+
+    if (
+      imageInput.files &&
+      imageInput.files[0]
+    ) {
+
+      imageUrl =
+        await uploadImage(
+          imageInput.files[0],
+          name
+        );
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("foodstuffs")
+        .insert({
+
+          name:
+            name,
+
+          description:
+            description || null,
+
+          price:
+            price,
+
+          unit:
+            unit,
+
+          image_url:
+            imageUrl,
+
+          in_stock:
+            inStock,
+
+          active:
+            active,
+
+          sort_order:
+            Number.isFinite(sortOrder)
+              ? sortOrder
+              : 0,
+
+          updated_at:
+            new Date().toISOString()
+
+        });
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    document
+      .getElementById(
+        "new-name"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "new-price"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "new-unit"
+      )
+      .value =
+        "per pack";
+
+
+    document
+      .getElementById(
+        "new-stock"
+      )
+      .value =
+        "true";
+
+
+    document
+      .getElementById(
+        "new-active"
+      )
+      .value =
+        "true";
+
+
+    document
+      .getElementById(
+        "new-sort"
+      )
+      .value =
+        "0";
+
+
+    document
+      .getElementById(
+        "new-description"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "new-image"
+      )
+      .value = "";
+
+
+    showMessage(
+      "New foodstuff added successfully."
+    );
+
+
+    await loadFoodstuffs();
+
+  } catch (error) {
+
+    console.error(error);
+
+    showMessage(
+      error.message ||
+      "Could not add this foodstuff.",
+      "error"
+    );
+  }
+}
+
+
+async function start() {
+
+  const allowed =
+    await protectPage();
+
+
+  if (!allowed) {
+    return;
+  }
+
+
+  await loadFoodstuffs();
+}
+
+
+start();
+
+</script>
+
+</body>
+  </html>
