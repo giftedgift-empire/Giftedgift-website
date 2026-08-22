@@ -2904,6 +2904,518 @@
   startHomepage();
 
 </script>
+  <!-- =========================
+     GIFTANA WELCOME POPUP
+========================= -->
+
+<style>
+
+  .giftana-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(7, 30, 82, 0.48);
+    backdrop-filter: blur(3px);
+  }
+
+  .giftana-overlay.show {
+    display: flex;
+  }
+
+  .giftana-card {
+    width: 100%;
+    max-width: 450px;
+
+    position: relative;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 32px 26px 27px;
+
+    border-top: 6px solid #f2bd16;
+
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.24);
+
+    animation: giftanaAppear 0.35s ease;
+  }
+
+  @keyframes giftanaAppear {
+
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+  }
+
+  .giftana-close {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f3f5f8;
+    color: #123a8c;
+
+    font-size: 23px;
+    font-weight: bold;
+
+    cursor: pointer;
+  }
+
+  .giftana-avatar {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #123a8c;
+    color: white;
+
+    border: 5px solid #f2bd16;
+
+    font-size: 34px;
+  }
+
+  .giftana-card h2 {
+    margin: 0 0 15px;
+
+    text-align: center;
+
+    color: #123a8c;
+
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .giftana-card h2 span {
+    color: #d8a90e;
+  }
+
+  .giftana-message {
+    color: #4f5965;
+
+    text-align: center;
+
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .giftana-actions {
+    margin-top: 23px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+  }
+
+  .giftana-button {
+    min-height: 49px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 12px;
+
+    border: none;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    text-align: center;
+  }
+
+  .giftana-shop {
+    background: #f2bd16;
+    color: #111111;
+  }
+
+  .giftana-categories {
+    background: #123a8c;
+    color: white;
+  }
+
+  .giftana-email,
+  .giftana-voice {
+    background: #eef3ff;
+    color: #123a8c;
+
+    border: 1px solid #cad8f5;
+  }
+
+  .giftana-note {
+    margin-top: 14px;
+
+    text-align: center;
+
+    color: #818894;
+
+    font-size: 12px;
+  }
+
+
+  @media (max-width: 480px) {
+
+    .giftana-overlay {
+      align-items: flex-end;
+      padding: 12px;
+    }
+
+    .giftana-card {
+      max-width: none;
+
+      padding: 30px 19px 22px;
+
+      border-radius:
+        22px 22px 16px 16px;
+    }
+
+    .giftana-card h2 {
+      font-size: 25px;
+    }
+
+    .giftana-message {
+      font-size: 15px;
+    }
+
+    .giftana-actions {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+</style>
+
+
+<div
+  id="giftana-overlay"
+  class="giftana-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="giftana-title"
+>
+
+  <div class="giftana-card">
+
+    <button
+      id="giftana-close"
+      class="giftana-close"
+      type="button"
+      aria-label="Close Giftana"
+    >
+      ×
+    </button>
+
+
+    <div class="giftana-avatar">
+      👋
+    </div>
+
+
+    <h2 id="giftana-title">
+
+      Welcome from
+
+      <span>
+        Giftana
+      </span>
+
+    </h2>
+
+
+    <p class="giftana-message">
+
+      Welcome to GiftedGift Empire.
+      My name is Giftana.
+      Feel free to explore and select whatever you like.
+      If you need my assistance, just contact me through
+      our email and I’ll be happy to help.
+
+    </p>
+
+
+    <div class="giftana-actions">
+
+      <a
+        href="shop.html"
+        class="giftana-button giftana-shop"
+      >
+        🛍️ Start Shopping
+      </a>
+
+
+      <a
+        href="categories.html"
+        class="giftana-button giftana-categories"
+      >
+        📂 Browse Categories
+      </a>
+
+
+      <a
+        href="mailto:gift@giftedgiftempire.com"
+        class="giftana-button giftana-email"
+      >
+        📧 Email Us
+      </a>
+
+
+      <button
+        id="giftana-voice"
+        class="giftana-button giftana-voice"
+        type="button"
+      >
+        🔊 Hear Giftana
+      </button>
+
+    </div>
+
+
+    <p class="giftana-note">
+      You can close this welcome message anytime.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  (function () {
+
+    const overlay =
+      document.getElementById(
+        "giftana-overlay"
+      );
+
+    const closeButton =
+      document.getElementById(
+        "giftana-close"
+      );
+
+    const voiceButton =
+      document.getElementById(
+        "giftana-voice"
+      );
+
+
+    const welcomeMessage =
+      "Welcome to GiftedGift Empire. My name is Giftana. Feel free to explore and select whatever you like. If you need my assistance, just contact me through our email and I'll be happy to help.";
+
+
+    /*
+      Show Giftana once per browser session
+    */
+
+    const alreadyShown =
+      sessionStorage.getItem(
+        "giftanaWelcomeShown"
+      );
+
+
+    if (!alreadyShown) {
+
+      setTimeout(
+        function () {
+
+          overlay.classList.add(
+            "show"
+          );
+
+
+          sessionStorage.setItem(
+            "giftanaWelcomeShown",
+            "yes"
+          );
+
+        },
+        1200
+      );
+
+    }
+
+
+    function closeGiftana() {
+
+      overlay.classList.remove(
+        "show"
+      );
+
+
+      if (
+        "speechSynthesis" in window
+      ) {
+
+        window
+          .speechSynthesis
+          .cancel();
+
+      }
+
+
+      voiceButton.textContent =
+        "🔊 Hear Giftana";
+
+    }
+
+
+    closeButton.addEventListener(
+      "click",
+      closeGiftana
+    );
+
+
+    overlay.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          event.target === overlay
+        ) {
+
+          closeGiftana();
+
+        }
+
+      }
+    );
+
+
+    voiceButton.addEventListener(
+      "click",
+      function () {
+
+        if (
+          !(
+            "speechSynthesis" in window
+          )
+        ) {
+
+          voiceButton.textContent =
+            "Voice unavailable on this device";
+
+          return;
+
+        }
+
+
+        window
+          .speechSynthesis
+          .cancel();
+
+
+        const speech =
+          new SpeechSynthesisUtterance(
+            welcomeMessage
+          );
+
+
+        speech.lang =
+          "en-GB";
+
+        speech.rate =
+          0.95;
+
+        speech.pitch =
+          1;
+
+        speech.volume =
+          1;
+
+
+        const voices =
+          window
+            .speechSynthesis
+            .getVoices();
+
+
+        const englishVoice =
+          voices.find(
+            voice =>
+              String(
+                voice.lang || ""
+              )
+                .toLowerCase()
+                .startsWith("en")
+          );
+
+
+        if (englishVoice) {
+
+          speech.voice =
+            englishVoice;
+
+        }
+
+
+        voiceButton.textContent =
+          "🔊 Giftana is speaking...";
+
+
+        speech.onend =
+          function () {
+
+            voiceButton.textContent =
+              "🔊 Hear Giftana";
+
+          };
+
+
+        speech.onerror =
+          function () {
+
+            voiceButton.textContent =
+              "🔊 Hear Giftana";
+
+          };
+
+
+        window
+          .speechSynthesis
+          .speak(
+            speech
+          );
+
+      }
+    );
+
+  })();
+
+</script>
 
 
 </body>
