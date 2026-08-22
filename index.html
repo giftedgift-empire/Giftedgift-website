@@ -18,11 +18,9 @@
     content="Discover useful products, African foodstuffs, digital products, smart recommendations, deals and carefully selected finds from GiftedGift Empire."
   >
 
-
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
   </script>
-
 
   <style>
 
@@ -39,18 +37,15 @@
       --border: #e6e8ec;
     }
 
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-
     html {
       scroll-behavior: smooth;
     }
-
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -59,16 +54,13 @@
       line-height: 1.5;
     }
 
-
     img {
       max-width: 100%;
     }
 
-
     a {
       color: inherit;
     }
-
 
 
     /* =========================
@@ -84,7 +76,6 @@
       box-shadow: 0 3px 14px rgba(0, 0, 0, 0.13);
     }
 
-
     .header-main {
       max-width: 1250px;
       margin: auto;
@@ -95,7 +86,6 @@
       align-items: center;
       gap: 16px;
     }
-
 
     .menu-button {
       width: 44px;
@@ -113,7 +103,6 @@
       justify-content: center;
     }
 
-
     .brand {
       display: flex;
       align-items: center;
@@ -123,7 +112,6 @@
 
       min-width: 0;
     }
-
 
     .brand img {
       width: 62px;
@@ -136,23 +124,19 @@
       padding: 3px;
     }
 
-
     .brand-name {
       font-size: 28px;
       font-weight: 800;
       white-space: nowrap;
     }
 
-
     .brand-name .gifted {
       color: white;
     }
 
-
     .brand-name .empire {
       color: var(--gold);
     }
-
 
     .header-actions {
       margin-left: auto;
@@ -161,7 +145,6 @@
       align-items: center;
       gap: 10px;
     }
-
 
     .header-icon {
       width: 44px;
@@ -180,11 +163,9 @@
       position: relative;
     }
 
-
     .header-icon:hover {
       background: rgba(255, 255, 255, 0.12);
     }
-
 
     .cart-count {
       position: absolute;
@@ -208,7 +189,6 @@
     }
 
 
-
     /* =========================
        NAVIGATION
     ========================= */
@@ -216,7 +196,6 @@
     .nav-wrapper {
       border-top: 1px solid rgba(255, 255, 255, 0.13);
     }
-
 
     .main-nav {
       max-width: 1250px;
@@ -228,7 +207,6 @@
       justify-content: center;
       gap: 5px;
     }
-
 
     .main-nav a {
       display: block;
@@ -244,17 +222,14 @@
       border-bottom: 3px solid transparent;
     }
 
-
     .main-nav a:hover {
       color: var(--gold);
     }
-
 
     .main-nav a.active {
       color: var(--gold);
       border-bottom-color: var(--gold);
     }
-
 
 
     /* =========================
@@ -273,7 +248,6 @@
       overflow: hidden;
     }
 
-
     .hero-inner {
       max-width: 1250px;
       margin: auto;
@@ -286,11 +260,9 @@
       gap: 45px;
     }
 
-
     .hero-copy {
       padding: 25px 5px;
     }
-
 
     .eyebrow {
       display: inline-block;
@@ -307,7 +279,6 @@
       margin-bottom: 18px;
     }
 
-
     .hero h1 {
       font-size: clamp(42px, 6vw, 68px);
       line-height: 1.05;
@@ -317,11 +288,9 @@
       color: #131820;
     }
 
-
     .hero h1 span {
       color: var(--gold-dark);
     }
-
 
     .hero p {
       max-width: 600px;
@@ -332,7 +301,6 @@
       color: #555e68;
     }
 
-
     .hero-buttons {
       display: flex;
       gap: 12px;
@@ -340,7 +308,6 @@
 
       margin-top: 28px;
     }
-
 
     .primary-button,
     .secondary-button {
@@ -360,31 +327,28 @@
       text-decoration: none;
     }
 
-
     .primary-button {
       background: var(--gold);
       color: #111;
     }
 
-
     .primary-button:hover {
       background: var(--gold-dark);
     }
-
 
     .secondary-button {
       background: var(--blue);
       color: white;
     }
 
-
     .secondary-button:hover {
       background: var(--dark-blue);
     }
 
 
-
-    /* HERO IMAGES */
+    /* =========================
+       HERO IMAGES
+    ========================= */
 
     .hero-showcase {
       min-height: 500px;
@@ -394,7 +358,6 @@
       grid-template-rows: 1fr 1fr;
       gap: 12px;
     }
-
 
     .hero-photo {
       position: relative;
@@ -410,11 +373,9 @@
       text-decoration: none;
     }
 
-
     .hero-photo:first-child {
       grid-row: 1 / 3;
     }
-
 
     .hero-photo img {
       width: 100%;
@@ -427,11 +388,9 @@
       transition: transform 0.3s ease;
     }
 
-
     .hero-photo:hover img {
       transform: scale(1.03);
     }
-
 
     .hero-photo-label {
       position: absolute;
@@ -450,7 +409,6 @@
     }
 
 
-
     /* =========================
        TRUST STRIP
     ========================= */
@@ -464,7 +422,6 @@
 
       padding: 0 22px;
     }
-
 
     .trust-grid {
       background: white;
@@ -480,7 +437,6 @@
       border: 1px solid var(--border);
     }
 
-
     .trust-item {
       text-align: center;
 
@@ -489,17 +445,14 @@
       border-right: 1px solid var(--border);
     }
 
-
     .trust-item:last-child {
       border-right: none;
     }
-
 
     .trust-icon {
       font-size: 30px;
       margin-bottom: 8px;
     }
-
 
     .trust-title {
       color: var(--blue);
@@ -507,13 +460,11 @@
       font-size: 14px;
     }
 
-
     .trust-text {
       color: var(--muted);
       font-size: 12px;
       margin-top: 3px;
     }
-
 
 
     /* =========================
@@ -526,12 +477,10 @@
       padding: 72px 22px;
     }
 
-
     .section-heading {
       text-align: center;
       margin-bottom: 35px;
     }
-
 
     .section-kicker {
       color: var(--gold-dark);
@@ -542,7 +491,6 @@
       margin-bottom: 6px;
     }
 
-
     .section-heading h2 {
       color: #15191f;
 
@@ -550,7 +498,6 @@
 
       line-height: 1.15;
     }
-
 
     .section-heading p {
       max-width: 680px;
@@ -563,7 +510,6 @@
     }
 
 
-
     /* =========================
        CATEGORIES
     ========================= */
@@ -571,7 +517,6 @@
     .categories-section {
       background: #fbfbfc;
     }
-
 
     .category-grid {
       display: grid;
@@ -581,7 +526,6 @@
 
       gap: 22px;
     }
-
 
     .category-card {
       background: white;
@@ -599,14 +543,12 @@
         box-shadow 0.2s ease;
     }
 
-
     .category-card:hover {
       transform: translateY(-3px);
 
       box-shadow:
         0 12px 30px rgba(0, 0, 0, 0.1);
     }
-
 
     .category-image {
       width: 100%;
@@ -617,7 +559,6 @@
       overflow: hidden;
     }
 
-
     .category-image img {
       width: 100%;
       height: 100%;
@@ -627,11 +568,9 @@
       display: block;
     }
 
-
     .category-content {
       padding: 22px;
     }
-
 
     .category-content h3 {
       color: var(--blue);
@@ -642,7 +581,6 @@
       margin-bottom: 9px;
     }
 
-
     .category-content p {
       color: var(--muted);
 
@@ -650,7 +588,6 @@
 
       min-height: 52px;
     }
-
 
     .category-link {
       display: inline-block;
@@ -670,17 +607,14 @@
       font-size: 14px;
     }
 
-
     .category-link:hover {
       background: var(--gold-dark);
     }
-
 
     .foodstuff-card .category-link {
       background: var(--green);
       color: white;
     }
-
 
 
     /* =========================
@@ -697,12 +631,10 @@
       margin-bottom: 28px;
     }
 
-
     .featured-top h2 {
       font-size: 36px;
       line-height: 1.1;
     }
-
 
     .view-all {
       display: inline-block;
@@ -721,7 +653,6 @@
       white-space: nowrap;
     }
 
-
     .product-grid {
       display: grid;
 
@@ -730,7 +661,6 @@
 
       gap: 20px;
     }
-
 
     .product-card {
       background: white;
@@ -745,7 +675,6 @@
         0 4px 16px rgba(0, 0, 0, 0.05);
     }
 
-
     .product-image {
       height: 235px;
 
@@ -758,7 +687,6 @@
       overflow: hidden;
     }
 
-
     .product-image img {
       width: 100%;
       height: 100%;
@@ -766,17 +694,14 @@
       object-fit: cover;
     }
 
-
     .product-placeholder {
       color: #7b8088;
       font-weight: 700;
     }
 
-
     .product-content {
       padding: 18px;
     }
-
 
     .product-category {
       color: var(--gold-dark);
@@ -789,7 +714,6 @@
       margin-bottom: 6px;
     }
 
-
     .product-name {
       color: #1e2329;
 
@@ -801,7 +725,6 @@
       margin-bottom: 9px;
     }
 
-
     .product-price {
       color: var(--blue);
 
@@ -810,7 +733,6 @@
 
       margin-bottom: 13px;
     }
-
 
     .product-button {
       display: block;
@@ -830,7 +752,6 @@
     }
 
 
-
     /* =========================
        DISCOVER / LINKS
     ========================= */
@@ -840,23 +761,19 @@
       color: white;
     }
 
-
     .discover-section .section-heading h2 {
       color: white;
     }
-
 
     .discover-section .section-heading p {
       color: #d8e1f3;
     }
 
-
     .discover-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 18px;
     }
-
 
     .discover-card {
       padding: 28px 23px;
@@ -870,12 +787,10 @@
         1px solid rgba(255, 255, 255, 0.12);
     }
 
-
     .discover-icon {
       font-size: 33px;
       margin-bottom: 12px;
     }
-
 
     .discover-card h3 {
       color: var(--gold);
@@ -883,12 +798,10 @@
       margin-bottom: 9px;
     }
 
-
     .discover-card p {
       color: #dce4f2;
       line-height: 1.65;
     }
-
 
     .discover-card a {
       display: inline-block;
@@ -907,7 +820,6 @@
     }
 
 
-
     /* =========================
        ABOUT
     ========================= */
@@ -916,14 +828,12 @@
       background: #f7f8fa;
     }
 
-
     .about-box {
       max-width: 900px;
       margin: auto;
 
       text-align: center;
     }
-
 
     .about-box h2 {
       color: var(--blue);
@@ -933,7 +843,6 @@
       margin-bottom: 15px;
     }
 
-
     .about-box p {
       color: #5e6670;
 
@@ -941,7 +850,6 @@
 
       line-height: 1.8;
     }
-
 
     .about-buttons {
       margin-top: 24px;
@@ -954,7 +862,6 @@
     }
 
 
-
     /* =========================
        FOOTER
     ========================= */
@@ -963,7 +870,6 @@
       background: #071e52;
       color: white;
     }
-
 
     .footer-inner {
       max-width: 1250px;
@@ -978,7 +884,6 @@
       gap: 40px;
     }
 
-
     .footer-brand {
       display: flex;
       align-items: center;
@@ -986,7 +891,6 @@
 
       margin-bottom: 16px;
     }
-
 
     .footer-brand img {
       width: 48px;
@@ -998,11 +902,9 @@
       border-radius: 50%;
     }
 
-
     .footer-brand strong {
       font-size: 22px;
     }
-
 
     .footer-copy {
       color: #ced8ed;
@@ -1010,13 +912,11 @@
       line-height: 1.7;
     }
 
-
     .footer-column h3 {
       color: var(--gold);
 
       margin-bottom: 13px;
     }
-
 
     .footer-column a {
       display: block;
@@ -1028,11 +928,9 @@
       margin: 8px 0;
     }
 
-
     .footer-column a:hover {
       color: var(--gold);
     }
-
 
     .footer-bottom {
       max-width: 1250px;
@@ -1049,7 +947,6 @@
 
       text-align: center;
     }
-
 
 
     /* =========================
@@ -1073,6 +970,18 @@
     }
 
 
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 1050px) {
+
+      .discover-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
 
     /* =========================
        MOBILE
@@ -1084,56 +993,42 @@
         font-size: 23px;
       }
 
-
       .hero-inner {
         grid-template-columns: 1fr;
       }
 
-
       .hero-copy {
         text-align: center;
       }
-
 
       .hero p {
         margin-left: auto;
         margin-right: auto;
       }
 
-
       .hero-buttons {
         justify-content: center;
       }
 
-
       .hero-showcase {
         min-height: 420px;
       }
-
 
       .category-grid {
         grid-template-columns:
           repeat(2, minmax(0, 1fr));
       }
 
-
       .product-grid {
         grid-template-columns:
           repeat(2, minmax(0, 1fr));
       }
-
-
-      .discover-grid {
-        grid-template-columns: 1fr;
-      }
-
 
       .footer-inner {
         grid-template-columns: 1fr 1fr;
       }
 
     }
-
 
 
     @media (max-width: 720px) {
@@ -1144,28 +1039,23 @@
         gap: 7px;
       }
 
-
       .brand img {
         width: 48px;
         height: 48px;
       }
 
-
       .brand-name {
         font-size: 20px;
       }
-
 
       .header-actions {
         gap: 1px;
       }
 
-
       .header-icon {
         width: 39px;
         height: 39px;
       }
-
 
       .main-nav {
         display: none;
@@ -1176,11 +1066,9 @@
         flex-direction: column;
       }
 
-
       .main-nav.open {
         display: flex;
       }
-
 
       .main-nav a {
         padding: 11px 8px;
@@ -1190,7 +1078,6 @@
         border-radius: 7px;
       }
 
-
       .main-nav a.active {
         background:
           rgba(255, 255, 255, 0.08);
@@ -1198,84 +1085,72 @@
         border-bottom: none;
       }
 
-
       .hero-inner {
         padding: 38px 16px 46px;
         gap: 28px;
       }
 
-
       .hero h1 {
         font-size: 43px;
       }
 
-
       .hero p {
         font-size: 17px;
       }
-
 
       .hero-showcase {
         min-height: 330px;
         gap: 8px;
       }
 
-
       .hero-photo {
         border-radius: 15px;
       }
-
 
       .trust-section {
         padding: 0 12px;
       }
 
-
       .trust-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
 
       .trust-item {
         border-bottom: 1px solid var(--border);
       }
 
-
       .trust-item:nth-child(2) {
         border-right: none;
       }
-
 
       .section {
         padding: 55px 15px;
       }
 
-
       .category-grid {
         grid-template-columns: 1fr;
       }
 
-
       .category-image {
         height: 280px;
       }
-
 
       .featured-top {
         align-items: flex-start;
         flex-direction: column;
       }
 
-
       .product-grid {
         grid-template-columns: 1fr;
       }
-
 
       .product-image {
         height: 300px;
       }
 
+      .discover-grid {
+        grid-template-columns: 1fr;
+      }
 
       .footer-inner {
         grid-template-columns: 1fr;
@@ -1284,33 +1159,27 @@
     }
 
 
-
     @media (max-width: 430px) {
 
       .brand-name {
         font-size: 18px;
       }
 
-
       .menu-button {
         width: 34px;
       }
-
 
       .header-icon {
         width: 35px;
       }
 
-
       .hero h1 {
         font-size: 38px;
       }
 
-
       .hero-showcase {
         min-height: 290px;
       }
-
 
       .hero-photo-label {
         font-size: 10px;
@@ -1321,7 +1190,6 @@
   </style>
 
 </head>
-
 
 
 <body>
@@ -1340,6 +1208,7 @@
       class="menu-button"
       type="button"
       aria-label="Open menu"
+      aria-expanded="false"
     >
       ☰
     </button>
@@ -1354,7 +1223,6 @@
         src="my-logo.png"
         alt="GiftedGift Empire Logo"
       >
-
 
       <div class="brand-name">
 
@@ -1428,6 +1296,10 @@
         Categories
       </a>
 
+      <a href="daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
       <a href="blog.html">
         Blog
       </a>
@@ -1455,7 +1327,6 @@
 </header>
 
 
-
 <!-- =========================
      HERO
 ========================= -->
@@ -1470,7 +1341,6 @@
         GIFTEDGIFT EMPIRE
       </div>
 
-
       <h1>
 
         Smart Finds for
@@ -1481,7 +1351,6 @@
 
       </h1>
 
-
       <p>
 
         Discover useful products, digital resources,
@@ -1491,7 +1360,6 @@
 
       </p>
 
-
       <div class="hero-buttons">
 
         <a
@@ -1500,7 +1368,6 @@
         >
           Explore Our Picks →
         </a>
-
 
         <a
           href="shop.html"
@@ -1528,7 +1395,6 @@
   </div>
 
 </section>
-
 
 
 <!-- =========================
@@ -1611,7 +1477,6 @@
 </section>
 
 
-
 <!-- =========================
      CATEGORIES
 ========================= -->
@@ -1652,7 +1517,6 @@
   </div>
 
 </section>
-
 
 
 <!-- =========================
@@ -1700,7 +1564,6 @@
 </section>
 
 
-
 <!-- =========================
      DISCOVER MORE
 ========================= -->
@@ -1720,14 +1583,41 @@
       </h2>
 
       <p>
-        Find special offers, helpful articles and
-        shopping information across the website.
+        Find special offers, inspiration, helpful articles
+        and shopping information across the website.
       </p>
 
     </div>
 
 
     <div class="discover-grid">
+
+
+      <!-- DAILY INSPIRATION -->
+
+      <div class="discover-card">
+
+        <div class="discover-icon">
+          🙏
+        </div>
+
+        <h3>
+          Daily Inspiration
+        </h3>
+
+        <p>
+          Find encouraging Bible verses, prayers and
+          uplifting words to inspire your day.
+        </p>
+
+        <a href="daily-inspiration.html">
+          Get Inspired
+        </a>
+
+      </div>
+
+
+      <!-- DEALS -->
 
       <div class="discover-card">
 
@@ -1751,6 +1641,8 @@
       </div>
 
 
+      <!-- BLOG -->
+
       <div class="discover-card">
 
         <div class="discover-icon">
@@ -1772,6 +1664,8 @@
 
       </div>
 
+
+      <!-- AFRICAN FOODSTUFFS -->
 
       <div class="discover-card">
 
@@ -1799,7 +1693,6 @@
   </div>
 
 </section>
-
 
 
 <!-- =========================
@@ -1835,7 +1728,6 @@
           About Us
         </a>
 
-
         <a
           href="contact.html"
           class="primary-button"
@@ -1850,7 +1742,6 @@
   </div>
 
 </section>
-
 
 
 <!-- =========================
@@ -1919,6 +1810,10 @@
         Information
       </h3>
 
+      <a href="daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
       <a href="blog.html">
         Blog
       </a>
@@ -1961,7 +1856,6 @@
 </footer>
 
 
-
 <script>
 
   /* =========================
@@ -1981,7 +1875,6 @@
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
-
 
 
   /* =========================
@@ -2008,9 +1901,20 @@
         "open"
       );
 
+
+      const isOpen =
+        mainNav.classList.contains(
+          "open"
+        );
+
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
     }
   );
-
 
 
   /* =========================
@@ -2036,7 +1940,6 @@
   }
 
 
-
   /* =========================
      MONEY
   ========================= */
@@ -2051,7 +1954,6 @@
       number.toFixed(2);
 
   }
-
 
 
   /* =========================
@@ -2096,7 +1998,6 @@
     );
 
   }
-
 
 
   /* =========================
@@ -2168,7 +2069,6 @@
   }
 
 
-
   /* =========================
      HERO IMAGES
   ========================= */
@@ -2204,11 +2104,6 @@
 
     }
 
-
-    /*
-      Prefer these categories
-      for the hero.
-    */
 
     const preferredNames = [
       "Home & Living",
@@ -2297,7 +2192,6 @@
       ).join("");
 
   }
-
 
 
   /* =========================
@@ -2418,7 +2312,6 @@
       ).join("");
 
   }
-
 
 
   /* =========================
@@ -2576,7 +2469,6 @@
   }
 
 
-
   /* =========================
      CART COUNT
   ========================= */
@@ -2633,7 +2525,6 @@
         count;
 
   }
-
 
 
   /* =========================
