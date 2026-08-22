@@ -240,6 +240,7 @@
     }
 
     @media (max-width: 650px) {
+
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -550,7 +551,9 @@
 </footer>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
 
 
 <script>
@@ -578,11 +581,16 @@
     "giftedgift_shipping_selection";
 
 
-  let cartSummary = null;
+  let cartSummary =
+    null;
 
-  let activeZones = [];
 
-  let selectedShippingRate = null;
+  let activeZones =
+    [];
+
+
+  let selectedShippingRate =
+    null;
 
 
   function getCart() {
@@ -608,13 +616,42 @@
   }
 
 
+  function normalizeDealId(
+    value
+  ) {
+
+    const number =
+      Number(
+        value
+      );
+
+
+    return (
+      Number.isInteger(number) &&
+      number > 0
+    )
+      ? number
+      : null;
+  }
+
+
   function formatPrice(
     amount
   ) {
 
+    const number =
+      Number(
+        amount
+      );
+
+
     return (
       "€" +
-      Number(amount).toFixed(2)
+      (
+        Number.isFinite(number)
+          ? number
+          : 0
+      ).toFixed(2)
     );
   }
 
@@ -624,7 +661,19 @@
   ) {
 
     const weight =
-      Number(kg);
+      Number(
+        kg
+      );
+
+
+    if (
+      !Number.isFinite(
+        weight
+      )
+    ) {
+
+      return "Weight unavailable";
+    }
 
 
     if (
@@ -686,6 +735,144 @@
   }
 
 
+  function isDealLive(
+    deal,
+    product
+  ) {
+
+    if (
+      !deal ||
+      !product ||
+      deal.active !== true
+    ) {
+
+      return false;
+    }
+
+
+    if (
+      deal.item_type !==
+      "product"
+    ) {
+
+      return false;
+    }
+
+
+    if (
+      Number(
+        deal.item_id
+      ) !==
+      Number(
+        product.id
+      )
+    ) {
+
+      return false;
+    }
+
+
+    const now =
+      new Date();
+
+
+    if (
+      deal.starts_at
+    ) {
+
+      const start =
+        new Date(
+          deal.starts_at
+        );
+
+
+      if (
+        Number.isNaN(
+          start.getTime()
+        ) ||
+        now < start
+      ) {
+
+        return false;
+      }
+    }
+
+
+    if (
+      deal.ends_at
+    ) {
+
+      const end =
+        new Date(
+          deal.ends_at
+        );
+
+
+      if (
+        Number.isNaN(
+          end.getTime()
+        ) ||
+        now > end
+      ) {
+
+        return false;
+      }
+    }
+
+
+    return true;
+  }
+
+
+  function getVerifiedDealPrice(
+    deal,
+    product
+  ) {
+
+    if (
+      !isDealLive(
+        deal,
+        product
+      )
+    ) {
+
+      return null;
+    }
+
+
+    const normalPrice =
+      Number(
+        product.price
+      );
+
+
+    const dealPrice =
+      Number(
+        deal.deal_price ??
+        deal.price
+      );
+
+
+    if (
+      !Number.isFinite(
+        normalPrice
+      ) ||
+      normalPrice <= 0 ||
+      !Number.isFinite(
+        dealPrice
+      ) ||
+      dealPrice <= 0 ||
+      dealPrice >= normalPrice
+    ) {
+
+      return null;
+    }
+
+
+    return dealPrice;
+  }
+
+
   async function calculateCartSummary() {
 
     const cart =
@@ -702,13 +889,16 @@
     }
 
 
-    const ids =
-      cart.map(
-        item =>
-          Number(
-            item.product_id
-          )
-      );
+    const ids = [
+      ...new Set(
+        cart.map(
+          item =>
+            Number(
+              item.product_id
+            )
+        )
+      )
+    ];
 
 
     const {
@@ -716,7 +906,9 @@
       error
     } =
       await supabaseClient
-        .from("products")
+        .from(
+          "products"
+        )
         .select(
           "id,name,price,in_stock,weight_kg"
         )
@@ -730,7 +922,10 @@
       error
     ) {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       throw new Error(
         "Your cart products could not be loaded."
@@ -748,11 +943,91 @@
       product => {
 
         productMap.set(
-          Number(product.id),
+          Number(
+            product.id
+          ),
           product
         );
       }
     );
+
+
+    /*
+      Load only the deals referenced
+      by the physical cart.
+    */
+
+    const dealIds = [
+      ...new Set(
+        cart
+          .map(
+            item =>
+              normalizeDealId(
+                item.deal_id
+              )
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+    const dealMap =
+      new Map();
+
+
+    if (
+      dealIds.length > 0
+    ) {
+
+      const {
+        data: deals,
+        error: dealError
+      } =
+        await supabaseClient
+          .from(
+            "deals"
+          )
+          .select(
+            "id,item_type,item_id,deal_price,price,active,starts_at,ends_at"
+          )
+          .in(
+            "id",
+            dealIds
+          );
+
+
+      if (
+        dealError
+      ) {
+
+        /*
+          If deals cannot be verified,
+          we do not trust the discounted
+          prices. Normal prices will apply.
+        */
+
+        console.error(
+          "Could not verify deals:",
+          dealError
+        );
+
+      } else {
+
+        (
+          deals || []
+        ).forEach(
+          deal => {
+
+            dealMap.set(
+              Number(
+                deal.id
+              ),
+              deal
+            );
+          }
+        );
+      }
+    }
 
 
     let totalItems =
@@ -806,7 +1081,7 @@
         );
 
 
-      const price =
+      const normalPrice =
         Number(
           product.price
         );
@@ -819,7 +1094,9 @@
 
 
       if (
-        !Number.isInteger(quantity) ||
+        !Number.isInteger(
+          quantity
+        ) ||
         quantity <= 0
       ) {
 
@@ -830,8 +1107,10 @@
 
 
       if (
-        !Number.isFinite(price) ||
-        price <= 0
+        !Number.isFinite(
+          normalPrice
+        ) ||
+        normalPrice <= 0
       ) {
 
         throw new Error(
@@ -841,7 +1120,9 @@
 
 
       if (
-        !Number.isFinite(weight) ||
+        !Number.isFinite(
+          weight
+        ) ||
         weight <= 0
       ) {
 
@@ -851,16 +1132,56 @@
       }
 
 
+      let effectivePrice =
+        normalPrice;
+
+
+      const dealId =
+        normalizeDealId(
+          item.deal_id
+        );
+
+
+      if (
+        dealId
+      ) {
+
+        const deal =
+          dealMap.get(
+            dealId
+          );
+
+
+        const verifiedDealPrice =
+          getVerifiedDealPrice(
+            deal,
+            product
+          );
+
+
+        if (
+          verifiedDealPrice !==
+          null
+        ) {
+
+          effectivePrice =
+            verifiedDealPrice;
+        }
+      }
+
+
       totalItems +=
         quantity;
 
 
       subtotal +=
-        price * quantity;
+        effectivePrice *
+        quantity;
 
 
       totalWeightKg +=
-        weight * quantity;
+        weight *
+        quantity;
     }
 
 
@@ -905,7 +1226,10 @@
       error
     ) {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       throw new Error(
         "Shipping destinations could not be loaded."
@@ -914,7 +1238,9 @@
 
 
     activeZones =
-      Array.isArray(data)
+      Array.isArray(
+        data
+      )
         ? data
         : [];
 
@@ -932,7 +1258,8 @@
     `;
 
 
-    let regionNames = null;
+    let regionNames =
+      null;
 
 
     try {
@@ -973,22 +1300,29 @@
 
 
             option.value =
-              String(code)
-                .toUpperCase();
+              String(
+                code
+              ).toUpperCase();
 
 
             option.dataset.zoneId =
-              String(zone.id);
+              String(
+                zone.id
+              );
 
 
             option.textContent =
               regionNames
+
                 ? regionNames.of(
-                    String(code)
-                      .toUpperCase()
+                    String(
+                      code
+                    ).toUpperCase()
                   )
-                : String(code)
-                    .toUpperCase();
+
+                : String(
+                    code
+                  ).toUpperCase();
 
 
             select.appendChild(
@@ -1168,7 +1502,10 @@
       error
     ) {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       throw new Error(
         "Shipping prices could not be loaded."
@@ -1192,16 +1529,6 @@
             rate.max_weight_kg
           );
 
-
-        /*
-          Important:
-
-          > minimum
-          <= maximum
-
-          This means exactly 2 kg uses
-          the 1–2 kg rate, not the 2–5 kg rate.
-        */
 
         return (
           weightKg > min &&
@@ -1291,9 +1618,12 @@
 
             <span class="shipping-name">
               ${rate.carrier}
-              ${rate.service_name
-                ? " — " + rate.service_name
-                : ""}
+              ${
+                rate.service_name
+                  ? " — " +
+                    rate.service_name
+                  : ""
+              }
             </span>
 
           </div>
@@ -1509,18 +1839,8 @@
     );
 
 
-    /*
-      This is only the customer's selected quote.
-
-      When we build physical PayPal checkout,
-      the server will independently recalculate
-      products, weight and shipping before charging.
-      The browser price will NOT be trusted.
-    */
-
-
-    window.location.href = "physical-checkout.html";
-    window.location.href = "physical-checkout.html";
+    window.location.href =
+      "physical-checkout.html";
   }
 
 
@@ -1591,4 +1911,5 @@
 </script>
 
 </body>
+
 </html>
