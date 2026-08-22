@@ -568,6 +568,17 @@
       display: block;
     }
 
+    .category-image.homepage-promo-image {
+      height: auto;
+      background: white;
+    }
+
+    .category-image.homepage-promo-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
     .category-content {
       padding: 22px;
     }
@@ -1135,6 +1146,10 @@
         height: 280px;
       }
 
+      .category-image.homepage-promo-image {
+        height: auto;
+      }
+
       .featured-top {
         align-items: flex-start;
         flex-direction: column;
@@ -1363,6 +1378,7 @@
       <div class="hero-buttons">
 
         <a
+          id="hero-primary-button"
           href="categories.html"
           class="primary-button"
         >
@@ -1370,6 +1386,7 @@
         </a>
 
         <a
+          id="hero-secondary-button"
           href="shop.html"
           class="secondary-button"
         >
@@ -1406,8 +1423,6 @@
   <div class="trust-grid">
 
 
-    <!-- USEFUL PRODUCTS -->
-
     <a
       href="shop.html"
       class="trust-item"
@@ -1429,8 +1444,6 @@
 
     </a>
 
-
-    <!-- TRUSTED RECOMMENDATIONS -->
 
     <a
       href="categories.html"
@@ -1454,8 +1467,6 @@
     </a>
 
 
-    <!-- BEST DEALS -->
-
     <a
       href="deals.html"
       class="trust-item"
@@ -1477,8 +1488,6 @@
 
     </a>
 
-
-    <!-- SHOP WITH CONFIDENCE -->
 
     <a
       href="shop.html"
@@ -1622,8 +1631,6 @@
     <div class="discover-grid">
 
 
-      <!-- DAILY INSPIRATION -->
-
       <div class="discover-card">
 
         <div class="discover-icon">
@@ -1645,8 +1652,6 @@
 
       </div>
 
-
-      <!-- DEALS -->
 
       <div class="discover-card">
 
@@ -1670,8 +1675,6 @@
       </div>
 
 
-      <!-- BLOG -->
-
       <div class="discover-card">
 
         <div class="discover-icon">
@@ -1693,8 +1696,6 @@
 
       </div>
 
-
-      <!-- AFRICAN FOODSTUFFS -->
 
       <div class="discover-card">
 
@@ -1904,6 +1905,101 @@
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
+
+
+  let homepageSettings = null;
+
+
+  /* =========================
+     HOMEPAGE SETTINGS
+  ========================= */
+
+  async function loadHomepageSettings() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("homepage_settings")
+        .select("*")
+        .eq("id", 1)
+        .maybeSingle();
+
+
+    if (error) {
+
+      console.error(
+        "Homepage settings error:",
+        error
+      );
+
+      homepageSettings = null;
+
+      return;
+
+    }
+
+
+    homepageSettings =
+      data || null;
+
+
+    if (!homepageSettings) {
+      return;
+    }
+
+
+    const primaryButton =
+      document.getElementById(
+        "hero-primary-button"
+      );
+
+
+    const secondaryButton =
+      document.getElementById(
+        "hero-secondary-button"
+      );
+
+
+    if (primaryButton) {
+
+      const text =
+        homepageSettings
+          .hero_primary_button_text ||
+        "Explore Our Picks";
+
+
+      primaryButton.textContent =
+        text.includes("→")
+          ? text
+          : text + " →";
+
+
+      primaryButton.href =
+        homepageSettings
+          .hero_primary_button_link ||
+        "categories.html";
+
+    }
+
+
+    if (secondaryButton) {
+
+      secondaryButton.textContent =
+        homepageSettings
+          .hero_secondary_button_text ||
+        "Shop All Products";
+
+
+      secondaryButton.href =
+        homepageSettings
+          .hero_secondary_button_link ||
+        "shop.html";
+
+    }
+
+  }
 
 
   /* =========================
@@ -2121,12 +2217,149 @@
       );
 
 
+    const heroImage =
+      homepageSettings
+        ?.hero_feature_image_url ||
+      "";
+
+
+    if (heroImage) {
+
+      const preferredSideNames = [
+        "Fashion & Accessories",
+        "Beauty & Lifestyle"
+      ];
+
+
+      let sideImages = [];
+
+
+      preferredSideNames.forEach(
+        preferredName => {
+
+          const match =
+            withImages.find(
+              category =>
+                String(
+                  category.name || ""
+                ).toLowerCase() ===
+                preferredName.toLowerCase()
+            );
+
+
+          if (
+            match &&
+            !sideImages.includes(match)
+          ) {
+
+            sideImages.push(match);
+
+          }
+
+        }
+      );
+
+
+      withImages.forEach(
+        category => {
+
+          const name =
+            String(
+              category.name || ""
+            )
+              .toLowerCase()
+              .trim();
+
+
+          if (
+            sideImages.length < 2 &&
+            name !== "home & living" &&
+            !sideImages.includes(
+              category
+            )
+          ) {
+
+            sideImages.push(
+              category
+            );
+
+          }
+
+        }
+      );
+
+
+      sideImages =
+        sideImages.slice(
+          0,
+          2
+        );
+
+
+      const heroLink =
+        homepageSettings
+          ?.hero_primary_button_link ||
+        "categories.html";
+
+
+      let html = `
+
+        <a
+          class="hero-photo"
+          href="${escapeHTML(heroLink)}"
+        >
+
+          <img
+            src="${escapeHTML(heroImage)}"
+            alt="Smart Finds for Everyday Life"
+          >
+
+        </a>
+
+      `;
+
+
+      html +=
+        sideImages.map(
+          category => `
+
+            <a
+              class="hero-photo"
+              href="${getCategoryLink(category)}"
+            >
+
+              <img
+                src="${escapeHTML(category.image_url)}"
+                alt="${escapeHTML(category.name)}"
+              >
+
+              <span class="hero-photo-label">
+                ${escapeHTML(category.name)}
+              </span>
+
+            </a>
+
+          `
+        ).join("");
+
+
+      box.innerHTML =
+        html;
+
+
+      return;
+
+    }
+
+
     if (!withImages.length) {
 
       box.innerHTML = `
+
         <div class="loading-box">
           Category images will appear here.
         </div>
+
       `;
 
       return;
@@ -2175,14 +2408,10 @@
 
         if (
           selected.length < 3 &&
-          !selected.includes(
-            category
-          )
+          !selected.includes(category)
         ) {
 
-          selected.push(
-            category
-          );
+          selected.push(category);
 
         }
 
@@ -2260,6 +2489,12 @@
             "Category";
 
 
+          const normalizedName =
+            String(name)
+              .toLowerCase()
+              .trim();
+
+
           const slug =
             String(
               category.slug || ""
@@ -2269,20 +2504,107 @@
           const isFoodstuffs =
             slug ===
               "african-foodstuffs" ||
-            String(name)
-              .toLowerCase()
-              .trim() ===
+            normalizedName ===
               "african foodstuffs";
 
 
+          let imageUrl =
+            category.image_url ||
+            "";
+
+
+          let buttonText =
+            "Shop Now";
+
+
+          let buttonLink =
+            getCategoryLink(
+              category
+            );
+
+
+          let isHomepagePromo =
+            false;
+
+
+          if (
+            normalizedName ===
+              "home & living" &&
+            homepageSettings
+              ?.home_living_promo_image_url
+          ) {
+
+            imageUrl =
+              homepageSettings
+                .home_living_promo_image_url;
+
+
+            buttonText =
+              homepageSettings
+                .home_living_button_text ||
+              "Shop Now";
+
+
+            buttonLink =
+              homepageSettings
+                .home_living_button_link ||
+              getCategoryLink(
+                category
+              );
+
+
+            isHomepagePromo =
+              true;
+
+          }
+
+
+          if (
+            normalizedName ===
+              "useful finds" &&
+            homepageSettings
+              ?.useful_finds_promo_image_url
+          ) {
+
+            imageUrl =
+              homepageSettings
+                .useful_finds_promo_image_url;
+
+
+            buttonText =
+              homepageSettings
+                .useful_finds_button_text ||
+              "Shop Now";
+
+
+            buttonLink =
+              homepageSettings
+                .useful_finds_button_link ||
+              getCategoryLink(
+                category
+              );
+
+
+            isHomepagePromo =
+              true;
+
+          }
+
+
           const imageHTML =
-            category.image_url
+            imageUrl
               ? `
 
-                <div class="category-image">
+                <div
+                  class="category-image ${
+                    isHomepagePromo
+                      ? "homepage-promo-image"
+                      : ""
+                  }"
+                >
 
                   <img
-                    src="${escapeHTML(category.image_url)}"
+                    src="${escapeHTML(imageUrl)}"
                     alt="${escapeHTML(name)}"
                   >
 
@@ -2326,9 +2648,9 @@
 
                 <a
                   class="category-link"
-                  href="${getCategoryLink(category)}"
+                  href="${escapeHTML(buttonLink)}"
                 >
-                  Shop Now →
+                  ${escapeHTML(buttonText)} →
                 </a>
 
               </div>
@@ -2557,14 +2879,29 @@
 
 
   /* =========================
-     START
+     START HOMEPAGE
   ========================= */
 
-  loadCategories();
+  async function startHomepage() {
 
-  loadFeaturedProducts();
+    await loadHomepageSettings();
 
-  updateCartCount();
+
+    await Promise.all([
+
+      loadCategories(),
+
+      loadFeaturedProducts()
+
+    ]);
+
+
+    updateCartCount();
+
+  }
+
+
+  startHomepage();
 
 </script>
 
