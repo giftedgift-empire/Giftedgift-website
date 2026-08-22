@@ -136,6 +136,35 @@
       margin: 22px 0 10px;
     }
 
+    .normal-price {
+      color: #888;
+      text-decoration: line-through;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .deal-price {
+      color: #123a8c;
+    }
+
+    .deal-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .deal-saving {
+      margin-top: 8px;
+      color: #17803d;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
     .stock {
       display: inline-block;
       margin: 12px 0 25px;
@@ -557,16 +586,6 @@
     );
 
 
-  /*
-    This cart is specifically for physical products.
-
-    Digital products keep their existing digital
-    checkout and secure-download system.
-
-    Affiliate products continue using their
-    affiliate links.
-  */
-
   const CART_KEY =
     "giftedgift_physical_cart";
 
@@ -583,7 +602,21 @@
     );
 
 
+  const dealId =
+    Number(
+      params.get("deal_id")
+    );
+
+
   let currentProduct =
+    null;
+
+
+  let currentDeal =
+    null;
+
+
+  let currentUnitPrice =
     null;
 
 
@@ -593,6 +626,38 @@
 
   let maxQuantity =
     99;
+
+
+  function escapeHTML(
+    value
+  ) {
+
+    return String(
+      value == null
+        ? ""
+        : value
+    )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+  }
 
 
   function getCart() {
@@ -630,7 +695,9 @@
 
     localStorage.setItem(
       CART_KEY,
-      JSON.stringify(cart)
+      JSON.stringify(
+        cart
+      )
     );
   }
 
@@ -673,7 +740,9 @@
     document.getElementById(
       "cart-count"
     ).textContent =
-      String(count);
+      String(
+        count
+      );
   }
 
 
@@ -681,23 +750,28 @@
     value
   ) {
 
+    const number =
+      Number(
+        value
+      );
+
+
+    if (
+      !Number.isFinite(
+        number
+      )
+    ) {
+
+      return "€0.00";
+    }
+
+
     return (
       "€" +
-      Number(value).toFixed(2)
+      number.toFixed(2)
     );
   }
 
-
-  /*
-    If a real stock-quantity field exists,
-    the page will use it.
-
-    Otherwise an in-stock product temporarily
-    allows up to 99 pieces.
-
-    We can connect exact inventory quantities
-    when we build the inventory/order stage.
-  */
 
   function getStockLimit(
     product
@@ -722,7 +796,9 @@
     ) {
 
       const number =
-        Number(value);
+        Number(
+          value
+        );
 
 
       if (
@@ -780,6 +856,237 @@
   }
 
 
+  function isDealLive(
+    deal
+  ) {
+
+    if (
+      !deal ||
+      deal.active !== true
+    ) {
+
+      return false;
+    }
+
+
+    if (
+      deal.item_type !==
+      "product"
+    ) {
+
+      return false;
+    }
+
+
+    if (
+      Number(
+        deal.item_id
+      ) !==
+      Number(
+        productId
+      )
+    ) {
+
+      return false;
+    }
+
+
+    const now =
+      new Date();
+
+
+    if (
+      deal.starts_at
+    ) {
+
+      const startsAt =
+        new Date(
+          deal.starts_at
+        );
+
+
+      if (
+        Number.isNaN(
+          startsAt.getTime()
+        ) ||
+        now < startsAt
+      ) {
+
+        return false;
+      }
+    }
+
+
+    if (
+      deal.ends_at
+    ) {
+
+      const endsAt =
+        new Date(
+          deal.ends_at
+        );
+
+
+      if (
+        Number.isNaN(
+          endsAt.getTime()
+        ) ||
+        now > endsAt
+      ) {
+
+        return false;
+      }
+    }
+
+
+    return true;
+  }
+
+
+  function getDealPrice(
+    deal,
+    product
+  ) {
+
+    if (
+      !deal ||
+      !product
+    ) {
+
+      return null;
+    }
+
+
+    const normalPrice =
+      Number(
+        product.price
+      );
+
+
+    const dealPrice =
+      Number(
+        deal.deal_price ??
+        deal.price
+      );
+
+
+    if (
+      !Number.isFinite(
+        normalPrice
+      ) ||
+      normalPrice <= 0
+    ) {
+
+      return null;
+    }
+
+
+    if (
+      !Number.isFinite(
+        dealPrice
+      ) ||
+      dealPrice <= 0 ||
+      dealPrice >= normalPrice
+    ) {
+
+      return null;
+    }
+
+
+    return dealPrice;
+  }
+
+
+  async function loadDeal(
+    product
+  ) {
+
+    currentDeal =
+      null;
+
+
+    currentUnitPrice =
+      Number(
+        product.price
+      );
+
+
+    if (
+      !Number.isInteger(
+        dealId
+      ) ||
+      dealId <= 0
+    ) {
+
+      return;
+    }
+
+
+    const {
+      data: deal,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "deals"
+        )
+        .select("*")
+        .eq(
+          "id",
+          dealId
+        )
+        .maybeSingle();
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Deal loading error:",
+        error
+      );
+
+
+      return;
+    }
+
+
+    if (
+      !isDealLive(
+        deal
+      )
+    ) {
+
+      return;
+    }
+
+
+    const verifiedDealPrice =
+      getDealPrice(
+        deal,
+        product
+      );
+
+
+    if (
+      verifiedDealPrice ===
+      null
+    ) {
+
+      return;
+    }
+
+
+    currentDeal =
+      deal;
+
+
+    currentUnitPrice =
+      verifiedDealPrice;
+  }
+
+
   function updateQuantityUI() {
 
     if (
@@ -792,7 +1099,7 @@
 
     const price =
       Number(
-        currentProduct.price
+        currentUnitPrice
       );
 
 
@@ -867,8 +1174,7 @@
 
     if (
       !currentProduct ||
-      currentProduct.in_stock !==
-        true
+      currentProduct.in_stock !== true
     ) {
 
       showMessage(
@@ -882,7 +1188,7 @@
 
     const price =
       Number(
-        currentProduct.price
+        currentUnitPrice
       );
 
 
@@ -906,15 +1212,95 @@
       getCart();
 
 
+    const activeDealId =
+      currentDeal
+        ? Number(
+            currentDeal.id
+          )
+        : null;
+
+
+    /*
+      Find this exact cart line.
+
+      A normal purchase and a deal purchase
+      of the same product remain separate.
+    */
+
     const existingItem =
       cart.find(
-        item =>
-          Number(
-            item.product_id
-          ) ===
-          Number(
-            currentProduct.id
-          )
+        item => {
+
+          const sameProduct =
+            Number(
+              item.product_id
+            ) ===
+            Number(
+              currentProduct.id
+            );
+
+
+          const itemDealId =
+            item.deal_id
+              ? Number(
+                  item.deal_id
+                )
+              : null;
+
+
+          return (
+            sameProduct &&
+            itemDealId === activeDealId
+          );
+        }
+      );
+
+
+    /*
+      Count every quantity of this product
+      already in the cart so stock cannot be
+      exceeded by mixing normal + deal lines.
+    */
+
+    const totalProductQuantity =
+      cart.reduce(
+        (
+          total,
+          item
+        ) => {
+
+          if (
+            Number(
+              item.product_id
+            ) !==
+            Number(
+              currentProduct.id
+            )
+          ) {
+
+            return total;
+          }
+
+
+          const quantity =
+            Number(
+              item.quantity
+            );
+
+
+          return total +
+            (
+              Number.isInteger(
+                quantity
+              ) &&
+              quantity > 0
+
+                ? quantity
+                : 0
+            );
+
+        },
+        0
       );
 
 
@@ -928,7 +1314,7 @@
 
     const remaining =
       maxQuantity -
-      existingQuantity;
+      totalProductQuantity;
 
 
     if (
@@ -961,19 +1347,7 @@
 
     } else {
 
-      /*
-        We deliberately store only:
-        product ID + quantity.
-
-        The cart will fetch the current price,
-        weight and product details directly
-        from Supabase.
-
-        This is safer than trusting prices
-        stored in the customer's browser.
-      */
-
-      cart.push({
+      const cartItem = {
 
         product_id:
           Number(
@@ -983,7 +1357,21 @@
         quantity:
           quantityToAdd
 
-      });
+      };
+
+
+      if (
+        activeDealId
+      ) {
+
+        cartItem.deal_id =
+          activeDealId;
+      }
+
+
+      cart.push(
+        cartItem
+      );
     }
 
 
@@ -1073,25 +1461,106 @@
       "";
 
 
-    const price =
+    const normalPrice =
       Number(
         product.price
       );
 
 
-    document.getElementById(
-      "product-price"
-    ).textContent =
+    const displayedPrice =
+      Number(
+        currentUnitPrice
+      );
+
+
+    const priceBox =
+      document.getElementById(
+        "product-price"
+      );
+
+
+    if (
+      currentDeal &&
       Number.isFinite(
-        price
+        displayedPrice
       ) &&
-      price > 0
+      displayedPrice > 0
+    ) {
 
-        ? formatPrice(
-            price
-          )
+      const saving =
+        normalPrice -
+        displayedPrice;
 
-        : "Price unavailable";
+
+      const badge =
+        currentDeal.badge ||
+        "Special Deal";
+
+
+      priceBox.innerHTML = `
+
+        <span class="normal-price">
+          ${formatPrice(
+            normalPrice
+          )}
+        </span>
+
+        <span class="deal-price">
+          ${formatPrice(
+            displayedPrice
+          )}
+        </span>
+
+        <div>
+          <span class="deal-badge">
+            ${escapeHTML(
+              badge
+            )}
+          </span>
+        </div>
+
+        <div class="deal-saving">
+          You save
+          ${formatPrice(
+            saving
+          )}
+        </div>
+
+      `;
+
+
+      const backLink =
+        document.querySelector(
+          ".back-link"
+        );
+
+
+      if (
+        backLink
+      ) {
+
+        backLink.href =
+          "deals.html";
+
+
+        backLink.textContent =
+          "← Back to Deals";
+      }
+
+    } else {
+
+      priceBox.textContent =
+        Number.isFinite(
+          normalPrice
+        ) &&
+        normalPrice > 0
+
+          ? formatPrice(
+              normalPrice
+            )
+
+          : "Price unavailable";
+    }
 
 
     const rating =
@@ -1148,9 +1617,9 @@
       product.in_stock === true &&
       maxQuantity > 0 &&
       Number.isFinite(
-        price
+        displayedPrice
       ) &&
-      price > 0
+      displayedPrice > 0
     ) {
 
       stockStatus.textContent =
@@ -1174,7 +1643,9 @@
 
 
       addButton.textContent =
-        "Add to Cart";
+        currentDeal
+          ? "Add Deal to Cart"
+          : "Add to Cart";
 
 
       selectedQuantity =
@@ -1272,6 +1743,16 @@
       product;
 
 
+    /*
+      If this product page was opened through
+      a physical deal, verify that deal first.
+    */
+
+    await loadDeal(
+      product
+    );
+
+
     renderProduct(
       product
     );
@@ -1328,4 +1809,4 @@
 
 </body>
 
-        </html>
+</html>
