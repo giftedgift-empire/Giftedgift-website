@@ -793,13 +793,18 @@ function getDestination(
 
   if (
   deal.item_type ===
-  "digital_product"
+  "product"
 ) {
+
   return (
-    "checkout.html?product_id=" +
-    encodeURIComponent(deal.item_id) +
+    "product.html?id=" +
+    encodeURIComponent(
+      deal.item_id
+    ) +
     "&deal_id=" +
-    encodeURIComponent(deal.id)
+    encodeURIComponent(
+      deal.id
+    )
   );
 }
     
