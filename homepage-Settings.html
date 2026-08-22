@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Homepage Settings | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 32px 20px;
+    }
+
+    header h1 {
+      color: #f2bd16;
+      margin: 0 0 8px;
+      font-size: 34px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 18px 60px;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .top-buttons a {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 13px 20px;
+      border-radius: 9px;
+    }
+
+    .back-button {
+      background: #123a8c;
+      color: white;
+    }
+
+    .website-button {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .section-card h2 {
+      color: #123a8c;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 26px;
+    }
+
+    .section-description {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 18px 0 8px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="file"] {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cfd4dc;
+      border-radius: 9px;
+      font-size: 16px;
+      background: white;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+    }
+
+    .help {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 7px;
+    }
+
+    .preview-box {
+      margin-top: 15px;
+      background: #f7f8fa;
+      border: 1px solid #e4e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .preview-box img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: contain;
+      display: block;
+      background: #eee;
+    }
+
+    .preview-label {
+      padding: 10px 12px;
+      color: #555;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .save-button {
+      width: 100%;
+      background: #123a8c;
+      color: white;
+      border: none;
+      padding: 16px 20px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .save-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #message {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 9px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .success {
+      background: #e5f7eb;
+      color: #176b31;
+    }
+
+    .error {
+      background: #fde8e8;
+      color: #a11919;
+    }
+
+    #status {
+      text-align: center;
+      padding: 60px 20px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      .section-card {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="status">
+  Checking admin access...
+</div>
+
+<div id="page" style="display:none;">
+
+  <header>
+    <h1>Homepage Settings</h1>
+    <p>Manage homepage images, buttons and destinations.</p>
+  </header>
+
+  <main class="container">
+
+    <div class="top-buttons">
+
+      <a
+        href="dashboard.html"
+        class="back-button">
+        ← Back to Dashboard
+      </a>
+
+      <a
+        href="index.html"
+        class="website-button">
+        🌐 View Website
+      </a>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="section-card">
+
+      <h2>Homepage Hero Image</h2>
+
+      <p class="section-description">
+        This replaces the large Home & Living picture currently
+        shown in the top homepage image collage.
+      </p>
+
+      <label for="hero-image">
+        Choose New Hero Image
+      </label>
+
+      <input
+        id="hero-image"
+        type="file"
+        accept="image/*">
+
+      <p class="help">
+        Leave this empty if you do not want to change the current image.
+      </p>
+
+      <div
+        id="hero-preview-box"
+        class="preview-box">
+
+        <div class="preview-label">
+          Current / selected hero image
+        </div>
+
+        <img
+          id="hero-preview"
+          alt="Hero image preview">
+
+      </div>
+
+
+      <label for="hero-primary-text">
+        Yellow Button Text
+      </label>
+
+      <input
+        id="hero-primary-text"
+        type="text"
+        value="Explore Our Picks">
+
+
+      <label for="hero-primary-link">
+        Yellow Button Destination
+      </label>
+
+      <input
+        id="hero-primary-link"
+        type="text"
+        value="categories.html">
+
+
+      <label for="hero-secondary-text">
+        Blue Button Text
+      </label>
+
+      <input
+        id="hero-secondary-text"
+        type="text"
+        value="Shop All Products">
+
+
+      <label for="hero-secondary-link">
+        Blue Button Destination
+      </label>
+
+      <input
+        id="hero-secondary-link"
+        type="text"
+        value="shop.html">
+
+    </section>
+
+
+    <!-- HOME & LIVING -->
+
+    <section class="section-card">
+
+      <h2>Home & Living Homepage Image</h2>
+
+      <p class="section-description">
+        This image is only for the Home & Living promotional
+        card on the homepage. It will not replace the normal
+        category image on your Categories page.
+      </p>
+
+      <label for="home-image">
+        Choose New Home & Living Image
+      </label>
+
+      <input
+        id="home-image"
+        type="file"
+        accept="image/*">
+
+      <div
+        id="home-preview-box"
+        class="preview-box">
+
+        <div class="preview-label">
+          Current / selected Home & Living image
+        </div>
+
+        <img
+          id="home-preview"
+          alt="Home & Living preview">
+
+      </div>
+
+
+      <label for="home-button-text">
+        Button Text
+      </label>
+
+      <input
+        id="home-button-text"
+        type="text"
+        value="Shop Now">
+
+
+      <label for="home-button-link">
+        Button Destination
+      </label>
+
+      <input
+        id="home-button-link"
+        type="text"
+        value="shop.html?category=Home%20%26%20Living">
+
+    </section>
+
+
+    <!-- USEFUL FINDS -->
+
+    <section class="section-card">
+
+      <h2>Useful Finds Homepage Image</h2>
+
+      <p class="section-description">
+        This image is only for the Useful Finds promotional
+        card on the homepage.
+      </p>
+
+      <label for="useful-image">
+        Choose New Useful Finds Image
+      </label>
+
+      <input
+        id="useful-image"
+        type="file"
+        accept="image/*">
+
+      <div
+        id="useful-preview-box"
+        class="preview-box">
+
+        <div class="preview-label">
+          Current / selected Useful Finds image
+        </div>
+
+        <img
+          id="useful-preview"
+          alt="Useful Finds preview">
+
+      </div>
+
+
+      <label for="useful-button-text">
+        Button Text
+      </label>
+
+      <input
+        id="useful-button-text"
+        type="text"
+        value="Shop Now">
+
+
+      <label for="useful-button-link">
+        Button Destination
+      </label>
+
+      <input
+        id="useful-button-link"
+        type="text"
+        value="shop.html?category=Useful%20Finds">
+
+    </section>
+
+
+    <button
+      id="save-button"
+      class="save-button"
+      type="button">
+      Save Homepage Settings
+    </button>
+
+
+    <div id="message"></div>
+
+  </main>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+const IMAGE_BUCKET =
+  "product-images";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+let currentSettings = null;
+
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.auth.getSession();
+
+
+  const session =
+    data?.session;
+
+
+  if (
+    error ||
+    !session ||
+    session.user.id !== ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+    return;
+  }
+
+
+  document
+    .getElementById("status")
+    .style.display = "none";
+
+
+  document
+    .getElementById("page")
+    .style.display = "block";
+
+
+  await loadSettings();
+
+}
+
+
+
+async function loadSettings() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("homepage_settings")
+      .select("*")
+      .eq("id", 1)
+      .single();
+
+
+  if (error) {
+
+    showMessage(
+      "Homepage settings could not be loaded.",
+      "error"
+    );
+
+    console.error(error);
+
+    return;
+  }
+
+
+  currentSettings = data;
+
+
+  document.getElementById(
+    "hero-primary-text"
+  ).value =
+    data.hero_primary_button_text || "";
+
+
+  document.getElementById(
+    "hero-primary-link"
+  ).value =
+    data.hero_primary_button_link || "";
+
+
+  document.getElementById(
+    "hero-secondary-text"
+  ).value =
+    data.hero_secondary_button_text || "";
+
+
+  document.getElementById(
+    "hero-secondary-link"
+  ).value =
+    data.hero_secondary_button_link || "";
+
+
+  document.getElementById(
+    "home-button-text"
+  ).value =
+    data.home_living_button_text || "";
+
+
+  document.getElementById(
+    "home-button-link"
+  ).value =
+    data.home_living_button_link || "";
+
+
+  document.getElementById(
+    "useful-button-text"
+  ).value =
+    data.useful_finds_button_text || "";
+
+
+  document.getElementById(
+    "useful-button-link"
+  ).value =
+    data.useful_finds_button_link || "";
+
+
+  showStoredPreview(
+    "hero-preview",
+    "hero-preview-box",
+    data.hero_feature_image_url
+  );
+
+
+  showStoredPreview(
+    "home-preview",
+    "home-preview-box",
+    data.home_living_promo_image_url
+  );
+
+
+  showStoredPreview(
+    "useful-preview",
+    "useful-preview-box",
+    data.useful_finds_promo_image_url
+  );
+
+}
+
+
+
+function showStoredPreview(
+  imageId,
+  boxId,
+  url
+) {
+
+  if (!url) {
+    return;
+  }
+
+
+  const image =
+    document.getElementById(imageId);
+
+  const box =
+    document.getElementById(boxId);
+
+
+  image.src = url;
+
+  box.style.display = "block";
+
+}
+
+
+
+function setupLocalPreview(
+  inputId,
+  imageId,
+  boxId
+) {
+
+  document
+    .getElementById(inputId)
+    .addEventListener(
+      "change",
+      function() {
+
+        const file =
+          this.files?.[0];
+
+
+        if (!file) {
+          return;
+        }
+
+
+        const url =
+          URL.createObjectURL(file);
+
+
+        document
+          .getElementById(imageId)
+          .src = url;
+
+
+        document
+          .getElementById(boxId)
+          .style.display = "block";
+
+      }
+    );
+
+}
+
+
+
+async function uploadHomepageImage(
+  file,
+  label
+) {
+
+  if (!file) {
+    return null;
+  }
+
+
+  const cleanName =
+    file.name
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9.\-_]/g,
+        "-"
+      );
+
+
+  const path =
+    "homepage/" +
+    label +
+    "-" +
+    Date.now() +
+    "-" +
+    cleanName;
+
+
+  const {
+    error: uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from(IMAGE_BUCKET)
+      .upload(
+        path,
+        file,
+        {
+          cacheControl: "3600",
+          upsert: false
+        }
+      );
+
+
+  if (uploadError) {
+
+    throw new Error(
+      uploadError.message
+    );
+
+  }
+
+
+  const {
+    data
+  } =
+    supabaseClient
+      .storage
+      .from(IMAGE_BUCKET)
+      .getPublicUrl(path);
+
+
+  return data.publicUrl;
+
+}
+
+
+
+async function saveSettings() {
+
+  const button =
+    document.getElementById(
+      "save-button"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Saving...";
+
+
+  try {
+
+    const heroFile =
+      document.getElementById(
+        "hero-image"
+      ).files?.[0];
+
+
+    const homeFile =
+      document.getElementById(
+        "home-image"
+      ).files?.[0];
+
+
+    const usefulFile =
+      document.getElementById(
+        "useful-image"
+      ).files?.[0];
+
+
+    let heroUrl =
+      currentSettings
+        ?.hero_feature_image_url ||
+      null;
+
+
+    let homeUrl =
+      currentSettings
+        ?.home_living_promo_image_url ||
+      null;
+
+
+    let usefulUrl =
+      currentSettings
+        ?.useful_finds_promo_image_url ||
+      null;
+
+
+    if (heroFile) {
+
+      heroUrl =
+        await uploadHomepageImage(
+          heroFile,
+          "hero"
+        );
+
+    }
+
+
+    if (homeFile) {
+
+      homeUrl =
+        await uploadHomepageImage(
+          homeFile,
+          "home-living"
+        );
+
+    }
+
+
+    if (usefulFile) {
+
+      usefulUrl =
+        await uploadHomepageImage(
+          usefulFile,
+          "useful-finds"
+        );
+
+    }
+
+
+    const updates = {
+
+      hero_feature_image_url:
+        heroUrl,
+
+      hero_primary_button_text:
+        document
+          .getElementById(
+            "hero-primary-text"
+          )
+          .value
+          .trim(),
+
+      hero_primary_button_link:
+        document
+          .getElementById(
+            "hero-primary-link"
+          )
+          .value
+          .trim(),
+
+      hero_secondary_button_text:
+        document
+          .getElementById(
+            "hero-secondary-text"
+          )
+          .value
+          .trim(),
+
+      hero_secondary_button_link:
+        document
+          .getElementById(
+            "hero-secondary-link"
+          )
+          .value
+          .trim(),
+
+      home_living_promo_image_url:
+        homeUrl,
+
+      home_living_button_text:
+        document
+          .getElementById(
+            "home-button-text"
+          )
+          .value
+          .trim(),
+
+      home_living_button_link:
+        document
+          .getElementById(
+            "home-button-link"
+          )
+          .value
+          .trim(),
+
+      useful_finds_promo_image_url:
+        usefulUrl,
+
+      useful_finds_button_text:
+        document
+          .getElementById(
+            "useful-button-text"
+          )
+          .value
+          .trim(),
+
+      useful_finds_button_link:
+        document
+          .getElementById(
+            "useful-button-link"
+          )
+          .value
+          .trim(),
+
+      updated_at:
+        new Date().toISOString()
+
+    };
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("homepage_settings")
+        .update(updates)
+        .eq("id", 1)
+        .select()
+        .single();
+
+
+    if (error) {
+
+      throw new Error(
+        error.message
+      );
+
+    }
+
+
+    currentSettings = data;
+
+
+    showMessage(
+      "Homepage settings saved successfully.",
+      "success"
+    );
+
+
+    await loadSettings();
+
+  }
+  catch (error) {
+
+    console.error(error);
+
+
+    showMessage(
+      "Could not save homepage settings: " +
+      error.message,
+      "error"
+    );
+
+  }
+  finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Save Homepage Settings";
+
+  }
+
+}
+
+
+
+function showMessage(
+  text,
+  type
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.textContent = text;
+
+  box.className = type;
+
+  box.style.display = "block";
+
+}
+
+
+
+setupLocalPreview(
+  "hero-image",
+  "hero-preview",
+  "hero-preview-box"
+);
+
+
+setupLocalPreview(
+  "home-image",
+  "home-preview",
+  "home-preview-box"
+);
+
+
+setupLocalPreview(
+  "useful-image",
+  "useful-preview",
+  "useful-preview-box"
+);
+
+
+document
+  .getElementById(
+    "save-button"
+  )
+  .addEventListener(
+    "click",
+    saveSettings
+  );
+
+
+protectPage();
+
+</script>
+
+</body>
+</html>
