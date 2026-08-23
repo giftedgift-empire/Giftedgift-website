@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
+  <title id="document-title">
     Privacy Policy | GiftedGift Empire
   </title>
 
@@ -44,6 +44,13 @@
     rel="apple-touch-icon"
     href="my-logo.png"
   >
+
+
+  <!-- SUPABASE -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+  </script>
 
 
   <style>
@@ -247,6 +254,47 @@
     }
 
 
+    /* EXTRA STYLES FOR IMPORTED POLICY CONTENT */
+
+    .policy-card .business-box,
+    .policy-card .info-box {
+      background: #edf3ff;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .policy-card .important-box,
+    .policy-card .gold-box,
+    .policy-card .notice-box {
+      background: #fff9df;
+      border: 1px solid #efdb7c;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .policy-card .success-box {
+      background: #edf8f1;
+      border-left: 5px solid #18713b;
+      padding: 18px;
+      border-radius: 9px;
+      margin: 20px 0;
+    }
+
+
+    /* NOT AVAILABLE */
+
+    .policy-unavailable {
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    .policy-unavailable h2 {
+      margin-top: 0;
+    }
+
+
     /* FOOTER */
 
     footer {
@@ -365,7 +413,7 @@
 
 <section class="hero">
 
-  <h1>
+  <h1 id="policy-title">
     Privacy Policy
   </h1>
 
@@ -375,7 +423,10 @@
     when you use our website and services.
   </p>
 
-  <div class="updated">
+  <div
+    id="policy-updated"
+    class="updated"
+  >
     Last updated: 23 August 2026
   </div>
 
@@ -392,7 +443,17 @@
   </a>
 
 
-  <article class="policy-card">
+  <article
+    id="policy-content"
+    class="policy-card"
+  >
+
+
+    <!-- =========================================
+         STATIC FALLBACK CONTENT
+         This remains visible if Supabase
+         temporarily cannot be reached.
+    ========================================== -->
 
 
     <div class="intro">
@@ -422,9 +483,11 @@
 
     <p>
       <strong>Email:</strong>
+
       <a href="mailto:gift@giftedgiftempire.com">
         gift@giftedgiftempire.com
       </a>
+
     </p>
 
 
@@ -897,17 +960,23 @@
       </p>
 
       <p>
-        <strong>GiftedGift Empire</strong>
+        <strong>
+          GiftedGift Empire
+        </strong>
       </p>
 
       <p>
+
         Email:
-        <a href="mailto:gift@giftedgiftempire.com">
+
+        <a href="mailto:gift@giftgiftempire.com">
           gift@giftedgiftempire.com
         </a>
+
       </p>
 
     </div>
+
 
   </article>
 
@@ -921,6 +990,7 @@
       GiftedGift Empire
     </strong>
   </p>
+
 
   <p>
 
@@ -938,12 +1008,271 @@
 
   </p>
 
+
   <p>
     © 2026 GiftedGift Empire.
     All rights reserved.
   </p>
 
 </footer>
+
+
+<script>
+
+  /* =========================
+     SUPABASE
+  ========================= */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /* =========================
+     FORMAT DATE
+  ========================= */
+
+  function formatPolicyDate(value) {
+
+    if (!value) {
+      return "";
+    }
+
+
+    const date =
+      new Date(value);
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "";
+
+    }
+
+
+    return date.toLocaleDateString(
+      "en-GB",
+      {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
+  /* =========================
+     LOAD PRIVACY POLICY
+  ========================= */
+
+  async function loadPrivacyPolicy() {
+
+    const contentBox =
+      document.getElementById(
+        "policy-content"
+      );
+
+
+    const titleBox =
+      document.getElementById(
+        "policy-title"
+      );
+
+
+    const updatedBox =
+      document.getElementById(
+        "policy-updated"
+      );
+
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("legal_pages")
+          .select(
+            "title, content_html, published, updated_at"
+          )
+          .eq(
+            "slug",
+            "privacy-policy"
+          )
+          .maybeSingle();
+
+
+      if (error) {
+
+        console.error(
+          "Privacy Policy load error:",
+          error
+        );
+
+
+        /*
+          Keep the static fallback content
+          already displayed in the page.
+        */
+
+        return;
+
+      }
+
+
+      /*
+        If no row is visible, the policy is
+        unpublished or unavailable.
+      */
+
+      if (!data) {
+
+        titleBox.textContent =
+          "Privacy Policy";
+
+
+        updatedBox.style.display =
+          "none";
+
+
+        contentBox.innerHTML = `
+
+          <div class="policy-unavailable">
+
+            <h2>
+              Privacy Policy Unavailable
+            </h2>
+
+            <p>
+              This page is not currently published.
+            </p>
+
+            <p>
+              Please contact GiftedGift Empire if
+              you need assistance.
+            </p>
+
+            <p>
+
+              <a
+                href="mailto:gift@giftedgiftempire.com"
+              >
+                gift@giftedgiftempire.com
+              </a>
+
+            </p>
+
+          </div>
+
+        `;
+
+
+        return;
+
+      }
+
+
+      /*
+        Update public page title
+      */
+
+      const title =
+        String(
+          data.title ||
+          "Privacy Policy"
+        ).trim();
+
+
+      titleBox.textContent =
+        title;
+
+
+      document.title =
+        title +
+        " | GiftedGift Empire";
+
+
+      /*
+        Update last-modified date
+      */
+
+      const formattedDate =
+        formatPolicyDate(
+          data.updated_at
+        );
+
+
+      if (formattedDate) {
+
+        updatedBox.textContent =
+          "Last updated: " +
+          formattedDate;
+
+      }
+
+
+      /*
+        Replace fallback with the content
+        saved through Admin only when
+        actual saved content exists.
+      */
+
+      const savedContent =
+        String(
+          data.content_html || ""
+        ).trim();
+
+
+      if (savedContent) {
+
+        contentBox.innerHTML =
+          savedContent;
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Privacy Policy error:",
+        error
+      );
+
+
+      /*
+        Network problem:
+        leave static fallback visible.
+      */
+
+    }
+
+  }
+
+
+  /* =========================
+     START
+  ========================= */
+
+  loadPrivacyPolicy();
+
+</script>
+
 
 </body>
 
