@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Website Settings | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      color: #f2bd16;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .page {
+      max-width: 950px;
+      margin: auto;
+      padding: 30px 18px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #123a8c;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .help {
+      margin-top: 7px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-info {
+      flex: 1;
+    }
+
+    .toggle-info strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .toggle-info span {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .toggle-row input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .warning {
+      background: #fff6d9;
+      border: 1px solid #ecd384;
+      padding: 14px;
+      border-radius: 9px;
+      color: #725500;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .save-button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 9px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .save-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #e8f7ec;
+      border: 1px solid #b8dfc0;
+      color: #17652d;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      border: 1px solid #efbbbb;
+      color: #951d1d;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 60px 20px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .toggle-row {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div id="loading">
+  Checking admin access...
+</div>
+
+
+<div
+  id="admin-page"
+  style="display:none;"
+>
+
+<header>
+
+  <h1>
+    Website Settings
+  </h1>
+
+  <p>
+    Manage store-wide GiftedGift Empire settings.
+  </p>
+
+</header>
+
+
+<main class="page">
+
+  <a
+    href="dashboard.html"
+    class="back-link"
+  >
+    ← Back to Dashboard
+  </a>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <section class="card">
+
+    <h2>
+      Currency
+    </h2>
+
+
+    <div class="field">
+
+      <label for="currency-code">
+        Currency Code
+      </label>
+
+      <input
+        id="currency-code"
+        type="text"
+        maxlength="3"
+        placeholder="EUR"
+      >
+
+      <div class="help">
+        Example: EUR
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="currency-symbol">
+        Currency Symbol
+      </label>
+
+      <input
+        id="currency-symbol"
+        type="text"
+        maxlength="5"
+        placeholder="€"
+      >
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>
+      Store Messages
+    </h2>
+
+
+    <div class="field">
+
+      <label for="shop-notice">
+        Shop Notice
+      </label>
+
+      <textarea
+        id="shop-notice"
+        placeholder="Optional notice to customers..."
+      ></textarea>
+
+      <div class="help">
+        Leave empty if you do not want a shop notice.
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="affiliate-disclosure">
+        Affiliate Disclosure
+      </label>
+
+      <textarea
+        id="affiliate-disclosure"
+        placeholder="Some links on this website may be affiliate links..."
+      ></textarea>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>
+      Store Features
+    </h2>
+
+
+    <div class="toggle-row">
+
+      <div class="toggle-info">
+        <strong>
+          Deals
+        </strong>
+
+        <span>
+          Allow Deals features on the store.
+        </span>
+      </div>
+
+      <input
+        id="deals-enabled"
+        type="checkbox"
+      >
+
+    </div>
+
+
+    <div class="toggle-row">
+
+      <div class="toggle-info">
+        <strong>
+          Reviews
+        </strong>
+
+        <span>
+          Allow Reviews features on the store.
+        </span>
+      </div>
+
+      <input
+        id="reviews-enabled"
+        type="checkbox"
+      >
+
+    </div>
+
+
+    <div class="toggle-row">
+
+      <div class="toggle-info">
+        <strong>
+          Digital Products
+        </strong>
+
+        <span>
+          Allow digital products to be available.
+        </span>
+      </div>
+
+      <input
+        id="digital-products-enabled"
+        type="checkbox"
+      >
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>
+      Tax / VAT
+    </h2>
+
+
+    <div class="warning">
+      Your tax settings are currently not finalized.
+      Do not enable VAT or enter a new rate unless the correct tax treatment has been confirmed.
+    </div>
+
+
+    <div class="toggle-row">
+
+      <div class="toggle-info">
+        <strong>
+          Enable Tax
+        </strong>
+
+        <span>
+          Turns automatic tax calculation on or off.
+        </span>
+      </div>
+
+      <input
+        id="tax-enabled"
+        type="checkbox"
+      >
+
+    </div>
+
+
+    <div class="toggle-row">
+
+      <div class="toggle-info">
+        <strong>
+          Prices Include Tax
+        </strong>
+
+        <span>
+          Indicates whether product prices already include tax.
+        </span>
+      </div>
+
+      <input
+        id="prices-include-tax"
+        type="checkbox"
+      >
+
+    </div>
+
+
+    <div class="field" style="margin-top:20px;">
+
+      <label for="default-tax-rate">
+        Default Tax Rate
+      </label>
+
+      <input
+        id="default-tax-rate"
+        type="number"
+        step="0.001"
+        min="0"
+        placeholder="0.000"
+      >
+
+      <div class="help">
+        This saves the exact numeric value stored in Supabase.
+        Leave it unchanged for now if your VAT setup has not been confirmed.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>
+      Free Shipping
+    </h2>
+
+
+    <div class="toggle-row">
+
+      <div class="toggle-info">
+        <strong>
+          Enable Free Shipping
+        </strong>
+
+        <span>
+          Allow free shipping once the required order value is reached.
+        </span>
+      </div>
+
+      <input
+        id="free-shipping-enabled"
+        type="checkbox"
+      >
+
+    </div>
+
+
+    <div class="field" style="margin-top:20px;">
+
+      <label for="free-shipping-threshold">
+        Free Shipping Threshold
+      </label>
+
+      <input
+        id="free-shipping-threshold"
+        type="number"
+        step="0.01"
+        min="0"
+        placeholder="Example: 100"
+      >
+
+      <div class="help">
+        Leave empty if free shipping is disabled.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <button
+    id="save-button"
+    class="save-button"
+    type="button"
+  >
+    Save Website Settings
+  </button>
+
+</main>
+
+</div>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const SETTINGS_ID =
+  1;
+
+
+function showMessage(
+  text,
+  type = "success"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    `message ${type}`;
+
+
+  box.textContent =
+    text;
+
+
+  box.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+
+async function loadSettings() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "shop_settings"
+      )
+      .select(
+        "id,currency_code,currency_symbol,shop_notice,affiliate_disclosure,deals_enabled,reviews_enabled,digital_products_enabled,tax_enabled,prices_include_tax,default_tax_rate,free_shipping_enabled,free_shipping_threshold,updated_at"
+      )
+      .eq(
+        "id",
+        SETTINGS_ID
+      )
+      .single();
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "Website settings could not be loaded.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  document.getElementById(
+    "currency-code"
+  ).value =
+    data.currency_code || "";
+
+
+  document.getElementById(
+    "currency-symbol"
+  ).value =
+    data.currency_symbol || "";
+
+
+  document.getElementById(
+    "shop-notice"
+  ).value =
+    data.shop_notice || "";
+
+
+  document.getElementById(
+    "affiliate-disclosure"
+  ).value =
+    data.affiliate_disclosure || "";
+
+
+  document.getElementById(
+    "deals-enabled"
+  ).checked =
+    data.deals_enabled === true;
+
+
+  document.getElementById(
+    "reviews-enabled"
+  ).checked =
+    data.reviews_enabled === true;
+
+
+  document.getElementById(
+    "digital-products-enabled"
+  ).checked =
+    data.digital_products_enabled === true;
+
+
+  document.getElementById(
+    "tax-enabled"
+  ).checked =
+    data.tax_enabled === true;
+
+
+  document.getElementById(
+    "prices-include-tax"
+  ).checked =
+    data.prices_include_tax === true;
+
+
+  document.getElementById(
+    "default-tax-rate"
+  ).value =
+    data.default_tax_rate ?? 0;
+
+
+  document.getElementById(
+    "free-shipping-enabled"
+  ).checked =
+    data.free_shipping_enabled === true;
+
+
+  document.getElementById(
+    "free-shipping-threshold"
+  ).value =
+    data.free_shipping_threshold ?? "";
+}
+
+
+async function saveSettings() {
+
+  const currencyCode =
+    document.getElementById(
+      "currency-code"
+    )
+      .value
+      .trim()
+      .toUpperCase();
+
+
+  const currencySymbol =
+    document.getElementById(
+      "currency-symbol"
+    )
+      .value
+      .trim();
+
+
+  if (
+    currencyCode.length !== 3
+  ) {
+
+    showMessage(
+      "Currency code must contain 3 letters, for example EUR.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  if (
+    !currencySymbol
+  ) {
+
+    showMessage(
+      "Please enter the currency symbol.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  const taxRateValue =
+    document.getElementById(
+      "default-tax-rate"
+    ).value;
+
+
+  const shippingThresholdValue =
+    document.getElementById(
+      "free-shipping-threshold"
+    ).value;
+
+
+  const taxRate =
+    taxRateValue === ""
+      ? 0
+      : Number(
+          taxRateValue
+        );
+
+
+  if (
+    !Number.isFinite(
+      taxRate
+    ) ||
+    taxRate < 0
+  ) {
+
+    showMessage(
+      "Please enter a valid tax rate.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  let freeShippingThreshold =
+    null;
+
+
+  if (
+    shippingThresholdValue !== ""
+  ) {
+
+    freeShippingThreshold =
+      Number(
+        shippingThresholdValue
+      );
+
+
+    if (
+      !Number.isFinite(
+        freeShippingThreshold
+      ) ||
+      freeShippingThreshold < 0
+    ) {
+
+      showMessage(
+        "Please enter a valid free shipping threshold.",
+        "error"
+      );
+
+
+      return;
+    }
+  }
+
+
+  const payload = {
+
+    currency_code:
+      currencyCode,
+
+    currency_symbol:
+      currencySymbol,
+
+    shop_notice:
+      document.getElementById(
+        "shop-notice"
+      ).value.trim() || null,
+
+    affiliate_disclosure:
+      document.getElementById(
+        "affiliate-disclosure"
+      ).value.trim() || null,
+
+    deals_enabled:
+      document.getElementById(
+        "deals-enabled"
+      ).checked,
+
+    reviews_enabled:
+      document.getElementById(
+        "reviews-enabled"
+      ).checked,
+
+    digital_products_enabled:
+      document.getElementById(
+        "digital-products-enabled"
+      ).checked,
+
+    tax_enabled:
+      document.getElementById(
+        "tax-enabled"
+      ).checked,
+
+    prices_include_tax:
+      document.getElementById(
+        "prices-include-tax"
+      ).checked,
+
+    default_tax_rate:
+      taxRate,
+
+    free_shipping_enabled:
+      document.getElementById(
+        "free-shipping-enabled"
+      ).checked,
+
+    free_shipping_threshold:
+      freeShippingThreshold,
+
+    updated_at:
+      new Date().toISOString()
+
+  };
+
+
+  const button =
+    document.getElementById(
+      "save-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Saving...";
+
+
+  try {
+
+    const {
+      error
+    } =
+      await db
+        .from(
+          "shop_settings"
+        )
+        .update(
+          payload
+        )
+        .eq(
+          "id",
+          SETTINGS_ID
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      throw new Error(
+        error.message ||
+        "Website settings could not be saved."
+      );
+    }
+
+
+    showMessage(
+      "Website settings saved successfully."
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      error instanceof Error
+        ? error.message
+        : "Website settings could not be saved.",
+      "error"
+    );
+
+
+  } finally {
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Save Website Settings";
+  }
+}
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .auth
+      .getSession();
+
+
+  const session =
+    data?.session;
+
+
+  if (
+    error ||
+    !session ||
+    session.user?.id !==
+      ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+
+    return;
+  }
+
+
+  document.getElementById(
+    "loading"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "admin-page"
+  ).style.display =
+    "block";
+
+
+  await loadSettings();
+}
+
+
+document.getElementById(
+  "save-button"
+).addEventListener(
+  "click",
+  saveSettings
+);
+
+
+protectPage();
+
+</script>
+
+</body>
+
+</html>
