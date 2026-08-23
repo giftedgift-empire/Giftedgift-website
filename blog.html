@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Blog | GiftedGift Empire</title>
-  <meta name="description" content="Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire.">
+
+  <meta
+    name="description"
+    content="Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire."
+  >
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -70,52 +80,211 @@
       padding: 45px 20px;
     }
 
-    .blog h2 {
+    .blog > h2 {
       text-align: center;
       font-size: 30px;
       margin-bottom: 35px;
     }
 
+    .loading {
+      text-align: center;
+      padding: 45px 20px;
+      color: #666;
+      font-weight: bold;
+    }
+
+    .message {
+      display: none;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      padding: 14px;
+      border-radius: 9px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      border: 1px solid #efbbbb;
+      color: #951d1d;
+    }
+
+    .empty {
+      display: none;
+      background: white;
+      max-width: 700px;
+      margin: auto;
+      padding: 35px 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .empty h3 {
+      color: #123a8c;
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .empty p {
+      color: #555;
+      line-height: 1.7;
+    }
+
     .posts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: none;
+      grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
     }
 
     .post {
       background: white;
-      padding: 25px;
       border-radius: 14px;
+      overflow: hidden;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-image-box {
+      width: 100%;
+      height: 230px;
+      background: #f1f1f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .post-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-no-image {
+      color: #888;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    .post-body {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .post-date {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 10px;
     }
 
     .post h3 {
       color: #123a8c;
       font-size: 23px;
-      margin-top: 0;
+      margin: 0 0 12px;
     }
 
     .post p {
       color: #555;
       line-height: 1.7;
+      margin: 0;
     }
 
     .read-more {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 18px;
       background: #f2bd16;
       color: #111;
+      border: none;
       text-decoration: none;
       font-weight: bold;
       padding: 11px 18px;
       border-radius: 7px;
+      cursor: pointer;
+      align-self: flex-start;
+      font-size: 15px;
     }
 
-    .coming-soon {
-      display: inline-block;
-      margin-top: 12px;
-      font-weight: bold;
+    .read-more:hover {
+      opacity: 0.9;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.65);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.open {
+      display: block;
+    }
+
+    .modal-card {
+      position: relative;
+      max-width: 850px;
+      margin: 25px auto;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+
+    .modal-image {
+      display: none;
+      width: 100%;
+      max-height: 430px;
+      object-fit: cover;
+      background: #f3f3f3;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .modal-title {
+      margin: 0 45px 10px 0;
       color: #123a8c;
+      font-size: 32px;
+    }
+
+    .modal-date {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .modal-content {
+      color: #444;
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #123a8c;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 2;
     }
 
     footer {
@@ -125,85 +294,751 @@
       text-align: center;
       padding: 30px 20px;
     }
+
+    @media (max-width: 650px) {
+
+      .hero h2 {
+        font-size: 31px;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      .blog {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .posts {
+        grid-template-columns: 1fr;
+      }
+
+      .post-image-box {
+        height: 220px;
+      }
+
+      .modal {
+        padding: 10px;
+      }
+
+      .modal-card {
+        margin: 10px auto;
+      }
+
+      .modal-body {
+        padding: 24px 20px;
+      }
+
+      .modal-title {
+        font-size: 27px;
+      }
+
+      .modal-content {
+        font-size: 16px;
+      }
+    }
+
   </style>
 </head>
+
 
 <body>
 
 <header>
-  <h1>GiftedGift Empire</h1>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="categories.html">Categories</a>
-    <a href="blog.html">Blog</a>
-    <a href="deals.html">Deals</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="shop.html">
+      Shop
+    </a>
+
+    <a href="categories.html">
+      Categories
+    </a>
+
+    <a href="daily-inspiration.html">
+      Daily Inspiration
+    </a>
+
+    <a href="blog.html">
+      Blog
+    </a>
+
+    <a href="deals.html">
+      Deals
+    </a>
+
+    <a href="about.html">
+      About
+    </a>
+
+    <a href="contact.html">
+      Contact
+    </a>
+
+    <a href="cart.html">
+      🛒 Cart
+    </a>
+
   </nav>
+
 </header>
 
+
 <section class="hero">
-  <h2>GiftedGift Empire Blog</h2>
+
+  <h2>
+    GiftedGift Empire Blog
+  </h2>
 
   <p>
-    Helpful shopping guides, product recommendations, lifestyle ideas
-    and useful tips to help you discover better finds.
+    Helpful shopping guides, product recommendations,
+    lifestyle ideas and useful tips to help you
+    discover better finds.
   </p>
+
 </section>
+
 
 <main class="blog">
 
-  <h2>Latest From the Blog</h2>
+  <h2>
+    Latest From the Blog
+  </h2>
 
-  <div class="posts">
 
-    <article class="post">
-      <h3>Home & Living</h3>
-      <p>
-        Discover practical ideas, useful home products and smart finds
-        that can make everyday living easier.
-      </p>
-      <span class="coming-soon">Articles Coming Soon</span>
-    </article>
+  <div
+    id="message"
+    class="message"
+  ></div>
 
-    <article class="post">
-      <h3>Beauty & Lifestyle</h3>
-      <p>
-        Explore beauty, personal-care and lifestyle guides designed
-        to help you make informed shopping decisions.
-      </p>
-      <span class="coming-soon">Articles Coming Soon</span>
-    </article>
 
-    <article class="post">
-      <h3>Fashion & Accessories</h3>
-      <p>
-        Find fashion inspiration, accessories, useful recommendations
-        and shopping guides.
-      </p>
-      <span class="coming-soon">Articles Coming Soon</span>
-    </article>
-
-    <article class="post">
-      <h3>Buying Guides</h3>
-      <p>
-        Compare products, discover useful recommendations and learn
-        what to consider before making a purchase.
-      </p>
-      <span class="coming-soon">Articles Coming Soon</span>
-    </article>
-
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading articles...
   </div>
+
+
+  <section
+    id="empty"
+    class="empty"
+  >
+
+    <h3>
+      Articles Coming Soon
+    </h3>
+
+    <p>
+      New shopping guides, recommendations,
+      useful finds and lifestyle articles
+      are being prepared for you.
+    </p>
+
+  </section>
+
+
+  <section
+    id="posts"
+    class="posts"
+  ></section>
 
 </main>
 
+
+<div
+  id="article-modal"
+  class="modal"
+>
+
+  <article class="modal-card">
+
+    <button
+      id="close-modal"
+      class="close-modal"
+      type="button"
+      aria-label="Close article"
+    >
+      ×
+    </button>
+
+
+    <img
+      id="modal-image"
+      class="modal-image"
+      alt=""
+    >
+
+
+    <div class="modal-body">
+
+      <h2
+        id="modal-title"
+        class="modal-title"
+      ></h2>
+
+
+      <div
+        id="modal-date"
+        class="modal-date"
+      ></div>
+
+
+      <div
+        id="modal-content"
+        class="modal-content"
+      ></div>
+
+    </div>
+
+  </article>
+
+</div>
+
+
 <footer>
-  <p><strong>GiftedGift Empire</strong></p>
-  <p>© 2026 GiftedGift Empire. All rights reserved.</p>
+
+  <p>
+    <strong>
+      GiftedGift Empire
+    </strong>
+  </p>
+
+  <p>
+    © 2026 GiftedGift Empire.
+    All rights reserved.
+  </p>
+
 </footer>
 
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const db =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  let publishedPosts =
+    [];
+
+
+  function showError(
+    text
+  ) {
+
+    const box =
+      document.getElementById(
+        "message"
+      );
+
+
+    box.className =
+      "message error";
+
+
+    box.textContent =
+      text;
+  }
+
+
+  function formatDate(
+    value
+  ) {
+
+    if (
+      !value
+    ) {
+
+      return "";
+    }
+
+
+    const date =
+      new Date(
+        value
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "";
+    }
+
+
+    return date.toLocaleDateString(
+      undefined,
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      }
+    );
+  }
+
+
+  function createPostCard(
+    post
+  ) {
+
+    const article =
+      document.createElement(
+        "article"
+      );
+
+
+    article.className =
+      "post";
+
+
+    const imageBox =
+      document.createElement(
+        "div"
+      );
+
+
+    imageBox.className =
+      "post-image-box";
+
+
+    if (
+      post.image_url
+    ) {
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+
+      image.className =
+        "post-image";
+
+
+      image.src =
+        post.image_url;
+
+
+      image.alt =
+        post.title ||
+        "GiftedGift Empire blog article";
+
+
+      image.loading =
+        "lazy";
+
+
+      imageBox.appendChild(
+        image
+      );
+
+    } else {
+
+      const placeholder =
+        document.createElement(
+          "div"
+        );
+
+
+      placeholder.className =
+        "post-no-image";
+
+
+      placeholder.textContent =
+        "GiftedGift Empire";
+
+
+      imageBox.appendChild(
+        placeholder
+      );
+    }
+
+
+    const body =
+      document.createElement(
+        "div"
+      );
+
+
+    body.className =
+      "post-body";
+
+
+    const date =
+      document.createElement(
+        "div"
+      );
+
+
+    date.className =
+      "post-date";
+
+
+    date.textContent =
+      formatDate(
+        post.created_at
+      );
+
+
+    const title =
+      document.createElement(
+        "h3"
+      );
+
+
+    title.textContent =
+      post.title ||
+      "Article";
+
+
+    const excerpt =
+      document.createElement(
+        "p"
+      );
+
+
+    excerpt.textContent =
+      post.excerpt ||
+      "";
+
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+
+    button.className =
+      "read-more";
+
+
+    button.type =
+      "button";
+
+
+    button.textContent =
+      "Read Article";
+
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        openArticle(
+          post
+        );
+      }
+    );
+
+
+    if (
+      date.textContent
+    ) {
+
+      body.appendChild(
+        date
+      );
+    }
+
+
+    body.appendChild(
+      title
+    );
+
+
+    body.appendChild(
+      excerpt
+    );
+
+
+    body.appendChild(
+      button
+    );
+
+
+    article.appendChild(
+      imageBox
+    );
+
+
+    article.appendChild(
+      body
+    );
+
+
+    return article;
+  }
+
+
+  function openArticle(
+    post
+  ) {
+
+    const modal =
+      document.getElementById(
+        "article-modal"
+      );
+
+
+    const image =
+      document.getElementById(
+        "modal-image"
+      );
+
+
+    document.getElementById(
+      "modal-title"
+    ).textContent =
+      post.title ||
+      "Article";
+
+
+    document.getElementById(
+      "modal-date"
+    ).textContent =
+      formatDate(
+        post.created_at
+      );
+
+
+    document.getElementById(
+      "modal-content"
+    ).textContent =
+      post.content ||
+      "";
+
+
+    if (
+      post.image_url
+    ) {
+
+      image.src =
+        post.image_url;
+
+
+      image.alt =
+        post.title ||
+        "GiftedGift Empire article";
+
+
+      image.style.display =
+        "block";
+
+    } else {
+
+      image.removeAttribute(
+        "src"
+      );
+
+
+      image.style.display =
+        "none";
+    }
+
+
+    modal.classList.add(
+      "open"
+    );
+
+
+    document.body.style.overflow =
+      "hidden";
+  }
+
+
+  function closeArticle() {
+
+    document.getElementById(
+      "article-modal"
+    ).classList.remove(
+      "open"
+    );
+
+
+    document.body.style.overflow =
+      "";
+  }
+
+
+  async function loadPosts() {
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+
+    const postsBox =
+      document.getElementById(
+        "posts"
+      );
+
+
+    const empty =
+      document.getElementById(
+        "empty"
+      );
+
+
+    const {
+      data,
+      error
+    } =
+      await db
+        .from(
+          "blog_posts"
+        )
+        .select(
+          "id,title,excerpt,content,image_url,published,created_at"
+        )
+        .eq(
+          "published",
+          true
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    loading.style.display =
+      "none";
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      showError(
+        "The Blog could not be loaded right now."
+      );
+
+
+      return;
+    }
+
+
+    publishedPosts =
+      Array.isArray(
+        data
+      )
+        ? data
+        : [];
+
+
+    if (
+      publishedPosts.length === 0
+    ) {
+
+      empty.style.display =
+        "block";
+
+
+      return;
+    }
+
+
+    postsBox.innerHTML =
+      "";
+
+
+    publishedPosts.forEach(
+      post => {
+
+        postsBox.appendChild(
+          createPostCard(
+            post
+          )
+        );
+      }
+    );
+
+
+    postsBox.style.display =
+      "grid";
+  }
+
+
+  document.getElementById(
+    "close-modal"
+  ).addEventListener(
+    "click",
+    closeArticle
+  );
+
+
+  document.getElementById(
+    "article-modal"
+  ).addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target.id ===
+        "article-modal"
+      ) {
+
+        closeArticle();
+      }
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key ===
+        "Escape"
+      ) {
+
+        closeArticle();
+      }
+    }
+  );
+
+
+  loadPosts();
+
+</script>
+
 </body>
+
 </html>
