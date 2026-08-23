@@ -18,6 +18,160 @@
     content="Discover useful products, African foodstuffs, digital products, smart recommendations, deals and carefully selected finds from GiftedGift Empire."
   >
 
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <meta
+    name="application-name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+
+  <!-- =========================
+       CANONICAL WEBSITE
+  ========================= -->
+
+  <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/"
+  >
+
+
+  <!-- =========================
+       FAVICON / BRAND ICON
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="my-logo.png"
+  >
+
+
+  <!-- =========================
+       FACEBOOK / WHATSAPP /
+       SOCIAL SHARING
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    property="og:title"
+    content="GiftedGift Empire | Smart Finds & Recommendations"
+  >
+
+  <meta
+    property="og:description"
+    content="Discover useful products, African foodstuffs, digital products, smart recommendations, deals and carefully selected finds from GiftedGift Empire."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/"
+  >
+
+  <meta
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    property="og:image:type"
+    content="image/png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="GiftedGift Empire logo"
+  >
+
+
+  <!-- =========================
+       X / TWITTER SHARING
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="GiftedGift Empire | Smart Finds & Recommendations"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Discover useful products, African foodstuffs, digital products, smart recommendations and deals from GiftedGift Empire."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+
+  <!-- =========================
+       GOOGLE / SEARCH ENGINE
+       ORGANIZATION BRANDING
+  ========================= -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://giftedgiftempire.com/#organization",
+        "name": "GiftedGift Empire",
+        "url": "https://giftedgiftempire.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://giftedgiftempire.com/my-logo.png"
+        },
+        "email": "gift@giftedgiftempire.com"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://giftedgiftempire.com/#website",
+        "url": "https://giftedgiftempire.com/",
+        "name": "GiftedGift Empire",
+        "description": "Smart finds, useful products, African foodstuffs, digital products, deals and carefully selected recommendations.",
+        "publisher": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        }
+      }
+    ]
+  }
+  </script>
+
+
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
   </script>
@@ -787,16 +941,16 @@
     }
 
     .discover-card {
-  padding: 28px 23px;
+      padding: 28px 23px;
 
-  border-radius: 16px;
+      border-radius: 16px;
 
-  background: #ffffff;
+      background: #ffffff;
 
-  border: 1px solid #e5e7eb;
+      border: 1px solid #e5e7eb;
 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-}
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    }
 
     .discover-icon {
       font-size: 33px;
@@ -810,9 +964,9 @@
     }
 
     .discover-card p {
-  color: var(--blue);
-  line-height: 1.65;
-}
+      color: var(--blue);
+      line-height: 1.65;
+    }
 
     .discover-card a {
       display: inline-block;
@@ -1232,11 +1386,15 @@
     <a
       href="index.html"
       class="brand"
+      aria-label="GiftedGift Empire home"
     >
 
       <img
         src="my-logo.png"
-        alt="GiftedGift Empire Logo"
+        alt="GiftedGift Empire logo"
+        width="62"
+        height="62"
+        fetchpriority="high"
       >
 
       <div class="brand-name">
@@ -1788,7 +1946,10 @@
 
         <img
           src="my-logo.png"
-          alt="GiftedGift Empire"
+          alt="GiftedGift Empire logo"
+          width="48"
+          height="48"
+          loading="lazy"
         >
 
         <strong>
@@ -2904,7 +3065,9 @@
   startHomepage();
 
 </script>
-  <!-- =========================
+
+
+<!-- =========================
      GIFTANA WELCOME POPUP
 ========================= -->
 
