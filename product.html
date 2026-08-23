@@ -11,6 +11,11 @@
 
   <title>Product | GiftedGift Empire</title>
 
+  <meta
+    name="description"
+    content="Shop products and read customer reviews at GiftedGift Empire."
+  >
+
   <style>
     * {
       box-sizing: border-box;
@@ -120,8 +125,15 @@
     }
 
     .rating {
-      margin: 10px 0;
+      margin: 12px 0 18px;
       font-weight: bold;
+      color: #555;
+    }
+
+    .rating-stars {
+      color: #e7a900;
+      letter-spacing: 2px;
+      margin-right: 7px;
     }
 
     .description {
@@ -296,6 +308,208 @@
       font-weight: bold;
     }
 
+
+    /* REVIEWS */
+
+    .reviews-section {
+      display: none;
+      margin-top: 35px;
+    }
+
+    .reviews-heading {
+      margin-bottom: 20px;
+    }
+
+    .reviews-heading h2 {
+      margin: 0 0 8px;
+      color: #123a8c;
+      font-size: 29px;
+    }
+
+    .reviews-heading p {
+      margin: 0;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .review-summary {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      margin-bottom: 22px;
+    }
+
+    .review-summary-score {
+      font-size: 30px;
+      font-weight: bold;
+      color: #123a8c;
+      margin-bottom: 6px;
+    }
+
+    .review-summary-stars {
+      color: #e7a900;
+      font-size: 23px;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+
+    .review-summary-count {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .approved-reviews,
+    .review-form-card {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    }
+
+    .approved-reviews h3,
+    .review-form-card h3 {
+      margin: 0 0 18px;
+      color: #123a8c;
+      font-size: 22px;
+    }
+
+    .review-card {
+      padding: 18px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .review-card:first-child {
+      padding-top: 0;
+    }
+
+    .review-card:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .review-card-name {
+      font-weight: bold;
+      color: #123a8c;
+      margin-bottom: 7px;
+    }
+
+    .review-card-stars {
+      color: #e7a900;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .review-card-text {
+      color: #444;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .review-card-date {
+      color: #888;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .no-reviews {
+      color: #666;
+      line-height: 1.6;
+      background: #f8f9fb;
+      padding: 16px;
+      border-radius: 9px;
+    }
+
+    .review-form-card label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .review-form-card input[type="text"],
+    .review-form-card textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .review-form-card textarea {
+      min-height: 135px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .star-picker {
+      display: flex;
+      gap: 5px;
+      margin: 2px 0 20px;
+    }
+
+    .star-picker button {
+      border: none;
+      background: transparent;
+      color: #bbb;
+      font-size: 35px;
+      line-height: 1;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .star-picker button.selected {
+      color: #e7a900;
+    }
+
+    .review-submit {
+      width: 100%;
+      border: none;
+      background: #123a8c;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .review-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .review-form-message {
+      display: none;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 8px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .review-form-message.success {
+      display: block;
+      background: #e9f8ed;
+      border: 1px solid #b7e1c1;
+      color: #17652d;
+    }
+
+    .review-form-message.error {
+      display: block;
+      background: #ffe8e8;
+      border: 1px solid #efb9b9;
+      color: #9c1d1d;
+    }
+
     footer {
       margin-top: 50px;
       padding: 30px 20px;
@@ -328,6 +542,16 @@
       .image-placeholder {
         min-height: 260px;
       }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .review-summary,
+      .approved-reviews,
+      .review-form-card {
+        padding: 20px;
+      }
     }
   </style>
 
@@ -354,6 +578,10 @@
 
     <a href="categories.html">
       Categories
+    </a>
+
+    <a href="daily-inspiration.html">
+      Daily Inspiration
     </a>
 
     <a href="blog.html">
@@ -440,7 +668,9 @@
       <div
         id="product-rating"
         class="rating"
-      ></div>
+      >
+        No customer reviews yet
+      </div>
 
 
       <div
@@ -545,6 +775,179 @@
 
   </section>
 
+
+  <!-- CUSTOMER REVIEWS -->
+
+  <section
+    id="reviews-section"
+    class="reviews-section"
+  >
+
+    <div class="reviews-heading">
+
+      <h2>
+        Customer Reviews
+      </h2>
+
+      <p>
+        Read approved customer feedback or share your experience with this product.
+      </p>
+
+    </div>
+
+
+    <div
+      id="review-summary"
+      class="review-summary"
+    >
+
+      <div
+        id="review-summary-score"
+        class="review-summary-score"
+      >
+        No ratings yet
+      </div>
+
+      <div
+        id="review-summary-stars"
+        class="review-summary-stars"
+      >
+        ☆☆☆☆☆
+      </div>
+
+      <div
+        id="review-summary-count"
+        class="review-summary-count"
+      >
+        Be the first to leave a review.
+      </div>
+
+    </div>
+
+
+    <div class="reviews-grid">
+
+
+      <div class="approved-reviews">
+
+        <h3>
+          Reviews
+        </h3>
+
+        <div id="reviews-list">
+
+          <div class="no-reviews">
+            No approved customer reviews yet.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="review-form-card">
+
+        <h3>
+          Leave a Review
+        </h3>
+
+
+        <label for="reviewer-name">
+          Your Name
+        </label>
+
+        <input
+          id="reviewer-name"
+          type="text"
+          maxlength="80"
+          placeholder="Enter your name"
+        >
+
+
+        <label>
+          Your Rating
+        </label>
+
+        <div
+          id="star-picker"
+          class="star-picker"
+          aria-label="Choose your rating"
+        >
+
+          <button
+            type="button"
+            data-rating="1"
+            aria-label="1 star"
+          >
+            ★
+          </button>
+
+          <button
+            type="button"
+            data-rating="2"
+            aria-label="2 stars"
+          >
+            ★
+          </button>
+
+          <button
+            type="button"
+            data-rating="3"
+            aria-label="3 stars"
+          >
+            ★
+          </button>
+
+          <button
+            type="button"
+            data-rating="4"
+            aria-label="4 stars"
+          >
+            ★
+          </button>
+
+          <button
+            type="button"
+            data-rating="5"
+            aria-label="5 stars"
+          >
+            ★
+          </button>
+
+        </div>
+
+
+        <label for="review-text">
+          Your Review
+        </label>
+
+        <textarea
+          id="review-text"
+          maxlength="1500"
+          placeholder="Tell us what you think about this product..."
+        ></textarea>
+
+
+        <button
+          id="submit-review"
+          class="review-submit"
+          type="button"
+        >
+          Submit Review
+        </button>
+
+
+        <div
+          id="review-form-message"
+          class="review-form-message"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
 </main>
 
 
@@ -626,6 +1029,14 @@
 
   let maxQuantity =
     99;
+
+
+  let approvedReviews =
+    [];
+
+
+  let selectedReviewRating =
+    0;
 
 
   function escapeHTML(
@@ -1220,13 +1631,6 @@
         : null;
 
 
-    /*
-      Find this exact cart line.
-
-      A normal purchase and a deal purchase
-      of the same product remain separate.
-    */
-
     const existingItem =
       cart.find(
         item => {
@@ -1255,12 +1659,6 @@
         }
       );
 
-
-    /*
-      Count every quantity of this product
-      already in the cart so stock cannot be
-      exceeded by mixing normal + deal lines.
-    */
 
     const totalProductQuantity =
       cart.reduce(
@@ -1454,6 +1852,10 @@
       "Product";
 
 
+    document.title =
+      `${product.name || "Product"} | GiftedGift Empire`;
+
+
     document.getElementById(
       "product-description"
     ).textContent =
@@ -1563,32 +1965,6 @@
     }
 
 
-    const rating =
-      document.getElementById(
-        "product-rating"
-      );
-
-
-    if (
-      product.rating !== null &&
-      product.rating !== undefined &&
-      product.rating !== ""
-    ) {
-
-      rating.textContent =
-        `⭐ ${product.rating} / 5`;
-
-
-      rating.style.display =
-        "block";
-
-    } else {
-
-      rating.style.display =
-        "none";
-    }
-
-
     const stockStatus =
       document.getElementById(
         "stock-status"
@@ -1678,6 +2054,693 @@
   }
 
 
+  /* REVIEWS */
+
+
+  function formatReviewDate(
+    value
+  ) {
+
+    if (
+      !value
+    ) {
+
+      return "";
+    }
+
+
+    const date =
+      new Date(
+        value
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "";
+    }
+
+
+    return date.toLocaleDateString(
+      undefined,
+      {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }
+    );
+  }
+
+
+  function starString(
+    rating
+  ) {
+
+    const safe =
+      Math.max(
+        0,
+        Math.min(
+          5,
+          Math.round(
+            Number(
+              rating
+            ) || 0
+          )
+        )
+      );
+
+
+    return (
+      "★".repeat(
+        safe
+      ) +
+      "☆".repeat(
+        5 - safe
+      )
+    );
+  }
+
+
+  function getAverageRating() {
+
+    if (
+      approvedReviews.length === 0
+    ) {
+
+      return 0;
+    }
+
+
+    const total =
+      approvedReviews.reduce(
+        (
+          sum,
+          review
+        ) =>
+          sum +
+          Number(
+            review.rating || 0
+          ),
+        0
+      );
+
+
+    return (
+      total /
+      approvedReviews.length
+    );
+  }
+
+
+  function renderReviewSummary() {
+
+    const topRating =
+      document.getElementById(
+        "product-rating"
+      );
+
+
+    const score =
+      document.getElementById(
+        "review-summary-score"
+      );
+
+
+    const stars =
+      document.getElementById(
+        "review-summary-stars"
+      );
+
+
+    const count =
+      document.getElementById(
+        "review-summary-count"
+      );
+
+
+    if (
+      approvedReviews.length === 0
+    ) {
+
+      topRating.innerHTML =
+        '<span class="rating-stars">☆☆☆☆☆</span> No customer reviews yet';
+
+
+      score.textContent =
+        "No ratings yet";
+
+
+      stars.textContent =
+        "☆☆☆☆☆";
+
+
+      count.textContent =
+        "Be the first to leave a review.";
+
+
+      return;
+    }
+
+
+    const average =
+      getAverageRating();
+
+
+    const roundedStars =
+      starString(
+        average
+      );
+
+
+    const reviewWord =
+      approvedReviews.length === 1
+        ? "review"
+        : "reviews";
+
+
+    topRating.innerHTML =
+      `<span class="rating-stars">${
+        escapeHTML(
+          roundedStars
+        )
+      }</span> ${
+        average.toFixed(1)
+      } / 5 · ${
+        approvedReviews.length
+      } ${reviewWord}`;
+
+
+    score.textContent =
+      `${average.toFixed(1)} / 5`;
+
+
+    stars.textContent =
+      roundedStars;
+
+
+    count.textContent =
+      `${approvedReviews.length} approved customer ${reviewWord}`;
+  }
+
+
+  function renderReviews() {
+
+    const container =
+      document.getElementById(
+        "reviews-list"
+      );
+
+
+    container.innerHTML =
+      "";
+
+
+    if (
+      approvedReviews.length === 0
+    ) {
+
+      const empty =
+        document.createElement(
+          "div"
+        );
+
+
+      empty.className =
+        "no-reviews";
+
+
+      empty.textContent =
+        "No approved customer reviews yet. Be the first to share your experience.";
+
+
+      container.appendChild(
+        empty
+      );
+
+
+      return;
+    }
+
+
+    approvedReviews.forEach(
+      review => {
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+
+        card.className =
+          "review-card";
+
+
+        const name =
+          document.createElement(
+            "div"
+          );
+
+
+        name.className =
+          "review-card-name";
+
+
+        name.textContent =
+          review.reviewer_name ||
+          "Customer";
+
+
+        const stars =
+          document.createElement(
+            "div"
+          );
+
+
+        stars.className =
+          "review-card-stars";
+
+
+        stars.textContent =
+          starString(
+            review.rating
+          );
+
+
+        const text =
+          document.createElement(
+            "div"
+          );
+
+
+        text.className =
+          "review-card-text";
+
+
+        text.textContent =
+          review.review_text ||
+          "";
+
+
+        card.appendChild(
+          name
+        );
+
+
+        card.appendChild(
+          stars
+        );
+
+
+        card.appendChild(
+          text
+        );
+
+
+        const formattedDate =
+          formatReviewDate(
+            review.created_at
+          );
+
+
+        if (
+          formattedDate
+        ) {
+
+          const date =
+            document.createElement(
+              "div"
+            );
+
+
+          date.className =
+            "review-card-date";
+
+
+          date.textContent =
+            formattedDate;
+
+
+          card.appendChild(
+            date
+          );
+        }
+
+
+        container.appendChild(
+          card
+        );
+      }
+    );
+  }
+
+
+  async function loadReviews() {
+
+    if (
+      !Number.isInteger(
+        productId
+      ) ||
+      productId <= 0
+    ) {
+
+      return;
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "reviews"
+        )
+        .select(
+          "id,item_type,item_id,reviewer_name,rating,review_text,approved,created_at"
+        )
+        .eq(
+          "item_type",
+          "product"
+        )
+        .eq(
+          "item_id",
+          productId
+        )
+        .eq(
+          "approved",
+          true
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Reviews loading error:",
+        error
+      );
+
+
+      approvedReviews =
+        [];
+
+
+    } else {
+
+      approvedReviews =
+        data || [];
+    }
+
+
+    renderReviewSummary();
+
+
+    renderReviews();
+
+
+    document.getElementById(
+      "reviews-section"
+    ).style.display =
+      "block";
+  }
+
+
+  function updateStarPicker() {
+
+    document
+      .querySelectorAll(
+        "#star-picker button"
+      )
+      .forEach(
+        button => {
+
+          const rating =
+            Number(
+              button.dataset.rating
+            );
+
+
+          button.classList.toggle(
+            "selected",
+            rating <=
+            selectedReviewRating
+          );
+        }
+      );
+  }
+
+
+  function showReviewFormMessage(
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "review-form-message"
+      );
+
+
+    box.className =
+      `review-form-message ${type}`;
+
+
+    box.textContent =
+      text;
+  }
+
+
+  function clearReviewFormMessage() {
+
+    const box =
+      document.getElementById(
+        "review-form-message"
+      );
+
+
+    box.className =
+      "review-form-message";
+
+
+    box.textContent =
+      "";
+  }
+
+
+  async function submitReview() {
+
+    clearReviewFormMessage();
+
+
+    if (
+      !currentProduct
+    ) {
+
+      showReviewFormMessage(
+        "The product has not finished loading.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const reviewerName =
+      document.getElementById(
+        "reviewer-name"
+      )
+        .value
+        .trim();
+
+
+    const reviewText =
+      document.getElementById(
+        "review-text"
+      )
+        .value
+        .trim();
+
+
+    if (
+      !reviewerName
+    ) {
+
+      showReviewFormMessage(
+        "Please enter your name.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      reviewerName.length > 80
+    ) {
+
+      showReviewFormMessage(
+        "Your name is too long.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      !Number.isInteger(
+        selectedReviewRating
+      ) ||
+      selectedReviewRating < 1 ||
+      selectedReviewRating > 5
+    ) {
+
+      showReviewFormMessage(
+        "Please choose a star rating from 1 to 5.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      !reviewText
+    ) {
+
+      showReviewFormMessage(
+        "Please write your review.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      reviewText.length > 1500
+    ) {
+
+      showReviewFormMessage(
+        "Your review is too long.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const button =
+      document.getElementById(
+        "submit-review"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Submitting...";
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from(
+          "reviews"
+        )
+        .insert({
+
+          item_type:
+            "product",
+
+          item_id:
+            Number(
+              currentProduct.id
+            ),
+
+          reviewer_name:
+            reviewerName,
+
+          rating:
+            selectedReviewRating,
+
+          review_text:
+            reviewText,
+
+          approved:
+            false
+
+        });
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Submit Review";
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Review submission error:",
+        error
+      );
+
+
+      showReviewFormMessage(
+        "Your review could not be submitted. Please try again.",
+        "error"
+      );
+
+
+      return;
+    }
+
+
+    document.getElementById(
+      "reviewer-name"
+    ).value =
+      "";
+
+
+    document.getElementById(
+      "review-text"
+    ).value =
+      "";
+
+
+    selectedReviewRating =
+      0;
+
+
+    updateStarPicker();
+
+
+    showReviewFormMessage(
+      "Thank you! Your review has been submitted and is waiting for approval.",
+      "success"
+    );
+  }
+
+
   async function loadProduct() {
 
     const loading =
@@ -1743,11 +2806,6 @@
       product;
 
 
-    /*
-      If this product page was opened through
-      a physical deal, verify that deal first.
-    */
-
     await loadDeal(
       product
     );
@@ -1764,6 +2822,9 @@
 
     content.style.display =
       "grid";
+
+
+    await loadReviews();
   }
 
 
@@ -1801,7 +2862,46 @@
   );
 
 
+  document
+    .querySelectorAll(
+      "#star-picker button"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            selectedReviewRating =
+              Number(
+                button.dataset.rating
+              );
+
+
+            updateStarPicker();
+
+
+            clearReviewFormMessage();
+          }
+        );
+      }
+    );
+
+
+  document.getElementById(
+    "submit-review"
+  ).addEventListener(
+    "click",
+    submitReview
+  );
+
+
   updateCartCount();
+
+
+  updateStarPicker();
+
 
   loadProduct();
 
