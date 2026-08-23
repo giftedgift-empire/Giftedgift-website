@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Manage Reviews | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      color: #f2bd16;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .page {
+      max-width: 1050px;
+      margin: auto;
+      padding: 30px 18px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(150px, 1fr)
+      );
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      color: #123a8c;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .filter-button {
+      border: 1px solid #ccc;
+      background: white;
+      color: #333;
+      padding: 10px 15px;
+      border-radius: 22px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .filter-button.active {
+      background: #123a8c;
+      color: white;
+      border-color: #123a8c;
+    }
+
+    .message {
+      display: none;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #e8f7ec;
+      color: #17652d;
+      border: 1px solid #b8dfc0;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      color: #951d1d;
+      border: 1px solid #efbbbb;
+    }
+
+    .review-card {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      margin-bottom: 17px;
+    }
+
+    .review-card.pending {
+      border-left: 5px solid #f2bd16;
+    }
+
+    .review-card.approved {
+      border-left: 5px solid #2e8b57;
+    }
+
+    .review-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .reviewer {
+      font-size: 18px;
+      font-weight: bold;
+      color: #123a8c;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status.pending {
+      background: #fff3cd;
+      color: #775700;
+    }
+
+    .status.approved {
+      background: #e8f7ec;
+      color: #17652d;
+    }
+
+    .stars {
+      font-size: 21px;
+      color: #e7a900;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .review-text {
+      color: #444;
+      line-height: 1.7;
+      white-space: pre-line;
+      margin-bottom: 15px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .item-badge {
+      display: inline-block;
+      background: #eef3ff;
+      color: #123a8c;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .approve-button {
+      background: #2e8b57;
+      color: white;
+      flex: 1;
+    }
+
+    .hide-button {
+      background: #e5e7eb;
+      color: #222;
+      flex: 1;
+    }
+
+    .delete-button {
+      background: #c62828;
+      color: white;
+      flex: 1;
+    }
+
+    .empty {
+      background: white;
+      border-radius: 14px;
+      padding: 40px 20px;
+      text-align: center;
+      color: #666;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    }
+
+    #loading {
+      text-align: center;
+      padding: 60px 20px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .review-card {
+        padding: 18px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div id="loading">
+  Checking admin access...
+</div>
+
+
+<div
+  id="admin-page"
+  style="display:none;"
+>
+
+<header>
+
+  <h1>
+    Manage Reviews
+  </h1>
+
+  <p>
+    Approve, hide or delete customer reviews.
+  </p>
+
+</header>
+
+
+<main class="page">
+
+  <a
+    href="dashboard.html"
+    class="back-link"
+  >
+    ← Back to Dashboard
+  </a>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <section class="stats">
+
+    <div class="stat">
+      <strong id="total-count">0</strong>
+      <span>Total Reviews</span>
+    </div>
+
+    <div class="stat">
+      <strong id="pending-count">0</strong>
+      <span>Pending</span>
+    </div>
+
+    <div class="stat">
+      <strong id="approved-count">0</strong>
+      <span>Approved</span>
+    </div>
+
+  </section>
+
+
+  <div class="filters">
+
+    <button
+      class="filter-button active"
+      data-filter="all"
+      type="button"
+    >
+      All
+    </button>
+
+    <button
+      class="filter-button"
+      data-filter="pending"
+      type="button"
+    >
+      Pending
+    </button>
+
+    <button
+      class="filter-button"
+      data-filter="approved"
+      type="button"
+    >
+      Approved
+    </button>
+
+  </div>
+
+
+  <div id="reviews-container">
+
+    <div class="empty">
+      Loading reviews...
+    </div>
+
+  </div>
+
+</main>
+
+</div>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+let allReviews =
+  [];
+
+
+let currentFilter =
+  "all";
+
+
+function showMessage(
+  text,
+  type = "success"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    `message ${type}`;
+
+
+  box.textContent =
+    text;
+
+
+  box.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+
+function formatDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+  }
+
+
+  return date.toLocaleString();
+}
+
+
+function starText(
+  rating
+) {
+
+  const safeRating =
+    Math.max(
+      0,
+      Math.min(
+        5,
+        Number(rating) || 0
+      )
+    );
+
+
+  return (
+    "★".repeat(
+      safeRating
+    ) +
+    "☆".repeat(
+      5 - safeRating
+    )
+  );
+}
+
+
+function readableType(
+  itemType
+) {
+
+  const value =
+    String(
+      itemType || ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+  if (
+    value === "product"
+  ) {
+
+    return "Physical Product";
+  }
+
+
+  if (
+    value === "digital_product" ||
+    value === "digital"
+  ) {
+
+    return "Digital Product";
+  }
+
+
+  if (
+    value === "affiliate_product" ||
+    value === "affiliate"
+  ) {
+
+    return "Affiliate Product";
+  }
+
+
+  return (
+    itemType ||
+    "Item"
+  );
+}
+
+
+function updateStats() {
+
+  const pending =
+    allReviews.filter(
+      review =>
+        review.approved !== true
+    ).length;
+
+
+  const approved =
+    allReviews.filter(
+      review =>
+        review.approved === true
+    ).length;
+
+
+  document.getElementById(
+    "total-count"
+  ).textContent =
+    allReviews.length;
+
+
+  document.getElementById(
+    "pending-count"
+  ).textContent =
+    pending;
+
+
+  document.getElementById(
+    "approved-count"
+  ).textContent =
+    approved;
+}
+
+
+function createReviewCard(
+  review
+) {
+
+  const card =
+    document.createElement(
+      "article"
+    );
+
+
+  card.className =
+    review.approved
+      ? "review-card approved"
+      : "review-card pending";
+
+
+  const top =
+    document.createElement(
+      "div"
+    );
+
+
+  top.className =
+    "review-top";
+
+
+  const reviewer =
+    document.createElement(
+      "div"
+    );
+
+
+  reviewer.className =
+    "reviewer";
+
+
+  reviewer.textContent =
+    review.reviewer_name ||
+    "Customer";
+
+
+  const status =
+    document.createElement(
+      "span"
+    );
+
+
+  status.className =
+    review.approved
+      ? "status approved"
+      : "status pending";
+
+
+  status.textContent =
+    review.approved
+      ? "Approved"
+      : "Pending";
+
+
+  top.appendChild(
+    reviewer
+  );
+
+
+  top.appendChild(
+    status
+  );
+
+
+  card.appendChild(
+    top
+  );
+
+
+  const stars =
+    document.createElement(
+      "div"
+    );
+
+
+  stars.className =
+    "stars";
+
+
+  stars.textContent =
+    starText(
+      review.rating
+    );
+
+
+  stars.title =
+    `${review.rating || 0} out of 5`;
+
+
+  card.appendChild(
+    stars
+  );
+
+
+  const reviewText =
+    document.createElement(
+      "div"
+    );
+
+
+  reviewText.className =
+    "review-text";
+
+
+  reviewText.textContent =
+    review.review_text ||
+    "";
+
+
+  card.appendChild(
+    reviewText
+  );
+
+
+  const meta =
+    document.createElement(
+      "div"
+    );
+
+
+  meta.className =
+    "meta";
+
+
+  const item =
+    document.createElement(
+      "span"
+    );
+
+
+  item.className =
+    "item-badge";
+
+
+  item.textContent =
+    `${readableType(
+      review.item_type
+    )} #${review.item_id}`;
+
+
+  meta.appendChild(
+    item
+  );
+
+
+  const date =
+    formatDate(
+      review.created_at
+    );
+
+
+  if (
+    date
+  ) {
+
+    const dateElement =
+      document.createElement(
+        "span"
+      );
+
+
+    dateElement.textContent =
+      date;
+
+
+    meta.appendChild(
+      dateElement
+    );
+  }
+
+
+  card.appendChild(
+    meta
+  );
+
+
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+
+  actions.className =
+    "actions";
+
+
+  if (
+    review.approved !== true
+  ) {
+
+    const approveButton =
+      document.createElement(
+        "button"
+      );
+
+
+    approveButton.className =
+      "approve-button";
+
+
+    approveButton.textContent =
+      "✓ Approve";
+
+
+    approveButton.addEventListener(
+      "click",
+      () => {
+
+        changeApproval(
+          review.id,
+          true
+        );
+      }
+    );
+
+
+    actions.appendChild(
+      approveButton
+    );
+
+  } else {
+
+    const hideButton =
+      document.createElement(
+        "button"
+      );
+
+
+    hideButton.className =
+      "hide-button";
+
+
+    hideButton.textContent =
+      "Hide Review";
+
+
+    hideButton.addEventListener(
+      "click",
+      () => {
+
+        changeApproval(
+          review.id,
+          false
+        );
+      }
+    );
+
+
+    actions.appendChild(
+      hideButton
+    );
+  }
+
+
+  const deleteButton =
+    document.createElement(
+      "button"
+    );
+
+
+  deleteButton.className =
+    "delete-button";
+
+
+  deleteButton.textContent =
+    "Delete";
+
+
+  deleteButton.addEventListener(
+    "click",
+    () => {
+
+      deleteReview(
+        review.id,
+        review.reviewer_name
+      );
+    }
+  );
+
+
+  actions.appendChild(
+    deleteButton
+  );
+
+
+  card.appendChild(
+    actions
+  );
+
+
+  return card;
+}
+
+
+function renderReviews() {
+
+  const container =
+    document.getElementById(
+      "reviews-container"
+    );
+
+
+  let reviews =
+    allReviews;
+
+
+  if (
+    currentFilter === "pending"
+  ) {
+
+    reviews =
+      allReviews.filter(
+        review =>
+          review.approved !== true
+      );
+  }
+
+
+  if (
+    currentFilter === "approved"
+  ) {
+
+    reviews =
+      allReviews.filter(
+        review =>
+          review.approved === true
+      );
+  }
+
+
+  container.innerHTML =
+    "";
+
+
+  if (
+    reviews.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">No reviews found in this section.</div>';
+
+
+    return;
+  }
+
+
+  reviews.forEach(
+    review => {
+
+      container.appendChild(
+        createReviewCard(
+          review
+        )
+      );
+    }
+  );
+}
+
+
+async function loadReviews() {
+
+  const container =
+    document.getElementById(
+      "reviews-container"
+    );
+
+
+  container.innerHTML =
+    '<div class="empty">Loading reviews...</div>';
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "reviews"
+      )
+      .select(
+        "id,item_type,item_id,reviewer_name,rating,review_text,approved,created_at"
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    container.innerHTML =
+      '<div class="empty">Reviews could not be loaded.</div>';
+
+
+    showMessage(
+      "Reviews could not be loaded.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  allReviews =
+    data || [];
+
+
+  updateStats();
+
+
+  renderReviews();
+}
+
+
+async function changeApproval(
+  id,
+  approved
+) {
+
+  const {
+    error
+  } =
+    await db
+      .from(
+        "reviews"
+      )
+      .update({
+        approved
+      })
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      approved
+        ? "The review could not be approved."
+        : "The review could not be hidden.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  showMessage(
+    approved
+      ? "Review approved successfully."
+      : "Review hidden successfully."
+  );
+
+
+  await loadReviews();
+}
+
+
+async function deleteReview(
+  id,
+  reviewerName
+) {
+
+  const confirmed =
+    window.confirm(
+      `Delete this review from ${
+        reviewerName || "the customer"
+      }?`
+    );
+
+
+  if (
+    !confirmed
+  ) {
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await db
+      .from(
+        "reviews"
+      )
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "The review could not be deleted.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  showMessage(
+    "Review deleted successfully."
+  );
+
+
+  await loadReviews();
+}
+
+
+document
+  .querySelectorAll(
+    ".filter-button"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".filter-button"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          currentFilter =
+            button.dataset.filter;
+
+
+          renderReviews();
+        }
+      );
+    }
+  );
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .auth
+      .getSession();
+
+
+  const session =
+    data?.session;
+
+
+  if (
+    error ||
+    !session ||
+    session.user?.id !==
+      ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+
+    return;
+  }
+
+
+  document.getElementById(
+    "loading"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "admin-page"
+  ).style.display =
+    "block";
+
+
+  await loadReviews();
+}
+
+
+protectPage();
+
+</script>
+
+</body>
+
+</html>
