@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Manage Legal & Policies | GiftedGift Empire
+  </title>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+  </script>
+
+
+  <style>
+
+    :root {
+      --blue: #123a8c;
+      --dark-blue: #071e52;
+      --gold: #f2bd16;
+      --gold-dark: #d8a90e;
+      --green: #188038;
+      --red: #c62828;
+      --light: #f5f7fa;
+      --white: #ffffff;
+      --text: #252a31;
+      --muted: #68707a;
+      --border: #dfe3e8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background: var(--light);
+      color: var(--text);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar {
+      background: var(--blue);
+      color: white;
+
+      padding: 15px 18px;
+
+      box-shadow:
+        0 3px 14px
+        rgba(0, 0, 0, 0.14);
+    }
+
+    .topbar-inner {
+      max-width: 1200px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .topbar img {
+      width: 52px;
+      height: 52px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+    .topbar-title {
+      min-width: 0;
+    }
+
+    .topbar-title strong {
+      display: block;
+
+      font-size: 20px;
+    }
+
+    .topbar-title span {
+      color: #dbe4f7;
+
+      font-size: 13px;
+    }
+
+    .dashboard-link {
+      margin-left: auto;
+
+      display: inline-flex;
+      align-items: center;
+
+      min-height: 42px;
+
+      padding: 9px 14px;
+
+      border-radius: 8px;
+
+      background: var(--gold);
+      color: #111;
+
+      text-decoration: none;
+
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      max-width: 1200px;
+
+      margin: auto;
+
+      padding: 28px 16px 60px;
+    }
+
+    .page-heading {
+      margin-bottom: 24px;
+    }
+
+    .page-heading h1 {
+      margin: 0 0 7px;
+
+      color: var(--blue);
+
+      font-size: 31px;
+    }
+
+    .page-heading p {
+      margin: 0;
+
+      color: var(--muted);
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 13px;
+
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 13px;
+
+      padding: 18px;
+
+      box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-label {
+      color: var(--muted);
+
+      font-size: 12px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      margin-bottom: 7px;
+    }
+
+    .stat-number {
+      color: var(--blue);
+
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+
+    /* =========================
+       EDITOR CARD
+    ========================= */
+
+    .editor-card {
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 5px 18px
+        rgba(0, 0, 0, 0.06);
+    }
+
+    .editor-top {
+      padding: 20px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      background: #fbfcfe;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #333;
+
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    select,
+    input[type="text"] {
+      width: 100%;
+
+      min-height: 48px;
+
+      padding: 11px 13px;
+
+      border:
+        1px solid #ccd2da;
+
+      border-radius: 9px;
+
+      background: white;
+
+      color: #222;
+
+      outline: none;
+    }
+
+    select:focus,
+    input[type="text"]:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(18, 58, 140, 0.11);
+    }
+
+
+    /* =========================
+       PUBLISH SWITCH
+    ========================= */
+
+    .publish-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding: 14px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: white;
+    }
+
+    .publish-copy strong {
+      display: block;
+
+      color: #333;
+    }
+
+    .publish-copy span {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .switch {
+      position: relative;
+
+      width: 52px;
+      height: 29px;
+
+      flex: 0 0 auto;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+
+      inset: 0;
+
+      cursor: pointer;
+
+      background: #b8bec7;
+
+      border-radius: 30px;
+
+      transition: 0.2s;
+    }
+
+    .slider::before {
+      content: "";
+
+      position: absolute;
+
+      width: 23px;
+      height: 23px;
+
+      left: 3px;
+      top: 3px;
+
+      border-radius: 50%;
+
+      background: white;
+
+      transition: 0.2s;
+
+      box-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.25);
+    }
+
+    .switch input:checked + .slider {
+      background: var(--green);
+    }
+
+    .switch input:checked + .slider::before {
+      transform: translateX(23px);
+    }
+
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .action-bar {
+      padding: 16px 20px;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      background: white;
+    }
+
+    .button {
+      min-height: 44px;
+
+      padding: 10px 16px;
+
+      border: none;
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-weight: 800;
+
+      text-decoration: none;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button-blue {
+      background: var(--blue);
+      color: white;
+    }
+
+    .button-gold {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .button-light {
+      background: #edf2fb;
+      color: var(--blue);
+
+      border:
+        1px solid #cad6ec;
+    }
+
+    .button-green {
+      background: var(--green);
+      color: white;
+    }
+
+    .button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+
+    /* =========================
+       EDITOR
+    ========================= */
+
+    .content-section {
+      padding: 20px;
+    }
+
+    .content-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-bottom: 11px;
+    }
+
+    .content-heading strong {
+      color: var(--blue);
+
+      font-size: 18px;
+    }
+
+    .content-heading span {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .visual-editor {
+      min-height: 650px;
+
+      padding: 26px;
+
+      border:
+        1px solid #ccd2da;
+
+      border-radius: 12px;
+
+      background: white;
+
+      color: #4f5863;
+
+      line-height: 1.7;
+
+      outline: none;
+
+      overflow-wrap: anywhere;
+    }
+
+    .visual-editor:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(18, 58, 140, 0.09);
+    }
+
+    .visual-editor h2 {
+      color: var(--blue);
+
+      margin-top: 34px;
+      margin-bottom: 12px;
+
+      font-size: 24px;
+    }
+
+    .visual-editor h2:first-child {
+      margin-top: 0;
+    }
+
+    .visual-editor h3 {
+      color: #333;
+
+      margin-top: 22px;
+    }
+
+    .visual-editor p {
+      margin: 0 0 15px;
+    }
+
+    .visual-editor ul,
+    .visual-editor ol {
+      padding-left: 24px;
+    }
+
+    .visual-editor li {
+      margin-bottom: 8px;
+    }
+
+    .visual-editor a {
+      color: var(--blue);
+
+      font-weight: bold;
+    }
+
+    .visual-editor .intro {
+      background: #f7f9fd;
+
+      border-left:
+        5px solid var(--gold);
+
+      padding: 18px;
+
+      border-radius: 9px;
+
+      margin-bottom: 30px;
+    }
+
+    .visual-editor .contact-box,
+    .visual-editor .business-box,
+    .visual-editor .info-box {
+      background: #edf3ff;
+
+      padding: 18px;
+
+      border-radius: 10px;
+
+      margin: 20px 0;
+    }
+
+    .visual-editor .important-box,
+    .visual-editor .gold-box,
+    .visual-editor .notice-box {
+      background: #fff9df;
+
+      padding: 18px;
+
+      border-radius: 10px;
+
+      margin: 20px 0;
+    }
+
+    .visual-editor .success-box {
+      background: #edf8f1;
+
+      padding: 18px;
+
+      border-left:
+        5px solid var(--green);
+
+      border-radius: 9px;
+
+      margin: 20px 0;
+    }
+
+    .visual-editor .details {
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      margin: 18px 0;
+    }
+
+    .visual-editor .detail-row {
+      padding: 14px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .visual-editor .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .visual-editor .detail-label {
+      font-weight: bold;
+      color: #333;
+    }
+
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty-editor {
+      min-height: 300px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .status {
+      display: none;
+
+      margin: 0 20px 20px;
+
+      padding: 13px 15px;
+
+      border-radius: 9px;
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.success {
+      background: #eaf7ee;
+      color: #176333;
+
+      border:
+        1px solid #bae0c5;
+    }
+
+    .status.error {
+      background: #fff0f0;
+      color: #9b1c1c;
+
+      border:
+        1px solid #efbcbc;
+    }
+
+    .status.info {
+      background: #edf3ff;
+      color: var(--blue);
+
+      border:
+        1px solid #cbd9f4;
+    }
+
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+      padding: 45px;
+
+      text-align: center;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .topbar-inner {
+        align-items: flex-start;
+      }
+
+      .topbar img {
+        width: 46px;
+        height: 46px;
+      }
+
+      .dashboard-link {
+        padding: 8px 10px;
+
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .page-heading h1 {
+        font-size: 27px;
+      }
+
+      .editor-top,
+      .content-section {
+        padding: 15px;
+      }
+
+      .action-bar {
+        padding: 14px;
+      }
+
+      .button {
+        flex: 1 1 calc(50% - 6px);
+      }
+
+      .visual-editor {
+        min-height: 550px;
+
+        padding: 18px;
+
+        font-size: 15px;
+      }
+
+      .content-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <img
+      src="my-logo.png"
+      alt="GiftedGift Empire logo"
+    >
+
+    <div class="topbar-title">
+
+      <strong>
+        GiftedGift Empire
+      </strong>
+
+      <span>
+        Legal & Policies
+      </span>
+
+    </div>
+
+
+    <a
+      href="dashboard.html"
+      class="dashboard-link"
+    >
+      ← Dashboard
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div class="page-heading">
+
+    <h1>
+      Legal & Policies
+    </h1>
+
+    <p>
+      Edit your public legal and policy pages without
+      changing GitHub code.
+    </p>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Legal Pages
+      </div>
+
+      <div
+        id="total-pages"
+        class="stat-number"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Published
+      </div>
+
+      <div
+        id="published-pages"
+        class="stat-number"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Saved Content
+      </div>
+
+      <div
+        id="saved-pages"
+        class="stat-number"
+      >
+        0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section class="editor-card">
+
+
+    <div id="loading-box" class="loading">
+
+      Loading legal pages...
+
+    </div>
+
+
+    <div
+      id="editor-area"
+      style="display:none;"
+    >
+
+
+      <div class="editor-top">
+
+
+        <div class="field">
+
+          <label for="page-select">
+            Select Legal Page
+          </label>
+
+          <select id="page-select"></select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="page-title">
+            Page Title
+          </label>
+
+          <input
+            id="page-title"
+            type="text"
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="publish-row">
+
+          <div class="publish-copy">
+
+            <strong>
+              Published
+            </strong>
+
+            <span>
+              Allow visitors to see this policy.
+            </span>
+
+          </div>
+
+
+          <label class="switch">
+
+            <input
+              id="page-published"
+              type="checkbox"
+            >
+
+            <span class="slider"></span>
+
+          </label>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="action-bar">
+
+
+        <button
+          id="import-button"
+          class="button button-light"
+          type="button"
+        >
+          📥 Import Current Page
+        </button>
+
+
+        <a
+          id="public-page-button"
+          class="button button-light"
+          href="#"
+          target="_blank"
+        >
+          👁 View Public Page
+        </a>
+
+
+        <button
+          id="save-button"
+          class="button button-green"
+          type="button"
+        >
+          💾 Save Changes
+        </button>
+
+
+      </div>
+
+
+      <div class="content-section">
+
+
+        <div class="content-heading">
+
+          <strong>
+            Policy Content
+          </strong>
+
+          <span>
+            Tap directly into the text below to edit it.
+          </span>
+
+        </div>
+
+
+        <div
+          id="visual-editor"
+          class="visual-editor"
+          contenteditable="true"
+          spellcheck="true"
+        ></div>
+
+
+      </div>
+
+
+      <div
+        id="status"
+        class="status"
+      ></div>
+
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+  /* =========================
+     SUPABASE
+  ========================= */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const ADMIN_USER_ID =
+    "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /* =========================
+     PAGE MAP
+  ========================= */
+
+  const PUBLIC_PAGES = {
+
+    "privacy-policy":
+      "privacy-policy.html",
+
+    "returns-refunds":
+      "returns-refunds.html",
+
+    "shipping-policy":
+      "shipping-policy.html",
+
+    "terms-conditions":
+      "terms-conditions.html",
+
+    "legal-notice":
+      "legal-notice.html"
+
+  };
+
+
+  let legalPages = [];
+
+  let currentPage = null;
+
+
+  /* =========================
+     ELEMENTS
+  ========================= */
+
+  const loadingBox =
+    document.getElementById(
+      "loading-box"
+    );
+
+
+  const editorArea =
+    document.getElementById(
+      "editor-area"
+    );
+
+
+  const pageSelect =
+    document.getElementById(
+      "page-select"
+    );
+
+
+  const pageTitle =
+    document.getElementById(
+      "page-title"
+    );
+
+
+  const pagePublished =
+    document.getElementById(
+      "page-published"
+    );
+
+
+  const visualEditor =
+    document.getElementById(
+      "visual-editor"
+    );
+
+
+  const importButton =
+    document.getElementById(
+      "import-button"
+    );
+
+
+  const publicPageButton =
+    document.getElementById(
+      "public-page-button"
+    );
+
+
+  const saveButton =
+    document.getElementById(
+      "save-button"
+    );
+
+
+  const statusBox =
+    document.getElementById(
+      "status"
+    );
+
+
+  /* =========================
+     AUTH
+  ========================= */
+
+  async function checkAdmin() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .getUser();
+
+
+    const user =
+      data?.user || null;
+
+
+    if (
+      error ||
+      !user ||
+      user.id !== ADMIN_USER_ID
+    ) {
+
+      window.location.href =
+        "admin.html";
+
+      return false;
+
+    }
+
+
+    return true;
+
+  }
+
+
+  /* =========================
+     STATUS
+  ========================= */
+
+  function showStatus(
+    message,
+    type = "info"
+  ) {
+
+    statusBox.textContent =
+      message;
+
+
+    statusBox.className =
+      "status show " + type;
+
+
+    statusBox.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+
+
+    setTimeout(
+      function () {
+
+        statusBox.className =
+          "status";
+
+      },
+      4500
+    );
+
+  }
+
+
+  /* =========================
+     STATS
+  ========================= */
+
+  function updateStats() {
+
+    document
+      .getElementById(
+        "total-pages"
+      )
+      .textContent =
+        legalPages.length;
+
+
+    document
+      .getElementById(
+        "published-pages"
+      )
+      .textContent =
+        legalPages.filter(
+          item =>
+            item.published === true
+        ).length;
+
+
+    document
+      .getElementById(
+        "saved-pages"
+      )
+      .textContent =
+        legalPages.filter(
+          item =>
+            String(
+              item.content_html || ""
+            ).trim()
+        ).length;
+
+  }
+
+
+  /* =========================
+     LOAD LEGAL PAGES
+  ========================= */
+
+  async function loadLegalPages() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("legal_pages")
+        .select("*")
+        .order(
+          "id",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (error) {
+
+      loadingBox.innerHTML = `
+
+        <strong>
+          Legal pages could not be loaded.
+        </strong>
+
+        <br><br>
+
+        ${escapeHTML(error.message)}
+
+      `;
+
+      return;
+
+    }
+
+
+    legalPages =
+      data || [];
+
+
+    if (!legalPages.length) {
+
+      loadingBox.textContent =
+        "No legal pages were found.";
+
+      return;
+
+    }
+
+
+    pageSelect.innerHTML =
+      legalPages.map(
+        item => `
+
+          <option
+            value="${escapeHTML(item.slug)}"
+          >
+
+            ${escapeHTML(item.title)}
+
+          </option>
+
+        `
+      ).join("");
+
+
+    loadingBox.style.display =
+      "none";
+
+
+    editorArea.style.display =
+      "block";
+
+
+    updateStats();
+
+
+    selectPage(
+      legalPages[0].slug
+    );
+
+  }
+
+
+  /* =========================
+     SELECT PAGE
+  ========================= */
+
+  function selectPage(slug) {
+
+    currentPage =
+      legalPages.find(
+        item =>
+          item.slug === slug
+      ) || null;
+
+
+    if (!currentPage) {
+      return;
+    }
+
+
+    pageSelect.value =
+      currentPage.slug;
+
+
+    pageTitle.value =
+      currentPage.title || "";
+
+
+    pagePublished.checked =
+      currentPage.published === true;
+
+
+    const content =
+      String(
+        currentPage.content_html || ""
+      ).trim();
+
+
+    if (content) {
+
+      visualEditor.innerHTML =
+        content;
+
+    } else {
+
+      visualEditor.innerHTML = `
+
+        <div class="empty-editor">
+
+          <div>
+
+            <strong>
+              No Supabase content saved yet.
+            </strong>
+
+            <br><br>
+
+            Tap
+            <strong>
+              “Import Current Page”
+            </strong>
+
+            above to bring your existing
+            policy into this editor.
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    const publicFile =
+      PUBLIC_PAGES[
+        currentPage.slug
+      ] || "index.html";
+
+
+    publicPageButton.href =
+      publicFile;
+
+  }
+
+
+  /* =========================
+     IMPORT CURRENT STATIC PAGE
+  ========================= */
+
+  async function importCurrentPage() {
+
+    if (!currentPage) {
+      return;
+    }
+
+
+    const file =
+      PUBLIC_PAGES[
+        currentPage.slug
+      ];
+
+
+    if (!file) {
+
+      showStatus(
+        "Public page could not be identified.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const confirmed =
+      confirm(
+        "Import the current public page into the editor? This will replace anything currently shown in the editor, but it will not save until you tap Save Changes."
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    importButton.disabled =
+      true;
+
+
+    importButton.textContent =
+      "Importing...";
+
+
+    try {
+
+      const response =
+        await fetch(
+          file + "?import=" + Date.now(),
+          {
+            cache: "no-store"
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Could not open " + file
+        );
+
+      }
+
+
+      const html =
+        await response.text();
+
+
+      const parser =
+        new DOMParser();
+
+
+      const documentCopy =
+        parser.parseFromString(
+          html,
+          "text/html"
+        );
+
+
+      let contentNode =
+        documentCopy.querySelector(
+          ".policy-card"
+        );
+
+
+      if (!contentNode) {
+
+        contentNode =
+          documentCopy.querySelector(
+            ".legal-card"
+          );
+
+      }
+
+
+      if (!contentNode) {
+
+        throw new Error(
+          "The policy content area was not found."
+        );
+
+      }
+
+
+      visualEditor.innerHTML =
+        contentNode.innerHTML;
+
+
+      showStatus(
+        "Current public page imported. Review it, then tap Save Changes.",
+        "success"
+      );
+
+    } catch (error) {
+
+      console.error(
+        error
+      );
+
+
+      showStatus(
+        error.message ||
+        "The page could not be imported.",
+        "error"
+      );
+
+    } finally {
+
+      importButton.disabled =
+        false;
+
+
+      importButton.textContent =
+        "📥 Import Current Page";
+
+    }
+
+  }
+
+
+  /* =========================
+     SAVE
+  ========================= */
+
+  async function savePage() {
+
+    if (!currentPage) {
+      return;
+    }
+
+
+    const title =
+      pageTitle.value.trim();
+
+
+    if (!title) {
+
+      showStatus(
+        "Please enter a page title.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const emptyMessage =
+      visualEditor.querySelector(
+        ".empty-editor"
+      );
+
+
+    if (emptyMessage) {
+
+      showStatus(
+        "Import the current policy before saving.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const contentHTML =
+      visualEditor.innerHTML.trim();
+
+
+    if (!contentHTML) {
+
+      showStatus(
+        "The policy content cannot be empty.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    saveButton.disabled =
+      true;
+
+
+    saveButton.textContent =
+      "Saving...";
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("legal_pages")
+        .update({
+
+          title:
+            title,
+
+          content_html:
+            contentHTML,
+
+          published:
+            pagePublished.checked
+
+        })
+        .eq(
+          "id",
+          currentPage.id
+        )
+        .select()
+        .single();
+
+
+    saveButton.disabled =
+      false;
+
+
+    saveButton.textContent =
+      "💾 Save Changes";
+
+
+    if (error) {
+
+      console.error(
+        error
+      );
+
+
+      showStatus(
+        "Save failed: " +
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const index =
+      legalPages.findIndex(
+        item =>
+          item.id === currentPage.id
+      );
+
+
+    if (index >= 0) {
+
+      legalPages[index] =
+        data;
+
+    }
+
+
+    currentPage =
+      data;
+
+
+    updateStats();
+
+
+    pageSelect
+      .querySelector(
+        `option[value="${CSS.escape(data.slug)}"]`
+      )
+      .textContent =
+        data.title;
+
+
+    showStatus(
+      "Changes saved successfully.",
+      "success"
+    );
+
+  }
+
+
+  /* =========================
+     ESCAPE
+  ========================= */
+
+  function escapeHTML(value) {
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.textContent =
+      value == null
+        ? ""
+        : String(value);
+
+
+    return div.innerHTML;
+
+  }
+
+
+  /* =========================
+     EVENTS
+  ========================= */
+
+  pageSelect.addEventListener(
+    "change",
+    function () {
+
+      selectPage(
+        pageSelect.value
+      );
+
+    }
+  );
+
+
+  importButton.addEventListener(
+    "click",
+    importCurrentPage
+  );
+
+
+  saveButton.addEventListener(
+    "click",
+    savePage
+  );
+
+
+  /* =========================
+     START
+  ========================= */
+
+  async function start() {
+
+    const isAdmin =
+      await checkAdmin();
+
+
+    if (!isAdmin) {
+      return;
+    }
+
+
+    await loadLegalPages();
+
+  }
+
+
+  start();
+
+</script>
+
+
+</body>
+
+</html>
