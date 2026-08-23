@@ -94,7 +94,7 @@
       border-radius: 16px;
       padding: 34px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      margin-bottom: 25px;
+      margin-bottom: 28px;
     }
 
     .inspiration-image {
@@ -162,6 +162,162 @@
       margin-top: 20px;
     }
 
+    .engagement {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid #eee;
+    }
+
+    .engagement button {
+      border: 1px solid #ddd;
+      background: white;
+      color: #333;
+      padding: 11px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .engagement button:hover {
+      background: #f7f7f7;
+    }
+
+    .engagement button.liked {
+      background: #fff0f3;
+      border-color: #f1b5c2;
+      color: #b42345;
+    }
+
+    .engagement button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .comments-section {
+      display: none;
+      margin-top: 25px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
+
+    .comments-section.open {
+      display: block;
+    }
+
+    .comments-section h4 {
+      margin: 0 0 18px;
+      color: #123a8c;
+      font-size: 20px;
+    }
+
+    .comment-list {
+      margin-bottom: 25px;
+    }
+
+    .comment-item {
+      background: #f8f9fb;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .comment-name {
+      font-weight: bold;
+      color: #123a8c;
+      margin-bottom: 6px;
+    }
+
+    .comment-text {
+      color: #444;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .comment-date {
+      color: #888;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .no-comments {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .comment-form {
+      background: #f8f9fb;
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    .comment-form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .comment-form textarea {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .comment-submit {
+      width: 100%;
+      border: none;
+      background: #123a8c;
+      color: white;
+      padding: 13px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .comment-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .comment-status {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .comment-status.success {
+      display: block;
+      background: #e8f7ec;
+      border: 1px solid #b8dfc0;
+      color: #17652d;
+    }
+
+    .comment-status.error {
+      display: block;
+      background: #ffe8e8;
+      border: 1px solid #efbbbb;
+      color: #951d1d;
+    }
+
     .empty {
       background: white;
       padding: 30px;
@@ -222,6 +378,10 @@
       .message {
         font-size: 16px;
       }
+
+      .engagement button {
+        flex: 1;
+      }
     }
   </style>
 </head>
@@ -236,18 +396,11 @@
   </h1>
 
   <nav>
+    <a href="index.html">Home</a>
 
-    <a href="index.html">
-      Home
-    </a>
+    <a href="shop.html">Shop</a>
 
-    <a href="shop.html">
-      Shop
-    </a>
-
-    <a href="categories.html">
-      Categories
-    </a>
+    <a href="categories.html">Categories</a>
 
     <a
       href="daily-inspiration.html"
@@ -256,26 +409,17 @@
       Daily Inspiration
     </a>
 
-    <a href="blog.html">
-      Blog
-    </a>
+    <a href="blog.html">Blog</a>
 
-    <a href="deals.html">
-      Deals
-    </a>
+    <a href="deals.html">Deals</a>
 
-    <a href="about.html">
-      About
-    </a>
+    <a href="about.html">About</a>
 
-    <a href="contact.html">
-      Contact
-    </a>
+    <a href="contact.html">Contact</a>
 
     <a href="cart.html">
       🛒 Cart
     </a>
-
   </nav>
 
 </header>
@@ -360,33 +504,66 @@ const db =
   );
 
 
-const FALLBACK_POST = {
+let likesByPost =
+  {};
 
-  category:
-    "God's Word for Today",
 
-  title:
-    "Cast Your Cares on God",
+let commentsByPost =
+  {};
 
-  verse_text:
-    "Cast your cares on the Lord and He will sustain you.",
 
-  verse_reference:
-    "Psalm 55:22",
+function getVisitorId() {
 
-  message:
-    "Whatever is weighing on your heart today, you do not have to carry it alone. Give your worries, fears and uncertainties to God and trust Him to strengthen you.",
+  const storageKey =
+    "giftedgift_inspiration_visitor_id";
 
-  prayer:
-    "Lord, I place every worry and burden in Your hands. Give me peace, strength and wisdom for today. Guide my steps and help me trust You completely. Amen.",
 
-  image_url:
-    null,
+  let visitorId =
+    localStorage.getItem(
+      storageKey
+    );
 
-  created_at:
-    null
 
-};
+  if (
+    visitorId
+  ) {
+
+    return visitorId;
+  }
+
+
+  if (
+    window.crypto &&
+    typeof crypto.randomUUID === "function"
+  ) {
+
+    visitorId =
+      crypto.randomUUID();
+
+  } else {
+
+    visitorId =
+      "visitor-" +
+      Date.now() +
+      "-" +
+      Math.random()
+        .toString(36)
+        .slice(2);
+  }
+
+
+  localStorage.setItem(
+    storageKey,
+    visitorId
+  );
+
+
+  return visitorId;
+}
+
+
+const visitorId =
+  getVisitorId();
 
 
 function formatDate(
@@ -425,6 +602,613 @@ function formatDate(
       day: "numeric"
     }
   );
+}
+
+
+function escapeForId(
+  value
+) {
+
+  return String(
+    value
+  ).replace(
+    /[^a-zA-Z0-9_-]/g,
+    "-"
+  );
+}
+
+
+function getLikeInfo(
+  inspirationId
+) {
+
+  const rows =
+    likesByPost[
+      inspirationId
+    ] || [];
+
+
+  return {
+
+    count:
+      rows.length,
+
+    liked:
+      rows.some(
+        row =>
+          row.visitor_id ===
+          visitorId
+      )
+
+  };
+}
+
+
+function getComments(
+  inspirationId
+) {
+
+  return (
+    commentsByPost[
+      inspirationId
+    ] || []
+  );
+}
+
+
+async function addLike(
+  inspirationId,
+  button
+) {
+
+  const info =
+    getLikeInfo(
+      inspirationId
+    );
+
+
+  if (
+    info.liked
+  ) {
+
+    return;
+  }
+
+
+  button.disabled =
+    true;
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "daily_inspiration_likes"
+      )
+      .insert({
+        inspiration_id:
+          inspirationId,
+
+        visitor_id:
+          visitorId
+      })
+      .select(
+        "inspiration_id,visitor_id"
+      )
+      .single();
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Like error:",
+      error
+    );
+
+
+    /*
+      A duplicate means this browser
+      already liked this post.
+    */
+
+    if (
+      error.code !== "23505"
+    ) {
+
+      button.disabled =
+        false;
+
+      return;
+    }
+
+  } else {
+
+    if (
+      !likesByPost[
+        inspirationId
+      ]
+    ) {
+
+      likesByPost[
+        inspirationId
+      ] =
+        [];
+    }
+
+
+    likesByPost[
+      inspirationId
+    ].push(
+      data
+    );
+  }
+
+
+  button.classList.add(
+    "liked"
+  );
+
+
+  button.textContent =
+    "❤️ Liked · " +
+    Math.max(
+      1,
+      getLikeInfo(
+        inspirationId
+      ).count
+    );
+
+
+  button.disabled =
+    true;
+}
+
+
+function createCommentsSection(
+  post
+) {
+
+  const safeId =
+    escapeForId(
+      post.id
+    );
+
+
+  const section =
+    document.createElement(
+      "section"
+    );
+
+
+  section.className =
+    "comments-section";
+
+
+  section.id =
+    "comments-" +
+    safeId;
+
+
+  const heading =
+    document.createElement(
+      "h4"
+    );
+
+
+  heading.textContent =
+    "Comments";
+
+
+  section.appendChild(
+    heading
+  );
+
+
+  const commentList =
+    document.createElement(
+      "div"
+    );
+
+
+  commentList.className =
+    "comment-list";
+
+
+  const comments =
+    getComments(
+      post.id
+    );
+
+
+  if (
+    comments.length === 0
+  ) {
+
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+
+    empty.className =
+      "no-comments";
+
+
+    empty.textContent =
+      "No approved comments yet. Be the first to leave one.";
+
+
+    commentList.appendChild(
+      empty
+    );
+
+  } else {
+
+    comments.forEach(
+      comment => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "comment-item";
+
+
+        const name =
+          document.createElement(
+            "div"
+          );
+
+
+        name.className =
+          "comment-name";
+
+
+        name.textContent =
+          comment.name;
+
+
+        const text =
+          document.createElement(
+            "div"
+          );
+
+
+        text.className =
+          "comment-text";
+
+
+        text.textContent =
+          comment.comment_text;
+
+
+        item.appendChild(
+          name
+        );
+
+
+        item.appendChild(
+          text
+        );
+
+
+        const dateText =
+          formatDate(
+            comment.created_at
+          );
+
+
+        if (
+          dateText
+        ) {
+
+          const date =
+            document.createElement(
+              "div"
+            );
+
+
+          date.className =
+            "comment-date";
+
+
+          date.textContent =
+            dateText;
+
+
+          item.appendChild(
+            date
+          );
+        }
+
+
+        commentList.appendChild(
+          item
+        );
+      }
+    );
+  }
+
+
+  section.appendChild(
+    commentList
+  );
+
+
+  const form =
+    document.createElement(
+      "form"
+    );
+
+
+  form.className =
+    "comment-form";
+
+
+  const nameLabel =
+    document.createElement(
+      "label"
+    );
+
+
+  nameLabel.textContent =
+    "Your Name";
+
+
+  const nameInput =
+    document.createElement(
+      "input"
+    );
+
+
+  nameInput.type =
+    "text";
+
+
+  nameInput.maxLength =
+    80;
+
+
+  nameInput.required =
+    true;
+
+
+  nameInput.placeholder =
+    "Enter your name";
+
+
+  const commentLabel =
+    document.createElement(
+      "label"
+    );
+
+
+  commentLabel.textContent =
+    "Your Comment";
+
+
+  const commentInput =
+    document.createElement(
+      "textarea"
+    );
+
+
+  commentInput.maxLength =
+    1000;
+
+
+  commentInput.required =
+    true;
+
+
+  commentInput.placeholder =
+    "Write your comment...";
+
+
+  const submit =
+    document.createElement(
+      "button"
+    );
+
+
+  submit.type =
+    "submit";
+
+
+  submit.className =
+    "comment-submit";
+
+
+  submit.textContent =
+    "Post Comment";
+
+
+  const status =
+    document.createElement(
+      "div"
+    );
+
+
+  status.className =
+    "comment-status";
+
+
+  form.appendChild(
+    nameLabel
+  );
+
+
+  form.appendChild(
+    nameInput
+  );
+
+
+  form.appendChild(
+    commentLabel
+  );
+
+
+  form.appendChild(
+    commentInput
+  );
+
+
+  form.appendChild(
+    submit
+  );
+
+
+  form.appendChild(
+    status
+  );
+
+
+  form.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const name =
+        nameInput.value.trim();
+
+
+      const commentText =
+        commentInput.value.trim();
+
+
+      status.className =
+        "comment-status";
+
+
+      if (
+        !name
+      ) {
+
+        status.textContent =
+          "Please enter your name.";
+
+
+        status.classList.add(
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (
+        !commentText
+      ) {
+
+        status.textContent =
+          "Please write your comment.";
+
+
+        status.classList.add(
+          "error"
+        );
+
+        return;
+      }
+
+
+      submit.disabled =
+        true;
+
+
+      submit.textContent =
+        "Submitting...";
+
+
+      const {
+        error
+      } =
+        await db
+          .from(
+            "daily_inspiration_comments"
+          )
+          .insert({
+            inspiration_id:
+              post.id,
+
+            name,
+
+            comment_text:
+              commentText,
+
+            approved:
+              false,
+
+            approved_at:
+              null
+          });
+
+
+      submit.disabled =
+        false;
+
+
+      submit.textContent =
+        "Post Comment";
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Comment error:",
+          error
+        );
+
+
+        status.textContent =
+          "Your comment could not be submitted. Please try again.";
+
+
+        status.classList.add(
+          "error"
+        );
+
+
+        return;
+      }
+
+
+      nameInput.value =
+        "";
+
+
+      commentInput.value =
+        "";
+
+
+      status.textContent =
+        "Thank you! Your comment has been submitted and is waiting for approval.";
+
+
+      status.classList.add(
+        "success"
+      );
+    }
+  );
+
+
+  section.appendChild(
+    form
+  );
+
+
+  return section;
 }
 
 
@@ -669,7 +1453,254 @@ function createInspirationCard(
   }
 
 
+  const likeInfo =
+    getLikeInfo(
+      post.id
+    );
+
+
+  const comments =
+    getComments(
+      post.id
+    );
+
+
+  const engagement =
+    document.createElement(
+      "div"
+    );
+
+
+  engagement.className =
+    "engagement";
+
+
+  const likeButton =
+    document.createElement(
+      "button"
+    );
+
+
+  likeButton.type =
+    "button";
+
+
+  likeButton.textContent =
+    likeInfo.liked
+      ? `❤️ Liked · ${likeInfo.count}`
+      : `❤️ Like · ${likeInfo.count}`;
+
+
+  if (
+    likeInfo.liked
+  ) {
+
+    likeButton.classList.add(
+      "liked"
+    );
+
+
+    likeButton.disabled =
+      true;
+  }
+
+
+  likeButton.addEventListener(
+    "click",
+    () => {
+      addLike(
+        post.id,
+        likeButton
+      );
+    }
+  );
+
+
+  const commentButton =
+    document.createElement(
+      "button"
+    );
+
+
+  commentButton.type =
+    "button";
+
+
+  commentButton.textContent =
+    `💬 Comments · ${comments.length}`;
+
+
+  engagement.appendChild(
+    likeButton
+  );
+
+
+  engagement.appendChild(
+    commentButton
+  );
+
+
+  article.appendChild(
+    engagement
+  );
+
+
+  const commentsSection =
+    createCommentsSection(
+      post
+    );
+
+
+  commentButton.addEventListener(
+    "click",
+    () => {
+
+      commentsSection.classList.toggle(
+        "open"
+      );
+    }
+  );
+
+
+  article.appendChild(
+    commentsSection
+  );
+
+
   return article;
+}
+
+
+async function loadEngagement(
+  posts
+) {
+
+  const ids =
+    posts.map(
+      post =>
+        post.id
+    );
+
+
+  if (
+    ids.length === 0
+  ) {
+
+    return;
+  }
+
+
+  const [
+    likesResult,
+    commentsResult
+  ] =
+    await Promise.all([
+
+      db
+        .from(
+          "daily_inspiration_likes"
+        )
+        .select(
+          "inspiration_id,visitor_id"
+        )
+        .in(
+          "inspiration_id",
+          ids
+        ),
+
+      db
+        .from(
+          "daily_inspiration_comments"
+        )
+        .select(
+          "id,inspiration_id,name,comment_text,created_at"
+        )
+        .in(
+          "inspiration_id",
+          ids
+        )
+        .eq(
+          "approved",
+          true
+        )
+        .order(
+          "created_at",
+          {
+            ascending: true
+          }
+        )
+
+    ]);
+
+
+  likesByPost =
+    {};
+
+
+  commentsByPost =
+    {};
+
+
+  if (
+    !likesResult.error &&
+    likesResult.data
+  ) {
+
+    likesResult.data.forEach(
+      row => {
+
+        if (
+          !likesByPost[
+            row.inspiration_id
+          ]
+        ) {
+
+          likesByPost[
+            row.inspiration_id
+          ] =
+            [];
+        }
+
+
+        likesByPost[
+          row.inspiration_id
+        ].push(
+          row
+        );
+      }
+    );
+  }
+
+
+  if (
+    !commentsResult.error &&
+    commentsResult.data
+  ) {
+
+    commentsResult.data.forEach(
+      row => {
+
+        if (
+          !commentsByPost[
+            row.inspiration_id
+          ]
+        ) {
+
+          commentsByPost[
+            row.inspiration_id
+          ] =
+            [];
+        }
+
+
+        commentsByPost[
+          row.inspiration_id
+        ].push(
+          row
+        );
+      }
+    );
+  }
 }
 
 
@@ -741,16 +1772,16 @@ async function loadInspirations() {
     );
 
 
-    /*
-      Keep the page usable if Supabase
-      temporarily fails.
-    */
+    document.getElementById(
+      "loading"
+    ).style.display =
+      "none";
 
-    renderInspirations(
-      [
-        FALLBACK_POST
-      ]
-    );
+
+    document.getElementById(
+      "inspiration-list"
+    ).innerHTML =
+      '<div class="empty">Daily Inspiration could not be loaded. Please try again later.</div>';
 
 
     return;
@@ -762,15 +1793,25 @@ async function loadInspirations() {
     data.length === 0
   ) {
 
-    renderInspirations(
-      [
-        FALLBACK_POST
-      ]
-    );
+    document.getElementById(
+      "loading"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "inspiration-list"
+    ).innerHTML =
+      '<div class="empty">More inspiration is coming soon.</div>';
 
 
     return;
   }
+
+
+  await loadEngagement(
+    data
+  );
 
 
   renderInspirations(
