@@ -40,7 +40,7 @@
     }
 
     .page {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: auto;
       padding: 30px 18px 60px;
     }
@@ -197,6 +197,11 @@
       color: #951d1d;
     }
 
+    .section-title {
+      color: #123a8c;
+      margin: 0 0 18px;
+    }
+
     .posts-grid {
       display: grid;
       grid-template-columns: repeat(
@@ -283,12 +288,125 @@
       flex: 1;
     }
 
+    .moderation-card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-top: 30px;
+    }
+
+    .moderation-heading {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .moderation-heading h2 {
+      margin: 0;
+      color: #123a8c;
+    }
+
+    .pending-count {
+      background: #fff3cd;
+      color: #775700;
+      border-radius: 20px;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .comment-group-title {
+      margin: 25px 0 14px;
+      color: #333;
+    }
+
+    .comment-admin-card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+      background: #fafafa;
+    }
+
+    .comment-admin-card.pending {
+      border-left: 5px solid #f2bd16;
+    }
+
+    .comment-admin-card.approved {
+      border-left: 5px solid #2e8b57;
+    }
+
+    .comment-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .comment-post {
+      color: #123a8c;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .comment-person {
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .comment-body {
+      color: #444;
+      line-height: 1.6;
+      white-space: pre-line;
+      margin-bottom: 15px;
+    }
+
+    .comment-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .approve-button {
+      background: #2e8b57;
+      color: white;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .comment-delete-button {
+      background: #c62828;
+      color: white;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .approved-label {
+      display: inline-block;
+      background: #e8f7ec;
+      color: #17652d;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 20px;
+    }
+
     .empty {
       text-align: center;
       padding: 35px 15px;
       color: #666;
       background: white;
       border-radius: 12px;
+    }
+
+    .moderation-card .empty {
+      background: #f8f9fb;
     }
 
     #loading {
@@ -303,8 +421,14 @@
         padding-right: 14px;
       }
 
-      .card {
+      .card,
+      .moderation-card {
         padding: 20px;
+      }
+
+      .post-actions,
+      .comment-actions {
+        flex-direction: column;
       }
     }
   </style>
@@ -330,7 +454,7 @@
   </h1>
 
   <p>
-    Add Bible verses, prayers and encouragement.
+    Add inspiration and moderate visitor comments.
   </p>
 
 </header>
@@ -373,19 +497,12 @@
       >
 
       <datalist id="category-options">
-
         <option value="God's Word for Today">
-
         <option value="Peace Before Sleep">
-
         <option value="Breakthrough">
-
         <option value="Prayer">
-
         <option value="Encouragement">
-
         <option value="Faith">
-
       </datalist>
 
     </div>
@@ -537,7 +654,7 @@
 
   <section>
 
-    <h2 style="color:#123a8c;">
+    <h2 class="section-title">
       Existing Inspirations
     </h2>
 
@@ -545,6 +662,35 @@
 
       <div class="empty">
         Loading inspirations...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="moderation-card">
+
+    <div class="moderation-heading">
+
+      <h2>
+        💬 Comment Moderation
+      </h2>
+
+      <div
+        id="pending-count"
+        class="pending-count"
+      >
+        Pending: 0
+      </div>
+
+    </div>
+
+
+    <div id="comments-container">
+
+      <div class="empty">
+        Loading comments...
       </div>
 
     </div>
@@ -588,6 +734,10 @@ let editingId =
 
 let currentImageUrl =
   "";
+
+
+let inspirationsById =
+  {};
 
 
 const categoryInput =
@@ -716,6 +866,38 @@ function safeFileName(
       /[^a-z0-9._-]+/g,
       "-"
     );
+}
+
+
+function formatDateTime(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+  }
+
+
+  return date.toLocaleString();
 }
 
 
@@ -999,6 +1181,12 @@ async function saveInspiration() {
     };
 
 
+    const wasEditing =
+      Boolean(
+        editingId
+      );
+
+
     let result;
 
 
@@ -1053,7 +1241,7 @@ async function saveInspiration() {
 
 
     showMessage(
-      editingId
+      wasEditing
         ? "Inspiration updated successfully."
         : "Inspiration saved successfully."
     );
@@ -1063,6 +1251,9 @@ async function saveInspiration() {
 
 
     await loadInspirations();
+
+
+    await loadComments();
 
 
   } catch (error) {
@@ -1086,13 +1277,10 @@ async function saveInspiration() {
       false;
 
 
-    if (
-      !editingId
-    ) {
-
-      button.textContent =
-        "Save Inspiration";
-    }
+    button.textContent =
+      editingId
+        ? "Update Inspiration"
+        : "Save Inspiration";
   }
 }
 
@@ -1130,7 +1318,8 @@ function createPostCard(
 
 
     image.alt =
-      post.title || "Daily Inspiration";
+      post.title ||
+      "Daily Inspiration";
 
 
     card.appendChild(
@@ -1363,6 +1552,26 @@ async function loadInspirations() {
   }
 
 
+  inspirationsById =
+    {};
+
+
+  if (
+    data
+  ) {
+
+    data.forEach(
+      post => {
+
+        inspirationsById[
+          post.id
+        ] =
+          post;
+      }
+    );
+  }
+
+
   if (
     !data ||
     data.length === 0
@@ -1555,6 +1764,553 @@ async function deleteInspiration(
 
 
   await loadInspirations();
+
+
+  await loadComments();
+}
+
+
+function createAdminCommentCard(
+  comment
+) {
+
+  const card =
+    document.createElement(
+      "article"
+    );
+
+
+  card.className =
+    comment.approved
+      ? "comment-admin-card approved"
+      : "comment-admin-card pending";
+
+
+  const post =
+    inspirationsById[
+      comment.inspiration_id
+    ];
+
+
+  const postTitle =
+    post?.title ||
+    `Inspiration #${comment.inspiration_id}`;
+
+
+  const postLine =
+    document.createElement(
+      "div"
+    );
+
+
+  postLine.className =
+    "comment-post";
+
+
+  postLine.textContent =
+    "On: " +
+    postTitle;
+
+
+  card.appendChild(
+    postLine
+  );
+
+
+  const person =
+    document.createElement(
+      "div"
+    );
+
+
+  person.className =
+    "comment-person";
+
+
+  person.textContent =
+    comment.name ||
+    "Visitor";
+
+
+  card.appendChild(
+    person
+  );
+
+
+  const body =
+    document.createElement(
+      "div"
+    );
+
+
+  body.className =
+    "comment-body";
+
+
+  body.textContent =
+    comment.comment_text ||
+    "";
+
+
+  card.appendChild(
+    body
+  );
+
+
+  const meta =
+    document.createElement(
+      "div"
+    );
+
+
+  meta.className =
+    "comment-meta";
+
+
+  const submitted =
+    document.createElement(
+      "span"
+    );
+
+
+  submitted.textContent =
+    "Submitted: " +
+    (
+      formatDateTime(
+        comment.created_at
+      ) ||
+      "Unknown"
+    );
+
+
+  meta.appendChild(
+    submitted
+  );
+
+
+  if (
+    comment.approved &&
+    comment.approved_at
+  ) {
+
+    const approved =
+      document.createElement(
+        "span"
+      );
+
+
+    approved.textContent =
+      "Approved: " +
+      formatDateTime(
+        comment.approved_at
+      );
+
+
+    meta.appendChild(
+      approved
+    );
+  }
+
+
+  card.appendChild(
+    meta
+  );
+
+
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+
+  actions.className =
+    "comment-actions";
+
+
+  if (
+    !comment.approved
+  ) {
+
+    const approveButton =
+      document.createElement(
+        "button"
+      );
+
+
+    approveButton.className =
+      "approve-button";
+
+
+    approveButton.textContent =
+      "✓ Approve";
+
+
+    approveButton.addEventListener(
+      "click",
+      () => {
+        approveComment(
+          comment.id
+        );
+      }
+    );
+
+
+    actions.appendChild(
+      approveButton
+    );
+
+  } else {
+
+    const label =
+      document.createElement(
+        "span"
+      );
+
+
+    label.className =
+      "approved-label";
+
+
+    label.textContent =
+      "✓ Approved";
+
+
+    actions.appendChild(
+      label
+    );
+  }
+
+
+  const deleteButton =
+    document.createElement(
+      "button"
+    );
+
+
+  deleteButton.className =
+    "comment-delete-button";
+
+
+  deleteButton.textContent =
+    "Delete";
+
+
+  deleteButton.addEventListener(
+    "click",
+    () => {
+      deleteComment(
+        comment.id,
+        comment.name
+      );
+    }
+  );
+
+
+  actions.appendChild(
+    deleteButton
+  );
+
+
+  card.appendChild(
+    actions
+  );
+
+
+  return card;
+}
+
+
+async function loadComments() {
+
+  const container =
+    document.getElementById(
+      "comments-container"
+    );
+
+
+  container.innerHTML =
+    '<div class="empty">Loading comments...</div>';
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "daily_inspiration_comments"
+      )
+      .select(
+        "id,inspiration_id,name,comment_text,approved,created_at,approved_at"
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    container.innerHTML =
+      '<div class="empty">Comments could not be loaded.</div>';
+
+
+    return;
+  }
+
+
+  const comments =
+    data || [];
+
+
+  const pending =
+    comments.filter(
+      comment =>
+        comment.approved !== true
+    );
+
+
+  const approved =
+    comments.filter(
+      comment =>
+        comment.approved === true
+    );
+
+
+  document.getElementById(
+    "pending-count"
+  ).textContent =
+    `Pending: ${pending.length}`;
+
+
+  container.innerHTML =
+    "";
+
+
+  if (
+    comments.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">No visitor comments yet.</div>';
+
+
+    return;
+  }
+
+
+  if (
+    pending.length > 0
+  ) {
+
+    const heading =
+      document.createElement(
+        "h3"
+      );
+
+
+    heading.className =
+      "comment-group-title";
+
+
+    heading.textContent =
+      `Pending Comments (${pending.length})`;
+
+
+    container.appendChild(
+      heading
+    );
+
+
+    pending.forEach(
+      comment => {
+
+        container.appendChild(
+          createAdminCommentCard(
+            comment
+          )
+        );
+      }
+    );
+
+  } else {
+
+    const emptyPending =
+      document.createElement(
+        "div"
+      );
+
+
+    emptyPending.className =
+      "empty";
+
+
+    emptyPending.textContent =
+      "No comments are waiting for approval.";
+
+
+    container.appendChild(
+      emptyPending
+    );
+  }
+
+
+  if (
+    approved.length > 0
+  ) {
+
+    const heading =
+      document.createElement(
+        "h3"
+      );
+
+
+    heading.className =
+      "comment-group-title";
+
+
+    heading.textContent =
+      `Approved Comments (${approved.length})`;
+
+
+    container.appendChild(
+      heading
+    );
+
+
+    approved.forEach(
+      comment => {
+
+        container.appendChild(
+          createAdminCommentCard(
+            comment
+          )
+        );
+      }
+    );
+  }
+}
+
+
+async function approveComment(
+  id
+) {
+
+  const {
+    error
+  } =
+    await db
+      .from(
+        "daily_inspiration_comments"
+      )
+      .update({
+        approved:
+          true,
+
+        approved_at:
+          new Date().toISOString()
+      })
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "The comment could not be approved.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  showMessage(
+    "Comment approved successfully."
+  );
+
+
+  await loadComments();
+}
+
+
+async function deleteComment(
+  id,
+  name
+) {
+
+  const confirmed =
+    window.confirm(
+      `Delete this comment from ${name || "the visitor"}?`
+    );
+
+
+  if (
+    !confirmed
+  ) {
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await db
+      .from(
+        "daily_inspiration_comments"
+      )
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "The comment could not be deleted.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  showMessage(
+    "Comment deleted successfully."
+  );
+
+
+  await loadComments();
 }
 
 
@@ -1605,6 +2361,9 @@ async function protectPage() {
 
 
   await loadInspirations();
+
+
+  await loadComments();
 }
 
 
