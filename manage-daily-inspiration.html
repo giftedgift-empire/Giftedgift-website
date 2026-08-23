@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Manage Daily Inspiration | GiftedGift Empire</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      color: #f2bd16;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 18px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 28px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #123a8c;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    #verse-text {
+      min-height: 110px;
+    }
+
+    #message-text,
+    #prayer {
+      min-height: 170px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f7f7f7;
+    }
+
+    .help {
+      color: #666;
+      font-size: 13px;
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    .publish-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .publish-row input {
+      width: 22px;
+      height: 22px;
+    }
+
+    .preview {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .preview img {
+      width: 100%;
+      max-width: 420px;
+      max-height: 320px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #f7f7f7;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 13px 18px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .save-button {
+      background: #f2bd16;
+      color: #111;
+      flex: 1;
+      min-width: 190px;
+    }
+
+    .cancel-button {
+      background: #e5e7eb;
+      color: #222;
+      display: none;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #e8f7ec;
+      border: 1px solid #b8dfc0;
+      color: #17652d;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      border: 1px solid #efbbbb;
+      color: #951d1d;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+      );
+      gap: 18px;
+    }
+
+    .post-card {
+      background: #fff;
+      border: 1px solid #e3e3e3;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .post-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .post-body {
+      padding: 18px;
+    }
+
+    .post-category {
+      display: inline-block;
+      background: #f2bd16;
+      color: #111;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .post-body h3 {
+      margin: 0 0 10px;
+      color: #123a8c;
+    }
+
+    .post-reference {
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .status.published {
+      background: #e8f7ec;
+      color: #17652d;
+    }
+
+    .status.draft {
+      background: #eee;
+      color: #555;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .edit-button {
+      background: #123a8c;
+      color: white;
+      flex: 1;
+    }
+
+    .delete-button {
+      background: #c62828;
+      color: white;
+      flex: 1;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 35px 15px;
+      color: #666;
+      background: white;
+      border-radius: 12px;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 55px 20px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div id="loading">
+  Checking admin access...
+</div>
+
+
+<div
+  id="admin-page"
+  style="display:none;"
+>
+
+<header>
+
+  <h1>
+    Manage Daily Inspiration
+  </h1>
+
+  <p>
+    Add Bible verses, prayers and encouragement.
+  </p>
+
+</header>
+
+
+<main class="page">
+
+  <a
+    href="dashboard.html"
+    class="back-link"
+  >
+    ← Back to Dashboard
+  </a>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <section class="card">
+
+    <h2 id="form-heading">
+      Add Inspiration
+    </h2>
+
+
+    <div class="field">
+
+      <label for="category">
+        Category
+      </label>
+
+      <input
+        id="category"
+        type="text"
+        list="category-options"
+        placeholder="God's Word for Today"
+      >
+
+      <datalist id="category-options">
+
+        <option value="God's Word for Today">
+
+        <option value="Peace Before Sleep">
+
+        <option value="Breakthrough">
+
+        <option value="Prayer">
+
+        <option value="Encouragement">
+
+        <option value="Faith">
+
+      </datalist>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="title">
+        Title
+      </label>
+
+      <input
+        id="title"
+        type="text"
+        placeholder="Example: Cast Your Cares on God"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="verse-text">
+        Bible Verse
+      </label>
+
+      <textarea
+        id="verse-text"
+        placeholder="Example: Cast your cares on the Lord and He will sustain you."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="verse-reference">
+        Bible Reference
+      </label>
+
+      <input
+        id="verse-reference"
+        type="text"
+        placeholder="Example: Psalm 55:22"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="message-text">
+        Encouragement / Message
+      </label>
+
+      <textarea
+        id="message-text"
+        placeholder="Write the encouragement here..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="prayer">
+        Prayer
+      </label>
+
+      <textarea
+        id="prayer"
+        placeholder="Write the prayer here..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="image-file">
+        Inspiration Image (optional)
+      </label>
+
+      <input
+        id="image-file"
+        type="file"
+        accept="image/*"
+      >
+
+      <div class="help">
+        Choose an image directly from your phone gallery or files.
+      </div>
+
+      <div
+        id="preview"
+        class="preview"
+      >
+
+        <img
+          id="preview-image"
+          alt="Inspiration image preview"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="publish-row">
+
+      <input
+        id="published"
+        type="checkbox"
+      >
+
+      <label
+        for="published"
+        style="margin:0;"
+      >
+        Publish this inspiration
+      </label>
+
+    </div>
+
+
+    <div class="button-row">
+
+      <button
+        id="save-button"
+        class="save-button"
+        type="button"
+      >
+        Save Inspiration
+      </button>
+
+
+      <button
+        id="cancel-button"
+        class="cancel-button"
+        type="button"
+      >
+        Cancel Edit
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section>
+
+    <h2 style="color:#123a8c;">
+      Existing Inspirations
+    </h2>
+
+    <div id="posts-container">
+
+      <div class="empty">
+        Loading inspirations...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+let editingId =
+  null;
+
+
+let currentImageUrl =
+  "";
+
+
+const categoryInput =
+  document.getElementById(
+    "category"
+  );
+
+
+const titleInput =
+  document.getElementById(
+    "title"
+  );
+
+
+const verseTextInput =
+  document.getElementById(
+    "verse-text"
+  );
+
+
+const verseReferenceInput =
+  document.getElementById(
+    "verse-reference"
+  );
+
+
+const messageInput =
+  document.getElementById(
+    "message-text"
+  );
+
+
+const prayerInput =
+  document.getElementById(
+    "prayer"
+  );
+
+
+const imageFileInput =
+  document.getElementById(
+    "image-file"
+  );
+
+
+const publishedInput =
+  document.getElementById(
+    "published"
+  );
+
+
+function showMessage(
+  text,
+  type = "success"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    `message ${type}`;
+
+
+  box.textContent =
+    text;
+
+
+  box.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+
+function showPreview(
+  url
+) {
+
+  const wrapper =
+    document.getElementById(
+      "preview"
+    );
+
+
+  const image =
+    document.getElementById(
+      "preview-image"
+    );
+
+
+  if (
+    url
+  ) {
+
+    image.src =
+      url;
+
+
+    wrapper.style.display =
+      "block";
+
+  } else {
+
+    image.removeAttribute(
+      "src"
+    );
+
+
+    wrapper.style.display =
+      "none";
+  }
+}
+
+
+function safeFileName(
+  name
+) {
+
+  return String(
+    name || "inspiration-image"
+  )
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9._-]+/g,
+      "-"
+    );
+}
+
+
+async function uploadImage(
+  file
+) {
+
+  if (
+    !file
+  ) {
+
+    return currentImageUrl || null;
+  }
+
+
+  if (
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    throw new Error(
+      "Please choose an image file."
+    );
+  }
+
+
+  const path =
+    "daily-inspiration/" +
+    Date.now() +
+    "-" +
+    safeFileName(
+      file.name
+    );
+
+
+  const {
+    error
+  } =
+    await db
+      .storage
+      .from(
+        "product-images"
+      )
+      .upload(
+        path,
+        file,
+        {
+          cacheControl: "3600",
+          upsert: false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    throw new Error(
+      "The inspiration image could not be uploaded."
+    );
+  }
+
+
+  const {
+    data
+  } =
+    db
+      .storage
+      .from(
+        "product-images"
+      )
+      .getPublicUrl(
+        path
+      );
+
+
+  return (
+    data?.publicUrl ||
+    null
+  );
+}
+
+
+function resetForm() {
+
+  editingId =
+    null;
+
+
+  currentImageUrl =
+    "";
+
+
+  categoryInput.value =
+    "God's Word for Today";
+
+
+  titleInput.value =
+    "";
+
+
+  verseTextInput.value =
+    "";
+
+
+  verseReferenceInput.value =
+    "";
+
+
+  messageInput.value =
+    "";
+
+
+  prayerInput.value =
+    "";
+
+
+  imageFileInput.value =
+    "";
+
+
+  publishedInput.checked =
+    false;
+
+
+  showPreview(
+    ""
+  );
+
+
+  document.getElementById(
+    "form-heading"
+  ).textContent =
+    "Add Inspiration";
+
+
+  document.getElementById(
+    "save-button"
+  ).textContent =
+    "Save Inspiration";
+
+
+  document.getElementById(
+    "cancel-button"
+  ).style.display =
+    "none";
+}
+
+
+async function saveInspiration() {
+
+  const category =
+    categoryInput.value.trim();
+
+
+  const title =
+    titleInput.value.trim();
+
+
+  const verseText =
+    verseTextInput.value.trim();
+
+
+  const verseReference =
+    verseReferenceInput.value.trim();
+
+
+  const message =
+    messageInput.value.trim();
+
+
+  const prayer =
+    prayerInput.value.trim();
+
+
+  if (
+    !category
+  ) {
+
+    showMessage(
+      "Please enter a category.",
+      "error"
+    );
+
+    categoryInput.focus();
+
+    return;
+  }
+
+
+  if (
+    !title
+  ) {
+
+    showMessage(
+      "Please enter a title.",
+      "error"
+    );
+
+    titleInput.focus();
+
+    return;
+  }
+
+
+  if (
+    !verseText &&
+    !message &&
+    !prayer
+  ) {
+
+    showMessage(
+      "Please add a Bible verse, message or prayer.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "save-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Saving...";
+
+
+  try {
+
+    const file =
+      imageFileInput.files?.[0] ||
+      null;
+
+
+    const imageUrl =
+      await uploadImage(
+        file
+      );
+
+
+    const payload = {
+
+      category,
+
+      title,
+
+      verse_text:
+        verseText || null,
+
+      verse_reference:
+        verseReference || null,
+
+      message:
+        message || null,
+
+      prayer:
+        prayer || null,
+
+      image_url:
+        imageUrl,
+
+      published:
+        publishedInput.checked,
+
+      updated_at:
+        new Date().toISOString()
+
+    };
+
+
+    let result;
+
+
+    if (
+      editingId
+    ) {
+
+      result =
+        await db
+          .from(
+            "daily_inspirations"
+          )
+          .update(
+            payload
+          )
+          .eq(
+            "id",
+            editingId
+          )
+          .select()
+          .single();
+
+    } else {
+
+      result =
+        await db
+          .from(
+            "daily_inspirations"
+          )
+          .insert(
+            payload
+          )
+          .select()
+          .single();
+    }
+
+
+    if (
+      result.error
+    ) {
+
+      console.error(
+        result.error
+      );
+
+
+      throw new Error(
+        result.error.message ||
+        "The inspiration could not be saved."
+      );
+    }
+
+
+    showMessage(
+      editingId
+        ? "Inspiration updated successfully."
+        : "Inspiration saved successfully."
+    );
+
+
+    resetForm();
+
+
+    await loadInspirations();
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      error instanceof Error
+        ? error.message
+        : "The inspiration could not be saved.",
+      "error"
+    );
+
+
+  } finally {
+
+    button.disabled =
+      false;
+
+
+    if (
+      !editingId
+    ) {
+
+      button.textContent =
+        "Save Inspiration";
+    }
+  }
+}
+
+
+function createPostCard(
+  post
+) {
+
+  const card =
+    document.createElement(
+      "article"
+    );
+
+
+  card.className =
+    "post-card";
+
+
+  if (
+    post.image_url
+  ) {
+
+    const image =
+      document.createElement(
+        "img"
+      );
+
+
+    image.className =
+      "post-image";
+
+
+    image.src =
+      post.image_url;
+
+
+    image.alt =
+      post.title || "Daily Inspiration";
+
+
+    card.appendChild(
+      image
+    );
+  }
+
+
+  const body =
+    document.createElement(
+      "div"
+    );
+
+
+  body.className =
+    "post-body";
+
+
+  const category =
+    document.createElement(
+      "div"
+    );
+
+
+  category.className =
+    "post-category";
+
+
+  category.textContent =
+    post.category ||
+    "Daily Inspiration";
+
+
+  body.appendChild(
+    category
+  );
+
+
+  const title =
+    document.createElement(
+      "h3"
+    );
+
+
+  title.textContent =
+    post.title ||
+    "Untitled";
+
+
+  body.appendChild(
+    title
+  );
+
+
+  if (
+    post.verse_reference
+  ) {
+
+    const reference =
+      document.createElement(
+        "div"
+      );
+
+
+    reference.className =
+      "post-reference";
+
+
+    reference.textContent =
+      post.verse_reference;
+
+
+    body.appendChild(
+      reference
+    );
+  }
+
+
+  const status =
+    document.createElement(
+      "div"
+    );
+
+
+  status.className =
+    post.published
+      ? "status published"
+      : "status draft";
+
+
+  status.textContent =
+    post.published
+      ? "Published"
+      : "Draft";
+
+
+  body.appendChild(
+    status
+  );
+
+
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+
+  actions.className =
+    "post-actions";
+
+
+  const editButton =
+    document.createElement(
+      "button"
+    );
+
+
+  editButton.className =
+    "edit-button";
+
+
+  editButton.textContent =
+    "Edit";
+
+
+  editButton.addEventListener(
+    "click",
+    () => {
+      startEdit(
+        post
+      );
+    }
+  );
+
+
+  const deleteButton =
+    document.createElement(
+      "button"
+    );
+
+
+  deleteButton.className =
+    "delete-button";
+
+
+  deleteButton.textContent =
+    "Delete";
+
+
+  deleteButton.addEventListener(
+    "click",
+    () => {
+      deleteInspiration(
+        post.id,
+        post.title
+      );
+    }
+  );
+
+
+  actions.appendChild(
+    editButton
+  );
+
+
+  actions.appendChild(
+    deleteButton
+  );
+
+
+  body.appendChild(
+    actions
+  );
+
+
+  card.appendChild(
+    body
+  );
+
+
+  return card;
+}
+
+
+async function loadInspirations() {
+
+  const container =
+    document.getElementById(
+      "posts-container"
+    );
+
+
+  container.innerHTML =
+    '<div class="empty">Loading inspirations...</div>';
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "daily_inspirations"
+      )
+      .select(
+        "id,category,title,verse_text,verse_reference,message,prayer,image_url,published,created_at,updated_at"
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    container.innerHTML =
+      '<div class="empty">Inspirations could not be loaded.</div>';
+
+
+    return;
+  }
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">No inspirations have been added yet.</div>';
+
+
+    return;
+  }
+
+
+  const grid =
+    document.createElement(
+      "div"
+    );
+
+
+  grid.className =
+    "posts-grid";
+
+
+  data.forEach(
+    post => {
+
+      grid.appendChild(
+        createPostCard(
+          post
+        )
+      );
+    }
+  );
+
+
+  container.innerHTML =
+    "";
+
+
+  container.appendChild(
+    grid
+  );
+}
+
+
+function startEdit(
+  post
+) {
+
+  editingId =
+    post.id;
+
+
+  currentImageUrl =
+    post.image_url ||
+    "";
+
+
+  categoryInput.value =
+    post.category ||
+    "God's Word for Today";
+
+
+  titleInput.value =
+    post.title ||
+    "";
+
+
+  verseTextInput.value =
+    post.verse_text ||
+    "";
+
+
+  verseReferenceInput.value =
+    post.verse_reference ||
+    "";
+
+
+  messageInput.value =
+    post.message ||
+    "";
+
+
+  prayerInput.value =
+    post.prayer ||
+    "";
+
+
+  publishedInput.checked =
+    post.published === true;
+
+
+  imageFileInput.value =
+    "";
+
+
+  showPreview(
+    currentImageUrl
+  );
+
+
+  document.getElementById(
+    "form-heading"
+  ).textContent =
+    "Edit Inspiration";
+
+
+  document.getElementById(
+    "save-button"
+  ).textContent =
+    "Update Inspiration";
+
+
+  document.getElementById(
+    "cancel-button"
+  ).style.display =
+    "inline-block";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+async function deleteInspiration(
+  id,
+  title
+) {
+
+  const confirmed =
+    window.confirm(
+      `Delete "${title || "this inspiration"}"?`
+    );
+
+
+  if (
+    !confirmed
+  ) {
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await db
+      .from(
+        "daily_inspirations"
+      )
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "The inspiration could not be deleted.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  if (
+    editingId === id
+  ) {
+
+    resetForm();
+  }
+
+
+  showMessage(
+    "Inspiration deleted successfully."
+  );
+
+
+  await loadInspirations();
+}
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .auth
+      .getSession();
+
+
+  const session =
+    data?.session;
+
+
+  if (
+    error ||
+    !session ||
+    session.user?.id !==
+      ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+
+    return;
+  }
+
+
+  document.getElementById(
+    "loading"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "admin-page"
+  ).style.display =
+    "block";
+
+
+  resetForm();
+
+
+  await loadInspirations();
+}
+
+
+imageFileInput.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      imageFileInput.files?.[0];
+
+
+    if (
+      !file
+    ) {
+
+      showPreview(
+        currentImageUrl
+      );
+
+      return;
+    }
+
+
+    const temporaryUrl =
+      URL.createObjectURL(
+        file
+      );
+
+
+    showPreview(
+      temporaryUrl
+    );
+  }
+);
+
+
+document.getElementById(
+  "save-button"
+).addEventListener(
+  "click",
+  saveInspiration
+);
+
+
+document.getElementById(
+  "cancel-button"
+).addEventListener(
+  "click",
+  resetForm
+);
+
+
+protectPage();
+
+</script>
+
+</body>
+
+</html>
