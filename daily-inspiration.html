@@ -82,12 +82,28 @@
       padding: 45px 20px 70px;
     }
 
+    .loading {
+      text-align: center;
+      padding: 50px 20px;
+      color: #666;
+      font-weight: bold;
+    }
+
     .inspiration-card {
       background: white;
       border-radius: 16px;
       padding: 34px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       margin-bottom: 25px;
+    }
+
+    .inspiration-image {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      background: #f7f7f7;
     }
 
     .label {
@@ -113,6 +129,7 @@
       font-weight: bold;
       color: #333;
       margin-bottom: 15px;
+      white-space: pre-line;
     }
 
     .reference {
@@ -125,6 +142,7 @@
       color: #555;
       font-size: 17px;
       line-height: 1.8;
+      white-space: pre-line;
     }
 
     .prayer {
@@ -135,25 +153,23 @@
       margin-top: 25px;
       color: #444;
       line-height: 1.8;
+      white-space: pre-line;
     }
 
-    .coming {
+    .date {
+      color: #888;
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    .empty {
       background: white;
-      padding: 28px;
+      padding: 30px;
       border-radius: 14px;
       text-align: center;
       box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-    }
-
-    .coming h3 {
-      color: #123a8c;
-      margin-top: 0;
-    }
-
-    .coming p {
       color: #666;
       line-height: 1.7;
-      margin-bottom: 0;
     }
 
     footer {
@@ -202,6 +218,10 @@
       .verse {
         font-size: 19px;
       }
+
+      .message {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -216,11 +236,18 @@
   </h1>
 
   <nav>
-    <a href="index.html">Home</a>
 
-    <a href="shop.html">Shop</a>
+    <a href="index.html">
+      Home
+    </a>
 
-    <a href="categories.html">Categories</a>
+    <a href="shop.html">
+      Shop
+    </a>
+
+    <a href="categories.html">
+      Categories
+    </a>
 
     <a
       href="daily-inspiration.html"
@@ -229,17 +256,26 @@
       Daily Inspiration
     </a>
 
-    <a href="blog.html">Blog</a>
+    <a href="blog.html">
+      Blog
+    </a>
 
-    <a href="deals.html">Deals</a>
+    <a href="deals.html">
+      Deals
+    </a>
 
-    <a href="about.html">About</a>
+    <a href="about.html">
+      About
+    </a>
 
-    <a href="contact.html">Contact</a>
+    <a href="contact.html">
+      Contact
+    </a>
 
     <a href="cart.html">
       🛒 Cart
     </a>
+
   </nav>
 
 </header>
@@ -261,54 +297,15 @@
 
 <main class="page">
 
-  <article class="inspiration-card">
-
-    <span class="label">
-      God's Word for Today
-    </span>
-
-    <h3>
-      Cast Your Cares on God
-    </h3>
-
-    <div class="verse">
-      “Cast your cares on the Lord and He will sustain you.”
-    </div>
-
-    <div class="reference">
-      Psalm 55:22
-    </div>
-
-    <div class="message">
-      Whatever is weighing on your heart today, you do not have
-      to carry it alone. Give your worries, fears and uncertainties
-      to God and trust Him to strengthen you.
-    </div>
-
-    <div class="prayer">
-      <strong>Today's Prayer:</strong><br><br>
-
-      Lord, I place every worry and burden in Your hands.
-      Give me peace, strength and wisdom for today.
-      Guide my steps and help me trust You completely.
-      Amen.
-    </div>
-
-  </article>
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading inspiration...
+  </div>
 
 
-  <section class="coming">
-
-    <h3>
-      More Inspiration Is Coming
-    </h3>
-
-    <p>
-      Daily Bible verses, prayers, breakthrough encouragement
-      and uplifting messages will be added here regularly.
-    </p>
-
-  </section>
+  <div id="inspiration-list"></div>
 
 </main>
 
@@ -323,16 +320,468 @@
 
   <p>
     <a href="about.html">About</a>
+
     <a href="contact.html">Contact</a>
+
     <a href="blog.html">Blog</a>
-    <a href="daily-inspiration.html">Daily Inspiration</a>
+
+    <a href="daily-inspiration.html">
+      Daily Inspiration
+    </a>
   </p>
 
   <p>
-    © 2026 GiftedGift Empire. All rights reserved.
+    © 2026 GiftedGift Empire.
+    All rights reserved.
   </p>
 
 </footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const FALLBACK_POST = {
+
+  category:
+    "God's Word for Today",
+
+  title:
+    "Cast Your Cares on God",
+
+  verse_text:
+    "Cast your cares on the Lord and He will sustain you.",
+
+  verse_reference:
+    "Psalm 55:22",
+
+  message:
+    "Whatever is weighing on your heart today, you do not have to carry it alone. Give your worries, fears and uncertainties to God and trust Him to strengthen you.",
+
+  prayer:
+    "Lord, I place every worry and burden in Your hands. Give me peace, strength and wisdom for today. Guide my steps and help me trust You completely. Amen.",
+
+  image_url:
+    null,
+
+  created_at:
+    null
+
+};
+
+
+function formatDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+  }
+
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }
+  );
+}
+
+
+function createInspirationCard(
+  post
+) {
+
+  const article =
+    document.createElement(
+      "article"
+    );
+
+
+  article.className =
+    "inspiration-card";
+
+
+  if (
+    post.image_url
+  ) {
+
+    const image =
+      document.createElement(
+        "img"
+      );
+
+
+    image.className =
+      "inspiration-image";
+
+
+    image.src =
+      post.image_url;
+
+
+    image.alt =
+      post.title ||
+      "Daily Inspiration";
+
+
+    article.appendChild(
+      image
+    );
+  }
+
+
+  if (
+    post.category
+  ) {
+
+    const label =
+      document.createElement(
+        "span"
+      );
+
+
+    label.className =
+      "label";
+
+
+    label.textContent =
+      post.category;
+
+
+    article.appendChild(
+      label
+    );
+  }
+
+
+  const title =
+    document.createElement(
+      "h3"
+    );
+
+
+  title.textContent =
+    post.title ||
+    "Daily Inspiration";
+
+
+  article.appendChild(
+    title
+  );
+
+
+  if (
+    post.verse_text
+  ) {
+
+    const verse =
+      document.createElement(
+        "div"
+      );
+
+
+    verse.className =
+      "verse";
+
+
+    verse.textContent =
+      `“${post.verse_text}”`;
+
+
+    article.appendChild(
+      verse
+    );
+  }
+
+
+  if (
+    post.verse_reference
+  ) {
+
+    const reference =
+      document.createElement(
+        "div"
+      );
+
+
+    reference.className =
+      "reference";
+
+
+    reference.textContent =
+      post.verse_reference;
+
+
+    article.appendChild(
+      reference
+    );
+  }
+
+
+  if (
+    post.message
+  ) {
+
+    const message =
+      document.createElement(
+        "div"
+      );
+
+
+    message.className =
+      "message";
+
+
+    message.textContent =
+      post.message;
+
+
+    article.appendChild(
+      message
+    );
+  }
+
+
+  if (
+    post.prayer
+  ) {
+
+    const prayer =
+      document.createElement(
+        "div"
+      );
+
+
+    prayer.className =
+      "prayer";
+
+
+    const heading =
+      document.createElement(
+        "strong"
+      );
+
+
+    heading.textContent =
+      "Prayer:";
+
+
+    prayer.appendChild(
+      heading
+    );
+
+
+    prayer.appendChild(
+      document.createElement(
+        "br"
+      )
+    );
+
+
+    prayer.appendChild(
+      document.createElement(
+        "br"
+      )
+    );
+
+
+    prayer.appendChild(
+      document.createTextNode(
+        post.prayer
+      )
+    );
+
+
+    article.appendChild(
+      prayer
+    );
+  }
+
+
+  const formattedDate =
+    formatDate(
+      post.created_at
+    );
+
+
+  if (
+    formattedDate
+  ) {
+
+    const date =
+      document.createElement(
+        "div"
+      );
+
+
+    date.className =
+      "date";
+
+
+    date.textContent =
+      formattedDate;
+
+
+    article.appendChild(
+      date
+    );
+  }
+
+
+  return article;
+}
+
+
+function renderInspirations(
+  posts
+) {
+
+  const container =
+    document.getElementById(
+      "inspiration-list"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  posts.forEach(
+    post => {
+
+      container.appendChild(
+        createInspirationCard(
+          post
+        )
+      );
+    }
+  );
+
+
+  document.getElementById(
+    "loading"
+  ).style.display =
+    "none";
+}
+
+
+async function loadInspirations() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "daily_inspirations"
+      )
+      .select(
+        "id,category,title,verse_text,verse_reference,message,prayer,image_url,published,created_at"
+      )
+      .eq(
+        "published",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Daily Inspiration error:",
+      error
+    );
+
+
+    /*
+      Keep the page usable if Supabase
+      temporarily fails.
+    */
+
+    renderInspirations(
+      [
+        FALLBACK_POST
+      ]
+    );
+
+
+    return;
+  }
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    renderInspirations(
+      [
+        FALLBACK_POST
+      ]
+    );
+
+
+    return;
+  }
+
+
+  renderInspirations(
+    data
+  );
+}
+
+
+loadInspirations();
+
+</script>
 
 </body>
 
