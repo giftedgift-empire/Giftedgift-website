@@ -134,7 +134,7 @@ header p {
 
   <img
     src="my-logo.png"
-    alt="Gifted Gift Empire Logo"
+    alt="GiftedGift Empire Logo"
     style="
       width:120px;
       height:120px;
@@ -149,22 +149,23 @@ header p {
   <h1>GiftedGift Empire</h1>
 
   <p>Admin Dashboard</p>
+
   <a
-  href="index.html"
-  target="_blank"
-  style="
-    display:inline-block;
-    margin-top:15px;
-    background:#f2bd16;
-    color:#111;
-    text-decoration:none;
-    padding:11px 20px;
-    border-radius:8px;
-    font-weight:bold;
-  "
->
-  🌐 View Website
-</a>
+    href="index.html"
+    target="_blank"
+    style="
+      display:inline-block;
+      margin-top:15px;
+      background:#f2bd16;
+      color:#111;
+      text-decoration:none;
+      padding:11px 20px;
+      border-radius:8px;
+      font-weight:bold;
+    "
+  >
+    🌐 View Website
+  </a>
 
 </header>
 
@@ -231,43 +232,50 @@ header p {
       </button>
 
     </div>
-    
-  <div class="card">
 
-  <h2>Shipping</h2>
 
-  <p>
-    Manage shipping zones, Chronopost,
-    GLS and weight-based delivery prices.
-  </p>
 
-  <button
-    type="button"
-    onclick="goTo('manage-shipping.html')"
-  >
-    Manage Shipping
-  </button>
+    <!-- SHIPPING -->
 
-</div>
+    <div class="card">
+
+      <h2>Shipping</h2>
+
+      <p>
+        Manage shipping zones, Chronopost,
+        GLS and weight-based delivery prices.
+      </p>
+
+      <button
+        type="button"
+        onclick="goTo('manage-shipping.html')"
+      >
+        Manage Shipping
+      </button>
+
+    </div>
+
+
+
     <!-- FOODSTUFFS -->
 
-<div class="card">
+    <div class="card">
 
-  <h2>African Foodstuffs</h2>
+      <h2>African Foodstuffs</h2>
 
-  <p>
-    Manage food products, pictures, prices,
-    stock status and WhatsApp-order items.
-  </p>
+      <p>
+        Manage food products, pictures, prices,
+        stock status and WhatsApp-order items.
+      </p>
 
-  <button
-    type="button"
-    onclick="goTo('manage-foodstuffs.html')"
-  >
-    Manage Foodstuffs
-  </button>
+      <button
+        type="button"
+        onclick="goTo('manage-foodstuffs.html')"
+      >
+        Manage Foodstuffs
+      </button>
 
-</div>
+    </div>
 
 
 
@@ -337,6 +345,50 @@ header p {
 
 
 
+    <!-- HOMEPAGE SETTINGS -->
+
+    <div class="card">
+
+      <h2>Homepage Settings</h2>
+
+      <p>
+        Manage homepage images,
+        buttons and featured sections.
+      </p>
+
+      <button
+        type="button"
+        onclick="goTo('homepage-settings.html')"
+      >
+        Manage Homepage
+      </button>
+
+    </div>
+
+
+
+    <!-- DAILY INSPIRATION -->
+
+    <div class="card">
+
+      <h2>Daily Inspiration</h2>
+
+      <p>
+        Add Bible verses, prayers,
+        encouragement and moderate comments.
+      </p>
+
+      <button
+        type="button"
+        onclick="goTo('manage-daily-inspiration.html')"
+      >
+        Manage Daily Inspiration
+      </button>
+
+    </div>
+
+
+
     <!-- BLOG -->
 
     <div class="card">
@@ -375,6 +427,28 @@ header p {
         onclick="goTo('manage-deals.html')"
       >
         Manage Deals
+      </button>
+
+    </div>
+
+
+
+    <!-- REVIEWS -->
+
+    <div class="card">
+
+      <h2>Reviews</h2>
+
+      <p>
+        Approve, hide and delete
+        customer ratings and reviews.
+      </p>
+
+      <button
+        type="button"
+        onclick="goTo('manage-reviews.html')"
+      >
+        Manage Reviews
       </button>
 
     </div>
@@ -432,8 +506,8 @@ header p {
       <h2>Website Settings</h2>
 
       <p>
-        Manage general GiftedGift Empire
-        website settings.
+        Manage currency, tax,
+        store features and website settings.
       </p>
 
       <button
@@ -478,6 +552,10 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
 const supabaseClient =
   supabase.createClient(
     SUPABASE_URL,
@@ -503,7 +581,8 @@ async function protectDashboard() {
 
   if (
     error ||
-    !session
+    !session ||
+    session.user?.id !== ADMIN_USER_ID
   ) {
 
     window.location.replace(
