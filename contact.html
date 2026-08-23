@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Contact | GiftedGift Empire</title>
+
+  <meta
+    name="description"
+    content="Contact GiftedGift Empire for product questions, support, partnerships and business enquiries."
+  >
 
   <style>
     * {
@@ -41,7 +51,8 @@
       font-weight: bold;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a.active {
       color: #f2bd16;
     }
 
@@ -53,7 +64,15 @@
 
     .hero h2 {
       font-size: 38px;
-      margin-bottom: 15px;
+      margin: 0 0 15px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: #555;
+      line-height: 1.7;
+      font-size: 17px;
     }
 
     .contact {
@@ -62,7 +81,15 @@
       padding: 45px 22px;
     }
 
+    .loading {
+      text-align: center;
+      padding: 50px 20px;
+      color: #666;
+      font-weight: bold;
+    }
+
     .contact-card {
+      display: none;
       background: white;
       padding: 30px;
       border-radius: 14px;
@@ -70,27 +97,69 @@
       text-align: center;
     }
 
-    .contact-card p {
+    .contact-image {
+      display: none;
+      width: 100%;
+      max-width: 520px;
+      max-height: 380px;
+      object-fit: contain;
+      margin: 0 auto 25px;
+      border-radius: 12px;
+      background: #f7f7f7;
+    }
+
+    .contact-message {
       color: #555;
       line-height: 1.8;
       font-size: 17px;
+      margin-bottom: 25px;
+      white-space: pre-line;
+    }
+
+    .email-block {
+      margin: 25px 0 10px;
+    }
+
+    .email-label {
+      font-weight: bold;
+      margin-bottom: 8px;
     }
 
     .email-address {
       color: #123a8c;
       font-weight: bold;
       text-decoration: none;
+      word-break: break-word;
+    }
+
+    .email-address:hover {
+      text-decoration: underline;
     }
 
     .contact-button {
-      display: inline-block;
-      margin-top: 15px;
+      display: none;
+      margin-top: 20px;
       background: #f2bd16;
       color: #111;
       text-decoration: none;
       font-weight: bold;
-      padding: 12px 20px;
-      border-radius: 7px;
+      padding: 13px 22px;
+      border-radius: 8px;
+    }
+
+    .contact-button:hover {
+      opacity: 0.9;
+    }
+
+    .message {
+      display: none;
+      background: #fff4d6;
+      color: #805b00;
+      border: 1px solid #ead18a;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     footer {
@@ -100,58 +169,455 @@
       text-align: center;
       padding: 30px 20px;
     }
+
+    @media (max-width: 650px) {
+      nav {
+        gap: 12px;
+      }
+
+      .hero h2 {
+        font-size: 31px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .contact {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .contact-card {
+        padding: 22px;
+      }
+
+      .contact-message {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
+
 
 <body>
 
 <header>
-  <h1>GiftedGift Empire</h1>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
 
   <nav>
     <a href="index.html">Home</a>
+
     <a href="shop.html">Shop</a>
+
     <a href="categories.html">Categories</a>
+
+    <a href="daily-inspiration.html">
+      Daily Inspiration
+    </a>
+
     <a href="blog.html">Blog</a>
+
     <a href="deals.html">Deals</a>
+
     <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
+
+    <a
+      href="contact.html"
+      class="active"
+    >
+      Contact
+    </a>
+
+    <a href="cart.html">
+      🛒 Cart
+    </a>
   </nav>
+
 </header>
 
+
 <section class="hero">
-  <h2>Contact Us</h2>
-  <p>Questions, suggestions, partnerships or business enquiries?</p>
+
+  <h2 id="page-title">
+    Contact Us
+  </h2>
+
+  <p id="page-subtitle">
+    Questions, suggestions, partnerships or business enquiries?
+  </p>
+
 </section>
 
+
 <main class="contact">
-  <div class="contact-card">
 
-    <p>
-      We’d love to hear from you. For business enquiries,
-      partnerships, product questions or general support,
-      contact GiftedGift Empire by email.
-    </p>
+  <div
+    id="message"
+    class="message"
+  ></div>
 
-    <p>
-      <strong>Email:</strong><br>
-      <a class="email-address" href="mailto:gift@giftedgiftempire.com">
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading Contact page...
+  </div>
+
+
+  <section
+    id="contact-card"
+    class="contact-card"
+  >
+
+    <img
+      id="contact-image"
+      class="contact-image"
+      alt="Contact GiftedGift Empire"
+    >
+
+
+    <div
+      id="contact-message"
+      class="contact-message"
+    ></div>
+
+
+    <div class="email-block">
+
+      <div class="email-label">
+        Email:
+      </div>
+
+      <a
+        id="email-address"
+        class="email-address"
+        href="mailto:gift@giftedgiftempire.com"
+      >
         gift@giftedgiftempire.com
       </a>
-    </p>
 
-    <a class="contact-button" href="mailto:gift@giftedgiftempire.com">
+    </div>
+
+
+    <a
+      id="contact-button"
+      class="contact-button"
+      href="mailto:gift@giftedgiftempire.com"
+    >
       Email GiftedGift Empire
     </a>
 
-  </div>
+  </section>
+
 </main>
 
+
 <footer>
-  <p><strong>GiftedGift Empire</strong></p>
-  <p>© 2026 GiftedGift Empire. All rights reserved.</p>
+
+  <p>
+    <strong>
+      GiftedGift Empire
+    </strong>
+  </p>
+
+  <p>
+    © 2026 GiftedGift Empire.
+    All rights reserved.
+  </p>
+
 </footer>
 
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const DEFAULT_CONTACT = {
+
+  title:
+    "Contact Us",
+
+  subtitle:
+    "Questions, suggestions, partnerships or business enquiries?",
+
+  content:
+    "We’d love to hear from you. For business enquiries, partnerships, product questions or general support, contact GiftedGift Empire by email.",
+
+  button_text:
+    "Email GiftedGift Empire",
+
+  button_url:
+    "mailto:gift@giftedgiftempire.com",
+
+  image_url:
+    null
+
+};
+
+
+function getEmailFromMailto(
+  value
+) {
+
+  const url =
+    String(
+      value || ""
+    ).trim();
+
+
+  if (
+    url.toLowerCase().startsWith(
+      "mailto:"
+    )
+  ) {
+
+    return url.substring(
+      7
+    ).trim();
+  }
+
+
+  return "";
+}
+
+
+function renderContact(
+  data
+) {
+
+  const contact =
+    {
+      ...DEFAULT_CONTACT,
+      ...(data || {})
+    };
+
+
+  const title =
+    contact.title ||
+    DEFAULT_CONTACT.title;
+
+
+  const subtitle =
+    contact.subtitle ||
+    DEFAULT_CONTACT.subtitle;
+
+
+  const content =
+    contact.content ||
+    DEFAULT_CONTACT.content;
+
+
+  const buttonText =
+    contact.button_text ||
+    DEFAULT_CONTACT.button_text;
+
+
+  const buttonUrl =
+    contact.button_url ||
+    DEFAULT_CONTACT.button_url;
+
+
+  const email =
+    getEmailFromMailto(
+      buttonUrl
+    ) ||
+    "gift@giftedgiftempire.com";
+
+
+  document.getElementById(
+    "page-title"
+  ).textContent =
+    title;
+
+
+  document.getElementById(
+    "page-subtitle"
+  ).textContent =
+    subtitle;
+
+
+  document.getElementById(
+    "contact-message"
+  ).textContent =
+    content;
+
+
+  const emailLink =
+    document.getElementById(
+      "email-address"
+    );
+
+
+  emailLink.textContent =
+    email;
+
+
+  emailLink.href =
+    "mailto:" + email;
+
+
+  const button =
+    document.getElementById(
+      "contact-button"
+    );
+
+
+  if (
+    buttonText &&
+    buttonUrl
+  ) {
+
+    button.textContent =
+      buttonText;
+
+
+    button.href =
+      buttonUrl;
+
+
+    button.style.display =
+      "inline-block";
+
+  } else {
+
+    button.style.display =
+      "none";
+  }
+
+
+  const image =
+    document.getElementById(
+      "contact-image"
+    );
+
+
+  if (
+    contact.image_url
+  ) {
+
+    image.src =
+      contact.image_url;
+
+
+    image.style.display =
+      "block";
+
+  } else {
+
+    image.removeAttribute(
+      "src"
+    );
+
+
+    image.style.display =
+      "none";
+  }
+
+
+  document.getElementById(
+    "loading"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "contact-card"
+  ).style.display =
+    "block";
+}
+
+
+async function loadContact() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "site_content"
+      )
+      .select(
+        "id,section,title,subtitle,content,button_text,button_url,image_url,updated_at"
+      )
+      .eq(
+        "section",
+        "contact"
+      )
+      .limit(1)
+      .maybeSingle();
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Contact page error:",
+      error
+    );
+
+
+    /*
+      Keep the public Contact page usable
+      even if Supabase temporarily fails.
+    */
+
+    renderContact(
+      DEFAULT_CONTACT
+    );
+
+
+    return;
+  }
+
+
+  if (
+    !data
+  ) {
+
+    renderContact(
+      DEFAULT_CONTACT
+    );
+
+
+    return;
+  }
+
+
+  renderContact(
+    data
+  );
+}
+
+
+loadContact();
+
+</script>
+
 </body>
+
 </html>
