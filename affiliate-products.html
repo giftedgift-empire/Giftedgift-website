@@ -24,7 +24,7 @@
 <link
   rel="canonical"
   id="canonical-link"
-  href="https://giftedgiftempire.com/affiliate-product.html"
+  href="https://giftedgiftempire.com/affiliate-products.html"
 >
 
 <link
@@ -60,19 +60,13 @@
 <meta
   property="og:url"
   id="og-url"
-  content="https://giftedgiftempire.com/affiliate-product.html"
+  content="https://giftedgiftempire.com/affiliate-products.html"
 >
 
 <meta
   property="og:image"
   id="og-image"
   content="https://giftedgiftempire.com/my-logo.png"
->
-
-<meta
-  property="og:image:alt"
-  id="og-image-alt"
-  content="GiftedGift Empire"
 >
 
 
@@ -99,12 +93,6 @@
   name="twitter:image"
   id="twitter-image"
   content="https://giftedgiftempire.com/my-logo.png"
->
-
-<meta
-  name="twitter:image:alt"
-  id="twitter-image-alt"
-  content="GiftedGift Empire"
 >
 
 
@@ -185,7 +173,7 @@ header {
 main {
   max-width: 1180px;
   margin: auto;
-  padding: 32px 18px 55px;
+  padding: 30px 18px 55px;
 }
 
 .back-link {
@@ -202,7 +190,7 @@ main {
 
 
 /* =========================
-   LOADING / ERROR
+   STATUS
 ========================= */
 
 .status-box {
@@ -227,7 +215,10 @@ main {
 
 .product-card {
   display: none;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
   background: white;
   border-radius: 18px;
   overflow: hidden;
@@ -259,27 +250,31 @@ main {
 }
 
 .product-info {
-  padding: 42px 38px;
+  padding: 40px 38px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.product-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
 .category {
-  display: inline-block;
-  align-self: flex-start;
+  display: none;
   background: #eef3ff;
   color: #123a8c;
   padding: 7px 12px;
   border-radius: 50px;
   font-size: 13px;
   font-weight: 800;
-  margin-bottom: 15px;
 }
 
 .featured-badge {
   display: none;
-  align-self: flex-start;
   background: #fff2b5;
   border: 1px solid #f2bd16;
   color: #5d4700;
@@ -287,11 +282,10 @@ main {
   border-radius: 50px;
   font-size: 13px;
   font-weight: 800;
-  margin-bottom: 13px;
 }
 
 .product-title {
-  margin: 0 0 13px;
+  margin: 0 0 12px;
   color: #123a8c;
   font-size: 38px;
   line-height: 1.15;
@@ -301,7 +295,7 @@ main {
 .merchant-line {
   color: #666;
   font-size: 15px;
-  margin: 0 0 13px;
+  margin: 0 0 12px;
 }
 
 .rating {
@@ -317,26 +311,18 @@ main {
   letter-spacing: 1px;
 }
 
-.description {
-  color: #444;
-  font-size: 17px;
-  white-space: pre-line;
-  margin: 5px 0 22px;
-  overflow-wrap: anywhere;
-}
-
 
 /* =========================
    PRICE
 ========================= */
 
 .price-area {
-  margin: 5px 0 23px;
+  margin: 7px 0 24px;
 }
 
 .normal-price {
   color: #123a8c;
-  font-size: 29px;
+  font-size: 30px;
   font-weight: 900;
 }
 
@@ -355,7 +341,7 @@ main {
 
 .sale-price {
   color: #123a8c;
-  font-size: 30px;
+  font-size: 31px;
   font-weight: 900;
 }
 
@@ -369,9 +355,9 @@ main {
 }
 
 .saving {
-  margin-top: 7px;
+  margin-top: 8px;
   color: #237a36;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .price-note {
@@ -382,7 +368,34 @@ main {
 
 
 /* =========================
-   AFFILIATE BUTTON
+   ABOUT PRODUCT
+========================= */
+
+.about-product {
+  margin: 0 0 25px;
+  padding: 20px;
+  background: #fafbfe;
+  border-radius: 12px;
+  border: 1px solid #e8eaf0;
+}
+
+.about-product h2 {
+  margin: 0 0 10px;
+  color: #123a8c;
+  font-size: 21px;
+}
+
+.description {
+  color: #444;
+  font-size: 16px;
+  white-space: pre-line;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   SHOP NOW
 ========================= */
 
 .shop-button {
@@ -394,7 +407,7 @@ main {
   text-decoration: none;
   padding: 17px 22px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 900;
   border: 2px solid #e4ae00;
   transition:
@@ -415,58 +428,27 @@ main {
 .merchant-note {
   text-align: center;
   color: #666;
-  font-size: 13px;
-  margin: 10px 0 0;
+  font-size: 14px;
+  margin: 12px 5px 0;
 }
 
 
 /* =========================
-   DISCLOSURE
+   AFFILIATE DISCLOSURE
 ========================= */
 
 .disclosure {
   margin-top: 22px;
-  padding: 14px 16px;
+  padding: 16px 17px;
   background: #f7f8fb;
   border-left: 4px solid #f2bd16;
   border-radius: 7px;
   color: #555;
-  font-size: 13px;
+  font-size: 14px;
 }
 
-
-/* =========================
-   TRUST
-========================= */
-
-.trust-section {
-  display: none;
-  margin-top: 26px;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-.trust-item {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-}
-
-.trust-icon {
-  font-size: 25px;
-}
-
-.trust-item strong {
-  display: block;
-  color: #123a8c;
-  margin-top: 6px;
-}
-
-.trust-item span {
-  color: #666;
-  font-size: 13px;
+.disclosure strong {
+  color: #222;
 }
 
 
@@ -477,20 +459,20 @@ main {
 .share-section {
   display: none;
   background: white;
-  padding: 24px;
-  border-radius: 13px;
+  padding: 25px;
+  border-radius: 14px;
   margin-top: 26px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.06);
 }
 
 .share-section h2 {
   color: #123a8c;
-  margin: 0 0 8px;
-  font-size: 20px;
+  margin: 0 0 7px;
+  font-size: 21px;
 }
 
 .share-section p {
-  margin-top: 0;
+  margin: 0 0 16px;
   color: #666;
 }
 
@@ -503,20 +485,12 @@ main {
 .share-btn {
   border: none;
   border-radius: 8px;
-  padding: 11px 15px;
+  padding: 12px 17px;
   cursor: pointer;
   font-weight: 800;
   background: #123a8c;
   color: white;
-}
-
-.share-btn:hover {
-  opacity: 0.94;
-}
-
-.share-btn:focus {
-  outline: 3px solid rgba(18,58,140,0.20);
-  outline-offset: 2px;
+  font-size: 14px;
 }
 
 .copy-btn {
@@ -597,7 +571,7 @@ footer {
   }
 
   .product-image-area img {
-    max-height: 420px;
+    max-height: 430px;
   }
 
   .product-info {
@@ -606,10 +580,6 @@ footer {
 
   .product-title {
     font-size: 30px;
-  }
-
-  .trust-section {
-    grid-template-columns: 1fr;
   }
 
 }
@@ -649,8 +619,16 @@ footer {
     font-size: 27px;
   }
 
+  .about-product {
+    padding: 17px;
+  }
+
   .description {
     font-size: 16px;
+  }
+
+  .sale-price {
+    font-size: 28px;
   }
 
   .share-buttons {
@@ -750,19 +728,22 @@ footer {
 
     <div class="product-info">
 
-      <div
-        id="featured-badge"
-        class="featured-badge"
-      >
-        Featured Pick
+
+      <div class="product-labels">
+
+        <div
+          id="featured-badge"
+          class="featured-badge"
+        >
+          Featured Pick
+        </div>
+
+        <div
+          id="category"
+          class="category"
+        ></div>
+
       </div>
-
-
-      <div
-        id="category"
-        class="category"
-        style="display:none;"
-      ></div>
 
 
       <h1
@@ -795,15 +776,23 @@ footer {
 
 
       <div
-        id="description"
-        class="description"
-      ></div>
-
-
-      <div
         id="price-area"
         class="price-area"
       ></div>
+
+
+      <section class="about-product">
+
+        <h2>
+          About This Product
+        </h2>
+
+        <div
+          id="description"
+          class="description"
+        ></div>
+
+      </section>
 
 
       <a
@@ -813,15 +802,12 @@ footer {
         target="_blank"
         rel="sponsored noopener noreferrer"
       >
-        Shop Now
+        SHOP NOW
       </a>
 
 
-      <p
-        id="merchant-note"
-        class="merchant-note"
-      >
-        You will be redirected to the merchant's website to complete your purchase.
+      <p class="merchant-note">
+        This button will direct you to where you can complete your purchase.
       </p>
 
 
@@ -843,64 +829,6 @@ footer {
 
 
   <section
-    id="trust-section"
-    class="trust-section"
-  >
-
-    <div class="trust-item">
-
-      <div class="trust-icon">
-        ✓
-      </div>
-
-      <strong>
-        Carefully Selected
-      </strong>
-
-      <span>
-        Recommendations selected for the GiftedGift Empire audience.
-      </span>
-
-    </div>
-
-
-    <div class="trust-item">
-
-      <div class="trust-icon">
-        ↗
-      </div>
-
-      <strong>
-        Merchant Checkout
-      </strong>
-
-      <span>
-        Your purchase is completed directly on the merchant's website.
-      </span>
-
-    </div>
-
-
-    <div class="trust-item">
-
-      <div class="trust-icon">
-        🔒
-      </div>
-
-      <strong>
-        Merchant Payment
-      </strong>
-
-      <span>
-        Payment and order processing are handled by the merchant.
-      </span>
-
-    </div>
-
-  </section>
-
-
-  <section
     id="share-section"
     class="share-section"
   >
@@ -910,7 +838,7 @@ footer {
     </h2>
 
     <p>
-      Share this GiftedGift Empire recommendation with others.
+      Share this GiftedGift Empire product with others.
     </p>
 
 
@@ -995,11 +923,9 @@ footer {
 
 
     <div class="copyright">
-
       © <span id="year"></span>
       GiftedGift Empire.
       All rights reserved.
-
     </div>
 
   </div>
@@ -1007,23 +933,27 @@ footer {
 </footer>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
 
 
 <script>
 
+
 /* =========================
-   SITE CONFIGURATION
+   CONFIGURATION
 ========================= */
 
 const SITE_ORIGIN =
   "https://giftedgiftempire.com";
 
 const AFFILIATE_PAGE_PATH =
-  "/affiliate-product.html";
+  "/affiliate-products.html";
 
 const DEFAULT_SOCIAL_IMAGE =
-  SITE_ORIGIN + "/my-logo.png";
+  SITE_ORIGIN +
+  "/my-logo.png";
 
 
 const SUPABASE_URL =
@@ -1040,15 +970,13 @@ const supabaseClient =
   );
 
 
-let currentProductID =
-  null;
-
 let currentProductShareURL =
-  SITE_ORIGIN + AFFILIATE_PAGE_PATH;
+  SITE_ORIGIN +
+  AFFILIATE_PAGE_PATH;
 
 
 /* =========================
-   COPYRIGHT YEAR
+   YEAR
 ========================= */
 
 document.getElementById(
@@ -1071,6 +999,7 @@ function formatEUR(value) {
     !Number.isFinite(number) ||
     number < 0
   ) {
+
     return "";
   }
 
@@ -1106,6 +1035,7 @@ function calculateDiscount(
     sale < 0 ||
     original <= sale
   ) {
+
     return null;
   }
 
@@ -1155,6 +1085,7 @@ function safeAffiliateURL(value) {
       url.protocol !== "http:" &&
       url.protocol !== "https:"
     ) {
+
       return null;
     }
 
@@ -1188,6 +1119,7 @@ function safeImageURL(value) {
       url.protocol !== "http:" &&
       url.protocol !== "https:"
     ) {
+
       return null;
     }
 
@@ -1201,13 +1133,17 @@ function safeImageURL(value) {
 }
 
 
-function buildLandingPageURL(productID) {
+function buildLandingPageURL(
+  productID
+) {
 
   return (
     SITE_ORIGIN +
     AFFILIATE_PAGE_PATH +
     "?id=" +
-    encodeURIComponent(productID)
+    encodeURIComponent(
+      productID
+    )
   );
 }
 
@@ -1223,6 +1159,7 @@ function createStars(rating) {
     value <= 0 ||
     value > 5
   ) {
+
     return "";
   }
 
@@ -1252,7 +1189,9 @@ function createStars(rating) {
 }
 
 
-function createDescriptionPreview(description) {
+function createDescriptionPreview(
+  description
+) {
 
   const clean =
     String(
@@ -1275,6 +1214,7 @@ function createDescriptionPreview(description) {
   if (
     clean.length <= 155
   ) {
+
     return clean;
   }
 
@@ -1290,7 +1230,7 @@ function createDescriptionPreview(description) {
 
 
 /* =========================
-   SOCIAL / SEO META
+   META
 ========================= */
 
 function updateMeta(
@@ -1317,14 +1257,10 @@ function updateMeta(
     );
 
 
-  const productImage =
+  const image =
     safeImageURL(
       product.image_url
-    );
-
-
-  const image =
-    productImage ||
+    ) ||
     DEFAULT_SOCIAL_IMAGE;
 
 
@@ -1397,14 +1333,6 @@ function updateMeta(
 
 
   document.getElementById(
-    "og-image-alt"
-  ).setAttribute(
-    "content",
-    name
-  );
-
-
-  document.getElementById(
     "twitter-title"
   ).setAttribute(
     "content",
@@ -1425,14 +1353,6 @@ function updateMeta(
   ).setAttribute(
     "content",
     image
-  );
-
-
-  document.getElementById(
-    "twitter-image-alt"
-  ).setAttribute(
-    "content",
-    name
   );
 }
 
@@ -1500,11 +1420,6 @@ async function loadProduct() {
       : "";
 
 
-  /*
-    Current affiliate_products IDs are expected
-    to be numeric.
-  */
-
   if (
     !productID ||
     !/^\d+$/.test(productID)
@@ -1517,10 +1432,6 @@ async function loadProduct() {
 
     return;
   }
-
-
-  currentProductID =
-    productID;
 
 
   try {
@@ -1591,7 +1502,7 @@ async function loadProduct() {
 
       showError(
         "Product Link Unavailable",
-        "The merchant link for this product is currently unavailable."
+        "The purchase link for this product is currently unavailable."
       );
 
       return;
@@ -1608,6 +1519,7 @@ async function loadProduct() {
       product,
       productID
     );
+
 
   } catch (error) {
 
@@ -1651,12 +1563,6 @@ function renderProduct(
 
 
   card.style.display =
-    "grid";
-
-
-  document.getElementById(
-    "trust-section"
-  ).style.display =
     "grid";
 
 
@@ -1772,7 +1678,7 @@ function renderProduct(
     "Affiliate Product";
 
 
-  /* MERCHANT / NETWORK */
+  /* MERCHANT */
 
   const merchantLine =
     document.getElementById(
@@ -1789,6 +1695,7 @@ function renderProduct(
   ) {
 
     merchantParts.push(
+      "Available from " +
       product.merchant
     );
   }
@@ -1859,28 +1766,23 @@ function renderProduct(
   }
 
 
-  /* DESCRIPTION */
-
-  const description =
-    product.description
-      ? product.description
-      : (
-          "Visit the merchant website for full product " +
-          "information and current availability."
-        );
-
-
-  document.getElementById(
-    "description"
-  ).textContent =
-    description;
-
-
   /* PRICE */
 
   renderPrice(
     product
   );
+
+
+  /* DESCRIPTION */
+
+  document.getElementById(
+    "description"
+  ).textContent =
+    product.description ||
+    (
+      "Learn more about this product and view the latest " +
+      "information, price and availability using the Shop Now button."
+    );
 
 
   /* AFFILIATE LINK */
@@ -1891,45 +1793,17 @@ function renderProduct(
     );
 
 
-  /*
-    IMPORTANT:
-    The merchant affiliate URL is used exactly as stored
-    in Supabase. We do not rewrite or add parameters to it.
-  */
-
   button.href =
     affiliateURL;
 
 
-  button.dataset.productId =
-    String(
-      product.id
-    );
+  /*
+    Keep the CTA simple and consistent,
+    regardless of merchant.
+  */
 
-
-  button.dataset.merchant =
-    product.merchant ||
-    "";
-
-
-  button.dataset.network =
-    product.network ||
-    "";
-
-
-  if (
-    product.merchant
-  ) {
-
-    button.textContent =
-      "Shop at " +
-      product.merchant;
-
-  } else {
-
-    button.textContent =
-      "Shop Now";
-  }
+  button.textContent =
+    "SHOP NOW";
 }
 
 
@@ -1937,7 +1811,9 @@ function renderProduct(
    PRICE
 ========================= */
 
-function renderPrice(product) {
+function renderPrice(
+  product
+) {
 
   const priceArea =
     document.getElementById(
@@ -1958,7 +1834,7 @@ function renderPrice(product) {
     priceArea.innerHTML =
       `
         <div class="price-note">
-          Check the merchant website for the latest price.
+          Check the current price using the Shop Now button.
         </div>
       `;
 
@@ -1980,11 +1856,7 @@ function renderPrice(product) {
   ) {
 
     priceArea.innerHTML =
-      `
-        <div class="price-note">
-          Check the merchant website for the latest price.
-        </div>
-      `;
+      "";
 
     return;
   }
@@ -2004,8 +1876,7 @@ function renderPrice(product) {
       originalPrice
     ) &&
     originalPrice > 0 &&
-    originalPrice >
-      salePrice;
+    originalPrice > salePrice;
 
 
   if (
@@ -2070,7 +1941,7 @@ function renderPrice(product) {
 
 
         <div class="price-note">
-          Price and availability may change on the merchant's website.
+          Price and availability may change.
         </div>
       `;
 
@@ -2088,9 +1959,8 @@ function renderPrice(product) {
         )}
       </div>
 
-
       <div class="price-note">
-        Price and availability may change on the merchant's website.
+        Price and availability may change.
       </div>
     `;
 }
@@ -2108,10 +1978,6 @@ async function copyProductLink() {
     );
 
 
-  const shareURL =
-    currentProductShareURL;
-
-
   try {
 
     if (
@@ -2120,7 +1986,7 @@ async function copyProductLink() {
     ) {
 
       await navigator.clipboard.writeText(
-        shareURL
+        currentProductShareURL
       );
 
     } else {
@@ -2132,13 +1998,7 @@ async function copyProductLink() {
 
 
       temporaryInput.value =
-        shareURL;
-
-
-      temporaryInput.setAttribute(
-        "readonly",
-        ""
-      );
+        currentProductShareURL;
 
 
       temporaryInput.style.position =
@@ -2157,25 +2017,14 @@ async function copyProductLink() {
       temporaryInput.select();
 
 
-      const successful =
-        document.execCommand(
-          "copy"
-        );
+      document.execCommand(
+        "copy"
+      );
 
 
       document.body.removeChild(
         temporaryInput
       );
-
-
-      if (
-        !successful
-      ) {
-
-        throw new Error(
-          "Copy command failed."
-        );
-      }
     }
 
 
@@ -2193,10 +2042,11 @@ async function copyProductLink() {
       2500
     );
 
+
   } catch (error) {
 
     message.textContent =
-      "Please copy the product link from your browser address bar.";
+      "Please copy the product link from your browser.";
   }
 }
 
@@ -2214,10 +2064,6 @@ async function shareProduct() {
     "GiftedGift Empire Product";
 
 
-  const shareURL =
-    currentProductShareURL;
-
-
   if (
     navigator.share
   ) {
@@ -2230,10 +2076,10 @@ async function shareProduct() {
           title,
 
         text:
-          "Take a look at this recommendation from GiftedGift Empire.",
+          "Take a look at this product from GiftedGift Empire.",
 
         url:
-          shareURL
+          currentProductShareURL
 
       });
 
@@ -2266,12 +2112,6 @@ loadProduct();
 
 </script>
 
-
-<!--
-  Existing GiftedGift Empire cookie consent system.
-  Advertising/analytics trackers will later be attached
-  only after the appropriate visitor consent.
--->
 
 <script src="cookie-consent.js"></script>
 
