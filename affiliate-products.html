@@ -70,7 +70,7 @@
 >
 
 
-<!-- TWITTER / SOCIAL -->
+<!-- SOCIAL -->
 
 <meta
   name="twitter:card"
@@ -190,7 +190,7 @@ main {
 
 
 /* =========================
-   STATUS
+   STATUS / ERROR
 ========================= */
 
 .status-box {
@@ -215,6 +215,7 @@ main {
 
 .product-card {
   display: none;
+
   grid-template-columns:
     minmax(0, 1fr)
     minmax(0, 1fr);
@@ -222,15 +223,19 @@ main {
   background: white;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 5px 24px rgba(0,0,0,0.09);
+
+  box-shadow:
+    0 5px 24px rgba(0,0,0,0.09);
 }
 
 .product-image-area {
   background: #f4f5f7;
   min-height: 520px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 30px;
 }
 
@@ -238,7 +243,9 @@ main {
   width: 100%;
   max-width: 560px;
   max-height: 560px;
+
   object-fit: contain;
+
   border-radius: 14px;
 }
 
@@ -251,6 +258,7 @@ main {
 
 .product-info {
   padding: 40px 38px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -260,54 +268,74 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
+
   margin-bottom: 14px;
 }
 
 .category {
   display: none;
+
   background: #eef3ff;
   color: #123a8c;
+
   padding: 7px 12px;
+
   border-radius: 50px;
+
   font-size: 13px;
   font-weight: 800;
 }
 
 .featured-badge {
   display: none;
+
   background: #fff2b5;
   border: 1px solid #f2bd16;
+
   color: #5d4700;
+
   padding: 7px 12px;
+
   border-radius: 50px;
+
   font-size: 13px;
   font-weight: 800;
 }
 
 .product-title {
   margin: 0 0 12px;
+
   color: #123a8c;
+
   font-size: 38px;
   line-height: 1.15;
+
   overflow-wrap: anywhere;
 }
 
 .merchant-line {
   color: #666;
+
   font-size: 15px;
+
   margin: 0 0 12px;
 }
 
 .rating {
   display: none;
+
   margin-bottom: 14px;
+
   font-weight: 700;
+
   color: #4d4d4d;
 }
 
 .stars {
   color: #e0a800;
+
   font-size: 20px;
+
   letter-spacing: 1px;
 }
 
@@ -322,7 +350,9 @@ main {
 
 .normal-price {
   color: #123a8c;
+
   font-size: 30px;
+
   font-weight: 900;
 }
 
@@ -330,39 +360,53 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
   gap: 11px;
 }
 
 .original-price {
   color: #777;
+
   text-decoration: line-through;
+
   font-size: 18px;
 }
 
 .sale-price {
   color: #123a8c;
+
   font-size: 31px;
+
   font-weight: 900;
 }
 
 .discount-badge {
   background: #d92d20;
+
   color: white;
+
   padding: 6px 10px;
+
   border-radius: 7px;
+
   font-size: 13px;
+
   font-weight: 800;
 }
 
 .saving {
   margin-top: 8px;
+
   color: #237a36;
+
   font-weight: 800;
 }
 
 .price-note {
   color: #777;
+
   font-size: 13px;
+
   margin-top: 8px;
 }
 
@@ -373,23 +417,33 @@ main {
 
 .about-product {
   margin: 0 0 25px;
+
   padding: 20px;
+
   background: #fafbfe;
+
   border-radius: 12px;
+
   border: 1px solid #e8eaf0;
 }
 
 .about-product h2 {
   margin: 0 0 10px;
+
   color: #123a8c;
+
   font-size: 21px;
 }
 
 .description {
   color: #444;
+
   font-size: 16px;
+
   white-space: pre-line;
+
   margin: 0;
+
   overflow-wrap: anywhere;
 }
 
@@ -400,16 +454,27 @@ main {
 
 .shop-button {
   display: block;
+
   width: 100%;
+
   text-align: center;
+
   background: #f2bd16;
+
   color: #111;
+
   text-decoration: none;
+
   padding: 17px 22px;
+
   border-radius: 10px;
+
   font-size: 19px;
+
   font-weight: 900;
+
   border: 2px solid #e4ae00;
+
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
@@ -417,18 +482,25 @@ main {
 
 .shop-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.12);
 }
 
 .shop-button:focus {
-  outline: 3px solid rgba(18,58,140,0.25);
+  outline:
+    3px solid rgba(18,58,140,0.25);
+
   outline-offset: 2px;
 }
 
 .merchant-note {
   text-align: center;
+
   color: #666;
+
   font-size: 14px;
+
   margin: 12px 5px 0;
 }
 
@@ -439,11 +511,18 @@ main {
 
 .disclosure {
   margin-top: 22px;
+
   padding: 16px 17px;
+
   background: #f7f8fb;
-  border-left: 4px solid #f2bd16;
+
+  border-left:
+    4px solid #f2bd16;
+
   border-radius: 7px;
+
   color: #555;
+
   font-size: 14px;
 }
 
@@ -458,52 +537,126 @@ main {
 
 .share-section {
   display: none;
+
   background: white;
+
   padding: 25px;
+
   border-radius: 14px;
+
   margin-top: 26px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.06);
 }
 
 .share-section h2 {
   color: #123a8c;
+
   margin: 0 0 7px;
+
   font-size: 21px;
 }
 
 .share-section p {
   margin: 0 0 16px;
+
   color: #666;
 }
 
 .share-buttons {
   display: flex;
   flex-wrap: wrap;
+
   gap: 10px;
 }
 
 .share-btn {
   border: none;
+
   border-radius: 8px;
+
   padding: 12px 17px;
+
   cursor: pointer;
+
   font-weight: 800;
+
   background: #123a8c;
+
   color: white;
+
   font-size: 14px;
+}
+
+.share-btn:hover {
+  opacity: 0.94;
 }
 
 .copy-btn {
   background: #f2bd16;
+
   color: #111;
 }
 
 #copy-message {
   display: block;
+
   min-height: 22px;
+
   margin-top: 10px;
+
   color: #237a36;
+
   font-weight: 700;
+}
+
+
+/* =========================
+   SHOP MORE
+========================= */
+
+.shop-more-section {
+  display: none;
+
+  margin-top: 22px;
+
+  text-align: center;
+}
+
+.shop-more-button {
+  display: inline-block;
+
+  width: 100%;
+
+  max-width: 430px;
+
+  background: #123a8c;
+
+  color: white;
+
+  text-decoration: none;
+
+  padding: 15px 22px;
+
+  border-radius: 10px;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  border: 2px solid #123a8c;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.shop-more-button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.12);
 }
 
 
@@ -513,34 +666,45 @@ main {
 
 footer {
   background: #123a8c;
+
   color: white;
+
   padding: 32px 20px;
 }
 
 .footer-inner {
   max-width: 1180px;
+
   margin: auto;
+
   text-align: center;
 }
 
 .footer-brand {
   color: #f2bd16;
+
   font-size: 21px;
+
   font-weight: 900;
+
   margin-bottom: 9px;
 }
 
 .footer-links {
   margin-top: 18px;
+
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+
   gap: 15px;
 }
 
 .footer-links a {
   color: white;
+
   text-decoration: none;
+
   font-size: 14px;
 }
 
@@ -550,7 +714,9 @@ footer {
 
 .copyright {
   margin-top: 20px;
+
   color: #d8e0f3;
+
   font-size: 13px;
 }
 
@@ -567,6 +733,7 @@ footer {
 
   .product-image-area {
     min-height: auto;
+
     padding: 20px;
   }
 
@@ -583,6 +750,7 @@ footer {
   }
 
 }
+
 
 @media (max-width: 520px) {
 
@@ -639,6 +807,10 @@ footer {
     width: 100%;
   }
 
+  .shop-more-button {
+    max-width: none;
+  }
+
 }
 
 </style>
@@ -684,6 +856,7 @@ footer {
 
 <main>
 
+
   <a
     href="shop.html"
     class="back-link"
@@ -702,10 +875,13 @@ footer {
   </div>
 
 
+  <!-- PRODUCT -->
+
   <section
     id="product-card"
     class="product-card"
   >
+
 
     <div class="product-image-area">
 
@@ -737,6 +913,7 @@ footer {
         >
           Featured Pick
         </div>
+
 
         <div
           id="category"
@@ -781,6 +958,8 @@ footer {
       ></div>
 
 
+      <!-- DESCRIPTION -->
+
       <section class="about-product">
 
         <h2>
@@ -794,6 +973,8 @@ footer {
 
       </section>
 
+
+      <!-- SHOP NOW -->
 
       <a
         id="affiliate-button"
@@ -811,6 +992,8 @@ footer {
       </p>
 
 
+      <!-- DISCLOSURE -->
+
       <div class="disclosure">
 
         <strong>
@@ -823,10 +1006,13 @@ footer {
 
       </div>
 
+
     </div>
 
   </section>
 
+
+  <!-- SHARE -->
 
   <section
     id="share-section"
@@ -872,12 +1058,31 @@ footer {
 
   </section>
 
+
+  <!-- SHOP MORE -->
+
+  <section
+    id="shop-more-section"
+    class="shop-more-section"
+  >
+
+    <a
+      href="shop.html"
+      class="shop-more-button"
+    >
+      🛍️ SHOP MORE PRODUCTS
+    </a>
+
+  </section>
+
+
 </main>
 
 
 <footer>
 
   <div class="footer-inner">
+
 
     <div class="footer-brand">
       GiftedGift Empire
@@ -923,10 +1128,13 @@ footer {
 
 
     <div class="copyright">
+
       © <span id="year"></span>
       GiftedGift Empire.
       All rights reserved.
+
     </div>
+
 
   </div>
 
@@ -948,8 +1156,10 @@ footer {
 const SITE_ORIGIN =
   "https://giftedgiftempire.com";
 
+
 const AFFILIATE_PAGE_PATH =
   "/affiliate-products.html";
+
 
 const DEFAULT_SOCIAL_IMAGE =
   SITE_ORIGIN +
@@ -958,6 +1168,7 @@ const DEFAULT_SOCIAL_IMAGE =
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
 
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
@@ -1024,6 +1235,7 @@ function calculateDiscount(
   const original =
     Number(originalPrice);
 
+
   const sale =
     Number(salePrice);
 
@@ -1043,7 +1255,8 @@ function calculateDiscount(
   return Math.round(
     (
       (
-        original - sale
+        original -
+        sale
       ) /
       original
     ) * 100
@@ -1572,6 +1785,12 @@ function renderProduct(
     "block";
 
 
+  document.getElementById(
+    "shop-more-section"
+  ).style.display =
+    "block";
+
+
   /* IMAGE */
 
   const productImage =
@@ -1619,10 +1838,11 @@ function renderProduct(
         productImage.style.display =
           "none";
 
+
         noImage.style.display =
           "block";
-
       };
+
 
   } else {
 
@@ -1785,7 +2005,7 @@ function renderProduct(
     );
 
 
-  /* AFFILIATE LINK */
+  /* AFFILIATE BUTTON */
 
   const button =
     document.getElementById(
@@ -1793,14 +2013,14 @@ function renderProduct(
     );
 
 
+  /*
+    Keep the exact affiliate tracking URL
+    stored in Supabase.
+  */
+
   button.href =
     affiliateURL;
 
-
-  /*
-    Keep the CTA simple and consistent,
-    regardless of merchant.
-  */
 
   button.textContent =
     "SHOP NOW";
@@ -1945,6 +2165,7 @@ function renderPrice(
         </div>
       `;
 
+
     return;
   }
 
@@ -1989,6 +2210,7 @@ async function copyProductLink() {
         currentProductShareURL
       );
 
+
     } else {
 
       const temporaryInput =
@@ -2017,14 +2239,25 @@ async function copyProductLink() {
       temporaryInput.select();
 
 
-      document.execCommand(
-        "copy"
-      );
+      const copied =
+        document.execCommand(
+          "copy"
+        );
 
 
       document.body.removeChild(
         temporaryInput
       );
+
+
+      if (
+        !copied
+      ) {
+
+        throw new Error(
+          "Copy failed."
+        );
+      }
     }
 
 
@@ -2085,6 +2318,7 @@ async function shareProduct() {
 
 
       return;
+
 
     } catch (error) {
 
