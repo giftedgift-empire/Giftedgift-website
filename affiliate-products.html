@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Affiliate Product | GiftedGift Empire</title>
+
+<meta
+  name="description"
+  content="Discover this carefully selected product from GiftedGift Empire."
+>
+
+<link
+  rel="canonical"
+  id="canonical-link"
+  href="https://giftedgiftempire.com/affiliate-product.html"
+>
+
+<link
+  rel="icon"
+  href="my-logo.png"
+>
+
+<meta
+  property="og:type"
+  content="product"
+>
+
+<meta
+  property="og:site_name"
+  content="GiftedGift Empire"
+>
+
+<meta
+  property="og:title"
+  id="og-title"
+  content="Affiliate Product | GiftedGift Empire"
+>
+
+<meta
+  property="og:description"
+  id="og-description"
+  content="Discover this carefully selected product from GiftedGift Empire."
+>
+
+<meta
+  property="og:url"
+  id="og-url"
+  content="https://giftedgiftempire.com/affiliate-product.html"
+>
+
+<meta
+  property="og:image"
+  id="og-image"
+  content="https://giftedgiftempire.com/my-logo.png"
+>
+
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+>
+
+<meta
+  name="twitter:title"
+  id="twitter-title"
+  content="Affiliate Product | GiftedGift Empire"
+>
+
+<meta
+  name="twitter:description"
+  id="twitter-description"
+  content="Discover this carefully selected product from GiftedGift Empire."
+>
+
+<meta
+  name="twitter:image"
+  id="twitter-image"
+  content="https://giftedgiftempire.com/my-logo.png"
+>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f8fb;
+  color: #222;
+  line-height: 1.6;
+}
+
+
+/* HEADER */
+
+header {
+  background: #123a8c;
+  color: white;
+  padding: 16px 20px;
+  border-bottom: 4px solid #f2bd16;
+}
+
+.header-inner {
+  max-width: 1180px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.brand-name {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.header-link:hover {
+  color: #f2bd16;
+}
+
+
+/* MAIN */
+
+main {
+  max-width: 1180px;
+  margin: auto;
+  padding: 32px 18px 55px;
+}
+
+.back-link {
+  display: inline-block;
+  color: #123a8c;
+  text-decoration: none;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+
+/* LOADING / ERROR */
+
+.status-box {
+  background: white;
+  border-radius: 14px;
+  padding: 45px 25px;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  font-weight: 700;
+  color: #555;
+}
+
+.error-title {
+  color: #123a8c;
+  margin-top: 0;
+}
+
+
+/* PRODUCT */
+
+.product-card {
+  display: none;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 24px rgba(0,0,0,0.09);
+}
+
+.product-image-area {
+  background: #f4f5f7;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.product-image-area img {
+  width: 100%;
+  max-width: 560px;
+  max-height: 560px;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.no-image {
+  color: #777;
+  text-align: center;
+  font-weight: 700;
+}
+
+.product-info {
+  padding: 42px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category {
+  display: inline-block;
+  align-self: flex-start;
+  background: #eef3ff;
+  color: #123a8c;
+  padding: 7px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.featured-badge {
+  display: none;
+  align-self: flex-start;
+  background: #fff2b5;
+  border: 1px solid #f2bd16;
+  color: #5d4700;
+  padding: 7px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 13px;
+}
+
+.product-title {
+  margin: 0 0 13px;
+  color: #123a8c;
+  font-size: 38px;
+  line-height: 1.15;
+}
+
+.merchant-line {
+  color: #666;
+  font-size: 15px;
+  margin: 0 0 13px;
+}
+
+.rating {
+  display: none;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #4d4d4d;
+}
+
+.stars {
+  color: #e0a800;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.description {
+  color: #444;
+  font-size: 17px;
+  white-space: pre-line;
+  margin: 5px 0 22px;
+}
+
+
+/* PRICE */
+
+.price-area {
+  margin: 5px 0 23px;
+}
+
+.normal-price {
+  color: #123a8c;
+  font-size: 29px;
+  font-weight: 900;
+}
+
+.sale-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 11px;
+}
+
+.original-price {
+  color: #777;
+  text-decoration: line-through;
+  font-size: 18px;
+}
+
+.sale-price {
+  color: #123a8c;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.discount-badge {
+  background: #d92d20;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.saving {
+  margin-top: 7px;
+  color: #237a36;
+  font-weight: 700;
+}
+
+.price-note {
+  color: #777;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+
+/* CTA */
+
+.shop-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #f2bd16;
+  color: #111;
+  text-decoration: none;
+  padding: 17px 22px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 900;
+  border: 2px solid #e4ae00;
+  transition: transform 0.15s ease;
+}
+
+.shop-button:hover {
+  transform: translateY(-1px);
+}
+
+.shop-button:focus {
+  outline: 3px solid rgba(18,58,140,0.25);
+}
+
+.merchant-note {
+  text-align: center;
+  color: #666;
+  font-size: 13px;
+  margin: 10px 0 0;
+}
+
+
+/* DISCLOSURE */
+
+.disclosure {
+  margin-top: 22px;
+  padding: 14px 16px;
+  background: #f7f8fb;
+  border-left: 4px solid #f2bd16;
+  border-radius: 7px;
+  color: #555;
+  font-size: 13px;
+}
+
+
+/* TRUST */
+
+.trust-section {
+  display: none;
+  margin-top: 26px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.trust-item {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.trust-icon {
+  font-size: 25px;
+}
+
+.trust-item strong {
+  display: block;
+  color: #123a8c;
+  margin-top: 6px;
+}
+
+.trust-item span {
+  color: #666;
+  font-size: 13px;
+}
+
+
+/* SHARE */
+
+.share-section {
+  display: none;
+  background: white;
+  padding: 24px;
+  border-radius: 13px;
+  margin-top: 26px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.share-section h2 {
+  color: #123a8c;
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.share-section p {
+  margin-top: 0;
+  color: #666;
+}
+
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.share-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 15px;
+  cursor: pointer;
+  font-weight: 800;
+  background: #123a8c;
+  color: white;
+}
+
+.copy-btn {
+  background: #f2bd16;
+  color: #111;
+}
+
+#copy-message {
+  display: block;
+  margin-top: 10px;
+  color: #237a36;
+  font-weight: 700;
+}
+
+
+/* FOOTER */
+
+footer {
+  background: #123a8c;
+  color: white;
+  padding: 32px 20px;
+}
+
+.footer-inner {
+  max-width: 1180px;
+  margin: auto;
+  text-align: center;
+}
+
+.footer-brand {
+  color: #f2bd16;
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 9px;
+}
+
+.footer-links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #f2bd16;
+}
+
+.copyright {
+  margin-top: 20px;
+  color: #d8e0f3;
+  font-size: 13px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .product-card {
+    grid-template-columns: 1fr;
+  }
+
+  .product-image-area {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .product-image-area img {
+    max-height: 420px;
+  }
+
+  .product-info {
+    padding: 28px 22px;
+  }
+
+  .product-title {
+    font-size: 30px;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  header {
+    padding: 13px 14px;
+  }
+
+  .header-inner {
+    gap: 10px;
+  }
+
+  .brand img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-name {
+    font-size: 17px;
+  }
+
+  .header-link {
+    font-size: 13px;
+  }
+
+  main {
+    padding: 22px 13px 40px;
+  }
+
+  .product-info {
+    padding: 24px 18px;
+  }
+
+  .product-title {
+    font-size: 27px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      <img
+        src="my-logo.png"
+        alt="GiftedGift Empire"
+      >
+
+      <span class="brand-name">
+        GiftedGift Empire
+      </span>
+    </a>
+
+    <a
+      href="shop.html"
+      class="header-link"
+    >
+      Visit Shop
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <a
+    href="shop.html"
+    class="back-link"
+  >
+    ← Back to Shop
+  </a>
+
+
+  <div
+    id="status"
+    class="status-box"
+  >
+    Loading product...
+  </div>
+
+
+  <section
+    id="product-card"
+    class="product-card"
+  >
+
+    <div class="product-image-area">
+
+      <img
+        id="product-image"
+        alt=""
+        style="display:none;"
+      >
+
+      <div
+        id="no-image"
+        class="no-image"
+        style="display:none;"
+      >
+        Product image unavailable
+      </div>
+
+    </div>
+
+
+    <div class="product-info">
+
+      <div
+        id="featured-badge"
+        class="featured-badge"
+      >
+        Featured Pick
+      </div>
+
+      <div
+        id="category"
+        class="category"
+        style="display:none;"
+      ></div>
+
+
+      <h1
+        id="product-name"
+        class="product-title"
+      ></h1>
+
+
+      <p
+        id="merchant-line"
+        class="merchant-line"
+        style="display:none;"
+      ></p>
+
+
+      <div
+        id="rating"
+        class="rating"
+      >
+
+        <span
+          id="stars"
+          class="stars"
+        ></span>
+
+        <span id="rating-text"></span>
+
+      </div>
+
+
+      <div
+        id="description"
+        class="description"
+      ></div>
+
+
+      <div
+        id="price-area"
+        class="price-area"
+      ></div>
+
+
+      <a
+        id="affiliate-button"
+        class="shop-button"
+        href="#"
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+      >
+        Shop Now
+      </a>
+
+
+      <p
+        id="merchant-note"
+        class="merchant-note"
+      >
+        You will be redirected to the merchant's website to complete your purchase.
+      </p>
+
+
+      <div class="disclosure">
+
+        <strong>
+          Affiliate Disclosure:
+        </strong>
+
+        GiftedGift Empire may earn a commission
+        when you purchase through this link,
+        at no additional cost to you.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section
+    id="trust-section"
+    class="trust-section"
+  >
+
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+
+      <strong>
+        Carefully Selected
+      </strong>
+
+      <span>
+        Products chosen for our audience.
+      </span>
+    </div>
+
+
+    <div class="trust-item">
+      <div class="trust-icon">↗</div>
+
+      <strong>
+        Merchant Checkout
+      </strong>
+
+      <span>
+        Purchases are completed directly with the merchant.
+      </span>
+    </div>
+
+
+    <div class="trust-item">
+      <div class="trust-icon">🔒</div>
+
+      <strong>
+        Secure Purchase
+      </strong>
+
+      <span>
+        Payment is handled on the merchant's website.
+      </span>
+    </div>
+
+  </section>
+
+
+  <section
+    id="share-section"
+    class="share-section"
+  >
+
+    <h2>
+      Share This Product
+    </h2>
+
+    <p>
+      Share this GiftedGift Empire product page with others.
+    </p>
+
+    <div class="share-buttons">
+
+      <button
+        type="button"
+        class="share-btn copy-btn"
+        onclick="copyProductLink()"
+      >
+        Copy Link
+      </button>
+
+      <button
+        type="button"
+        class="share-btn"
+        onclick="shareProduct()"
+      >
+        Share
+      </button>
+
+    </div>
+
+    <span id="copy-message"></span>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      GiftedGift Empire
+    </div>
+
+    <div>
+      Smart finds, useful recommendations and carefully selected products.
+    </div>
+
+    <div class="footer-links">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="shop.html">
+        Shop
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="privacy-policy.html">
+        Privacy Policy
+      </a>
+
+      <a href="terms-conditions.html">
+        Terms & Conditions
+      </a>
+
+      <a href="legal-notice.html">
+        Legal Notice
+      </a>
+
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span>
+      GiftedGift Empire.
+      All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+document.getElementById(
+  "year"
+).textContent =
+  new Date().getFullYear();
+
+
+function formatEUR(value) {
+
+  const number =
+    Number(value);
+
+  if (!Number.isFinite(number)) {
+    return "";
+  }
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style: "currency",
+      currency: "EUR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }
+  ).format(number);
+}
+
+
+function calculateDiscount(
+  originalPrice,
+  salePrice
+) {
+
+  const original =
+    Number(originalPrice);
+
+  const sale =
+    Number(salePrice);
+
+  if (
+    !Number.isFinite(original) ||
+    !Number.isFinite(sale) ||
+    original <= 0 ||
+    sale < 0 ||
+    original <= sale
+  ) {
+    return null;
+  }
+
+  return Math.round(
+    (
+      (
+        original - sale
+      ) /
+      original
+    ) * 100
+  );
+}
+
+
+function escapeHTML(value) {
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function safeAffiliateURL(value) {
+
+  try {
+
+    const url =
+      new URL(value);
+
+    if (
+      url.protocol !== "http:" &&
+      url.protocol !== "https:"
+    ) {
+      return null;
+    }
+
+    return url.href;
+
+  } catch (error) {
+
+    return null;
+  }
+}
+
+
+function createStars(rating) {
+
+  const value =
+    Number(rating);
+
+  if (
+    !Number.isFinite(value) ||
+    value <= 0
+  ) {
+    return "";
+  }
+
+  const rounded =
+    Math.round(value);
+
+  let output =
+    "";
+
+  for (
+    let index = 1;
+    index <= 5;
+    index++
+  ) {
+
+    output +=
+      index <= rounded
+        ? "★"
+        : "☆";
+  }
+
+  return output;
+}
+
+
+function createDescriptionPreview(
+  description
+) {
+
+  const clean =
+    String(
+      description ||
+      ""
+    )
+      .replace(/\s+/g, " ")
+      .trim();
+
+  if (!clean) {
+    return "Discover this carefully selected product from GiftedGift Empire.";
+  }
+
+  if (
+    clean.length <= 155
+  ) {
+    return clean;
+  }
+
+  return clean.slice(
+    0,
+    152
+  ) + "...";
+}
+
+
+function updateMeta(
+  product,
+  productID
+) {
+
+  const name =
+    product.name ||
+    "Affiliate Product";
+
+  const description =
+    createDescriptionPreview(
+      product.description
+    );
+
+  const pageURL =
+    "https://giftedgiftempire.com/affiliate-product.html?id=" +
+    encodeURIComponent(
+      productID
+    );
+
+  const image =
+    product.image_url ||
+    "https://giftedgiftempire.com/my-logo.png";
+
+  const pageTitle =
+    name +
+    " | GiftedGift Empire";
+
+
+  document.title =
+    pageTitle;
+
+
+  const descriptionMeta =
+    document.querySelector(
+      'meta[name="description"]'
+    );
+
+  if (
+    descriptionMeta
+  ) {
+    descriptionMeta.setAttribute(
+      "content",
+      description
+    );
+  }
+
+
+  document.getElementById(
+    "canonical-link"
+  ).href =
+    pageURL;
+
+
+  document.getElementById(
+    "og-title"
+  ).setAttribute(
+    "content",
+    pageTitle
+  );
+
+
+  document.getElementById(
+    "og-description"
+  ).setAttribute(
+    "content",
+    description
+  );
+
+
+  document.getElementById(
+    "og-url"
+  ).setAttribute(
+    "content",
+    pageURL
+  );
+
+
+  document.getElementById(
+    "og-image"
+  ).setAttribute(
+    "content",
+    image
+  );
+
+
+  document.getElementById(
+    "twitter-title"
+  ).setAttribute(
+    "content",
+    pageTitle
+  );
+
+
+  document.getElementById(
+    "twitter-description"
+  ).setAttribute(
+    "content",
+    description
+  );
+
+
+  document.getElementById(
+    "twitter-image"
+  ).setAttribute(
+    "content",
+    image
+  );
+}
+
+
+function showError(
+  title,
+  message
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+  status.innerHTML =
+    `
+      <h2 class="error-title">
+        ${escapeHTML(title)}
+      </h2>
+
+      <p>
+        ${escapeHTML(message)}
+      </p>
+
+      <p>
+        <a
+          href="shop.html"
+          class="back-link"
+        >
+          Return to Shop
+        </a>
+      </p>
+    `;
+}
+
+
+async function loadProduct() {
+
+  const parameters =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const productID =
+    parameters.get("id");
+
+
+  if (
+    !productID ||
+    !/^\d+$/.test(productID)
+  ) {
+
+    showError(
+      "Product Not Found",
+      "This product link is incomplete or invalid."
+    );
+
+    return;
+  }
+
+
+  const {
+    data: product,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliate_products"
+      )
+      .select(
+        "id,name,description,price,original_price,category,image_url,affiliate_url,network,merchant,rating,featured,active"
+      )
+      .eq(
+        "id",
+        productID
+      )
+      .eq(
+        "active",
+        true
+      )
+      .maybeSingle();
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+    showError(
+      "Product Could Not Be Loaded",
+      "Please try again shortly."
+    );
+
+    return;
+  }
+
+
+  if (
+    !product
+  ) {
+
+    showError(
+      "Product Unavailable",
+      "This product may no longer be active or available."
+    );
+
+    return;
+  }
+
+
+  const affiliateURL =
+    safeAffiliateURL(
+      product.affiliate_url
+    );
+
+
+  if (
+    !affiliateURL
+  ) {
+
+    showError(
+      "Product Link Unavailable",
+      "The merchant link for this product is currently unavailable."
+    );
+
+    return;
+  }
+
+
+  renderProduct(
+    product,
+    affiliateURL
+  );
+
+
+  updateMeta(
+    product,
+    productID
+  );
+}
+
+
+function renderProduct(
+  product,
+  affiliateURL
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+  const card =
+    document.getElementById(
+      "product-card"
+    );
+
+
+  status.style.display =
+    "none";
+
+
+  card.style.display =
+    "grid";
+
+
+  document.getElementById(
+    "trust-section"
+  ).style.display =
+    "grid";
+
+
+  document.getElementById(
+    "share-section"
+  ).style.display =
+    "block";
+
+
+  const productImage =
+    document.getElementById(
+      "product-image"
+    );
+
+  const noImage =
+    document.getElementById(
+      "no-image"
+    );
+
+
+  if (
+    product.image_url
+  ) {
+
+    productImage.src =
+      product.image_url;
+
+    productImage.alt =
+      product.name ||
+      "Affiliate Product";
+
+    productImage.style.display =
+      "block";
+
+    noImage.style.display =
+      "none";
+
+  } else {
+
+    productImage.style.display =
+      "none";
+
+    noImage.style.display =
+      "block";
+  }
+
+
+  if (
+    product.featured
+  ) {
+
+    document.getElementById(
+      "featured-badge"
+    ).style.display =
+      "inline-block";
+  }
+
+
+  if (
+    product.category
+  ) {
+
+    const category =
+      document.getElementById(
+        "category"
+      );
+
+    category.textContent =
+      product.category;
+
+    category.style.display =
+      "inline-block";
+  }
+
+
+  document.getElementById(
+    "product-name"
+  ).textContent =
+    product.name ||
+    "Affiliate Product";
+
+
+  const merchantLine =
+    document.getElementById(
+      "merchant-line"
+    );
+
+  const merchantParts =
+    [];
+  if (
+    product.merchant
+  ) {
+
+    merchantParts.push(
+      product.merchant
+    );
+  }
+
+
+  if (
+    product.network
+  ) {
+
+    merchantParts.push(
+      "Affiliate network: " +
+      product.network
+    );
+  }
+
+
+  if (
+    merchantParts.length > 0
+  ) {
+
+    merchantLine.textContent =
+      merchantParts.join(
+        " • "
+      );
+
+    merchantLine.style.display =
+      "block";
+  }
+
+
+  const ratingValue =
+    Number(
+      product.rating
+    );
+
+
+  if (
+    Number.isFinite(
+      ratingValue
+    ) &&
+    ratingValue > 0
+  ) {
+
+    document.getElementById(
+      "stars"
+    ).textContent =
+      createStars(
+        ratingValue
+      );
+
+
+    document.getElementById(
+      "rating-text"
+    ).textContent =
+      " " +
+      ratingValue.toFixed(1) +
+      " / 5";
+
+
+    document.getElementById(
+      "rating"
+    ).style.display =
+      "block";
+  }
+
+
+  const description =
+    product.description
+      ? product.description
+      : "Visit the merchant website for full product information and current availability.";
+
+
+  document.getElementById(
+    "description"
+  ).textContent =
+    description;
+
+
+  renderPrice(
+    product
+  );
+
+
+  const button =
+    document.getElementById(
+      "affiliate-button"
+    );
+
+
+  button.href =
+    affiliateURL;
+
+
+  if (
+    product.merchant
+  ) {
+
+    button.textContent =
+      "Shop at " +
+      product.merchant;
+
+  } else {
+
+    button.textContent =
+      "Shop Now";
+  }
+
+}
+
+
+function renderPrice(
+  product
+) {
+
+  const priceArea =
+    document.getElementById(
+      "price-area"
+    );
+
+
+  const hasPrice =
+    product.price !== null &&
+    product.price !== undefined &&
+    product.price !== "";
+
+
+  if (
+    !hasPrice
+  ) {
+
+    priceArea.innerHTML =
+      `
+        <div class="price-note">
+          Check the merchant website for the latest price.
+        </div>
+      `;
+
+    return;
+  }
+
+
+  const salePrice =
+    Number(
+      product.price
+    );
+
+
+  if (
+    !Number.isFinite(
+      salePrice
+    )
+  ) {
+
+    priceArea.innerHTML =
+      "";
+
+    return;
+  }
+
+
+  const originalPrice =
+    Number(
+      product.original_price
+    );
+
+
+  const hasDiscount =
+    product.original_price !== null &&
+    product.original_price !== undefined &&
+    product.original_price !== "" &&
+    Number.isFinite(
+      originalPrice
+    ) &&
+    originalPrice >
+    salePrice;
+
+
+  if (
+    hasDiscount
+  ) {
+
+    const discount =
+      calculateDiscount(
+        originalPrice,
+        salePrice
+      );
+
+
+    const savings =
+      originalPrice -
+      salePrice;
+
+
+    priceArea.innerHTML =
+      `
+        <div class="sale-row">
+
+          <span class="original-price">
+            ${escapeHTML(
+              formatEUR(
+                originalPrice
+              )
+            )}
+          </span>
+
+          <span class="sale-price">
+            ${escapeHTML(
+              formatEUR(
+                salePrice
+              )
+            )}
+          </span>
+
+          ${
+            discount
+              ? `
+                <span class="discount-badge">
+                  ${discount}% OFF
+                </span>
+              `
+              : ""
+          }
+
+        </div>
+
+        <div class="saving">
+          Save
+          ${escapeHTML(
+            formatEUR(
+              savings
+            )
+          )}
+        </div>
+
+        <div class="price-note">
+          Price and availability may change on the merchant's website.
+        </div>
+      `;
+
+    return;
+  }
+
+
+  priceArea.innerHTML =
+    `
+      <div class="normal-price">
+        ${escapeHTML(
+          formatEUR(
+            salePrice
+          )
+        )}
+      </div>
+
+      <div class="price-note">
+        Price and availability may change on the merchant's website.
+      </div>
+    `;
+
+}
+
+
+async function copyProductLink() {
+
+  const message =
+    document.getElementById(
+      "copy-message"
+    );
+
+
+  try {
+
+    await navigator.clipboard.writeText(
+      window.location.href
+    );
+
+
+    message.textContent =
+      "Product link copied ✅";
+
+
+    setTimeout(
+      () => {
+
+        message.textContent =
+          "";
+
+      },
+      2500
+    );
+
+  } catch (error) {
+
+    message.textContent =
+      "Please copy the link from your browser address bar.";
+  }
+
+}
+
+
+async function shareProduct() {
+
+  const title =
+    document.getElementById(
+      "product-name"
+    ).textContent ||
+    "GiftedGift Empire Product";
+
+
+  if (
+    navigator.share
+  ) {
+
+    try {
+
+      await navigator.share({
+        title:
+          title,
+
+        text:
+          "Take a look at this product on GiftedGift Empire.",
+
+        url:
+          window.location.href
+      });
+
+      return;
+
+    } catch (error) {
+
+      if (
+        error &&
+        error.name ===
+        "AbortError"
+      ) {
+        return;
+      }
+    }
+  }
+
+
+  copyProductLink();
+}
+
+
+loadProduct();
+
+</script>
+
+
+<script src="cookie-consent.js"></script>
+
+
+</body>
+</html>
