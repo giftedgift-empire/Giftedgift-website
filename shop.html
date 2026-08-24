@@ -131,6 +131,22 @@
       color: #111;
     }
 
+    .foodstuff-link-wrap {
+      margin: 18px 0 28px;
+      text-align: center;
+    }
+
+    .foodstuff-link {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
     .shop-heading {
       text-align: center;
       font-size: 31px;
@@ -200,11 +216,46 @@
       flex-grow: 1;
     }
 
+    /* ------------------------------
+       PRICE DISPLAY
+    ------------------------------ */
+
     .price {
       font-size: 21px;
       font-weight: bold;
       color: #111;
       margin: 12px 0 5px;
+    }
+
+    .affiliate-price-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin: 14px 0 7px;
+    }
+
+    .original-price {
+      color: #777;
+      text-decoration: line-through;
+      font-size: 17px;
+    }
+
+    .sale-price {
+      color: #123a8c;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .discount-badge {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 6px;
+      background: #d93025;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .rating {
@@ -269,6 +320,10 @@
         padding-left: 14px;
         padding-right: 14px;
       }
+
+      .sale-price {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
@@ -281,7 +336,10 @@
   <h1>GiftedGift Empire</h1>
 
   <nav>
-    <a href="index.html">Home</a>
+
+    <a href="index.html">
+      Home
+    </a>
 
     <a href="shop.html">
       Shop
@@ -289,6 +347,10 @@
 
     <a href="categories.html">
       Categories
+    </a>
+
+    <a href="daily-inspiration.html">
+      Daily Inspiration
     </a>
 
     <a href="blog.html">
@@ -310,6 +372,7 @@
     <a href="cart.html">
       🛒 Cart
     </a>
+
   </nav>
 
 </header>
@@ -373,36 +436,18 @@
       </button>
 
     </div>
+
+
+    <div class="foodstuff-link-wrap">
+
+      <a
+        href="foodstuffs.html"
+        class="foodstuff-link"
+      >
+        🥘 Shop African Foodstuffs on WhatsApp
+      </a>
+
     </div>
-
-
-<!-- AFRICAN FOODSTUFFS -->
-
-<div style="
-  margin:18px 0 28px;
-  text-align:center;
-">
-
-  <a
-    href="foodstuffs.html"
-    style="
-      display:inline-block;
-      background:#25D366;
-      color:white;
-      text-decoration:none;
-      padding:14px 22px;
-      border-radius:10px;
-      font-size:17px;
-      font-weight:bold;
-    "
-  >
-    🥘 Shop African Foodstuffs on WhatsApp
-  </a>
-
-</div>
-
-
-<div class="category-line">
 
 
     <div class="category-line">
@@ -508,11 +553,6 @@
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
 
-  /*
-    Put the SAME publishable key that is already
-    inside your current shop.html between the quotes.
-  */
-
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
@@ -541,6 +581,10 @@
   let allProducts =
     [];
 
+
+  /* ==============================
+     BASIC HELPERS
+  ============================== */
 
   function firstValue(
     object,
@@ -594,12 +638,89 @@
     const number =
       Number(value);
 
+
     return (
       Number.isFinite(number) &&
       number >= 0
     );
   }
 
+
+  /*
+    Formats:
+
+    1529.90
+    as
+    €1,529.90
+  */
+
+  function formatEuro(
+    value
+  ) {
+
+    if (
+      !validPrice(value)
+    ) {
+
+      return "";
+    }
+
+
+    return new Intl.NumberFormat(
+      "en-US",
+      {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }
+    ).format(
+      Number(value)
+    );
+  }
+
+
+  function calculateDiscount(
+    originalPrice,
+    salePrice
+  ) {
+
+    const original =
+      Number(originalPrice);
+
+
+    const sale =
+      Number(salePrice);
+
+
+    if (
+      !Number.isFinite(original) ||
+      !Number.isFinite(sale) ||
+      original <= 0 ||
+      sale < 0 ||
+      sale >= original
+    ) {
+
+      return null;
+    }
+
+
+    return Math.round(
+      (
+        (
+          original -
+          sale
+        ) /
+        original
+      ) *
+      100
+    );
+  }
+
+
+  /* ==============================
+     NORMALIZE PHYSICAL PRODUCTS
+  ============================== */
 
   function normalizePhysical(
     product
@@ -659,6 +780,12 @@
           ]
         ),
 
+      originalPrice:
+        null,
+
+      salePrice:
+        null,
+
       rating:
         firstValue(
           product,
@@ -675,6 +802,10 @@
     };
   }
 
+
+  /* ==============================
+     NORMALIZE DIGITAL PRODUCTS
+  ============================== */
 
   function normalizeDigital(
     product
@@ -735,6 +866,12 @@
           ]
         ),
 
+      originalPrice:
+        null,
+
+      salePrice:
+        null,
+
       rating:
         firstValue(
           product,
@@ -770,9 +907,42 @@
   }
 
 
+  /* ==============================
+     NORMALIZE AFFILIATE PRODUCTS
+  ============================== */
+
   function normalizeAffiliate(
     product
   ) {
+
+    /*
+      Supports several possible column names so
+      existing and future affiliate products
+      continue working.
+    */
+
+    const salePrice =
+      firstValue(
+        product,
+        [
+          "sale_price",
+          "current_price",
+          "price"
+        ]
+      );
+
+
+    const originalPrice =
+      firstValue(
+        product,
+        [
+          "original_price",
+          "regular_price",
+          "old_price",
+          "was_price"
+        ]
+      );
+
 
     return {
 
@@ -823,13 +993,13 @@
         ) || "",
 
       price:
-        firstValue(
-          product,
-          [
-            "price",
-            "current_price"
-          ]
-        ),
+        salePrice,
+
+      salePrice:
+        salePrice,
+
+      originalPrice:
+        originalPrice,
 
       rating:
         firstValue(
@@ -860,6 +1030,10 @@
     };
   }
 
+
+  /* ==============================
+     DATABASE
+  ============================== */
 
   async function getTableRows(
     tableName
@@ -988,7 +1162,9 @@
 
     } catch (error) {
 
-      console.error(error);
+      console.error(
+        error
+      );
 
 
       container.innerHTML = `
@@ -999,6 +1175,10 @@
     }
   }
 
+
+  /* ==============================
+     FILTERS
+  ============================== */
 
   function applyFilters() {
 
@@ -1044,6 +1224,7 @@
 
 
     updateHeadings();
+
 
     renderProducts(
       visibleProducts
@@ -1115,6 +1296,10 @@
       "All Products";
   }
 
+
+  /* ==============================
+     PRODUCT BUTTONS
+  ============================== */
 
   function getProductButton(
     product
@@ -1224,6 +1409,95 @@
   }
 
 
+  /* ==============================
+     PRICE DISPLAY
+  ============================== */
+
+  function getPriceHTML(
+    product
+  ) {
+
+    /*
+      AFFILIATE PRODUCT WITH
+      ORIGINAL + SALE PRICE
+    */
+
+    if (
+      product.type ===
+      "affiliate" &&
+      validPrice(
+        product.originalPrice
+      ) &&
+      validPrice(
+        product.salePrice
+      ) &&
+      Number(
+        product.originalPrice
+      ) >
+      Number(
+        product.salePrice
+      )
+    ) {
+
+      const discount =
+        calculateDiscount(
+          product.originalPrice,
+          product.salePrice
+        );
+
+
+      return `
+        <div class="affiliate-price-wrap">
+
+          <span class="original-price">
+            ${formatEuro(product.originalPrice)}
+          </span>
+
+          <span class="sale-price">
+            ${formatEuro(product.salePrice)}
+          </span>
+
+          ${
+            discount !== null
+              ? `
+                <span class="discount-badge">
+                  ${discount}% OFF
+                </span>
+              `
+              : ""
+          }
+
+        </div>
+      `;
+    }
+
+
+    /*
+      NORMAL PRODUCT PRICE
+    */
+
+    if (
+      validPrice(
+        product.price
+      )
+    ) {
+
+      return `
+        <p class="price">
+          ${formatEuro(product.price)}
+        </p>
+      `;
+    }
+
+
+    return "";
+  }
+
+
+  /* ==============================
+     RENDER PRODUCTS
+  ============================== */
+
   function renderProducts(
     products
   ) {
@@ -1325,15 +1599,9 @@
 
 
         const price =
-          validPrice(
-            product.price
-          )
-            ? `
-              <p class="price">
-                €${Number(product.price).toFixed(2)}
-              </p>
-            `
-            : "";
+          getPriceHTML(
+            product
+          );
 
 
         const rating =
@@ -1381,6 +1649,10 @@
   }
 
 
+  /* ==============================
+     PRODUCT TYPE BUTTONS
+  ============================== */
+
   document
     .querySelectorAll(
       ".filter-button"
@@ -1421,6 +1693,10 @@
     );
 
 
+  /* ==============================
+     ACTIVE CATEGORY
+  ============================== */
+
   if (
     selectedCategory
   ) {
@@ -1446,10 +1722,17 @@
   }
 
 
+  /* ==============================
+     START
+  ============================== */
+
   loadAllProducts();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+
+<script src="cookie-consent.js"></script>
 
 </body>
+
 </html>
