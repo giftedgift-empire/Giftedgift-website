@@ -216,10 +216,6 @@
       flex-grow: 1;
     }
 
-    /* ------------------------------
-       PRICE DISPLAY
-    ------------------------------ */
-
     .price {
       font-size: 21px;
       font-weight: bold;
@@ -289,6 +285,7 @@
       margin-top: 8px;
       font-size: 11px;
       color: #777;
+      text-align: center;
     }
 
     .message {
@@ -646,14 +643,6 @@
   }
 
 
-  /*
-    Formats:
-
-    1529.90
-    as
-    €1,529.90
-  */
-
   function formatEuro(
     value
   ) {
@@ -914,12 +903,6 @@
   function normalizeAffiliate(
     product
   ) {
-
-    /*
-      Supports several possible column names so
-      existing and future affiliate products
-      continue working.
-    */
 
     const salePrice =
       firstValue(
@@ -1369,27 +1352,38 @@
     }
 
 
+    /*
+      AFFILIATE PRODUCTS
+
+      IMPORTANT:
+      Affiliate products now open their own
+      GiftedGift Empire landing page first.
+
+      Example:
+      affiliate-product.html?id=7
+    */
+
     if (
       product.type ===
       "affiliate"
     ) {
 
       if (
-        product.affiliateUrl
+        product.id !== null &&
+        product.id !== undefined &&
+        product.id !== ""
       ) {
 
         return `
           <a
             class="product-button"
-            href="${escapeHTML(product.affiliateUrl)}"
-            target="_blank"
-            rel="noopener sponsored"
+            href="affiliate-product.html?id=${encodeURIComponent(product.id)}"
           >
-            Shop Now
+            View Product
           </a>
 
           <div class="affiliate-note">
-            Affiliate link
+            Affiliate recommendation
           </div>
         `;
       }
@@ -1399,7 +1393,7 @@
         <span
           class="product-button disabled-button"
         >
-          Link Unavailable
+          Product Unavailable
         </span>
       `;
     }
@@ -1416,11 +1410,6 @@
   function getPriceHTML(
     product
   ) {
-
-    /*
-      AFFILIATE PRODUCT WITH
-      ORIGINAL + SALE PRICE
-    */
 
     if (
       product.type ===
@@ -1471,10 +1460,6 @@
       `;
     }
 
-
-    /*
-      NORMAL PRODUCT PRICE
-    */
 
     if (
       validPrice(
