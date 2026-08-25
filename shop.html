@@ -1384,7 +1384,7 @@ slug:
         return `
           <a
             class="product-button"
-            href="affiliate-products.html?id=${encodeURIComponent(product.id)}"
+            href="${product.slug ? "/" + encodeURIComponent(product.slug) : "affiliate-products.html?id=" + encodeURIComponent(product.id)}"
           >
             View Product
           </a>
