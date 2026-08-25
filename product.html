@@ -307,6 +307,95 @@
       text-decoration: none;
       font-weight: bold;
     }
+    .purchase-or {
+  margin: 24px 0 18px;
+  text-align: center;
+  font-weight: bold;
+  color: #777;
+}
+
+.whatsapp-purchase {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f7f9fb;
+  border: 1px solid #e2e5e9;
+}
+
+.whatsapp-purchase h3 {
+  margin: 0 0 8px;
+  color: #123a8c;
+  font-size: 21px;
+}
+
+.whatsapp-help {
+  margin: 0 0 18px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.whatsapp-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.whatsapp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.whatsapp-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.whatsapp-field label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.whatsapp-field input,
+.whatsapp-field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.whatsapp-field textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.whatsapp-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #25D366;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.whatsapp-button:hover {
+  opacity: 0.92;
+}
+
+@media (max-width: 600px) {
+  .whatsapp-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .whatsapp-field.full-width {
+    grid-column: auto;
+  }
+}
 
 
     /* REVIEWS */
