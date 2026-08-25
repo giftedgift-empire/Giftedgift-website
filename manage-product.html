@@ -1691,6 +1691,11 @@ function resetForm() {
   document
     .getElementById("product-form")
     .reset();
+  
+  slugWasEdited =
+    false;
+
+  updateSlugPreview();
 
   document
     .getElementById("product-id")
