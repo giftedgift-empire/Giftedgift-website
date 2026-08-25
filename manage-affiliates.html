@@ -1679,6 +1679,20 @@ async function editAffiliateProduct(
   ).value =
     data.name ||
     "";
+  document.getElementById(
+  "slug"
+).value =
+  data.slug ||
+  suggestShortSlug(
+    data.name
+  );
+
+
+slugWasEdited =
+  true;
+
+
+updateSlugPreview();
 
 
   document.getElementById(
