@@ -7,25 +7,6 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 export async function onRequestGet(context) {
 
-  /*
-    First allow normal website pages/files
-    such as /shop, /about, /contact, etc.
-  */
-
-  const existingAsset =
-    await context.env.ASSETS.fetch(
-      context.request
-    );
-
-
-  if (
-    existingAsset.status !== 404
-  ) {
-
-    return existingAsset;
-  }
-
-
   const slug =
     String(
       context.params.slug ||
@@ -37,15 +18,18 @@ export async function onRequestGet(context) {
 
   if (!slug) {
 
-    return existingAsset;
+    return context.env.ASSETS.fetch(
+      context.request
+    );
   }
 
 
   try {
 
     /*
-      Find the active affiliate product
-      that owns this short Share Link Name.
+      FIRST:
+      Check whether this slug belongs
+      to an active affiliate product.
     */
 
     const apiURL =
@@ -58,12 +42,17 @@ export async function onRequestGet(context) {
       "&limit=1";
 
 
-    const response =
+    const productResponse =
       await fetch(
         apiURL,
         {
           headers: {
+
             apikey:
+              SUPABASE_PUBLISHABLE_KEY,
+
+            Authorization:
+              "Bearer " +
               SUPABASE_PUBLISHABLE_KEY,
 
             Accept:
@@ -73,101 +62,107 @@ export async function onRequestGet(context) {
       );
 
 
-    if (!response.ok) {
-
-      console.error(
-        "Could not check affiliate slug:",
-        response.status
-      );
-
-      return existingAsset;
-    }
-
-
-    const products =
-      await response.json();
-
-
     if (
-      !Array.isArray(products) ||
-      products.length === 0
+      productResponse.ok
     ) {
 
-      return existingAsset;
-    }
+      const products =
+        await productResponse.json();
 
 
-    const product =
-      products[0];
+      if (
+        Array.isArray(products) &&
+        products.length > 0
+      ) {
+
+        const product =
+          products[0];
 
 
-    /*
-      Load the existing affiliate landing page
-      behind the clean URL.
-    */
+        /*
+          Load the existing affiliate
+          landing-page engine.
+        */
 
-    const landingURL =
-      new URL(
-        context.request.url
-      );
-
-
-    landingURL.pathname =
-      "/affiliate-products";
-
-    landingURL.search =
-      "";
+        const landingURL =
+          new URL(
+            context.request.url
+          );
 
 
-    const landingResponse =
-      await context.env.ASSETS.fetch(
-        landingURL
-      );
+        landingURL.pathname =
+          "/affiliate-products";
+
+        landingURL.search =
+          "";
 
 
-    if (
-      !landingResponse.ok
-    ) {
-
-      return landingResponse;
-    }
+        const landingResponse =
+          await context.env.ASSETS.fetch(
+            landingURL
+          );
 
 
-    /*
-      Give affiliate-products.html the real
-      product ID without putting ?id= in
-      the customer's URL.
-    */
+        if (
+          landingResponse.ok
+        ) {
 
-    const safeProductID =
-      JSON.stringify(
-        String(product.id)
-      );
-
-
-    return new HTMLRewriter()
-      .on(
-        "head",
-        {
-          element(element) {
-
-            element.append(
-              `
-                <script>
-                  window.__AFFILIATE_PRODUCT_ID =
-                    ${safeProductID};
-                </script>
-              `,
-              {
-                html: true
-              }
+          const safeProductID =
+            JSON.stringify(
+              String(
+                product.id
+              )
             );
-          }
+
+
+          /*
+            Insert the real product ID
+            into the landing page while
+            keeping the clean URL visible.
+          */
+
+          return new HTMLRewriter()
+            .on(
+              "head",
+              {
+                element(element) {
+
+                  element.append(
+                    `
+                      <script>
+                        window.__AFFILIATE_PRODUCT_ID =
+                          ${safeProductID};
+                      </script>
+                    `,
+                    {
+                      html: true
+                    }
+                  );
+                }
+              }
+            )
+            .transform(
+              landingResponse
+            );
         }
-      )
-      .transform(
-        landingResponse
-      );
+      }
+    }
+
+
+    /*
+      If it is NOT an affiliate-product slug,
+      let Cloudflare serve the normal website.
+
+      Examples:
+      /shop
+      /about
+      /contact
+      /blog
+    */
+
+    return context.env.ASSETS.fetch(
+      context.request
+    );
 
 
   } catch (error) {
@@ -178,6 +173,8 @@ export async function onRequestGet(context) {
     );
 
 
-    return existingAsset;
+    return context.env.ASSETS.fetch(
+      context.request
+    );
   }
-      }
+}
