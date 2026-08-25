@@ -3113,7 +3113,158 @@
 
   }
 
+/* =========================
+   HOMEPAGE ADVERTISEMENT
+========================= */
 
+async function loadHomepageAdvertisement() {
+
+  const section =
+    document.getElementById(
+      "homepage-ad-section"
+    );
+
+
+  const container =
+    document.getElementById(
+      "homepage-ad-container"
+    );
+
+
+  if (
+    !section ||
+    !container
+  ) {
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "advertisements"
+      )
+      .select(
+        "id,advertiser_name,ad_title,description,image_url,destination_url,placement,start_at,end_at,active"
+      )
+      .eq(
+        "placement",
+        "homepage_banner"
+      )
+      .eq(
+        "active",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      )
+      .limit(1);
+
+
+  if (error) {
+
+    console.error(
+      "Homepage advertisement error:",
+      error
+    );
+
+    return;
+  }
+
+
+  const ad =
+    Array.isArray(data) &&
+    data.length > 0
+      ? data[0]
+      : null;
+
+
+  if (!ad) {
+
+    section.style.display =
+      "none";
+
+    return;
+  }
+
+
+  const imageHTML =
+    ad.image_url
+      ? `
+        <img
+          class="homepage-ad-image"
+          src="${escapeHTML(ad.image_url)}"
+          alt="${escapeHTML(ad.ad_title || "Sponsored advertisement")}"
+          loading="lazy"
+        >
+      `
+      : "";
+
+
+  const descriptionHTML =
+    ad.description
+      ? `
+        <div class="homepage-ad-description">
+          ${escapeHTML(ad.description)}
+        </div>
+      `
+      : "";
+
+
+  container.innerHTML = `
+
+    <article class="homepage-ad-card">
+
+      <div class="homepage-ad-label">
+        Sponsored
+      </div>
+
+
+      <a
+        class="homepage-ad-link"
+        href="${escapeHTML(ad.destination_url)}"
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+      >
+
+        ${imageHTML}
+
+
+        <div class="homepage-ad-content">
+
+          <div class="homepage-ad-title">
+            ${escapeHTML(
+              ad.ad_title ||
+              ad.advertiser_name ||
+              "Sponsored Advertisement"
+            )}
+          </div>
+
+
+          ${descriptionHTML}
+
+
+          <span class="homepage-ad-visit">
+            Visit Advertiser →
+          </span>
+
+        </div>
+
+      </a>
+
+    </article>
+  `;
+
+
+  section.style.display =
+    "block";
+}
   /* =========================
      CART COUNT
   ========================= */
