@@ -934,7 +934,14 @@
 
       type:
         "affiliate",
-
+      
+slug:
+  firstValue(
+    product,
+    [
+      "slug"
+    ]
+  ) || "",
       typeLabel:
         "Affiliate Product",
 
