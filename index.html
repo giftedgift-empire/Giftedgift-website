@@ -3334,11 +3334,13 @@ async function loadHomepageAdvertisement() {
 
     await Promise.all([
 
-      loadCategories(),
+  loadCategories(),
 
-      loadFeaturedProducts()
+  loadFeaturedProducts(),
 
-    ]);
+  loadHomepageAdvertisement()
+
+]);
 
 
     updateCartCount();
