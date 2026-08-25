@@ -1000,9 +1000,10 @@
 
 
   const productId =
-    Number(
-      params.get("id")
-    );
+  Number(
+    window.__PHYSICAL_PRODUCT_ID ||
+    params.get("id")
+  );
 
 
   const dealId =
