@@ -2017,6 +2017,232 @@ const WHATSAPP_NUMBER =
       } added to your cart.`
     );
   }
+  
+  function completePurchaseOnWhatsApp() {
+
+  clearMessage();
+
+
+  if (!currentProduct) {
+
+    showMessage(
+      "Please wait for the product to finish loading.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (
+    currentProduct.in_stock !== true
+  ) {
+
+    showMessage(
+      "This product is currently out of stock.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById(
+        "whatsapp-name"
+      )
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById(
+        "whatsapp-phone"
+      )
+      .value
+      .trim();
+
+
+  const address =
+    document
+      .getElementById(
+        "whatsapp-address"
+      )
+      .value
+      .trim();
+
+
+  const postal =
+    document
+      .getElementById(
+        "whatsapp-postal"
+      )
+      .value
+      .trim();
+
+
+  const city =
+    document
+      .getElementById(
+        "whatsapp-city"
+      )
+      .value
+      .trim();
+
+
+  const country =
+    document
+      .getElementById(
+        "whatsapp-country"
+      )
+      .value
+      .trim();
+
+
+  const note =
+    document
+      .getElementById(
+        "whatsapp-note"
+      )
+      .value
+      .trim();
+
+
+  if (
+    !name ||
+    !phone ||
+    !address ||
+    !postal ||
+    !city ||
+    !country
+  ) {
+
+    showMessage(
+      "Please complete your name, phone number and full delivery address.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const unitPrice =
+    Number(
+      currentUnitPrice
+    );
+
+
+  if (
+    !Number.isFinite(
+      unitPrice
+    ) ||
+    unitPrice <= 0
+  ) {
+
+    showMessage(
+      "This product does not have a valid price.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const total =
+    unitPrice *
+    selectedQuantity;
+
+
+  let productURL;
+
+
+  if (
+    currentProduct.slug
+  ) {
+
+    productURL =
+      window.location.origin +
+      "/" +
+      encodeURIComponent(
+        currentProduct.slug
+      );
+
+  } else {
+
+    productURL =
+      window.location.origin +
+      "/product.html?id=" +
+      encodeURIComponent(
+        currentProduct.id
+      );
+  }
+
+
+  if (currentDeal) {
+
+    productURL +=
+      "?deal_id=" +
+      encodeURIComponent(
+        currentDeal.id
+      );
+  }
+
+
+  let whatsappMessage =
+`Hello GiftedGift Empire,
+
+I would like to purchase this product.
+
+PRODUCT:
+${currentProduct.name || "Product"}
+
+Quantity: ${selectedQuantity}
+Unit Price: ${formatPrice(unitPrice)}
+Product Total: ${formatPrice(total)}
+
+Product Link:
+${productURL}
+
+Delivery/Shipping Cost:
+To be confirmed on WhatsApp before payment.
+
+CUSTOMER DETAILS:
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Postal Code: ${postal}
+City: ${city}
+Country: ${country}`;
+
+
+  if (note) {
+
+    whatsappMessage += `
+
+Order Note:
+${note}`;
+  }
+
+
+  whatsappMessage += `
+
+Please confirm the shipping cost and final amount for my order. Thank you.`;
+
+
+  const whatsappURL =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    encodeURIComponent(
+      whatsappMessage
+    );
+
+
+  window.location.href =
+    whatsappURL;
+}
 
 
   function renderProduct(
