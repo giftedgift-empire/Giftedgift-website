@@ -5,7 +5,138 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-export async function onRequestGet(context) {
+async function getProductBySlug(
+  table,
+  slug,
+  activeAffiliate = false
+) {
+
+  let apiURL =
+    SUPABASE_URL +
+    "/rest/v1/" +
+    table +
+    "?select=id,slug" +
+    "&slug=eq." +
+    encodeURIComponent(slug);
+
+  if (activeAffiliate) {
+    apiURL +=
+      "&active=eq.true";
+  }
+
+  apiURL +=
+    "&limit=1";
+
+
+  const response =
+    await fetch(
+      apiURL,
+      {
+        headers: {
+          apikey:
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Authorization:
+            "Bearer " +
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Accept:
+            "application/json"
+        }
+      }
+    );
+
+
+  if (!response.ok) {
+    return null;
+  }
+
+
+  const products =
+    await response.json();
+
+
+  if (
+    !Array.isArray(products) ||
+    products.length === 0
+  ) {
+    return null;
+  }
+
+
+  return products[0];
+}
+
+
+
+async function serveLandingPage(
+  context,
+  pathname,
+  variableName,
+  productID
+) {
+
+  const landingURL =
+    new URL(
+      context.request.url
+    );
+
+
+  landingURL.pathname =
+    pathname;
+
+
+  landingURL.search =
+    "";
+
+
+  const landingResponse =
+    await context.env.ASSETS.fetch(
+      landingURL
+    );
+
+
+  if (!landingResponse.ok) {
+    return null;
+  }
+
+
+  const safeProductID =
+    JSON.stringify(
+      String(productID)
+    );
+
+
+  return new HTMLRewriter()
+    .on(
+      "head",
+      {
+        element(element) {
+
+          element.append(
+            `
+              <script>
+                window.${variableName} =
+                  ${safeProductID};
+              </script>
+            `,
+            {
+              html: true
+            }
+          );
+        }
+      }
+    )
+    .transform(
+      landingResponse
+    );
+}
+
+
+
+export async function onRequestGet(
+  context
+) {
 
   const slug =
     String(
@@ -27,137 +158,64 @@ export async function onRequestGet(context) {
   try {
 
     /*
-      FIRST:
-      Check whether this slug belongs
-      to an active affiliate product.
+      AFFILIATE PRODUCTS
     */
 
-    const apiURL =
-      SUPABASE_URL +
-      "/rest/v1/affiliate_products" +
-      "?select=id,slug" +
-      "&slug=eq." +
-      encodeURIComponent(slug) +
-      "&active=eq.true" +
-      "&limit=1";
-
-
-    const productResponse =
-      await fetch(
-        apiURL,
-        {
-          headers: {
-
-            apikey:
-              SUPABASE_PUBLISHABLE_KEY,
-
-            Authorization:
-              "Bearer " +
-              SUPABASE_PUBLISHABLE_KEY,
-
-            Accept:
-              "application/json"
-          }
-        }
+    const affiliateProduct =
+      await getProductBySlug(
+        "affiliate_products",
+        slug,
+        true
       );
 
 
-    if (
-      productResponse.ok
-    ) {
+    if (affiliateProduct) {
 
-      const products =
-        await productResponse.json();
-
-
-      if (
-        Array.isArray(products) &&
-        products.length > 0
-      ) {
-
-        const product =
-          products[0];
+      const response =
+        await serveLandingPage(
+          context,
+          "/affiliate-products.html",
+          "__AFFILIATE_PRODUCT_ID",
+          affiliateProduct.id
+        );
 
 
-        /*
-          Load the existing affiliate
-          landing-page engine.
-        */
-
-        const landingURL =
-          new URL(
-            context.request.url
-          );
-
-
-        landingURL.pathname =
-          "/affiliate-products";
-
-        landingURL.search =
-          "";
-
-
-        const landingResponse =
-          await context.env.ASSETS.fetch(
-            landingURL
-          );
-
-
-        if (
-          landingResponse.ok
-        ) {
-
-          const safeProductID =
-            JSON.stringify(
-              String(
-                product.id
-              )
-            );
-
-
-          /*
-            Insert the real product ID
-            into the landing page while
-            keeping the clean URL visible.
-          */
-
-          return new HTMLRewriter()
-            .on(
-              "head",
-              {
-                element(element) {
-
-                  element.append(
-                    `
-                      <script>
-                        window.__AFFILIATE_PRODUCT_ID =
-                          ${safeProductID};
-                      </script>
-                    `,
-                    {
-                      html: true
-                    }
-                  );
-                }
-              }
-            )
-            .transform(
-              landingResponse
-            );
-        }
+      if (response) {
+        return response;
       }
     }
 
 
     /*
-      If it is NOT an affiliate-product slug,
-      let Cloudflare serve the normal website.
+      PHYSICAL PRODUCTS
+    */
 
-      Examples:
-      /shop
-      /about
-      /contact
-      /blog
+    const physicalProduct =
+      await getProductBySlug(
+        "products",
+        slug
+      );
+
+
+    if (physicalProduct) {
+
+      const response =
+        await serveLandingPage(
+          context,
+          "/product.html",
+          "__PHYSICAL_PRODUCT_ID",
+          physicalProduct.id
+        );
+
+
+      if (response) {
+        return response;
+      }
+    }
+
+
+    /*
+      NORMAL WEBSITE PAGE / FILE
     */
 
     return context.env.ASSETS.fetch(
@@ -168,7 +226,7 @@ export async function onRequestGet(context) {
   } catch (error) {
 
     console.error(
-      "Clean affiliate URL error:",
+      "Clean product URL error:",
       error
     );
 
