@@ -643,6 +643,93 @@ function updateDiscountPreview() {
       ${discount}% OFF
     `;
 }
+  let slugWasEdited =
+  false;
+
+
+function cleanSlug(value) {
+
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/×/g, "x")
+    .replace(/&/g, " and ")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+
+function suggestShortSlug(value) {
+
+  const fullSlug =
+    cleanSlug(value);
+
+  if (!fullSlug) {
+    return "";
+  }
+
+  return fullSlug
+    .split("-")
+    .slice(0, 3)
+    .join("-");
+}
+
+
+function updateSlugPreview() {
+
+  const slug =
+    cleanSlug(
+      document.getElementById("slug").value
+    );
+
+  document.getElementById(
+    "slug-preview"
+  ).textContent =
+    slug || "product-name";
+}
+
+
+document
+  .getElementById("name")
+  .addEventListener(
+    "input",
+    function() {
+
+      if (slugWasEdited) {
+        return;
+      }
+
+      document.getElementById(
+        "slug"
+      ).value =
+        suggestShortSlug(
+          this.value
+        );
+
+      updateSlugPreview();
+    }
+  );
+
+
+document
+  .getElementById("slug")
+  .addEventListener(
+    "input",
+    function() {
+
+      slugWasEdited =
+        true;
+
+      this.value =
+        cleanSlug(
+          this.value
+        );
+
+      updateSlugPreview();
+    }
+  );
 
 
 document
