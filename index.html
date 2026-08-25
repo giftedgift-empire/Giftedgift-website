@@ -620,7 +620,105 @@
       margin-top: 3px;
     }
 
+/* =========================
+   HOMEPAGE ADVERTISEMENT
+========================= */
 
+.homepage-ad-card {
+  max-width: 1100px;
+  margin: auto;
+
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.homepage-ad-label {
+  padding: 9px 14px;
+
+  background: #f7f8fa;
+
+  color: #777;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.homepage-ad-link {
+  display: block;
+  text-decoration: none;
+}
+
+.homepage-ad-image {
+  display: block;
+
+  width: 100%;
+  max-height: 380px;
+
+  object-fit: contain;
+
+  background: #fafafa;
+}
+
+.homepage-ad-content {
+  padding: 18px 20px;
+}
+
+.homepage-ad-title {
+  color: var(--blue);
+
+  font-size: 22px;
+  font-weight: 800;
+
+  margin-bottom: 6px;
+}
+
+.homepage-ad-description {
+  color: var(--muted);
+
+  line-height: 1.6;
+}
+
+.homepage-ad-visit {
+  display: inline-block;
+
+  margin-top: 14px;
+
+  padding: 10px 16px;
+
+  background: var(--gold);
+  color: #111;
+
+  border-radius: 8px;
+
+  font-weight: 800;
+}
+
+@media (max-width: 720px) {
+
+  .homepage-ad-image {
+    max-height: 300px;
+  }
+
+  .homepage-ad-content {
+    padding: 16px;
+  }
+
+  .homepage-ad-title {
+    font-size: 20px;
+  }
+}
     /* =========================
        GENERAL SECTIONS
     ========================= */
