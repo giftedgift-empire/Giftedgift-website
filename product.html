@@ -3315,7 +3315,13 @@ Please confirm the shipping cost and final amount for my order. Thank you.`;
     addToCart
   );
 
-
+document.getElementById(
+  "whatsapp-purchase-button"
+).addEventListener(
+  "click",
+  completePurchaseOnWhatsApp
+);
+  
   document
     .querySelectorAll(
       "#star-picker button"
