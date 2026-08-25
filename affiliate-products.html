@@ -1624,7 +1624,8 @@ async function loadProduct() {
 
 
   const rawProductID =
-    parameters.get("id");
+  window.__AFFILIATE_PRODUCT_ID ||
+  parameters.get("id");
 
 
   const productID =
