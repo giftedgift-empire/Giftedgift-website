@@ -1347,15 +1347,30 @@ function safeImageURL(value) {
 
 
 function buildLandingPageURL(
-  productID
+  product
 ) {
+
+  if (
+    product &&
+    product.slug
+  ) {
+
+    return (
+      SITE_ORIGIN +
+      "/" +
+      encodeURIComponent(
+        product.slug
+      )
+    );
+  }
+
 
   return (
     SITE_ORIGIN +
     AFFILIATE_PAGE_PATH +
     "?id=" +
     encodeURIComponent(
-      productID
+      product.id
     )
   );
 }
