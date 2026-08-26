@@ -812,6 +812,14 @@
       id:
         product.id,
 
+      slug:
+  firstValue(
+    product,
+    [
+      "slug"
+    ]
+  ) || "",
+
       type:
         "digital",
 
