@@ -807,9 +807,11 @@ function getDestination(
         product.slug
       ) +
       "?deal_id=" +
-      encodeURIComponent(
-        deal.id
-      )
+encodeURIComponent(
+  deal.id ||
+  deal.deal_id ||
+  ""
+)
     );
   }
 
