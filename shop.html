@@ -722,6 +722,13 @@
 
       type:
         "physical",
+      slug:
+  firstValue(
+    product,
+    [
+      "slug"
+    ]
+  ) || "",
 
       typeLabel:
         "Physical Product",
