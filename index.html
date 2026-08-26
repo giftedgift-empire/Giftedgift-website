@@ -733,6 +733,36 @@
     ease-in-out
     infinite;
 }
+    @keyframes sponsoredAttention {
+
+  0%,
+  85%,
+  100% {
+    transform: translateX(0);
+  }
+
+  90% {
+    transform: translateX(3px);
+  }
+
+  94% {
+    transform: translateX(-3px);
+  }
+
+  97% {
+    transform: translateX(2px);
+  }
+}
+
+
+.homepage-ad-label {
+  animation:
+    sponsoredAttention
+    5s
+    ease-in-out
+    infinite;
+}
+    
 @media (max-width: 720px) {
 
   #homepage-ad-container {
