@@ -3171,7 +3171,7 @@
 
                 <a
                   class="product-button"
-                  href="product.html?id=${encodeURIComponent(product.id)}"
+               href="${product.slug ? "/" + encodeURIComponent(product.slug) : "product.html?id=" + encodeURIComponent(product.id)}"
                 >
                   View Product
                 </a>
