@@ -339,9 +339,10 @@
 
 
     const productId =
-      params.get(
-        "product_id"
-      );
+  window.__DIGITAL_PRODUCT_ID ||
+  params.get(
+    "product_id"
+  );
 
 
     const dealId =
