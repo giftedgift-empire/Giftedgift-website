@@ -155,6 +155,17 @@ header p {
   color: #9b1c1c;
 }
 
+.product-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 11px 16px;
+  border-radius: 8px;
+  background: #f2bd16;
+  color: #111;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .quantity-row {
   display: flex;
   align-items: center;
@@ -323,9 +334,11 @@ footer {
 
 <header>
 
-  <h1>African Foodstuffs</h1>
+  <h1 id="page-title">
+    African Foodstuffs
+  </h1>
 
-  <p>
+  <p id="page-description">
     Quality African foodstuffs available per pack.
     Choose what you need and submit your order directly
     to us on WhatsApp.
@@ -350,6 +363,15 @@ footer {
       class="shop-link"
     >
       Shop
+    </a>
+
+    <a
+      id="all-foodstuffs-link"
+      href="foodstuffs.html"
+      class="shop-link"
+      style="display:none;"
+    >
+      ← All Foodstuffs
     </a>
 
   </div>
@@ -398,7 +420,9 @@ footer {
       style="display:none;"
     >
 
-      <span>Product Total</span>
+      <span>
+        Product Total
+      </span>
 
       <span id="total-price">
         €0.00
@@ -569,6 +593,10 @@ const WHATSAPP_NUMBER =
   "2349060340336";
 
 
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
 const supabaseClient =
   supabase.createClient(
     SUPABASE_URL,
@@ -577,22 +605,48 @@ const supabaseClient =
 
 
 const loading =
-  document.getElementById("loading");
+  document.getElementById(
+    "loading"
+  );
 
 const productsBox =
-  document.getElementById("products");
+  document.getElementById(
+    "products"
+  );
 
 const summaryBox =
-  document.getElementById("summary");
+  document.getElementById(
+    "summary"
+  );
 
 const summaryTotal =
-  document.getElementById("summary-total");
+  document.getElementById(
+    "summary-total"
+  );
 
 const totalPriceBox =
-  document.getElementById("total-price");
+  document.getElementById(
+    "total-price"
+  );
 
 const messageBox =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
+
+
+const cleanFoodstuffId =
+  Number(
+    window.__FOODSTUFF_ID ||
+    0
+  );
+
+
+const isSingleFoodstuff =
+  Number.isInteger(
+    cleanFoodstuffId
+  ) &&
+  cleanFoodstuffId > 0;
 
 
 let products = [];
@@ -602,19 +656,66 @@ let quantities = {};
 
 function escapeHtml(value) {
 
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 }
 
 
 function money(value) {
 
-  return "€" +
-    Number(value || 0).toFixed(2);
+  return (
+    "€" +
+    Number(
+      value || 0
+    ).toFixed(2)
+  );
+}
+
+
+function getProductUrl(
+  product
+) {
+
+  if (
+    product &&
+    product.slug
+  ) {
+
+    return (
+      SITE_URL +
+      "/" +
+      encodeURIComponent(
+        product.slug
+      )
+    );
+  }
+
+
+  return (
+    SITE_URL +
+    "/foodstuffs.html"
+  );
 }
 
 
@@ -627,8 +728,11 @@ function showError(text) {
     text;
 
   messageBox.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
+    behavior:
+      "smooth",
+
+    block:
+      "center"
   });
 }
 
@@ -645,29 +749,49 @@ function clearMessage() {
 
 async function loadProducts() {
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("foodstuffs")
+  let query =
+    supabaseClient
+      .from(
+        "foodstuffs"
+      )
       .select(
-        "id,name,description,price,unit,image_url,in_stock,sort_order"
+        "id,name,slug,description,price,unit,image_url,in_stock,sort_order"
       )
       .eq(
         "active",
         true
-      )
+      );
+
+
+  if (
+    isSingleFoodstuff
+  ) {
+
+    query =
+      query.eq(
+        "id",
+        cleanFoodstuffId
+      );
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await query
       .order(
         "sort_order",
         {
-          ascending: true
+          ascending:
+            true
         }
       )
       .order(
         "id",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
@@ -678,7 +802,9 @@ async function loadProducts() {
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     productsBox.innerHTML =
       "<p>Foodstuffs could not be loaded.</p>";
@@ -691,11 +817,86 @@ async function loadProducts() {
     data || [];
 
 
-  products.forEach(product => {
+  if (
+    isSingleFoodstuff &&
+    products.length === 0
+  ) {
 
-    quantities[product.id] = 0;
+    productsBox.innerHTML =
+      "<p>This foodstuff is not currently available.</p>";
 
-  });
+    document
+      .getElementById(
+        "page-title"
+      )
+      .textContent =
+        "Foodstuff Not Available";
+
+
+    document
+      .getElementById(
+        "all-foodstuffs-link"
+      )
+      .style.display =
+        "inline-block";
+
+    return;
+  }
+
+
+  if (
+    isSingleFoodstuff &&
+    products.length === 1
+  ) {
+
+    const product =
+      products[0];
+
+
+    document
+      .getElementById(
+        "page-title"
+      )
+      .textContent =
+        product.name ||
+        "African Foodstuff";
+
+
+    document
+      .getElementById(
+        "page-description"
+      )
+      .textContent =
+        product.description ||
+        "Choose your quantity and submit your order directly to GiftedGift Empire on WhatsApp.";
+
+
+    document
+      .getElementById(
+        "all-foodstuffs-link"
+      )
+      .style.display =
+        "inline-block";
+
+
+    document.title =
+      (
+        product.name ||
+        "African Foodstuff"
+      ) +
+      " | GiftedGift Empire";
+  }
+
+
+  products.forEach(
+    product => {
+
+      quantities[
+        product.id
+      ] = 0;
+
+    }
+  );
 
 
   renderProducts();
@@ -704,7 +905,9 @@ async function loadProducts() {
 
 function renderProducts() {
 
-  if (!products.length) {
+  if (
+    !products.length
+  ) {
 
     productsBox.innerHTML =
       "<p>No foodstuffs are currently available.</p>";
@@ -714,124 +917,147 @@ function renderProducts() {
 
 
   productsBox.innerHTML =
-    products.map(product => {
+    products
+      .map(
+        product => {
 
 
-      const image = product.image_url
-        ? `
-          <img
-            src="${escapeHtml(product.image_url)}"
-            alt="${escapeHtml(product.name)}"
-          >
-        `
-        : `
-          <div class="no-image">
-            No picture available
-          </div>
-        `;
+          const image =
+            product.image_url
+              ? `
+                <img
+                  src="${escapeHtml(product.image_url)}"
+                  alt="${escapeHtml(product.name)}"
+                >
+              `
+              : `
+                <div class="no-image">
+                  No picture available
+                </div>
+              `;
 
 
-      const description =
-        product.description
-          ? `
-            <div class="product-description">
-              ${escapeHtml(product.description)}
-            </div>
-          `
-          : "";
+          const description =
+            product.description
+              ? `
+                <div class="product-description">
+                  ${escapeHtml(product.description)}
+                </div>
+              `
+              : "";
 
 
-      const controls =
-        product.in_stock
-          ? `
-            <div class="quantity-row">
+          const controls =
+            product.in_stock
+              ? `
+                <div class="quantity-row">
 
-              <button
-                type="button"
-                onclick="changeQuantity(
-                  ${Number(product.id)},
-                  -1
-                )"
-              >
-                −
-              </button>
+                  <button
+                    type="button"
+                    onclick="changeQuantity(
+                      ${Number(product.id)},
+                      -1
+                    )"
+                  >
+                    −
+                  </button>
 
-              <span
-                class="quantity"
-                id="qty-${product.id}"
-              >
-                0
-              </span>
+                  <span
+                    class="quantity"
+                    id="qty-${product.id}"
+                  >
+                    0
+                  </span>
 
-              <button
-                type="button"
-                onclick="changeQuantity(
-                  ${Number(product.id)},
-                  1
-                )"
-              >
-                +
-              </button>
+                  <button
+                    type="button"
+                    onclick="changeQuantity(
+                      ${Number(product.id)},
+                      1
+                    )"
+                  >
+                    +
+                  </button>
 
-            </div>
-          `
-          : `
-            <div class="unavailable">
-              Currently unavailable
-            </div>
+                </div>
+              `
+              : `
+                <div class="unavailable">
+                  Currently unavailable
+                </div>
+              `;
+
+
+          const productLink =
+            (
+              !isSingleFoodstuff &&
+              product.slug
+            )
+              ? `
+                <a
+                  class="product-link"
+                  href="/${encodeURIComponent(product.slug)}"
+                >
+                  View Product
+                </a>
+              `
+              : "";
+
+
+          return `
+
+            <article class="product-card">
+
+              <div class="product-image">
+                ${image}
+              </div>
+
+
+              <div class="product-body">
+
+                <div class="product-name">
+                  ${escapeHtml(product.name)}
+                </div>
+
+
+                ${description}
+
+
+                <div class="product-price">
+
+                  ${money(product.price)}
+                  ${escapeHtml(product.unit)}
+
+                </div>
+
+
+                <span class="stock ${
+                  product.in_stock
+                    ? "in-stock"
+                    : "out-stock"
+                }">
+
+                  ${
+                    product.in_stock
+                      ? "In Stock"
+                      : "Out of Stock"
+                  }
+
+                </span>
+
+
+                ${controls}
+
+                ${productLink}
+
+              </div>
+
+            </article>
           `;
 
-
-      return `
-
-        <article class="product-card">
-
-          <div class="product-image">
-            ${image}
-          </div>
-
-
-          <div class="product-body">
-
-            <div class="product-name">
-              ${escapeHtml(product.name)}
-            </div>
-
-
-            ${description}
-
-
-            <div class="product-price">
-
-              ${money(product.price)}
-              ${escapeHtml(product.unit)}
-
-            </div>
-
-
-            <span class="stock ${
-              product.in_stock
-                ? "in-stock"
-                : "out-stock"
-            }">
-
-              ${
-                product.in_stock
-                  ? "In Stock"
-                  : "Out of Stock"
-              }
-
-            </span>
-
-
-            ${controls}
-
-          </div>
-
-        </article>
-      `;
-
-    }).join("");
+        }
+      )
+      .join("");
 }
 
 
@@ -843,8 +1069,12 @@ function changeQuantity(
   const product =
     products.find(
       item =>
-        Number(item.id) ===
-        Number(productId)
+        Number(
+          item.id
+        ) ===
+        Number(
+          productId
+        )
     );
 
 
@@ -852,36 +1082,51 @@ function changeQuantity(
     !product ||
     !product.in_stock
   ) {
+
     return;
   }
 
 
   let quantity =
     Number(
-      quantities[productId] || 0
+      quantities[
+        productId
+      ] || 0
     );
 
 
-  quantity += change;
+  quantity +=
+    change;
 
 
-  if (quantity < 0) {
-    quantity = 0;
+  if (
+    quantity < 0
+  ) {
+
+    quantity =
+      0;
   }
 
 
-  if (quantity > 99) {
-    quantity = 99;
+  if (
+    quantity > 99
+  ) {
+
+    quantity =
+      99;
   }
 
 
-  quantities[productId] =
+  quantities[
+    productId
+  ] =
     quantity;
 
 
   document
     .getElementById(
-      "qty-" + productId
+      "qty-" +
+      productId
     )
     .textContent =
       quantity;
@@ -897,29 +1142,37 @@ function getSelectedItems() {
     .filter(
       product =>
         Number(
-          quantities[product.id] || 0
+          quantities[
+            product.id
+          ] || 0
         ) > 0
     )
-    .map(product => {
+    .map(
+      product => {
 
-      const quantity =
-        Number(
-          quantities[product.id]
-        );
-
-
-      const lineTotal =
-        Number(product.price) *
-        quantity;
+        const quantity =
+          Number(
+            quantities[
+              product.id
+            ]
+          );
 
 
-      return {
-        ...product,
-        quantity,
-        lineTotal
-      };
+        const lineTotal =
+          Number(
+            product.price
+          ) *
+          quantity;
 
-    });
+
+        return {
+          ...product,
+          quantity,
+          lineTotal
+        };
+
+      }
+    );
 }
 
 
@@ -929,7 +1182,9 @@ function updateSummary() {
     getSelectedItems();
 
 
-  if (!selected.length) {
+  if (
+    !selected.length
+  ) {
 
     summaryBox.innerHTML = `
       <div class="empty-summary">
@@ -952,46 +1207,56 @@ function updateSummary() {
 
   summaryBox.innerHTML =
     selected
-      .map(item => `
+      .map(
+        item => `
 
-        <div class="summary-item">
+          <div class="summary-item">
 
-          <span>
+            <span>
 
-            ${escapeHtml(item.name)}
+              ${escapeHtml(item.name)}
 
-            <br>
+              <br>
 
-            <small>
-              ${item.quantity}
-              ×
-              ${money(item.price)}
-            </small>
+              <small>
+                ${item.quantity}
+                ×
+                ${money(item.price)}
+              </small>
 
-          </span>
+            </span>
 
 
-          <strong>
-            ${money(item.lineTotal)}
-          </strong>
+            <strong>
+              ${money(item.lineTotal)}
+            </strong>
 
-        </div>
+          </div>
 
-      `)
+        `
+      )
       .join("");
 
 
   const total =
     selected.reduce(
-      (sum, item) =>
+      (
+        sum,
+        item
+      ) =>
         sum +
-        Number(item.lineTotal),
+        Number(
+          item.lineTotal
+        ),
+
       0
     );
 
 
   totalPriceBox.textContent =
-    money(total);
+    money(
+      total
+    );
 
 
   summaryTotal.style.display =
@@ -1008,7 +1273,9 @@ function submitWhatsAppOrder() {
     getSelectedItems();
 
 
-  if (!selected.length) {
+  if (
+    !selected.length
+  ) {
 
     showError(
       "Please select at least one foodstuff before submitting your order."
@@ -1100,21 +1367,50 @@ function submitWhatsAppOrder() {
 
   const total =
     selected.reduce(
-      (sum, item) =>
+      (
+        sum,
+        item
+      ) =>
         sum +
-        Number(item.lineTotal),
+        Number(
+          item.lineTotal
+        ),
+
       0
     );
 
 
   const orderLines =
-    selected.map(
-      (item, index) =>
+    selected
+      .map(
+        (
+          item,
+          index
+        ) => {
 
-        `${index + 1}. ${item.name}
-${item.quantity} pack(s) × ${money(item.price)} = ${money(item.lineTotal)}`
+          let line =
+            `${index + 1}. ${item.name}
+${item.quantity} pack(s) × ${money(item.price)} = ${money(item.lineTotal)}`;
 
-    ).join("\n\n");
+
+          if (
+            item.slug
+          ) {
+
+            line += `
+
+Product Link:
+${getProductUrl(item)}`;
+          }
+
+
+          return line;
+
+        }
+      )
+      .join(
+        "\n\n"
+      );
 
 
   let message = `Hello GiftedGift Empire,
@@ -1137,7 +1433,9 @@ City: ${city}
 Country: ${country}`;
 
 
-  if (note) {
+  if (
+    note
+  ) {
 
     message += `
 
@@ -1156,7 +1454,9 @@ Please confirm my order and delivery cost. Thank you.`;
     "https://wa.me/" +
     WHATSAPP_NUMBER +
     "?text=" +
-    encodeURIComponent(message);
+    encodeURIComponent(
+      message
+    );
 
 
   window.location.href =
@@ -1167,7 +1467,8 @@ Please confirm my order and delivery cost. Thank you.`;
 loadProducts();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+<script src="cookie-consent.js"></script>
 
 </body>
 </html>
