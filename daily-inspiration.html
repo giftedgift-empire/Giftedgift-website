@@ -9,9 +9,12 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Daily Inspiration | GiftedGift Empire</title>
+  <title>
+    Daily Inspiration | GiftedGift Empire
+  </title>
 
   <meta
+    id="page-description-meta"
     name="description"
     content="Daily Bible verses, prayers and encouragement from GiftedGift Empire."
   >
@@ -80,6 +83,14 @@
       max-width: 900px;
       margin: auto;
       padding: 45px 20px 70px;
+    }
+
+    .all-inspiration-link {
+      display: none;
+      margin-bottom: 25px;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .loading {
@@ -160,6 +171,21 @@
       color: #888;
       font-size: 13px;
       margin-top: 20px;
+    }
+
+    .open-link {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 11px 17px;
+      border-radius: 8px;
+      background: #f2bd16;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .open-link:hover {
+      opacity: 0.9;
     }
 
     .engagement {
@@ -396,11 +422,18 @@
   </h1>
 
   <nav>
-    <a href="index.html">Home</a>
 
-    <a href="shop.html">Shop</a>
+    <a href="index.html">
+      Home
+    </a>
 
-    <a href="categories.html">Categories</a>
+    <a href="shop.html">
+      Shop
+    </a>
+
+    <a href="categories.html">
+      Categories
+    </a>
 
     <a
       href="daily-inspiration.html"
@@ -409,29 +442,41 @@
       Daily Inspiration
     </a>
 
-    <a href="blog.html">Blog</a>
+    <a href="blog.html">
+      Blog
+    </a>
 
-    <a href="deals.html">Deals</a>
+    <a href="deals.html">
+      Deals
+    </a>
 
-    <a href="about.html">About</a>
+    <a href="about.html">
+      About
+    </a>
 
-    <a href="contact.html">Contact</a>
+    <a href="contact.html">
+      Contact
+    </a>
 
     <a href="cart.html">
       🛒 Cart
     </a>
+
   </nav>
 
 </header>
 
 
-<section class="hero">
+<section
+  id="inspiration-hero"
+  class="hero"
+>
 
-  <h2>
+  <h2 id="hero-title">
     Daily Inspiration
   </h2>
 
-  <p>
+  <p id="hero-description">
     A place for God’s Word, short prayers and encouragement
     to strengthen your faith and brighten your day.
   </p>
@@ -440,6 +485,15 @@
 
 
 <main class="page">
+
+  <a
+    id="all-inspiration-link"
+    href="daily-inspiration.html"
+    class="all-inspiration-link"
+  >
+    ← Back to Daily Inspiration
+  </a>
+
 
   <div
     id="loading"
@@ -463,11 +517,17 @@
   </p>
 
   <p>
-    <a href="about.html">About</a>
+    <a href="about.html">
+      About
+    </a>
 
-    <a href="contact.html">Contact</a>
+    <a href="contact.html">
+      Contact
+    </a>
 
-    <a href="blog.html">Blog</a>
+    <a href="blog.html">
+      Blog
+    </a>
 
     <a href="daily-inspiration.html">
       Daily Inspiration
@@ -497,11 +557,29 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
+
+
+const cleanInspirationId =
+  Number(
+    window.__DAILY_INSPIRATION_ID ||
+    0
+  );
+
+
+const isSingleInspiration =
+  Number.isInteger(
+    cleanInspirationId
+  ) &&
+  cleanInspirationId > 0;
 
 
 let likesByPost =
@@ -534,7 +612,8 @@ function getVisitorId() {
 
   if (
     window.crypto &&
-    typeof crypto.randomUUID === "function"
+    typeof crypto.randomUUID ===
+      "function"
   ) {
 
     visitorId =
@@ -597,9 +676,14 @@ function formatDate(
   return date.toLocaleDateString(
     undefined,
     {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
+      year:
+        "numeric",
+
+      month:
+        "long",
+
+      day:
+        "numeric"
     }
   );
 }
@@ -614,6 +698,32 @@ function escapeForId(
   ).replace(
     /[^a-zA-Z0-9_-]/g,
     "-"
+  );
+}
+
+
+function getInspirationUrl(
+  post
+) {
+
+  if (
+    post &&
+    post.slug
+  ) {
+
+    return (
+      SITE_URL +
+      "/" +
+      encodeURIComponent(
+        post.slug
+      )
+    );
+  }
+
+
+  return (
+    SITE_URL +
+    "/daily-inspiration.html"
   );
 }
 
@@ -710,13 +820,9 @@ async function addLike(
     );
 
 
-    /*
-      A duplicate means this browser
-      already liked this post.
-    */
-
     if (
-      error.code !== "23505"
+      error.code !==
+      "23505"
     ) {
 
       button.disabled =
@@ -825,7 +931,8 @@ function createCommentsSection(
 
 
   if (
-    comments.length === 0
+    comments.length ===
+    0
   ) {
 
     const empty =
@@ -1078,11 +1185,13 @@ function createCommentsSection(
 
 
       const name =
-        nameInput.value.trim();
+        nameInput.value
+          .trim();
 
 
       const commentText =
-        commentInput.value.trim();
+        commentInput.value
+          .trim();
 
 
       status.className =
@@ -1453,6 +1562,38 @@ function createInspirationCard(
   }
 
 
+  if (
+    !isSingleInspiration &&
+    post.slug
+  ) {
+
+    const openLink =
+      document.createElement(
+        "a"
+      );
+
+
+    openLink.className =
+      "open-link";
+
+
+    openLink.href =
+      "/" +
+      encodeURIComponent(
+        post.slug
+      );
+
+
+    openLink.textContent =
+      "Open & Share Inspiration";
+
+
+    article.appendChild(
+      openLink
+    );
+  }
+
+
   const likeInfo =
     getLikeInfo(
       post.id
@@ -1508,6 +1649,7 @@ function createInspirationCard(
   likeButton.addEventListener(
     "click",
     () => {
+
       addLike(
         post.id,
         likeButton
@@ -1555,9 +1697,11 @@ function createInspirationCard(
     "click",
     () => {
 
-      commentsSection.classList.toggle(
-        "open"
-      );
+      commentsSection
+        .classList
+        .toggle(
+          "open"
+        );
     }
   );
 
@@ -1583,7 +1727,8 @@ async function loadEngagement(
 
 
   if (
-    ids.length === 0
+    ids.length ===
+    0
   ) {
 
     return;
@@ -1626,7 +1771,8 @@ async function loadEngagement(
         .order(
           "created_at",
           {
-            ascending: true
+            ascending:
+              true
           }
         )
 
@@ -1646,29 +1792,31 @@ async function loadEngagement(
     likesResult.data
   ) {
 
-    likesResult.data.forEach(
-      row => {
+    likesResult
+      .data
+      .forEach(
+        row => {
 
-        if (
-          !likesByPost[
-            row.inspiration_id
-          ]
-        ) {
+          if (
+            !likesByPost[
+              row.inspiration_id
+            ]
+          ) {
+
+            likesByPost[
+              row.inspiration_id
+            ] =
+              [];
+          }
+
 
           likesByPost[
             row.inspiration_id
-          ] =
-            [];
+          ].push(
+            row
+          );
         }
-
-
-        likesByPost[
-          row.inspiration_id
-        ].push(
-          row
-        );
-      }
-    );
+      );
   }
 
 
@@ -1677,28 +1825,101 @@ async function loadEngagement(
     commentsResult.data
   ) {
 
-    commentsResult.data.forEach(
-      row => {
+    commentsResult
+      .data
+      .forEach(
+        row => {
 
-        if (
-          !commentsByPost[
-            row.inspiration_id
-          ]
-        ) {
+          if (
+            !commentsByPost[
+              row.inspiration_id
+            ]
+          ) {
+
+            commentsByPost[
+              row.inspiration_id
+            ] =
+              [];
+          }
+
 
           commentsByPost[
             row.inspiration_id
-          ] =
-            [];
+          ].push(
+            row
+          );
         }
+      );
+  }
+}
 
 
-        commentsByPost[
-          row.inspiration_id
-        ].push(
-          row
-        );
-      }
+function prepareSinglePage(
+  post
+) {
+
+  document
+    .getElementById(
+      "all-inspiration-link"
+    )
+    .style.display =
+      "inline-block";
+
+
+  document
+    .getElementById(
+      "hero-title"
+    )
+    .textContent =
+      post.title ||
+      "Daily Inspiration";
+
+
+  const heroDescription =
+    document.getElementById(
+      "hero-description"
+    );
+
+
+  heroDescription.textContent =
+    post.verse_reference ||
+    post.category ||
+    "Daily Inspiration from GiftedGift Empire.";
+
+
+  document.title =
+    (
+      post.title ||
+      "Daily Inspiration"
+    ) +
+    " | GiftedGift Empire";
+
+
+  const meta =
+    document.getElementById(
+      "page-description-meta"
+    );
+
+
+  const description =
+    post.verse_text ||
+    post.message ||
+    post.prayer ||
+    "Daily Bible verse, prayer and encouragement from GiftedGift Empire.";
+
+
+  if (
+    meta
+  ) {
+
+    meta.setAttribute(
+      "content",
+      String(
+        description
+      ).slice(
+        0,
+        160
+      )
     );
   }
 }
@@ -1730,34 +1951,53 @@ function renderInspirations(
   );
 
 
-  document.getElementById(
-    "loading"
-  ).style.display =
-    "none";
+  document
+    .getElementById(
+      "loading"
+    )
+    .style.display =
+      "none";
 }
 
 
 async function loadInspirations() {
 
-  const {
-    data,
-    error
-  } =
-    await db
+  let query =
+    db
       .from(
         "daily_inspirations"
       )
       .select(
-        "id,category,title,verse_text,verse_reference,message,prayer,image_url,published,created_at"
+        "id,category,title,slug,verse_text,verse_reference,message,prayer,image_url,published,created_at"
       )
       .eq(
         "published",
         true
-      )
+      );
+
+
+  if (
+    isSingleInspiration
+  ) {
+
+    query =
+      query.eq(
+        "id",
+        cleanInspirationId
+      );
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await query
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
@@ -1772,16 +2012,20 @@ async function loadInspirations() {
     );
 
 
-    document.getElementById(
-      "loading"
-    ).style.display =
-      "none";
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
 
 
-    document.getElementById(
-      "inspiration-list"
-    ).innerHTML =
-      '<div class="empty">Daily Inspiration could not be loaded. Please try again later.</div>';
+    document
+      .getElementById(
+        "inspiration-list"
+      )
+      .innerHTML =
+        '<div class="empty">Daily Inspiration could not be loaded. Please try again later.</div>';
 
 
     return;
@@ -1790,22 +2034,52 @@ async function loadInspirations() {
 
   if (
     !data ||
-    data.length === 0
+    data.length ===
+    0
   ) {
 
-    document.getElementById(
-      "loading"
-    ).style.display =
-      "none";
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
 
 
-    document.getElementById(
-      "inspiration-list"
-    ).innerHTML =
-      '<div class="empty">More inspiration is coming soon.</div>';
+    document
+      .getElementById(
+        "inspiration-list"
+      )
+      .innerHTML =
+        isSingleInspiration
+          ? '<div class="empty">This inspiration could not be found or is not currently published.</div>'
+          : '<div class="empty">More inspiration is coming soon.</div>';
+
+
+    if (
+      isSingleInspiration
+    ) {
+
+      document
+        .getElementById(
+          "all-inspiration-link"
+        )
+        .style.display =
+          "inline-block";
+    }
 
 
     return;
+  }
+
+
+  if (
+    isSingleInspiration
+  ) {
+
+    prepareSinglePage(
+      data[0]
+    );
   }
 
 
@@ -1823,7 +2097,8 @@ async function loadInspirations() {
 loadInspirations();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+<script src="cookie-consent.js"></script>
 
 </body>
 
