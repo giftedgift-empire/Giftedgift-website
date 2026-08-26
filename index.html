@@ -3342,12 +3342,12 @@ async function recordAdEvent(
 
 
       <a
-        class="homepage-ad-link"
-        href="${escapeHTML(ad.destination_url)}"
-        target="_blank"
-        rel="sponsored noopener noreferrer"
-        onclick="recordAdEvent(${Number(ad.id)}, 'click')"
-      >
+  id="homepage-ad-link"
+  class="homepage-ad-link"
+  href="${escapeHTML(ad.destination_url)}"
+  target="_blank"
+  rel="sponsored noopener noreferrer"
+>
 
         ${imageHTML}
 
