@@ -142,6 +142,14 @@ header p {
   grid-column: 1 / -1;
 }
 
+.help-text {
+  margin: 7px 0 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
 button {
   border: none;
   border-radius: 8px;
@@ -149,6 +157,11 @@ button {
   font-weight: bold;
   cursor: pointer;
   font-size: 15px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .primary {
@@ -366,6 +379,26 @@ button {
 
 
       <div class="field">
+
+        <label>
+          Share Link Name
+        </label>
+
+        <input
+          id="new-slug"
+          type="text"
+          placeholder="dried-stockfish"
+        >
+
+        <p class="help-text">
+          Public product link:
+          https://giftedgiftempire.com/<strong id="new-slug-preview">food-name</strong>
+        </p>
+
+      </div>
+
+
+      <div class="field">
         <label>Price (€)</label>
 
         <input
@@ -509,19 +542,186 @@ const supabaseClient =
 
 
 const loadingBox =
-  document.getElementById("loading");
+  document.getElementById(
+    "loading"
+  );
 
 const pageBox =
-  document.getElementById("page");
+  document.getElementById(
+    "page"
+  );
 
 const productsBox =
-  document.getElementById("products");
+  document.getElementById(
+    "products"
+  );
 
 const messageBox =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
 
 
 let foodstuffs = [];
+
+let newSlugWasEdited =
+  false;
+
+
+function cleanSlug(value) {
+
+  return String(
+    value || ""
+  )
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
+    .toLowerCase()
+    .trim()
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
+}
+
+
+function suggestShortSlug(
+  value
+) {
+
+  const fullSlug =
+    cleanSlug(
+      value
+    );
+
+  if (!fullSlug) {
+    return "";
+  }
+
+  return fullSlug
+    .split("-")
+    .slice(0, 4)
+    .join("-");
+}
+
+
+function updateNewSlugPreview() {
+
+  const slug =
+    cleanSlug(
+      document
+        .getElementById(
+          "new-slug"
+        )
+        .value
+    );
+
+  document
+    .getElementById(
+      "new-slug-preview"
+    )
+    .textContent =
+      slug ||
+      "food-name";
+}
+
+
+function updateExistingSlugPreview(
+  id
+) {
+
+  const input =
+    document.getElementById(
+      "slug-" + id
+    );
+
+  const preview =
+    document.getElementById(
+      "slug-preview-" + id
+    );
+
+  if (
+    !input ||
+    !preview
+  ) {
+    return;
+  }
+
+  const slug =
+    cleanSlug(
+      input.value
+    );
+
+  input.value =
+    slug;
+
+  preview.textContent =
+    slug ||
+    "food-name";
+}
+
+
+document
+  .getElementById(
+    "new-name"
+  )
+  .addEventListener(
+    "input",
+    function() {
+
+      if (
+        newSlugWasEdited
+      ) {
+        return;
+      }
+
+      document
+        .getElementById(
+          "new-slug"
+        )
+        .value =
+          suggestShortSlug(
+            this.value
+          );
+
+      updateNewSlugPreview();
+    }
+  );
+
+
+document
+  .getElementById(
+    "new-slug"
+  )
+  .addEventListener(
+    "input",
+    function() {
+
+      newSlugWasEdited =
+        true;
+
+      this.value =
+        cleanSlug(
+          this.value
+        );
+
+      updateNewSlugPreview();
+    }
+  );
 
 
 function escapeHtml(value) {
@@ -540,7 +740,8 @@ function money(value) {
   const number =
     Number(value || 0);
 
-  return "€" + number.toFixed(2);
+  return "€" +
+    number.toFixed(2);
 }
 
 
@@ -591,7 +792,8 @@ async function protectPage() {
   if (
     error ||
     !session ||
-    session.user.id !== ADMIN_USER_ID
+    session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     window.location.replace(
@@ -615,11 +817,22 @@ async function protectPage() {
 
 function safeFileName(name) {
 
-  return String(name || "food")
+  return String(
+    name || "food"
+  )
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 50);
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    )
+    .slice(
+      0,
+      50
+    );
 }
 
 
@@ -633,7 +846,11 @@ async function uploadImage(
   }
 
 
-  if (!file.type.startsWith("image/")) {
+  if (
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
 
     throw new Error(
       "Please choose an image file."
@@ -643,12 +860,17 @@ async function uploadImage(
 
   const extension =
     file.name.includes(".")
-      ? file.name.split(".").pop().toLowerCase()
+      ? file.name
+          .split(".")
+          .pop()
+          .toLowerCase()
       : "jpg";
 
 
   const filePath =
-    safeFileName(productName) +
+    safeFileName(
+      productName
+    ) +
     "-" +
     Date.now() +
     "-" +
@@ -664,20 +886,27 @@ async function uploadImage(
   } =
     await supabaseClient
       .storage
-      .from(IMAGE_BUCKET)
+      .from(
+        IMAGE_BUCKET
+      )
       .upload(
         filePath,
         file,
         {
-          cacheControl: "3600",
-          upsert: false
+          cacheControl:
+            "3600",
+
+          upsert:
+            false
         }
       );
 
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     throw new Error(
       "The picture could not be uploaded."
@@ -690,15 +919,21 @@ async function uploadImage(
   } =
     supabaseClient
       .storage
-      .from(IMAGE_BUCKET)
-      .getPublicUrl(filePath);
+      .from(
+        IMAGE_BUCKET
+      )
+      .getPublicUrl(
+        filePath
+      );
 
 
   return data.publicUrl;
 }
 
 
-function getStoragePath(imageUrl) {
+function getStoragePath(
+  imageUrl
+) {
 
   if (!imageUrl) {
     return null;
@@ -712,26 +947,35 @@ function getStoragePath(imageUrl) {
 
 
   const index =
-    imageUrl.indexOf(marker);
+    imageUrl.indexOf(
+      marker
+    );
 
 
-  if (index === -1) {
+  if (
+    index === -1
+  ) {
     return null;
   }
 
 
   return decodeURIComponent(
     imageUrl.substring(
-      index + marker.length
+      index +
+      marker.length
     )
   );
 }
 
 
-async function removeOldImage(imageUrl) {
+async function removeOldImage(
+  imageUrl
+) {
 
   const path =
-    getStoragePath(imageUrl);
+    getStoragePath(
+      imageUrl
+    );
 
 
   if (!path) {
@@ -744,11 +988,18 @@ async function removeOldImage(imageUrl) {
   } =
     await supabaseClient
       .storage
-      .from(IMAGE_BUCKET)
-      .remove([path]);
+      .from(
+        IMAGE_BUCKET
+      )
+      .remove(
+        [
+          path
+        ]
+      );
 
 
   if (error) {
+
     console.warn(
       "Old image could not be removed:",
       error
@@ -768,7 +1019,9 @@ async function loadFoodstuffs() {
     error
   } =
     await supabaseClient
-      .from("foodstuffs")
+      .from(
+        "foodstuffs"
+      )
       .select("*")
       .order(
         "sort_order",
@@ -786,7 +1039,9 @@ async function loadFoodstuffs() {
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     productsBox.innerHTML =
       "<div class='empty'>Could not load foodstuffs.</div>";
@@ -805,7 +1060,9 @@ async function loadFoodstuffs() {
 
 function renderFoodstuffs() {
 
-  if (!foodstuffs.length) {
+  if (
+    !foodstuffs.length
+  ) {
 
     productsBox.innerHTML = `
       <div class="empty">
@@ -819,282 +1076,321 @@ function renderFoodstuffs() {
 
   productsBox.innerHTML =
     foodstuffs
-      .map(product => {
+      .map(
+        product => {
 
-        const imageHtml =
-          product.image_url
-            ? `
-              <img
-                src="${escapeHtml(product.image_url)}"
-                alt="${escapeHtml(product.name)}"
-              >
-            `
-            : `
-              <div class="no-image">
-                No picture uploaded yet
+          const imageHtml =
+            product.image_url
+              ? `
+                <img
+                  src="${escapeHtml(product.image_url)}"
+                  alt="${escapeHtml(product.name)}"
+                >
+              `
+              : `
+                <div class="no-image">
+                  No picture uploaded yet
+                </div>
+              `;
+
+
+          const currentSlug =
+            product.slug ||
+            suggestShortSlug(
+              product.name
+            );
+
+
+          return `
+
+            <div class="product-card">
+
+              <div class="product-image-area">
+                ${imageHtml}
               </div>
-            `;
 
 
-        return `
+              <div class="product-body">
 
-          <div class="product-card">
-
-            <div class="product-image-area">
-              ${imageHtml}
-            </div>
+                <div class="product-title">
+                  ${escapeHtml(product.name)}
+                </div>
 
 
-            <div class="product-body">
+                <div class="status-row">
 
-              <div class="product-title">
-                ${escapeHtml(product.name)}
-              </div>
-
-
-              <div class="status-row">
-
-                <span class="badge ${
-                  product.in_stock
-                    ? "in-stock"
-                    : "out-stock"
-                }">
-
-                  ${
+                  <span class="badge ${
                     product.in_stock
-                      ? "In Stock"
-                      : "Out of Stock"
-                  }
+                      ? "in-stock"
+                      : "out-stock"
+                  }">
 
-                </span>
+                    ${
+                      product.in_stock
+                        ? "In Stock"
+                        : "Out of Stock"
+                    }
+
+                  </span>
 
 
-                <span class="badge ${
-                  product.active
-                    ? "visible"
-                    : "hidden"
-                }">
-
-                  ${
+                  <span class="badge ${
                     product.active
-                      ? "Visible"
-                      : "Hidden"
-                  }
+                      ? "visible"
+                      : "hidden"
+                  }">
 
-                </span>
+                    ${
+                      product.active
+                        ? "Visible"
+                        : "Hidden"
+                    }
+
+                  </span>
+
+                </div>
+
+
+                <div class="price-preview">
+
+                  ${money(product.price)}
+                  ${escapeHtml(product.unit)}
+
+                </div>
+
+
+                <div
+                  class="form-grid"
+                  style="margin-top:20px;"
+                >
+
+
+                  <div class="field">
+
+                    <label>
+                      Product Name
+                    </label>
+
+                    <input
+                      id="name-${product.id}"
+                      type="text"
+                      value="${escapeHtml(product.name)}"
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label>
+                      Share Link Name
+                    </label>
+
+                    <input
+                      id="slug-${product.id}"
+                      type="text"
+                      value="${escapeHtml(currentSlug)}"
+                      oninput="
+                        this.value = cleanSlug(this.value);
+                        updateExistingSlugPreview(${Number(product.id)});
+                      "
+                    >
+
+                    <p class="help-text">
+                      Public product link:
+                      https://giftedgiftempire.com/<strong id="slug-preview-${product.id}">${escapeHtml(currentSlug)}</strong>
+                    </p>
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label>
+                      Price (€)
+                    </label>
+
+                    <input
+                      id="price-${product.id}"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value="${escapeHtml(product.price)}"
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label>
+                      Selling Unit
+                    </label>
+
+                    <input
+                      id="unit-${product.id}"
+                      type="text"
+                      value="${escapeHtml(product.unit)}"
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label>
+                      Stock
+                    </label>
+
+                    <select
+                      id="stock-${product.id}"
+                    >
+
+                      <option
+                        value="true"
+                        ${
+                          product.in_stock
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        In Stock
+                      </option>
+
+                      <option
+                        value="false"
+                        ${
+                          !product.in_stock
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Out of Stock
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label>
+                      Website Visibility
+                    </label>
+
+                    <select
+                      id="active-${product.id}"
+                    >
+
+                      <option
+                        value="true"
+                        ${
+                          product.active
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Active / Show
+                      </option>
+
+                      <option
+                        value="false"
+                        ${
+                          !product.active
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Hidden
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label>
+                      Display Order
+                    </label>
+
+                    <input
+                      id="sort-${product.id}"
+                      type="number"
+                      step="1"
+                      min="0"
+                      value="${escapeHtml(product.sort_order)}"
+                    >
+
+                  </div>
+
+
+                  <div class="field full-width">
+
+                    <label>
+                      Description
+                    </label>
+
+                    <textarea
+                      id="description-${product.id}"
+                      placeholder="Optional description"
+                    >${escapeHtml(product.description || "")}</textarea>
+
+                  </div>
+
+
+                  <div class="field full-width image-input">
+
+                    <label>
+                      Replace / Upload Product Picture
+                    </label>
+
+                    <input
+                      id="image-${product.id}"
+                      type="file"
+                      accept="image/*"
+                    >
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  id="save-${product.id}"
+                  type="button"
+                  class="primary save-button"
+                  onclick="saveFoodstuff(${Number(product.id)})"
+                >
+                  Save Changes
+                </button>
 
               </div>
-
-
-              <div class="price-preview">
-
-                ${money(product.price)}
-                ${escapeHtml(product.unit)}
-
-              </div>
-
-
-              <div
-                class="form-grid"
-                style="margin-top:20px;"
-              >
-
-
-                <div class="field">
-
-                  <label>
-                    Product Name
-                  </label>
-
-                  <input
-                    id="name-${product.id}"
-                    type="text"
-                    value="${escapeHtml(product.name)}"
-                  >
-
-                </div>
-
-
-                <div class="field">
-
-                  <label>
-                    Price (€)
-                  </label>
-
-                  <input
-                    id="price-${product.id}"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    value="${escapeHtml(product.price)}"
-                  >
-
-                </div>
-
-
-                <div class="field">
-
-                  <label>
-                    Selling Unit
-                  </label>
-
-                  <input
-                    id="unit-${product.id}"
-                    type="text"
-                    value="${escapeHtml(product.unit)}"
-                  >
-
-                </div>
-
-
-                <div class="field">
-
-                  <label>
-                    Stock
-                  </label>
-
-                  <select
-                    id="stock-${product.id}"
-                  >
-
-                    <option
-                      value="true"
-                      ${
-                        product.in_stock
-                          ? "selected"
-                          : ""
-                      }
-                    >
-                      In Stock
-                    </option>
-
-                    <option
-                      value="false"
-                      ${
-                        !product.in_stock
-                          ? "selected"
-                          : ""
-                      }
-                    >
-                      Out of Stock
-                    </option>
-
-                  </select>
-
-                </div>
-
-
-                <div class="field">
-
-                  <label>
-                    Website Visibility
-                  </label>
-
-                  <select
-                    id="active-${product.id}"
-                  >
-
-                    <option
-                      value="true"
-                      ${
-                        product.active
-                          ? "selected"
-                          : ""
-                      }
-                    >
-                      Active / Show
-                    </option>
-
-                    <option
-                      value="false"
-                      ${
-                        !product.active
-                          ? "selected"
-                          : ""
-                      }
-                    >
-                      Hidden
-                    </option>
-
-                  </select>
-
-                </div>
-
-
-                <div class="field">
-
-                  <label>
-                    Display Order
-                  </label>
-
-                  <input
-                    id="sort-${product.id}"
-                    type="number"
-                    step="1"
-                    min="0"
-                    value="${escapeHtml(product.sort_order)}"
-                  >
-
-                </div>
-
-
-                <div class="field full-width">
-
-                  <label>
-                    Description
-                  </label>
-
-                  <textarea
-                    id="description-${product.id}"
-                    placeholder="Optional description"
-                  >${escapeHtml(product.description || "")}</textarea>
-
-                </div>
-
-
-                <div class="field full-width image-input">
-
-                  <label>
-                    Replace / Upload Product Picture
-                  </label>
-
-                  <input
-                    id="image-${product.id}"
-                    type="file"
-                    accept="image/*"
-                  >
-
-                </div>
-
-              </div>
-
-
-              <button
-                id="save-${product.id}"
-                type="button"
-                class="primary save-button"
-                onclick="saveFoodstuff(${Number(product.id)})"
-              >
-                Save Changes
-              </button>
 
             </div>
+          `;
 
-          </div>
-        `;
-
-      })
+        }
+      )
       .join("");
 }
 
 
-async function saveFoodstuff(id) {
+async function saveFoodstuff(
+  id
+) {
 
   const product =
     foodstuffs.find(
       item =>
-        Number(item.id) ===
-        Number(id)
+        Number(
+          item.id
+        ) ===
+        Number(
+          id
+        )
     );
 
 
@@ -1110,6 +1406,16 @@ async function saveFoodstuff(id) {
       )
       .value
       .trim();
+
+
+  const slug =
+    cleanSlug(
+      document
+        .getElementById(
+          "slug-" + id
+        )
+        .value
+    );
 
 
   const price =
@@ -1136,7 +1442,8 @@ async function saveFoodstuff(id) {
       .getElementById(
         "stock-" + id
       )
-      .value === "true";
+      .value ===
+      "true";
 
 
   const active =
@@ -1144,7 +1451,8 @@ async function saveFoodstuff(id) {
       .getElementById(
         "active-" + id
       )
-      .value === "true";
+      .value ===
+      "true";
 
 
   const sortOrder =
@@ -1191,8 +1499,21 @@ async function saveFoodstuff(id) {
   }
 
 
+  if (!slug) {
+
+    showMessage(
+      "Share Link Name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
   if (
-    !Number.isFinite(price) ||
+    !Number.isFinite(
+      price
+    ) ||
     price < 0
   ) {
 
@@ -1216,7 +1537,8 @@ async function saveFoodstuff(id) {
   }
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
 
   button.textContent =
     "Saving...";
@@ -1253,11 +1575,16 @@ async function saveFoodstuff(id) {
       error
     } =
       await supabaseClient
-        .from("foodstuffs")
+        .from(
+          "foodstuffs"
+        )
         .update({
 
           name:
             name,
+
+          slug:
+            slug,
 
           price:
             price,
@@ -1266,7 +1593,8 @@ async function saveFoodstuff(id) {
             unit,
 
           description:
-            description || null,
+            description ||
+            null,
 
           image_url:
             imageUrl,
@@ -1278,12 +1606,15 @@ async function saveFoodstuff(id) {
             active,
 
           sort_order:
-            Number.isFinite(sortOrder)
+            Number.isFinite(
+              sortOrder
+            )
               ? sortOrder
               : 0,
 
           updated_at:
-            new Date().toISOString()
+            new Date()
+              .toISOString()
 
         })
         .eq(
@@ -1293,6 +1624,17 @@ async function saveFoodstuff(id) {
 
 
     if (error) {
+
+      if (
+        error.code ===
+        "23505"
+      ) {
+
+        throw new Error(
+          "That Share Link Name is already being used. Please choose another one."
+        );
+      }
+
       throw error;
     }
 
@@ -1300,7 +1642,8 @@ async function saveFoodstuff(id) {
     if (
       newImageUrl &&
       product.image_url &&
-      product.image_url !== newImageUrl
+      product.image_url !==
+        newImageUrl
     ) {
 
       await removeOldImage(
@@ -1319,7 +1662,9 @@ async function saveFoodstuff(id) {
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showMessage(
       error.message ||
@@ -1348,6 +1693,16 @@ async function addFoodstuff() {
       .trim();
 
 
+  const slug =
+    cleanSlug(
+      document
+        .getElementById(
+          "new-slug"
+        )
+        .value
+    );
+
+
   const price =
     Number(
       document
@@ -1372,7 +1727,8 @@ async function addFoodstuff() {
       .getElementById(
         "new-stock"
       )
-      .value === "true";
+      .value ===
+      "true";
 
 
   const active =
@@ -1380,7 +1736,8 @@ async function addFoodstuff() {
       .getElementById(
         "new-active"
       )
-      .value === "true";
+      .value ===
+      "true";
 
 
   const sortOrder =
@@ -1420,8 +1777,21 @@ async function addFoodstuff() {
   }
 
 
+  if (!slug) {
+
+    showMessage(
+      "Please enter the Share Link Name.",
+      "error"
+    );
+
+    return;
+  }
+
+
   if (
-    !Number.isFinite(price) ||
+    !Number.isFinite(
+      price
+    ) ||
     price < 0
   ) {
 
@@ -1468,14 +1838,20 @@ async function addFoodstuff() {
       error
     } =
       await supabaseClient
-        .from("foodstuffs")
+        .from(
+          "foodstuffs"
+        )
         .insert({
 
           name:
             name,
 
+          slug:
+            slug,
+
           description:
-            description || null,
+            description ||
+            null,
 
           price:
             price,
@@ -1493,17 +1869,31 @@ async function addFoodstuff() {
             active,
 
           sort_order:
-            Number.isFinite(sortOrder)
+            Number.isFinite(
+              sortOrder
+            )
               ? sortOrder
               : 0,
 
           updated_at:
-            new Date().toISOString()
+            new Date()
+              .toISOString()
 
         });
 
 
     if (error) {
+
+      if (
+        error.code ===
+        "23505"
+      ) {
+
+        throw new Error(
+          "That Share Link Name is already being used. Please choose another one."
+        );
+      }
+
       throw error;
     }
 
@@ -1512,14 +1902,31 @@ async function addFoodstuff() {
       .getElementById(
         "new-name"
       )
-      .value = "";
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "new-slug"
+      )
+      .value =
+        "";
+
+
+    newSlugWasEdited =
+      false;
+
+
+    updateNewSlugPreview();
 
 
     document
       .getElementById(
         "new-price"
       )
-      .value = "";
+      .value =
+        "";
 
 
     document
@@ -1558,14 +1965,16 @@ async function addFoodstuff() {
       .getElementById(
         "new-description"
       )
-      .value = "";
+      .value =
+        "";
 
 
     document
       .getElementById(
         "new-image"
       )
-      .value = "";
+      .value =
+        "";
 
 
     showMessage(
@@ -1577,7 +1986,9 @@ async function addFoodstuff() {
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showMessage(
       error.message ||
@@ -1608,4 +2019,4 @@ start();
 </script>
 
 </body>
-  </html>
+</html>
