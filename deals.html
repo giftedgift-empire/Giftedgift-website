@@ -796,6 +796,24 @@ function getDestination(
   "product"
 ) {
 
+  if (
+    product &&
+    product.slug
+  ) {
+
+    return (
+      "/" +
+      encodeURIComponent(
+        product.slug
+      ) +
+      "?deal_id=" +
+      encodeURIComponent(
+        deal.id
+      )
+    );
+  }
+
+
   return (
     "product.html?id=" +
     encodeURIComponent(
