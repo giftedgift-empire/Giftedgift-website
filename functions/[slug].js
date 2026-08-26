@@ -5,10 +5,10 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-async function getProductBySlug(
+async function getItemBySlug(
   table,
   slug,
-  activeAffiliate = false
+  requireActive = false
 ) {
 
   let apiURL =
@@ -19,7 +19,7 @@ async function getProductBySlug(
     "&slug=eq." +
     encodeURIComponent(slug);
 
-  if (activeAffiliate) {
+  if (requireActive) {
     apiURL +=
       "&active=eq.true";
   }
@@ -52,19 +52,19 @@ async function getProductBySlug(
   }
 
 
-  const products =
+  const items =
     await response.json();
 
 
   if (
-    !Array.isArray(products) ||
-    products.length === 0
+    !Array.isArray(items) ||
+    items.length === 0
   ) {
     return null;
   }
 
 
-  return products[0];
+  return items[0];
 }
 
 
@@ -73,7 +73,7 @@ async function serveLandingPage(
   context,
   pathname,
   variableName,
-  productID
+  itemID
 ) {
 
   const landingURL =
@@ -86,6 +86,13 @@ async function serveLandingPage(
     pathname;
 
 
+  /*
+    Remove the public query string only
+    from the internal asset request.
+
+    The customer's browser URL still keeps
+    things such as ?deal_id=4.
+  */
   landingURL.search =
     "";
 
@@ -96,14 +103,16 @@ async function serveLandingPage(
     );
 
 
-  if (!landingResponse.ok) {
+  if (
+    !landingResponse.ok
+  ) {
     return null;
   }
 
 
-  const safeProductID =
+  const safeItemID =
     JSON.stringify(
-      String(productID)
+      String(itemID)
     );
 
 
@@ -117,13 +126,14 @@ async function serveLandingPage(
             `
               <script>
                 window.${variableName} =
-                  ${safeProductID};
+                  ${safeItemID};
               </script>
             `,
             {
               html: true
             }
           );
+
         }
       }
     )
@@ -158,11 +168,13 @@ export async function onRequestGet(
   try {
 
     /*
+      =========================
       AFFILIATE PRODUCTS
+      =========================
     */
 
     const affiliateProduct =
-      await getProductBySlug(
+      await getItemBySlug(
         "affiliate_products",
         slug,
         true
@@ -186,12 +198,15 @@ export async function onRequestGet(
     }
 
 
+
     /*
+      =========================
       PHYSICAL PRODUCTS
+      =========================
     */
 
     const physicalProduct =
-      await getProductBySlug(
+      await getItemBySlug(
         "products",
         slug
       );
@@ -214,8 +229,75 @@ export async function onRequestGet(
     }
 
 
+
     /*
-      NORMAL WEBSITE PAGE / FILE
+      =========================
+      DIGITAL PRODUCTS
+      =========================
+    */
+
+    const digitalProduct =
+      await getItemBySlug(
+        "digital_products",
+        slug,
+        true
+      );
+
+
+    if (digitalProduct) {
+
+      const response =
+        await serveLandingPage(
+          context,
+          "/checkout.html",
+          "__DIGITAL_PRODUCT_ID",
+          digitalProduct.id
+        );
+
+
+      if (response) {
+        return response;
+      }
+    }
+
+
+
+    /*
+      =========================
+      FOODSTUFFS
+      =========================
+    */
+
+    const foodstuff =
+      await getItemBySlug(
+        "foodstuffs",
+        slug,
+        true
+      );
+
+
+    if (foodstuff) {
+
+      const response =
+        await serveLandingPage(
+          context,
+          "/foodstuffs.html",
+          "__FOODSTUFF_ID",
+          foodstuff.id
+        );
+
+
+      if (response) {
+        return response;
+      }
+    }
+
+
+
+    /*
+      Nothing matched.
+      Allow the normal website asset
+      to load as before.
     */
 
     return context.env.ASSETS.fetch(
@@ -226,7 +308,7 @@ export async function onRequestGet(
   } catch (error) {
 
     console.error(
-      "Clean product URL error:",
+      "Clean URL router error:",
       error
     );
 
