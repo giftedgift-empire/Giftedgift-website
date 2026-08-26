@@ -1341,7 +1341,7 @@ slug:
         return `
           <a
             class="product-button"
-            href="checkout.html?product_id=${encodeURIComponent(product.id)}"
+            href="${product.slug ? "/" + encodeURIComponent(product.slug) : "checkout.html?product_id=" + encodeURIComponent(product.id)}"
           >
             Buy Digital Product
           </a>
