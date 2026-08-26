@@ -113,6 +113,7 @@
       font-size: 13px;
       margin-top: 7px;
       line-height: 1.5;
+      word-break: break-word;
     }
 
     .publish-row {
@@ -249,6 +250,14 @@
       font-weight: bold;
       color: #555;
       margin-bottom: 12px;
+    }
+
+    .public-link {
+      color: #123a8c;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: break-word;
+      margin: 5px 0 15px;
     }
 
     .status {
@@ -525,6 +534,26 @@
 
     <div class="field">
 
+      <label for="slug">
+        Share Link Name
+      </label>
+
+      <input
+        id="slug"
+        type="text"
+        placeholder="cast-your-cares-on-god"
+      >
+
+      <div class="help">
+        Public inspiration link:
+        https://giftedgiftempire.com/<strong id="slug-preview">inspiration-name</strong>
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
       <label for="verse-text">
         Bible Verse
       </label>
@@ -721,6 +750,10 @@ const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
 
 
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -740,6 +773,10 @@ let inspirationsById =
   {};
 
 
+let slugWasEdited =
+  false;
+
+
 const categoryInput =
   document.getElementById(
     "category"
@@ -749,6 +786,12 @@ const categoryInput =
 const titleInput =
   document.getElementById(
     "title"
+  );
+
+
+const slugInput =
+  document.getElementById(
+    "slug"
   );
 
 
@@ -785,6 +828,126 @@ const imageFileInput =
 const publishedInput =
   document.getElementById(
     "published"
+  );
+
+
+function cleanSlug(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
+    .toLowerCase()
+    .trim()
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
+}
+
+
+function suggestShortSlug(
+  value
+) {
+
+  const fullSlug =
+    cleanSlug(
+      value
+    );
+
+
+  if (!fullSlug) {
+    return "";
+  }
+
+
+  return fullSlug
+    .split("-")
+    .slice(
+      0,
+      8
+    )
+    .join("-");
+}
+
+
+function updateSlugPreview() {
+
+  const slug =
+    cleanSlug(
+      slugInput.value
+    );
+
+
+  document.getElementById(
+    "slug-preview"
+  ).textContent =
+    slug ||
+    "inspiration-name";
+}
+
+
+titleInput
+  .addEventListener(
+    "input",
+    function() {
+
+      if (
+        slugWasEdited
+      ) {
+
+        return;
+      }
+
+
+      slugInput.value =
+        suggestShortSlug(
+          this.value
+        );
+
+
+      updateSlugPreview();
+    }
+  );
+
+
+slugInput
+  .addEventListener(
+    "input",
+    function() {
+
+      slugWasEdited =
+        true;
+
+
+      this.value =
+        cleanSlug(
+          this.value
+        );
+
+
+      updateSlugPreview();
+    }
   );
 
 
@@ -859,7 +1022,8 @@ function safeFileName(
 ) {
 
   return String(
-    name || "inspiration-image"
+    name ||
+    "inspiration-image"
   )
     .toLowerCase()
     .replace(
@@ -909,7 +1073,8 @@ async function uploadImage(
     !file
   ) {
 
-    return currentImageUrl || null;
+    return currentImageUrl ||
+      null;
   }
 
 
@@ -946,8 +1111,11 @@ async function uploadImage(
         path,
         file,
         {
-          cacheControl: "3600",
-          upsert: false
+          cacheControl:
+            "3600",
+
+          upsert:
+            false
         }
       );
 
@@ -997,12 +1165,23 @@ function resetForm() {
     "";
 
 
+  slugWasEdited =
+    false;
+
+
   categoryInput.value =
     "God's Word for Today";
 
 
   titleInput.value =
     "";
+
+
+  slugInput.value =
+    "";
+
+
+  updateSlugPreview();
 
 
   verseTextInput.value =
@@ -1063,6 +1242,12 @@ async function saveInspiration() {
     titleInput.value.trim();
 
 
+  const slug =
+    cleanSlug(
+      slugInput.value
+    );
+
+
   const verseText =
     verseTextInput.value.trim();
 
@@ -1110,6 +1295,21 @@ async function saveInspiration() {
 
 
   if (
+    !slug
+  ) {
+
+    showMessage(
+      "Please enter a Share Link Name.",
+      "error"
+    );
+
+    slugInput.focus();
+
+    return;
+  }
+
+
+  if (
     !verseText &&
     !message &&
     !prayer
@@ -1141,7 +1341,8 @@ async function saveInspiration() {
   try {
 
     const file =
-      imageFileInput.files?.[0] ||
+      imageFileInput
+        .files?.[0] ||
       null;
 
 
@@ -1157,17 +1358,23 @@ async function saveInspiration() {
 
       title,
 
+      slug,
+
       verse_text:
-        verseText || null,
+        verseText ||
+        null,
 
       verse_reference:
-        verseReference || null,
+        verseReference ||
+        null,
 
       message:
-        message || null,
+        message ||
+        null,
 
       prayer:
-        prayer || null,
+        prayer ||
+        null,
 
       image_url:
         imageUrl,
@@ -1176,7 +1383,8 @@ async function saveInspiration() {
         publishedInput.checked,
 
       updated_at:
-        new Date().toISOString()
+        new Date()
+          .toISOString()
 
     };
 
@@ -1231,6 +1439,17 @@ async function saveInspiration() {
       console.error(
         result.error
       );
+
+
+      if (
+        result.error.code ===
+        "23505"
+      ) {
+
+        throw new Error(
+          "That Share Link Name is already being used by another inspiration. Please choose another one."
+        );
+      }
 
 
       throw new Error(
@@ -1398,6 +1617,33 @@ function createPostCard(
   }
 
 
+  if (
+    post.slug
+  ) {
+
+    const publicLink =
+      document.createElement(
+        "div"
+      );
+
+
+    publicLink.className =
+      "public-link";
+
+
+    publicLink.textContent =
+      "Public Link: " +
+      SITE_URL +
+      "/" +
+      post.slug;
+
+
+    body.appendChild(
+      publicLink
+    );
+  }
+
+
   const status =
     document.createElement(
       "div"
@@ -1448,6 +1694,7 @@ function createPostCard(
   editButton.addEventListener(
     "click",
     () => {
+
       startEdit(
         post
       );
@@ -1472,6 +1719,7 @@ function createPostCard(
   deleteButton.addEventListener(
     "click",
     () => {
+
       deleteInspiration(
         post.id,
         post.title
@@ -1525,12 +1773,13 @@ async function loadInspirations() {
         "daily_inspirations"
       )
       .select(
-        "id,category,title,verse_text,verse_reference,message,prayer,image_url,published,created_at,updated_at"
+        "id,category,title,slug,verse_text,verse_reference,message,prayer,image_url,published,created_at,updated_at"
       )
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
@@ -1640,6 +1889,20 @@ function startEdit(
     "";
 
 
+  slugInput.value =
+    post.slug ||
+    suggestShortSlug(
+      post.title
+    );
+
+
+  slugWasEdited =
+    true;
+
+
+  updateSlugPreview();
+
+
   verseTextInput.value =
     post.verse_text ||
     "";
@@ -1661,7 +1924,8 @@ function startEdit(
 
 
   publishedInput.checked =
-    post.published === true;
+    post.published ===
+    true;
 
 
   imageFileInput.value =
@@ -1751,7 +2015,8 @@ async function deleteInspiration(
 
 
   if (
-    editingId === id
+    editingId ===
+    id
   ) {
 
     resetForm();
@@ -1948,6 +2213,7 @@ function createAdminCommentCard(
     approveButton.addEventListener(
       "click",
       () => {
+
         approveComment(
           comment.id
         );
@@ -1998,6 +2264,7 @@ function createAdminCommentCard(
   deleteButton.addEventListener(
     "click",
     () => {
+
       deleteComment(
         comment.id,
         comment.name
@@ -2046,7 +2313,8 @@ async function loadComments() {
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
@@ -2069,20 +2337,23 @@ async function loadComments() {
 
 
   const comments =
-    data || [];
+    data ||
+    [];
 
 
   const pending =
     comments.filter(
       comment =>
-        comment.approved !== true
+        comment.approved !==
+        true
     );
 
 
   const approved =
     comments.filter(
       comment =>
-        comment.approved === true
+        comment.approved ===
+        true
     );
 
 
@@ -2217,7 +2488,8 @@ async function approveComment(
           true,
 
         approved_at:
-          new Date().toISOString()
+          new Date()
+            .toISOString()
       })
       .eq(
         "id",
@@ -2367,37 +2639,39 @@ async function protectPage() {
 }
 
 
-imageFileInput.addEventListener(
-  "change",
-  () => {
+imageFileInput
+  .addEventListener(
+    "change",
+    () => {
 
-    const file =
-      imageFileInput.files?.[0];
+      const file =
+        imageFileInput
+          .files?.[0];
 
 
-    if (
-      !file
-    ) {
+      if (
+        !file
+      ) {
+
+        showPreview(
+          currentImageUrl
+        );
+
+        return;
+      }
+
+
+      const temporaryUrl =
+        URL.createObjectURL(
+          file
+        );
+
 
       showPreview(
-        currentImageUrl
+        temporaryUrl
       );
-
-      return;
     }
-
-
-    const temporaryUrl =
-      URL.createObjectURL(
-        file
-      );
-
-
-    showPreview(
-      temporaryUrl
-    );
-  }
-);
+  );
 
 
 document.getElementById(
