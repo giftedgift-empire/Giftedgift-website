@@ -3380,6 +3380,27 @@ async function recordAdEvent(
 
   section.style.display =
     "block";
+const adLink =
+  document.getElementById(
+    "homepage-ad-link"
+  );
+
+
+if (adLink) {
+
+  adLink.addEventListener(
+    "click",
+    function() {
+
+      recordAdEvent(
+        ad.id,
+        "click"
+      );
+
+    }
+  );
+}
+    
     recordAdEvent(
   ad.id,
   "impression"
