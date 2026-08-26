@@ -3346,6 +3346,7 @@ async function recordAdEvent(
         href="${escapeHTML(ad.destination_url)}"
         target="_blank"
         rel="sponsored noopener noreferrer"
+        onclick="recordAdEvent(${Number(ad.id)}, 'click')"
       >
 
         ${imageHTML}
