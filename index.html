@@ -3191,7 +3191,48 @@
    HOMEPAGE ADVERTISEMENT
 ========================= */
 
-async function loadHomepageAdvertisement() {
+async function recordAdEvent(
+  adId,
+  eventType
+) {
+
+  if (
+    !adId ||
+    ![
+      "impression",
+      "click"
+    ].includes(eventType)
+  ) {
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "record_ad_event",
+        {
+          ad_id:
+            Number(adId),
+
+          event_type:
+            eventType
+        }
+      );
+
+
+  if (error) {
+
+    console.error(
+      "Advertisement tracking error:",
+      error
+    );
+  }
+}
+  
+  async function loadHomepageAdvertisement() {
 
   const section =
     document.getElementById(
