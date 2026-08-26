@@ -67,6 +67,19 @@
       color: #123a8c;
     }
 
+    .promotion-section {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #e1e1e1;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .promotion-section h3 {
+      margin-top: 0;
+      color: #123a8c;
+    }
+
     .field {
       margin-bottom: 20px;
     }
@@ -78,7 +91,9 @@
     }
 
     input[type="text"],
-    textarea {
+    input[type="url"],
+    textarea,
+    select {
       width: 100%;
       padding: 13px;
       border: 1px solid #ccc;
@@ -106,6 +121,14 @@
       background: #f7f7f7;
       border: 1px solid #ddd;
       border-radius: 8px;
+    }
+
+    .help {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 8px 0 0;
+      word-break: break-word;
     }
 
     .image-preview {
@@ -149,6 +172,11 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .save-button {
@@ -216,6 +244,26 @@
       line-height: 1.6;
     }
 
+    .public-link {
+      font-size: 14px;
+      color: #123a8c;
+      word-break: break-word;
+      margin: 8px 0 14px;
+    }
+
+    .promotion-preview {
+      margin-top: 14px;
+      padding: 13px;
+      background: #fff8dd;
+      border-radius: 9px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .promotion-preview strong {
+      color: #123a8c;
+    }
+
     .status {
       display: inline-block;
       padding: 6px 10px;
@@ -275,6 +323,10 @@
         padding: 20px;
       }
 
+      .promotion-section {
+        padding: 16px;
+      }
+
       .actions {
         flex-direction: column;
       }
@@ -307,7 +359,8 @@
   </h1>
 
   <p>
-    Create and manage GiftedGift Empire articles.
+    Create articles and optionally promote products,
+    affiliate offers or advertisers.
   </p>
 
 </header>
@@ -353,6 +406,26 @@
 
     <div class="field">
 
+      <label for="slug">
+        Share Link Name
+      </label>
+
+      <input
+        id="slug"
+        type="text"
+        placeholder="useful-home-products"
+      >
+
+      <p class="help">
+        Public article link:
+        https://giftedgiftempire.com/<strong id="slug-preview">article-name</strong>
+      </p>
+
+    </div>
+
+
+    <div class="field">
+
       <label for="excerpt">
         Short Excerpt
       </label>
@@ -391,6 +464,10 @@
         accept="image/*"
       >
 
+      <p class="help">
+        Upload the main article image from your phone.
+      </p>
+
       <div
         id="image-preview"
         class="image-preview"
@@ -400,6 +477,136 @@
           id="preview-image"
           alt="Blog image preview"
         >
+
+      </div>
+
+    </div>
+
+
+    <div class="promotion-section">
+
+      <h3>
+        Optional Product / Advertising Promotion
+      </h3>
+
+      <p class="help">
+        Leave Promotion Type as None for a normal blog article.
+      </p>
+
+
+      <div class="field">
+
+        <label for="promotion-type">
+          Promotion Type
+        </label>
+
+        <select id="promotion-type">
+
+          <option value="none">
+            None — Normal Blog Article
+          </option>
+
+          <option value="own_product">
+            GiftedGift Empire Product
+          </option>
+
+          <option value="affiliate">
+            Affiliate Product
+          </option>
+
+          <option value="sponsored">
+            Sponsored Advertisement
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="promotion-name">
+          Product / Advertiser Name
+        </label>
+
+        <input
+          id="promotion-name"
+          type="text"
+          placeholder="Example: DELIFE Sirpio XL"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="promotion-url">
+          Product / Advertiser Link
+        </label>
+
+        <input
+          id="promotion-url"
+          type="url"
+          placeholder="https://giftedgiftempire.com/product-name"
+        >
+
+        <p class="help">
+          You can paste your GiftedGift Empire clean product link,
+          affiliate link or advertiser website.
+        </p>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="promotion-button-text">
+          Button Text
+        </label>
+
+        <input
+          id="promotion-button-text"
+          type="text"
+          placeholder="Shop This Product"
+        >
+
+        <p class="help">
+          Examples: Shop This Product, View Product,
+          Learn More, Visit Advertiser.
+        </p>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="promotion-image-file">
+          Promotion Image
+        </label>
+
+        <input
+          id="promotion-image-file"
+          type="file"
+          accept="image/*"
+        >
+
+        <p class="help">
+          Optional. Upload a separate product or advertiser image
+          from your phone.
+        </p>
+
+
+        <div
+          id="promotion-image-preview"
+          class="image-preview"
+        >
+
+          <img
+            id="promotion-preview-image"
+            alt="Promotion image preview"
+          >
+
+        </div>
 
       </div>
 
@@ -486,6 +693,10 @@ const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
 
 
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -501,9 +712,23 @@ let existingImageUrl =
   "";
 
 
+let existingPromotionImageUrl =
+  "";
+
+
+let slugWasEdited =
+  false;
+
+
 const titleInput =
   document.getElementById(
     "title"
+  );
+
+
+const slugInput =
+  document.getElementById(
+    "slug"
   );
 
 
@@ -525,9 +750,207 @@ const imageFileInput =
   );
 
 
+const promotionTypeInput =
+  document.getElementById(
+    "promotion-type"
+  );
+
+
+const promotionNameInput =
+  document.getElementById(
+    "promotion-name"
+  );
+
+
+const promotionUrlInput =
+  document.getElementById(
+    "promotion-url"
+  );
+
+
+const promotionButtonTextInput =
+  document.getElementById(
+    "promotion-button-text"
+  );
+
+
+const promotionImageFileInput =
+  document.getElementById(
+    "promotion-image-file"
+  );
+
+
 const publishedInput =
   document.getElementById(
     "published"
+  );
+
+
+function cleanSlug(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
+    .toLowerCase()
+    .trim()
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
+}
+
+
+function suggestShortSlug(
+  value
+) {
+
+  const fullSlug =
+    cleanSlug(
+      value
+    );
+
+
+  if (!fullSlug) {
+    return "";
+  }
+
+
+  return fullSlug
+    .split("-")
+    .slice(
+      0,
+      8
+    )
+    .join("-");
+}
+
+
+function updateSlugPreview() {
+
+  const slug =
+    cleanSlug(
+      slugInput.value
+    );
+
+
+  document
+    .getElementById(
+      "slug-preview"
+    )
+    .textContent =
+      slug ||
+      "article-name";
+}
+
+
+titleInput
+  .addEventListener(
+    "input",
+    function() {
+
+      if (
+        slugWasEdited
+      ) {
+        return;
+      }
+
+
+      slugInput.value =
+        suggestShortSlug(
+          this.value
+        );
+
+
+      updateSlugPreview();
+    }
+  );
+
+
+slugInput
+  .addEventListener(
+    "input",
+    function() {
+
+      slugWasEdited =
+        true;
+
+
+      this.value =
+        cleanSlug(
+          this.value
+        );
+
+
+      updateSlugPreview();
+    }
+  );
+
+
+promotionTypeInput
+  .addEventListener(
+    "change",
+    function() {
+
+      if (
+        promotionButtonTextInput
+          .value
+          .trim()
+      ) {
+        return;
+      }
+
+
+      if (
+        this.value ===
+        "sponsored"
+      ) {
+
+        promotionButtonTextInput.value =
+          "Visit Advertiser";
+
+      } else if (
+        this.value ===
+        "affiliate"
+      ) {
+
+        promotionButtonTextInput.value =
+          "Shop This Product";
+
+      } else if (
+        this.value ===
+        "own_product"
+      ) {
+
+        promotionButtonTextInput.value =
+          "View Product";
+
+      } else {
+
+        promotionButtonTextInput.value =
+          "";
+      }
+    }
   );
 
 
@@ -593,18 +1016,20 @@ function clearMessage() {
 
 
 function showPreview(
+  wrapperId,
+  imageId,
   url
 ) {
 
   const wrapper =
     document.getElementById(
-      "image-preview"
+      wrapperId
     );
 
 
   const image =
     document.getElementById(
-      "preview-image"
+      imageId
     );
 
 
@@ -642,8 +1067,23 @@ function resetForm() {
     "";
 
 
+  existingPromotionImageUrl =
+    "";
+
+
+  slugWasEdited =
+    false;
+
+
   titleInput.value =
     "";
+
+
+  slugInput.value =
+    "";
+
+
+  updateSlugPreview();
 
 
   excerptInput.value =
@@ -658,11 +1098,40 @@ function resetForm() {
     "";
 
 
+  promotionTypeInput.value =
+    "none";
+
+
+  promotionNameInput.value =
+    "";
+
+
+  promotionUrlInput.value =
+    "";
+
+
+  promotionButtonTextInput.value =
+    "";
+
+
+  promotionImageFileInput.value =
+    "";
+
+
   publishedInput.checked =
     false;
 
 
   showPreview(
+    "image-preview",
+    "preview-image",
+    ""
+  );
+
+
+  showPreview(
+    "promotion-image-preview",
+    "promotion-preview-image",
     ""
   );
 
@@ -701,15 +1170,18 @@ function safeFileName(
 }
 
 
-async function uploadBlogImage(
-  file
+async function uploadImage(
+  file,
+  folder,
+  currentUrl
 ) {
 
   if (
     !file
   ) {
 
-    return existingImageUrl || null;
+    return currentUrl ||
+      null;
   }
 
 
@@ -726,7 +1198,8 @@ async function uploadBlogImage(
 
 
   const path =
-    "blog/" +
+    folder +
+    "/" +
     Date.now() +
     "-" +
     safeFileName(
@@ -746,8 +1219,11 @@ async function uploadBlogImage(
         path,
         file,
         {
-          cacheControl: "3600",
-          upsert: false
+          cacheControl:
+            "3600",
+
+          upsert:
+            false
         }
       );
 
@@ -762,7 +1238,7 @@ async function uploadBlogImage(
 
 
     throw new Error(
-      "The blog image could not be uploaded."
+      "The image could not be uploaded."
     );
   }
 
@@ -796,12 +1272,40 @@ async function savePost() {
     titleInput.value.trim();
 
 
+  const slug =
+    cleanSlug(
+      slugInput.value
+    );
+
+
   const excerpt =
     excerptInput.value.trim();
 
 
   const content =
     contentInput.value.trim();
+
+
+  const promotionType =
+    promotionTypeInput.value;
+
+
+  const promotionName =
+    promotionNameInput
+      .value
+      .trim();
+
+
+  const promotionUrl =
+    promotionUrlInput
+      .value
+      .trim();
+
+
+  let promotionButtonText =
+    promotionButtonTextInput
+      .value
+      .trim();
 
 
   if (
@@ -814,6 +1318,21 @@ async function savePost() {
     );
 
     titleInput.focus();
+
+    return;
+  }
+
+
+  if (
+    !slug
+  ) {
+
+    showMessage(
+      "Please enter a Share Link Name.",
+      "error"
+    );
+
+    slugInput.focus();
 
     return;
   }
@@ -849,6 +1368,40 @@ async function savePost() {
   }
 
 
+  if (
+    promotionType !==
+      "none" &&
+    !promotionUrl
+  ) {
+
+    showMessage(
+      "Please enter the Product / Advertiser Link for this promotion.",
+      "error"
+    );
+
+    promotionUrlInput.focus();
+
+    return;
+  }
+
+
+  if (
+    promotionType !==
+      "none" &&
+    !promotionButtonText
+  ) {
+
+    promotionButtonText =
+      promotionType ===
+        "sponsored"
+        ? "Visit Advertiser"
+        : promotionType ===
+            "affiliate"
+          ? "Shop This Product"
+          : "View Product";
+  }
+
+
   const saveButton =
     document.getElementById(
       "save-button"
@@ -865,14 +1418,31 @@ async function savePost() {
 
   try {
 
-    const file =
-      imageFileInput.files?.[0] ||
+    const coverFile =
+      imageFileInput
+        .files?.[0] ||
+      null;
+
+
+    const promotionFile =
+      promotionImageFileInput
+        .files?.[0] ||
       null;
 
 
     const imageUrl =
-      await uploadBlogImage(
-        file
+      await uploadImage(
+        coverFile,
+        "blog",
+        existingImageUrl
+      );
+
+
+    const promotionImageUrl =
+      await uploadImage(
+        promotionFile,
+        "blog-promotions",
+        existingPromotionImageUrl
       );
 
 
@@ -880,12 +1450,45 @@ async function savePost() {
 
       title,
 
+      slug,
+
       excerpt,
 
       content,
 
       image_url:
         imageUrl,
+
+      promotion_type:
+        promotionType,
+
+      promotion_name:
+        promotionType ===
+        "none"
+          ? null
+          : promotionName ||
+            null,
+
+      promotion_url:
+        promotionType ===
+        "none"
+          ? null
+          : promotionUrl ||
+            null,
+
+      promotion_button_text:
+        promotionType ===
+        "none"
+          ? null
+          : promotionButtonText ||
+            null,
+
+      promotion_image_url:
+        promotionType ===
+        "none"
+          ? null
+          : promotionImageUrl ||
+            null,
 
       published:
         publishedInput.checked
@@ -943,6 +1546,17 @@ async function savePost() {
       );
 
 
+      if (
+        error.code ===
+        "23505"
+      ) {
+
+        throw new Error(
+          "That Share Link Name is already being used by another blog post. Please choose another one."
+        );
+      }
+
+
       throw new Error(
         error.message ||
         "The blog post could not be saved."
@@ -950,8 +1564,14 @@ async function savePost() {
     }
 
 
+    const wasEditing =
+      Boolean(
+        editingId
+      );
+
+
     showMessage(
-      editingId
+      wasEditing
         ? "Blog post updated successfully."
         : "Blog post created successfully."
     );
@@ -1013,12 +1633,13 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-        "id,title,excerpt,content,image_url,published,created_at"
+        "id,title,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,created_at"
       )
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
@@ -1085,12 +1706,96 @@ async function loadPosts() {
 
       const date =
         post.created_at
-
           ? new Date(
               post.created_at
             ).toLocaleString()
-
           : "";
+
+
+      const publicLink =
+        post.slug
+          ? SITE_URL +
+            "/" +
+            post.slug
+          : "";
+
+
+      let promotionInfo =
+        "";
+
+
+      if (
+        post.promotion_type &&
+        post.promotion_type !==
+          "none"
+      ) {
+
+        let typeText =
+          "Promotion";
+
+
+        if (
+          post.promotion_type ===
+          "affiliate"
+        ) {
+
+          typeText =
+            "Affiliate Product";
+
+        } else if (
+          post.promotion_type ===
+          "sponsored"
+        ) {
+
+          typeText =
+            "Sponsored Advertisement";
+
+        } else if (
+          post.promotion_type ===
+          "own_product"
+        ) {
+
+          typeText =
+            "GiftedGift Empire Product";
+        }
+
+
+        promotionInfo = `
+
+          <div class="promotion-preview">
+
+            <strong>
+              ${escapeHTML(
+                typeText
+              )}
+            </strong>
+
+            ${
+              post.promotion_name
+                ? `
+                  <br>
+                  ${escapeHTML(
+                    post.promotion_name
+                  )}
+                `
+                : ""
+            }
+
+            ${
+              post.promotion_url
+                ? `
+                  <br>
+                  ${escapeHTML(
+                    post.promotion_url
+                  )}
+                `
+                : ""
+            }
+
+          </div>
+
+        `;
+      }
 
 
       card.innerHTML = `
@@ -1151,11 +1856,31 @@ async function loadPosts() {
         }
 
 
+        ${
+          publicLink
+
+            ? `
+              <div class="public-link">
+                Public Link:
+                ${escapeHTML(
+                  publicLink
+                )}
+              </div>
+            `
+
+            : ""
+        }
+
+
         <p>
           ${escapeHTML(
-            post.excerpt || ""
+            post.excerpt ||
+            ""
           )}
         </p>
+
+
+        ${promotionInfo}
 
 
         <button
@@ -1230,9 +1955,28 @@ function startEditing(
     "";
 
 
+  existingPromotionImageUrl =
+    post.promotion_image_url ||
+    "";
+
+
   titleInput.value =
     post.title ||
     "";
+
+
+  slugInput.value =
+    post.slug ||
+    suggestShortSlug(
+      post.title
+    );
+
+
+  slugWasEdited =
+    true;
+
+
+  updateSlugPreview();
 
 
   excerptInput.value =
@@ -1245,16 +1989,50 @@ function startEditing(
     "";
 
 
+  promotionTypeInput.value =
+    post.promotion_type ||
+    "none";
+
+
+  promotionNameInput.value =
+    post.promotion_name ||
+    "";
+
+
+  promotionUrlInput.value =
+    post.promotion_url ||
+    "";
+
+
+  promotionButtonTextInput.value =
+    post.promotion_button_text ||
+    "";
+
+
   publishedInput.checked =
-    post.published === true;
+    post.published ===
+    true;
 
 
   imageFileInput.value =
     "";
 
 
+  promotionImageFileInput.value =
+    "";
+
+
   showPreview(
+    "image-preview",
+    "preview-image",
     existingImageUrl
+  );
+
+
+  showPreview(
+    "promotion-image-preview",
+    "promotion-preview-image",
+    existingPromotionImageUrl
   );
 
 
@@ -1415,6 +2193,8 @@ imageFileInput
       ) {
 
         showPreview(
+          "image-preview",
+          "preview-image",
           existingImageUrl
         );
 
@@ -1429,6 +2209,47 @@ imageFileInput
 
 
       showPreview(
+        "image-preview",
+        "preview-image",
+        temporaryUrl
+      );
+    }
+  );
+
+
+promotionImageFileInput
+  .addEventListener(
+    "change",
+    () => {
+
+      const file =
+        promotionImageFileInput
+          .files?.[0];
+
+
+      if (
+        !file
+      ) {
+
+        showPreview(
+          "promotion-image-preview",
+          "promotion-preview-image",
+          existingPromotionImageUrl
+        );
+
+        return;
+      }
+
+
+      const temporaryUrl =
+        URL.createObjectURL(
+          file
+        );
+
+
+      showPreview(
+        "promotion-image-preview",
+        "promotion-preview-image",
         temporaryUrl
       );
     }
