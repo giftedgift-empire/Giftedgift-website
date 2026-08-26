@@ -12,6 +12,7 @@
   <title>Blog | GiftedGift Empire</title>
 
   <meta
+    id="page-description-meta"
     name="description"
     content="Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire."
   >
@@ -201,12 +202,10 @@
       margin-top: 18px;
       background: #f2bd16;
       color: #111;
-      border: none;
       text-decoration: none;
       font-weight: bold;
       padding: 11px 18px;
       border-radius: 7px;
-      cursor: pointer;
       align-self: flex-start;
       font-size: 15px;
     }
@@ -215,76 +214,116 @@
       opacity: 0.9;
     }
 
-    .modal {
+    .single-article {
       display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.65);
-      padding: 20px;
-      overflow-y: auto;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .modal.open {
-      display: block;
-    }
-
-    .modal-card {
-      position: relative;
-      max-width: 850px;
-      margin: 25px auto;
+    .article-card {
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
     }
 
-    .modal-image {
+    .article-cover {
       display: none;
       width: 100%;
-      max-height: 430px;
+      max-height: 520px;
       object-fit: cover;
       background: #f3f3f3;
     }
 
-    .modal-body {
-      padding: 30px;
+    .article-body {
+      padding: 34px;
     }
 
-    .modal-title {
-      margin: 0 45px 10px 0;
+    .article-back {
+      display: inline-block;
+      margin-bottom: 24px;
       color: #123a8c;
-      font-size: 32px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    .modal-date {
+    .article-title {
+      color: #123a8c;
+      font-size: 36px;
+      line-height: 1.2;
+      margin: 0 0 12px;
+    }
+
+    .article-date {
       color: #777;
       font-size: 14px;
-      margin-bottom: 22px;
+      margin-bottom: 26px;
     }
 
-    .modal-content {
+    .article-content {
       color: #444;
       font-size: 17px;
-      line-height: 1.8;
+      line-height: 1.85;
       white-space: pre-line;
       overflow-wrap: anywhere;
     }
 
-    .close-modal {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 50%;
-      background: #123a8c;
-      color: white;
+    .promotion-box {
+      display: none;
+      margin-top: 36px;
+      padding: 24px;
+      border: 1px solid #e3e3e3;
+      border-radius: 14px;
+      background: #fafafa;
+    }
+
+    .promotion-label {
+      display: inline-block;
+      background: #f2bd16;
+      color: #111;
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .promotion-image {
+      display: none;
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 11px;
+      background: white;
+      margin-bottom: 20px;
+    }
+
+    .promotion-name {
+      color: #123a8c;
       font-size: 24px;
       font-weight: bold;
-      cursor: pointer;
-      z-index: 2;
+      margin-bottom: 12px;
+    }
+
+    .promotion-disclosure {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 12px 0 18px;
+    }
+
+    .promotion-button {
+      display: inline-block;
+      background: #f2bd16;
+      color: #111;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .promotion-button:hover {
+      opacity: 0.9;
     }
 
     footer {
@@ -318,24 +357,20 @@
         height: 220px;
       }
 
-      .modal {
-        padding: 10px;
+      .article-body {
+        padding: 24px 19px;
       }
 
-      .modal-card {
-        margin: 10px auto;
+      .article-title {
+        font-size: 29px;
       }
 
-      .modal-body {
-        padding: 24px 20px;
-      }
-
-      .modal-title {
-        font-size: 27px;
-      }
-
-      .modal-content {
+      .article-content {
         font-size: 16px;
+      }
+
+      .promotion-box {
+        padding: 18px;
       }
     }
 
@@ -394,7 +429,10 @@
 </header>
 
 
-<section class="hero">
+<section
+  id="blog-hero"
+  class="hero"
+>
 
   <h2>
     GiftedGift Empire Blog
@@ -411,99 +449,144 @@
 
 <main class="blog">
 
-  <h2>
-    Latest From the Blog
-  </h2>
-
-
   <div
-    id="message"
-    class="message"
-  ></div>
-
-
-  <div
-    id="loading"
-    class="loading"
+    id="blog-list-area"
   >
-    Loading articles...
+
+    <h2>
+      Latest From the Blog
+    </h2>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Loading articles...
+    </div>
+
+
+    <section
+      id="empty"
+      class="empty"
+    >
+
+      <h3>
+        Articles Coming Soon
+      </h3>
+
+      <p>
+        New shopping guides, recommendations,
+        useful finds and lifestyle articles
+        are being prepared for you.
+      </p>
+
+    </section>
+
+
+    <section
+      id="posts"
+      class="posts"
+    ></section>
+
   </div>
 
 
   <section
-    id="empty"
-    class="empty"
+    id="single-article"
+    class="single-article"
   >
 
-    <h3>
-      Articles Coming Soon
-    </h3>
+    <a
+      href="blog.html"
+      class="article-back"
+    >
+      ← Back to Blog
+    </a>
 
-    <p>
-      New shopping guides, recommendations,
-      useful finds and lifestyle articles
-      are being prepared for you.
-    </p>
+
+    <article class="article-card">
+
+      <img
+        id="article-cover"
+        class="article-cover"
+        alt=""
+      >
+
+
+      <div class="article-body">
+
+        <h1
+          id="article-title"
+          class="article-title"
+        ></h1>
+
+
+        <div
+          id="article-date"
+          class="article-date"
+        ></div>
+
+
+        <div
+          id="article-content"
+          class="article-content"
+        ></div>
+
+
+        <section
+          id="promotion-box"
+          class="promotion-box"
+        >
+
+          <div
+            id="promotion-label"
+            class="promotion-label"
+          ></div>
+
+
+          <img
+            id="promotion-image"
+            class="promotion-image"
+            alt=""
+          >
+
+
+          <div
+            id="promotion-name"
+            class="promotion-name"
+          ></div>
+
+
+          <div
+            id="promotion-disclosure"
+            class="promotion-disclosure"
+          ></div>
+
+
+          <a
+            id="promotion-button"
+            class="promotion-button"
+            href="#"
+          >
+            View Product
+          </a>
+
+        </section>
+
+      </div>
+
+    </article>
 
   </section>
 
-
-  <section
-    id="posts"
-    class="posts"
-  ></section>
-
 </main>
-
-
-<div
-  id="article-modal"
-  class="modal"
->
-
-  <article class="modal-card">
-
-    <button
-      id="close-modal"
-      class="close-modal"
-      type="button"
-      aria-label="Close article"
-    >
-      ×
-    </button>
-
-
-    <img
-      id="modal-image"
-      class="modal-image"
-      alt=""
-    >
-
-
-    <div class="modal-body">
-
-      <h2
-        id="modal-title"
-        class="modal-title"
-      ></h2>
-
-
-      <div
-        id="modal-date"
-        class="modal-date"
-      ></div>
-
-
-      <div
-        id="modal-content"
-        class="modal-content"
-      ></div>
-
-    </div>
-
-  </article>
-
-</div>
 
 
 <footer>
@@ -529,385 +612,662 @@
 
 <script>
 
-  const SUPABASE_URL =
-    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-  const db =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const cleanBlogPostId =
+  Number(
+    window.__BLOG_POST_ID ||
+    0
+  );
+
+
+const isSingleBlogPost =
+  Number.isInteger(
+    cleanBlogPostId
+  ) &&
+  cleanBlogPostId > 0;
+
+
+let publishedPosts =
+  [];
+
+
+function showError(
+  text
+) {
+
+  const box =
+    document.getElementById(
+      "message"
     );
 
 
-  let publishedPosts =
-    [];
+  box.className =
+    "message error";
 
 
-  function showError(
-    text
+  box.textContent =
+    text;
+}
+
+
+function formatDate(
+  value
+) {
+
+  if (
+    !value
   ) {
 
-    const box =
-      document.getElementById(
-        "message"
-      );
-
-
-    box.className =
-      "message error";
-
-
-    box.textContent =
-      text;
+    return "";
   }
 
 
-  function formatDate(
-    value
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
   ) {
 
-    if (
-      !value
-    ) {
+    return "";
+  }
 
-      return "";
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      year:
+        "numeric",
+
+      month:
+        "long",
+
+      day:
+        "numeric"
     }
+  );
+}
 
 
-    const date =
-      new Date(
+function getPostUrl(
+  post
+) {
+
+  if (
+    post &&
+    post.slug
+  ) {
+
+    return (
+      SITE_URL +
+      "/" +
+      encodeURIComponent(
+        post.slug
+      )
+    );
+  }
+
+
+  return (
+    SITE_URL +
+    "/blog.html"
+  );
+}
+
+
+function validHttpUrl(
+  value
+) {
+
+  if (!value) {
+    return false;
+  }
+
+
+  try {
+
+    const url =
+      new URL(
         value
       );
 
 
-    if (
-      Number.isNaN(
-        date.getTime()
-      )
-    ) {
-
-      return "";
-    }
-
-
-    return date.toLocaleDateString(
-      undefined,
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      }
+    return (
+      url.protocol ===
+        "https:" ||
+      url.protocol ===
+        "http:"
     );
+
+  } catch {
+
+    return false;
   }
+}
 
 
-  function createPostCard(
-    post
+function createPostCard(
+  post
+) {
+
+  const article =
+    document.createElement(
+      "article"
+    );
+
+
+  article.className =
+    "post";
+
+
+  const imageBox =
+    document.createElement(
+      "div"
+    );
+
+
+  imageBox.className =
+    "post-image-box";
+
+
+  if (
+    post.image_url
   ) {
-
-    const article =
-      document.createElement(
-        "article"
-      );
-
-
-    article.className =
-      "post";
-
-
-    const imageBox =
-      document.createElement(
-        "div"
-      );
-
-
-    imageBox.className =
-      "post-image-box";
-
-
-    if (
-      post.image_url
-    ) {
-
-      const image =
-        document.createElement(
-          "img"
-        );
-
-
-      image.className =
-        "post-image";
-
-
-      image.src =
-        post.image_url;
-
-
-      image.alt =
-        post.title ||
-        "GiftedGift Empire blog article";
-
-
-      image.loading =
-        "lazy";
-
-
-      imageBox.appendChild(
-        image
-      );
-
-    } else {
-
-      const placeholder =
-        document.createElement(
-          "div"
-        );
-
-
-      placeholder.className =
-        "post-no-image";
-
-
-      placeholder.textContent =
-        "GiftedGift Empire";
-
-
-      imageBox.appendChild(
-        placeholder
-      );
-    }
-
-
-    const body =
-      document.createElement(
-        "div"
-      );
-
-
-    body.className =
-      "post-body";
-
-
-    const date =
-      document.createElement(
-        "div"
-      );
-
-
-    date.className =
-      "post-date";
-
-
-    date.textContent =
-      formatDate(
-        post.created_at
-      );
-
-
-    const title =
-      document.createElement(
-        "h3"
-      );
-
-
-    title.textContent =
-      post.title ||
-      "Article";
-
-
-    const excerpt =
-      document.createElement(
-        "p"
-      );
-
-
-    excerpt.textContent =
-      post.excerpt ||
-      "";
-
-
-    const button =
-      document.createElement(
-        "button"
-      );
-
-
-    button.className =
-      "read-more";
-
-
-    button.type =
-      "button";
-
-
-    button.textContent =
-      "Read Article";
-
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        openArticle(
-          post
-        );
-      }
-    );
-
-
-    if (
-      date.textContent
-    ) {
-
-      body.appendChild(
-        date
-      );
-    }
-
-
-    body.appendChild(
-      title
-    );
-
-
-    body.appendChild(
-      excerpt
-    );
-
-
-    body.appendChild(
-      button
-    );
-
-
-    article.appendChild(
-      imageBox
-    );
-
-
-    article.appendChild(
-      body
-    );
-
-
-    return article;
-  }
-
-
-  function openArticle(
-    post
-  ) {
-
-    const modal =
-      document.getElementById(
-        "article-modal"
-      );
-
 
     const image =
-      document.getElementById(
-        "modal-image"
+      document.createElement(
+        "img"
       );
 
 
+    image.className =
+      "post-image";
+
+
+    image.src =
+      post.image_url;
+
+
+    image.alt =
+      post.title ||
+      "GiftedGift Empire blog article";
+
+
+    image.loading =
+      "lazy";
+
+
+    imageBox.appendChild(
+      image
+    );
+
+  } else {
+
+    const placeholder =
+      document.createElement(
+        "div"
+      );
+
+
+    placeholder.className =
+      "post-no-image";
+
+
+    placeholder.textContent =
+      "GiftedGift Empire";
+
+
+    imageBox.appendChild(
+      placeholder
+    );
+  }
+
+
+  const body =
+    document.createElement(
+      "div"
+    );
+
+
+  body.className =
+    "post-body";
+
+
+  const date =
+    document.createElement(
+      "div"
+    );
+
+
+  date.className =
+    "post-date";
+
+
+  date.textContent =
+    formatDate(
+      post.created_at
+    );
+
+
+  const title =
+    document.createElement(
+      "h3"
+    );
+
+
+  title.textContent =
+    post.title ||
+    "Article";
+
+
+  const excerpt =
+    document.createElement(
+      "p"
+    );
+
+
+  excerpt.textContent =
+    post.excerpt ||
+    "";
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.className =
+    "read-more";
+
+
+  link.textContent =
+    "Read Article";
+
+
+  link.href =
+    post.slug
+      ? "/" +
+        encodeURIComponent(
+          post.slug
+        )
+      : "blog.html";
+
+
+  if (
+    date.textContent
+  ) {
+
+    body.appendChild(
+      date
+    );
+  }
+
+
+  body.appendChild(
+    title
+  );
+
+
+  body.appendChild(
+    excerpt
+  );
+
+
+  body.appendChild(
+    link
+  );
+
+
+  article.appendChild(
+    imageBox
+  );
+
+
+  article.appendChild(
+    body
+  );
+
+
+  return article;
+}
+
+
+function renderPromotion(
+  post
+) {
+
+  const box =
     document.getElementById(
-      "modal-title"
-    ).textContent =
+      "promotion-box"
+    );
+
+
+  box.style.display =
+    "none";
+
+
+  const type =
+    post.promotion_type ||
+    "none";
+
+
+  if (
+    type ===
+    "none" ||
+    !post.promotion_url ||
+    !validHttpUrl(
+      post.promotion_url
+    )
+  ) {
+
+    return;
+  }
+
+
+  const label =
+    document.getElementById(
+      "promotion-label"
+    );
+
+
+  const image =
+    document.getElementById(
+      "promotion-image"
+    );
+
+
+  const name =
+    document.getElementById(
+      "promotion-name"
+    );
+
+
+  const disclosure =
+    document.getElementById(
+      "promotion-disclosure"
+    );
+
+
+  const button =
+    document.getElementById(
+      "promotion-button"
+    );
+
+
+  if (
+    type ===
+    "affiliate"
+  ) {
+
+    label.textContent =
+      "Affiliate Product";
+
+
+    disclosure.textContent =
+      "Affiliate Disclosure: GiftedGift Empire may earn a commission if you purchase through this link, at no extra cost to you.";
+
+  } else if (
+    type ===
+    "sponsored"
+  ) {
+
+    label.textContent =
+      "Sponsored";
+
+
+    disclosure.textContent =
+      "Sponsored Disclosure: This article contains a paid promotional placement.";
+
+  } else {
+
+    label.textContent =
+      "GiftedGift Empire Product";
+
+
+    disclosure.textContent =
+      "Featured product available through GiftedGift Empire.";
+  }
+
+
+  if (
+    post.promotion_image_url
+  ) {
+
+    image.src =
+      post.promotion_image_url;
+
+
+    image.alt =
+      post.promotion_name ||
+      "Featured product";
+
+
+    image.style.display =
+      "block";
+
+  } else {
+
+    image.removeAttribute(
+      "src"
+    );
+
+
+    image.style.display =
+      "none";
+  }
+
+
+  name.textContent =
+    post.promotion_name ||
+    "";
+
+
+  name.style.display =
+    post.promotion_name
+      ? "block"
+      : "none";
+
+
+  button.textContent =
+    post.promotion_button_text ||
+    (
+      type ===
+      "sponsored"
+        ? "Visit Advertiser"
+        : type ===
+            "affiliate"
+          ? "Shop This Product"
+          : "View Product"
+    );
+
+
+  button.href =
+    post.promotion_url;
+
+
+  if (
+    type ===
+      "affiliate" ||
+    type ===
+      "sponsored"
+  ) {
+
+    button.target =
+      "_blank";
+
+
+    button.rel =
+      "noopener noreferrer sponsored";
+
+  } else {
+
+    button.removeAttribute(
+      "target"
+    );
+
+
+    button.removeAttribute(
+      "rel"
+    );
+  }
+
+
+  box.style.display =
+    "block";
+}
+
+
+function renderSingleArticle(
+  post
+) {
+
+  document
+    .getElementById(
+      "blog-list-area"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "blog-hero"
+    )
+    .style.display =
+      "none";
+
+
+  const single =
+    document.getElementById(
+      "single-article"
+    );
+
+
+  const cover =
+    document.getElementById(
+      "article-cover"
+    );
+
+
+  document
+    .getElementById(
+      "article-title"
+    )
+    .textContent =
       post.title ||
       "Article";
 
 
-    document.getElementById(
-      "modal-date"
-    ).textContent =
+  document
+    .getElementById(
+      "article-date"
+    )
+    .textContent =
       formatDate(
         post.created_at
       );
 
 
-    document.getElementById(
-      "modal-content"
-    ).textContent =
+  document
+    .getElementById(
+      "article-content"
+    )
+    .textContent =
       post.content ||
       "";
 
 
-    if (
-      post.image_url
-    ) {
+  if (
+    post.image_url
+  ) {
 
-      image.src =
-        post.image_url;
-
-
-      image.alt =
-        post.title ||
-        "GiftedGift Empire article";
+    cover.src =
+      post.image_url;
 
 
-      image.style.display =
-        "block";
-
-    } else {
-
-      image.removeAttribute(
-        "src"
-      );
+    cover.alt =
+      post.title ||
+      "GiftedGift Empire article";
 
 
-      image.style.display =
-        "none";
-    }
+    cover.style.display =
+      "block";
 
+  } else {
 
-    modal.classList.add(
-      "open"
+    cover.removeAttribute(
+      "src"
     );
 
 
-    document.body.style.overflow =
-      "hidden";
+    cover.style.display =
+      "none";
   }
 
 
-  function closeArticle() {
+  document.title =
+    (
+      post.title ||
+      "Blog"
+    ) +
+    " | GiftedGift Empire";
 
+
+  const metaDescription =
     document.getElementById(
-      "article-modal"
-    ).classList.remove(
-      "open"
+      "page-description-meta"
     );
 
 
-    document.body.style.overflow =
-      "";
+  if (
+    metaDescription &&
+    post.excerpt
+  ) {
+
+    metaDescription.setAttribute(
+      "content",
+      post.excerpt
+    );
   }
 
 
-  async function loadPosts() {
-
-    const loading =
-      document.getElementById(
-        "loading"
-      );
+  renderPromotion(
+    post
+  );
 
 
-    const postsBox =
-      document.getElementById(
-        "posts"
-      );
+  single.style.display =
+    "block";
+}
 
 
-    const empty =
-      document.getElementById(
-        "empty"
-      );
+async function loadSinglePost() {
 
+  try {
 
     const {
       data,
@@ -918,127 +1278,207 @@
           "blog_posts"
         )
         .select(
-          "id,title,excerpt,content,image_url,published,created_at"
+          "id,title,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,created_at"
+        )
+        .eq(
+          "id",
+          cleanBlogPostId
         )
         .eq(
           "published",
           true
         )
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-    loading.style.display =
-      "none";
+        .single();
 
 
     if (
-      error
+      error ||
+      !data
     ) {
 
-      console.error(
-        error
+      throw new Error(
+        "This article could not be found."
       );
-
-
-      showError(
-        "The Blog could not be loaded right now."
-      );
-
-
-      return;
     }
 
 
-    publishedPosts =
-      Array.isArray(
-        data
-      )
-        ? data
-        : [];
-
-
-    if (
-      publishedPosts.length === 0
-    ) {
-
-      empty.style.display =
-        "block";
-
-
-      return;
-    }
-
-
-    postsBox.innerHTML =
-      "";
-
-
-    publishedPosts.forEach(
-      post => {
-
-        postsBox.appendChild(
-          createPostCard(
-            post
-          )
-        );
-      }
+    renderSingleArticle(
+      data
     );
 
 
-    postsBox.style.display =
-      "grid";
+  } catch (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    document
+      .getElementById(
+        "blog-hero"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "blog-list-area"
+      )
+      .innerHTML = `
+
+        <section
+          class="empty"
+          style="display:block;"
+        >
+
+          <h3>
+            Article Not Available
+          </h3>
+
+          <p>
+            This article could not be found
+            or is not currently published.
+          </p>
+
+          <p>
+            <a href="blog.html">
+              Return to the Blog
+            </a>
+          </p>
+
+        </section>
+
+      `;
+  }
+}
+
+
+async function loadPosts() {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const postsBox =
+    document.getElementById(
+      "posts"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "empty"
+    );
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "blog_posts"
+      )
+      .select(
+        "id,title,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,created_at"
+      )
+      .eq(
+        "published",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending:
+            false
+        }
+      );
+
+
+  loading.style.display =
+    "none";
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showError(
+      "The Blog could not be loaded right now."
+    );
+
+
+    return;
   }
 
 
-  document.getElementById(
-    "close-modal"
-  ).addEventListener(
-    "click",
-    closeArticle
-  );
+  publishedPosts =
+    Array.isArray(
+      data
+    )
+      ? data
+      : [];
 
 
-  document.getElementById(
-    "article-modal"
-  ).addEventListener(
-    "click",
-    event => {
+  if (
+    publishedPosts.length ===
+    0
+  ) {
 
-      if (
-        event.target.id ===
-        "article-modal"
-      ) {
+    empty.style.display =
+      "block";
 
-        closeArticle();
-      }
+
+    return;
+  }
+
+
+  postsBox.innerHTML =
+    "";
+
+
+  publishedPosts.forEach(
+    post => {
+
+      postsBox.appendChild(
+        createPostCard(
+          post
+        )
+      );
     }
   );
 
 
-  document.addEventListener(
-    "keydown",
-    event => {
+  postsBox.style.display =
+    "grid";
+}
 
-      if (
-        event.key ===
-        "Escape"
-      ) {
 
-        closeArticle();
-      }
-    }
-  );
+if (
+  isSingleBlogPost
+) {
 
+  loadSinglePost();
+
+} else {
 
   loadPosts();
+}
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+<script src="cookie-consent.js"></script>
 
 </body>
 
