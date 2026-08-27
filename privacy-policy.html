@@ -16,7 +16,7 @@
 
   <meta
     name="description"
-    content="Read the GiftedGift Empire Privacy Policy and learn how personal information is collected, used and protected."
+    content="Read the GiftedGift Empire Privacy Policy and learn how personal information, cookies, analytics and marketing technologies are used."
   >
 
   <meta
@@ -64,6 +64,7 @@
       --text: #222;
       --muted: #5f6772;
       --border: #e2e5ea;
+      --green: #18713b;
     }
 
     * {
@@ -83,7 +84,9 @@
     }
 
 
-    /* HEADER */
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       background: var(--blue);
@@ -140,7 +143,9 @@
     }
 
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       background: white;
@@ -174,7 +179,9 @@
     }
 
 
-    /* CONTENT */
+    /* =========================
+       CONTENT
+    ========================= */
 
     .page {
       max-width: 900px;
@@ -195,7 +202,9 @@
       padding: 34px;
       border-radius: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      box-shadow:
+        0 4px 16px
+        rgba(0, 0, 0, 0.06);
     }
 
     .intro {
@@ -237,24 +246,10 @@
       margin-bottom: 9px;
     }
 
-    .contact-box {
-      margin-top: 35px;
-      padding: 22px;
-      background: #edf3ff;
-      border-radius: 12px;
-    }
 
-    .contact-box h2 {
-      margin-top: 0;
-    }
-
-    .contact-box a {
-      color: var(--blue);
-      font-weight: bold;
-    }
-
-
-    /* EXTRA STYLES FOR IMPORTED POLICY CONTENT */
+    /* =========================
+       INFORMATION BOXES
+    ========================= */
 
     .policy-card .business-box,
     .policy-card .info-box {
@@ -276,14 +271,134 @@
 
     .policy-card .success-box {
       background: #edf8f1;
-      border-left: 5px solid #18713b;
+      border-left: 5px solid var(--green);
       padding: 18px;
       border-radius: 9px;
       margin: 20px 0;
     }
 
 
-    /* NOT AVAILABLE */
+    /* =========================
+       TRACKING DISCLOSURE
+    ========================= */
+
+    .tracking-card {
+      margin-top: 28px;
+      border-top: 6px solid var(--gold);
+    }
+
+    .tracking-intro {
+      background: #f7f9fd;
+      border-left: 5px solid var(--blue);
+      padding: 18px;
+      border-radius: 9px;
+      margin-bottom: 25px;
+    }
+
+    .tracking-service {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fbfbfc;
+    }
+
+    .tracking-service h3 {
+      margin-top: 0;
+      color: var(--blue);
+      font-size: 19px;
+    }
+
+    .tracking-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 9px;
+      border-radius: 18px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tracking-label.analytics {
+      background: #edf3ff;
+      color: var(--blue);
+    }
+
+    .tracking-label.marketing {
+      background: #fff4c6;
+      color: #765800;
+    }
+
+    .tracking-label.essential {
+      background: #eaf7ee;
+      color: var(--green);
+    }
+
+    .cookie-settings-area {
+      margin-top: 25px;
+      padding: 22px;
+      text-align: center;
+      background: #edf3ff;
+      border-radius: 12px;
+    }
+
+    .cookie-settings-area p {
+      max-width: 680px;
+      margin:
+        0 auto
+        16px;
+    }
+
+    .cookie-settings-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 48px;
+
+      padding:
+        11px 20px;
+
+      border: none;
+      border-radius: 9px;
+
+      background: var(--blue);
+      color: white;
+
+      font: inherit;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .cookie-settings-action:hover {
+      background: var(--dark-blue);
+    }
+
+
+    /* =========================
+       CONTACT BOX
+    ========================= */
+
+    .contact-box {
+      margin-top: 35px;
+      padding: 22px;
+      background: #edf3ff;
+      border-radius: 12px;
+    }
+
+    .contact-box h2 {
+      margin-top: 0;
+    }
+
+    .contact-box a {
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+
+    /* =========================
+       POLICY UNAVAILABLE
+    ========================= */
 
     .policy-unavailable {
       text-align: center;
@@ -295,7 +410,9 @@
     }
 
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: var(--dark-blue);
@@ -324,6 +441,10 @@
     }
 
 
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
 
       .policy-card {
@@ -338,6 +459,10 @@
         font-size: 21px;
       }
 
+      .tracking-service {
+        padding: 17px;
+      }
+
     }
 
   </style>
@@ -347,6 +472,10 @@
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -363,8 +492,13 @@
       >
 
       <div class="brand-name">
+
         GiftedGift
-        <span>Empire</span>
+
+        <span>
+          Empire
+        </span>
+
       </div>
 
     </a>
@@ -411,6 +545,10 @@
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
   <h1 id="policy-title">
@@ -418,16 +556,19 @@
   </h1>
 
   <p>
+
     This Privacy Policy explains how GiftedGift Empire
-    collects, uses, stores and protects personal information
-    when you use our website and services.
+    collects, uses, stores and protects personal information,
+    including our use of cookies, analytics and optional
+    advertising technologies.
+
   </p>
 
   <div
     id="policy-updated"
     class="updated"
   >
-    Last updated: 23 August 2026
+    Last updated: 27 August 2026
   </div>
 
 </section>
@@ -443,24 +584,22 @@
   </a>
 
 
+  <!-- =========================
+       MAIN PRIVACY POLICY
+  ========================= -->
+
   <article
     id="policy-content"
     class="policy-card"
   >
 
 
-    <!-- =========================================
-         STATIC FALLBACK CONTENT
-         This remains visible if Supabase
-         temporarily cannot be reached.
-    ========================================== -->
-
-
     <div class="intro">
 
       GiftedGift Empire respects your privacy and is committed
-      to handling personal information responsibly, transparently
-      and in accordance with applicable data-protection laws.
+      to handling personal information responsibly,
+      transparently and in accordance with applicable
+      data-protection laws.
 
     </div>
 
@@ -470,10 +609,12 @@
     </h2>
 
     <p>
+
       GiftedGift Empire operates the website
       giftedgiftempire.com and provides physical products,
       digital products, African foodstuffs, affiliate
       recommendations, deals, content and related services.
+
     </p>
 
     <p>
@@ -482,7 +623,10 @@
     </p>
 
     <p>
-      <strong>Email:</strong>
+
+      <strong>
+        Email:
+      </strong>
 
       <a href="mailto:gift@giftedgiftempire.com">
         gift@giftedgiftempire.com
@@ -496,48 +640,94 @@
     </h2>
 
     <p>
+
       The information we collect depends on how you use
       GiftedGift Empire.
+
     </p>
 
     <ul>
 
       <li>
-        <strong>Contact information:</strong>
+
+        <strong>
+          Contact information:
+        </strong>
+
         such as your name, email address and telephone number.
+
       </li>
 
       <li>
-        <strong>Order and delivery information:</strong>
+
+        <strong>
+          Order and delivery information:
+        </strong>
+
         such as delivery address, products ordered,
         quantities, shipping option and order status.
+
       </li>
 
       <li>
-        <strong>Payment-related information:</strong>
+
+        <strong>
+          Payment-related information:
+        </strong>
+
         such as payment status and transaction references.
         Payment-card information is handled by the relevant
         payment provider and is not intended to be stored
         directly by GiftedGift Empire.
+
       </li>
 
       <li>
-        <strong>Reviews and comments:</strong>
+
+        <strong>
+          Reviews and comments:
+        </strong>
+
         such as your name, rating, review, Daily Inspiration
         comment and date of submission.
+
       </li>
 
       <li>
-        <strong>Messages and enquiries:</strong>
+
+        <strong>
+          Messages and enquiries:
+        </strong>
+
         information you provide when contacting us by email,
         WhatsApp or another communication channel.
+
       </li>
 
       <li>
-        <strong>Technical and browser information:</strong>
+
+        <strong>
+          Technical and browser information:
+        </strong>
+
         information necessary for website operation,
-        security and functionality, including browser storage,
-        cart information and similar technical data.
+        security and functionality, including browser type,
+        device information, browser storage, cart information
+        and similar technical data.
+
+      </li>
+
+      <li>
+
+        <strong>
+          Optional analytics and advertising information:
+        </strong>
+
+        where you give the relevant consent, information about
+        visits, pages viewed, traffic sources, interactions and
+        advertising measurement may be processed through the
+        technologies explained below.
+
       </li>
 
     </ul>
@@ -586,6 +776,16 @@
       </li>
 
       <li>
+        measure website performance where analytics
+        consent has been given;
+      </li>
+
+      <li>
+        measure advertising effectiveness where marketing
+        consent has been given;
+      </li>
+
+      <li>
         comply with accounting, tax, consumer-protection
         and other legal obligations.
       </li>
@@ -598,36 +798,60 @@
     </h2>
 
     <p>
+
       Where applicable under data-protection law, we process
-      personal information on one or more of the following bases:
+      personal information on one or more of the following
+      bases:
+
     </p>
 
     <ul>
 
       <li>
-        <strong>Performance of a contract</strong> —
-        for example, processing an order, payment,
+
+        <strong>
+          Performance of a contract
+        </strong>
+
+        — for example, processing an order, payment,
         digital download or delivery.
+
       </li>
 
       <li>
-        <strong>Legal obligations</strong> —
-        where information must be retained or processed
+
+        <strong>
+          Legal obligations
+        </strong>
+
+        — where information must be retained or processed
         to comply with applicable law.
+
       </li>
 
       <li>
-        <strong>Legitimate interests</strong> —
-        such as website security, fraud prevention,
+
+        <strong>
+          Legitimate interests
+        </strong>
+
+        — such as website security, fraud prevention,
         customer service, moderation and improving
-        our services.
+        our services, where those interests are not
+        overridden by applicable rights.
+
       </li>
 
       <li>
-        <strong>Consent</strong> —
-        where consent is legally required, including
-        certain optional cookies, trackers or marketing
-        activities.
+
+        <strong>
+          Consent
+        </strong>
+
+        — where consent is legally required, including
+        optional analytics, advertising cookies, pixels,
+        tags and similar tracking technologies.
+
       </li>
 
     </ul>
@@ -638,20 +862,26 @@
     </h2>
 
     <p>
+
       Payments may be processed through third-party payment
       providers such as PayPal.
+
     </p>
 
     <p>
+
       When you use a third-party payment service, that
       provider may collect and process information according
       to its own privacy policy and legal obligations.
+
     </p>
 
     <p>
+
       GiftedGift Empire may receive payment confirmation,
       transaction identifiers and information necessary
       to complete or verify your order.
+
     </p>
 
 
@@ -660,16 +890,20 @@
     </h2>
 
     <p>
+
       When physical delivery is required, necessary customer
       and delivery information may be shared with shipping
       or logistics providers for the purpose of fulfilling
       the order.
+
     </p>
 
     <p>
+
       Only information reasonably necessary for delivery,
       tracking, customer service and related purposes should
       be provided to those service providers.
+
     </p>
 
 
@@ -678,15 +912,19 @@
     </h2>
 
     <p>
+
       Some African Foodstuffs orders or enquiries may be
       submitted through WhatsApp.
+
     </p>
 
     <p>
+
       When you choose to communicate through WhatsApp,
       your information is also processed by WhatsApp and
       its service providers according to their own terms
       and privacy practices.
+
     </p>
 
 
@@ -695,21 +933,27 @@
     </h2>
 
     <p>
+
       Some links on GiftedGift Empire are affiliate links.
       If you click an affiliate link, you may be redirected
       to a third-party merchant or affiliate network.
+
     </p>
 
     <p>
+
       Those third parties may collect information about your
       visit or purchase according to their own privacy and
       cookie policies.
+
     </p>
 
     <p>
+
       GiftedGift Empire may receive a commission from
       qualifying purchases made through certain affiliate
       links, at no additional cost to you.
+
     </p>
 
 
@@ -718,19 +962,25 @@
     </h2>
 
     <p>
+
       If you submit a product review or Daily Inspiration
       comment, it may first be held for moderation.
+
     </p>
 
     <p>
+
       When approved, the name you provided together with
       your review, rating or comment may become publicly
       visible on the website.
+
     </p>
 
     <p>
+
       Do not include private, confidential or sensitive
       personal information in a public review or comment.
+
     </p>
 
 
@@ -739,13 +989,18 @@
     </h2>
 
     <p>
-      GiftedGift Empire may use cookies or browser-storage
-      technologies such as local storage and session storage
-      to provide website functions.
+
+      GiftedGift Empire uses browser-storage technologies
+      for essential website functions and may use optional
+      analytics or marketing technologies only according
+      to the visitor's privacy choices.
+
     </p>
 
     <p>
-      These technologies may be used for functions such as:
+
+      Essential storage may be used for functions such as:
+
     </p>
 
     <ul>
@@ -755,28 +1010,34 @@
       </li>
 
       <li>
-        remembering temporary website or interface choices;
+        remembering website or interface preferences;
       </li>
 
       <li>
-        maintaining essential security or authentication;
+        supporting essential security or authentication;
       </li>
 
       <li>
-        managing website features such as likes or
-        welcome-message preferences;
+        remembering session-based website features;
       </li>
 
       <li>
-        remembering cookie or privacy choices.
+        remembering whether a welcome message has already
+        been displayed during a browser session;
+      </li>
+
+      <li>
+        storing your cookie and privacy choices.
       </li>
 
     </ul>
 
     <p>
-      Where cookies or trackers are not strictly necessary
-      and applicable law requires consent, they will only
-      be used after the appropriate consent has been obtained.
+
+      Optional analytics and marketing technologies are
+      described in the dedicated Cookie & Tracking
+      Technologies section below.
+
     </p>
 
 
@@ -785,16 +1046,22 @@
     </h2>
 
     <p>
+
       We may use trusted service providers to operate parts
       of GiftedGift Empire, including website hosting,
       database services, payment processing, delivery,
-      communications and technical services.
+      communications, analytics, advertising measurement
+      and technical services.
+
     </p>
 
     <p>
-      These providers may process personal information only
-      where necessary for the services they provide and may
-      be subject to their own legal and privacy obligations.
+
+      These providers may process personal information where
+      necessary for the services they provide and may be
+      subject to their own legal, contractual and privacy
+      obligations.
+
     </p>
 
 
@@ -803,14 +1070,19 @@
     </h2>
 
     <p>
+
       Some service providers may process information in
       countries outside your country of residence or outside
       the European Economic Area.
+
     </p>
 
     <p>
-      Where required, appropriate legal safeguards should
-      be used for international transfers of personal data.
+
+      Where required by applicable law, appropriate legal
+      safeguards are used for international transfers of
+      personal data.
+
     </p>
 
 
@@ -819,15 +1091,29 @@
     </h2>
 
     <p>
+
       Personal information is retained only for as long as
       reasonably necessary for the purpose for which it was
       collected and to meet applicable legal, accounting,
       tax, dispute-resolution and security requirements.
+
     </p>
 
     <p>
+
       Different categories of information may therefore
       have different retention periods.
+
+    </p>
+
+    <p>
+
+      Cookie and privacy choices made through our consent
+      interface are currently remembered in the visitor's
+      browser for approximately 180 days, unless the choice
+      expires, is reset, browser storage is cleared or the
+      consent system is materially updated.
+
     </p>
 
 
@@ -836,14 +1122,18 @@
     </h2>
 
     <p>
+
       Reasonable technical and organisational measures are
       used to help protect information against unauthorised
       access, alteration, disclosure or loss.
+
     </p>
 
     <p>
+
       However, no website, internet connection or electronic
       storage method can be guaranteed to be completely secure.
+
     </p>
 
 
@@ -852,8 +1142,10 @@
     </h2>
 
     <p>
+
       Depending on applicable law and your circumstances,
       you may have rights including:
+
     </p>
 
     <ul>
@@ -895,9 +1187,11 @@
     </ul>
 
     <p>
+
       In France, the relevant supervisory authority is
       the Commission Nationale de l'Informatique et des
       Libertés (CNIL).
+
     </p>
 
 
@@ -906,14 +1200,18 @@
     </h2>
 
     <p>
+
       GiftedGift Empire is not designed to intentionally
       collect personal information from children where
       parental or guardian consent would be legally required.
+
     </p>
 
     <p>
+
       If you believe a child has provided personal
       information improperly, please contact us.
+
     </p>
 
 
@@ -922,15 +1220,19 @@
     </h2>
 
     <p>
+
       GiftedGift Empire may contain links to websites
       operated by third parties.
+
     </p>
 
     <p>
+
       We are not responsible for the privacy practices,
       content or security of third-party websites.
       Please review their privacy policies before providing
       personal information.
+
     </p>
 
 
@@ -939,13 +1241,26 @@
     </h2>
 
     <p>
+
       This Privacy Policy may be updated when our services,
-      technology, business practices or legal obligations change.
+      technology, business practices, tracking technologies
+      or legal obligations change.
+
     </p>
 
     <p>
+
+      Where a material change affects optional analytics or
+      marketing technologies, visitors may be asked to make
+      their privacy choices again.
+
+    </p>
+
+    <p>
+
       The current version will be published on this page
       together with its latest update date.
+
     </p>
 
 
@@ -960,9 +1275,11 @@
       </p>
 
       <p>
+
         <strong>
           GiftedGift Empire
         </strong>
+
       </p>
 
       <p>
@@ -980,15 +1297,401 @@
 
   </article>
 
+
+  <!-- =====================================================
+       PERMANENT COOKIE / TRACKING DISCLOSURE
+
+       IMPORTANT:
+       This section is deliberately OUTSIDE policy-content.
+
+       The Admin/Supabase legal-page content may replace
+       policy-content, but this tracking disclosure will
+       remain visible.
+  ====================================================== -->
+
+  <section
+    id="cookie-tracking-information"
+    class="policy-card tracking-card"
+  >
+
+    <h2>
+      Cookie & Tracking Technologies
+    </h2>
+
+
+    <div class="tracking-intro">
+
+      GiftedGift Empire separates optional technologies
+      into Analytics and Marketing categories.
+
+      Optional analytics or advertising technologies are
+      not activated through our website unless the visitor
+      gives the relevant permission.
+
+    </div>
+
+
+    <!-- ESSENTIAL -->
+
+    <div class="tracking-service">
+
+      <span class="tracking-label essential">
+        Essential — Always Active
+      </span>
+
+      <h3>
+        Essential Browser Storage
+      </h3>
+
+      <p>
+
+        Essential browser storage supports functions requested
+        by the visitor, such as the shopping cart, website
+        preferences, privacy choices, session-based features
+        and certain security or authentication functions.
+
+      </p>
+
+      <p>
+
+        These technologies are not used by GiftedGift Empire
+        for optional advertising tracking.
+
+      </p>
+
+    </div>
+
+
+    <!-- GOOGLE ANALYTICS -->
+
+    <div class="tracking-service">
+
+      <span class="tracking-label analytics">
+        Analytics Consent Required
+      </span>
+
+      <h3>
+        Google Analytics 4
+      </h3>
+
+      <p>
+
+        GiftedGift Empire uses Google Analytics 4 to help
+        understand how visitors use the website.
+
+      </p>
+
+      <p>
+
+        Depending on the visitor's device and browser,
+        analytics information may include pages visited,
+        approximate traffic source, browser or device
+        information, engagement information and website
+        events.
+
+      </p>
+
+      <p>
+
+        Google Analytics is activated through GiftedGift
+        Empire only after the visitor allows
+        <strong>Analytics</strong> technologies.
+
+      </p>
+
+      <p>
+
+        Google may process information according to its own
+        privacy terms and applicable data-protection
+        obligations.
+
+      </p>
+
+    </div>
+
+
+    <!-- META -->
+
+    <div class="tracking-service">
+
+      <span class="tracking-label marketing">
+        Marketing Consent Required
+      </span>
+
+      <h3>
+        Meta / Facebook Pixel
+      </h3>
+
+      <p>
+
+        GiftedGift Empire uses the Meta Pixel to measure
+        activity associated with Facebook and Instagram
+        advertising and to understand how visitors interact
+        with the website after engaging with advertising.
+
+      </p>
+
+      <p>
+
+        Depending on the features used, Meta may receive
+        information relating to website visits, browser or
+        device information and events such as page views or,
+        when implemented, ecommerce actions.
+
+      </p>
+
+      <p>
+
+        The Meta Pixel is activated through GiftedGift
+        Empire only after the visitor allows
+        <strong>Marketing</strong> technologies.
+
+      </p>
+
+      <p>
+
+        Meta processes information according to its own
+        privacy terms and applicable data-protection
+        obligations.
+
+      </p>
+
+    </div>
+
+
+    <!-- PINTEREST -->
+
+    <div class="tracking-service">
+
+      <span class="tracking-label marketing">
+        Marketing Consent Required
+      </span>
+
+      <h3>
+        Pinterest Tag
+      </h3>
+
+      <p>
+
+        GiftedGift Empire uses the Pinterest Tag to measure
+        visits and actions associated with Pinterest traffic
+        or advertising, understand campaign performance and
+        support conversion measurement.
+
+      </p>
+
+      <p>
+
+        Depending on the visitor's device and the events
+        configured on the website, Pinterest may receive
+        information relating to website visits, technical
+        information and website interactions.
+
+      </p>
+
+      <p>
+
+        The Pinterest Tag is activated through GiftedGift
+        Empire only after the visitor allows
+        <strong>Marketing</strong> technologies.
+
+      </p>
+
+      <p>
+
+        Pinterest processes information according to its own
+        privacy terms and applicable data-protection
+        obligations.
+
+      </p>
+
+    </div>
+
+
+    <!-- TIKTOK -->
+
+    <div class="tracking-service">
+
+      <span class="tracking-label marketing">
+        Marketing Consent Required
+      </span>
+
+      <h3>
+        TikTok Pixel
+      </h3>
+
+      <p>
+
+        GiftedGift Empire uses the TikTok Pixel for
+        advertising measurement and to understand website
+        activity associated with TikTok campaigns or traffic.
+
+      </p>
+
+      <p>
+
+        Depending on the events configured, TikTok may receive
+        information relating to page visits, technical browser
+        or device information and website interactions.
+
+      </p>
+
+      <p>
+
+        The TikTok Pixel is activated through GiftedGift
+        Empire only after the visitor allows
+        <strong>Marketing</strong> technologies.
+
+      </p>
+
+      <p>
+
+        TikTok processes information according to its own
+        privacy terms and applicable data-protection
+        obligations.
+
+      </p>
+
+    </div>
+
+
+    <!-- FUTURE GOOGLE ADS -->
+
+    <div class="tracking-service">
+
+      <span class="tracking-label marketing">
+        Not Currently Active
+      </span>
+
+      <h3>
+        Google Ads / YouTube Advertising
+      </h3>
+
+      <p>
+
+        At the date of this Privacy Policy, GiftedGift Empire
+        has not activated Google Ads or YouTube advertising
+        conversion tracking.
+
+      </p>
+
+      <p>
+
+        If these advertising technologies are introduced
+        later, they will be treated as Marketing technologies
+        and will not be activated through our website before
+        the required Marketing consent is given.
+
+      </p>
+
+    </div>
+
+
+    <!-- CONSENT -->
+
+    <h2>
+      Managing Your Privacy Choices
+    </h2>
+
+    <p>
+
+      When a visitor first arrives, GiftedGift Empire provides
+      controls for accepting optional technologies, rejecting
+      optional technologies or managing Analytics and
+      Marketing choices separately.
+
+    </p>
+
+    <p>
+
+      Rejecting optional technologies does not disable
+      essential website functions such as normal browsing
+      or the shopping cart.
+
+    </p>
+
+    <p>
+
+      The selected privacy choice is currently remembered in
+      the browser for approximately 180 days.
+
+    </p>
+
+    <p>
+
+      Visitors can change or withdraw their choice at any time
+      using the <strong>Cookie Settings</strong> control shown
+      on the website.
+
+    </p>
+
+
+    <div class="cookie-settings-area">
+
+      <p>
+
+        Want to review or change your current Analytics and
+        Marketing choices?
+
+      </p>
+
+      <button
+        id="privacy-cookie-settings-button"
+        class="cookie-settings-action"
+        type="button"
+      >
+        Cookie Settings
+      </button>
+
+    </div>
+
+
+    <h2>
+      Third-Party Processing
+    </h2>
+
+    <p>
+
+      Google, Meta, Pinterest and TikTok operate their own
+      services and may process information under their own
+      privacy policies, terms and legal responsibilities.
+
+    </p>
+
+    <p>
+
+      Some processing by these providers may involve
+      international transfers of information. Where required,
+      those providers and the relevant parties are responsible
+      for using appropriate safeguards under applicable
+      data-protection law.
+
+    </p>
+
+    <p>
+
+      GiftedGift Empire may update this section if the
+      technologies used on the website materially change.
+
+    </p>
+
+  </section>
+
 </main>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
   <p>
+
     <strong>
       GiftedGift Empire
     </strong>
+
   </p>
 
 
@@ -1006,12 +1709,18 @@
       Contact
     </a>
 
+    <a href="privacy-policy.html">
+      Privacy
+    </a>
+
   </p>
 
 
   <p>
+
     © 2026 GiftedGift Empire.
     All rights reserved.
+
   </p>
 
 </footer>
@@ -1038,6 +1747,18 @@
     );
 
 
+  /*
+    This date represents the latest
+    mandatory tracking/privacy update
+    built directly into this page.
+  */
+
+  const TRACKING_POLICY_DATE =
+    new Date(
+      "2026-08-27T00:00:00Z"
+    );
+
+
   /* =========================
      FORMAT DATE
   ========================= */
@@ -1058,9 +1779,7 @@
         date.getTime()
       )
     ) {
-
       return "";
-
     }
 
 
@@ -1072,6 +1791,67 @@
         year: "numeric"
       }
     );
+
+  }
+
+
+  /* =========================
+     EFFECTIVE UPDATE DATE
+  ========================= */
+
+  function updateEffectivePolicyDate(
+    adminUpdatedAt
+  ) {
+
+    const updatedBox =
+      document.getElementById(
+        "policy-updated"
+      );
+
+
+    let effectiveDate =
+      new Date(
+        TRACKING_POLICY_DATE
+      );
+
+
+    if (adminUpdatedAt) {
+
+      const adminDate =
+        new Date(
+          adminUpdatedAt
+        );
+
+
+      if (
+        !Number.isNaN(
+          adminDate.getTime()
+        ) &&
+        adminDate >
+          effectiveDate
+      ) {
+
+        effectiveDate =
+          adminDate;
+
+      }
+
+    }
+
+
+    const formatted =
+      formatPolicyDate(
+        effectiveDate
+      );
+
+
+    if (formatted) {
+
+      updatedBox.textContent =
+        "Last updated: " +
+        formatted;
+
+    }
 
   }
 
@@ -1094,12 +1874,6 @@
       );
 
 
-    const updatedBox =
-      document.getElementById(
-        "policy-updated"
-      );
-
-
     try {
 
       const {
@@ -1107,7 +1881,9 @@
         error
       } =
         await supabaseClient
-          .from("legal_pages")
+          .from(
+            "legal_pages"
+          )
           .select(
             "title, content_html, published, updated_at"
           )
@@ -1127,61 +1903,31 @@
 
 
         /*
-          Keep the static fallback content
-          already displayed in the page.
+          Supabase problem:
+          keep the static fallback
+          and permanent tracker disclosure.
         */
+
+        updateEffectivePolicyDate(
+          null
+        );
 
         return;
 
       }
 
-
-      /*
-        If no row is visible, the policy is
-        unpublished or unavailable.
-      */
 
       if (!data) {
 
-        titleBox.textContent =
-          "Privacy Policy";
+        /*
+          Keep the static fallback policy
+          rather than leaving visitors
+          without privacy information.
+        */
 
-
-        updatedBox.style.display =
-          "none";
-
-
-        contentBox.innerHTML = `
-
-          <div class="policy-unavailable">
-
-            <h2>
-              Privacy Policy Unavailable
-            </h2>
-
-            <p>
-              This page is not currently published.
-            </p>
-
-            <p>
-              Please contact GiftedGift Empire if
-              you need assistance.
-            </p>
-
-            <p>
-
-              <a
-                href="mailto:gift@giftedgiftempire.com"
-              >
-                gift@giftedgiftempire.com
-              </a>
-
-            </p>
-
-          </div>
-
-        `;
-
+        updateEffectivePolicyDate(
+          null
+        );
 
         return;
 
@@ -1189,7 +1935,7 @@
 
 
       /*
-        Update public page title
+        Update public title.
       */
 
       const title =
@@ -1209,33 +1955,30 @@
 
 
       /*
-        Update last-modified date
+        Display whichever update is newer:
+        the Admin update or the mandatory
+        tracker-disclosure update.
       */
 
-      const formattedDate =
-        formatPolicyDate(
-          data.updated_at
-        );
-
-
-      if (formattedDate) {
-
-        updatedBox.textContent =
-          "Last updated: " +
-          formattedDate;
-
-      }
+      updateEffectivePolicyDate(
+        data.updated_at
+      );
 
 
       /*
-        Replace fallback with the content
-        saved through Admin only when
+        Use Admin policy content when
         actual saved content exists.
+
+        The permanent tracking section
+        remains outside this element and
+        therefore cannot be accidentally
+        removed by this replacement.
       */
 
       const savedContent =
         String(
-          data.content_html || ""
+          data.content_html ||
+          ""
         ).trim();
 
 
@@ -1255,12 +1998,59 @@
       );
 
 
-      /*
-        Network problem:
-        leave static fallback visible.
-      */
+      updateEffectivePolicyDate(
+        null
+      );
 
     }
+
+  }
+
+
+  /* =========================
+     POLICY COOKIE SETTINGS
+  ========================= */
+
+  function openPrivacyCookieSettings() {
+
+    if (
+      window.GiftedGiftConsent &&
+      typeof
+        window
+          .GiftedGiftConsent
+          .openSettings ===
+        "function"
+    ) {
+
+      window
+        .GiftedGiftConsent
+        .openSettings();
+
+      return;
+
+    }
+
+
+    console.warn(
+      "Cookie settings are not ready yet."
+    );
+
+  }
+
+
+  const privacyCookieButton =
+    document.getElementById(
+      "privacy-cookie-settings-button"
+    );
+
+
+  if (privacyCookieButton) {
+
+    privacyCookieButton
+      .addEventListener(
+        "click",
+        openPrivacyCookieSettings
+      );
 
   }
 
@@ -1269,10 +2059,21 @@
      START
   ========================= */
 
+  updateEffectivePolicyDate(
+    null
+  );
+
+
   loadPrivacyPolicy();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+
+<!-- =========================
+     COOKIE CONSENT
+========================= -->
+
+<script src="cookie-consent.js"></script>
 
 
 </body>
