@@ -87,6 +87,8 @@ input[type="file"] {
   color: #666;
   font-size: 14px;
   margin-top: 7px;
+  line-height: 1.5;
+  word-break: break-word;
 }
 
 .image-preview {
@@ -169,6 +171,7 @@ button:disabled {
 .small {
   color: #666;
   font-size: 14px;
+  word-break: break-word;
 }
 
 .actions button {
@@ -183,6 +186,7 @@ button:disabled {
 .message {
   margin-top: 15px;
   font-weight: bold;
+  line-height: 1.5;
 }
 
 #status {
@@ -466,23 +470,34 @@ button:disabled {
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
 
 const IMAGE_BUCKET =
   "product-images";
 
+
 const DIGITAL_BUCKET =
   "digital-files";
+
 
 const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
 
+
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
 const MAX_IMAGE_SIZE =
   5 * 1024 * 1024;
 
+
 const MAX_DIGITAL_SIZE =
   6 * 1024 * 1024;
+
 
 const supabaseClient =
   supabase.createClient(
@@ -495,10 +510,17 @@ let slugWasEdited =
   false;
 
 
-function cleanSlug(value) {
 
-  return String(value || "")
-    .normalize("NFD")
+function cleanSlug(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .normalize(
+      "NFD"
+    )
     .replace(
       /[\u0300-\u036f]/g,
       ""
@@ -524,22 +546,34 @@ function cleanSlug(value) {
 }
 
 
-function suggestShortSlug(value) {
+
+function suggestShortSlug(
+  value
+) {
 
   const fullSlug =
     cleanSlug(
       value
     );
 
-  if (!fullSlug) {
+
+  if (
+    !fullSlug
+  ) {
+
     return "";
   }
 
+
   return fullSlug
     .split("-")
-    .slice(0, 4)
+    .slice(
+      0,
+      4
+    )
     .join("-");
 }
+
 
 
 function updateSlugPreview() {
@@ -553,6 +587,7 @@ function updateSlugPreview() {
         .value
     );
 
+
   document
     .getElementById(
       "slug-preview"
@@ -563,6 +598,7 @@ function updateSlugPreview() {
 }
 
 
+
 document
   .getElementById(
     "name"
@@ -571,9 +607,13 @@ document
     "input",
     function() {
 
-      if (slugWasEdited) {
+      if (
+        slugWasEdited
+      ) {
+
         return;
       }
+
 
       document
         .getElementById(
@@ -584,9 +624,11 @@ document
             this.value
           );
 
+
       updateSlugPreview();
     }
   );
+
 
 
 document
@@ -600,14 +642,249 @@ document
       slugWasEdited =
         true;
 
+
       this.value =
         cleanSlug(
           this.value
         );
 
+
       updateSlugPreview();
     }
   );
+
+
+
+/*
+  =====================================================
+  GLOBAL CLEAN-URL COLLISION PROTECTION
+  =====================================================
+*/
+
+
+const RESERVED_ROOT_SLUGS =
+  new Set([
+
+    "index",
+    "home",
+    "shop",
+    "categories",
+    "daily-inspiration",
+    "blog",
+    "deals",
+    "about",
+    "contact",
+    "cart",
+
+    "product",
+    "checkout",
+    "affiliate-products",
+    "foodstuffs",
+
+    "privacy-policy",
+    "shipping-policy",
+    "returns-refunds",
+    "refund-policy",
+    "terms",
+    "terms-conditions",
+    "terms-and-conditions",
+    "legal-notice",
+    "cookie-policy",
+
+    "admin",
+    "dashboard",
+
+    "manage-blog",
+    "manage-daily-inspiration",
+    "manage-product",
+    "manage-products",
+    "manage-affiliate-products",
+    "manage-digital-products",
+    "manage-foodstuffs",
+    "manage-deals",
+    "manage-reviews",
+    "manage-orders",
+    "shop-settings",
+
+    "orders",
+
+    "tracking",
+    "cookie-consent",
+    "sitemap",
+    "robots",
+    "404"
+
+  ]);
+
+
+const GLOBAL_SLUG_TABLES = [
+
+  {
+    table:
+      "affiliate_products",
+
+    label:
+      "an Affiliate Product"
+  },
+
+  {
+    table:
+      "products",
+
+    label:
+      "a Physical Product"
+  },
+
+  {
+    table:
+      "digital_products",
+
+    label:
+      "another Digital Product"
+  },
+
+  {
+    table:
+      "foodstuffs",
+
+    label:
+      "an African Foodstuff"
+  },
+
+  {
+    table:
+      "blog_posts",
+
+    label:
+      "a Blog Post"
+  },
+
+  {
+    table:
+      "daily_inspirations",
+
+    label:
+      "a Daily Inspiration post"
+  }
+
+];
+
+
+async function checkGlobalSlugAvailability(
+  slug,
+  currentDigitalId = null
+) {
+
+  const cleanValue =
+    cleanSlug(
+      slug
+    );
+
+
+  if (
+    !cleanValue
+  ) {
+
+    throw new Error(
+      "Please enter a valid Share Link Name."
+    );
+  }
+
+
+  if (
+    RESERVED_ROOT_SLUGS.has(
+      cleanValue
+    )
+  ) {
+
+    throw new Error(
+      `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
+    );
+  }
+
+
+  for (
+    const source of
+    GLOBAL_SLUG_TABLES
+  ) {
+
+    let query =
+      supabaseClient
+        .from(
+          source.table
+        )
+        .select(
+          "id,slug"
+        )
+        .eq(
+          "slug",
+          cleanValue
+        );
+
+
+    /*
+      When editing the current Digital Product,
+      allow it to keep its own existing slug.
+    */
+
+    if (
+      source.table ===
+        "digital_products" &&
+      currentDigitalId
+    ) {
+
+      query =
+        query.neq(
+          "id",
+          currentDigitalId
+        );
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await query
+        .limit(
+          1
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Global slug check failed:",
+        source.table,
+        error
+      );
+
+
+      throw new Error(
+        "The Share Link Name could not be checked safely. Please try again."
+      );
+    }
+
+
+    if (
+      Array.isArray(
+        data
+      ) &&
+      data.length > 0
+    ) {
+
+      throw new Error(
+        `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
+      );
+    }
+  }
+
+
+  return true;
+}
+
 
 
 async function protectPage() {
@@ -620,34 +897,46 @@ async function protectPage() {
       .auth
       .getSession();
 
+
   if (
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     window.location.replace(
       "admin.html"
     );
 
+
     return;
   }
 
+
   document
-    .getElementById("status")
+    .getElementById(
+      "status"
+    )
     .style.display =
       "none";
 
+
   document
-    .getElementById("page")
+    .getElementById(
+      "page"
+    )
     .style.display =
       "block";
 
+
   await loadCategoryOptions();
+
 
   await loadDigitalProducts();
 }
+
 
 
 async function loadCategoryOptions() {
@@ -657,32 +946,47 @@ async function loadCategoryOptions() {
       "category"
     );
 
+
   select.innerHTML =
     `<option value="">Select category</option>`;
+
 
   const {
     data: categories,
     error
   } =
     await supabaseClient
-      .from("categories")
-      .select("name")
+      .from(
+        "categories"
+      )
+      .select(
+        "name"
+      )
       .order(
         "name",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
-  if (error) {
 
-    console.error(error);
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
 
     select.innerHTML =
       `<option value="">Categories could not be loaded</option>`;
 
+
     return;
   }
+
 
   if (
     !categories ||
@@ -692,26 +996,35 @@ async function loadCategoryOptions() {
     select.innerHTML =
       `<option value="">No categories available</option>`;
 
+
     return;
   }
+
 
   categories.forEach(
     category => {
 
-      if (!category.name) {
+      if (
+        !category.name
+      ) {
+
         return;
       }
+
 
       const option =
         document.createElement(
           "option"
         );
 
+
       option.value =
         category.name;
 
+
       option.textContent =
         category.name;
+
 
       select.appendChild(
         option
@@ -721,8 +1034,11 @@ async function loadCategoryOptions() {
 }
 
 
+
 document
-  .getElementById("cover-image")
+  .getElementById(
+    "cover-image"
+  )
   .addEventListener(
     "change",
     function(event) {
@@ -730,9 +1046,14 @@ document
       const file =
         event.target.files[0];
 
-      if (!file) {
+
+      if (
+        !file
+      ) {
+
         return;
       }
+
 
       if (
         !file.type ||
@@ -745,11 +1066,14 @@ document
           "Please choose an image file."
         );
 
+
         event.target.value =
           "";
 
+
         return;
       }
+
 
       if (
         file.size >
@@ -760,16 +1084,20 @@ document
           "Please choose an image smaller than 5 MB."
         );
 
+
         event.target.value =
           "";
 
+
         return;
       }
+
 
       const temporaryURL =
         URL.createObjectURL(
           file
         );
+
 
       showImagePreview(
         temporaryURL
@@ -778,8 +1106,11 @@ document
   );
 
 
+
 document
-  .getElementById("digital-file")
+  .getElementById(
+    "digital-file"
+  )
   .addEventListener(
     "change",
     function(event) {
@@ -787,18 +1118,24 @@ document
       const file =
         event.target.files[0];
 
+
       const status =
         document.getElementById(
           "file-status"
         );
 
-      if (!file) {
+
+      if (
+        !file
+      ) {
 
         status.textContent =
           "No digital file selected.";
 
+
         return;
       }
+
 
       if (
         file.size >
@@ -809,14 +1146,18 @@ document
           "Please choose a digital file smaller than 6 MB."
         );
 
+
         event.target.value =
           "";
+
 
         status.textContent =
           "No digital file selected.";
 
+
         return;
       }
+
 
       status.textContent =
         "Selected file: " +
@@ -825,36 +1166,48 @@ document
   );
 
 
-function showImagePreview(url) {
+
+function showImagePreview(
+  url
+) {
 
   const preview =
     document.getElementById(
       "image-preview"
     );
 
+
   const image =
     document.getElementById(
       "preview-img"
     );
 
-  if (!url) {
+
+  if (
+    !url
+  ) {
 
     preview.style.display =
       "none";
+
 
     image.removeAttribute(
       "src"
     );
 
+
     return;
   }
+
 
   image.src =
     url;
 
+
   preview.style.display =
     "block";
 }
+
 
 
 async function verifyAdminSession() {
@@ -867,11 +1220,13 @@ async function verifyAdminSession() {
       .auth
       .getSession();
 
+
   if (
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     throw new Error(
@@ -881,18 +1236,23 @@ async function verifyAdminSession() {
 }
 
 
+
 function makeSafeFileName(
   originalName,
   fallback
 ) {
 
   const parts =
-    originalName.split(".");
+    originalName.split(
+      "."
+    );
+
 
   let extension =
     parts.length > 1
       ? parts.pop()
       : "";
+
 
   extension =
     extension
@@ -902,9 +1262,12 @@ function makeSafeFileName(
         ""
       );
 
+
   let safeName =
     parts
-      .join("-")
+      .join(
+        "-"
+      )
       .toLowerCase()
       .replace(
         /[^a-z0-9_-]+/g,
@@ -915,10 +1278,15 @@ function makeSafeFileName(
         ""
       );
 
-  if (!safeName) {
+
+  if (
+    !safeName
+  ) {
+
     safeName =
       fallback;
   }
+
 
   return {
     safeName,
@@ -927,13 +1295,18 @@ function makeSafeFileName(
 }
 
 
-async function uploadCoverImage(file) {
+
+async function uploadCoverImage(
+  file
+) {
 
   await verifyAdminSession();
+
 
   const originalName =
     file.name ||
     "digital-cover.jpg";
+
 
   const fileInfo =
     makeSafeFileName(
@@ -941,14 +1314,22 @@ async function uploadCoverImage(file) {
       "digital-cover"
     );
 
-  let extension =
+
+  const extension =
     fileInfo.extension ||
     "jpg";
 
+
   const randomPart =
     Math.random()
-      .toString(36)
-      .slice(2, 10);
+      .toString(
+        36
+      )
+      .slice(
+        2,
+        10
+      );
+
 
   const filePath =
     "digital-covers/" +
@@ -959,6 +1340,7 @@ async function uploadCoverImage(file) {
     fileInfo.safeName +
     "." +
     extension;
+
 
   const {
     data: uploadData,
@@ -985,20 +1367,26 @@ async function uploadCoverImage(file) {
         }
       );
 
-  if (uploadError) {
+
+  if (
+    uploadError
+  ) {
 
     console.error(
       uploadError
     );
 
+
     throw uploadError;
   }
+
 
   const uploadedPath =
     uploadData &&
     uploadData.path
       ? uploadData.path
       : filePath;
+
 
   const {
     data: publicURLData
@@ -1012,6 +1400,7 @@ async function uploadCoverImage(file) {
         uploadedPath
       );
 
+
   if (
     !publicURLData ||
     !publicURLData.publicUrl
@@ -1022,8 +1411,10 @@ async function uploadCoverImage(file) {
     );
   }
 
+
   return publicURLData.publicUrl;
 }
+
 
 
 async function uploadDigitalFile(
@@ -1032,9 +1423,11 @@ async function uploadDigitalFile(
 
   await verifyAdminSession();
 
+
   const originalName =
     file.name ||
     "digital-file";
+
 
   const fileInfo =
     makeSafeFileName(
@@ -1042,10 +1435,17 @@ async function uploadDigitalFile(
       "digital-file"
     );
 
+
   const randomPart =
     Math.random()
-      .toString(36)
-      .slice(2, 10);
+      .toString(
+        36
+      )
+      .slice(
+        2,
+        10
+      );
+
 
   let filePath =
     "digital-products/" +
@@ -1055,6 +1455,7 @@ async function uploadDigitalFile(
     "-" +
     fileInfo.safeName;
 
+
   if (
     fileInfo.extension
   ) {
@@ -1063,6 +1464,7 @@ async function uploadDigitalFile(
       "." +
       fileInfo.extension;
   }
+
 
   const {
     data: uploadData,
@@ -1089,16 +1491,22 @@ async function uploadDigitalFile(
         }
       );
 
-  if (uploadError) {
+
+  if (
+    uploadError
+  ) {
 
     console.error(
       uploadError
     );
 
+
     throw uploadError;
   }
 
+
   return {
+
     path:
       uploadData &&
       uploadData.path
@@ -1107,8 +1515,10 @@ async function uploadDigitalFile(
 
     name:
       originalName
+
   };
 }
+
 
 
 async function loadDigitalProducts() {
@@ -1118,8 +1528,10 @@ async function loadDigitalProducts() {
       "digital-list"
     );
 
+
   list.textContent =
     "Loading digital products...";
+
 
   const {
     data: products,
@@ -1129,23 +1541,34 @@ async function loadDigitalProducts() {
       .from(
         "digital_products"
       )
-      .select("*")
+      .select(
+        "*"
+      )
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
-  if (error) {
 
-    console.error(error);
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
 
     list.textContent =
       "Digital products could not be loaded.";
 
+
     return;
   }
+
 
   if (
     !products ||
@@ -1155,11 +1578,14 @@ async function loadDigitalProducts() {
     list.textContent =
       "No digital products have been added yet.";
 
+
     return;
   }
 
+
   list.innerHTML =
     "";
+
 
   products.forEach(
     product => {
@@ -1169,11 +1595,14 @@ async function loadDigitalProducts() {
           "div"
         );
 
+
       item.className =
         "digital-item";
 
+
       let imageHTML =
         "";
+
 
       if (
         product.image_url
@@ -1181,11 +1610,17 @@ async function loadDigitalProducts() {
 
         imageHTML = `
           <img
-            src="${escapeAttribute(product.image_url)}"
-            alt="${escapeAttribute(product.name || "Digital Product")}"
+            src="${escapeAttribute(
+              product.image_url
+            )}"
+            alt="${escapeAttribute(
+              product.name ||
+              "Digital Product"
+            )}"
           >
         `;
       }
+
 
       const priceHTML =
         product.product_type ===
@@ -1197,23 +1632,25 @@ async function loadDigitalProducts() {
               ? "€" +
                 Number(
                   product.price
-                ).toFixed(2)
+                ).toFixed(
+                  2
+                )
               : "No price";
+
 
       const statusHTML =
         product.active
           ? "Active"
           : "Inactive";
 
-      const publicLinkHTML =
+
+      const publicLink =
         product.slug
-          ? `
-            <p class="small">
-              Public Link:
-              https://giftedgiftempire.com/${escapeHTML(product.slug)}
-            </p>
-          `
+          ? SITE_URL +
+            "/" +
+            product.slug
           : "";
+
 
       item.innerHTML = `
 
@@ -1234,7 +1671,18 @@ async function loadDigitalProducts() {
           )}
         </p>
 
-        ${publicLinkHTML}
+        ${
+          publicLink
+            ? `
+              <p class="small">
+                Public Link:
+                ${escapeHTML(
+                  publicLink
+                )}
+              </p>
+            `
+            : ""
+        }
 
         <p>
           ${escapeHTML(
@@ -1285,12 +1733,14 @@ async function loadDigitalProducts() {
         </div>
       `;
 
+
       list.appendChild(
         item
       );
     }
   );
 }
+
 
 
 document
@@ -1303,56 +1753,205 @@ document
 
       event.preventDefault();
 
+
       const message =
         document.getElementById(
           "form-message"
         );
+
 
       const saveButton =
         document.getElementById(
           "save-button"
         );
 
+
+      const id =
+        document
+          .getElementById(
+            "digital-id"
+          )
+          .value;
+
+
+      const name =
+        document
+          .getElementById(
+            "name"
+          )
+          .value
+          .trim();
+
+
+      const slug =
+        cleanSlug(
+          document
+            .getElementById(
+              "slug"
+            )
+            .value
+        );
+
+
+      const category =
+        document
+          .getElementById(
+            "category"
+          )
+          .value;
+
+
+      if (
+        !name
+      ) {
+
+        message.textContent =
+          "Please enter a Product Name.";
+
+
+        document
+          .getElementById(
+            "name"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      if (
+        !slug
+      ) {
+
+        message.textContent =
+          "Please enter a Share Link Name.";
+
+
+        document
+          .getElementById(
+            "slug"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      if (
+        !category
+      ) {
+
+        message.textContent =
+          "Please select a Category.";
+
+
+        document
+          .getElementById(
+            "category"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      let filePath =
+        document
+          .getElementById(
+            "current-file-path"
+          )
+          .value ||
+        null;
+
+
+      const fileInput =
+        document.getElementById(
+          "digital-file"
+        );
+
+
+      const selectedFile =
+        fileInput.files &&
+        fileInput.files.length > 0
+          ? fileInput.files[0]
+          : null;
+
+
+      /*
+        New products must have a digital file.
+        Existing products may keep their
+        previously uploaded file.
+      */
+
+      if (
+        !filePath &&
+        !selectedFile
+      ) {
+
+        message.textContent =
+          "Please choose a digital file.";
+
+
+        fileInput.focus();
+
+
+        return;
+      }
+
+
       saveButton.disabled =
         true;
 
+
+      saveButton.textContent =
+        "Checking Share Link...";
+
+
       message.textContent =
-        "Saving...";
+        "Checking Share Link...";
+
 
       try {
 
-        const id =
-          document.getElementById(
-            "digital-id"
-          ).value;
+        /*
+          IMPORTANT:
+          Check the clean URL before uploading
+          the cover image or digital file.
+        */
+
+        await checkGlobalSlugAvailability(
+          slug,
+          id ||
+          null
+        );
+
 
         let imageURL =
-          document.getElementById(
-            "current-image-url"
-          ).value ||
+          document
+            .getElementById(
+              "current-image-url"
+            )
+            .value ||
           null;
 
-        let filePath =
-          document.getElementById(
-            "current-file-path"
-          ).value ||
-          null;
 
         let fileName =
-          document.getElementById(
-            "current-file-name"
-          ).value ||
+          document
+            .getElementById(
+              "current-file-name"
+            )
+            .value ||
           null;
+
 
         const imageInput =
           document.getElementById(
             "cover-image"
           );
 
-        const fileInput =
-          document.getElementById(
-            "digital-file"
-          );
 
         const selectedImage =
           imageInput.files &&
@@ -1360,16 +1959,18 @@ document
             ? imageInput.files[0]
             : null;
 
-        const selectedFile =
-          fileInput.files &&
-          fileInput.files.length > 0
-            ? fileInput.files[0]
-            : null;
 
-        if (selectedImage) {
+        if (
+          selectedImage
+        ) {
 
           message.textContent =
             "Uploading cover image...";
+
+
+          saveButton.textContent =
+            "Uploading Cover...";
+
 
           imageURL =
             await uploadCoverImage(
@@ -1377,51 +1978,57 @@ document
             );
         }
 
-        if (selectedFile) {
+
+        if (
+          selectedFile
+        ) {
 
           message.textContent =
             "Uploading digital file...";
+
+
+          saveButton.textContent =
+            "Uploading File...";
+
 
           const uploadedFile =
             await uploadDigitalFile(
               selectedFile
             );
 
+
           filePath =
             uploadedFile.path;
+
 
           fileName =
             uploadedFile.name;
         }
 
-        if (!filePath) {
+
+        if (
+          !filePath
+        ) {
 
           throw new Error(
             "Please choose a digital file."
           );
         }
 
+
         message.textContent =
           "Saving digital product...";
 
+
+        saveButton.textContent =
+          "Saving...";
+
+
         const digitalData = {
 
-          name:
-            document
-              .getElementById(
-                "name"
-              )
-              .value
-              .trim(),
+          name,
 
-          slug:
-            cleanSlug(
-              document
-                .getElementById(
-                  "slug"
-                )
-                .value
-            ),
+          slug,
 
           description:
             document
@@ -1453,12 +2060,7 @@ document
               )
               .value,
 
-          category:
-            document
-              .getElementById(
-                "category"
-              )
-              .value,
+          category,
 
           image_url:
             imageURL,
@@ -1476,7 +2078,8 @@ document
               )
               .value
               .trim()
-            || null,
+            ||
+            null,
 
           rating:
             document
@@ -1506,21 +2109,16 @@ document
                 "active"
               )
               .checked
+
         };
-
-
-        if (!digitalData.slug) {
-
-          throw new Error(
-            "Please enter a Share Link Name."
-          );
-        }
 
 
         let saveError;
 
 
-        if (id) {
+        if (
+          id
+        ) {
 
           const result =
             await supabaseClient
@@ -1534,6 +2132,7 @@ document
                 "id",
                 id
               );
+
 
           saveError =
             result.error;
@@ -1549,16 +2148,20 @@ document
                 digitalData
               );
 
+
           saveError =
             result.error;
         }
 
 
-        if (saveError) {
+        if (
+          saveError
+        ) {
 
           console.error(
             saveError
           );
+
 
           if (
             saveError.code ===
@@ -1566,11 +2169,15 @@ document
           ) {
 
             throw new Error(
-              "That Share Link Name is already being used. Please choose a different one."
+              "That Share Link Name is already being used. Please choose another one."
             );
           }
 
-          throw saveError;
+
+          throw new Error(
+            saveError.message ||
+            "Digital product could not be saved."
+          );
         }
 
 
@@ -1582,23 +2189,60 @@ document
 
         resetForm();
 
+
         await loadDigitalProducts();
 
 
-      } catch (error) {
+      } catch (
+        error
+      ) {
 
         console.error(
           error
         );
 
+
+        const errorMessage =
+          error &&
+          error.message
+            ? error.message
+            : "Digital product could not be saved.";
+
+
         message.textContent =
-          error.message ||
-          "Digital product could not be saved.";
+          errorMessage;
+
+
+        if (
+          errorMessage
+            .toLowerCase()
+            .includes(
+              "share link"
+            )
+        ) {
+
+          document
+            .getElementById(
+              "slug"
+            )
+            .focus();
+        }
+
 
       } finally {
 
         saveButton.disabled =
           false;
+
+
+        saveButton.textContent =
+          document
+            .getElementById(
+              "digital-id"
+            )
+            .value
+            ? "Update Digital Product"
+            : "Save Digital Product";
       }
 
     }
@@ -1606,7 +2250,9 @@ document
 
 
 
-async function editDigitalProduct(id) {
+async function editDigitalProduct(
+  id
+) {
 
   const {
     data,
@@ -1616,7 +2262,9 @@ async function editDigitalProduct(id) {
       .from(
         "digital_products"
       )
-      .select("*")
+      .select(
+        "*"
+      )
       .eq(
         "id",
         id
@@ -1633,29 +2281,37 @@ async function editDigitalProduct(id) {
       "Digital product could not be opened."
     );
 
+
     return;
   }
 
 
-  document.getElementById(
-    "digital-id"
-  ).value =
-    data.id;
+  document
+    .getElementById(
+      "digital-id"
+    )
+    .value =
+      data.id;
 
 
-  document.getElementById(
-    "name"
-  ).value =
-    data.name || "";
+  document
+    .getElementById(
+      "name"
+    )
+    .value =
+      data.name ||
+      "";
 
 
-  document.getElementById(
-    "slug"
-  ).value =
-    data.slug ||
-    suggestShortSlug(
-      data.name
-    );
+  document
+    .getElementById(
+      "slug"
+    )
+    .value =
+      data.slug ||
+      suggestShortSlug(
+        data.name
+      );
 
 
   slugWasEdited =
@@ -1665,123 +2321,168 @@ async function editDigitalProduct(id) {
   updateSlugPreview();
 
 
-  document.getElementById(
-    "description"
-  ).value =
-    data.description || "";
+  document
+    .getElementById(
+      "description"
+    )
+    .value =
+      data.description ||
+      "";
 
 
-  document.getElementById(
-    "price"
-  ).value =
-    data.price ?? "";
+  document
+    .getElementById(
+      "price"
+    )
+    .value =
+      data.price ??
+      "";
 
 
-  document.getElementById(
-    "product-type"
-  ).value =
-    data.product_type || "paid";
+  document
+    .getElementById(
+      "product-type"
+    )
+    .value =
+      data.product_type ||
+      "paid";
 
 
   ensureCategoryOption(
-    data.category || ""
+    data.category ||
+    ""
   );
 
 
-  document.getElementById(
-    "category"
-  ).value =
-    data.category || "";
+  document
+    .getElementById(
+      "category"
+    )
+    .value =
+      data.category ||
+      "";
 
 
-  document.getElementById(
-    "current-image-url"
-  ).value =
-    data.image_url || "";
+  document
+    .getElementById(
+      "current-image-url"
+    )
+    .value =
+      data.image_url ||
+      "";
 
 
-  document.getElementById(
-    "current-file-path"
-  ).value =
-    data.file_path || "";
+  document
+    .getElementById(
+      "current-file-path"
+    )
+    .value =
+      data.file_path ||
+      "";
 
 
-  document.getElementById(
-    "current-file-name"
-  ).value =
-    data.file_name || "";
+  document
+    .getElementById(
+      "current-file-name"
+    )
+    .value =
+      data.file_name ||
+      "";
 
 
-  document.getElementById(
-    "cover-image"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "cover-image"
+    )
+    .value =
+      "";
 
 
-  document.getElementById(
-    "digital-file"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "digital-file"
+    )
+    .value =
+      "";
 
 
   showImagePreview(
-    data.image_url || ""
+    data.image_url ||
+    ""
   );
 
 
-  document.getElementById(
-    "file-status"
-  ).textContent =
-    data.file_name
-      ? "Current file: " +
-        data.file_name
-      : "No digital file saved.";
+  document
+    .getElementById(
+      "file-status"
+    )
+    .textContent =
+      data.file_name
+        ? "Current file: " +
+          data.file_name
+        : "No digital file saved.";
 
 
-  document.getElementById(
-    "checkout-url"
-  ).value =
-    data.checkout_url || "";
+  document
+    .getElementById(
+      "checkout-url"
+    )
+    .value =
+      data.checkout_url ||
+      "";
 
 
-  document.getElementById(
-    "rating"
-  ).value =
-    data.rating ?? "";
+  document
+    .getElementById(
+      "rating"
+    )
+    .value =
+      data.rating ??
+      "";
 
 
-  document.getElementById(
-    "featured"
-  ).checked =
-    Boolean(
-      data.featured
-    );
+  document
+    .getElementById(
+      "featured"
+    )
+    .checked =
+      Boolean(
+        data.featured
+      );
 
 
-  document.getElementById(
-    "active"
-  ).checked =
-    Boolean(
-      data.active
-    );
+  document
+    .getElementById(
+      "active"
+    )
+    .checked =
+      Boolean(
+        data.active
+      );
 
 
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Edit Digital Product";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Edit Digital Product";
 
 
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Update Digital Product";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Update Digital Product";
 
 
-  document.getElementById(
-    "cancel-edit"
-  ).style.display =
-    "inline-block";
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "inline-block";
 
 
   window.scrollTo({
@@ -1792,9 +2493,14 @@ async function editDigitalProduct(id) {
 
 
 
-function ensureCategoryOption(categoryName) {
+function ensureCategoryOption(
+  categoryName
+) {
 
-  if (!categoryName) {
+  if (
+    !categoryName
+  ) {
+
     return;
   }
 
@@ -1817,7 +2523,9 @@ function ensureCategoryOption(categoryName) {
       );
 
 
-  if (!exists) {
+  if (
+    !exists
+  ) {
 
     const option =
       document.createElement(
@@ -1842,7 +2550,9 @@ function ensureCategoryOption(categoryName) {
 
 
 
-async function deleteDigitalProduct(id) {
+async function deleteDigitalProduct(
+  id
+) {
 
   const confirmed =
     confirm(
@@ -1850,7 +2560,10 @@ async function deleteDigitalProduct(id) {
     );
 
 
-  if (!confirmed) {
+  if (
+    !confirmed
+  ) {
+
     return;
   }
 
@@ -1869,7 +2582,9 @@ async function deleteDigitalProduct(id) {
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       error
@@ -1879,6 +2594,7 @@ async function deleteDigitalProduct(id) {
     alert(
       "Digital product could not be deleted."
     );
+
 
     return;
   }
@@ -1913,93 +2629,144 @@ function resetForm() {
     false;
 
 
+  document
+    .getElementById(
+      "digital-id"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "current-image-url"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "current-file-path"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "current-file-name"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "product-type"
+    )
+    .value =
+      "paid";
+
+
+  document
+    .getElementById(
+      "active"
+    )
+    .checked =
+      true;
+
+
+  document
+    .getElementById(
+      "featured"
+    )
+    .checked =
+      false;
+
+
+  document
+    .getElementById(
+      "file-status"
+    )
+    .textContent =
+      "No digital file selected.";
+
+
+  showImagePreview(
+    ""
+  );
+
+
   updateSlugPreview();
 
 
-  document.getElementById(
-    "digital-id"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Add Digital Product";
 
 
-  document.getElementById(
-    "current-image-url"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Save Digital Product";
 
 
-  document.getElementById(
-    "current-file-path"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "current-file-name"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "product-type"
-  ).value =
-    "paid";
-
-
-  document.getElementById(
-    "active"
-  ).checked =
-    true;
-
-
-  document.getElementById(
-    "file-status"
-  ).textContent =
-    "No digital file selected.";
-
-
-  showImagePreview("");
-
-
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Add Digital Product";
-
-
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Save Digital Product";
-
-
-  document.getElementById(
-    "cancel-edit"
-  ).style.display =
-    "none";
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "none";
 }
 
 
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
   return String(
     value == null
       ? ""
       : value
   )
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 }
 
 
 
-function escapeAttribute(value) {
+function escapeAttribute(
+  value
+) {
 
-  return escapeHTML(value);
+  return escapeHTML(
+    value
+  );
 }
 
 
