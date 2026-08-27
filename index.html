@@ -3001,24 +3001,20 @@
               ${imageHTML}
 
 
-              <div class="category-content">
+              <div
+  class="category-content"
+  style="text-align:center;"
+>
 
-                <h3>
-                  ${escapeHTML(name)}
-                </h3>
+  <a
+    class="category-link"
+    href="${escapeHTML(buttonLink)}"
+    aria-label="Shop ${escapeHTML(name)}"
+  >
+    ${escapeHTML(buttonText)} →
+  </a>
 
-
-                <p>
-                  ${escapeHTML(
-                    category.description ||
-                    "Explore products in this category."
-                  )}
-                </p>
-
-
-                <a
-                  class="category-link"
-                  href="${escapeHTML(buttonLink)}"
+</div>
                 >
                   ${escapeHTML(buttonText)} →
                 </a>
