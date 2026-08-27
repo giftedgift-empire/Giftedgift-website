@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /manage-
+Disallow: /shop-settings.html
+Disallow: /orders.html
+Disallow: /cart.html
+Disallow: /checkout.html
+
+Sitemap: https://giftedgiftempire.com/sitemap.xml
