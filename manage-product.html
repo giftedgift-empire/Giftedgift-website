@@ -179,6 +179,7 @@ button:disabled {
 .message {
   margin-top: 15px;
   font-weight: bold;
+  line-height: 1.5;
 }
 
 #status {
@@ -242,7 +243,9 @@ button:disabled {
   id="name"
   required
 >
-  <label for="slug">
+
+
+<label for="slug">
   Share Link Name
 </label>
 
@@ -578,8 +581,11 @@ async function loadCategoryOptions() {
 
 }
 
+
+
 let slugWasEdited =
   false;
+
 
 
 function cleanSlug(value) {
@@ -597,6 +603,7 @@ function cleanSlug(value) {
 }
 
 
+
 function suggestShortSlug(value) {
 
   const fullSlug =
@@ -612,6 +619,7 @@ function suggestShortSlug(value) {
     .join("-");
 
 }
+
 
 
 function updateSlugPreview() {
@@ -635,6 +643,7 @@ function updateSlugPreview() {
       "product-name";
 
 }
+
 
 
 document
@@ -666,6 +675,7 @@ document
   );
 
 
+
 document
   .getElementById(
     "slug"
@@ -688,6 +698,236 @@ document
 
     }
   );
+
+
+
+/*
+  =====================================================
+  GLOBAL CLEAN-URL COLLISION PROTECTION
+  =====================================================
+*/
+
+
+const RESERVED_ROOT_SLUGS =
+  new Set([
+
+    "index",
+    "home",
+    "shop",
+    "categories",
+    "daily-inspiration",
+    "blog",
+    "deals",
+    "about",
+    "contact",
+    "cart",
+
+    "product",
+    "checkout",
+    "affiliate-products",
+    "foodstuffs",
+
+    "privacy-policy",
+    "shipping-policy",
+    "returns-refunds",
+    "refund-policy",
+    "terms",
+    "terms-conditions",
+    "terms-and-conditions",
+    "legal-notice",
+    "cookie-policy",
+
+    "admin",
+    "dashboard",
+
+    "manage-blog",
+    "manage-daily-inspiration",
+    "manage-product",
+    "manage-products",
+    "manage-affiliate-products",
+    "manage-digital-products",
+    "manage-foodstuffs",
+    "manage-deals",
+    "manage-reviews",
+    "manage-orders",
+    "shop-settings",
+
+    "orders",
+
+    "tracking",
+    "cookie-consent",
+    "sitemap",
+    "robots",
+    "404"
+
+  ]);
+
+
+const GLOBAL_SLUG_TABLES = [
+
+  {
+    table:
+      "affiliate_products",
+
+    label:
+      "an Affiliate Product"
+  },
+
+  {
+    table:
+      "products",
+
+    label:
+      "another Physical Product"
+  },
+
+  {
+    table:
+      "digital_products",
+
+    label:
+      "a Digital Product"
+  },
+
+  {
+    table:
+      "foodstuffs",
+
+    label:
+      "an African Foodstuff"
+  },
+
+  {
+    table:
+      "blog_posts",
+
+    label:
+      "a Blog Post"
+  },
+
+  {
+    table:
+      "daily_inspirations",
+
+    label:
+      "a Daily Inspiration post"
+  }
+
+];
+
+
+async function checkGlobalSlugAvailability(
+  slug,
+  currentProductId = null
+) {
+
+  const cleanValue =
+    cleanSlug(
+      slug
+    );
+
+
+  if (!cleanValue) {
+
+    throw new Error(
+      "Please enter a valid Share Link Name."
+    );
+  }
+
+
+  if (
+    RESERVED_ROOT_SLUGS.has(
+      cleanValue
+    )
+  ) {
+
+    throw new Error(
+      `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
+    );
+  }
+
+
+  for (
+    const source of
+    GLOBAL_SLUG_TABLES
+  ) {
+
+    let query =
+      supabaseClient
+        .from(
+          source.table
+        )
+        .select(
+          "id,slug"
+        )
+        .eq(
+          "slug",
+          cleanValue
+        );
+
+
+    /*
+      When editing this product,
+      allow it to keep its own slug.
+    */
+
+    if (
+      source.table ===
+        "products" &&
+      currentProductId
+    ) {
+
+      query =
+        query.neq(
+          "id",
+          currentProductId
+        );
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await query
+        .limit(
+          1
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Global slug check failed:",
+        source.table,
+        error
+      );
+
+
+      throw new Error(
+        "The Share Link Name could not be checked safely. Please try again."
+      );
+    }
+
+
+    if (
+      Array.isArray(
+        data
+      ) &&
+      data.length > 0
+    ) {
+
+      throw new Error(
+        `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
+      );
+    }
+  }
+
+
+  return true;
+}
+
+
 
 document
   .getElementById(
@@ -1104,6 +1344,20 @@ async function loadProducts() {
         </p>
 
 
+        ${
+          product.slug
+            ? `
+              <p class="small">
+                Public Link:
+                https://giftedgiftempire.com/${escapeHTML(
+                  product.slug
+                )}
+              </p>
+            `
+            : ""
+        }
+
+
         <div class="actions">
 
           <button
@@ -1161,26 +1415,113 @@ document
         );
 
 
+      const id =
+        document
+          .getElementById(
+            "product-id"
+          )
+          .value;
+
+
+      const name =
+        document
+          .getElementById(
+            "name"
+          )
+          .value
+          .trim();
+
+
+      const slug =
+        cleanSlug(
+          document
+            .getElementById(
+              "slug"
+            )
+            .value
+        );
+
+
+      const category =
+        document
+          .getElementById(
+            "category"
+          )
+          .value;
+
+
+      if (!name) {
+
+        message.textContent =
+          "Please enter a Product Name.";
+
+        document
+          .getElementById(
+            "name"
+          )
+          .focus();
+
+        return;
+      }
+
+
+      if (!slug) {
+
+        message.textContent =
+          "Please enter a Share Link Name.";
+
+        document
+          .getElementById(
+            "slug"
+          )
+          .focus();
+
+        return;
+      }
+
+
+      if (!category) {
+
+        message.textContent =
+          "Please select a Category.";
+
+        document
+          .getElementById(
+            "category"
+          )
+          .focus();
+
+        return;
+      }
+
+
       saveButton.disabled =
         true;
 
 
       message.textContent =
-        "Saving...";
+        "Checking Share Link...";
 
 
       try {
 
-        const id =
-          document.getElementById(
-            "product-id"
-          ).value;
+        /*
+          Check the global clean URL
+          BEFORE uploading an image.
+        */
+
+        await checkGlobalSlugAvailability(
+          slug,
+          id || null
+        );
 
 
         let imageURL =
-          document.getElementById(
-            "current-image-url"
-          ).value ||
+          document
+            .getElementById(
+              "current-image-url"
+            )
+            .value ||
           null;
 
 
@@ -1208,30 +1549,18 @@ document
               selectedFile
             );
 
-
-          message.textContent =
-            "Saving product...";
-
         }
+
+
+        message.textContent =
+          "Saving product...";
 
 
         const productData = {
 
-          name:
-            document
-              .getElementById(
-                "name"
-              )
-              .value
-              .trim(),
-          slug:
-  cleanSlug(
-    document
-      .getElementById(
-        "slug"
-      )
-      .value
-  ),
+          name,
+
+          slug,
 
           description:
             document
@@ -1256,12 +1585,7 @@ document
                 )
               : null,
 
-          category:
-            document
-              .getElementById(
-                "category"
-              )
-              .value,
+          category,
 
           image_url:
             imageURL,
@@ -1349,7 +1673,22 @@ document
             productError
           );
 
-          throw productError;
+
+          if (
+            productError.code ===
+            "23505"
+          ) {
+
+            throw new Error(
+              "That Share Link Name is already being used. Please choose another one."
+            );
+          }
+
+
+          throw new Error(
+            productError.message ||
+            "The product could not be saved."
+          );
         }
 
 
@@ -1371,13 +1710,46 @@ document
         );
 
 
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "Product could not be saved.";
+
+
         message.textContent =
-          "Product could not be saved. Please check your login, image and product details.";
+          errorMessage;
+
+
+        if (
+          errorMessage
+            .toLowerCase()
+            .includes(
+              "share link"
+            )
+        ) {
+
+          document
+            .getElementById(
+              "slug"
+            )
+            .focus();
+        }
+
 
       } finally {
 
         saveButton.disabled =
           false;
+
+
+        saveButton.textContent =
+          document
+            .getElementById(
+              "product-id"
+            )
+            .value
+            ? "Update Product"
+            : "Save Product";
 
       }
 
@@ -1430,22 +1802,24 @@ async function editProduct(id) {
     .value =
       data.name ||
       "";
+
+
   document
-  .getElementById(
-    "slug"
-  )
-  .value =
-    data.slug ||
-    suggestShortSlug(
-      data.name
-    );
+    .getElementById(
+      "slug"
+    )
+    .value =
+      data.slug ||
+      suggestShortSlug(
+        data.name
+      );
 
 
-slugWasEdited =
-  true;
+  slugWasEdited =
+    true;
 
 
-updateSlugPreview();
+  updateSlugPreview();
 
 
   document
@@ -1689,46 +2063,80 @@ document
 function resetForm() {
 
   document
-    .getElementById("product-form")
+    .getElementById(
+      "product-form"
+    )
     .reset();
-  
+
+
   slugWasEdited =
     false;
 
+
   updateSlugPreview();
 
-  document
-    .getElementById("product-id")
-    .value = "";
 
   document
-    .getElementById("current-image-url")
-    .value = "";
+    .getElementById(
+      "product-id"
+    )
+    .value =
+      "";
+
 
   document
-    .getElementById("in_stock")
-    .checked = true;
+    .getElementById(
+      "current-image-url"
+    )
+    .value =
+      "";
 
-  showImagePreview("");
-
-  document
-    .getElementById("form-title")
-    .textContent = "Add Product";
 
   document
-    .getElementById("save-button")
-    .textContent = "Save Product";
+    .getElementById(
+      "in_stock"
+    )
+    .checked =
+      true;
+
+
+  showImagePreview(
+    ""
+  );
+
 
   document
-    .getElementById("cancel-edit")
-    .style.display = "none";
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Add Product";
+
+
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Save Product";
+
+
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "none";
 }
+
 
 
 function escapeHTML(value) {
 
   return String(
-    value == null ? "" : value
+    value == null
+      ? ""
+      : value
   )
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -1738,11 +2146,15 @@ function escapeHTML(value) {
 }
 
 
+
 function escapeAttribute(value) {
 
-  return escapeHTML(value);
+  return escapeHTML(
+    value
+  );
 
 }
+
 
 
 protectPage();
