@@ -1445,30 +1445,127 @@
   );
 
 
-  /* =========================================================
-     START
-  ========================================================= */
+/* =========================================================
+   START
+========================================================= */
 
-  const existingConsent =
-    getStoredConsent();
-
-
-  window.GiftedGiftConsent =
-    buildPublicAPI(
-      existingConsent
-    );
+const existingConsent =
+  getStoredConsent();
 
 
-  if (existingConsent) {
+window.GiftedGiftConsent =
+  buildPublicAPI(
+    existingConsent
+  );
 
-    settingsButton.classList.add(
-      "show"
-    );
 
-  } else {
+/* =========================================================
+   LOAD CONSENT-CONTROLLED TRACKING
+========================================================= */
 
-    showBanner();
+function loadTrackingSystem() {
+
+  if (
+    document.getElementById(
+      "giftedgift-tracking-script"
+    )
+  ) {
+
+    return;
 
   }
 
-})();
+
+  const trackingScript =
+    document.createElement(
+      "script"
+    );
+
+
+  trackingScript.id =
+    "giftedgift-tracking-script";
+
+
+  /*
+    Root-relative path is intentional.
+
+    This allows tracking.js to work on
+    normal pages and clean URLs such as:
+    /test-product
+    /fashion-glasses
+    /delife-sirpio-xl
+  */
+
+  trackingScript.src =
+    "/tracking.js";
+
+
+  trackingScript.async =
+    true;
+
+
+  trackingScript.onload =
+    function () {
+
+      /*
+        Tell tracking.js the visitor's
+        current consent state immediately
+        after the tracking system loads.
+      */
+
+      window.dispatchEvent(
+        new CustomEvent(
+          "giftedgift:consentready",
+          {
+            detail: {
+
+              analytics:
+                Boolean(
+                  existingConsent?.analytics
+                ),
+
+              marketing:
+                Boolean(
+                  existingConsent?.marketing
+                )
+
+            }
+          }
+        )
+      );
+
+    };
+
+
+  document.head.appendChild(
+    trackingScript
+  );
+
+}
+
+
+loadTrackingSystem();
+
+
+/*
+  Existing visitor:
+  their valid consent choice is respected.
+
+  New visitor:
+  optional tracking remains off until
+  they make a choice in the banner.
+*/
+
+if (existingConsent) {
+
+  settingsButton.classList.add(
+    "show"
+  );
+
+} else {
+
+  showBanner();
+
+}
+
+})(); 
