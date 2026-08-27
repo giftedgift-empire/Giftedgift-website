@@ -494,6 +494,7 @@ button:disabled {
 
 
     <button
+      id="add-foodstuff-button"
       type="button"
       class="gold full-button"
       onclick="addFoodstuff()"
@@ -524,11 +525,14 @@ button:disabled {
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
+
 const SUPABASE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
+
 const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
 
 const IMAGE_BUCKET =
   "foodstuff-images";
@@ -546,15 +550,18 @@ const loadingBox =
     "loading"
   );
 
+
 const pageBox =
   document.getElementById(
     "page"
   );
 
+
 const productsBox =
   document.getElementById(
     "products"
   );
+
 
 const messageBox =
   document.getElementById(
@@ -562,18 +569,25 @@ const messageBox =
   );
 
 
-let foodstuffs = [];
+let foodstuffs =
+  [];
+
 
 let newSlugWasEdited =
   false;
 
 
-function cleanSlug(value) {
+
+function cleanSlug(
+  value
+) {
 
   return String(
     value || ""
   )
-    .normalize("NFD")
+    .normalize(
+      "NFD"
+    )
     .replace(
       /[\u0300-\u036f]/g,
       ""
@@ -599,6 +613,7 @@ function cleanSlug(value) {
 }
 
 
+
 function suggestShortSlug(
   value
 ) {
@@ -608,15 +623,28 @@ function suggestShortSlug(
       value
     );
 
-  if (!fullSlug) {
+
+  if (
+    !fullSlug
+  ) {
+
     return "";
   }
 
+
   return fullSlug
-    .split("-")
-    .slice(0, 4)
-    .join("-");
+    .split(
+      "-"
+    )
+    .slice(
+      0,
+      4
+    )
+    .join(
+      "-"
+    );
 }
+
 
 
 function updateNewSlugPreview() {
@@ -630,6 +658,7 @@ function updateNewSlugPreview() {
         .value
     );
 
+
   document
     .getElementById(
       "new-slug-preview"
@@ -638,6 +667,7 @@ function updateNewSlugPreview() {
       slug ||
       "food-name";
 }
+
 
 
 function updateExistingSlugPreview(
@@ -649,30 +679,37 @@ function updateExistingSlugPreview(
       "slug-" + id
     );
 
+
   const preview =
     document.getElementById(
       "slug-preview-" + id
     );
 
+
   if (
     !input ||
     !preview
   ) {
+
     return;
   }
+
 
   const slug =
     cleanSlug(
       input.value
     );
 
+
   input.value =
     slug;
+
 
   preview.textContent =
     slug ||
     "food-name";
 }
+
 
 
 document
@@ -686,8 +723,10 @@ document
       if (
         newSlugWasEdited
       ) {
+
         return;
       }
+
 
       document
         .getElementById(
@@ -698,9 +737,11 @@ document
             this.value
           );
 
+
       updateNewSlugPreview();
     }
   );
+
 
 
 document
@@ -714,35 +755,298 @@ document
       newSlugWasEdited =
         true;
 
+
       this.value =
         cleanSlug(
           this.value
         );
+
 
       updateNewSlugPreview();
     }
   );
 
 
-function escapeHtml(value) {
 
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+/*
+  =====================================================
+  GLOBAL CLEAN-URL COLLISION PROTECTION
+  =====================================================
+*/
+
+
+const RESERVED_ROOT_SLUGS =
+  new Set([
+
+    "index",
+    "home",
+    "shop",
+    "categories",
+    "daily-inspiration",
+    "blog",
+    "deals",
+    "about",
+    "contact",
+    "cart",
+
+    "product",
+    "checkout",
+    "affiliate-products",
+    "foodstuffs",
+
+    "privacy-policy",
+    "shipping-policy",
+    "returns-refunds",
+    "refund-policy",
+    "terms",
+    "terms-conditions",
+    "terms-and-conditions",
+    "legal-notice",
+    "cookie-policy",
+
+    "admin",
+    "dashboard",
+
+    "manage-blog",
+    "manage-daily-inspiration",
+    "manage-product",
+    "manage-products",
+    "manage-affiliate-products",
+    "manage-digital-products",
+    "manage-foodstuffs",
+    "manage-deals",
+    "manage-reviews",
+    "manage-orders",
+    "shop-settings",
+
+    "orders",
+
+    "tracking",
+    "cookie-consent",
+    "sitemap",
+    "robots",
+    "404"
+
+  ]);
+
+
+const GLOBAL_SLUG_TABLES = [
+
+  {
+    table:
+      "affiliate_products",
+
+    label:
+      "an Affiliate Product"
+  },
+
+  {
+    table:
+      "products",
+
+    label:
+      "a Physical Product"
+  },
+
+  {
+    table:
+      "digital_products",
+
+    label:
+      "a Digital Product"
+  },
+
+  {
+    table:
+      "foodstuffs",
+
+    label:
+      "another African Foodstuff"
+  },
+
+  {
+    table:
+      "blog_posts",
+
+    label:
+      "a Blog Post"
+  },
+
+  {
+    table:
+      "daily_inspirations",
+
+    label:
+      "a Daily Inspiration post"
+  }
+
+];
+
+
+async function checkGlobalSlugAvailability(
+  slug,
+  currentFoodstuffId = null
+) {
+
+  const cleanValue =
+    cleanSlug(
+      slug
+    );
+
+
+  if (
+    !cleanValue
+  ) {
+
+    throw new Error(
+      "Please enter a valid Share Link Name."
+    );
+  }
+
+
+  if (
+    RESERVED_ROOT_SLUGS.has(
+      cleanValue
+    )
+  ) {
+
+    throw new Error(
+      `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
+    );
+  }
+
+
+  for (
+    const source of
+    GLOBAL_SLUG_TABLES
+  ) {
+
+    let query =
+      supabaseClient
+        .from(
+          source.table
+        )
+        .select(
+          "id,slug"
+        )
+        .eq(
+          "slug",
+          cleanValue
+        );
+
+
+    /*
+      When editing an existing foodstuff,
+      allow it to keep its own slug.
+    */
+
+    if (
+      source.table ===
+        "foodstuffs" &&
+      currentFoodstuffId
+    ) {
+
+      query =
+        query.neq(
+          "id",
+          currentFoodstuffId
+        );
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await query
+        .limit(
+          1
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Global slug check failed:",
+        source.table,
+        error
+      );
+
+
+      throw new Error(
+        "The Share Link Name could not be checked safely. Please try again."
+      );
+    }
+
+
+    if (
+      Array.isArray(
+        data
+      ) &&
+      data.length > 0
+    ) {
+
+      throw new Error(
+        `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
+      );
+    }
+  }
+
+
+  return true;
 }
 
 
-function money(value) {
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+}
+
+
+
+function money(
+  value
+) {
 
   const number =
-    Number(value || 0);
+    Number(
+      value || 0
+    );
+
 
   return "€" +
-    number.toFixed(2);
+    number.toFixed(
+      2
+    );
 }
+
 
 
 function showMessage(
@@ -751,27 +1055,38 @@ function showMessage(
 ) {
 
   messageBox.className =
-    "message " + type;
+    "message " +
+    type;
+
 
   messageBox.textContent =
     text;
 
+
   messageBox.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
+    behavior:
+      "smooth",
+
+    block:
+      "center"
   });
 
 
-  setTimeout(() => {
+  setTimeout(
+    () => {
 
-    messageBox.className =
-      "message";
+      messageBox.className =
+        "message";
 
-    messageBox.textContent =
-      "";
 
-  }, 4500);
+      messageBox.textContent =
+        "";
+
+    },
+    4500
+  );
 }
+
 
 
 async function protectPage() {
@@ -800,12 +1115,14 @@ async function protectPage() {
       "admin.html"
     );
 
+
     return false;
   }
 
 
   loadingBox.style.display =
     "none";
+
 
   pageBox.style.display =
     "block";
@@ -815,10 +1132,14 @@ async function protectPage() {
 }
 
 
-function safeFileName(name) {
+
+function safeFileName(
+  name
+) {
 
   return String(
-    name || "food"
+    name ||
+    "food"
   )
     .toLowerCase()
     .replace(
@@ -836,12 +1157,16 @@ function safeFileName(name) {
 }
 
 
+
 async function uploadImage(
   file,
   productName
 ) {
 
-  if (!file) {
+  if (
+    !file
+  ) {
+
     return null;
   }
 
@@ -859,9 +1184,13 @@ async function uploadImage(
 
 
   const extension =
-    file.name.includes(".")
+    file.name.includes(
+      "."
+    )
       ? file.name
-          .split(".")
+          .split(
+            "."
+          )
           .pop()
           .toLowerCase()
       : "jpg";
@@ -875,8 +1204,13 @@ async function uploadImage(
     Date.now() +
     "-" +
     Math.random()
-      .toString(36)
-      .slice(2, 8) +
+      .toString(
+        36
+      )
+      .slice(
+        2,
+        8
+      ) +
     "." +
     extension;
 
@@ -902,11 +1236,14 @@ async function uploadImage(
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       error
     );
+
 
     throw new Error(
       "The picture could not be uploaded."
@@ -931,11 +1268,15 @@ async function uploadImage(
 }
 
 
+
 function getStoragePath(
   imageUrl
 ) {
 
-  if (!imageUrl) {
+  if (
+    !imageUrl
+  ) {
+
     return null;
   }
 
@@ -955,6 +1296,7 @@ function getStoragePath(
   if (
     index === -1
   ) {
+
     return null;
   }
 
@@ -968,6 +1310,7 @@ function getStoragePath(
 }
 
 
+
 async function removeOldImage(
   imageUrl
 ) {
@@ -978,7 +1321,10 @@ async function removeOldImage(
     );
 
 
-  if (!path) {
+  if (
+    !path
+  ) {
+
     return;
   }
 
@@ -998,7 +1344,9 @@ async function removeOldImage(
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.warn(
       "Old image could not be removed:",
@@ -1006,6 +1354,7 @@ async function removeOldImage(
     );
   }
 }
+
 
 
 async function loadFoodstuffs() {
@@ -1022,40 +1371,50 @@ async function loadFoodstuffs() {
       .from(
         "foodstuffs"
       )
-      .select("*")
+      .select(
+        "*"
+      )
       .order(
         "sort_order",
         {
-          ascending: true
+          ascending:
+            true
         }
       )
       .order(
         "id",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       error
     );
 
+
     productsBox.innerHTML =
       "<div class='empty'>Could not load foodstuffs.</div>";
+
 
     return;
   }
 
 
   foodstuffs =
-    data || [];
+    data ||
+    [];
 
 
   renderFoodstuffs();
 }
+
 
 
 function renderFoodstuffs() {
@@ -1070,6 +1429,7 @@ function renderFoodstuffs() {
       </div>
     `;
 
+
     return;
   }
 
@@ -1083,8 +1443,12 @@ function renderFoodstuffs() {
             product.image_url
               ? `
                 <img
-                  src="${escapeHtml(product.image_url)}"
-                  alt="${escapeHtml(product.name)}"
+                  src="${escapeHtml(
+                    product.image_url
+                  )}"
+                  alt="${escapeHtml(
+                    product.name
+                  )}"
                 >
               `
               : `
@@ -1113,7 +1477,9 @@ function renderFoodstuffs() {
               <div class="product-body">
 
                 <div class="product-title">
-                  ${escapeHtml(product.name)}
+                  ${escapeHtml(
+                    product.name
+                  )}
                 </div>
 
 
@@ -1153,8 +1519,12 @@ function renderFoodstuffs() {
 
                 <div class="price-preview">
 
-                  ${money(product.price)}
-                  ${escapeHtml(product.unit)}
+                  ${money(
+                    product.price
+                  )}
+                  ${escapeHtml(
+                    product.unit
+                  )}
 
                 </div>
 
@@ -1174,7 +1544,9 @@ function renderFoodstuffs() {
                     <input
                       id="name-${product.id}"
                       type="text"
-                      value="${escapeHtml(product.name)}"
+                      value="${escapeHtml(
+                        product.name
+                      )}"
                     >
 
                   </div>
@@ -1189,16 +1561,22 @@ function renderFoodstuffs() {
                     <input
                       id="slug-${product.id}"
                       type="text"
-                      value="${escapeHtml(currentSlug)}"
+                      value="${escapeHtml(
+                        currentSlug
+                      )}"
                       oninput="
                         this.value = cleanSlug(this.value);
-                        updateExistingSlugPreview(${Number(product.id)});
+                        updateExistingSlugPreview(${Number(
+                          product.id
+                        )});
                       "
                     >
 
                     <p class="help-text">
                       Public product link:
-                      https://giftedgiftempire.com/<strong id="slug-preview-${product.id}">${escapeHtml(currentSlug)}</strong>
+                      https://giftedgiftempire.com/<strong id="slug-preview-${product.id}">${escapeHtml(
+                        currentSlug
+                      )}</strong>
                     </p>
 
                   </div>
@@ -1215,7 +1593,9 @@ function renderFoodstuffs() {
                       type="number"
                       step="0.01"
                       min="0"
-                      value="${escapeHtml(product.price)}"
+                      value="${escapeHtml(
+                        product.price
+                      )}"
                     >
 
                   </div>
@@ -1230,7 +1610,9 @@ function renderFoodstuffs() {
                     <input
                       id="unit-${product.id}"
                       type="text"
-                      value="${escapeHtml(product.unit)}"
+                      value="${escapeHtml(
+                        product.unit
+                      )}"
                     >
 
                   </div>
@@ -1321,7 +1703,9 @@ function renderFoodstuffs() {
                       type="number"
                       step="1"
                       min="0"
-                      value="${escapeHtml(product.sort_order)}"
+                      value="${escapeHtml(
+                        product.sort_order
+                      )}"
                     >
 
                   </div>
@@ -1336,7 +1720,10 @@ function renderFoodstuffs() {
                     <textarea
                       id="description-${product.id}"
                       placeholder="Optional description"
-                    >${escapeHtml(product.description || "")}</textarea>
+                    >${escapeHtml(
+                      product.description ||
+                      ""
+                    )}</textarea>
 
                   </div>
 
@@ -1362,7 +1749,9 @@ function renderFoodstuffs() {
                   id="save-${product.id}"
                   type="button"
                   class="primary save-button"
-                  onclick="saveFoodstuff(${Number(product.id)})"
+                  onclick="saveFoodstuff(${Number(
+                    product.id
+                  )})"
                 >
                   Save Changes
                 </button>
@@ -1374,8 +1763,11 @@ function renderFoodstuffs() {
 
         }
       )
-      .join("");
+      .join(
+        ""
+      );
 }
+
 
 
 async function saveFoodstuff(
@@ -1394,7 +1786,10 @@ async function saveFoodstuff(
     );
 
 
-  if (!product) {
+  if (
+    !product
+  ) {
+
     return;
   }
 
@@ -1402,7 +1797,8 @@ async function saveFoodstuff(
   const name =
     document
       .getElementById(
-        "name-" + id
+        "name-" +
+        id
       )
       .value
       .trim();
@@ -1412,7 +1808,8 @@ async function saveFoodstuff(
     cleanSlug(
       document
         .getElementById(
-          "slug-" + id
+          "slug-" +
+          id
         )
         .value
     );
@@ -1422,7 +1819,8 @@ async function saveFoodstuff(
     Number(
       document
         .getElementById(
-          "price-" + id
+          "price-" +
+          id
         )
         .value
     );
@@ -1431,7 +1829,8 @@ async function saveFoodstuff(
   const unit =
     document
       .getElementById(
-        "unit-" + id
+        "unit-" +
+        id
       )
       .value
       .trim();
@@ -1440,7 +1839,8 @@ async function saveFoodstuff(
   const inStock =
     document
       .getElementById(
-        "stock-" + id
+        "stock-" +
+        id
       )
       .value ===
       "true";
@@ -1449,7 +1849,8 @@ async function saveFoodstuff(
   const active =
     document
       .getElementById(
-        "active-" + id
+        "active-" +
+        id
       )
       .value ===
       "true";
@@ -1459,7 +1860,8 @@ async function saveFoodstuff(
     Number(
       document
         .getElementById(
-          "sort-" + id
+          "sort-" +
+          id
         )
         .value
     );
@@ -1468,7 +1870,8 @@ async function saveFoodstuff(
   const description =
     document
       .getElementById(
-        "description-" + id
+        "description-" +
+        id
       )
       .value
       .trim();
@@ -1477,34 +1880,42 @@ async function saveFoodstuff(
   const imageInput =
     document
       .getElementById(
-        "image-" + id
+        "image-" +
+        id
       );
 
 
   const button =
     document
       .getElementById(
-        "save-" + id
+        "save-" +
+        id
       );
 
 
-  if (!name) {
+  if (
+    !name
+  ) {
 
     showMessage(
       "Product name is required.",
       "error"
     );
 
+
     return;
   }
 
 
-  if (!slug) {
+  if (
+    !slug
+  ) {
 
     showMessage(
       "Share Link Name is required.",
       "error"
     );
+
 
     return;
   }
@@ -1522,16 +1933,20 @@ async function saveFoodstuff(
       "error"
     );
 
+
     return;
   }
 
 
-  if (!unit) {
+  if (
+    !unit
+  ) {
 
     showMessage(
       "Please enter the selling unit.",
       "error"
     );
+
 
     return;
   }
@@ -1540,8 +1955,9 @@ async function saveFoodstuff(
   button.disabled =
     true;
 
+
   button.textContent =
-    "Saving...";
+    "Checking Share Link...";
 
 
   let imageUrl =
@@ -1554,10 +1970,29 @@ async function saveFoodstuff(
 
   try {
 
+    /*
+      Check the Share Link before
+      uploading a replacement image.
+    */
+
+    await checkGlobalSlugAvailability(
+      slug,
+      id
+    );
+
+
+    button.textContent =
+      "Saving...";
+
+
     if (
       imageInput.files &&
       imageInput.files[0]
     ) {
+
+      button.textContent =
+        "Uploading Picture...";
+
 
       newImageUrl =
         await uploadImage(
@@ -1568,6 +2003,10 @@ async function saveFoodstuff(
 
       imageUrl =
         newImageUrl;
+
+
+      button.textContent =
+        "Saving...";
     }
 
 
@@ -1580,17 +2019,13 @@ async function saveFoodstuff(
         )
         .update({
 
-          name:
-            name,
+          name,
 
-          slug:
-            slug,
+          slug,
 
-          price:
-            price,
+          price,
 
-          unit:
-            unit,
+          unit,
 
           description:
             description ||
@@ -1602,8 +2037,7 @@ async function saveFoodstuff(
           in_stock:
             inStock,
 
-          active:
-            active,
+          active,
 
           sort_order:
             Number.isFinite(
@@ -1623,7 +2057,9 @@ async function saveFoodstuff(
         );
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       if (
         error.code ===
@@ -1634,6 +2070,7 @@ async function saveFoodstuff(
           "That Share Link Name is already being used. Please choose another one."
         );
       }
+
 
       throw error;
     }
@@ -1660,11 +2097,15 @@ async function saveFoodstuff(
 
     await loadFoodstuffs();
 
-  } catch (error) {
+
+  } catch (
+    error
+  ) {
 
     console.error(
       error
     );
+
 
     showMessage(
       error.message ||
@@ -1676,13 +2117,21 @@ async function saveFoodstuff(
     button.disabled =
       false;
 
+
     button.textContent =
       "Save Changes";
   }
 }
 
 
+
 async function addFoodstuff() {
+
+  const button =
+    document.getElementById(
+      "add-foodstuff-button"
+    );
+
 
   const name =
     document
@@ -1766,23 +2215,29 @@ async function addFoodstuff() {
       );
 
 
-  if (!name) {
+  if (
+    !name
+  ) {
 
     showMessage(
       "Please enter the product name.",
       "error"
     );
 
+
     return;
   }
 
 
-  if (!slug) {
+  if (
+    !slug
+  ) {
 
     showMessage(
       "Please enter the Share Link Name.",
       "error"
     );
+
 
     return;
   }
@@ -1800,19 +2255,31 @@ async function addFoodstuff() {
       "error"
     );
 
+
     return;
   }
 
 
-  if (!unit) {
+  if (
+    !unit
+  ) {
 
     showMessage(
       "Please enter the selling unit.",
       "error"
     );
 
+
     return;
   }
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Checking Share Link...";
 
 
   let imageUrl =
@@ -1821,10 +2288,24 @@ async function addFoodstuff() {
 
   try {
 
+    /*
+      Check the clean URL before
+      uploading the foodstuff picture.
+    */
+
+    await checkGlobalSlugAvailability(
+      slug
+    );
+
+
     if (
       imageInput.files &&
       imageInput.files[0]
     ) {
+
+      button.textContent =
+        "Uploading Picture...";
+
 
       imageUrl =
         await uploadImage(
@@ -1832,6 +2313,10 @@ async function addFoodstuff() {
           name
         );
     }
+
+
+    button.textContent =
+      "Saving...";
 
 
     const {
@@ -1843,21 +2328,17 @@ async function addFoodstuff() {
         )
         .insert({
 
-          name:
-            name,
+          name,
 
-          slug:
-            slug,
+          slug,
 
           description:
             description ||
             null,
 
-          price:
-            price,
+          price,
 
-          unit:
-            unit,
+          unit,
 
           image_url:
             imageUrl,
@@ -1865,8 +2346,7 @@ async function addFoodstuff() {
           in_stock:
             inStock,
 
-          active:
-            active,
+          active,
 
           sort_order:
             Number.isFinite(
@@ -1882,7 +2362,9 @@ async function addFoodstuff() {
         });
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       if (
         error.code ===
@@ -1893,6 +2375,7 @@ async function addFoodstuff() {
           "That Share Link Name is already being used. Please choose another one."
         );
       }
+
 
       throw error;
     }
@@ -1984,19 +2467,34 @@ async function addFoodstuff() {
 
     await loadFoodstuffs();
 
-  } catch (error) {
+
+  } catch (
+    error
+  ) {
 
     console.error(
       error
     );
+
 
     showMessage(
       error.message ||
       "Could not add this foodstuff.",
       "error"
     );
+
+
+  } finally {
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Add Foodstuff";
   }
 }
+
 
 
 async function start() {
@@ -2005,13 +2503,17 @@ async function start() {
     await protectPage();
 
 
-  if (!allowed) {
+  if (
+    !allowed
+  ) {
+
     return;
   }
 
 
   await loadFoodstuffs();
 }
+
 
 
 start();
