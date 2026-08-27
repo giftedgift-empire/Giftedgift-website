@@ -1170,6 +1170,245 @@ function safeFileName(
 }
 
 
+/*
+  =====================================================
+  GLOBAL CLEAN-URL COLLISION PROTECTION
+  =====================================================
+*/
+
+
+const RESERVED_ROOT_SLUGS =
+  new Set([
+
+    "index",
+    "home",
+    "shop",
+    "categories",
+    "daily-inspiration",
+    "blog",
+    "deals",
+    "about",
+    "contact",
+    "cart",
+
+    "product",
+    "checkout",
+    "affiliate-products",
+    "foodstuffs",
+
+    "privacy-policy",
+    "shipping-policy",
+    "returns-refunds",
+    "refund-policy",
+    "terms",
+    "terms-conditions",
+    "terms-and-conditions",
+    "legal-notice",
+    "cookie-policy",
+
+    "admin",
+    "dashboard",
+
+    "manage-blog",
+    "manage-daily-inspiration",
+    "manage-products",
+    "manage-affiliate-products",
+    "manage-digital-products",
+    "manage-foodstuffs",
+    "manage-deals",
+    "manage-reviews",
+    "manage-orders",
+    "shop-settings",
+
+    "orders",
+
+    "tracking",
+    "cookie-consent",
+    "sitemap",
+    "robots",
+    "404"
+
+  ]);
+
+
+const GLOBAL_SLUG_TABLES = [
+
+  {
+    table:
+      "affiliate_products",
+
+    label:
+      "an Affiliate Product"
+  },
+
+  {
+    table:
+      "products",
+
+    label:
+      "a Physical Product"
+  },
+
+  {
+    table:
+      "digital_products",
+
+    label:
+      "a Digital Product"
+  },
+
+  {
+    table:
+      "foodstuffs",
+
+    label:
+      "an African Foodstuff"
+  },
+
+  {
+    table:
+      "blog_posts",
+
+    label:
+      "another Blog Post"
+  },
+
+  {
+    table:
+      "daily_inspirations",
+
+    label:
+      "a Daily Inspiration post"
+  }
+
+];
+
+
+async function checkGlobalSlugAvailability(
+  slug
+) {
+
+  const cleanValue =
+    cleanSlug(
+      slug
+    );
+
+
+  if (
+    !cleanValue
+  ) {
+
+    throw new Error(
+      "Please enter a valid Share Link Name."
+    );
+  }
+
+
+  /*
+    Stop articles from taking the clean URL
+    of an important normal website page.
+  */
+
+  if (
+    RESERVED_ROOT_SLUGS.has(
+      cleanValue
+    )
+  ) {
+
+    throw new Error(
+      `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
+    );
+  }
+
+
+  /*
+    Check every table that uses the same
+    root clean-URL system.
+  */
+
+  for (
+    const source of
+    GLOBAL_SLUG_TABLES
+  ) {
+
+    let query =
+      db
+        .from(
+          source.table
+        )
+        .select(
+          "id,slug"
+        )
+        .eq(
+          "slug",
+          cleanValue
+        );
+
+
+    /*
+      When editing an existing Blog post,
+      allow that post to keep its own slug.
+    */
+
+    if (
+      source.table ===
+        "blog_posts" &&
+      editingId
+    ) {
+
+      query =
+        query.neq(
+          "id",
+          editingId
+        );
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await query
+        .limit(
+          1
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Global slug check failed:",
+        source.table,
+        error
+      );
+
+
+      throw new Error(
+        "The Share Link Name could not be checked safely. Please try again."
+      );
+    }
+
+
+    if (
+      Array.isArray(
+        data
+      ) &&
+      data.length > 0
+    ) {
+
+      throw new Error(
+        `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
+      );
+    }
+  }
+
+
+  return true;
+}
+
+
 async function uploadImage(
   file,
   folder,
@@ -1413,10 +1652,25 @@ async function savePost() {
 
 
   saveButton.textContent =
-    "Saving...";
+    "Checking Share Link...";
 
 
   try {
+
+    /*
+      IMPORTANT:
+      Check the clean URL before uploading
+      images or saving anything.
+    */
+
+    await checkGlobalSlugAvailability(
+      slug
+    );
+
+
+    saveButton.textContent =
+      "Saving...";
+
 
     const coverFile =
       imageFileInput
@@ -1546,13 +1800,19 @@ async function savePost() {
       );
 
 
+      /*
+        Keep the database duplicate check too.
+        This protects against two saves happening
+        at almost exactly the same time.
+      */
+
       if (
         error.code ===
         "23505"
       ) {
 
         throw new Error(
-          "That Share Link Name is already being used by another blog post. Please choose another one."
+          "That Share Link Name is already being used. Please choose another one."
         );
       }
 
@@ -1590,12 +1850,28 @@ async function savePost() {
     );
 
 
-    showMessage(
+    const errorMessage =
       error instanceof Error
         ? error.message
-        : "The blog post could not be saved.",
+        : "The blog post could not be saved.";
+
+
+    showMessage(
+      errorMessage,
       "error"
     );
+
+
+    if (
+      errorMessage
+        .toLowerCase()
+        .includes(
+          "share link"
+        )
+    ) {
+
+      slugInput.focus();
+    }
 
 
   } finally {
