@@ -154,6 +154,7 @@ button {
 
 button:disabled {
   opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .affiliate-item {
@@ -182,6 +183,7 @@ button:disabled {
 .small {
   color: #666;
   font-size: 14px;
+  word-break: break-word;
 }
 
 .price-display {
@@ -231,6 +233,7 @@ button:disabled {
 .message {
   margin-top: 15px;
   font-weight: bold;
+  line-height: 1.5;
 }
 
 #status {
@@ -287,7 +290,8 @@ button:disabled {
   id="name"
   required
 >
-  <label for="slug">
+
+<label for="slug">
   Share Link Name
 </label>
 
@@ -487,14 +491,22 @@ button:disabled {
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
 
 const STORAGE_BUCKET =
   "product-images";
 
+
 const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
 
 const supabaseClient =
   supabase.createClient(
@@ -503,14 +515,21 @@ const supabaseClient =
   );
 
 
+let slugWasEdited =
+  false;
+
+
+
 function formatEUR(value) {
 
   const number =
     Number(value);
 
+
   if (!Number.isFinite(number)) {
     return "";
   }
+
 
   return new Intl.NumberFormat(
     "en-US",
@@ -524,6 +543,7 @@ function formatEUR(value) {
 }
 
 
+
 function calculateDiscount(
   originalPrice,
   salePrice
@@ -532,8 +552,10 @@ function calculateDiscount(
   const original =
     Number(originalPrice);
 
+
   const sale =
     Number(salePrice);
+
 
   if (
     !Number.isFinite(original) ||
@@ -542,8 +564,10 @@ function calculateDiscount(
     sale < 0 ||
     original <= sale
   ) {
+
     return null;
   }
+
 
   return Math.round(
     (
@@ -556,22 +580,30 @@ function calculateDiscount(
 }
 
 
+
 function updateDiscountPreview() {
 
   const saleValue =
     document
-      .getElementById("price")
+      .getElementById(
+        "price"
+      )
       .value;
+
 
   const originalValue =
     document
-      .getElementById("original-price")
+      .getElementById(
+        "original-price"
+      )
       .value;
+
 
   const preview =
     document.getElementById(
       "discount-preview"
     );
+
 
   if (
     !saleValue ||
@@ -581,32 +613,49 @@ function updateDiscountPreview() {
     preview.style.display =
       "none";
 
+
     preview.innerHTML =
       "";
+
 
     return;
   }
 
+
   const salePrice =
-    Number(saleValue);
+    Number(
+      saleValue
+    );
+
 
   const originalPrice =
-    Number(originalValue);
+    Number(
+      originalValue
+    );
+
 
   if (
-    !Number.isFinite(salePrice) ||
-    !Number.isFinite(originalPrice) ||
-    originalPrice <= salePrice
+    !Number.isFinite(
+      salePrice
+    ) ||
+    !Number.isFinite(
+      originalPrice
+    ) ||
+    originalPrice <=
+      salePrice
   ) {
 
     preview.style.display =
       "block";
 
+
     preview.innerHTML =
       "Original price should be higher than the current / sale price.";
 
+
     return;
   }
+
 
   const discount =
     calculateDiscount(
@@ -614,107 +663,168 @@ function updateDiscountPreview() {
       salePrice
     );
 
+
   const savings =
     originalPrice -
     salePrice;
 
+
   preview.style.display =
     "block";
+
 
   preview.innerHTML =
     `
       Original:
       <s>${escapeHTML(
-        formatEUR(originalPrice)
+        formatEUR(
+          originalPrice
+        )
       )}</s>
       &nbsp; | &nbsp;
 
       Sale:
       <strong>${escapeHTML(
-        formatEUR(salePrice)
+        formatEUR(
+          salePrice
+        )
       )}</strong>
       <br>
 
       Save
       ${escapeHTML(
-        formatEUR(savings)
+        formatEUR(
+          savings
+        )
       )}
       —
       ${discount}% OFF
     `;
 }
-  let slugWasEdited =
-  false;
 
 
-function cleanSlug(value) {
 
-  return String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/×/g, "x")
-    .replace(/&/g, " and ")
+function cleanSlug(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
 }
 
 
-function suggestShortSlug(value) {
+
+function suggestShortSlug(
+  value
+) {
 
   const fullSlug =
-    cleanSlug(value);
+    cleanSlug(
+      value
+    );
+
 
   if (!fullSlug) {
     return "";
   }
 
+
   return fullSlug
     .split("-")
-    .slice(0, 3)
+    .slice(
+      0,
+      3
+    )
     .join("-");
 }
+
 
 
 function updateSlugPreview() {
 
   const slug =
     cleanSlug(
-      document.getElementById("slug").value
+      document
+        .getElementById(
+          "slug"
+        )
+        .value
     );
 
-  document.getElementById(
-    "slug-preview"
-  ).textContent =
-    slug || "product-name";
+
+  document
+    .getElementById(
+      "slug-preview"
+    )
+    .textContent =
+      slug ||
+      "product-name";
 }
 
 
+
 document
-  .getElementById("name")
+  .getElementById(
+    "name"
+  )
   .addEventListener(
     "input",
     function() {
 
-      if (slugWasEdited) {
+      if (
+        slugWasEdited
+      ) {
+
         return;
       }
 
-      document.getElementById(
-        "slug"
-      ).value =
-        suggestShortSlug(
-          this.value
-        );
+
+      document
+        .getElementById(
+          "slug"
+        )
+        .value =
+          suggestShortSlug(
+            this.value
+          );
+
 
       updateSlugPreview();
     }
   );
 
 
+
 document
-  .getElementById("slug")
+  .getElementById(
+    "slug"
+  )
   .addEventListener(
     "input",
     function() {
@@ -722,94 +832,373 @@ document
       slugWasEdited =
         true;
 
+
       this.value =
         cleanSlug(
           this.value
         );
+
 
       updateSlugPreview();
     }
   );
 
 
+
+/*
+  =====================================================
+  GLOBAL CLEAN-URL COLLISION PROTECTION
+  =====================================================
+*/
+
+
+const RESERVED_ROOT_SLUGS =
+  new Set([
+
+    "index",
+    "home",
+    "shop",
+    "categories",
+    "daily-inspiration",
+    "blog",
+    "deals",
+    "about",
+    "contact",
+    "cart",
+
+    "product",
+    "checkout",
+    "affiliate-products",
+    "foodstuffs",
+
+    "privacy-policy",
+    "shipping-policy",
+    "returns-refunds",
+    "refund-policy",
+    "terms",
+    "terms-conditions",
+    "terms-and-conditions",
+    "legal-notice",
+    "cookie-policy",
+
+    "admin",
+    "dashboard",
+
+    "manage-blog",
+    "manage-daily-inspiration",
+    "manage-product",
+    "manage-products",
+    "manage-affiliate-products",
+    "manage-digital-products",
+    "manage-foodstuffs",
+    "manage-deals",
+    "manage-reviews",
+    "manage-orders",
+    "shop-settings",
+
+    "orders",
+
+    "tracking",
+    "cookie-consent",
+    "sitemap",
+    "robots",
+    "404"
+
+  ]);
+
+
+const GLOBAL_SLUG_TABLES = [
+
+  {
+    table:
+      "affiliate_products",
+
+    label:
+      "another Affiliate Product"
+  },
+
+  {
+    table:
+      "products",
+
+    label:
+      "a Physical Product"
+  },
+
+  {
+    table:
+      "digital_products",
+
+    label:
+      "a Digital Product"
+  },
+
+  {
+    table:
+      "foodstuffs",
+
+    label:
+      "an African Foodstuff"
+  },
+
+  {
+    table:
+      "blog_posts",
+
+    label:
+      "a Blog Post"
+  },
+
+  {
+    table:
+      "daily_inspirations",
+
+    label:
+      "a Daily Inspiration post"
+  }
+
+];
+
+
+async function checkGlobalSlugAvailability(
+  slug,
+  currentAffiliateId = null
+) {
+
+  const cleanValue =
+    cleanSlug(
+      slug
+    );
+
+
+  if (
+    !cleanValue
+  ) {
+
+    throw new Error(
+      "Please enter a valid Share Link Name."
+    );
+  }
+
+
+  if (
+    RESERVED_ROOT_SLUGS.has(
+      cleanValue
+    )
+  ) {
+
+    throw new Error(
+      `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
+    );
+  }
+
+
+  for (
+    const source of
+    GLOBAL_SLUG_TABLES
+  ) {
+
+    let query =
+      supabaseClient
+        .from(
+          source.table
+        )
+        .select(
+          "id,slug"
+        )
+        .eq(
+          "slug",
+          cleanValue
+        );
+
+
+    /*
+      When editing the current Affiliate Product,
+      allow it to keep its own existing slug.
+    */
+
+    if (
+      source.table ===
+        "affiliate_products" &&
+      currentAffiliateId
+    ) {
+
+      query =
+        query.neq(
+          "id",
+          currentAffiliateId
+        );
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await query
+        .limit(
+          1
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Global slug check failed:",
+        source.table,
+        error
+      );
+
+
+      throw new Error(
+        "The Share Link Name could not be checked safely. Please try again."
+      );
+    }
+
+
+    if (
+      Array.isArray(
+        data
+      ) &&
+      data.length > 0
+    ) {
+
+      throw new Error(
+        `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
+      );
+    }
+  }
+
+
+  return true;
+}
+
+
+
 document
-  .getElementById("price")
+  .getElementById(
+    "price"
+  )
   .addEventListener(
     "input",
     updateDiscountPreview
   );
 
 
+
 document
-  .getElementById("original-price")
+  .getElementById(
+    "original-price"
+  )
   .addEventListener(
     "input",
     updateDiscountPreview
   );
+
 
 
 async function protectPage() {
 
-  const { data, error } =
-    await supabaseClient.auth.getSession();
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
 
   if (
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
-    window.location.replace("admin.html");
+    window.location.replace(
+      "admin.html"
+    );
+
+
     return;
   }
 
-  document.getElementById(
-    "status"
-  ).style.display =
-    "none";
 
-  document.getElementById(
-    "page"
-  ).style.display =
-    "block";
+  document
+    .getElementById(
+      "status"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "page"
+    )
+    .style.display =
+      "block";
+
 
   await loadCategoryOptions();
+
+
   await loadAffiliateProducts();
 }
+
 
 
 async function loadCategoryOptions() {
 
   const select =
-    document.getElementById("category");
+    document.getElementById(
+      "category"
+    );
+
 
   select.innerHTML =
     `<option value="">Select category</option>`;
+
 
   const {
     data: categories,
     error
   } =
     await supabaseClient
-      .from("categories")
-      .select("name")
+      .from(
+        "categories"
+      )
+      .select(
+        "name"
+      )
       .order(
         "name",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
-  if (error) {
 
-    console.error(error);
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
 
     select.innerHTML =
       `<option value="">Categories could not be loaded</option>`;
 
+
     return;
   }
+
 
   if (
     !categories ||
@@ -819,26 +1208,35 @@ async function loadCategoryOptions() {
     select.innerHTML =
       `<option value="">No categories available</option>`;
 
+
     return;
   }
+
 
   categories.forEach(
     category => {
 
-      if (!category.name) {
+      if (
+        !category.name
+      ) {
+
         return;
       }
+
 
       const option =
         document.createElement(
           "option"
         );
 
+
       option.value =
         category.name;
 
+
       option.textContent =
         category.name;
+
 
       select.appendChild(
         option
@@ -848,8 +1246,11 @@ async function loadCategoryOptions() {
 }
 
 
+
 document
-  .getElementById("affiliate-image")
+  .getElementById(
+    "affiliate-image"
+  )
   .addEventListener(
     "change",
     function(event) {
@@ -857,9 +1258,14 @@ document
       const file =
         event.target.files[0];
 
-      if (!file) {
+
+      if (
+        !file
+      ) {
+
         return;
       }
+
 
       if (
         !file.type ||
@@ -872,11 +1278,14 @@ document
           "Please choose an image file."
         );
 
+
         event.target.value =
           "";
 
+
         return;
       }
+
 
       if (
         file.size >
@@ -887,16 +1296,20 @@ document
           "Please choose an image smaller than 5 MB."
         );
 
+
         event.target.value =
           "";
 
+
         return;
       }
+
 
       const temporaryURL =
         URL.createObjectURL(
           file
         );
+
 
       showImagePreview(
         temporaryURL
@@ -905,57 +1318,77 @@ document
   );
 
 
-function showImagePreview(url) {
+
+function showImagePreview(
+  url
+) {
 
   const preview =
     document.getElementById(
       "image-preview"
     );
 
+
   const image =
     document.getElementById(
       "preview-img"
     );
 
-  if (!url) {
+
+  if (
+    !url
+  ) {
 
     preview.style.display =
       "none";
+
 
     image.removeAttribute(
       "src"
     );
 
+
     return;
   }
 
+
   image.src =
     url;
+
 
   preview.style.display =
     "block";
 }
 
 
+
 async function uploadAffiliateImage(
   file
 ) {
 
-  if (!file) {
+  if (
+    !file
+  ) {
+
     return null;
   }
+
 
   const {
     data,
     error
   } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient
+      .auth
+      .getSession();
+
 
   if (
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     throw new Error(
@@ -963,17 +1396,23 @@ async function uploadAffiliateImage(
     );
   }
 
+
   const originalName =
     file.name ||
     "affiliate-product.jpg";
 
+
   const parts =
-    originalName.split(".");
+    originalName.split(
+      "."
+    );
+
 
   let extension =
     parts.length > 1
       ? parts.pop()
       : "jpg";
+
 
   extension =
     extension
@@ -983,13 +1422,21 @@ async function uploadAffiliateImage(
         ""
       );
 
-  if (!extension) {
-    extension = "jpg";
+
+  if (
+    !extension
+  ) {
+
+    extension =
+      "jpg";
   }
+
 
   let safeName =
     parts
-      .join("-")
+      .join(
+        "-"
+      )
       .toLowerCase()
       .replace(
         /[^a-z0-9_-]+/g,
@@ -1000,18 +1447,26 @@ async function uploadAffiliateImage(
         ""
       );
 
-  if (!safeName) {
+
+  if (
+    !safeName
+  ) {
+
     safeName =
       "affiliate-product";
   }
 
+
   const randomPart =
     Math.random()
-      .toString(36)
+      .toString(
+        36
+      )
       .slice(
         2,
         10
       );
+
 
   const filePath =
     "affiliates/" +
@@ -1022,6 +1477,7 @@ async function uploadAffiliateImage(
     safeName +
     "." +
     extension;
+
 
   const {
     data: uploadData,
@@ -1048,20 +1504,26 @@ async function uploadAffiliateImage(
         }
       );
 
-  if (uploadError) {
+
+  if (
+    uploadError
+  ) {
 
     console.error(
       uploadError
     );
 
+
     throw uploadError;
   }
+
 
   const uploadedPath =
     uploadData &&
     uploadData.path
       ? uploadData.path
       : filePath;
+
 
   const {
     data: publicURLData
@@ -1075,6 +1537,7 @@ async function uploadAffiliateImage(
         uploadedPath
       );
 
+
   if (
     !publicURLData ||
     !publicURLData.publicUrl
@@ -1085,8 +1548,10 @@ async function uploadAffiliateImage(
     );
   }
 
+
   return publicURLData.publicUrl;
 }
+
 
 
 async function loadAffiliateProducts() {
@@ -1096,8 +1561,10 @@ async function loadAffiliateProducts() {
       "affiliate-list"
     );
 
+
   list.textContent =
     "Loading affiliate products...";
+
 
   const {
     data: products,
@@ -1107,23 +1574,34 @@ async function loadAffiliateProducts() {
       .from(
         "affiliate_products"
       )
-      .select("*")
+      .select(
+        "*"
+      )
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
-  if (error) {
 
-    console.error(error);
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
 
     list.textContent =
       "Affiliate products could not be loaded.";
 
+
     return;
   }
+
 
   if (
     !products ||
@@ -1133,11 +1611,14 @@ async function loadAffiliateProducts() {
     list.textContent =
       "No affiliate products have been added yet.";
 
+
     return;
   }
 
+
   list.innerHTML =
     "";
+
 
   products.forEach(
     product => {
@@ -1147,11 +1628,14 @@ async function loadAffiliateProducts() {
           "div"
         );
 
+
       item.className =
         "affiliate-item";
 
+
       let imageHTML =
         "";
+
 
       if (
         product.image_url
@@ -1171,10 +1655,12 @@ async function loadAffiliateProducts() {
           `;
       }
 
+
       const hasPrice =
         product.price !== null &&
         product.price !== undefined &&
         product.price !== "";
+
 
       const salePrice =
         hasPrice
@@ -1182,6 +1668,7 @@ async function loadAffiliateProducts() {
               product.price
             )
           : null;
+
 
       const hasOriginalPrice =
         product.original_price !== null &&
@@ -1194,6 +1681,7 @@ async function loadAffiliateProducts() {
           product.price
         );
 
+
       let priceHTML =
         `
           <div class="price-display">
@@ -1202,6 +1690,7 @@ async function loadAffiliateProducts() {
             </span>
           </div>
         `;
+
 
       if (
         hasPrice &&
@@ -1213,11 +1702,13 @@ async function loadAffiliateProducts() {
             product.original_price
           );
 
+
         const discount =
           calculateDiscount(
             originalPrice,
             salePrice
           );
+
 
         priceHTML =
           `
@@ -1272,10 +1763,20 @@ async function loadAffiliateProducts() {
           `;
       }
 
+
       const statusHTML =
         product.active
           ? "Active"
           : "Inactive";
+
+
+      const publicLink =
+        product.slug
+          ? SITE_URL +
+            "/" +
+            product.slug
+          : "";
+
 
       item.innerHTML =
         `
@@ -1298,6 +1799,19 @@ async function loadAffiliateProducts() {
           </p>
 
           ${priceHTML}
+
+          ${
+            publicLink
+              ? `
+                <p class="small">
+                  Public Link:
+                  ${escapeHTML(
+                    publicLink
+                  )}
+                </p>
+              `
+              : ""
+          }
 
           <p class="small">
             Network:
@@ -1342,12 +1856,14 @@ async function loadAffiliateProducts() {
           </div>
         `;
 
+
       list.appendChild(
         item
       );
     }
   );
 }
+
 
 
 document
@@ -1360,45 +1876,239 @@ document
 
       event.preventDefault();
 
+
       const message =
         document.getElementById(
           "form-message"
         );
+
 
       const saveButton =
         document.getElementById(
           "save-button"
         );
 
+
+      const id =
+        document
+          .getElementById(
+            "affiliate-id"
+          )
+          .value;
+
+
+      const name =
+        document
+          .getElementById(
+            "name"
+          )
+          .value
+          .trim();
+
+
+      const slug =
+        cleanSlug(
+          document
+            .getElementById(
+              "slug"
+            )
+            .value
+        );
+
+
+      const category =
+        document
+          .getElementById(
+            "category"
+          )
+          .value;
+
+
+      const affiliateURL =
+        document
+          .getElementById(
+            "affiliate_url"
+          )
+          .value
+          .trim();
+
+
+      if (
+        !name
+      ) {
+
+        message.textContent =
+          "Please enter a Product Name.";
+
+
+        document
+          .getElementById(
+            "name"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      if (
+        !slug
+      ) {
+
+        message.textContent =
+          "Please enter a Share Link Name.";
+
+
+        document
+          .getElementById(
+            "slug"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      if (
+        !category
+      ) {
+
+        message.textContent =
+          "Please select a Category.";
+
+
+        document
+          .getElementById(
+            "category"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      if (
+        !affiliateURL
+      ) {
+
+        message.textContent =
+          "Please enter the Affiliate Link.";
+
+
+        document
+          .getElementById(
+            "affiliate_url"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
+      const priceField =
+        document
+          .getElementById(
+            "price"
+          )
+          .value;
+
+
+      const originalPriceField =
+        document
+          .getElementById(
+            "original-price"
+          )
+          .value;
+
+
+      const price =
+        priceField
+          ? Number(
+              priceField
+            )
+          : null;
+
+
+      const originalPrice =
+        originalPriceField
+          ? Number(
+              originalPriceField
+            )
+          : null;
+
+
+      if (
+        originalPrice !== null &&
+        price !== null &&
+        originalPrice <= price
+      ) {
+
+        message.textContent =
+          "Original price must be higher than the current / sale price. If the product is not on sale, leave Original Price empty.";
+
+
+        document
+          .getElementById(
+            "original-price"
+          )
+          .focus();
+
+
+        return;
+      }
+
+
       saveButton.disabled =
         true;
 
+
+      saveButton.textContent =
+        "Checking Share Link...";
+
+
       message.textContent =
-        "Saving...";
+        "Checking Share Link...";
+
 
       try {
 
-        const id =
-          document.getElementById(
-            "affiliate-id"
-          ).value;
+        /*
+          Check the clean URL BEFORE
+          uploading an affiliate image.
+        */
+
+        await checkGlobalSlugAvailability(
+          slug,
+          id ||
+          null
+        );
+
 
         let imageURL =
-          document.getElementById(
-            "current-image-url"
-          ).value ||
+          document
+            .getElementById(
+              "current-image-url"
+            )
+            .value ||
           null;
+
 
         const imageInput =
           document.getElementById(
             "affiliate-image"
           );
 
+
         const selectedFile =
           imageInput.files &&
           imageInput.files.length > 0
             ? imageInput.files[0]
             : null;
+
 
         if (
           selectedFile
@@ -1407,70 +2117,31 @@ document
           message.textContent =
             "Uploading affiliate product image...";
 
+
+          saveButton.textContent =
+            "Uploading Image...";
+
+
           imageURL =
             await uploadAffiliateImage(
               selectedFile
             );
-
-          message.textContent =
-            "Saving affiliate product...";
         }
 
 
-        const priceField =
-          document.getElementById(
-            "price"
-          ).value;
-
-        const originalPriceField =
-          document.getElementById(
-            "original-price"
-          ).value;
-
-        const price =
-          priceField
-            ? Number(
-                priceField
-              )
-            : null;
-
-        const originalPrice =
-          originalPriceField
-            ? Number(
-                originalPriceField
-              )
-            : null;
+        message.textContent =
+          "Saving affiliate product...";
 
 
-        if (
-          originalPrice !== null &&
-          price !== null &&
-          originalPrice <= price
-        ) {
-
-          throw new Error(
-            "Original price must be higher than the current / sale price. If the product is not on sale, leave Original Price empty."
-          );
-        }
+        saveButton.textContent =
+          "Saving...";
 
 
         const affiliateData = {
 
-          name:
-            document
-              .getElementById(
-                "name"
-              )
-              .value
-              .trim(),
-          slug:
-  cleanSlug(
-    document
-      .getElementById(
-        "slug"
-      )
-      .value
-  ),
+          name,
+
+          slug,
 
           description:
             document
@@ -1480,29 +2151,18 @@ document
               .value
               .trim(),
 
-          price:
-            price,
+          price,
 
           original_price:
             originalPrice,
 
-          category:
-            document
-              .getElementById(
-                "category"
-              )
-              .value,
+          category,
 
           image_url:
             imageURL,
 
           affiliate_url:
-            document
-              .getElementById(
-                "affiliate_url"
-              )
-              .value
-              .trim(),
+            affiliateURL,
 
           network:
             document
@@ -1550,13 +2210,16 @@ document
                 "active"
               )
               .checked
+
         };
 
 
         let saveError;
 
 
-        if (id) {
+        if (
+          id
+        ) {
 
           const result =
             await supabaseClient
@@ -1570,6 +2233,7 @@ document
                 "id",
                 id
               );
+
 
           saveError =
             result.error;
@@ -1585,6 +2249,7 @@ document
                 affiliateData
               );
 
+
           saveError =
             result.error;
         }
@@ -1597,6 +2262,18 @@ document
           console.error(
             saveError
           );
+
+
+          if (
+            saveError.code ===
+            "23505"
+          ) {
+
+            throw new Error(
+              "That Share Link Name is already being used. Please choose another one."
+            );
+          }
+
 
           throw new Error(
             saveError.message ||
@@ -1613,27 +2290,64 @@ document
 
         resetForm();
 
+
         await loadAffiliateProducts();
 
-      } catch (error) {
+
+      } catch (
+        error
+      ) {
 
         console.error(
           error
         );
 
-        message.textContent =
+
+        const errorMessage =
           error &&
           error.message
             ? error.message
             : "Affiliate product could not be saved. Please check the image, affiliate link and product details.";
 
+
+        message.textContent =
+          errorMessage;
+
+
+        if (
+          errorMessage
+            .toLowerCase()
+            .includes(
+              "share link"
+            )
+        ) {
+
+          document
+            .getElementById(
+              "slug"
+            )
+            .focus();
+        }
+
+
       } finally {
 
         saveButton.disabled =
           false;
+
+
+        saveButton.textContent =
+          document
+            .getElementById(
+              "affiliate-id"
+            )
+            .value
+            ? "Update Affiliate Product"
+            : "Save Affiliate Product";
       }
     }
   );
+
 
 
 async function editAffiliateProduct(
@@ -1648,12 +2362,15 @@ async function editAffiliateProduct(
       .from(
         "affiliate_products"
       )
-      .select("*")
+      .select(
+        "*"
+      )
       .eq(
         "id",
         id
       )
       .single();
+
 
   if (
     error ||
@@ -1664,56 +2381,71 @@ async function editAffiliateProduct(
       "Affiliate product could not be opened."
     );
 
+
     return;
   }
 
 
-  document.getElementById(
-    "affiliate-id"
-  ).value =
-    data.id;
+  document
+    .getElementById(
+      "affiliate-id"
+    )
+    .value =
+      data.id;
 
 
-  document.getElementById(
-    "name"
-  ).value =
-    data.name ||
-    "";
-  document.getElementById(
-  "slug"
-).value =
-  data.slug ||
-  suggestShortSlug(
-    data.name
-  );
+  document
+    .getElementById(
+      "name"
+    )
+    .value =
+      data.name ||
+      "";
 
 
-slugWasEdited =
-  true;
+  document
+    .getElementById(
+      "slug"
+    )
+    .value =
+      data.slug ||
+      suggestShortSlug(
+        data.name
+      );
 
 
-updateSlugPreview();
+  slugWasEdited =
+    true;
 
 
-  document.getElementById(
-    "description"
-  ).value =
-    data.description ||
-    "";
+  updateSlugPreview();
 
 
-  document.getElementById(
-    "price"
-  ).value =
-    data.price ??
-    "";
+  document
+    .getElementById(
+      "description"
+    )
+    .value =
+      data.description ||
+      "";
 
 
-  document.getElementById(
-    "original-price"
-  ).value =
-    data.original_price ??
-    "";
+  document
+    .getElementById(
+      "price"
+    )
+    .value =
+      data.price ??
+      "";
+
+
+  document
+    .getElementById(
+      "original-price"
+    )
+    .value =
+      data.original_price ??
+      "";
 
 
   updateDiscountPreview();
@@ -1725,24 +2457,30 @@ updateSlugPreview();
   );
 
 
-  document.getElementById(
-    "category"
-  ).value =
-    data.category ||
-    "";
+  document
+    .getElementById(
+      "category"
+    )
+    .value =
+      data.category ||
+      "";
 
 
-  document.getElementById(
-    "current-image-url"
-  ).value =
-    data.image_url ||
-    "";
+  document
+    .getElementById(
+      "current-image-url"
+    )
+    .value =
+      data.image_url ||
+      "";
 
 
-  document.getElementById(
-    "affiliate-image"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "affiliate-image"
+    )
+    .value =
+      "";
 
 
   showImagePreview(
@@ -1751,66 +2489,84 @@ updateSlugPreview();
   );
 
 
-  document.getElementById(
-    "affiliate_url"
-  ).value =
-    data.affiliate_url ||
-    "";
+  document
+    .getElementById(
+      "affiliate_url"
+    )
+    .value =
+      data.affiliate_url ||
+      "";
 
 
-  document.getElementById(
-    "network"
-  ).value =
-    data.network ||
-    "";
+  document
+    .getElementById(
+      "network"
+    )
+    .value =
+      data.network ||
+      "";
 
 
-  document.getElementById(
-    "merchant"
-  ).value =
-    data.merchant ||
-    "";
+  document
+    .getElementById(
+      "merchant"
+    )
+    .value =
+      data.merchant ||
+      "";
 
 
-  document.getElementById(
-    "rating"
-  ).value =
-    data.rating ??
-    "";
+  document
+    .getElementById(
+      "rating"
+    )
+    .value =
+      data.rating ??
+      "";
 
 
-  document.getElementById(
-    "featured"
-  ).checked =
-    Boolean(
-      data.featured
-    );
+  document
+    .getElementById(
+      "featured"
+    )
+    .checked =
+      Boolean(
+        data.featured
+      );
 
 
-  document.getElementById(
-    "active"
-  ).checked =
-    Boolean(
-      data.active
-    );
+  document
+    .getElementById(
+      "active"
+    )
+    .checked =
+      Boolean(
+        data.active
+      );
 
 
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Edit Affiliate Product";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Edit Affiliate Product";
 
 
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Update Affiliate Product";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Update Affiliate Product";
 
 
-  document.getElementById(
-    "cancel-edit"
-  ).style.display =
-    "inline-block";
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "inline-block";
 
 
   window.scrollTo({
@@ -1820,6 +2576,7 @@ updateSlugPreview();
 }
 
 
+
 function ensureCategoryOption(
   categoryName
 ) {
@@ -1827,13 +2584,16 @@ function ensureCategoryOption(
   if (
     !categoryName
   ) {
+
     return;
   }
+
 
   const select =
     document.getElementById(
       "category"
     );
+
 
   const exists =
     Array
@@ -1846,6 +2606,7 @@ function ensureCategoryOption(
           categoryName
       );
 
+
   if (
     !exists
   ) {
@@ -1855,18 +2616,22 @@ function ensureCategoryOption(
         "option"
       );
 
+
     option.value =
       categoryName;
+
 
     option.textContent =
       categoryName +
       " (existing category)";
+
 
     select.appendChild(
       option
     );
   }
 }
+
 
 
 async function deleteAffiliateProduct(
@@ -1878,11 +2643,14 @@ async function deleteAffiliateProduct(
       "Are you sure you want to delete this affiliate product?"
     );
 
+
   if (
     !confirmed
   ) {
+
     return;
   }
+
 
   const {
     error
@@ -1897,6 +2665,7 @@ async function deleteAffiliateProduct(
         id
       );
 
+
   if (
     error
   ) {
@@ -1905,15 +2674,19 @@ async function deleteAffiliateProduct(
       error
     );
 
+
     alert(
       "Affiliate product could not be deleted."
     );
 
+
     return;
   }
 
-  loadAffiliateProducts();
+
+  await loadAffiliateProducts();
 }
+
 
 
 document
@@ -1926,6 +2699,7 @@ document
   );
 
 
+
 function resetForm() {
 
   document
@@ -1935,22 +2709,40 @@ function resetForm() {
     .reset();
 
 
-  document.getElementById(
-    "affiliate-id"
-  ).value =
-    "";
+  slugWasEdited =
+    false;
 
 
-  document.getElementById(
-    "current-image-url"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "affiliate-id"
+    )
+    .value =
+      "";
 
 
-  document.getElementById(
-    "active"
-  ).checked =
-    true;
+  document
+    .getElementById(
+      "current-image-url"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "active"
+    )
+    .checked =
+      true;
+
+
+  document
+    .getElementById(
+      "featured"
+    )
+    .checked =
+      false;
 
 
   showImagePreview(
@@ -1961,23 +2753,33 @@ function resetForm() {
   updateDiscountPreview();
 
 
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Add Affiliate Product";
+  updateSlugPreview();
 
 
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Save Affiliate Product";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Add Affiliate Product";
 
 
-  document.getElementById(
-    "cancel-edit"
-  ).style.display =
-    "none";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Save Affiliate Product";
+
+
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "none";
 }
+
 
 
 function escapeHTML(
@@ -2012,6 +2814,7 @@ function escapeHTML(
 }
 
 
+
 function escapeAttribute(
   value
 ) {
@@ -2020,6 +2823,7 @@ function escapeAttribute(
     value
   );
 }
+
 
 
 protectPage();
