@@ -495,14 +495,14 @@
 
 
     .gg-cookie-reject {
-      background: white;
+  background:
+    var(--gg-cookie-blue);
 
-      color:
-        var(--gg-cookie-blue);
+  color: white;
 
-      border-color:
-        var(--gg-cookie-blue);
-    }
+  border-color:
+    var(--gg-cookie-blue);
+}
 
 
     .gg-cookie-manage {
