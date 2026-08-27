@@ -39,7 +39,7 @@
 
 
   const CONSENT_VERSION =
-    "2.0";
+    "2.1";
 
 
   const CONSENT_DURATION_DAYS =
