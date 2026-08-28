@@ -2314,7 +2314,53 @@ Please confirm the shipping cost and final amount for my order. Thank you.`;
 
 
     document.title =
-      `${product.name || "Product"} | GiftedGift Empire`;
+  `${product.name || "Product"} | GiftedGift Empire`;
+
+
+const metaDescription =
+  document.getElementById(
+    "product-meta-description"
+  );
+
+
+if (metaDescription) {
+
+  const descriptionText =
+    String(
+      product.description ||
+      `View ${product.name || "this product"}, price and availability at GiftedGift Empire.`
+    )
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 160);
+
+
+  metaDescription.setAttribute(
+    "content",
+    descriptionText
+  );
+}
+
+
+const canonical =
+  document.getElementById(
+    "product-canonical"
+  );
+
+
+if (canonical) {
+
+  const canonicalURL =
+    product.slug
+      ? `https://giftedgiftempire.com/${encodeURIComponent(product.slug)}`
+      : `https://giftedgiftempire.com/product.html?id=${encodeURIComponent(product.id)}`;
+
+
+  canonical.setAttribute(
+    "href",
+    canonicalURL
+  );
+}
 
 
     document.getElementById(
