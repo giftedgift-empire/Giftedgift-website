@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -9,7 +10,9 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Affiliate Product | GiftedGift Empire</title>
+<title>
+  Affiliate Product | GiftedGift Empire
+</title>
 
 <meta
   name="description"
@@ -29,11 +32,13 @@
 
 <link
   rel="icon"
-  href="my-logo.png"
+  href="/my-logo.png"
 >
 
 
-<!-- OPEN GRAPH -->
+<!-- =========================
+     OPEN GRAPH
+========================= -->
 
 <meta
   property="og:type"
@@ -70,7 +75,9 @@
 >
 
 
-<!-- SOCIAL -->
+<!-- =========================
+     SOCIAL
+========================= -->
 
 <meta
   name="twitter:card"
@@ -639,13 +646,13 @@ main {
 
   padding: 15px 22px;
 
-  border-2px solid #e4ae00;
-
   font-size: 17px;
 
   font-weight: 900;
 
   border: 2px solid #123a8c;
+
+  border-radius: 9px;
 
   transition:
     transform 0.15s ease,
@@ -814,6 +821,7 @@ footer {
 }
 
 </style>
+
 </head>
 
 
@@ -831,7 +839,7 @@ footer {
     >
 
       <img
-        src="my-logo.png"
+        src="/my-logo.png"
         alt="GiftedGift Empire"
       >
 
@@ -875,7 +883,9 @@ footer {
   </div>
 
 
-  <!-- PRODUCT -->
+  <!-- =========================
+       PRODUCT
+  ========================= -->
 
   <section
     id="product-card"
@@ -974,7 +984,7 @@ footer {
       </section>
 
 
-      <!-- SHOP NOW -->
+      <!-- AFFILIATE BUTTON -->
 
       <a
         id="affiliate-button"
@@ -992,7 +1002,7 @@ footer {
       </p>
 
 
-      <!-- DISCLOSURE -->
+      <!-- AFFILIATE DISCLOSURE -->
 
       <div class="disclosure">
 
@@ -1012,7 +1022,9 @@ footer {
   </section>
 
 
-  <!-- SHARE -->
+  <!-- =========================
+       SHARE
+  ========================= -->
 
   <section
     id="share-section"
@@ -1059,7 +1071,9 @@ footer {
   </section>
 
 
-  <!-- SHOP MORE -->
+  <!-- =========================
+       SHOP MORE
+  ========================= -->
 
   <section
     id="shop-more-section"
@@ -1200,14 +1214,20 @@ document.getElementById(
    HELPERS
 ========================= */
 
-function formatEUR(value) {
+function formatEUR(
+  value
+) {
 
   const number =
-    Number(value);
+    Number(
+      value
+    );
 
 
   if (
-    !Number.isFinite(number) ||
+    !Number.isFinite(
+      number
+    ) ||
     number < 0
   ) {
 
@@ -1218,12 +1238,21 @@ function formatEUR(value) {
   return new Intl.NumberFormat(
     "en-US",
     {
-      style: "currency",
-      currency: "EUR",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      style:
+        "currency",
+
+      currency:
+        "EUR",
+
+      minimumFractionDigits:
+        2,
+
+      maximumFractionDigits:
+        2
     }
-  ).format(number);
+  ).format(
+    number
+  );
 }
 
 
@@ -1233,16 +1262,24 @@ function calculateDiscount(
 ) {
 
   const original =
-    Number(originalPrice);
+    Number(
+      originalPrice
+    );
 
 
   const sale =
-    Number(salePrice);
+    Number(
+      salePrice
+    );
 
 
   if (
-    !Number.isFinite(original) ||
-    !Number.isFinite(sale) ||
+    !Number.isFinite(
+      original
+    ) ||
+    !Number.isFinite(
+      sale
+    ) ||
     original <= 0 ||
     sale < 0 ||
     original <= sale
@@ -1259,29 +1296,52 @@ function calculateDiscount(
         sale
       ) /
       original
-    ) * 100
+    ) *
+    100
   );
 }
 
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
   return String(
     value == null
       ? ""
       : value
   )
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 }
 
 
-function safeAffiliateURL(value) {
+function safeAffiliateURL(
+  value
+) {
 
-  if (!value) {
+  if (
+    !value
+  ) {
+
     return null;
   }
 
@@ -1290,13 +1350,17 @@ function safeAffiliateURL(value) {
 
     const url =
       new URL(
-        String(value).trim()
+        String(
+          value
+        ).trim()
       );
 
 
     if (
-      url.protocol !== "http:" &&
-      url.protocol !== "https:"
+      url.protocol !==
+        "http:" &&
+      url.protocol !==
+        "https:"
     ) {
 
       return null;
@@ -1305,16 +1369,23 @@ function safeAffiliateURL(value) {
 
     return url.href;
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     return null;
   }
 }
 
 
-function safeImageURL(value) {
+function safeImageURL(
+  value
+) {
 
-  if (!value) {
+  if (
+    !value
+  ) {
+
     return null;
   }
 
@@ -1323,14 +1394,18 @@ function safeImageURL(value) {
 
     const url =
       new URL(
-        String(value).trim(),
+        String(
+          value
+        ).trim(),
         SITE_ORIGIN
       );
 
 
     if (
-      url.protocol !== "http:" &&
-      url.protocol !== "https:"
+      url.protocol !==
+        "http:" &&
+      url.protocol !==
+        "https:"
     ) {
 
       return null;
@@ -1339,7 +1414,9 @@ function safeImageURL(value) {
 
     return url.href;
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     return null;
   }
@@ -1376,14 +1453,20 @@ function buildLandingPageURL(
 }
 
 
-function createStars(rating) {
+function createStars(
+  rating
+) {
 
   const value =
-    Number(rating);
+    Number(
+      rating
+    );
 
 
   if (
-    !Number.isFinite(value) ||
+    !Number.isFinite(
+      value
+    ) ||
     value <= 0 ||
     value > 5
   ) {
@@ -1393,7 +1476,9 @@ function createStars(rating) {
 
 
   const rounded =
-    Math.round(value);
+    Math.round(
+      value
+    );
 
 
   let output =
@@ -1426,11 +1511,16 @@ function createDescriptionPreview(
       description ||
       ""
     )
-      .replace(/\s+/g, " ")
+      .replace(
+        /\s+/g,
+        " "
+      )
       .trim();
 
 
-  if (!clean) {
+  if (
+    !clean
+  ) {
 
     return (
       "Discover this carefully selected product " +
@@ -1440,7 +1530,8 @@ function createDescriptionPreview(
 
 
   if (
-    clean.length <= 155
+    clean.length <=
+    155
   ) {
 
     return clean;
@@ -1458,12 +1549,11 @@ function createDescriptionPreview(
 
 
 /* =========================
-   META
+   META SEO
 ========================= */
 
 function updateMeta(
-  product,
-  productID
+  product
 ) {
 
   const name =
@@ -1522,10 +1612,19 @@ function updateMeta(
   }
 
 
-  document.getElementById(
-    "canonical-link"
-  ).href =
-    pageURL;
+  const canonicalLink =
+    document.getElementById(
+      "canonical-link"
+    );
+
+
+  if (
+    canonicalLink
+  ) {
+
+    canonicalLink.href =
+      pageURL;
+  }
 
 
   document.getElementById(
@@ -1586,6 +1685,166 @@ function updateMeta(
 
 
 /* =========================
+   AFFILIATE PRODUCT
+   STRUCTURED DATA
+========================= */
+
+function updateAffiliateStructuredData(
+  product,
+  affiliateURL
+) {
+
+  let schemaScript =
+    document.getElementById(
+      "affiliate-product-structured-data"
+    );
+
+
+  if (
+    !schemaScript
+  ) {
+
+    schemaScript =
+      document.createElement(
+        "script"
+      );
+
+
+    schemaScript.type =
+      "application/ld+json";
+
+
+    schemaScript.id =
+      "affiliate-product-structured-data";
+
+
+    document.head.appendChild(
+      schemaScript
+    );
+  }
+
+
+  const landingPageURL =
+    buildLandingPageURL(
+      product
+    );
+
+
+  const schemaData = {
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "Product",
+
+    "name":
+      product.name ||
+      "Product",
+
+    "description":
+      product.description ||
+      "",
+
+    "url":
+      landingPageURL
+
+  };
+
+
+  const imageURL =
+    safeImageURL(
+      product.image_url
+    );
+
+
+  if (
+    imageURL
+  ) {
+
+    schemaData.image =
+      [
+        imageURL
+      ];
+  }
+
+
+  if (
+    product.category
+  ) {
+
+    schemaData.category =
+      product.category;
+  }
+
+
+  const price =
+    Number(
+      product.price
+    );
+
+
+  if (
+    Number.isFinite(
+      price
+    ) &&
+    price >= 0
+  ) {
+
+    schemaData.offers = {
+
+      "@type":
+        "Offer",
+
+      "url":
+        affiliateURL,
+
+      "priceCurrency":
+        "EUR",
+
+      "price":
+        price.toFixed(
+          2
+        )
+
+    };
+
+
+    /*
+      IMPORTANT:
+      GiftedGift Empire is recommending
+      this affiliate product.
+
+      The external merchant is the seller.
+    */
+
+    if (
+      product.merchant
+    ) {
+
+      schemaData
+        .offers
+        .seller = {
+
+          "@type":
+            "Organization",
+
+          "name":
+            product.merchant
+
+        };
+    }
+  }
+
+
+  schemaScript.textContent =
+    JSON.stringify(
+      schemaData
+    );
+}
+
+
+/* =========================
    ERROR
 ========================= */
 
@@ -1639,19 +1898,25 @@ async function loadProduct() {
 
 
   const rawProductID =
-  window.__AFFILIATE_PRODUCT_ID ||
-  parameters.get("id");
+    window.__AFFILIATE_PRODUCT_ID ||
+    parameters.get(
+      "id"
+    );
 
 
   const productID =
     rawProductID
-      ? rawProductID.trim()
+      ? String(
+          rawProductID
+        ).trim()
       : "";
 
 
   if (
     !productID ||
-    !/^\d+$/.test(productID)
+    !/^\d+$/.test(
+      productID
+    )
   ) {
 
     showError(
@@ -1738,19 +2003,44 @@ async function loadProduct() {
     }
 
 
+    /*
+      Render visible product information.
+    */
+
     renderProduct(
       product,
       affiliateURL
     );
 
 
+    /*
+      Dynamic title,
+      description,
+      canonical and social metadata.
+    */
+
     updateMeta(
-      product,
-      productID
+      product
     );
 
 
-  } catch (error) {
+    /*
+      Product structured data
+      for search engines.
+
+      External merchant remains
+      the seller.
+    */
+
+    updateAffiliateStructuredData(
+      product,
+      affiliateURL
+    );
+
+
+  } catch (
+    error
+  ) {
 
     console.error(
       "Unexpected affiliate product error:",
@@ -1949,7 +2239,8 @@ function renderProduct(
 
 
   if (
-    merchantParts.length > 0
+    merchantParts.length >
+    0
   ) {
 
     merchantLine.textContent =
@@ -1991,7 +2282,9 @@ function renderProduct(
       "rating-text"
     ).textContent =
       " " +
-      ratingValue.toFixed(1) +
+      ratingValue.toFixed(
+        1
+      ) +
       " / 5";
 
 
@@ -2030,8 +2323,13 @@ function renderProduct(
 
 
   /*
-    Keep the exact affiliate tracking URL
+    IMPORTANT:
+    Keep the exact merchant affiliate URL
     stored in Supabase.
+
+    Do not rebuild or modify it,
+    because it may contain affiliate
+    tracking parameters.
   */
 
   button.href =
@@ -2105,14 +2403,18 @@ function renderPrice(
 
 
   const hasDiscount =
-    product.original_price !== null &&
-    product.original_price !== undefined &&
-    product.original_price !== "" &&
+    product.original_price !==
+      null &&
+    product.original_price !==
+      undefined &&
+    product.original_price !==
+      "" &&
     Number.isFinite(
       originalPrice
     ) &&
     originalPrice > 0 &&
-    originalPrice > salePrice;
+    originalPrice >
+      salePrice;
 
 
   if (
@@ -2222,9 +2524,10 @@ async function copyProductLink() {
       window.isSecureContext
     ) {
 
-      await navigator.clipboard.writeText(
-        currentProductShareURL
-      );
+      await navigator.clipboard
+        .writeText(
+          currentProductShareURL
+        );
 
 
     } else {
@@ -2292,7 +2595,9 @@ async function copyProductLink() {
     );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     message.textContent =
       "Please copy the product link from your browser.";
@@ -2336,12 +2641,14 @@ async function shareProduct() {
       return;
 
 
-    } catch (error) {
+    } catch (
+      error
+    ) {
 
       if (
         error &&
         error.name ===
-        "AbortError"
+          "AbortError"
       ) {
 
         return;
@@ -2363,8 +2670,9 @@ loadProduct();
 </script>
 
 
-<script src="cookie-consent.js"></script>
+<script src="/cookie-consent.js"></script>
 
 
 </body>
+
 </html>
