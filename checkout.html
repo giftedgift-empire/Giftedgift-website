@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
 
@@ -15,6 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -116,6 +118,13 @@
       font-weight: 700;
     }
 
+
+    /*
+      =====================================================
+      DIGITAL CONTENT CONSENT
+      =====================================================
+    */
+
     .consent-box {
       margin: 24px 0;
       padding: 16px;
@@ -139,9 +148,194 @@
       flex-shrink: 0;
     }
 
-    #paypal-button {
-      margin-top: 20px;
+
+    /*
+      =====================================================
+      PAYMENT SECTION
+      =====================================================
+    */
+
+    .payment-section {
+      margin-top: 28px;
+      padding-top: 4px;
     }
+
+    .payment-heading {
+      margin: 0 0 8px;
+      color: #123a8c;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .payment-intro {
+      margin: 0 0 18px;
+      color: #666;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .paypal-payment-card {
+      border: 1px solid #d9e0ee;
+      border-radius: 15px;
+      padding: 18px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(18, 58, 140, 0.07);
+    }
+
+    .paypal-title-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 12px;
+    }
+
+    .paypal-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #eef4ff;
+      color: #123a8c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .paypal-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #222;
+    }
+
+    .payment-highlight-box {
+      position: relative;
+      overflow: hidden;
+      margin: 14px 0 18px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #fffaf0;
+      border: 1px solid #f2bd16;
+      box-shadow: 0 3px 12px rgba(242, 189, 22, 0.16);
+    }
+
+    .payment-highlight-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 55%;
+      height: 100%;
+
+      background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.85),
+        transparent
+      );
+
+      animation: boxShine 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes boxShine {
+
+      0% {
+        left: -80%;
+      }
+
+      55%,
+      100% {
+        left: 130%;
+      }
+
+    }
+
+    .payment-highlight {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.65;
+
+      background: linear-gradient(
+        90deg,
+        #123a8c 0%,
+        #123a8c 28%,
+        #c38f00 43%,
+        #f2bd16 49%,
+        #fff0a0 52%,
+        #f2bd16 55%,
+        #123a8c 72%,
+        #123a8c 100%
+      );
+
+      background-size: 220% auto;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+      animation: paymentShimmer 3s linear infinite;
+    }
+
+    @keyframes paymentShimmer {
+
+      0% {
+        background-position: 220% center;
+      }
+
+      100% {
+        background-position: -220% center;
+      }
+
+    }
+
+    .payment-tip {
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      background: #f6f8fc;
+      border-radius: 10px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .payment-tip strong {
+      color: #123a8c;
+    }
+
+    #paypal-button {
+      display: block;
+      margin-top: 12px;
+    }
+
+    .payment-security {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #ececec;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .payment-security-icon {
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+
+    /*
+      =====================================================
+      MESSAGES
+      =====================================================
+    */
 
     .message {
       display: none;
@@ -171,6 +365,13 @@
       color: #666;
     }
 
+
+    /*
+      =====================================================
+      SECURE DOWNLOAD
+      =====================================================
+    */
+
     .download-area {
       display: none;
       margin-top: 25px;
@@ -178,6 +379,10 @@
       text-align: center;
       background: #eef5ff;
       border-radius: 12px;
+    }
+
+    .download-area p {
+      line-height: 1.6;
     }
 
     .download-btn {
@@ -197,1228 +402,1672 @@
     }
 
     .secure-note {
-      margin-top: 16px;
+      margin-top: 18px;
       font-size: 13px;
       color: #777;
       text-align: center;
     }
+
+
+    /*
+      =====================================================
+      MOBILE
+      =====================================================
+    */
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding: 16px 10px;
+      }
+
+      .checkout-card {
+        padding: 18px;
+        border-radius: 12px;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+      .checkout-title {
+        font-size: 20px;
+      }
+
+      .product-name {
+        font-size: 22px;
+      }
+
+      .normal-price,
+      .deal-price {
+        font-size: 28px;
+      }
+
+      .payment-heading {
+        font-size: 21px;
+      }
+
+      .paypal-payment-card {
+        padding: 15px;
+      }
+
+      .payment-highlight {
+        font-size: 15px;
+      }
+
+    }
+
+
+    /*
+      Respect visitors who prefer reduced motion.
+    */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .payment-highlight,
+      .payment-highlight-box::before {
+        animation: none;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="page">
 
-    <div class="checkout-card">
+<div class="page">
 
-      <div class="brand">
-        GiftedGift Empire
-      </div>
 
-      <h1 class="checkout-title">
-        Secure Checkout
-      </h1>
+  <div class="checkout-card">
+
+
+    <div class="brand">
+      GiftedGift Empire
+    </div>
+
+
+    <h1 class="checkout-title">
+      Secure Checkout
+    </h1>
+
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Loading product...
+    </div>
+
+
+    <div
+      id="checkout-content"
+      style="display:none;"
+    >
+
+
+      <img
+        id="product-image"
+        class="product-image"
+        alt="Product"
+      />
+
 
       <div
-        id="loading"
-        class="loading"
-      >
-        Loading product...
-      </div>
+        id="product-name"
+        class="product-name"
+      ></div>
+
 
       <div
-        id="checkout-content"
-        style="display:none;"
+        id="product-description"
+        class="product-description"
+      ></div>
+
+
+      <div
+        id="price-area"
+        class="price-area"
+      ></div>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+
+      <div class="consent-box">
+
+        <label>
+
+          <input
+            type="checkbox"
+            id="withdrawal-consent"
+          />
+
+          <span>
+
+            I expressly consent to the immediate delivery of this
+            digital content and acknowledge that once the digital
+            content is supplied, I lose my right of withdrawal where
+            applicable.
+
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <!--
+        =====================================================
+        PAYMENT AREA
+        =====================================================
+      -->
+
+
+      <div
+        id="payment-section"
+        class="payment-section"
       >
 
-        <img
-          id="product-image"
-          class="product-image"
-          alt="Product"
-        />
 
-        <div
-          id="product-name"
-          class="product-name"
-        ></div>
+        <h2 class="payment-heading">
+          Choose how you want to pay
+        </h2>
 
-        <div
-          id="product-description"
-          class="product-description"
-        ></div>
 
-        <div
-          id="price-area"
-          class="price-area"
-        ></div>
+        <p class="payment-intro">
+          Complete your purchase securely using the payment option below.
+        </p>
 
-        <div
-          id="message"
-          class="message"
-        ></div>
 
-        <div class="consent-box">
+        <div class="paypal-payment-card">
 
-          <label>
 
-            <input
-              type="checkbox"
-              id="withdrawal-consent"
-            />
+          <div class="paypal-title-row">
 
-            <span>
-              I expressly consent to the immediate delivery of this
-              digital content and acknowledge that once the digital
-              content is supplied, I lose my right of withdrawal where
-              applicable.
+            <div class="paypal-icon">
+              P
+            </div>
+
+            <div class="paypal-title">
+              PayPal Secure Checkout
+            </div>
+
+          </div>
+
+
+          <div class="payment-highlight-box">
+
+            <p class="payment-highlight">
+              Pay securely with PayPal. Eligible debit cards,
+              credit cards, and bank accounts may also appear
+              when the secure PayPal window opens.
+            </p>
+
+          </div>
+
+
+          <div class="payment-tip">
+
+            <strong>
+              You may have more payment choices.
+            </strong>
+
+            After you continue, PayPal will securely show
+            the payment methods available to you.
+
+          </div>
+
+
+          <paypal-button
+            id="paypal-button"
+            type="pay"
+          ></paypal-button>
+
+
+          <div class="payment-security">
+
+            <span class="payment-security-icon">
+              🔒
             </span>
 
-          </label>
+            <span>
+              Your payment information is handled securely by PayPal.
+              GiftedGift Empire does not receive or store your full
+              card or bank details.
+            </span>
+
+          </div>
+
 
         </div>
 
-        <paypal-button
-          id="paypal-button"
-          type="pay"
-        ></paypal-button>
-
-        <div
-          id="download-area"
-          class="download-area"
-        >
-
-          <p>
-            Payment completed successfully.
-            Your secure download is ready.
-          </p>
-
-          <button
-            id="download-button"
-            class="download-btn"
-            type="button"
-          >
-            Download Your Product
-          </button>
-
-        </div>
-
-        <div class="secure-note">
-          Secure digital checkout powered by PayPal.
-        </div>
 
       </div>
 
+
+      <!--
+        =====================================================
+        DOWNLOAD AFTER SUCCESSFUL PAYMENT
+        =====================================================
+      -->
+
+
+      <div
+        id="download-area"
+        class="download-area"
+      >
+
+        <p>
+          Payment completed successfully.
+          Your secure download is ready.
+        </p>
+
+        <button
+          id="download-button"
+          class="download-btn"
+          type="button"
+        >
+          Download Your Product
+        </button>
+
+      </div>
+
+
+      <div class="secure-note">
+        Secure digital checkout powered by PayPal.
+      </div>
+
+
     </div>
+
 
   </div>
 
 
-  <script>
-
-    const SUPABASE_URL =
-      "https://mvoxizdzjmtcvokowhpd.supabase.co";
-
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
-
-    const PAYPAL_SANDBOX_CLIENT_ID =
-      "AQEwW30fuW09fPr4dtGUuWD0S3tlKblHPpZffcy0POvsuPhSI3b400ykmO893Fp4dO2yXtHR8Ey8nDGI";
+</div>
 
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-      );
+<script>
 
 
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
 
-    const productId =
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const PAYPAL_SANDBOX_CLIENT_ID =
+  "AQEwW30fuW09fPr4dtGUuWD0S3tlKblHPpZffcy0POvsuPhSI3b400ykmO893Fp4dO2yXtHR8Ey8nDGI";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const productId =
   window.__DIGITAL_PRODUCT_ID ||
   params.get(
     "product_id"
   );
 
 
-    const dealId =
-      params.get(
-        "deal_id"
+const dealId =
+  params.get(
+    "deal_id"
+  );
+
+
+let currentProduct =
+  null;
+
+
+let currentDeal =
+  null;
+
+
+let checkoutAmount =
+  null;
+
+
+let paypalSdkReady =
+  false;
+
+
+let paypalConfigured =
+  false;
+
+
+let paymentInProgress =
+  false;
+
+
+let downloadToken =
+  null;
+
+
+
+function showError(
+  message
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message error";
+
+
+  box.textContent =
+    message;
+}
+
+
+
+function showSuccess(
+  message
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message success";
+
+
+  box.textContent =
+    message;
+}
+
+
+
+function clearMessage() {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message";
+
+
+  box.textContent =
+    "";
+}
+
+
+
+function formatPrice(
+  value
+) {
+
+  return (
+    "€" +
+    Number(
+      value
+    ).toFixed(
+      2
+    )
+  );
+}
+
+
+
+function validNumber(
+  value
+) {
+
+  const number =
+    Number(
+      value
+    );
+
+
+  return (
+    Number.isFinite(
+      number
+    ) &&
+    number > 0
+  );
+}
+
+
+
+async function loadProduct() {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const content =
+    document.getElementById(
+      "checkout-content"
+    );
+
+
+  try {
+
+
+    const numericProductId =
+      Number(
+        productId
       );
 
 
-    let currentProduct =
-      null;
-
-    let currentDeal =
-      null;
-
-    let checkoutAmount =
-      null;
-
-    let paypalSdkReady =
-      false;
-
-    let paypalConfigured =
-      false;
-
-    let paymentInProgress =
-      false;
-
-    let downloadToken =
-      null;
-
-
-    function showError(message) {
-
-      const box =
-        document.getElementById(
-          "message"
-        );
-
-      box.className =
-        "message error";
-
-      box.textContent =
-        message;
-    }
-
-
-    function showSuccess(message) {
-
-      const box =
-        document.getElementById(
-          "message"
-        );
-
-      box.className =
-        "message success";
-
-      box.textContent =
-        message;
-    }
-
-
-    function clearMessage() {
-
-      const box =
-        document.getElementById(
-          "message"
-        );
-
-      box.className =
-        "message";
-
-      box.textContent =
-        "";
-    }
-
-
-    function formatPrice(value) {
-
-      return (
-        "€" +
-        Number(value).toFixed(2)
-      );
-    }
-
-
-    function validNumber(value) {
-
-      const number =
-        Number(value);
-
-      return (
-        Number.isFinite(number) &&
-        number > 0
-      );
-    }
-
-
-    async function loadProduct() {
-
-      const loading =
-        document.getElementById(
-          "loading"
-        );
-
-      const content =
-        document.getElementById(
-          "checkout-content"
-        );
-
-
-      try {
-
-        const numericProductId =
-          Number(productId);
-
-
-        if (
-          !Number.isInteger(
-            numericProductId
-          ) ||
-          numericProductId <= 0
-        ) {
-
-          throw new Error(
-            "This checkout link is missing a valid product."
-          );
-        }
-
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .from(
-              "digital_products"
-            )
-            .select(
-              "id,name,description,price,image_url,product_type,active"
-            )
-            .eq(
-              "id",
-              numericProductId
-            )
-            .single();
-
-
-        if (
-          error ||
-          !data
-        ) {
-
-          throw new Error(
-            "This digital product could not be found."
-          );
-        }
-
-
-        if (
-          data.active !== true
-        ) {
-
-          throw new Error(
-            "This digital product is not currently available."
-          );
-        }
-
-
-        if (
-          data.product_type !==
-          "paid"
-        ) {
-
-          throw new Error(
-            "This product does not require a paid checkout."
-          );
-        }
-
-
-        if (
-          !validNumber(
-            data.price
-          )
-        ) {
-
-          throw new Error(
-            "This product does not have a valid price."
-          );
-        }
-
-
-        currentProduct =
-          data;
-
-        checkoutAmount =
-          Number(
-            data.price
-          );
-
-
-        if (dealId) {
-
-          await loadDeal();
-        }
-
-
-        renderProduct();
-
-
-        loading.style.display =
-          "none";
-
-        content.style.display =
-          "block";
-
-
-        maybeConfigurePayPal();
-
-      } catch (error) {
-
-        loading.style.display =
-          "none";
-
-        content.style.display =
-          "block";
-
-        showError(
-          error instanceof Error
-            ? error.message
-            : "Checkout could not be loaded."
-        );
-
-
-        const paypalButton =
-          document.getElementById(
-            "paypal-button"
-          );
-
-        if (paypalButton) {
-
-          paypalButton.style.display =
-            "none";
-        }
-
-
-        const consent =
-          document.getElementById(
-            "withdrawal-consent"
-          );
-
-        if (consent) {
-
-          consent.disabled =
-            true;
-        }
-      }
-    }
-
-
-    async function loadDeal() {
-
-      const numericDealId =
-        Number(dealId);
-
-
-      if (
-        !Number.isInteger(
-          numericDealId
-        ) ||
-        numericDealId <= 0
-      ) {
-
-        throw new Error(
-          "This deal link is invalid."
-        );
-      }
-
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .from(
-            "deals"
-          )
-          .select(
-            "id,item_type,item_id,deal_price,active,starts_at,ends_at"
-          )
-          .eq(
-            "id",
-            numericDealId
-          )
-          .single();
-
-
-      if (
-        error ||
-        !data
-      ) {
-
-        throw new Error(
-          "This deal could not be found."
-        );
-      }
-
-
-      if (
-        data.item_type !==
-        "digital_product"
-      ) {
-
-        throw new Error(
-          "This deal is not for a digital product."
-        );
-      }
-
-
-      if (
-        Number(
-          data.item_id
-        ) !==
-        Number(
-          currentProduct.id
-        )
-      ) {
-
-        throw new Error(
-          "This deal does not belong to this product."
-        );
-      }
-
-
-      if (
-        data.active !== true
-      ) {
-
-        throw new Error(
-          "This deal is no longer active."
-        );
-      }
-
-
-      const now =
-        new Date();
-
-
-      if (data.starts_at) {
-
-        const startsAt =
-          new Date(
-            data.starts_at
-          );
-
-
-        if (
-          Number.isNaN(
-            startsAt.getTime()
-          )
-        ) {
-
-          throw new Error(
-            "This deal has an invalid start date."
-          );
-        }
-
-
-        if (
-          now <
-          startsAt
-        ) {
-
-          throw new Error(
-            "This deal has not started yet."
-          );
-        }
-      }
-
-
-      if (data.ends_at) {
-
-        const endsAt =
-          new Date(
-            data.ends_at
-          );
-
-
-        if (
-          Number.isNaN(
-            endsAt.getTime()
-          )
-        ) {
-
-          throw new Error(
-            "This deal has an invalid end date."
-          );
-        }
-
-
-        if (
-          now >
-          endsAt
-        ) {
-
-          throw new Error(
-            "This deal has expired."
-          );
-        }
-      }
-
-
-      const dealPrice =
-        Number(
-          data.deal_price
-        );
-
-
-      const normalPrice =
-        Number(
-          currentProduct.price
-        );
-
-
-      if (
-        !Number.isFinite(
-          dealPrice
-        ) ||
-        dealPrice <= 0 ||
-        dealPrice >=
-          normalPrice
-      ) {
-
-        throw new Error(
-          "This deal does not have a valid discounted price."
-        );
-      }
-
-
-      currentDeal =
-        data;
-
-      checkoutAmount =
-        dealPrice;
-    }
-
-
-    function renderProduct() {
-
-      const image =
-        document.getElementById(
-          "product-image"
-        );
-
-      const name =
-        document.getElementById(
-          "product-name"
-        );
-
-      const description =
-        document.getElementById(
-          "product-description"
-        );
-
-      const priceArea =
-        document.getElementById(
-          "price-area"
-        );
-
-
-      if (
-        currentProduct.image_url
-      ) {
-
-        image.src =
-          currentProduct.image_url;
-
-        image.style.display =
-          "block";
-
-      } else {
-
-        image.style.display =
-          "none";
-      }
-
-
-      name.textContent =
-        currentProduct.name ||
-        "Digital Product";
-
-
-      description.textContent =
-        currentProduct.description ||
-        "";
-
-
-      if (currentDeal) {
-
-        const normalPrice =
-          Number(
-            currentProduct.price
-          );
-
-        const saving =
-          normalPrice -
-          Number(
-            checkoutAmount
-          );
-
-
-        priceArea.innerHTML = `
-          <div class="deal-price-row">
-            <span class="old-price">
-              ${formatPrice(normalPrice)}
-            </span>
-
-            <span class="deal-price">
-              ${formatPrice(checkoutAmount)}
-            </span>
-          </div>
-
-          <div class="deal-label">
-            Deal applied — save ${formatPrice(saving)}
-          </div>
-        `;
-
-      } else {
-
-        priceArea.innerHTML = `
-          <div class="normal-price">
-            ${formatPrice(checkoutAmount)}
-          </div>
-        `;
-      }
-    }
-
-
-    async function createPayPalOrder() {
-
-      clearMessage();
-
-
-      if (
-        !currentProduct
-      ) {
-
-        throw new Error(
-          "The product has not loaded yet."
-        );
-      }
-
-
-      const consent =
-        document.getElementById(
-          "withdrawal-consent"
-        );
-
-
-      if (
-        !consent.checked
-      ) {
-
-        showError(
-          "Please accept the digital-content consent before paying."
-        );
-
-        throw new Error(
-          "Digital-content consent is required."
-        );
-      }
-
-
-      const requestBody = {
-
-        product_id:
-          Number(
-            currentProduct.id
-          ),
-
-        withdrawal_waiver_accepted:
-          true
-      };
-
-
-      if (currentDeal) {
-
-        requestBody.deal_id =
-          Number(
-            currentDeal.id
-          );
-      }
-
-
-      const response =
-        await fetch(
-          SUPABASE_URL +
-            "/functions/v1/paypal-create-order",
-          {
-            method:
-              "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify(
-                requestBody
-              )
-          }
-        );
-
-
-      const data =
-        await response.json();
-
-
-      if (
-        !response.ok ||
-        !data.id
-      ) {
-
-        throw new Error(
-          data.error ||
-          "PayPal order could not be created."
-        );
-      }
-
-
-      return {
-        orderId:
-          data.id
-      };
-    }
-
-
-    async function capturePayPalOrder(
-      orderId
+    if (
+      !Number.isInteger(
+        numericProductId
+      ) ||
+      numericProductId <= 0
     ) {
 
-      const response =
-        await fetch(
-          SUPABASE_URL +
-            "/functions/v1/paypal-capture-order",
-          {
-            method:
-              "POST",
+      throw new Error(
+        "This checkout link is missing a valid product."
+      );
 
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify({
-                order_id:
-                  orderId
-              })
-          }
-        );
-
-
-      const data =
-        await response.json();
-
-
-      if (
-        !response.ok ||
-        data.success !== true ||
-        data.payment_status !==
-          "COMPLETED" ||
-        !data.download_token
-      ) {
-
-        throw new Error(
-          data.error ||
-          "Payment could not be confirmed."
-        );
-      }
-
-
-      return data;
     }
 
 
-    async function maybeConfigurePayPal() {
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "digital_products"
+        )
+        .select(
+          "id,name,description,price,image_url,product_type,active"
+        )
+        .eq(
+          "id",
+          numericProductId
+        )
+        .single();
 
-      if (
-        paypalConfigured ||
-        !paypalSdkReady ||
-        !currentProduct
-      ) {
 
-        return;
-      }
+    if (
+      error ||
+      !data
+    ) {
+
+      throw new Error(
+        "This digital product could not be found."
+      );
+
+    }
 
 
-      paypalConfigured =
+    if (
+      data.active !== true
+    ) {
+
+      throw new Error(
+        "This digital product is not currently available."
+      );
+
+    }
+
+
+    if (
+      data.product_type !==
+      "paid"
+    ) {
+
+      throw new Error(
+        "This product does not require a paid checkout."
+      );
+
+    }
+
+
+    if (
+      !validNumber(
+        data.price
+      )
+    ) {
+
+      throw new Error(
+        "This product does not have a valid price."
+      );
+
+    }
+
+
+    currentProduct =
+      data;
+
+
+    checkoutAmount =
+      Number(
+        data.price
+      );
+
+
+    if (
+      dealId
+    ) {
+
+      await loadDeal();
+
+    }
+
+
+    renderProduct();
+
+
+    loading.style.display =
+      "none";
+
+
+    content.style.display =
+      "block";
+
+
+    maybeConfigurePayPal();
+
+
+  } catch (
+    error
+  ) {
+
+
+    loading.style.display =
+      "none";
+
+
+    content.style.display =
+      "block";
+
+
+    showError(
+      error instanceof Error
+        ? error.message
+        : "Checkout could not be loaded."
+    );
+
+
+    const paymentSection =
+      document.getElementById(
+        "payment-section"
+      );
+
+
+    if (
+      paymentSection
+    ) {
+
+      paymentSection.style.display =
+        "none";
+
+    }
+
+
+    const consent =
+      document.getElementById(
+        "withdrawal-consent"
+      );
+
+
+    if (
+      consent
+    ) {
+
+      consent.disabled =
         true;
 
+    }
 
-      try {
+  }
 
-        const paypalInstance =
-          await window.paypal
-            .createInstance({
-              clientId:
-                PAYPAL_SANDBOX_CLIENT_ID,
-
-              components: [
-                "paypal-payments"
-              ],
-
-              pageType:
-                "checkout"
-            });
+}
 
 
-        const eligibility =
-          await paypalInstance
-            .findEligibleMethods({
-              currencyCode:
-                "EUR"
-            });
+
+async function loadDeal() {
 
 
-        if (
-          !eligibility ||
-          !eligibility.isEligible(
-            "paypal"
+  const numericDealId =
+    Number(
+      dealId
+    );
+
+
+  if (
+    !Number.isInteger(
+      numericDealId
+    ) ||
+    numericDealId <= 0
+  ) {
+
+    throw new Error(
+      "This deal link is invalid."
+    );
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "deals"
+      )
+      .select(
+        "id,item_type,item_id,deal_price,active,starts_at,ends_at"
+      )
+      .eq(
+        "id",
+        numericDealId
+      )
+      .single();
+
+
+  if (
+    error ||
+    !data
+  ) {
+
+    throw new Error(
+      "This deal could not be found."
+    );
+
+  }
+
+
+  if (
+    data.item_type !==
+    "digital_product"
+  ) {
+
+    throw new Error(
+      "This deal is not for a digital product."
+    );
+
+  }
+
+
+  if (
+    Number(
+      data.item_id
+    ) !==
+    Number(
+      currentProduct.id
+    )
+  ) {
+
+    throw new Error(
+      "This deal does not belong to this product."
+    );
+
+  }
+
+
+  if (
+    data.active !== true
+  ) {
+
+    throw new Error(
+      "This deal is no longer active."
+    );
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  if (
+    data.starts_at
+  ) {
+
+
+    const startsAt =
+      new Date(
+        data.starts_at
+      );
+
+
+    if (
+      Number.isNaN(
+        startsAt.getTime()
+      )
+    ) {
+
+      throw new Error(
+        "This deal has an invalid start date."
+      );
+
+    }
+
+
+    if (
+      now <
+      startsAt
+    ) {
+
+      throw new Error(
+        "This deal has not started yet."
+      );
+
+    }
+
+  }
+
+
+  if (
+    data.ends_at
+  ) {
+
+
+    const endsAt =
+      new Date(
+        data.ends_at
+      );
+
+
+    if (
+      Number.isNaN(
+        endsAt.getTime()
+      )
+    ) {
+
+      throw new Error(
+        "This deal has an invalid end date."
+      );
+
+    }
+
+
+    if (
+      now >
+      endsAt
+    ) {
+
+      throw new Error(
+        "This deal has expired."
+      );
+
+    }
+
+  }
+
+
+  const dealPrice =
+    Number(
+      data.deal_price
+    );
+
+
+  const normalPrice =
+    Number(
+      currentProduct.price
+    );
+
+
+  if (
+    !Number.isFinite(
+      dealPrice
+    ) ||
+    dealPrice <= 0 ||
+    dealPrice >=
+      normalPrice
+  ) {
+
+    throw new Error(
+      "This deal does not have a valid discounted price."
+    );
+
+  }
+
+
+  currentDeal =
+    data;
+
+
+  checkoutAmount =
+    dealPrice;
+
+}
+
+
+
+function renderProduct() {
+
+
+  const image =
+    document.getElementById(
+      "product-image"
+    );
+
+
+  const name =
+    document.getElementById(
+      "product-name"
+    );
+
+
+  const description =
+    document.getElementById(
+      "product-description"
+    );
+
+
+  const priceArea =
+    document.getElementById(
+      "price-area"
+    );
+
+
+  if (
+    currentProduct.image_url
+  ) {
+
+
+    image.src =
+      currentProduct.image_url;
+
+
+    image.style.display =
+      "block";
+
+
+  } else {
+
+
+    image.style.display =
+      "none";
+
+  }
+
+
+  name.textContent =
+    currentProduct.name ||
+    "Digital Product";
+
+
+  description.textContent =
+    currentProduct.description ||
+    "";
+
+
+  if (
+    currentDeal
+  ) {
+
+
+    const normalPrice =
+      Number(
+        currentProduct.price
+      );
+
+
+    const saving =
+      normalPrice -
+      Number(
+        checkoutAmount
+      );
+
+
+    priceArea.innerHTML = `
+
+      <div class="deal-price-row">
+
+        <span class="old-price">
+          ${formatPrice(normalPrice)}
+        </span>
+
+        <span class="deal-price">
+          ${formatPrice(checkoutAmount)}
+        </span>
+
+      </div>
+
+      <div class="deal-label">
+        Deal applied — save ${formatPrice(saving)}
+      </div>
+
+    `;
+
+
+  } else {
+
+
+    priceArea.innerHTML = `
+
+      <div class="normal-price">
+        ${formatPrice(checkoutAmount)}
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+async function createPayPalOrder() {
+
+
+  clearMessage();
+
+
+  if (
+    !currentProduct
+  ) {
+
+    throw new Error(
+      "The product has not loaded yet."
+    );
+
+  }
+
+
+  const consent =
+    document.getElementById(
+      "withdrawal-consent"
+    );
+
+
+  if (
+    !consent.checked
+  ) {
+
+
+    showError(
+      "Please accept the digital-content consent before paying."
+    );
+
+
+    throw new Error(
+      "Digital-content consent is required."
+    );
+
+  }
+
+
+  const requestBody = {
+
+
+    product_id:
+      Number(
+        currentProduct.id
+      ),
+
+
+    withdrawal_waiver_accepted:
+      true
+
+  };
+
+
+  if (
+    currentDeal
+  ) {
+
+
+    requestBody.deal_id =
+      Number(
+        currentDeal.id
+      );
+
+  }
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+        "/functions/v1/paypal-create-order",
+
+      {
+
+        method:
+          "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:
+          JSON.stringify(
+            requestBody
           )
-        ) {
 
-          throw new Error(
-            "PayPal is not available for this checkout."
-          );
-        }
+      }
+
+    );
 
 
-        const paypalSession =
-          paypalInstance
-            .createPayPalOneTimePaymentSession({
-              onApprove:
-                async (
-                  data
-                ) => {
-
-                  try {
-
-                    paymentInProgress =
-                      true;
-
-                    showSuccess(
-                      "Payment approved. Confirming your order..."
-                    );
+  const data =
+    await response.json();
 
 
-                    const capture =
-                      await capturePayPalOrder(
-                        data.orderId
-                      );
+  if (
+    !response.ok ||
+    !data.id
+  ) {
 
 
-                    downloadToken =
-                      capture.download_token;
+    throw new Error(
+
+      data.error ||
+      "PayPal order could not be created."
+
+    );
+
+  }
 
 
-                    document
-                      .getElementById(
-                        "paypal-button"
-                      )
-                      .style.display =
-                      "none";
+  return {
+
+    orderId:
+      data.id
+
+  };
+
+}
 
 
-                    const consent =
-                      document.getElementById(
-                        "withdrawal-consent"
-                      );
+
+async function capturePayPalOrder(
+  orderId
+) {
 
 
-                    consent.disabled =
-                      true;
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+        "/functions/v1/paypal-capture-order",
+
+      {
+
+        method:
+          "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            order_id:
+              orderId
+
+          })
+
+      }
+
+    );
 
 
-                    document
-                      .getElementById(
-                        "download-area"
-                      )
-                      .style.display =
-                      "block";
+  const data =
+    await response.json();
 
 
-                    showSuccess(
-                      "Payment completed successfully."
-                    );
-
-                  } catch (error) {
-
-                    showError(
-                      error instanceof Error
-                        ? error.message
-                        : "Payment confirmation failed."
-                    );
-
-                  } finally {
-
-                    paymentInProgress =
-                      false;
-                  }
-                },
+  if (
+    !response.ok ||
+    data.success !== true ||
+    data.payment_status !==
+      "COMPLETED" ||
+    !data.download_token
+  ) {
 
 
-              onCancel:
-                () => {
+    throw new Error(
 
-                  paymentInProgress =
-                    false;
+      data.error ||
+      "Payment could not be confirmed."
 
-                  showError(
-                    "Payment was cancelled."
-                  );
-                },
+    );
+
+  }
 
 
-              onError:
-                (error) => {
+  return data;
 
-                  console.error(
-                    "PayPal error:",
-                    error
-                  );
-
-                  paymentInProgress =
-                    false;
-
-                  showError(
-                    "PayPal could not complete the payment."
-                  );
-                }
-            });
+}
 
 
-        const paypalButton =
-          document.getElementById(
-            "paypal-button"
-          );
+
+async function maybeConfigurePayPal() {
 
 
-        paypalButton
-          .addEventListener(
-            "click",
-            async () => {
+  if (
+    paypalConfigured ||
+    !paypalSdkReady ||
+    !currentProduct
+  ) {
 
-              if (
-                paymentInProgress
-              ) {
+    return;
 
-                return;
-              }
+  }
 
 
-              clearMessage();
+  paypalConfigured =
+    true;
 
 
-              const consent =
-                document.getElementById(
-                  "withdrawal-consent"
-                );
+  try {
 
 
-              if (
-                !consent.checked
-              ) {
+    const paypalInstance =
+      await window.paypal
+        .createInstance({
 
-                showError(
-                  "Please accept the digital-content consent before paying."
-                );
+          clientId:
+            PAYPAL_SANDBOX_CLIENT_ID,
 
-                return;
-              }
+          components: [
+            "paypal-payments"
+          ],
+
+          pageType:
+            "checkout"
+
+        });
+
+
+    const eligibility =
+      await paypalInstance
+        .findEligibleMethods({
+
+          currencyCode:
+            "EUR"
+
+        });
+
+
+    if (
+      !eligibility ||
+      !eligibility.isEligible(
+        "paypal"
+      )
+    ) {
+
+
+      throw new Error(
+        "PayPal is not available for this checkout."
+      );
+
+    }
+
+
+    const paypalSession =
+      paypalInstance
+        .createPayPalOneTimePaymentSession({
+
+
+          onApprove:
+            async (
+              data
+            ) => {
 
 
               try {
+
 
                 paymentInProgress =
                   true;
 
 
-                /*
-                  Important:
-                  PayPal Web SDK v6 expects
-                  the order promise to be
-                  passed to session.start().
-                  Do not await it here first.
-                */
-
-                const orderPromise =
-                  createPayPalOrder();
+                showSuccess(
+                  "Payment approved. Confirming your order..."
+                );
 
 
-                await paypalSession
-                  .start(
-                    {
-                      presentationMode:
-                        "auto"
-                    },
-                    orderPromise
+                const capture =
+                  await capturePayPalOrder(
+                    data.orderId
                   );
 
 
-              } catch (error) {
+                downloadToken =
+                  capture.download_token;
 
-                console.error(
-                  error
+
+                const paymentSection =
+                  document.getElementById(
+                    "payment-section"
+                  );
+
+
+                if (
+                  paymentSection
+                ) {
+
+                  paymentSection.style.display =
+                    "none";
+
+                }
+
+
+                const consent =
+                  document.getElementById(
+                    "withdrawal-consent"
+                  );
+
+
+                consent.disabled =
+                  true;
+
+
+                document
+                  .getElementById(
+                    "download-area"
+                  )
+                  .style.display =
+                    "block";
+
+
+                showSuccess(
+                  "Payment completed successfully."
                 );
+
+
+              } catch (
+                error
+              ) {
 
 
                 showError(
+
                   error instanceof Error
                     ? error.message
-                    : "Unable to start PayPal checkout."
+                    : "Payment confirmation failed."
+
                 );
+
 
               } finally {
 
+
                 paymentInProgress =
                   false;
+
               }
+
+            },
+
+
+          onCancel:
+            () => {
+
+
+              paymentInProgress =
+                false;
+
+
+              showError(
+                "Payment was cancelled."
+              );
+
+            },
+
+
+          onError:
+            (
+              error
+            ) => {
+
+
+              console.error(
+                "PayPal error:",
+                error
+              );
+
+
+              paymentInProgress =
+                false;
+
+
+              showError(
+                "PayPal could not complete the payment."
+              );
+
             }
-          );
+
+        });
 
 
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        paypalConfigured =
-          false;
-
-
-        showError(
-          error instanceof Error
-            ? error.message
-            : "PayPal could not be loaded."
-        );
-      }
-    }
-
-
-    async function downloadProduct() {
-
-      if (
-        !downloadToken
-      ) {
-
-        showError(
-          "Your secure download token is missing."
-        );
-
-        return;
-      }
-
-
-      const button =
-        document.getElementById(
-          "download-button"
-        );
-
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Preparing download...";
-
-
-      try {
-
-        const response =
-          await fetch(
-            SUPABASE_URL +
-              "/functions/v1/digital-download",
-            {
-              method:
-                "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-
-              body:
-                JSON.stringify({
-                  download_token:
-                    downloadToken
-                })
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        if (
-          !response.ok ||
-          !data.download_url
-        ) {
-
-          throw new Error(
-            data.error ||
-            "The download could not be prepared."
-          );
-        }
-
-
-        window.location.href =
-          data.download_url;
-
-
-      } catch (error) {
-
-        showError(
-          error instanceof Error
-            ? error.message
-            : "The download could not be prepared."
-        );
-
-
-        button.disabled =
-          false;
-
-        button.textContent =
-          "Download Your Product";
-      }
-    }
-
-
-    document
-      .getElementById(
-        "download-button"
-      )
-      .addEventListener(
-        "click",
-        downloadProduct
+    const paypalButton =
+      document.getElementById(
+        "paypal-button"
       );
 
 
-    function onPayPalWebSdkLoaded() {
+    paypalButton
+      .addEventListener(
+        "click",
+        async () => {
 
-      paypalSdkReady =
-        true;
 
-      maybeConfigurePayPal();
+          if (
+            paymentInProgress
+          ) {
+
+            return;
+
+          }
+
+
+          clearMessage();
+
+
+          const consent =
+            document.getElementById(
+              "withdrawal-consent"
+            );
+
+
+          if (
+            !consent.checked
+          ) {
+
+
+            showError(
+              "Please accept the digital-content consent before paying."
+            );
+
+
+            return;
+
+          }
+
+
+          try {
+
+
+            paymentInProgress =
+              true;
+
+
+            /*
+              IMPORTANT:
+              PayPal Web SDK v6 expects
+              the order promise to be
+              passed to session.start().
+              Do not await it here first.
+            */
+
+
+            const orderPromise =
+              createPayPalOrder();
+
+
+            await paypalSession
+              .start(
+
+                {
+                  presentationMode:
+                    "auto"
+                },
+
+                orderPromise
+
+              );
+
+
+          } catch (
+            error
+          ) {
+
+
+            console.error(
+              error
+            );
+
+
+            showError(
+
+              error instanceof Error
+                ? error.message
+                : "Unable to start PayPal checkout."
+
+            );
+
+
+          } finally {
+
+
+            paymentInProgress =
+              false;
+
+          }
+
+        }
+      );
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    paypalConfigured =
+      false;
+
+
+    showError(
+
+      error instanceof Error
+        ? error.message
+        : "PayPal could not be loaded."
+
+    );
+
+  }
+
+}
+
+
+
+async function downloadProduct() {
+
+
+  if (
+    !downloadToken
+  ) {
+
+
+    showError(
+      "Your secure download token is missing."
+    );
+
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "download-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Preparing download...";
+
+
+  try {
+
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+          "/functions/v1/digital-download",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              download_token:
+                downloadToken
+
+            })
+
+        }
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.download_url
+    ) {
+
+
+      throw new Error(
+
+        data.error ||
+        "The download could not be prepared."
+
+      );
+
     }
 
 
-    window.onPayPalWebSdkLoaded =
-      onPayPalWebSdkLoaded;
+    window.location.href =
+      data.download_url;
 
 
-    loadProduct();
+  } catch (
+    error
+  ) {
 
-  </script>
+
+    showError(
+
+      error instanceof Error
+        ? error.message
+        : "The download could not be prepared."
+
+    );
 
 
-  <script
-    async
-    src="https://www.sandbox.paypal.com/web-sdk/v6/core"
-    onload="onPayPalWebSdkLoaded()"
-  ></script>
-  <script src="cookie-consent.js"></script>
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Download Your Product";
+
+  }
+
+}
+
+
+
+document
+  .getElementById(
+    "download-button"
+  )
+  .addEventListener(
+    "click",
+    downloadProduct
+  );
+
+
+
+function onPayPalWebSdkLoaded() {
+
+
+  paypalSdkReady =
+    true;
+
+
+  maybeConfigurePayPal();
+
+}
+
+
+
+window.onPayPalWebSdkLoaded =
+  onPayPalWebSdkLoaded;
+
+
+
+loadProduct();
+
+
+</script>
+
+
+<script
+  async
+  src="https://www.sandbox.paypal.com/web-sdk/v6/core"
+  onload="onPayPalWebSdkLoaded()"
+></script>
+
+
+<script src="cookie-consent.js"></script>
+
 
 </body>
+
 </html>
