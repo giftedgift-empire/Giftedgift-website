@@ -2361,6 +2361,117 @@ if (canonical) {
     canonicalURL
   );
 }
+    /* PRODUCT SEO STRUCTURED DATA */
+
+let productSchema =
+  document.getElementById(
+    "product-structured-data"
+  );
+
+
+if (!productSchema) {
+
+  productSchema =
+    document.createElement(
+      "script"
+    );
+
+
+  productSchema.type =
+    "application/ld+json";
+
+
+  productSchema.id =
+    "product-structured-data";
+
+
+  document.head.appendChild(
+    productSchema
+  );
+}
+
+
+const productSchemaURL =
+  product.slug
+    ? `https://giftedgiftempire.com/${encodeURIComponent(product.slug)}`
+    : `https://giftedgiftempire.com/product.html?id=${encodeURIComponent(product.id)}`;
+
+
+const schemaPrice =
+  Number(
+    currentUnitPrice ??
+    product.price
+  );
+
+
+const schemaData = {
+
+  "@context":
+    "https://schema.org",
+
+  "@type":
+    "Product",
+
+  "name":
+    product.name ||
+    "Product",
+
+  "description":
+    product.description ||
+    "",
+
+  "sku":
+    String(
+      product.id
+    ),
+
+  "url":
+    productSchemaURL
+
+};
+
+
+if (product.image_url) {
+
+  schemaData.image =
+    [
+      product.image_url
+    ];
+}
+
+
+if (
+  Number.isFinite(schemaPrice) &&
+  schemaPrice > 0
+) {
+
+  schemaData.offers = {
+
+    "@type":
+      "Offer",
+
+    "url":
+      productSchemaURL,
+
+    "priceCurrency":
+      "EUR",
+
+    "price":
+      schemaPrice.toFixed(2),
+
+    "availability":
+      product.in_stock === true
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock"
+
+  };
+}
+
+
+productSchema.textContent =
+  JSON.stringify(
+    schemaData
+  );
 
 
     document.getElementById(
