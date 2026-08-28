@@ -377,7 +377,7 @@ export async function onRequestGet(
       const response =
         await serveLandingPage(
           context,
-          "/checkout.html",
+          "/digital-product.html",
           "__DIGITAL_PRODUCT_ID",
           digitalProduct.id
         );
