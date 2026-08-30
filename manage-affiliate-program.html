@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Manage Affiliates | GiftedGift Empire Admin
+  </title>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .top-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .admin-label {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .back-button {
+      border: 1px solid rgba(255,255,255,0.45);
+      background: transparent;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 15px 50px;
+    }
+
+    .title-row {
+      margin-bottom: 22px;
+    }
+
+    .title-row h1 {
+      margin: 0 0 7px;
+      color: #123a8c;
+      font-size: 30px;
+    }
+
+    .title-row p {
+      margin: 0;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe9e9;
+      color: #921c1c;
+      border: 1px solid #f1b8b8;
+    }
+
+    .message.success {
+      display: block;
+      background: #eaf8ee;
+      color: #17662d;
+      border: 1px solid #b8e3c2;
+    }
+
+    .message.info {
+      display: block;
+      background: #eef5ff;
+      color: #123a8c;
+      border: 1px solid #cbdcf7;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns:
+        repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat {
+      background: white;
+      border: 1px solid #e1e6ef;
+      border-radius: 13px;
+      padding: 17px;
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .stat-number {
+      color: #123a8c;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .controls {
+      background: white;
+      border: 1px solid #e1e6ef;
+      border-radius: 13px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-input,
+    .filter-select {
+      border: 1px solid #cdd4df;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-size: 15px;
+      background: white;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .filter-select {
+      min-width: 160px;
+    }
+
+    .refresh-button {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 15px;
+      background: #123a8c;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .loading {
+      padding: 35px 10px;
+      text-align: center;
+      color: #666;
+      font-weight: 700;
+    }
+
+    .empty {
+      display: none;
+      padding: 35px 20px;
+      text-align: center;
+      background: white;
+      border-radius: 13px;
+      border: 1px solid #e1e6ef;
+      color: #666;
+    }
+
+    .affiliate-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .affiliate-card {
+      background: white;
+      border: 1px solid #dfe5ee;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow:
+        0 5px 18px rgba(0,0,0,0.05);
+    }
+
+    .affiliate-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .affiliate-name {
+      color: #123a8c;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .affiliate-email {
+      color: #555;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .status.pending {
+      background: #fff4bd;
+      color: #725500;
+      border: 1px solid #f2bd16;
+    }
+
+    .status.approved {
+      background: #e7f8ec;
+      color: #17662d;
+      border: 1px solid #b8e3c2;
+    }
+
+    .status.rejected {
+      background: #ffe8e8;
+      color: #921c1c;
+      border: 1px solid #efb7b7;
+    }
+
+    .status.suspended {
+      background: #eee;
+      color: #444;
+      border: 1px solid #ccc;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns:
+        repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .detail {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .detail-label {
+      display: block;
+      color: #777;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      color: #333;
+      font-size: 14px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .commission-area {
+      padding: 15px;
+      background: #f8f9fc;
+      border-radius: 11px;
+      margin-bottom: 15px;
+    }
+
+    .commission-area label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 800;
+      color: #123a8c;
+    }
+
+    .commission-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .commission-input {
+      width: 130px;
+      border: 1px solid #cdd4df;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 15px;
+    }
+
+    .percent {
+      font-weight: 800;
+      color: #555;
+    }
+
+    .actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .action-button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .approve-button {
+      background: #17662d;
+      color: white;
+    }
+
+    .reject-button {
+      background: #9c1c1c;
+      color: white;
+    }
+
+    .save-button {
+      background: #123a8c;
+      color: white;
+    }
+
+    .suspend-button {
+      background: #555;
+      color: white;
+    }
+
+    .reactivate-button {
+      background: #17662d;
+      color: white;
+    }
+
+    .copy-button {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .action-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .access-box {
+      display: none;
+      max-width: 600px;
+      margin: 70px auto;
+      padding: 28px;
+      text-align: center;
+      background: white;
+      border: 1px solid #e1e6ef;
+      border-radius: 15px;
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    .access-box h2 {
+      color: #9c1c1c;
+    }
+
+    @media (max-width: 800px) {
+
+      .stats {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 500px) {
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .affiliate-card {
+        padding: 16px;
+      }
+
+      .commission-input {
+        width: 110px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="top-inner">
+
+    <div>
+
+      <div class="brand">
+        GiftedGift Empire
+      </div>
+
+      <div class="admin-label">
+        Affiliate Administration
+      </div>
+
+    </div>
+
+    <button
+      class="back-button"
+      type="button"
+      onclick="history.back()"
+    >
+      ← Back
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div
+    id="access-box"
+    class="access-box"
+  >
+
+    <h2>
+      Admin Access Required
+    </h2>
+
+    <p>
+      You must be signed in with the GiftedGift Empire
+      administrator account to manage affiliates.
+    </p>
+
+  </div>
+
+
+  <div id="admin-content">
+
+
+    <section class="title-row">
+
+      <h1>
+        Manage Affiliates
+      </h1>
+
+      <p>
+        Review applications, approve affiliates,
+        set commission rates, manage referral codes
+        and suspend accounts when necessary.
+      </p>
+
+    </section>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <section class="stats">
+
+      <div class="stat">
+
+        <div
+          id="total-count"
+          class="stat-number"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Total Affiliates
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div
+          id="pending-count"
+          class="stat-number"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Pending
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div
+          id="approved-count"
+          class="stat-number"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Approved
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div
+          id="suspended-count"
+          class="stat-number"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Suspended
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="controls">
+
+      <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        placeholder="Search name, email or referral code..."
+      >
+
+
+      <select
+        id="status-filter"
+        class="filter-select"
+      >
+
+        <option value="all">
+          All Statuses
+        </option>
+
+        <option value="pending">
+          Pending
+        </option>
+
+        <option value="approved">
+          Approved
+        </option>
+
+        <option value="rejected">
+          Rejected
+        </option>
+
+        <option value="suspended">
+          Suspended
+        </option>
+
+      </select>
+
+
+      <button
+        id="refresh-button"
+        class="refresh-button"
+        type="button"
+      >
+        Refresh
+      </button>
+
+    </section>
+
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Loading affiliates...
+    </div>
+
+
+    <div
+      id="empty"
+      class="empty"
+    >
+      No affiliates found.
+    </div>
+
+
+    <section
+      id="affiliate-list"
+      class="affiliate-list"
+    ></section>
+
+
+  </div>
+
+
+</main>
+
+
+<script>
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+let allAffiliates =
+  [];
+
+
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+
+function showMessage(
+  text,
+  type = "success"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message " +
+    type;
+
+
+  box.textContent =
+    text;
+
+}
+
+
+
+function clearMessage() {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message";
+
+
+  box.textContent =
+    "";
+
+}
+
+
+
+function formatDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "—";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "—";
+
+  }
+
+
+  return date.toLocaleString();
+
+}
+
+
+
+function randomCharacters(
+  length
+) {
+
+  const alphabet =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+  const array =
+    new Uint32Array(
+      length
+    );
+
+
+  crypto.getRandomValues(
+    array
+  );
+
+
+  return Array.from(
+    array
+  )
+    .map(
+      number =>
+        alphabet[
+          number %
+          alphabet.length
+        ]
+    )
+    .join("");
+
+}
+
+
+
+function cleanNameForCode(
+  affiliate
+) {
+
+  const source =
+    affiliate.full_name ||
+    affiliate.email
+      .split("@")[0] ||
+    "AFFILIATE";
+
+
+  const clean =
+    source
+      .toUpperCase()
+      .replace(
+        /[^A-Z0-9]/g,
+        ""
+      )
+      .slice(
+        0,
+        8
+      );
+
+
+  return clean ||
+    "AFFILIATE";
+
+}
+
+
+
+async function createUniqueReferralCode(
+  affiliate
+) {
+
+  for (
+    let attempt = 0;
+    attempt < 10;
+    attempt++
+  ) {
+
+
+    const code =
+      "GGE-" +
+      cleanNameForCode(
+        affiliate
+      ) +
+      "-" +
+      randomCharacters(
+        5
+      );
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "affiliates"
+        )
+        .select(
+          "id"
+        )
+        .ilike(
+          "referral_code",
+          code
+        )
+        .limit(
+          1
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    if (
+      !data ||
+      data.length === 0
+    ) {
+
+      return code;
+
+    }
+
+  }
+
+
+  throw new Error(
+    "A unique referral code could not be generated."
+  );
+
+}
+
+
+
+async function verifyAdmin() {
+
+  const {
+    data: {
+      session
+    }
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if (
+    !session ||
+    !session.user ||
+    session.user.id !==
+      ADMIN_USER_ID
+  ) {
+
+    document
+      .getElementById(
+        "admin-content"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "access-box"
+      )
+      .style.display =
+        "block";
+
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+
+async function loadAffiliates() {
+
+  clearMessage();
+
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  loading.style.display =
+    "block";
+
+
+  try {
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "affiliates"
+        )
+        .select(
+          `
+            id,
+            user_id,
+            email,
+            full_name,
+            referral_code,
+            status,
+            commission_rate,
+            approved_at,
+            created_at,
+            updated_at
+          `
+        )
+        .order(
+          "created_at",
+          {
+            ascending:
+              false
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    allAffiliates =
+      data ||
+      [];
+
+
+    updateStats();
+
+
+    renderAffiliates();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Affiliate load error:",
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Affiliates could not be loaded.",
+      "error"
+    );
+
+
+  } finally {
+
+
+    loading.style.display =
+      "none";
+
+  }
+
+}
+
+
+
+function updateStats() {
+
+  const total =
+    allAffiliates.length;
+
+
+  const pending =
+    allAffiliates.filter(
+      affiliate =>
+        affiliate.status ===
+        "pending"
+    ).length;
+
+
+  const approved =
+    allAffiliates.filter(
+      affiliate =>
+        affiliate.status ===
+        "approved"
+    ).length;
+
+
+  const suspended =
+    allAffiliates.filter(
+      affiliate =>
+        affiliate.status ===
+        "suspended"
+    ).length;
+
+
+  document
+    .getElementById(
+      "total-count"
+    )
+    .textContent =
+      total;
+
+
+  document
+    .getElementById(
+      "pending-count"
+    )
+    .textContent =
+      pending;
+
+
+  document
+    .getElementById(
+      "approved-count"
+    )
+    .textContent =
+      approved;
+
+
+  document
+    .getElementById(
+      "suspended-count"
+    )
+    .textContent =
+      suspended;
+
+}
+
+
+
+function filteredAffiliates() {
+
+  const search =
+    document
+      .getElementById(
+        "search-input"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const status =
+    document
+      .getElementById(
+        "status-filter"
+      )
+      .value;
+
+
+  return allAffiliates.filter(
+    affiliate => {
+
+
+      const matchesStatus =
+        status ===
+          "all" ||
+        affiliate.status ===
+          status;
+
+
+      const searchable =
+        [
+          affiliate.full_name,
+          affiliate.email,
+          affiliate.referral_code
+        ]
+          .filter(
+            Boolean
+          )
+          .join(
+            " "
+          )
+          .toLowerCase();
+
+
+      const matchesSearch =
+        !search ||
+        searchable.includes(
+          search
+        );
+
+
+      return (
+        matchesStatus &&
+        matchesSearch
+      );
+
+    }
+  );
+
+}
+
+
+
+function renderAffiliates() {
+
+  const list =
+    document.getElementById(
+      "affiliate-list"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "empty"
+    );
+
+
+  const affiliates =
+    filteredAffiliates();
+
+
+  list.innerHTML =
+    "";
+
+
+  if (
+    affiliates.length === 0
+  ) {
+
+    empty.style.display =
+      "block";
+
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  for (
+    const affiliate
+    of affiliates
+  ) {
+
+
+    const card =
+      document.createElement(
+        "article"
+      );
+
+
+    card.className =
+      "affiliate-card";
+
+
+    const commissionValue =
+      affiliate.commission_rate ===
+        null ||
+      affiliate.commission_rate ===
+        undefined
+
+        ? ""
+
+        : Number(
+            affiliate.commission_rate
+          );
+
+
+    card.innerHTML = `
+
+      <div class="affiliate-top">
+
+        <div>
+
+          <div class="affiliate-name">
+            ${
+              escapeHtml(
+                affiliate.full_name ||
+                "Unnamed Affiliate"
+              )
+            }
+          </div>
+
+          <div class="affiliate-email">
+            ${
+              escapeHtml(
+                affiliate.email
+              )
+            }
+          </div>
+
+        </div>
+
+        <span class="status ${
+          escapeHtml(
+            affiliate.status
+          )
+        }">
+          ${
+            escapeHtml(
+              affiliate.status
+            )
+          }
+        </span>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail">
+
+          <span class="detail-label">
+            Referral Code
+          </span>
+
+          <span class="detail-value">
+            ${
+              escapeHtml(
+                affiliate.referral_code ||
+                "Not assigned yet"
+              )
+            }
+          </span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <span class="detail-label">
+            Applied
+          </span>
+
+          <span class="detail-value">
+            ${
+              escapeHtml(
+                formatDate(
+                  affiliate.created_at
+                )
+              )
+            }
+          </span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <span class="detail-label">
+            Approved
+          </span>
+
+          <span class="detail-value">
+            ${
+              escapeHtml(
+                formatDate(
+                  affiliate.approved_at
+                )
+              )
+            }
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="commission-area">
+
+        <label
+          for="commission-${affiliate.id}"
+        >
+          Commission Rate
+        </label>
+
+        <div class="commission-row">
+
+          <input
+            id="commission-${affiliate.id}"
+            class="commission-input"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            value="${commissionValue}"
+            placeholder="e.g. 20"
+          >
+
+          <span class="percent">
+            %
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="actions"
+        id="actions-${affiliate.id}"
+      ></div>
+
+    `;
+
+
+    list.appendChild(
+      card
+    );
+
+
+    renderActions(
+      affiliate
+    );
+
+  }
+
+}
+
+
+
+function renderActions(
+  affiliate
+) {
+
+  const area =
+    document.getElementById(
+      "actions-" +
+      affiliate.id
+    );
+
+
+  if (
+    !area
+  ) {
+
+    return;
+
+  }
+
+
+  area.innerHTML =
+    "";
+
+
+  if (
+    affiliate.status ===
+      "pending" ||
+    affiliate.status ===
+      "rejected"
+  ) {
+
+
+    addActionButton(
+      area,
+      "Approve Affiliate",
+      "approve-button",
+      () =>
+        approveAffiliate(
+          affiliate
+        )
+    );
+
+  }
+
+
+  if (
+    affiliate.status ===
+      "pending"
+  ) {
+
+
+    addActionButton(
+      area,
+      "Reject",
+      "reject-button",
+      () =>
+        rejectAffiliate(
+          affiliate
+        )
+    );
+
+  }
+
+
+  if (
+    affiliate.status ===
+      "approved"
+  ) {
+
+
+    addActionButton(
+      area,
+      "Save Commission",
+      "save-button",
+      () =>
+        saveCommission(
+          affiliate
+        )
+    );
+
+
+    if (
+      affiliate.referral_code
+    ) {
+
+      addActionButton(
+        area,
+        "Copy Referral Code",
+        "copy-button",
+        () =>
+          copyReferralCode(
+            affiliate.referral_code
+          )
+      );
+
+    }
+
+
+    addActionButton(
+      area,
+      "Suspend",
+      "suspend-button",
+      () =>
+        suspendAffiliate(
+          affiliate
+        )
+    );
+
+  }
+
+
+  if (
+    affiliate.status ===
+      "suspended"
+  ) {
+
+
+    addActionButton(
+      area,
+      "Reactivate",
+      "reactivate-button",
+      () =>
+        reactivateAffiliate(
+          affiliate
+        )
+    );
+
+  }
+
+}
+
+
+
+function addActionButton(
+  area,
+  label,
+  className,
+  action
+) {
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+
+  button.type =
+    "button";
+
+
+  button.className =
+    "action-button " +
+    className;
+
+
+  button.textContent =
+    label;
+
+
+  button.addEventListener(
+    "click",
+    action
+  );
+
+
+  area.appendChild(
+    button
+  );
+
+}
+
+
+
+function getCommissionRate(
+  affiliate
+) {
+
+  const input =
+    document.getElementById(
+      "commission-" +
+      affiliate.id
+    );
+
+
+  const raw =
+    input.value.trim();
+
+
+  if (
+    raw === ""
+  ) {
+
+    throw new Error(
+      "Enter the commission percentage before approving this affiliate."
+    );
+
+  }
+
+
+  const rate =
+    Number(
+      raw
+    );
+
+
+  if (
+    !Number.isFinite(
+      rate
+    ) ||
+    rate < 0 ||
+    rate > 100
+  ) {
+
+    throw new Error(
+      "Commission rate must be between 0% and 100%."
+    );
+
+  }
+
+
+  return rate;
+
+}
+
+
+
+async function approveAffiliate(
+  affiliate
+) {
+
+  clearMessage();
+
+
+  try {
+
+
+    const commissionRate =
+      getCommissionRate(
+        affiliate
+      );
+
+
+    let referralCode =
+      affiliate.referral_code;
+
+
+    if (
+      !referralCode
+    ) {
+
+      referralCode =
+        await createUniqueReferralCode(
+          affiliate
+        );
+
+    }
+
+
+    if (
+      !confirm(
+        "Approve " +
+        (
+          affiliate.full_name ||
+          affiliate.email
+        ) +
+        " at " +
+        commissionRate +
+        "% commission?"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from(
+          "affiliates"
+        )
+        .update({
+
+          status:
+            "approved",
+
+          commission_rate:
+            commissionRate,
+
+          referral_code:
+            referralCode,
+
+          approved_at:
+            new Date()
+              .toISOString()
+
+        })
+        .eq(
+          "id",
+          affiliate.id
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    showMessage(
+      "Affiliate approved successfully. Referral code: " +
+      referralCode
+    );
+
+
+    await loadAffiliates();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Affiliate could not be approved.",
+      "error"
+    );
+
+  }
+
+}
+
+
+
+async function rejectAffiliate(
+  affiliate
+) {
+
+  if (
+    !confirm(
+      "Reject this affiliate application?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliates"
+      )
+      .update({
+
+        status:
+          "rejected",
+
+        approved_at:
+          null
+
+      })
+      .eq(
+        "id",
+        affiliate.id
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message,
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Affiliate application rejected."
+  );
+
+
+  await loadAffiliates();
+
+}
+
+
+
+async function saveCommission(
+  affiliate
+) {
+
+  clearMessage();
+
+
+  try {
+
+
+    const commissionRate =
+      getCommissionRate(
+        affiliate
+      );
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from(
+          "affiliates"
+        )
+        .update({
+
+          commission_rate:
+            commissionRate
+
+        })
+        .eq(
+          "id",
+          affiliate.id
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    showMessage(
+      "Commission rate updated successfully."
+    );
+
+
+    await loadAffiliates();
+
+
+  } catch (
+    error
+  ) {
+
+
+    showMessage(
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+
+async function suspendAffiliate(
+  affiliate
+) {
+
+  if (
+    !confirm(
+      "Suspend this affiliate?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliates"
+      )
+      .update({
+
+        status:
+          "suspended"
+
+      })
+      .eq(
+        "id",
+        affiliate.id
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message,
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Affiliate suspended."
+  );
+
+
+  await loadAffiliates();
+
+}
+
+
+
+async function reactivateAffiliate(
+  affiliate
+) {
+
+  if (
+    !confirm(
+      "Reactivate this affiliate?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliates"
+      )
+      .update({
+
+        status:
+          "approved"
+
+      })
+      .eq(
+        "id",
+        affiliate.id
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message,
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Affiliate reactivated successfully."
+  );
+
+
+  await loadAffiliates();
+
+}
+
+
+
+async function copyReferralCode(
+  code
+) {
+
+  try {
+
+
+    await navigator
+      .clipboard
+      .writeText(
+        code
+      );
+
+
+    showMessage(
+      "Referral code copied: " +
+      code
+    );
+
+
+  } catch (
+    error
+  ) {
+
+
+    showMessage(
+      "Could not copy the referral code automatically.",
+      "error"
+    );
+
+  }
+
+}
+
+
+
+document
+  .getElementById(
+    "search-input"
+  )
+  .addEventListener(
+    "input",
+    renderAffiliates
+  );
+
+
+document
+  .getElementById(
+    "status-filter"
+  )
+  .addEventListener(
+    "change",
+    renderAffiliates
+  );
+
+
+document
+  .getElementById(
+    "refresh-button"
+  )
+  .addEventListener(
+    "click",
+    loadAffiliates
+  );
+
+
+
+async function startPage() {
+
+  const isAdmin =
+    await verifyAdmin();
+
+
+  if (
+    !isAdmin
+  ) {
+
+    return;
+
+  }
+
+
+  await loadAffiliates();
+
+}
+
+
+
+startPage();
+
+
+</script>
+
+
+</body>
+
+</html>
