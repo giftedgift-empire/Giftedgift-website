@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Join Our Affiliate Program | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Join the GiftedGift Empire affiliate program and earn commissions by promoting eligible digital products."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 50%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      padding: 18px 20px;
+      text-align: center;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-size: 27px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 38px 16px 50px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .intro-badge {
+      display: inline-block;
+      background: #fff4bd;
+      color: #765900;
+      border: 1px solid #f2bd16;
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .intro h1 {
+      margin: 0 0 12px;
+      color: #123a8c;
+      font-size: 33px;
+      line-height: 1.2;
+    }
+
+    .intro p {
+      max-width: 630px;
+      margin: 0 auto;
+      color: #5e6570;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+      gap: 12px;
+      margin: 26px 0;
+    }
+
+    .benefit {
+      background: white;
+      border: 1px solid #dfe6f2;
+      border-radius: 13px;
+      padding: 16px 12px;
+      text-align: center;
+      box-shadow:
+        0 4px 15px rgba(18,58,140,0.05);
+    }
+
+    .benefit-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .benefit strong {
+      display: block;
+      color: #123a8c;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .benefit span {
+      display: block;
+      color: #666;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .register-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.09);
+      border: 1px solid #e4e8ef;
+    }
+
+    .register-card h2 {
+      margin: 0 0 5px;
+      color: #123a8c;
+      font-size: 23px;
+    }
+
+    .register-card .subtitle {
+      margin: 0 0 23px;
+      color: #666;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    label.field-label {
+      display: block;
+      margin: 16px 0 7px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #cdd4df;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.09);
+    }
+
+    .password-help {
+      margin-top: 7px;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .agreement {
+      margin: 21px 0 4px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #f8f9fc;
+      border: 1px solid #e1e5ec;
+    }
+
+    .agreement label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      line-height: 1.55;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .agreement input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .submit-button {
+      width: 100%;
+      margin-top: 22px;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 18px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      opacity: 0.95;
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 10px;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe9e9;
+      color: #921c1c;
+      border: 1px solid #f1b8b8;
+    }
+
+    .message.success {
+      display: block;
+      background: #eaf8ee;
+      color: #17662d;
+      border: 1px solid #b8e3c2;
+    }
+
+    .pending-box {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      text-align: center;
+      background: #eef5ff;
+      border: 1px solid #c9dcfa;
+      border-radius: 13px;
+    }
+
+    .pending-box h3 {
+      color: #123a8c;
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .pending-box p {
+      margin: 7px 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .pending-status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 7px 13px;
+      background: #fff4bd;
+      color: #755700;
+      border: 1px solid #f2bd16;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .security-note {
+      margin-top: 19px;
+      padding-top: 17px;
+      border-top: 1px solid #ececec;
+      color: #6c7179;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .back-home {
+      display: block;
+      width: fit-content;
+      margin: 26px auto 0;
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 22px 15px;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 650px) {
+
+      .page {
+        padding-top: 27px;
+      }
+
+      .intro h1 {
+        font-size: 27px;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .register-card {
+        padding: 21px 17px;
+        border-radius: 14px;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="brand">
+    GiftedGift Empire
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <section class="intro">
+
+    <div class="intro-badge">
+      GiftedGift Empire Affiliate Program
+    </div>
+
+    <h1>
+      Promote. Refer. Earn.
+    </h1>
+
+    <p>
+      Join our affiliate program and earn commission
+      when customers purchase eligible GiftedGift Empire
+      digital products through your unique referral link.
+    </p>
+
+  </section>
+
+
+  <section class="benefits">
+
+
+    <div class="benefit">
+
+      <div class="benefit-icon">
+        🔗
+      </div>
+
+      <strong>
+        Your Own Referral Link
+      </strong>
+
+      <span>
+        Approved affiliates receive their own unique
+        referral code.
+      </span>
+
+    </div>
+
+
+    <div class="benefit">
+
+      <div class="benefit-icon">
+        💰
+      </div>
+
+      <strong>
+        Earn Commission
+      </strong>
+
+      <span>
+        Qualifying completed sales can generate
+        affiliate commission.
+      </span>
+
+    </div>
+
+
+    <div class="benefit">
+
+      <div class="benefit-icon">
+        📊
+      </div>
+
+      <strong>
+        Track Your Results
+      </strong>
+
+      <span>
+        Your affiliate dashboard will show clicks,
+        commissions and payouts.
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+  <section class="register-card">
+
+
+    <h2>
+      Create Your Affiliate Account
+    </h2>
+
+    <p class="subtitle">
+      Registration is free. Applications are reviewed
+      before affiliate links are activated.
+    </p>
+
+
+    <form id="affiliate-form">
+
+
+      <label
+        for="full-name"
+        class="field-label"
+      >
+        Full Name
+      </label>
+
+      <input
+        type="text"
+        id="full-name"
+        autocomplete="name"
+        maxlength="100"
+        placeholder="Enter your full name"
+        required
+      >
+
+
+      <label
+        for="email"
+        class="field-label"
+      >
+        Email Address
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        autocomplete="email"
+        maxlength="254"
+        placeholder="Enter your email address"
+        required
+      >
+
+
+      <label
+        for="password"
+        class="field-label"
+      >
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        autocomplete="new-password"
+        minlength="8"
+        maxlength="72"
+        placeholder="Create a secure password"
+        required
+      >
+
+      <div class="password-help">
+        Use at least 8 characters. A combination of
+        letters, numbers and symbols is recommended.
+      </div>
+
+
+      <label
+        for="confirm-password"
+        class="field-label"
+      >
+        Confirm Password
+      </label>
+
+      <input
+        type="password"
+        id="confirm-password"
+        autocomplete="new-password"
+        minlength="8"
+        maxlength="72"
+        placeholder="Enter your password again"
+        required
+      >
+
+
+      <div class="agreement">
+
+        <label>
+
+          <input
+            type="checkbox"
+            id="agreement"
+            required
+          >
+
+          <span>
+            I confirm that the information I provided is
+            correct and I agree to follow GiftedGift Empire's
+            affiliate program rules, including honest promotion
+            and no misleading or fraudulent activity.
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <button
+        type="submit"
+        id="submit-button"
+        class="submit-button"
+      >
+        Apply to Become an Affiliate
+      </button>
+
+
+      <div
+        id="message"
+        class="message"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+
+    </form>
+
+
+    <div
+      id="pending-box"
+      class="pending-box"
+    >
+
+      <h3>
+        Application Received ✅
+      </h3>
+
+      <p>
+        Your GiftedGift Empire affiliate account has
+        been created.
+      </p>
+
+      <p>
+        Your application must be reviewed and approved
+        before you can receive an active referral link
+        and earn commissions.
+      </p>
+
+      <div class="pending-status">
+        Status: Pending Approval
+      </div>
+
+    </div>
+
+
+    <div class="security-note">
+      🔒 Your password is handled securely by our
+      authentication provider. GiftedGift Empire does not
+      store your plain-text password.
+    </div>
+
+
+  </section>
+
+
+  <a
+    href="/"
+    class="back-home"
+  >
+    ← Back to GiftedGift Empire
+  </a>
+
+
+</main>
+
+
+<footer>
+  © GiftedGift Empire
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+
+function showMessage(
+  text,
+  type = "error"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message " +
+    type;
+
+
+  box.textContent =
+    text;
+
+}
+
+
+
+function clearMessage() {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message";
+
+
+  box.textContent =
+    "";
+
+}
+
+
+
+function normalizeEmail(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+
+function friendlySignupError(
+  error
+) {
+
+  const message =
+    error &&
+    error.message
+      ? error.message
+      : "";
+
+
+  const lower =
+    message.toLowerCase();
+
+
+  if (
+    lower.includes(
+      "already registered"
+    ) ||
+    lower.includes(
+      "already been registered"
+    ) ||
+    lower.includes(
+      "user already"
+    )
+  ) {
+
+    return "An account with this email already exists.";
+
+  }
+
+
+  if (
+    lower.includes(
+      "password"
+    )
+  ) {
+
+    return "Please choose a stronger password and try again.";
+
+  }
+
+
+  if (
+    lower.includes(
+      "email"
+    )
+  ) {
+
+    return "Please check your email address and try again.";
+
+  }
+
+
+  if (
+    lower.includes(
+      "rate"
+    ) ||
+    lower.includes(
+      "too many"
+    )
+  ) {
+
+    return "Too many registration attempts. Please wait a little and try again.";
+
+  }
+
+
+  return (
+    message ||
+    "Your affiliate account could not be created. Please try again."
+  );
+
+}
+
+
+
+document
+  .getElementById(
+    "affiliate-form"
+  )
+  .addEventListener(
+    "submit",
+    async function(
+      event
+    ) {
+
+      event.preventDefault();
+
+
+      clearMessage();
+
+
+      const fullName =
+        document
+          .getElementById(
+            "full-name"
+          )
+          .value
+          .trim();
+
+
+      const email =
+        normalizeEmail(
+          document
+            .getElementById(
+              "email"
+            )
+            .value
+        );
+
+
+      const password =
+        document
+          .getElementById(
+            "password"
+          )
+          .value;
+
+
+      const confirmPassword =
+        document
+          .getElementById(
+            "confirm-password"
+          )
+          .value;
+
+
+      const agreement =
+        document
+          .getElementById(
+            "agreement"
+          )
+          .checked;
+
+
+      const button =
+        document.getElementById(
+          "submit-button"
+        );
+
+
+      if (
+        fullName.length < 2
+      ) {
+
+        showMessage(
+          "Please enter your full name."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        !email ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+          email
+        )
+      ) {
+
+        showMessage(
+          "Please enter a valid email address."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        password.length < 8
+      ) {
+
+        showMessage(
+          "Your password must contain at least 8 characters."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        password !==
+        confirmPassword
+      ) {
+
+        showMessage(
+          "The two passwords do not match."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        !agreement
+      ) {
+
+        showMessage(
+          "Please confirm the affiliate program agreement before continuing."
+        );
+
+
+        return;
+
+      }
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "Creating Affiliate Account...";
+
+
+      try {
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .auth
+            .signUp({
+
+              email,
+
+              password,
+
+              options: {
+
+                data: {
+
+                  full_name:
+                    fullName,
+
+                  account_type:
+                    "affiliate"
+
+                }
+
+              }
+
+            });
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+        if (
+          !data ||
+          !data.user
+        ) {
+
+          throw new Error(
+            "Your affiliate account could not be created."
+          );
+
+        }
+
+
+        /*
+          The trigger we installed in Supabase automatically
+          creates the corresponding affiliates row with:
+
+          status = pending
+        */
+
+
+        document
+          .getElementById(
+            "affiliate-form"
+          )
+          .style.display =
+            "none";
+
+
+        document
+          .getElementById(
+            "pending-box"
+          )
+          .style.display =
+            "block";
+
+
+        /*
+          If email confirmation is enabled in Supabase,
+          there may be no active session yet.
+
+          If Supabase created an immediate session, sign the
+          applicant out after registration. They will use the
+          dedicated affiliate login page after approval.
+        */
+
+
+        if (
+          data.session
+        ) {
+
+          await supabaseClient
+            .auth
+            .signOut();
+
+        }
+
+
+      } catch (
+        error
+      ) {
+
+
+        console.error(
+          "Affiliate registration error:",
+          error
+        );
+
+
+        showMessage(
+          friendlySignupError(
+            error
+          )
+        );
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "Apply to Become an Affiliate";
+
+      }
+
+    }
+  );
+
+
+</script>
+
+
+<script src="cookie-consent.js"></script>
+
+
+</body>
+
+</html>
