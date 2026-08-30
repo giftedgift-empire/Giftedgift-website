@@ -165,14 +165,187 @@
       color: #123a8c;
       font-size: 23px;
       font-weight: 800;
+      text-align: center;
     }
 
     .payment-intro {
-      margin: 0 0 18px;
+      margin: 0 0 20px;
       color: #666;
       line-height: 1.55;
       font-size: 15px;
+      text-align: center;
     }
+
+
+    /*
+      =====================================================
+      CREDIT / DEBIT CARD
+      =====================================================
+    */
+
+    .card-payment-card {
+      border: 1px solid #d9e0ee;
+      border-radius: 15px;
+      padding: 18px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(18, 58, 140, 0.07);
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 12px;
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #eef4ff;
+      color: #123a8c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #222;
+    }
+
+    .card-highlight-box {
+      position: relative;
+      overflow: hidden;
+      margin: 14px 0 18px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #fffaf0;
+      border: 1px solid #f2bd16;
+      box-shadow: 0 3px 12px rgba(242, 189, 22, 0.16);
+    }
+
+    .card-highlight-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 55%;
+      height: 100%;
+
+      background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.85),
+        transparent
+      );
+
+      animation: cardBoxShine 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes cardBoxShine {
+
+      0% {
+        left: -80%;
+      }
+
+      55%,
+      100% {
+        left: 130%;
+      }
+
+    }
+
+    .card-highlight-text {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: #123a8c;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.65;
+    }
+
+    .card-brands {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .card-brand {
+      padding: 6px 10px;
+      border-radius: 7px;
+      background: #eef4ff;
+      color: #123a8c;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .card-payment-button {
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      padding: 15px 18px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .card-payment-button:hover {
+      opacity: 0.95;
+    }
+
+    .card-security {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #ececec;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+
+    /*
+      =====================================================
+      PAYMENT DIVIDER
+      =====================================================
+    */
+
+    .payment-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+      color: #777;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .payment-divider::before,
+    .payment-divider::after {
+      content: "";
+      height: 1px;
+      background: #ddd;
+      flex: 1;
+    }
+
+
+    /*
+      =====================================================
+      PAYPAL
+      =====================================================
+    */
 
     .paypal-payment-card {
       border: 1px solid #d9e0ee;
@@ -447,11 +620,13 @@
         font-size: 21px;
       }
 
-      .paypal-payment-card {
+      .paypal-payment-card,
+      .card-payment-card {
         padding: 15px;
       }
 
-      .payment-highlight {
+      .payment-highlight,
+      .card-highlight-text {
         font-size: 15px;
       }
 
@@ -465,7 +640,8 @@
     @media (prefers-reduced-motion: reduce) {
 
       .payment-highlight,
-      .payment-highlight-box::before {
+      .payment-highlight-box::before,
+      .card-highlight-box::before {
         animation: none;
       }
 
@@ -582,8 +758,101 @@
 
 
         <p class="payment-intro">
-          Complete your purchase securely using the payment option below.
+          Complete your purchase securely using the payment method you prefer.
         </p>
+
+
+        <!--
+          ===================================================
+          CREDIT / DEBIT CARD
+          ===================================================
+        -->
+
+
+        <div class="card-payment-card">
+
+
+          <div class="card-title-row">
+
+            <div class="card-icon">
+              💳
+            </div>
+
+            <div class="card-title">
+              Credit / Debit Card
+            </div>
+
+          </div>
+
+
+          <div class="card-highlight-box">
+
+            <p class="card-highlight-text">
+              Pay securely with your credit or debit card.
+              No PayPal account is required.
+            </p>
+
+          </div>
+
+
+          <div class="card-brands">
+
+            <span class="card-brand">
+              VISA
+            </span>
+
+            <span class="card-brand">
+              Mastercard
+            </span>
+
+            <span class="card-brand">
+              Debit Card
+            </span>
+
+            <span class="card-brand">
+              Credit Card
+            </span>
+
+          </div>
+
+
+          <button
+            type="button"
+            id="card-payment-button"
+            class="card-payment-button"
+          >
+            Pay with Credit / Debit Card
+          </button>
+
+
+          <div class="card-security">
+
+            <span>
+              🔒
+            </span>
+
+            <span>
+              Card payments are handled securely by Flutterwave.
+              GiftedGift Empire does not receive or store your full
+              card number or security code.
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="payment-divider">
+          OR
+        </div>
+
+
+        <!--
+          ===================================================
+          PAYPAL
+          ===================================================
+        -->
 
 
         <div class="paypal-payment-card">
@@ -654,7 +923,7 @@
 
       <!--
         =====================================================
-        DOWNLOAD AFTER SUCCESSFUL PAYMENT
+        DOWNLOAD AFTER SUCCESSFUL PAYPAL PAYMENT
         =====================================================
       -->
 
@@ -681,7 +950,7 @@
 
 
       <div class="secure-note">
-        Secure digital checkout powered by PayPal.
+        Secure digital checkout powered by PayPal and Flutterwave.
       </div>
 
 
@@ -732,6 +1001,12 @@ const productId =
 const dealId =
   params.get(
     "deal_id"
+  );
+
+
+const referralCode =
+  params.get(
+    "ref"
   );
 
 
@@ -1375,6 +1650,105 @@ function renderProduct() {
 
 }
 
+
+
+/*
+  =========================================================
+  FLUTTERWAVE CARD CHECKOUT
+  =========================================================
+*/
+
+
+function openCardCheckout() {
+
+
+  clearMessage();
+
+
+  if (
+    !currentProduct
+  ) {
+
+    showError(
+      "The product has not loaded yet."
+    );
+
+
+    return;
+
+  }
+
+
+  const cardCheckoutURL =
+    new URL(
+      "/flutterwave-checkout.html",
+      window.location.origin
+    );
+
+
+  cardCheckoutURL
+    .searchParams
+    .set(
+      "product_id",
+      String(
+        currentProduct.id
+      )
+    );
+
+
+  if (
+    currentDeal
+  ) {
+
+    cardCheckoutURL
+      .searchParams
+      .set(
+        "deal_id",
+        String(
+          currentDeal.id
+        )
+      );
+
+  }
+
+
+  if (
+    referralCode
+  ) {
+
+    cardCheckoutURL
+      .searchParams
+      .set(
+        "ref",
+        referralCode
+      );
+
+  }
+
+
+  window.location.href =
+    cardCheckoutURL.toString();
+
+}
+
+
+
+document
+  .getElementById(
+    "card-payment-button"
+  )
+  .addEventListener(
+    "click",
+    openCardCheckout
+  );
+
+
+
+/*
+  =========================================================
+  PAYPAL
+  =========================================================
+*/
 
 
 async function createPayPalOrder() {
