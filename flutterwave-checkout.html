@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Card Checkout | GiftedGift Empire
+  </title>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 28px 14px;
+    }
+
+    .checkout-card {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow:
+        0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .brand {
+      text-align: center;
+      color: #123a8c;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .checkout-title {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .loading {
+      padding: 35px 10px;
+      text-align: center;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .product-image {
+      display: none;
+      width: 100%;
+      max-height: 330px;
+      object-fit: contain;
+      background: #f7f7f7;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .product-name {
+      font-size: 25px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .product-description {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .normal-price {
+      color: #123a8c;
+      font-size: 30px;
+      font-weight: 800;
+      margin: 16px 0;
+    }
+
+    .deal-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0 8px;
+    }
+
+    .old-price {
+      color: #777;
+      font-size: 20px;
+      text-decoration: line-through;
+    }
+
+    .deal-price {
+      color: #123a8c;
+      font-size: 31px;
+      font-weight: 800;
+    }
+
+    .deal-badge {
+      display: inline-block;
+      background: #f2bd16;
+      color: #111;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .payment-box {
+      margin-top: 25px;
+      padding: 20px;
+      border: 1px solid #d8e0ee;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow:
+        0 4px 16px rgba(18,58,140,0.06);
+    }
+
+    .payment-heading {
+      margin: 0 0 7px;
+      color: #123a8c;
+      font-size: 22px;
+    }
+
+    .payment-subtitle {
+      margin: 0 0 18px;
+      color: #666;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .card-highlight {
+      position: relative;
+      overflow: hidden;
+      padding: 16px;
+      margin-bottom: 18px;
+      background: #fffaf0;
+      border: 1px solid #f2bd16;
+      border-radius: 12px;
+      box-shadow:
+        0 3px 12px rgba(242,189,22,0.15);
+    }
+
+    .card-highlight::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 50%;
+      height: 100%;
+
+      background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,0.9),
+        transparent
+      );
+
+      animation:
+        shine 3.5s ease-in-out infinite;
+
+      pointer-events: none;
+    }
+
+    @keyframes shine {
+
+      0% {
+        left: -80%;
+      }
+
+      55%,
+      100% {
+        left: 130%;
+      }
+
+    }
+
+    .card-highlight-text {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: #123a8c;
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+
+    .card-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .card-icon {
+      padding: 6px 10px;
+      background: #eef4ff;
+      color: #123a8c;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    label.field-label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: 700;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      border: 1px solid #ccd3df;
+      border-radius: 9px;
+      padding: 13px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .consent-box {
+      margin: 20px 0;
+      padding: 15px;
+      background: #fff8dc;
+      border: 1px solid #e6c85c;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+
+    .consent-box label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+
+    .consent-box input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .pay-button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      background: #123a8c;
+      color: #fff;
+      padding: 15px 18px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pay-button:hover {
+      opacity: 0.95;
+    }
+
+    .pay-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .secure-note {
+      margin-top: 14px;
+      color: #666;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .message {
+      display: none;
+      padding: 14px;
+      margin: 18px 0;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffe8e8;
+      color: #941c1c;
+      border: 1px solid #f1b8b8;
+    }
+
+    .message.success {
+      display: block;
+      background: #e9f8ed;
+      color: #17662d;
+      border: 1px solid #b8e3c2;
+    }
+
+    .message.info {
+      display: block;
+      background: #eef5ff;
+      color: #123a8c;
+      border: 1px solid #c8d9f5;
+    }
+
+    .verification-box {
+      display: none;
+      text-align: center;
+      margin-top: 24px;
+      padding: 22px;
+      background: #eef5ff;
+      border-radius: 13px;
+    }
+
+    .verification-box h2 {
+      color: #123a8c;
+      margin-top: 0;
+    }
+
+    .download-area {
+      display: none;
+      margin-top: 24px;
+      padding: 20px;
+      text-align: center;
+      background: #eaf8ee;
+      border: 1px solid #b8e3c2;
+      border-radius: 13px;
+    }
+
+    .download-area h2 {
+      color: #17662d;
+      margin-top: 0;
+    }
+
+    .download-button {
+      border: 0;
+      background: #123a8c;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .download-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #123a8c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding: 14px 9px;
+      }
+
+      .checkout-card {
+        padding: 18px;
+        border-radius: 13px;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+      .product-name {
+        font-size: 22px;
+      }
+
+      .normal-price,
+      .deal-price {
+        font-size: 28px;
+      }
+
+      .payment-box {
+        padding: 16px;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .card-highlight::before {
+        animation: none;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+  <div class="checkout-card">
+
+    <div class="brand">
+      GiftedGift Empire
+    </div>
+
+    <h1 class="checkout-title">
+      Secure Card Checkout
+    </h1>
+
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Loading your checkout...
+    </div>
+
+
+    <div
+      id="checkout-content"
+      style="display:none;"
+    >
+
+      <img
+        id="product-image"
+        class="product-image"
+        alt="Digital Product"
+      >
+
+
+      <div
+        id="product-name"
+        class="product-name"
+      ></div>
+
+
+      <div
+        id="product-description"
+        class="product-description"
+      ></div>
+
+
+      <div
+        id="price-area"
+      ></div>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+
+      <!-- NORMAL CARD PAYMENT FORM -->
+
+      <div
+        id="payment-box"
+        class="payment-box"
+      >
+
+        <h2 class="payment-heading">
+          💳 Pay with Credit or Debit Card
+        </h2>
+
+        <p class="payment-subtitle">
+          Enter your contact information below,
+          then continue to Flutterwave's secure card page.
+        </p>
+
+
+        <div class="card-highlight">
+
+          <p class="card-highlight-text">
+            Pay securely with your credit or debit card.
+            Your card details are entered directly on
+            Flutterwave's secure payment page.
+          </p>
+
+          <div class="card-icons">
+
+            <span class="card-icon">
+              VISA
+            </span>
+
+            <span class="card-icon">
+              Mastercard
+            </span>
+
+            <span class="card-icon">
+              Debit Card
+            </span>
+
+            <span class="card-icon">
+              Credit Card
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <label
+          for="customer-name"
+          class="field-label"
+        >
+          Your Name
+        </label>
+
+        <input
+          type="text"
+          id="customer-name"
+          autocomplete="name"
+          placeholder="Enter your name"
+        >
+
+
+        <label
+          for="customer-email"
+          class="field-label"
+        >
+          Email Address
+        </label>
+
+        <input
+          type="email"
+          id="customer-email"
+          autocomplete="email"
+          placeholder="Enter your email address"
+          required
+        >
+
+
+        <div class="consent-box">
+
+          <label>
+
+            <input
+              type="checkbox"
+              id="withdrawal-consent"
+            >
+
+            <span>
+              I expressly consent to the immediate delivery
+              of this digital content and acknowledge that
+              once the digital content is supplied, I lose
+              my right of withdrawal where applicable.
+            </span>
+
+          </label>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="card-pay-button"
+          class="pay-button"
+        >
+          Continue to Secure Card Payment
+        </button>
+
+
+        <div class="secure-note">
+          🔒 Your full card number and security code are
+          handled by Flutterwave. GiftedGift Empire does not
+          store your full card details.
+        </div>
+
+      </div>
+
+
+      <!-- VERIFYING RETURNED PAYMENT -->
+
+      <div
+        id="verification-box"
+        class="verification-box"
+      >
+
+        <h2>
+          Verifying Your Payment
+        </h2>
+
+        <p>
+          Please wait while we securely confirm your
+          payment with Flutterwave.
+        </p>
+
+      </div>
+
+
+      <!-- SUCCESSFUL DOWNLOAD -->
+
+      <div
+        id="download-area"
+        class="download-area"
+      >
+
+        <h2>
+          Payment Successful ✅
+        </h2>
+
+        <p>
+          Your payment has been verified and your
+          digital product is ready.
+        </p>
+
+        <button
+          type="button"
+          id="download-button"
+          class="download-button"
+        >
+          Download Your Product
+        </button>
+
+      </div>
+
+
+      <a
+        href="/shop"
+        class="back-link"
+      >
+        ← Back to Shop
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const queryProductId =
+  params.get(
+    "product_id"
+  ) ||
+  params.get(
+    "id"
+  );
+
+
+const querySlug =
+  params.get(
+    "slug"
+  );
+
+
+const dealId =
+  params.get(
+    "deal_id"
+  );
+
+
+const referralCode =
+  params.get(
+    "ref"
+  );
+
+
+const flutterwaveReturn =
+  params.get(
+    "flutterwave_return"
+  ) === "1";
+
+
+const returnedStatus =
+  params.get(
+    "status"
+  );
+
+
+const returnedTxRef =
+  params.get(
+    "tx_ref"
+  );
+
+
+const returnedTransactionId =
+  params.get(
+    "transaction_id"
+  );
+
+
+let currentProduct =
+  null;
+
+
+let currentDeal =
+  null;
+
+
+let checkoutAmount =
+  null;
+
+
+let downloadToken =
+  null;
+
+
+
+function showMessage(
+  message,
+  type = "error"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message " +
+    type;
+
+
+  box.textContent =
+    message;
+}
+
+
+
+function clearMessage() {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message";
+
+
+  box.textContent =
+    "";
+}
+
+
+
+function validNumber(
+  value
+) {
+
+  const number =
+    Number(
+      value
+    );
+
+
+  return (
+    Number.isFinite(
+      number
+    ) &&
+    number > 0
+  );
+}
+
+
+
+function formatPrice(
+  value
+) {
+
+  return (
+    "€" +
+    Number(
+      value
+    ).toFixed(
+      2
+    )
+  );
+}
+
+
+
+async function loadProduct() {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const content =
+    document.getElementById(
+      "checkout-content"
+    );
+
+
+  try {
+
+
+    let query =
+      supabaseClient
+        .from(
+          "digital_products"
+        )
+        .select(
+          "id,name,slug,description,price,image_url,product_type,active"
+        );
+
+
+    if (
+      queryProductId
+    ) {
+
+
+      const numericId =
+        Number(
+          queryProductId
+        );
+
+
+      if (
+        !Number.isInteger(
+          numericId
+        ) ||
+        numericId <= 0
+      ) {
+
+        throw new Error(
+          "This card checkout link has an invalid product."
+        );
+
+      }
+
+
+      query =
+        query.eq(
+          "id",
+          numericId
+        );
+
+
+    } else if (
+      querySlug
+    ) {
+
+
+      query =
+        query.eq(
+          "slug",
+          querySlug
+        );
+
+
+    } else {
+
+
+      throw new Error(
+        "This card checkout link is missing a product."
+      );
+
+    }
+
+
+    const {
+      data:
+        product,
+
+      error:
+        productError,
+    } =
+      await query
+        .single();
+
+
+    if (
+      productError ||
+      !product
+    ) {
+
+      console.error(
+        productError
+      );
+
+
+      throw new Error(
+        "This digital product could not be found."
+      );
+
+    }
+
+
+    if (
+      product.active !== true
+    ) {
+
+      throw new Error(
+        "This digital product is not currently available."
+      );
+
+    }
+
+
+    if (
+      product.product_type !==
+      "paid"
+    ) {
+
+      throw new Error(
+        "This digital product does not require payment."
+      );
+
+    }
+
+
+    if (
+      !validNumber(
+        product.price
+      )
+    ) {
+
+      throw new Error(
+        "This digital product does not have a valid price."
+      );
+
+    }
+
+
+    currentProduct =
+      product;
+
+
+    checkoutAmount =
+      Number(
+        product.price
+      );
+
+
+    if (
+      dealId
+    ) {
+
+      await loadDeal();
+
+    }
+
+
+    renderProduct();
+
+
+    loading.style.display =
+      "none";
+
+
+    content.style.display =
+      "block";
+
+
+    /*
+      If Flutterwave has returned the customer after
+      payment, immediately begin secure verification.
+    */
+
+
+    if (
+      flutterwaveReturn ||
+      (
+        returnedTransactionId &&
+        returnedTxRef
+      )
+    ) {
+
+      await handleFlutterwaveReturn();
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
+
+    loading.style.display =
+      "none";
+
+
+    content.style.display =
+      "block";
+
+
+    document
+      .getElementById(
+        "payment-box"
+      )
+      .style.display =
+        "none";
+
+
+    showMessage(
+
+      error instanceof Error
+        ? error.message
+        : "Card checkout could not be loaded.",
+
+      "error"
+
+    );
+
+  }
+
+}
+
+
+
+async function loadDeal() {
+
+
+  const numericDealId =
+    Number(
+      dealId
+    );
+
+
+  if (
+    !Number.isInteger(
+      numericDealId
+    ) ||
+    numericDealId <= 0
+  ) {
+
+    throw new Error(
+      "This deal link is invalid."
+    );
+
+  }
+
+
+  const {
+    data:
+      deal,
+
+    error:
+      dealError,
+  } =
+    await supabaseClient
+      .from(
+        "deals"
+      )
+      .select(
+        "id,item_type,item_id,deal_price,active,starts_at,ends_at"
+      )
+      .eq(
+        "id",
+        numericDealId
+      )
+      .single();
+
+
+  if (
+    dealError ||
+    !deal
+  ) {
+
+    throw new Error(
+      "This deal could not be found."
+    );
+
+  }
+
+
+  if (
+    deal.item_type !==
+      "digital_product" ||
+    Number(
+      deal.item_id
+    ) !==
+      Number(
+        currentProduct.id
+      )
+  ) {
+
+    throw new Error(
+      "This deal does not belong to this digital product."
+    );
+
+  }
+
+
+  if (
+    deal.active !== true
+  ) {
+
+    throw new Error(
+      "This deal is no longer active."
+    );
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  if (
+    deal.starts_at
+  ) {
+
+
+    const startsAt =
+      new Date(
+        deal.starts_at
+      );
+
+
+    if (
+      !Number.isNaN(
+        startsAt.getTime()
+      ) &&
+      now < startsAt
+    ) {
+
+      throw new Error(
+        "This deal has not started yet."
+      );
+
+    }
+
+  }
+
+
+  if (
+    deal.ends_at
+  ) {
+
+
+    const endsAt =
+      new Date(
+        deal.ends_at
+      );
+
+
+    if (
+      !Number.isNaN(
+        endsAt.getTime()
+      ) &&
+      now > endsAt
+    ) {
+
+      throw new Error(
+        "This deal has expired."
+      );
+
+    }
+
+  }
+
+
+  const dealPrice =
+    Number(
+      deal.deal_price
+    );
+
+
+  if (
+    !Number.isFinite(
+      dealPrice
+    ) ||
+    dealPrice <= 0 ||
+    dealPrice >=
+      Number(
+        currentProduct.price
+      )
+  ) {
+
+    throw new Error(
+      "This deal does not have a valid discounted price."
+    );
+
+  }
+
+
+  currentDeal =
+    deal;
+
+
+  checkoutAmount =
+    dealPrice;
+
+}
+
+
+
+function renderProduct() {
+
+
+  const image =
+    document.getElementById(
+      "product-image"
+    );
+
+
+  const name =
+    document.getElementById(
+      "product-name"
+    );
+
+
+  const description =
+    document.getElementById(
+      "product-description"
+    );
+
+
+  const priceArea =
+    document.getElementById(
+      "price-area"
+    );
+
+
+  if (
+    currentProduct.image_url
+  ) {
+
+
+    image.src =
+      currentProduct.image_url;
+
+
+    image.style.display =
+      "block";
+
+  }
+
+
+  name.textContent =
+    currentProduct.name ||
+    "Digital Product";
+
+
+  description.textContent =
+    currentProduct.description ||
+    "";
+
+
+  if (
+    currentDeal
+  ) {
+
+
+    const normalPrice =
+      Number(
+        currentProduct.price
+      );
+
+
+    const saving =
+      normalPrice -
+      checkoutAmount;
+
+
+    priceArea.innerHTML = `
+
+      <div class="deal-row">
+
+        <span class="old-price">
+          ${formatPrice(normalPrice)}
+        </span>
+
+        <span class="deal-price">
+          ${formatPrice(checkoutAmount)}
+        </span>
+
+      </div>
+
+      <div class="deal-badge">
+        Deal applied — save ${formatPrice(saving)}
+      </div>
+
+    `;
+
+
+  } else {
+
+
+    priceArea.innerHTML = `
+
+      <div class="normal-price">
+        ${formatPrice(checkoutAmount)}
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+async function startCardPayment() {
+
+
+  clearMessage();
+
+
+  if (
+    !currentProduct
+  ) {
+
+    showMessage(
+      "The digital product has not loaded yet."
+    );
+
+
+    return;
+
+  }
+
+
+  const customerName =
+    document
+      .getElementById(
+        "customer-name"
+      )
+      .value
+      .trim();
+
+
+  const customerEmail =
+    document
+      .getElementById(
+        "customer-email"
+      )
+      .value
+      .trim();
+
+
+  const consent =
+    document
+      .getElementById(
+        "withdrawal-consent"
+      );
+
+
+  if (
+    !customerEmail
+  ) {
+
+    showMessage(
+      "Please enter your email address."
+    );
+
+
+    document
+      .getElementById(
+        "customer-email"
+      )
+      .focus();
+
+
+    return;
+
+  }
+
+
+  if (
+    !consent.checked
+  ) {
+
+    showMessage(
+      "Please accept the digital-content consent before paying."
+    );
+
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "card-pay-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Preparing Secure Payment...";
+
+
+  showMessage(
+    "Preparing your secure card payment...",
+    "info"
+  );
+
+
+  try {
+
+
+    const requestBody = {
+
+      product_id:
+        Number(
+          currentProduct.id
+        ),
+
+      customer_email:
+        customerEmail,
+
+      customer_name:
+        customerName,
+
+      withdrawal_waiver_accepted:
+        true,
+
+    };
+
+
+    if (
+      currentDeal
+    ) {
+
+      requestBody.deal_id =
+        Number(
+          currentDeal.id
+        );
+
+    }
+
+
+    if (
+      referralCode
+    ) {
+
+      requestBody.ref =
+        referralCode;
+
+    }
+
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+          "/functions/v1/flutterwave-create-payment",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json",
+
+          },
+
+          body:
+            JSON.stringify(
+              requestBody
+            ),
+
+        }
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      data.success !== true ||
+      !data.payment_link
+    ) {
+
+      throw new Error(
+
+        data.error ||
+        "The secure card payment could not be created."
+
+      );
+
+    }
+
+
+    /*
+      Flutterwave now handles the card entry securely.
+    */
+
+
+    window.location.href =
+      data.payment_link;
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+
+      error instanceof Error
+        ? error.message
+        : "Unable to start card payment.",
+
+      "error"
+
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Continue to Secure Card Payment";
+
+  }
+
+}
+
+
+
+async function handleFlutterwaveReturn() {
+
+
+  const paymentBox =
+    document.getElementById(
+      "payment-box"
+    );
+
+
+  const verificationBox =
+    document.getElementById(
+      "verification-box"
+    );
+
+
+  /*
+    Flutterwave may return a cancelled/failed checkout.
+  */
+
+
+  if (
+    returnedStatus &&
+    returnedStatus !==
+      "successful"
+  ) {
+
+
+    showMessage(
+      returnedStatus ===
+        "cancelled"
+
+        ? "The card payment was cancelled. You can try again."
+
+        : "The card payment was not successful. You can try again.",
+
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !returnedTransactionId ||
+    !returnedTxRef
+  ) {
+
+
+    showMessage(
+      "Flutterwave returned without enough information to verify the payment.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  paymentBox.style.display =
+    "none";
+
+
+  verificationBox.style.display =
+    "block";
+
+
+  clearMessage();
+
+
+  try {
+
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+          "/functions/v1/flutterwave-verify-payment",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json",
+
+          },
+
+          body:
+            JSON.stringify({
+
+              transaction_id:
+                returnedTransactionId,
+
+              tx_ref:
+                returnedTxRef,
+
+            }),
+
+        }
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      data.success !== true ||
+      data.payment_status !==
+        "successful" ||
+      !data.download_token
+    ) {
+
+      throw new Error(
+
+        data.error ||
+        "The card payment could not be verified."
+
+      );
+
+    }
+
+
+    downloadToken =
+      data.download_token;
+
+
+    verificationBox.style.display =
+      "none";
+
+
+    document
+      .getElementById(
+        "download-area"
+      )
+      .style.display =
+        "block";
+
+
+    showMessage(
+      "Payment completed and verified successfully.",
+      "success"
+    );
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    verificationBox.style.display =
+      "none";
+
+
+    showMessage(
+
+      error instanceof Error
+        ? error.message
+        : "Payment verification failed.",
+
+      "error"
+
+    );
+
+  }
+
+}
+
+
+
+async function downloadProduct() {
+
+
+  if (
+    !downloadToken
+  ) {
+
+    showMessage(
+      "Your secure download token is missing."
+    );
+
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "download-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Preparing Download...";
+
+
+  try {
+
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+          "/functions/v1/flutterwave-digital-download",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json",
+
+          },
+
+          body:
+            JSON.stringify({
+
+              download_token:
+                downloadToken,
+
+            }),
+
+        }
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      data.success !== true ||
+      !data.download_url
+    ) {
+
+      throw new Error(
+
+        data.error ||
+        "Your secure download could not be prepared."
+
+      );
+
+    }
+
+
+    window.location.href =
+      data.download_url;
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+
+      error instanceof Error
+        ? error.message
+        : "The secure download could not be prepared.",
+
+      "error"
+
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Download Your Product";
+
+  }
+
+}
+
+
+
+document
+  .getElementById(
+    "card-pay-button"
+  )
+  .addEventListener(
+    "click",
+    startCardPayment
+  );
+
+
+document
+  .getElementById(
+    "download-button"
+  )
+  .addEventListener(
+    "click",
+    downloadProduct
+  );
+
+
+loadProduct();
+
+
+</script>
+
+
+<script
+  src="cookie-consent.js"
+></script>
+
+
+</body>
+
+</html>
