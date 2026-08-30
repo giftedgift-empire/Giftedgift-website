@@ -15,7 +15,7 @@
 
   <meta
     name="description"
-    content="Join the GiftedGift Empire affiliate program and earn commissions by promoting eligible digital products."
+    content="Join the GiftedGift Empire affiliate program and earn commissions by promoting eligible GiftedGift Empire products and offers."
   >
 
   <meta
@@ -379,7 +379,7 @@
     <p>
       Join our affiliate program and earn commission
       when customers purchase eligible GiftedGift Empire
-      digital products through your unique referral link.
+      products and offers through your unique referral link.
     </p>
 
   </section>
@@ -400,7 +400,7 @@
 
       <span>
         Approved affiliates receive their own unique
-        referral code.
+        referral code for eligible products and offers.
       </span>
 
     </div>
@@ -988,14 +988,6 @@ document
         }
 
 
-        /*
-          The trigger we installed in Supabase automatically
-          creates the corresponding affiliates row with:
-
-          status = pending
-        */
-
-
         document
           .getElementById(
             "affiliate-form"
@@ -1010,16 +1002,6 @@ document
           )
           .style.display =
             "block";
-
-
-        /*
-          If email confirmation is enabled in Supabase,
-          there may be no active session yet.
-
-          If Supabase created an immediate session, sign the
-          applicant out after registration. They will use the
-          dedicated affiliate login page after approval.
-        */
 
 
         if (
