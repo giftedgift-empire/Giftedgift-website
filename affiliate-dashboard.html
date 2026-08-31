@@ -459,7 +459,7 @@
 
     /*
       =====================================================
-      COMING STATS
+      PERFORMANCE
       =====================================================
     */
 
@@ -936,7 +936,7 @@
 
 
 
-    <!-- FUTURE LIVE STATS -->
+    <!-- LIVE AFFILIATE PERFORMANCE -->
 
     <section class="stats-section">
 
@@ -946,15 +946,16 @@
 
 
       <p>
-        Your live clicks, qualifying sales, commissions
-        and payouts will appear here as we complete
-        the tracking connection.
+        Track your referral activity, qualifying sales,
+        commission earnings and payouts.
       </p>
 
 
 
       <div class="stats-grid">
 
+
+        <!-- REFERRAL CLICKS -->
 
         <div class="stat-card">
 
@@ -963,23 +964,25 @@
           </div>
 
           <div class="stat-title">
-  Referral Clicks
-</div>
+            Referral Clicks
+          </div>
 
-<div
-  id="referral-click-count"
-  class="stat-value"
->
-  —
-</div>
+          <div
+            id="referral-click-count"
+            class="stat-value"
+          >
+            —
+          </div>
 
           <div class="stat-note">
-            Tracking connection next
+            Live tracked referral visits
           </div>
 
         </div>
 
 
+
+        <!-- QUALIFYING SALES -->
 
         <div class="stat-card">
 
@@ -991,17 +994,22 @@
             Qualifying Sales
           </div>
 
-          <div class="stat-value">
+          <div
+            id="qualifying-sales-count"
+            class="stat-value"
+          >
             —
           </div>
 
           <div class="stat-note">
-            Order attribution connection next
+            Completed, non-refunded affiliate orders
           </div>
 
         </div>
 
 
+
+        <!-- COMMISSION EARNINGS -->
 
         <div class="stat-card">
 
@@ -1014,11 +1022,11 @@
           </div>
 
           <div
-  id="qualifying-sales-count"
-  class="stat-value"
->
-  —
-</div>
+            id="commission-earnings-value"
+            class="stat-value"
+          >
+            —
+          </div>
 
           <div class="stat-note">
             Commission connection next
@@ -1027,6 +1035,8 @@
         </div>
 
 
+
+        <!-- PAID OUT -->
 
         <div class="stat-card">
 
@@ -1038,7 +1048,10 @@
             Paid Out
           </div>
 
-          <div class="stat-value">
+          <div
+            id="paid-out-value"
+            class="stat-value"
+          >
             —
           </div>
 
@@ -1530,187 +1543,195 @@ async function loadDashboard() {
           commissionRate
         );
 
-/*
-  =====================================================
-  LOAD REFERRAL CLICK COUNT
-  =====================================================
-*/
 
 
-try {
+    /*
+      =====================================================
+      LOAD REFERRAL CLICK COUNT
+      =====================================================
+    */
 
 
-  const {
-    count: referralClickCount,
-    error: referralClickError
-  } =
-    await supabaseClient
-      .from(
-        "affiliate_clicks"
-      )
-      .select(
-        "id",
-        {
-          count: "exact",
-          head: true
-        }
-      )
-      .eq(
-        "affiliate_id",
-        affiliate.id
+    try {
+
+
+      const {
+        count: referralClickCount,
+        error: referralClickError
+      } =
+        await supabaseClient
+          .from(
+            "affiliate_clicks"
+          )
+          .select(
+            "id",
+            {
+              count: "exact",
+              head: true
+            }
+          )
+          .eq(
+            "affiliate_id",
+            affiliate.id
+          );
+
+
+
+      if (
+        referralClickError
+      ) {
+
+        console.error(
+          "Affiliate click count error:",
+          referralClickError
+        );
+
+
+        document
+          .getElementById(
+            "referral-click-count"
+          )
+          .textContent =
+            "—";
+
+
+      } else {
+
+
+        document
+          .getElementById(
+            "referral-click-count"
+          )
+          .textContent =
+            Number(
+              referralClickCount || 0
+            );
+
+
+      }
+
+
+    } catch (
+      clickCountError
+    ) {
+
+
+      console.error(
+        "Affiliate click count error:",
+        clickCountError
       );
 
 
+      document
+        .getElementById(
+          "referral-click-count"
+        )
+        .textContent =
+          "—";
 
-  if (
-    referralClickError
-  ) {
-
-    console.error(
-      "Affiliate click count error:",
-      referralClickError
-    );
-
-
-    document
-      .getElementById(
-        "referral-click-count"
-      )
-      .textContent =
-        "—";
+    }
 
 
-  } else {
+
+    /*
+      =====================================================
+      LOAD QUALIFYING SALES
+      =====================================================
+    */
 
 
-    document
-      .getElementById(
-        "referral-click-count"
-      )
-      .textContent =
-        Number(
-          referralClickCount || 0
+    try {
+
+
+      const salesResponse =
+        await fetch(
+          "/api/affiliate-sales",
+          {
+            method:
+              "GET",
+
+            headers: {
+
+              Authorization:
+                "Bearer " +
+                session.access_token,
+
+              Accept:
+                "application/json"
+
+            }
+
+          }
         );
 
 
-  }
+
+      if (
+        !salesResponse.ok
+      ) {
 
 
-} catch (
-  clickCountError
-) {
+        const errorText =
+          await salesResponse.text();
 
 
-  console.error(
-    "Affiliate click count error:",
-    clickCountError
-  );
+        console.error(
+          "Affiliate sales load failed:",
+          salesResponse.status,
+          errorText
+        );
 
 
-  document
-    .getElementById(
-      "referral-click-count"
-    )
-    .textContent =
-      "—";
-
-}
-/*
-  =====================================================
-  LOAD QUALIFYING SALES
-  =====================================================
-*/
+        document
+          .getElementById(
+            "qualifying-sales-count"
+          )
+          .textContent =
+            "—";
 
 
-try {
+      } else {
 
 
-  const salesResponse =
-    await fetch(
-      "/api/affiliate-sales",
-      {
-        method:
-          "GET",
+        const salesData =
+          await salesResponse.json();
 
-        headers: {
 
-          Authorization:
-            "Bearer " +
-            session.access_token,
+        document
+          .getElementById(
+            "qualifying-sales-count"
+          )
+          .textContent =
+            Number(
+              salesData.qualifying_sales || 0
+            );
 
-          Accept:
-            "application/json"
-
-        }
 
       }
-    );
+
+
+    } catch (
+      salesLoadError
+    ) {
+
+
+      console.error(
+        "Affiliate sales load error:",
+        salesLoadError
+      );
+
+
+      document
+        .getElementById(
+          "qualifying-sales-count"
+        )
+        .textContent =
+          "—";
+
+    }
 
 
 
-  if (
-    !salesResponse.ok
-  ) {
-
-
-    const errorText =
-      await salesResponse.text();
-
-
-    console.error(
-      "Affiliate sales load failed:",
-      salesResponse.status,
-      errorText
-    );
-
-
-    document
-      .getElementById(
-        "qualifying-sales-count"
-      )
-      .textContent =
-        "—";
-
-
-  } else {
-
-
-    const salesData =
-      await salesResponse.json();
-
-
-    document
-      .getElementById(
-        "qualifying-sales-count"
-      )
-      .textContent =
-        Number(
-          salesData.qualifying_sales || 0
-        );
-
-
-  }
-
-
-} catch (
-  salesLoadError
-) {
-
-
-  console.error(
-    "Affiliate sales load error:",
-    salesLoadError
-  );
-
-
-  document
-    .getElementById(
-      "qualifying-sales-count"
-    )
-    .textContent =
-      "—";
-
-}
     /*
       SHOW DASHBOARD
     */
