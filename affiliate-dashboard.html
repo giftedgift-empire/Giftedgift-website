@@ -19,19 +19,15 @@
     content="noindex, nofollow"
   >
 
-
   <style>
 
     * {
       box-sizing: border-box;
     }
 
-
     body {
       margin: 0;
-
       min-height: 100vh;
-
       font-family: Arial, sans-serif;
 
       background:
@@ -45,38 +41,25 @@
       color: #222;
     }
 
-
-    /*
-      =====================================================
-      HEADER
-      =====================================================
-    */
-
     .top-bar {
       background: #123a8c;
-
       padding: 17px 20px;
 
       display: flex;
-
       align-items: center;
       justify-content: space-between;
 
       gap: 15px;
     }
 
-
     .brand {
       color: #f2bd16;
-
       font-size: 24px;
       font-weight: 800;
     }
 
-
     .logout-button {
       border: 1px solid rgba(255,255,255,0.5);
-
       border-radius: 8px;
 
       padding: 9px 14px;
@@ -90,33 +73,17 @@
       cursor: pointer;
     }
 
-
     .logout-button:hover {
       background: rgba(255,255,255,0.1);
     }
-
-
-    /*
-      =====================================================
-      PAGE
-      =====================================================
-    */
 
     .page {
       width: 100%;
       max-width: 1100px;
 
       margin: 0 auto;
-
       padding: 35px 16px 60px;
     }
-
-
-    /*
-      =====================================================
-      LOADING
-      =====================================================
-    */
 
     .loading-box {
       background: white;
@@ -127,19 +94,11 @@
       padding: 30px;
 
       text-align: center;
-
       color: #555;
 
       box-shadow:
         0 7px 25px rgba(0,0,0,0.06);
     }
-
-
-    /*
-      =====================================================
-      ERROR
-      =====================================================
-    */
 
     .error-box {
       display: none;
@@ -155,22 +114,13 @@
       line-height: 1.6;
     }
 
-
-    /*
-      =====================================================
-      DASHBOARD
-      =====================================================
-    */
-
     #dashboard {
       display: none;
     }
 
-
     .welcome-section {
       margin-bottom: 25px;
     }
-
 
     .welcome-badge {
       display: inline-block;
@@ -190,7 +140,6 @@
       font-weight: 800;
     }
 
-
     .welcome-section h1 {
       margin: 0 0 7px;
 
@@ -200,7 +149,6 @@
       line-height: 1.2;
     }
 
-
     .welcome-section p {
       margin: 0;
 
@@ -208,13 +156,6 @@
 
       line-height: 1.6;
     }
-
-
-    /*
-      =====================================================
-      SUMMARY CARDS
-      =====================================================
-    */
 
     .summary-grid {
       display: grid;
@@ -226,10 +167,8 @@
         );
 
       gap: 15px;
-
       margin-bottom: 25px;
     }
-
 
     .summary-card {
       background: white;
@@ -243,7 +182,6 @@
         0 6px 22px rgba(0,0,0,0.05);
     }
 
-
     .summary-label {
       color: #717780;
 
@@ -252,7 +190,6 @@
 
       margin-bottom: 8px;
     }
-
 
     .summary-value {
       color: #123a8c;
@@ -263,17 +200,9 @@
       word-break: break-word;
     }
 
-
     .status-approved {
       color: #17662d;
     }
-
-
-    /*
-      =====================================================
-      MAIN CARDS
-      =====================================================
-    */
 
     .dashboard-grid {
       display: grid;
@@ -283,7 +212,6 @@
 
       gap: 18px;
     }
-
 
     .card {
       background: white;
@@ -297,7 +225,6 @@
         0 7px 25px rgba(0,0,0,0.06);
     }
 
-
     .card h2 {
       margin: 0 0 7px;
 
@@ -305,7 +232,6 @@
 
       font-size: 21px;
     }
-
 
     .card-description {
       margin: 0 0 20px;
@@ -315,13 +241,6 @@
       font-size: 14px;
       line-height: 1.55;
     }
-
-
-    /*
-      =====================================================
-      REFERRAL LINK
-      =====================================================
-    */
 
     .referral-code-box {
       margin-bottom: 18px;
@@ -334,7 +253,6 @@
       border-radius: 11px;
     }
 
-
     .referral-code-label {
       margin-bottom: 7px;
 
@@ -343,7 +261,6 @@
       font-size: 12px;
       font-weight: 700;
     }
-
 
     .referral-code {
       color: #123a8c;
@@ -354,17 +271,13 @@
       word-break: break-all;
     }
 
-
     .link-box {
       display: flex;
-
       gap: 9px;
     }
 
-
     .link-box input {
       flex: 1;
-
       min-width: 0;
 
       padding: 12px 13px;
@@ -373,12 +286,10 @@
       border-radius: 9px;
 
       background: #fafafa;
-
       color: #333;
 
       font-size: 14px;
     }
-
 
     .copy-button {
       flex-shrink: 0;
@@ -396,11 +307,9 @@
       cursor: pointer;
     }
 
-
     .copy-button:hover {
       opacity: 0.94;
     }
-
 
     .copy-message {
       min-height: 19px;
@@ -412,13 +321,6 @@
       font-size: 13px;
       font-weight: 700;
     }
-
-
-    /*
-      =====================================================
-      ACCOUNT DETAILS
-      =====================================================
-    */
 
     .detail-row {
       display: flex;
@@ -432,18 +334,14 @@
       border-bottom: 1px solid #eeeeee;
     }
 
-
     .detail-row:last-child {
       border-bottom: none;
     }
 
-
     .detail-label {
       color: #777;
-
       font-size: 14px;
     }
-
 
     .detail-value {
       color: #222;
@@ -456,17 +354,9 @@
       word-break: break-word;
     }
 
-
-    /*
-      =====================================================
-      PERFORMANCE
-      =====================================================
-    */
-
     .stats-section {
       margin-top: 25px;
     }
-
 
     .stats-section h2 {
       margin: 0 0 7px;
@@ -476,7 +366,6 @@
       font-size: 22px;
     }
 
-
     .stats-section > p {
       margin: 0 0 17px;
 
@@ -485,7 +374,6 @@
       font-size: 14px;
       line-height: 1.55;
     }
-
 
     .stats-grid {
       display: grid;
@@ -499,7 +387,6 @@
       gap: 13px;
     }
 
-
     .stat-card {
       background: white;
 
@@ -512,13 +399,10 @@
         0 5px 18px rgba(0,0,0,0.04);
     }
 
-
     .stat-icon {
       font-size: 22px;
-
       margin-bottom: 9px;
     }
-
 
     .stat-title {
       color: #666;
@@ -529,14 +413,12 @@
       margin-bottom: 6px;
     }
 
-
     .stat-value {
       color: #123a8c;
 
       font-size: 20px;
       font-weight: 800;
     }
-
 
     .stat-note {
       margin-top: 6px;
@@ -546,13 +428,6 @@
       font-size: 11px;
       line-height: 1.4;
     }
-
-
-    /*
-      =====================================================
-      FOOTER
-      =====================================================
-    */
 
     footer {
       padding: 22px 15px;
@@ -564,24 +439,15 @@
       font-size: 13px;
     }
 
-
-    /*
-      =====================================================
-      MOBILE
-      =====================================================
-    */
-
     @media (max-width: 800px) {
 
       .summary-grid {
         grid-template-columns: 1fr;
       }
 
-
       .dashboard-grid {
         grid-template-columns: 1fr;
       }
-
 
       .stats-grid {
         grid-template-columns:
@@ -593,55 +459,44 @@
 
     }
 
-
     @media (max-width: 500px) {
 
       .top-bar {
         padding: 15px;
       }
 
-
       .brand {
         font-size: 20px;
       }
-
 
       .page {
         padding-top: 25px;
       }
 
-
       .welcome-section h1 {
         font-size: 27px;
       }
-
 
       .card {
         padding: 19px 16px;
       }
 
-
       .link-box {
         flex-direction: column;
       }
-
 
       .copy-button {
         width: 100%;
       }
 
-
       .stats-grid {
         grid-template-columns: 1fr;
       }
 
-
       .detail-row {
         flex-direction: column;
-
         gap: 5px;
       }
-
 
       .detail-value {
         text-align: left;
@@ -662,7 +517,6 @@
   <div class="brand">
     GiftedGift Empire
   </div>
-
 
   <button
     type="button"
@@ -687,18 +541,14 @@
   </div>
 
 
-
   <div
     id="error-box"
     class="error-box"
   ></div>
 
 
-
   <div id="dashboard">
 
-
-    <!-- WELCOME -->
 
     <section class="welcome-section">
 
@@ -706,11 +556,9 @@
         Approved Affiliate
       </div>
 
-
       <h1 id="welcome-name">
         Welcome
       </h1>
-
 
       <p>
         Manage your GiftedGift Empire referral information
@@ -720,8 +568,6 @@
     </section>
 
 
-
-    <!-- SUMMARY -->
 
     <section class="summary-grid">
 
@@ -742,7 +588,6 @@
       </div>
 
 
-
       <div class="summary-card">
 
         <div class="summary-label">
@@ -757,7 +602,6 @@
         </div>
 
       </div>
-
 
 
       <div class="summary-card">
@@ -783,14 +627,11 @@
     <section class="dashboard-grid">
 
 
-      <!-- REFERRAL -->
-
       <div class="card">
 
         <h2>
           Your Referral Link
         </h2>
-
 
         <p class="card-description">
           Share your unique referral link when promoting
@@ -798,13 +639,11 @@
         </p>
 
 
-
         <div class="referral-code-box">
 
           <div class="referral-code-label">
             YOUR REFERRAL CODE
           </div>
-
 
           <div
             id="referral-code"
@@ -816,7 +655,6 @@
         </div>
 
 
-
         <div class="link-box">
 
           <input
@@ -825,7 +663,6 @@
             readonly
             aria-label="Affiliate referral link"
           >
-
 
           <button
             type="button"
@@ -847,19 +684,15 @@
 
 
 
-      <!-- ACCOUNT -->
-
       <div class="card">
 
         <h2>
           Affiliate Account
         </h2>
 
-
         <p class="card-description">
           Your current affiliate account information.
         </p>
-
 
 
         <div class="detail-row">
@@ -878,7 +711,6 @@
         </div>
 
 
-
         <div class="detail-row">
 
           <div class="detail-label">
@@ -895,7 +727,6 @@
         </div>
 
 
-
         <div class="detail-row">
 
           <div class="detail-label">
@@ -910,7 +741,6 @@
           </div>
 
         </div>
-
 
 
         <div class="detail-row">
@@ -936,14 +766,11 @@
 
 
 
-    <!-- LIVE AFFILIATE PERFORMANCE -->
-
     <section class="stats-section">
 
       <h2>
         Performance
       </h2>
-
 
       <p>
         Track your referral activity, qualifying sales,
@@ -951,11 +778,8 @@
       </p>
 
 
-
       <div class="stats-grid">
 
-
-        <!-- REFERRAL CLICKS -->
 
         <div class="stat-card">
 
@@ -982,8 +806,6 @@
 
 
 
-        <!-- QUALIFYING SALES -->
-
         <div class="stat-card">
 
           <div class="stat-icon">
@@ -1009,8 +831,6 @@
 
 
 
-        <!-- COMMISSION EARNINGS -->
-
         <div class="stat-card">
 
           <div class="stat-icon">
@@ -1029,14 +849,12 @@
           </div>
 
           <div class="stat-note">
-            Commission connection next
+            Active, non-reversed commissions
           </div>
 
         </div>
 
 
-
-        <!-- PAID OUT -->
 
         <div class="stat-card">
 
@@ -1105,13 +923,6 @@ const supabaseClient =
 
 
 
-/*
-  =====================================================
-  PAGE ELEMENTS
-  =====================================================
-*/
-
-
 const loadingBox =
   document.getElementById(
     "loading-box"
@@ -1131,13 +942,6 @@ const dashboard =
 
 
 
-/*
-  =====================================================
-  NORMALIZE
-  =====================================================
-*/
-
-
 function normalizeEmail(
   value
 ) {
@@ -1152,13 +956,6 @@ function normalizeEmail(
 
 
 
-/*
-  =====================================================
-  DISPLAY ERROR
-  =====================================================
-*/
-
-
 function showError(
   message
 ) {
@@ -1166,14 +963,11 @@ function showError(
   loadingBox.style.display =
     "none";
 
-
   dashboard.style.display =
     "none";
 
-
   errorBox.style.display =
     "block";
-
 
   errorBox.textContent =
     message;
@@ -1182,17 +976,9 @@ function showError(
 
 
 
-/*
-  =====================================================
-  COMMISSION FORMAT
-  =====================================================
-*/
-
-
 function formatCommissionRate(
   value
 ) {
-
 
   if (
     value === null ||
@@ -1233,11 +1019,48 @@ function formatCommissionRate(
 
 
 
-/*
-  =====================================================
-  LOAD AFFILIATE
-  =====================================================
-*/
+function formatMoney(
+  value
+) {
+
+  const number =
+    Number(
+      value || 0
+    );
+
+
+  if (
+    !Number.isFinite(
+      number
+    )
+  ) {
+
+    return "€0.00";
+
+  }
+
+
+  return new Intl.NumberFormat(
+    "en-IE",
+    {
+      style:
+        "currency",
+
+      currency:
+        "EUR",
+
+      minimumFractionDigits:
+        2,
+
+      maximumFractionDigits:
+        2
+    }
+  ).format(
+    number
+  );
+
+}
+
 
 
 async function loadDashboard() {
@@ -1247,8 +1070,11 @@ async function loadDashboard() {
 
 
     /*
+      =====================================================
       GET LOGGED-IN USER
+      =====================================================
     */
+
 
     const {
       data: sessionData,
@@ -1282,10 +1108,8 @@ async function loadDashboard() {
       !session.user
     ) {
 
-
       window.location.href =
         "/affiliate-login.html";
-
 
       return;
 
@@ -1297,7 +1121,6 @@ async function loadDashboard() {
       session.user;
 
 
-
     const email =
       normalizeEmail(
         user.email
@@ -1306,8 +1129,11 @@ async function loadDashboard() {
 
 
     /*
+      =====================================================
       FIND AFFILIATE PROFILE
+      =====================================================
     */
+
 
     const {
       data: affiliate,
@@ -1342,15 +1168,12 @@ async function loadDashboard() {
       !affiliate
     ) {
 
-
       await supabaseClient
         .auth
         .signOut();
 
-
       window.location.href =
         "/affiliate-login.html";
-
 
       return;
 
@@ -1359,8 +1182,11 @@ async function loadDashboard() {
 
 
     /*
+      =====================================================
       REQUIRE APPROVED STATUS
+      =====================================================
     */
+
 
     const status =
       String(
@@ -1376,15 +1202,12 @@ async function loadDashboard() {
       "approved"
     ) {
 
-
       await supabaseClient
         .auth
         .signOut();
 
-
       window.location.href =
         "/affiliate-login.html";
-
 
       return;
 
@@ -1393,8 +1216,11 @@ async function loadDashboard() {
 
 
     /*
-      GET PROFILE VALUES
+      =====================================================
+      PROFILE VALUES
+      =====================================================
     */
+
 
     const fullName =
       affiliate.full_name ||
@@ -1413,10 +1239,6 @@ async function loadDashboard() {
 
 
 
-    /*
-      REQUIRE REFERRAL CODE
-    */
-
     if (
       !referralCode
     ) {
@@ -1425,16 +1247,11 @@ async function loadDashboard() {
         "Your affiliate account is approved, but your referral code is not available yet. Please contact GiftedGift Empire."
       );
 
-
       return;
 
     }
 
 
-
-    /*
-      BUILD MAIN REFERRAL LINK
-    */
 
     const referralLink =
       window.location.origin +
@@ -1446,8 +1263,11 @@ async function loadDashboard() {
 
 
     /*
+      =====================================================
       DISPLAY ACCOUNT
+      =====================================================
     */
+
 
     document
       .getElementById(
@@ -1458,14 +1278,12 @@ async function loadDashboard() {
         fullName;
 
 
-
     document
       .getElementById(
         "status-value"
       )
       .textContent =
         "Approved";
-
 
 
     document
@@ -1478,14 +1296,12 @@ async function loadDashboard() {
         );
 
 
-
     document
       .getElementById(
         "referral-summary"
       )
       .textContent =
         referralCode;
-
 
 
     document
@@ -1496,7 +1312,6 @@ async function loadDashboard() {
         referralCode;
 
 
-
     document
       .getElementById(
         "referral-link"
@@ -1505,14 +1320,12 @@ async function loadDashboard() {
         referralLink;
 
 
-
     document
       .getElementById(
         "affiliate-name"
       )
       .textContent =
         fullName;
-
 
 
     document
@@ -1524,14 +1337,12 @@ async function loadDashboard() {
         email;
 
 
-
     document
       .getElementById(
         "affiliate-status"
       )
       .textContent =
         "Approved";
-
 
 
     document
@@ -1594,9 +1405,7 @@ async function loadDashboard() {
           .textContent =
             "—";
 
-
       } else {
-
 
         document
           .getElementById(
@@ -1606,7 +1415,6 @@ async function loadDashboard() {
             Number(
               referralClickCount || 0
             );
-
 
       }
 
@@ -1689,7 +1497,6 @@ async function loadDashboard() {
           .textContent =
             "—";
 
-
       } else {
 
 
@@ -1705,7 +1512,6 @@ async function loadDashboard() {
             Number(
               salesData.qualifying_sales || 0
             );
-
 
       }
 
@@ -1733,16 +1539,146 @@ async function loadDashboard() {
 
 
     /*
-      SHOW DASHBOARD
+      =====================================================
+      LOAD COMMISSION EARNINGS
+      =====================================================
     */
+
+
+    try {
+
+
+      const {
+        data: commissionRows,
+        error: commissionError
+      } =
+        await supabaseClient
+          .from(
+            "affiliate_commissions"
+          )
+          .select(
+            "commission_amount,reversed_at"
+          )
+          .eq(
+            "affiliate_id",
+            affiliate.id
+          )
+          .is(
+            "reversed_at",
+            null
+          );
+
+
+
+      if (
+        commissionError
+      ) {
+
+
+        console.error(
+          "Affiliate commission load error:",
+          commissionError
+        );
+
+
+        document
+          .getElementById(
+            "commission-earnings-value"
+          )
+          .textContent =
+            "—";
+
+
+      } else {
+
+
+        const totalCommission =
+          (
+            Array.isArray(
+              commissionRows
+            )
+              ? commissionRows
+              : []
+          )
+            .reduce(
+              (
+                total,
+                row
+              ) => {
+
+                const amount =
+                  Number(
+                    row.commission_amount || 0
+                  );
+
+
+                if (
+                  !Number.isFinite(
+                    amount
+                  )
+                ) {
+
+                  return total;
+
+                }
+
+
+                return (
+                  total +
+                  amount
+                );
+
+              },
+              0
+            );
+
+
+        document
+          .getElementById(
+            "commission-earnings-value"
+          )
+          .textContent =
+            formatMoney(
+              totalCommission
+            );
+
+      }
+
+
+    } catch (
+      commissionLoadError
+    ) {
+
+
+      console.error(
+        "Affiliate commission load error:",
+        commissionLoadError
+      );
+
+
+      document
+        .getElementById(
+          "commission-earnings-value"
+        )
+        .textContent =
+          "—";
+
+    }
+
+
+
+    /*
+      =====================================================
+      SHOW DASHBOARD
+      =====================================================
+    */
+
 
     loadingBox.style.display =
       "none";
 
-
     errorBox.style.display =
       "none";
-
 
     dashboard.style.display =
       "block";
@@ -1762,7 +1698,6 @@ async function loadDashboard() {
     showError(
       "We could not load your affiliate dashboard. Please try logging in again."
     );
-
 
   }
 
@@ -1795,12 +1730,10 @@ document
           .value;
 
 
-
       const message =
         document.getElementById(
           "copy-message"
         );
-
 
 
       if (
@@ -1810,7 +1743,6 @@ document
         return;
 
       }
-
 
 
       try {
@@ -1845,7 +1777,6 @@ document
 
         message.textContent =
           "Select and copy your referral link above.";
-
 
       }
 
@@ -1887,7 +1818,6 @@ document
       window.location.href =
         "/affiliate-login.html";
 
-
     }
   );
 
@@ -1914,12 +1844,10 @@ supabaseClient
         "SIGNED_OUT"
       ) {
 
-
         window.location.href =
           "/affiliate-login.html";
 
       }
-
 
     }
   );
