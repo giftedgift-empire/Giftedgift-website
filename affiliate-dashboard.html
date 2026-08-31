@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Affiliate Dashboard | GiftedGift Empire
+  </title>
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      font-family: Arial, sans-serif;
+
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 50%,
+          #ffffff 100%
+        );
+
+      color: #222;
+    }
+
+
+    /*
+      =====================================================
+      HEADER
+      =====================================================
+    */
+
+    .top-bar {
+      background: #123a8c;
+
+      padding: 17px 20px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+
+    .brand {
+      color: #f2bd16;
+
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+
+    .logout-button {
+      border: 1px solid rgba(255,255,255,0.5);
+
+      border-radius: 8px;
+
+      padding: 9px 14px;
+
+      background: transparent;
+      color: white;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .logout-button:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+
+    /*
+      =====================================================
+      PAGE
+      =====================================================
+    */
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+
+      margin: 0 auto;
+
+      padding: 35px 16px 60px;
+    }
+
+
+    /*
+      =====================================================
+      LOADING
+      =====================================================
+    */
+
+    .loading-box {
+      background: white;
+
+      border: 1px solid #e0e5ed;
+      border-radius: 14px;
+
+      padding: 30px;
+
+      text-align: center;
+
+      color: #555;
+
+      box-shadow:
+        0 7px 25px rgba(0,0,0,0.06);
+    }
+
+
+    /*
+      =====================================================
+      ERROR
+      =====================================================
+    */
+
+    .error-box {
+      display: none;
+
+      background: #ffe9e9;
+      color: #921c1c;
+
+      border: 1px solid #efbbbb;
+      border-radius: 12px;
+
+      padding: 16px;
+
+      line-height: 1.6;
+    }
+
+
+    /*
+      =====================================================
+      DASHBOARD
+      =====================================================
+    */
+
+    #dashboard {
+      display: none;
+    }
+
+
+    .welcome-section {
+      margin-bottom: 25px;
+    }
+
+
+    .welcome-badge {
+      display: inline-block;
+
+      margin-bottom: 10px;
+
+      padding: 6px 12px;
+
+      border-radius: 999px;
+
+      background: #fff4bd;
+      color: #755700;
+
+      border: 1px solid #f2bd16;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+
+    .welcome-section h1 {
+      margin: 0 0 7px;
+
+      color: #123a8c;
+
+      font-size: 31px;
+      line-height: 1.2;
+    }
+
+
+    .welcome-section p {
+      margin: 0;
+
+      color: #666;
+
+      line-height: 1.6;
+    }
+
+
+    /*
+      =====================================================
+      SUMMARY CARDS
+      =====================================================
+    */
+
+    .summary-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+
+      gap: 15px;
+
+      margin-bottom: 25px;
+    }
+
+
+    .summary-card {
+      background: white;
+
+      border: 1px solid #e1e6ee;
+      border-radius: 14px;
+
+      padding: 20px;
+
+      box-shadow:
+        0 6px 22px rgba(0,0,0,0.05);
+    }
+
+
+    .summary-label {
+      color: #717780;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      margin-bottom: 8px;
+    }
+
+
+    .summary-value {
+      color: #123a8c;
+
+      font-size: 21px;
+      font-weight: 800;
+
+      word-break: break-word;
+    }
+
+
+    .status-approved {
+      color: #17662d;
+    }
+
+
+    /*
+      =====================================================
+      MAIN CARDS
+      =====================================================
+    */
+
+    .dashboard-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.4fr 1fr;
+
+      gap: 18px;
+    }
+
+
+    .card {
+      background: white;
+
+      border: 1px solid #e1e6ee;
+      border-radius: 15px;
+
+      padding: 23px;
+
+      box-shadow:
+        0 7px 25px rgba(0,0,0,0.06);
+    }
+
+
+    .card h2 {
+      margin: 0 0 7px;
+
+      color: #123a8c;
+
+      font-size: 21px;
+    }
+
+
+    .card-description {
+      margin: 0 0 20px;
+
+      color: #666;
+
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+
+    /*
+      =====================================================
+      REFERRAL LINK
+      =====================================================
+    */
+
+    .referral-code-box {
+      margin-bottom: 18px;
+
+      padding: 16px;
+
+      background: #f7f9fd;
+
+      border: 1px solid #dce5f4;
+      border-radius: 11px;
+    }
+
+
+    .referral-code-label {
+      margin-bottom: 7px;
+
+      color: #666;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+
+    .referral-code {
+      color: #123a8c;
+
+      font-size: 21px;
+      font-weight: 800;
+
+      word-break: break-all;
+    }
+
+
+    .link-box {
+      display: flex;
+
+      gap: 9px;
+    }
+
+
+    .link-box input {
+      flex: 1;
+
+      min-width: 0;
+
+      padding: 12px 13px;
+
+      border: 1px solid #ccd4df;
+      border-radius: 9px;
+
+      background: #fafafa;
+
+      color: #333;
+
+      font-size: 14px;
+    }
+
+
+    .copy-button {
+      flex-shrink: 0;
+
+      border: none;
+      border-radius: 9px;
+
+      padding: 12px 16px;
+
+      background: #f2bd16;
+      color: #111;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .copy-button:hover {
+      opacity: 0.94;
+    }
+
+
+    .copy-message {
+      min-height: 19px;
+
+      margin-top: 9px;
+
+      color: #17662d;
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+
+    /*
+      =====================================================
+      ACCOUNT DETAILS
+      =====================================================
+    */
+
+    .detail-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 13px 0;
+
+      border-bottom: 1px solid #eeeeee;
+    }
+
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+
+    .detail-label {
+      color: #777;
+
+      font-size: 14px;
+    }
+
+
+    .detail-value {
+      color: #222;
+
+      text-align: right;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      word-break: break-word;
+    }
+
+
+    /*
+      =====================================================
+      COMING STATS
+      =====================================================
+    */
+
+    .stats-section {
+      margin-top: 25px;
+    }
+
+
+    .stats-section h2 {
+      margin: 0 0 7px;
+
+      color: #123a8c;
+
+      font-size: 22px;
+    }
+
+
+    .stats-section > p {
+      margin: 0 0 17px;
+
+      color: #666;
+
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+
+    .stats-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          4,
+          1fr
+        );
+
+      gap: 13px;
+    }
+
+
+    .stat-card {
+      background: white;
+
+      border: 1px solid #e1e6ee;
+      border-radius: 13px;
+
+      padding: 18px;
+
+      box-shadow:
+        0 5px 18px rgba(0,0,0,0.04);
+    }
+
+
+    .stat-icon {
+      font-size: 22px;
+
+      margin-bottom: 9px;
+    }
+
+
+    .stat-title {
+      color: #666;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      margin-bottom: 6px;
+    }
+
+
+    .stat-value {
+      color: #123a8c;
+
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+
+    .stat-note {
+      margin-top: 6px;
+
+      color: #999;
+
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+
+    /*
+      =====================================================
+      FOOTER
+      =====================================================
+    */
+
+    footer {
+      padding: 22px 15px;
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+
+    /*
+      =====================================================
+      MOBILE
+      =====================================================
+    */
+
+    @media (max-width: 800px) {
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .stats-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .top-bar {
+        padding: 15px;
+      }
+
+
+      .brand {
+        font-size: 20px;
+      }
+
+
+      .page {
+        padding-top: 25px;
+      }
+
+
+      .welcome-section h1 {
+        font-size: 27px;
+      }
+
+
+      .card {
+        padding: 19px 16px;
+      }
+
+
+      .link-box {
+        flex-direction: column;
+      }
+
+
+      .copy-button {
+        width: 100%;
+      }
+
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .detail-row {
+        flex-direction: column;
+
+        gap: 5px;
+      }
+
+
+      .detail-value {
+        text-align: left;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="brand">
+    GiftedGift Empire
+  </div>
+
+
+  <button
+    type="button"
+    id="logout-button"
+    class="logout-button"
+  >
+    Log Out
+  </button>
+
+</header>
+
+
+
+<main class="page">
+
+
+  <div
+    id="loading-box"
+    class="loading-box"
+  >
+    Loading your affiliate dashboard...
+  </div>
+
+
+
+  <div
+    id="error-box"
+    class="error-box"
+  ></div>
+
+
+
+  <div id="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome-section">
+
+      <div class="welcome-badge">
+        Approved Affiliate
+      </div>
+
+
+      <h1 id="welcome-name">
+        Welcome
+      </h1>
+
+
+      <p>
+        Manage your GiftedGift Empire referral information
+        and monitor your affiliate account.
+      </p>
+
+    </section>
+
+
+
+    <!-- SUMMARY -->
+
+    <section class="summary-grid">
+
+
+      <div class="summary-card">
+
+        <div class="summary-label">
+          Affiliate Status
+        </div>
+
+        <div
+          id="status-value"
+          class="summary-value status-approved"
+        >
+          Approved
+        </div>
+
+      </div>
+
+
+
+      <div class="summary-card">
+
+        <div class="summary-label">
+          Commission Rate
+        </div>
+
+        <div
+          id="commission-value"
+          class="summary-value"
+        >
+          —
+        </div>
+
+      </div>
+
+
+
+      <div class="summary-card">
+
+        <div class="summary-label">
+          Referral Code
+        </div>
+
+        <div
+          id="referral-summary"
+          class="summary-value"
+        >
+          —
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <section class="dashboard-grid">
+
+
+      <!-- REFERRAL -->
+
+      <div class="card">
+
+        <h2>
+          Your Referral Link
+        </h2>
+
+
+        <p class="card-description">
+          Share your unique referral link when promoting
+          eligible GiftedGift Empire products and offers.
+        </p>
+
+
+
+        <div class="referral-code-box">
+
+          <div class="referral-code-label">
+            YOUR REFERRAL CODE
+          </div>
+
+
+          <div
+            id="referral-code"
+            class="referral-code"
+          >
+            —
+          </div>
+
+        </div>
+
+
+
+        <div class="link-box">
+
+          <input
+            type="text"
+            id="referral-link"
+            readonly
+            aria-label="Affiliate referral link"
+          >
+
+
+          <button
+            type="button"
+            id="copy-button"
+            class="copy-button"
+          >
+            Copy Link
+          </button>
+
+        </div>
+
+
+        <div
+          id="copy-message"
+          class="copy-message"
+        ></div>
+
+      </div>
+
+
+
+      <!-- ACCOUNT -->
+
+      <div class="card">
+
+        <h2>
+          Affiliate Account
+        </h2>
+
+
+        <p class="card-description">
+          Your current affiliate account information.
+        </p>
+
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Full Name
+          </div>
+
+          <div
+            id="affiliate-name"
+            class="detail-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Email
+          </div>
+
+          <div
+            id="affiliate-email"
+            class="detail-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Status
+          </div>
+
+          <div
+            id="affiliate-status"
+            class="detail-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Commission
+          </div>
+
+          <div
+            id="affiliate-commission"
+            class="detail-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- FUTURE LIVE STATS -->
+
+    <section class="stats-section">
+
+      <h2>
+        Performance
+      </h2>
+
+
+      <p>
+        Your live clicks, qualifying sales, commissions
+        and payouts will appear here as we complete
+        the tracking connection.
+      </p>
+
+
+
+      <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            👆
+          </div>
+
+          <div class="stat-title">
+            Referral Clicks
+          </div>
+
+          <div class="stat-value">
+            —
+          </div>
+
+          <div class="stat-note">
+            Tracking connection next
+          </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            🛍️
+          </div>
+
+          <div class="stat-title">
+            Qualifying Sales
+          </div>
+
+          <div class="stat-value">
+            —
+          </div>
+
+          <div class="stat-note">
+            Order attribution connection next
+          </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            💰
+          </div>
+
+          <div class="stat-title">
+            Commission Earnings
+          </div>
+
+          <div class="stat-value">
+            —
+          </div>
+
+          <div class="stat-note">
+            Commission connection next
+          </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            💳
+          </div>
+
+          <div class="stat-title">
+            Paid Out
+          </div>
+
+          <div class="stat-value">
+            —
+          </div>
+
+          <div class="stat-note">
+            Payout connection next
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+
+</main>
+
+
+
+<footer>
+  © GiftedGift Empire
+</footer>
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+
+<script>
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+
+/*
+  =====================================================
+  PAGE ELEMENTS
+  =====================================================
+*/
+
+
+const loadingBox =
+  document.getElementById(
+    "loading-box"
+  );
+
+
+const errorBox =
+  document.getElementById(
+    "error-box"
+  );
+
+
+const dashboard =
+  document.getElementById(
+    "dashboard"
+  );
+
+
+
+/*
+  =====================================================
+  NORMALIZE
+  =====================================================
+*/
+
+
+function normalizeEmail(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+
+/*
+  =====================================================
+  DISPLAY ERROR
+  =====================================================
+*/
+
+
+function showError(
+  message
+) {
+
+  loadingBox.style.display =
+    "none";
+
+
+  dashboard.style.display =
+    "none";
+
+
+  errorBox.style.display =
+    "block";
+
+
+  errorBox.textContent =
+    message;
+
+}
+
+
+
+/*
+  =====================================================
+  COMMISSION FORMAT
+  =====================================================
+*/
+
+
+function formatCommissionRate(
+  value
+) {
+
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+
+    return "—";
+
+  }
+
+
+  const number =
+    Number(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      number
+    )
+  ) {
+
+    return String(
+      value
+    );
+
+  }
+
+
+  return (
+    number +
+    "%"
+  );
+
+}
+
+
+
+/*
+  =====================================================
+  LOAD AFFILIATE
+  =====================================================
+*/
+
+
+async function loadDashboard() {
+
+
+  try {
+
+
+    /*
+      GET LOGGED-IN USER
+    */
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+
+    if (
+      sessionError
+    ) {
+
+      throw sessionError;
+
+    }
+
+
+
+    const session =
+      sessionData
+        ? sessionData.session
+        : null;
+
+
+
+    if (
+      !session ||
+      !session.user
+    ) {
+
+
+      window.location.href =
+        "/affiliate-login.html";
+
+
+      return;
+
+    }
+
+
+
+    const user =
+      session.user;
+
+
+
+    const email =
+      normalizeEmail(
+        user.email
+      );
+
+
+
+    /*
+      FIND AFFILIATE PROFILE
+    */
+
+    const {
+      data: affiliate,
+      error: affiliateError
+    } =
+      await supabaseClient
+        .from(
+          "affiliates"
+        )
+        .select(
+          "*"
+        )
+        .eq(
+          "email",
+          email
+        )
+        .maybeSingle();
+
+
+
+    if (
+      affiliateError
+    ) {
+
+      throw affiliateError;
+
+    }
+
+
+
+    if (
+      !affiliate
+    ) {
+
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+
+      window.location.href =
+        "/affiliate-login.html";
+
+
+      return;
+
+    }
+
+
+
+    /*
+      REQUIRE APPROVED STATUS
+    */
+
+    const status =
+      String(
+        affiliate.status || ""
+      )
+        .trim()
+        .toLowerCase();
+
+
+
+    if (
+      status !==
+      "approved"
+    ) {
+
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+
+      window.location.href =
+        "/affiliate-login.html";
+
+
+      return;
+
+    }
+
+
+
+    /*
+      GET PROFILE VALUES
+    */
+
+    const fullName =
+      affiliate.full_name ||
+      affiliate.name ||
+      user.user_metadata?.full_name ||
+      "Affiliate";
+
+
+    const referralCode =
+      affiliate.referral_code ||
+      "";
+
+
+    const commissionRate =
+      affiliate.commission_rate;
+
+
+
+    /*
+      REQUIRE REFERRAL CODE
+    */
+
+    if (
+      !referralCode
+    ) {
+
+      showError(
+        "Your affiliate account is approved, but your referral code is not available yet. Please contact GiftedGift Empire."
+      );
+
+
+      return;
+
+    }
+
+
+
+    /*
+      BUILD MAIN REFERRAL LINK
+    */
+
+    const referralLink =
+      window.location.origin +
+      "/?ref=" +
+      encodeURIComponent(
+        referralCode
+      );
+
+
+
+    /*
+      DISPLAY ACCOUNT
+    */
+
+    document
+      .getElementById(
+        "welcome-name"
+      )
+      .textContent =
+        "Welcome, " +
+        fullName;
+
+
+
+    document
+      .getElementById(
+        "status-value"
+      )
+      .textContent =
+        "Approved";
+
+
+
+    document
+      .getElementById(
+        "commission-value"
+      )
+      .textContent =
+        formatCommissionRate(
+          commissionRate
+        );
+
+
+
+    document
+      .getElementById(
+        "referral-summary"
+      )
+      .textContent =
+        referralCode;
+
+
+
+    document
+      .getElementById(
+        "referral-code"
+      )
+      .textContent =
+        referralCode;
+
+
+
+    document
+      .getElementById(
+        "referral-link"
+      )
+      .value =
+        referralLink;
+
+
+
+    document
+      .getElementById(
+        "affiliate-name"
+      )
+      .textContent =
+        fullName;
+
+
+
+    document
+      .getElementById(
+        "affiliate-email"
+      )
+      .textContent =
+        affiliate.email ||
+        email;
+
+
+
+    document
+      .getElementById(
+        "affiliate-status"
+      )
+      .textContent =
+        "Approved";
+
+
+
+    document
+      .getElementById(
+        "affiliate-commission"
+      )
+      .textContent =
+        formatCommissionRate(
+          commissionRate
+        );
+
+
+
+    /*
+      SHOW DASHBOARD
+    */
+
+    loadingBox.style.display =
+      "none";
+
+
+    errorBox.style.display =
+      "none";
+
+
+    dashboard.style.display =
+      "block";
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Affiliate dashboard error:",
+      error
+    );
+
+
+    showError(
+      "We could not load your affiliate dashboard. Please try logging in again."
+    );
+
+
+  }
+
+
+}
+
+
+
+/*
+  =====================================================
+  COPY REFERRAL LINK
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "copy-button"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+
+      const link =
+        document
+          .getElementById(
+            "referral-link"
+          )
+          .value;
+
+
+
+      const message =
+        document.getElementById(
+          "copy-message"
+        );
+
+
+
+      if (
+        !link
+      ) {
+
+        return;
+
+      }
+
+
+
+      try {
+
+
+        await navigator
+          .clipboard
+          .writeText(
+            link
+          );
+
+
+        message.textContent =
+          "Referral link copied ✅";
+
+
+      } catch (
+        error
+      ) {
+
+
+        const input =
+          document.getElementById(
+            "referral-link"
+          );
+
+
+        input.focus();
+
+        input.select();
+
+
+        message.textContent =
+          "Select and copy your referral link above.";
+
+
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  LOG OUT
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "logout-button"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+
+      this.disabled =
+        true;
+
+
+      this.textContent =
+        "Logging Out...";
+
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+
+      window.location.href =
+        "/affiliate-login.html";
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  AUTH STATE
+  =====================================================
+*/
+
+
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    (
+      event,
+      session
+    ) => {
+
+
+      if (
+        event ===
+        "SIGNED_OUT"
+      ) {
+
+
+        window.location.href =
+          "/affiliate-login.html";
+
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  START
+  =====================================================
+*/
+
+
+loadDashboard();
+
+
+</script>
+
+
+
+<script src="cookie-consent.js"></script>
+
+
+</body>
+
+</html>
