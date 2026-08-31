@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Affiliate Login | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Log in to your GiftedGift Empire affiliate account."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      font-family: Arial, sans-serif;
+
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+
+      color: #222;
+    }
+
+
+    .top-bar {
+      background: #123a8c;
+
+      padding: 18px 20px;
+
+      text-align: center;
+    }
+
+
+    .brand {
+      margin: 0;
+
+      color: #f2bd16;
+
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+
+    .page {
+      width: 100%;
+
+      max-width: 520px;
+
+      margin: 0 auto;
+
+      padding: 55px 16px 50px;
+    }
+
+
+    .intro {
+      text-align: center;
+
+      margin-bottom: 24px;
+    }
+
+
+    .intro-badge {
+      display: inline-block;
+
+      margin-bottom: 13px;
+
+      padding: 7px 13px;
+
+      background: #fff4bd;
+      color: #765900;
+
+      border: 1px solid #f2bd16;
+      border-radius: 999px;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    .intro h1 {
+      margin: 0 0 10px;
+
+      color: #123a8c;
+
+      font-size: 32px;
+      line-height: 1.2;
+    }
+
+
+    .intro p {
+      margin: 0;
+
+      color: #666;
+
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+
+    .login-card {
+      background: #ffffff;
+
+      border: 1px solid #e1e6ee;
+      border-radius: 18px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.09);
+    }
+
+
+    .login-card h2 {
+      margin: 0 0 6px;
+
+      color: #123a8c;
+
+      font-size: 23px;
+    }
+
+
+    .subtitle {
+      margin: 0 0 23px;
+
+      color: #666;
+
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+
+    .field-label {
+      display: block;
+
+      margin: 16px 0 7px;
+
+      color: #333;
+
+      font-weight: 700;
+    }
+
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+
+      padding: 13px 14px;
+
+      border: 1px solid #cdd4df;
+      border-radius: 9px;
+
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+
+      outline: none;
+
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+    }
+
+
+    input:focus {
+      border-color: #123a8c;
+
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.09);
+    }
+
+
+    .password-field {
+      position: relative;
+
+      width: 100%;
+    }
+
+
+    .password-field input {
+      padding-right: 54px;
+    }
+
+
+    .password-toggle {
+      position: absolute;
+
+      top: 50%;
+      right: 8px;
+
+      transform: translateY(-50%);
+
+      width: 42px;
+      height: 42px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 0;
+
+      border: none;
+      border-radius: 8px;
+
+      background: transparent;
+
+      font-size: 20px;
+
+      cursor: pointer;
+    }
+
+
+    .password-toggle:hover {
+      background: #f1f4f9;
+    }
+
+
+    .login-button {
+      width: 100%;
+
+      margin-top: 24px;
+
+      padding: 15px 18px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: #f2bd16;
+      color: #111;
+
+      font-size: 17px;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .login-button:hover {
+      opacity: 0.95;
+    }
+
+
+    .login-button:disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
+    }
+
+
+    .message {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 14px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+
+    .message.error {
+      display: block;
+
+      background: #ffe9e9;
+      color: #921c1c;
+
+      border: 1px solid #f1b8b8;
+    }
+
+
+    .message.info {
+      display: block;
+
+      background: #eef5ff;
+      color: #123a8c;
+
+      border: 1px solid #c9dcfa;
+    }
+
+
+    .account-links {
+      margin-top: 22px;
+
+      padding-top: 19px;
+
+      border-top: 1px solid #ececec;
+
+      text-align: center;
+    }
+
+
+    .account-links p {
+      margin: 7px 0;
+
+      color: #666;
+
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+
+    .account-links a {
+      color: #123a8c;
+
+      font-weight: 700;
+
+      text-decoration: none;
+    }
+
+
+    .account-links a:hover {
+      text-decoration: underline;
+    }
+
+
+    .security-note {
+      margin-top: 19px;
+
+      color: #777;
+
+      text-align: center;
+
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+
+    .back-home {
+      display: block;
+
+      width: fit-content;
+
+      margin: 26px auto 0;
+
+      color: #123a8c;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+
+    .back-home:hover {
+      text-decoration: underline;
+    }
+
+
+    footer {
+      padding: 22px 15px;
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+
+    @media (max-width: 550px) {
+
+      .page {
+        padding-top: 35px;
+      }
+
+
+      .intro h1 {
+        font-size: 27px;
+      }
+
+
+      .login-card {
+        padding: 22px 17px;
+
+        border-radius: 14px;
+      }
+
+
+      .brand {
+        font-size: 24px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="brand">
+    GiftedGift Empire
+  </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+  <section class="intro">
+
+    <div class="intro-badge">
+      Affiliate Centre
+    </div>
+
+
+    <h1>
+      Welcome Back
+    </h1>
+
+
+    <p>
+      Log in to access your GiftedGift Empire
+      affiliate account and dashboard.
+    </p>
+
+  </section>
+
+
+
+  <section class="login-card">
+
+
+    <h2>
+      Affiliate Login
+    </h2>
+
+
+    <p class="subtitle">
+      Use the email address and password you created
+      when applying to the affiliate program.
+    </p>
+
+
+
+    <form id="login-form">
+
+
+      <label
+        for="email"
+        class="field-label"
+      >
+        Email Address
+      </label>
+
+
+      <input
+        type="email"
+        id="email"
+        autocomplete="email"
+        maxlength="254"
+        placeholder="Enter your email address"
+        required
+      >
+
+
+
+      <label
+        for="password"
+        class="field-label"
+      >
+        Password
+      </label>
+
+
+      <div class="password-field">
+
+        <input
+          type="password"
+          id="password"
+          autocomplete="current-password"
+          maxlength="72"
+          placeholder="Enter your password"
+          required
+        >
+
+
+        <button
+          type="button"
+          id="password-toggle"
+          class="password-toggle"
+          aria-label="Show password"
+          title="Show password"
+        >
+          👁
+        </button>
+
+      </div>
+
+
+
+      <button
+        type="submit"
+        id="login-button"
+        class="login-button"
+      >
+        Log In to Affiliate Account
+      </button>
+
+
+
+      <div
+        id="message"
+        class="message"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+
+    </form>
+
+
+
+    <div class="account-links">
+
+      <p>
+        Not an affiliate yet?
+        <a href="/affiliate-register.html">
+          Apply to join
+        </a>
+      </p>
+
+    </div>
+
+
+
+    <div class="security-note">
+      🔒 Your login is securely handled through
+      GiftedGift Empire's authentication system.
+    </div>
+
+
+  </section>
+
+
+
+  <a
+    href="/"
+    class="back-home"
+  >
+    ← Back to GiftedGift Empire
+  </a>
+
+
+</main>
+
+
+
+<footer>
+  © GiftedGift Empire
+</footer>
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+
+<script>
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+
+/*
+  =====================================================
+  MESSAGE HELPERS
+  =====================================================
+*/
+
+
+function showMessage(
+  text,
+  type = "error"
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message " +
+    type;
+
+
+  box.textContent =
+    text;
+
+}
+
+
+
+function clearMessage() {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message";
+
+
+  box.textContent =
+    "";
+
+}
+
+
+
+/*
+  =====================================================
+  PASSWORD SHOW / HIDE
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "password-toggle"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+
+      const input =
+        document.getElementById(
+          "password"
+        );
+
+
+      const hidden =
+        input.type ===
+        "password";
+
+
+      input.type =
+        hidden
+          ? "text"
+          : "password";
+
+
+      this.textContent =
+        hidden
+          ? "🙈"
+          : "👁";
+
+
+      this.setAttribute(
+        "aria-label",
+        hidden
+          ? "Hide password"
+          : "Show password"
+      );
+
+
+      this.setAttribute(
+        "title",
+        hidden
+          ? "Hide password"
+          : "Show password"
+      );
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  NORMALIZE EMAIL
+  =====================================================
+*/
+
+
+function normalizeEmail(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+
+/*
+  =====================================================
+  CHECK EXISTING SESSION
+  =====================================================
+*/
+
+
+async function checkExistingSession() {
+
+
+  try {
+
+
+    const {
+      data
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      data &&
+      data.session &&
+      data.session.user
+    ) {
+
+      await checkAffiliateAccess(
+        data.session.user
+      );
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Session check error:",
+      error
+    );
+
+  }
+
+
+}
+
+
+
+/*
+  =====================================================
+  CHECK AFFILIATE STATUS
+  =====================================================
+*/
+
+
+async function checkAffiliateAccess(
+  user
+) {
+
+
+  if (
+    !user ||
+    !user.email
+  ) {
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    showMessage(
+      "We could not verify this affiliate account."
+    );
+
+
+    return;
+
+  }
+
+
+
+  const email =
+    normalizeEmail(
+      user.email
+    );
+
+
+
+  const {
+    data: affiliate,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliates"
+      )
+      .select(
+        "*"
+      )
+      .eq(
+        "email",
+        email
+      )
+      .maybeSingle();
+
+
+
+  if (
+    error
+  ) {
+
+
+    console.error(
+      "Affiliate account lookup error:",
+      error
+    );
+
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    showMessage(
+      "We could not verify your affiliate account. Please try again."
+    );
+
+
+    return;
+
+  }
+
+
+
+  if (
+    !affiliate
+  ) {
+
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    showMessage(
+      "No affiliate application was found for this account."
+    );
+
+
+    return;
+
+  }
+
+
+
+  const status =
+    String(
+      affiliate.status || ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+
+  /*
+    APPROVED
+  */
+
+  if (
+    status ===
+    "approved"
+  ) {
+
+
+    window.location.href =
+      "/affiliate-dashboard.html";
+
+
+    return;
+
+  }
+
+
+
+  /*
+    PENDING
+  */
+
+  if (
+    status ===
+    "pending"
+  ) {
+
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    showMessage(
+      "Your affiliate application is still pending approval.",
+      "info"
+    );
+
+
+    return;
+
+  }
+
+
+
+  /*
+    SUSPENDED
+  */
+
+  if (
+    status ===
+    "suspended"
+  ) {
+
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    showMessage(
+      "Your affiliate account is currently suspended. Please contact GiftedGift Empire for assistance."
+    );
+
+
+    return;
+
+  }
+
+
+
+  /*
+    REJECTED
+  */
+
+  if (
+    status ===
+    "rejected"
+  ) {
+
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    showMessage(
+      "This affiliate application was not approved."
+    );
+
+
+    return;
+
+  }
+
+
+
+  /*
+    UNKNOWN STATUS
+  */
+
+  await supabaseClient
+    .auth
+    .signOut();
+
+
+  showMessage(
+    "Your affiliate account is not currently available for dashboard access."
+  );
+
+
+}
+
+
+
+/*
+  =====================================================
+  LOGIN
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "login-form"
+  )
+  .addEventListener(
+    "submit",
+    async function(
+      event
+    ) {
+
+
+      event.preventDefault();
+
+
+      clearMessage();
+
+
+
+      const email =
+        normalizeEmail(
+          document
+            .getElementById(
+              "email"
+            )
+            .value
+        );
+
+
+
+      const password =
+        document
+          .getElementById(
+            "password"
+          )
+          .value;
+
+
+
+      const button =
+        document.getElementById(
+          "login-button"
+        );
+
+
+
+      if (
+        !email ||
+        !password
+      ) {
+
+        showMessage(
+          "Please enter your email address and password."
+        );
+
+
+        return;
+
+      }
+
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "Logging In...";
+
+
+
+      try {
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .auth
+            .signInWithPassword({
+
+              email,
+
+              password
+
+            });
+
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+
+        if (
+          !data ||
+          !data.user
+        ) {
+
+          throw new Error(
+            "Login could not be completed."
+          );
+
+        }
+
+
+
+        button.textContent =
+          "Checking Affiliate Account...";
+
+
+
+        await checkAffiliateAccess(
+          data.user
+        );
+
+
+      } catch (
+        error
+      ) {
+
+
+        console.error(
+          "Affiliate login error:",
+          error
+        );
+
+
+        await supabaseClient
+          .auth
+          .signOut();
+
+
+        let message =
+          "Unable to log in. Please check your email address and password.";
+
+
+        const errorText =
+          String(
+            error &&
+            error.message
+              ? error.message
+              : ""
+          )
+            .toLowerCase();
+
+
+        if (
+          errorText.includes(
+            "email not confirmed"
+          )
+        ) {
+
+          message =
+            "Please confirm your email address before logging in.";
+
+        }
+
+
+        showMessage(
+          message
+        );
+
+
+      } finally {
+
+
+        /*
+          If login succeeded and redirect starts,
+          this does not matter.
+
+          If access was refused, restore the button.
+        */
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "Log In to Affiliate Account";
+
+
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  START
+  =====================================================
+*/
+
+
+checkExistingSession();
+
+
+</script>
+
+
+
+<script src="cookie-consent.js"></script>
+
+
+</body>
+
+</html>
