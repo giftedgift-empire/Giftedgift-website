@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -23,15 +24,18 @@
     content="index, follow"
   >
 
+
   <style>
 
     * {
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+
       background:
         linear-gradient(
           180deg,
@@ -39,15 +43,18 @@
           #f8f9fc 50%,
           #ffffff 100%
         );
+
       color: #222;
       min-height: 100vh;
     }
+
 
     .top-bar {
       background: #123a8c;
       padding: 18px 20px;
       text-align: center;
     }
+
 
     .brand {
       color: #f2bd16;
@@ -56,6 +63,7 @@
       margin: 0;
     }
 
+
     .page {
       width: 100%;
       max-width: 780px;
@@ -63,294 +71,562 @@
       padding: 38px 16px 50px;
     }
 
+
     .intro {
       text-align: center;
       margin-bottom: 28px;
     }
 
+
     .intro-badge {
       display: inline-block;
+
       background: #fff4bd;
       color: #765900;
+
       border: 1px solid #f2bd16;
       border-radius: 999px;
+
       padding: 7px 13px;
+
       font-size: 13px;
       font-weight: 800;
+
       margin-bottom: 14px;
     }
 
+
     .intro h1 {
       margin: 0 0 12px;
+
       color: #123a8c;
+
       font-size: 33px;
       line-height: 1.2;
     }
 
+
     .intro p {
       max-width: 630px;
       margin: 0 auto;
+
       color: #5e6570;
+
       font-size: 16px;
       line-height: 1.65;
     }
 
+
+    /*
+      =====================================================
+      BENEFITS
+      =====================================================
+    */
+
     .benefits {
       display: grid;
+
       grid-template-columns:
         repeat(
           3,
           1fr
         );
+
       gap: 12px;
+
       margin: 26px 0;
     }
 
+
     .benefit {
       background: white;
+
       border: 1px solid #dfe6f2;
       border-radius: 13px;
+
       padding: 16px 12px;
+
       text-align: center;
+
       box-shadow:
         0 4px 15px rgba(18,58,140,0.05);
     }
+
 
     .benefit-icon {
       font-size: 24px;
       margin-bottom: 8px;
     }
 
+
     .benefit strong {
       display: block;
+
       color: #123a8c;
+
       margin-bottom: 5px;
+
       font-size: 14px;
     }
 
+
     .benefit span {
       display: block;
+
       color: #666;
+
       font-size: 12px;
       line-height: 1.45;
     }
 
+
+    /*
+      =====================================================
+      REGISTRATION CARD
+      =====================================================
+    */
+
     .register-card {
       background: white;
+
       border-radius: 18px;
+
       padding: 28px;
+
       box-shadow:
         0 10px 35px rgba(0,0,0,0.09);
+
       border: 1px solid #e4e8ef;
     }
 
+
     .register-card h2 {
       margin: 0 0 5px;
+
       color: #123a8c;
+
       font-size: 23px;
     }
 
+
     .register-card .subtitle {
       margin: 0 0 23px;
+
       color: #666;
+
       line-height: 1.55;
       font-size: 14px;
     }
 
+
+    /*
+      =====================================================
+      FORM FIELDS
+      =====================================================
+    */
+
     label.field-label {
       display: block;
+
       margin: 16px 0 7px;
+
       font-weight: 700;
       color: #333;
     }
+
 
     input[type="text"],
     input[type="email"],
     input[type="password"],
     textarea {
       width: 100%;
+
       padding: 13px 14px;
+
       border: 1px solid #cdd4df;
       border-radius: 9px;
+
       font-family: Arial, sans-serif;
       font-size: 16px;
+
       outline: none;
+
       transition:
         border-color 0.2s,
         box-shadow 0.2s;
     }
 
+
     input:focus,
     textarea:focus {
       border-color: #123a8c;
+
       box-shadow:
         0 0 0 3px rgba(18,58,140,0.09);
     }
 
+
     textarea {
       min-height: 150px;
+
       resize: vertical;
+
       line-height: 1.55;
     }
+
+
+    /*
+      =====================================================
+      PASSWORD SHOW / HIDE
+      =====================================================
+    */
+
+    .password-field {
+      position: relative;
+      width: 100%;
+    }
+
+
+    .password-field input {
+      width: 100%;
+      padding-right: 54px;
+    }
+
+
+    .password-toggle {
+      position: absolute;
+
+      top: 50%;
+      right: 8px;
+
+      transform: translateY(-50%);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      width: 42px;
+      height: 42px;
+
+      padding: 0;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: transparent;
+
+      color: #555;
+
+      font-size: 20px;
+      line-height: 1;
+
+      cursor: pointer;
+
+      user-select: none;
+    }
+
+
+    .password-toggle:hover {
+      background: #f1f4f9;
+    }
+
+
+    .password-toggle:focus-visible {
+      outline: 2px solid #123a8c;
+      outline-offset: 1px;
+    }
+
 
     .password-help,
     .application-help {
       margin-top: 7px;
+
       color: #777;
+
       font-size: 12px;
       line-height: 1.5;
     }
 
+
+    /*
+      =====================================================
+      APPLICATION / PROMOTION PLAN
+      =====================================================
+    */
+
     .application-section {
       margin-top: 22px;
+
       padding: 17px;
+
       background: #f7f9fd;
+
       border: 1px solid #dce5f4;
       border-radius: 12px;
     }
 
+
     .application-section h3 {
       margin: 0 0 6px;
+
       color: #123a8c;
+
       font-size: 18px;
     }
 
+
     .application-section p {
       margin: 0 0 13px;
+
       color: #666;
+
       font-size: 13px;
       line-height: 1.55;
     }
 
+
+    /*
+      =====================================================
+      AGREEMENT
+      =====================================================
+    */
+
     .agreement {
       margin: 21px 0 4px;
+
       padding: 14px;
+
       border-radius: 10px;
+
       background: #f8f9fc;
+
       border: 1px solid #e1e5ec;
     }
 
+
     .agreement label {
       display: flex;
+
       align-items: flex-start;
+
       gap: 10px;
+
       cursor: pointer;
+
       line-height: 1.55;
+
       font-size: 14px;
+
       color: #555;
     }
+
 
     .agreement input {
       width: 18px;
       height: 18px;
+
       margin-top: 2px;
+
       flex-shrink: 0;
     }
 
+
+    /*
+      =====================================================
+      SUBMIT BUTTON
+      =====================================================
+    */
+
     .submit-button {
       width: 100%;
+
       margin-top: 22px;
+
       border: none;
       border-radius: 10px;
+
       padding: 15px 18px;
+
       background: #f2bd16;
       color: #111;
+
       font-size: 17px;
       font-weight: 800;
+
       cursor: pointer;
     }
+
 
     .submit-button:hover {
       opacity: 0.95;
     }
+
 
     .submit-button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
 
+
+    /*
+      =====================================================
+      MESSAGES
+      =====================================================
+    */
+
     .message {
       display: none;
+
       margin-top: 18px;
+
       padding: 14px;
+
       border-radius: 10px;
+
       line-height: 1.55;
+
       font-size: 14px;
     }
 
+
     .message.error {
       display: block;
+
       background: #ffe9e9;
       color: #921c1c;
+
       border: 1px solid #f1b8b8;
     }
 
+
     .message.success {
       display: block;
+
       background: #eaf8ee;
       color: #17662d;
+
       border: 1px solid #b8e3c2;
     }
 
+
+    /*
+      =====================================================
+      PENDING APPLICATION
+      =====================================================
+    */
+
     .pending-box {
       display: none;
+
       margin-top: 20px;
+
       padding: 20px;
+
       text-align: center;
+
       background: #eef5ff;
+
       border: 1px solid #c9dcfa;
       border-radius: 13px;
     }
 
+
     .pending-box h3 {
       color: #123a8c;
+
       margin: 0 0 10px;
+
       font-size: 21px;
     }
 
+
     .pending-box p {
       margin: 7px 0;
+
       color: #555;
+
       line-height: 1.6;
     }
 
+
     .pending-status {
       display: inline-block;
+
       margin-top: 9px;
+
       padding: 7px 13px;
+
       background: #fff4bd;
       color: #755700;
+
       border: 1px solid #f2bd16;
       border-radius: 999px;
+
       font-size: 13px;
       font-weight: 800;
     }
 
+
+    /*
+      =====================================================
+      SECURITY / NAVIGATION
+      =====================================================
+    */
+
     .security-note {
       margin-top: 19px;
+
       padding-top: 17px;
+
       border-top: 1px solid #ececec;
+
       color: #6c7179;
+
       text-align: center;
+
       font-size: 12px;
       line-height: 1.6;
     }
 
+
     .back-home {
       display: block;
+
       width: fit-content;
+
       margin: 26px auto 0;
+
       color: #123a8c;
+
       text-decoration: none;
+
       font-weight: 700;
     }
 
+
+    .back-home:hover {
+      text-decoration: underline;
+    }
+
+
     footer {
       padding: 22px 15px;
+
       text-align: center;
+
       color: #777;
+
       font-size: 13px;
     }
+
+
+    /*
+      =====================================================
+      MOBILE
+      =====================================================
+    */
 
     @media (max-width: 650px) {
 
@@ -358,25 +634,37 @@
         padding-top: 27px;
       }
 
+
       .intro h1 {
         font-size: 27px;
       }
+
 
       .benefits {
         grid-template-columns: 1fr;
       }
 
+
       .register-card {
         padding: 21px 17px;
+
         border-radius: 14px;
       }
+
 
       .brand {
         font-size: 24px;
       }
 
+
       .application-section {
         padding: 14px;
+      }
+
+
+      .password-toggle {
+        width: 44px;
+        height: 44px;
       }
 
     }
@@ -407,9 +695,11 @@
       GiftedGift Empire Affiliate Program
     </div>
 
+
     <h1>
       Promote. Refer. Earn.
     </h1>
+
 
     <p>
       Join our affiliate program and earn commission
@@ -418,6 +708,7 @@
     </p>
 
   </section>
+
 
 
   <section class="benefits">
@@ -441,6 +732,7 @@
     </div>
 
 
+
     <div class="benefit">
 
       <div class="benefit-icon">
@@ -457,6 +749,7 @@
       </span>
 
     </div>
+
 
 
     <div class="benefit">
@@ -480,6 +773,7 @@
   </section>
 
 
+
   <section class="register-card">
 
 
@@ -487,14 +781,18 @@
       Create Your Affiliate Account
     </h2>
 
+
     <p class="subtitle">
       Registration is free. Applications are reviewed
       before affiliate links are activated.
     </p>
 
 
+
     <form id="affiliate-form">
 
+
+      <!-- FULL NAME -->
 
       <label
         for="full-name"
@@ -502,6 +800,7 @@
       >
         Full Name
       </label>
+
 
       <input
         type="text"
@@ -513,12 +812,16 @@
       >
 
 
+
+      <!-- EMAIL -->
+
       <label
         for="email"
         class="field-label"
       >
         Email Address
       </label>
+
 
       <input
         type="email"
@@ -530,6 +833,9 @@
       >
 
 
+
+      <!-- PASSWORD -->
+
       <label
         for="password"
         class="field-label"
@@ -537,21 +843,41 @@
         Password
       </label>
 
-      <input
-        type="password"
-        id="password"
-        autocomplete="new-password"
-        minlength="8"
-        maxlength="72"
-        placeholder="Create a secure password"
-        required
-      >
+
+      <div class="password-field">
+
+        <input
+          type="password"
+          id="password"
+          autocomplete="new-password"
+          minlength="8"
+          maxlength="72"
+          placeholder="Create a secure password"
+          required
+        >
+
+
+        <button
+          type="button"
+          class="password-toggle"
+          data-target="password"
+          aria-label="Show password"
+          title="Show password"
+        >
+          👁
+        </button>
+
+      </div>
+
 
       <div class="password-help">
         Use at least 8 characters. A combination of
         letters, numbers and symbols is recommended.
       </div>
 
+
+
+      <!-- CONFIRM PASSWORD -->
 
       <label
         for="confirm-password"
@@ -560,16 +886,35 @@
         Confirm Password
       </label>
 
-      <input
-        type="password"
-        id="confirm-password"
-        autocomplete="new-password"
-        minlength="8"
-        maxlength="72"
-        placeholder="Enter your password again"
-        required
-      >
 
+      <div class="password-field">
+
+        <input
+          type="password"
+          id="confirm-password"
+          autocomplete="new-password"
+          minlength="8"
+          maxlength="72"
+          placeholder="Enter your password again"
+          required
+        >
+
+
+        <button
+          type="button"
+          class="password-toggle"
+          data-target="confirm-password"
+          aria-label="Show password"
+          title="Show password"
+        >
+          👁
+        </button>
+
+      </div>
+
+
+
+      <!-- APPLICATION -->
 
       <div class="application-section">
 
@@ -577,11 +922,13 @@
           Tell Us About Your Application
         </h3>
 
+
         <p>
           Briefly explain why you want to become a
           GiftedGift Empire affiliate and how or where
           you plan to promote our eligible products and offers.
         </p>
+
 
         <label
           for="application-message"
@@ -589,6 +936,7 @@
         >
           Your Request / Promotion Plan
         </label>
+
 
         <textarea
           id="application-message"
@@ -598,6 +946,7 @@
           required
         ></textarea>
 
+
         <div class="application-help">
           Please write at least 30 characters.
           This message will be reviewed before your
@@ -606,6 +955,9 @@
 
       </div>
 
+
+
+      <!-- AGREEMENT -->
 
       <div class="agreement">
 
@@ -629,6 +981,9 @@
       </div>
 
 
+
+      <!-- SUBMIT -->
+
       <button
         type="submit"
         id="submit-button"
@@ -636,6 +991,7 @@
       >
         Apply to Become an Affiliate
       </button>
+
 
 
       <div
@@ -649,6 +1005,9 @@
     </form>
 
 
+
+    <!-- SUCCESS / PENDING -->
+
     <div
       id="pending-box"
       class="pending-box"
@@ -658,21 +1017,25 @@
         Application Received ✅
       </h3>
 
+
       <p>
         Your GiftedGift Empire affiliate account has
         been created.
       </p>
+
 
       <p>
         Your application and promotion plan will be
         reviewed before your affiliate account is approved.
       </p>
 
+
       <p>
         Once approved, you will be able to receive an
         active referral link and earn commissions on
         qualifying sales.
       </p>
+
 
       <div class="pending-status">
         Status: Pending Approval
@@ -681,14 +1044,18 @@
     </div>
 
 
+
     <div class="security-note">
+
       🔒 Your password is handled securely by our
       authentication provider. GiftedGift Empire does not
       store your plain-text password.
+
     </div>
 
 
   </section>
+
 
 
   <a
@@ -702,14 +1069,17 @@
 </main>
 
 
+
 <footer>
   © GiftedGift Empire
 </footer>
 
 
+
 <script
   src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
 ></script>
+
 
 
 <script>
@@ -729,6 +1099,118 @@ const supabaseClient =
     SUPABASE_PUBLISHABLE_KEY
   );
 
+
+
+/*
+  =====================================================
+  SHOW / HIDE PASSWORD
+  =====================================================
+*/
+
+
+document
+  .querySelectorAll(
+    ".password-toggle"
+  )
+  .forEach(
+    button => {
+
+
+      button.addEventListener(
+        "click",
+        function() {
+
+
+          const targetId =
+            this.getAttribute(
+              "data-target"
+            );
+
+
+          const input =
+            document.getElementById(
+              targetId
+            );
+
+
+          if (
+            !input
+          ) {
+
+            return;
+
+          }
+
+
+          const currentlyHidden =
+            input.type ===
+            "password";
+
+
+          if (
+            currentlyHidden
+          ) {
+
+
+            input.type =
+              "text";
+
+
+            this.textContent =
+              "🙈";
+
+
+            this.setAttribute(
+              "aria-label",
+              "Hide password"
+            );
+
+
+            this.setAttribute(
+              "title",
+              "Hide password"
+            );
+
+
+          } else {
+
+
+            input.type =
+              "password";
+
+
+            this.textContent =
+              "👁";
+
+
+            this.setAttribute(
+              "aria-label",
+              "Show password"
+            );
+
+
+            this.setAttribute(
+              "title",
+              "Show password"
+            );
+
+          }
+
+
+        }
+      );
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  MESSAGE HELPERS
+  =====================================================
+*/
 
 
 function showMessage(
@@ -773,6 +1255,13 @@ function clearMessage() {
 
 
 
+/*
+  =====================================================
+  EMAIL
+  =====================================================
+*/
+
+
 function normalizeEmail(
   value
 ) {
@@ -785,6 +1274,13 @@ function normalizeEmail(
 
 }
 
+
+
+/*
+  =====================================================
+  FRIENDLY SIGNUP ERRORS
+  =====================================================
+*/
 
 
 function friendlySignupError(
@@ -864,6 +1360,13 @@ function friendlySignupError(
 
 
 
+/*
+  =====================================================
+  AFFILIATE REGISTRATION
+  =====================================================
+*/
+
+
 document
   .getElementById(
     "affiliate-form"
@@ -874,10 +1377,12 @@ document
       event
     ) {
 
+
       event.preventDefault();
 
 
       clearMessage();
+
 
 
       const fullName =
@@ -887,6 +1392,7 @@ document
           )
           .value
           .trim();
+
 
 
       const email =
@@ -899,6 +1405,7 @@ document
         );
 
 
+
       const password =
         document
           .getElementById(
@@ -907,12 +1414,14 @@ document
           .value;
 
 
+
       const confirmPassword =
         document
           .getElementById(
             "confirm-password"
           )
           .value;
+
 
 
       const applicationMessage =
@@ -924,6 +1433,7 @@ document
           .trim();
 
 
+
       const agreement =
         document
           .getElementById(
@@ -932,11 +1442,17 @@ document
           .checked;
 
 
+
       const button =
         document.getElementById(
           "submit-button"
         );
 
+
+
+      /*
+        FULL NAME
+      */
 
       if (
         fullName.length < 2
@@ -951,6 +1467,11 @@ document
 
       }
 
+
+
+      /*
+        EMAIL
+      */
 
       if (
         !email ||
@@ -969,6 +1490,11 @@ document
       }
 
 
+
+      /*
+        PASSWORD
+      */
+
       if (
         password.length < 8
       ) {
@@ -982,6 +1508,11 @@ document
 
       }
 
+
+
+      /*
+        PASSWORD MATCH
+      */
 
       if (
         password !==
@@ -998,6 +1529,11 @@ document
       }
 
 
+
+      /*
+        APPLICATION MESSAGE
+      */
+
       if (
         applicationMessage.length < 30
       ) {
@@ -1010,6 +1546,7 @@ document
         return;
 
       }
+
 
 
       if (
@@ -1026,6 +1563,11 @@ document
       }
 
 
+
+      /*
+        AGREEMENT
+      */
+
       if (
         !agreement
       ) {
@@ -1040,6 +1582,11 @@ document
       }
 
 
+
+      /*
+        DISABLE BUTTON DURING SUBMISSION
+      */
+
       button.disabled =
         true;
 
@@ -1048,8 +1595,17 @@ document
         "Submitting Application...";
 
 
+
       try {
 
+
+        /*
+          CREATE AUTH ACCOUNT
+
+          application_message is included in signup metadata
+          so the existing affiliate-profile creation process
+          can save it to the affiliate record.
+        */
 
         const {
           data,
@@ -1083,6 +1639,7 @@ document
             });
 
 
+
         if (
           error
         ) {
@@ -1090,6 +1647,7 @@ document
           throw error;
 
         }
+
 
 
         if (
@@ -1103,6 +1661,11 @@ document
 
         }
 
+
+
+        /*
+          SHOW PENDING MESSAGE
+        */
 
         document
           .getElementById(
@@ -1119,6 +1682,12 @@ document
           .style.display =
             "block";
 
+
+
+        /*
+          DO NOT LEAVE A NEW AFFILIATE SIGNED IN
+          ON THE PUBLIC APPLICATION PAGE
+        */
 
         if (
           data.session
@@ -1158,11 +1727,13 @@ document
 
       }
 
+
     }
   );
 
 
 </script>
+
 
 
 <script src="cookie-consent.js"></script>
