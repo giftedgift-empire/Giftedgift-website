@@ -874,7 +874,7 @@
           </div>
 
           <div class="stat-note">
-            Payout connection next
+            Completed affiliate payouts
           </div>
 
         </div>
@@ -1019,8 +1019,9 @@ function formatCommissionRate(
 
 
 
-function formatMoney(
-  value
+function formatCurrency(
+  value,
+  currency = "EUR"
 ) {
 
   const number =
@@ -1040,24 +1041,46 @@ function formatMoney(
   }
 
 
-  return new Intl.NumberFormat(
-    "en-IE",
-    {
-      style:
-        "currency",
+  const currencyCode =
+    String(
+      currency || "EUR"
+    )
+      .trim()
+      .toUpperCase();
 
-      currency:
-        "EUR",
 
-      minimumFractionDigits:
-        2,
+  try {
 
-      maximumFractionDigits:
+    return new Intl.NumberFormat(
+      "en-IE",
+      {
+        style:
+          "currency",
+
+        currency:
+          currencyCode,
+
+        minimumFractionDigits:
+          2,
+
+        maximumFractionDigits:
+          2
+      }
+    ).format(
+      number
+    );
+
+  } catch {
+
+    return (
+      currencyCode +
+      " " +
+      number.toFixed(
         2
-    }
-  ).format(
-    number
-  );
+      )
+    );
+
+  }
 
 }
 
@@ -1638,8 +1661,9 @@ async function loadDashboard() {
             "commission-earnings-value"
           )
           .textContent =
-            formatMoney(
-              totalCommission
+            formatCurrency(
+              totalCommission,
+              "EUR"
             );
 
       }
@@ -1659,6 +1683,226 @@ async function loadDashboard() {
       document
         .getElementById(
           "commission-earnings-value"
+        )
+        .textContent =
+          "—";
+
+    }
+
+
+
+    /*
+      =====================================================
+      LOAD PAID OUT TOTAL
+      =====================================================
+    */
+
+
+    try {
+
+
+      const {
+        data: payoutRows,
+        error: payoutError
+      } =
+        await supabaseClient
+          .from(
+            "affiliate_payouts"
+          )
+          .select(
+            "amount,currency,paid_at"
+          )
+          .eq(
+            "affiliate_id",
+            affiliate.id
+          )
+          .not(
+            "paid_at",
+            "is",
+            null
+          );
+
+
+
+      if (
+        payoutError
+      ) {
+
+
+        console.error(
+          "Affiliate payout load error:",
+          payoutError
+        );
+
+
+        document
+          .getElementById(
+            "paid-out-value"
+          )
+          .textContent =
+            "—";
+
+
+      } else {
+
+
+        const paidRows =
+          Array.isArray(
+            payoutRows
+          )
+            ? payoutRows
+            : [];
+
+
+        if (
+          paidRows.length === 0
+        ) {
+
+
+          document
+            .getElementById(
+              "paid-out-value"
+            )
+            .textContent =
+              formatCurrency(
+                0,
+                "EUR"
+              );
+
+
+        } else {
+
+
+          const currencyTotals =
+            {};
+
+
+          paidRows.forEach(
+            function(
+              row
+            ) {
+
+
+              const amount =
+                Number(
+                  row.amount || 0
+                );
+
+
+              if (
+                !Number.isFinite(
+                  amount
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              const currency =
+                String(
+                  row.currency ||
+                  "EUR"
+                )
+                  .trim()
+                  .toUpperCase();
+
+
+              if (
+                !currencyTotals[
+                  currency
+                ]
+              ) {
+
+                currencyTotals[
+                  currency
+                ] =
+                  0;
+
+              }
+
+
+              currencyTotals[
+                currency
+              ] +=
+                amount;
+
+
+            }
+          );
+
+
+          const currencies =
+            Object.keys(
+              currencyTotals
+            );
+
+
+          if (
+            currencies.length === 0
+          ) {
+
+
+            document
+              .getElementById(
+                "paid-out-value"
+              )
+              .textContent =
+                formatCurrency(
+                  0,
+                  "EUR"
+                );
+
+
+          } else {
+
+
+            document
+              .getElementById(
+                "paid-out-value"
+              )
+              .textContent =
+                currencies
+                  .map(
+                    function(
+                      currency
+                    ) {
+
+                      return formatCurrency(
+                        currencyTotals[
+                          currency
+                        ],
+                        currency
+                      );
+
+                    }
+                  )
+                  .join(
+                    " + "
+                  );
+
+          }
+
+        }
+
+      }
+
+
+    } catch (
+      payoutLoadError
+    ) {
+
+
+      console.error(
+        "Affiliate payout load error:",
+        payoutLoadError
+      );
+
+
+      document
+        .getElementById(
+          "paid-out-value"
         )
         .textContent =
           "—";
