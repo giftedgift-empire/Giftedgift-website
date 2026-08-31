@@ -11,7 +11,7 @@
   >
 
   <title>
-    Manage Affiliates | GiftedGift Empire Admin
+    Manage Affiliate Program | GiftedGift Empire Admin
   </title>
 
   <script
@@ -305,6 +305,51 @@
       word-break: break-word;
     }
 
+
+    /*
+      =====================================================
+      APPLICATION / PROMOTION PLAN
+      =====================================================
+    */
+
+    .application-message-box {
+      margin-bottom: 17px;
+      padding: 16px;
+      background: #eef5ff;
+      border: 1px solid #c9dcfa;
+      border-radius: 11px;
+    }
+
+    .application-message-title {
+      display: block;
+      margin-bottom: 8px;
+      color: #123a8c;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .application-message-text {
+      margin: 0;
+      color: #444;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .no-application-message {
+      color: #777;
+      font-style: italic;
+    }
+
+
+    /*
+      =====================================================
+      COMMISSION
+      =====================================================
+    */
+
     .commission-area {
       padding: 15px;
       background: #f8f9fc;
@@ -422,7 +467,8 @@
     @media (max-width: 500px) {
 
       .stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
       }
 
       .affiliate-card {
@@ -454,7 +500,7 @@
       </div>
 
       <div class="admin-label">
-        Affiliate Administration
+        Affiliate Program Administration
       </div>
 
     </div>
@@ -498,13 +544,13 @@
     <section class="title-row">
 
       <h1>
-        Manage Affiliates
+        Manage Affiliate Program
       </h1>
 
       <p>
-        Review applications, approve affiliates,
-        set commission rates, manage referral codes
-        and suspend accounts when necessary.
+        Review affiliate applications and promotion plans,
+        approve or reject applicants, set commission rates,
+        manage referral codes and suspend accounts when necessary.
       </p>
 
     </section>
@@ -590,7 +636,7 @@
         id="search-input"
         class="search-input"
         type="search"
-        placeholder="Search name, email or referral code..."
+        placeholder="Search name, email, referral code or application..."
       >
 
 
@@ -1016,6 +1062,7 @@ async function loadAffiliates() {
             referral_code,
             status,
             commission_rate,
+            application_message,
             approved_at,
             created_at,
             updated_at
@@ -1180,7 +1227,8 @@ function filteredAffiliates() {
         [
           affiliate.full_name,
           affiliate.email,
-          affiliate.referral_code
+          affiliate.referral_code,
+          affiliate.application_message
         ]
           .filter(
             Boolean
@@ -1276,6 +1324,17 @@ function renderAffiliates() {
         : Number(
             affiliate.commission_rate
           );
+
+
+    const applicationMessage =
+      affiliate.application_message &&
+      String(
+        affiliate.application_message
+      ).trim()
+
+        ? affiliate.application_message
+
+        : null;
 
 
     card.innerHTML = `
@@ -1374,6 +1433,29 @@ function renderAffiliates() {
           </span>
 
         </div>
+
+      </div>
+
+
+      <div class="application-message-box">
+
+        <span class="application-message-title">
+          Application / Promotion Plan
+        </span>
+
+        <p class="application-message-text ${
+          applicationMessage
+            ? ""
+            : "no-application-message"
+        }">
+          ${
+            applicationMessage
+              ? escapeHtml(
+                  applicationMessage
+                )
+              : "No application message was submitted. This affiliate registered before the application-message field was added."
+          }
+        </p>
 
       </div>
 
@@ -1780,6 +1862,9 @@ async function rejectAffiliate(
   affiliate
 ) {
 
+  clearMessage();
+
+
   if (
     !confirm(
       "Reject this affiliate application?"
@@ -1818,7 +1903,8 @@ async function rejectAffiliate(
   ) {
 
     showMessage(
-      error.message,
+      error.message ||
+      "Affiliate application could not be rejected.",
       "error"
     );
 
@@ -1897,7 +1983,8 @@ async function saveCommission(
 
 
     showMessage(
-      error.message,
+      error.message ||
+      "Commission rate could not be updated.",
       "error"
     );
 
@@ -1910,6 +1997,9 @@ async function saveCommission(
 async function suspendAffiliate(
   affiliate
 ) {
+
+  clearMessage();
+
 
   if (
     !confirm(
@@ -1946,7 +2036,8 @@ async function suspendAffiliate(
   ) {
 
     showMessage(
-      error.message,
+      error.message ||
+      "Affiliate could not be suspended.",
       "error"
     );
 
@@ -1970,6 +2061,9 @@ async function suspendAffiliate(
 async function reactivateAffiliate(
   affiliate
 ) {
+
+  clearMessage();
+
 
   if (
     !confirm(
@@ -2006,7 +2100,8 @@ async function reactivateAffiliate(
   ) {
 
     showMessage(
-      error.message,
+      error.message ||
+      "Affiliate could not be reactivated.",
       "error"
     );
 
