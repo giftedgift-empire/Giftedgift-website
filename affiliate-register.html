@@ -166,11 +166,13 @@
 
     input[type="text"],
     input[type="email"],
-    input[type="password"] {
+    input[type="password"],
+    textarea {
       width: 100%;
       padding: 13px 14px;
       border: 1px solid #cdd4df;
       border-radius: 9px;
+      font-family: Arial, sans-serif;
       font-size: 16px;
       outline: none;
       transition:
@@ -178,50 +180,46 @@
         box-shadow 0.2s;
     }
 
-    input:focus {
+    input:focus,
+    textarea:focus {
       border-color: #123a8c;
       box-shadow:
         0 0 0 3px rgba(18,58,140,0.09);
     }
 
-    .password-wrapper {
-      position: relative;
-      width: 100%;
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.55;
     }
 
-    .password-wrapper input {
-      padding-right: 50px;
-    }
-
-    .password-toggle {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      border: none;
-      background: transparent;
-      padding: 6px;
-      cursor: pointer;
-      font-size: 20px;
-      line-height: 1;
-      color: #555;
-    }
-
-    .password-toggle:hover {
-      color: #123a8c;
-    }
-
-    .password-toggle:focus {
-      outline: 2px solid #123a8c;
-      outline-offset: 2px;
-      border-radius: 5px;
-    }
-
-    .password-help {
+    .password-help,
+    .application-help {
       margin-top: 7px;
       color: #777;
       font-size: 12px;
       line-height: 1.5;
+    }
+
+    .application-section {
+      margin-top: 22px;
+      padding: 17px;
+      background: #f7f9fd;
+      border: 1px solid #dce5f4;
+      border-radius: 12px;
+    }
+
+    .application-section h3 {
+      margin: 0 0 6px;
+      color: #123a8c;
+      font-size: 18px;
+    }
+
+    .application-section p {
+      margin: 0 0 13px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.55;
     }
 
     .agreement {
@@ -375,6 +373,10 @@
 
       .brand {
         font-size: 24px;
+      }
+
+      .application-section {
+        padding: 14px;
       }
 
     }
@@ -535,29 +537,15 @@
         Password
       </label>
 
-      <div class="password-wrapper">
-
-        <input
-          type="password"
-          id="password"
-          autocomplete="new-password"
-          minlength="8"
-          maxlength="72"
-          placeholder="Create a secure password"
-          required
-        >
-
-        <button
-          type="button"
-          class="password-toggle"
-          data-target="password"
-          aria-label="Show password"
-          title="Show password"
-        >
-          👁️
-        </button>
-
-      </div>
+      <input
+        type="password"
+        id="password"
+        autocomplete="new-password"
+        minlength="8"
+        maxlength="72"
+        placeholder="Create a secure password"
+        required
+      >
 
       <div class="password-help">
         Use at least 8 characters. A combination of
@@ -572,27 +560,49 @@
         Confirm Password
       </label>
 
-      <div class="password-wrapper">
+      <input
+        type="password"
+        id="confirm-password"
+        autocomplete="new-password"
+        minlength="8"
+        maxlength="72"
+        placeholder="Enter your password again"
+        required
+      >
 
-        <input
-          type="password"
-          id="confirm-password"
-          autocomplete="new-password"
-          minlength="8"
-          maxlength="72"
-          placeholder="Enter your password again"
+
+      <div class="application-section">
+
+        <h3>
+          Tell Us About Your Application
+        </h3>
+
+        <p>
+          Briefly explain why you want to become a
+          GiftedGift Empire affiliate and how or where
+          you plan to promote our eligible products and offers.
+        </p>
+
+        <label
+          for="application-message"
+          class="field-label"
+        >
+          Your Request / Promotion Plan
+        </label>
+
+        <textarea
+          id="application-message"
+          minlength="30"
+          maxlength="1500"
+          placeholder="Example: I would like to join the affiliate program because... I plan to promote products through my social media pages, website, WhatsApp, Pinterest, YouTube, or other channels..."
           required
-        >
+        ></textarea>
 
-        <button
-          type="button"
-          class="password-toggle"
-          data-target="confirm-password"
-          aria-label="Show confirm password"
-          title="Show password"
-        >
-          👁️
-        </button>
+        <div class="application-help">
+          Please write at least 30 characters.
+          This message will be reviewed before your
+          application is approved.
+        </div>
 
       </div>
 
@@ -654,9 +664,14 @@
       </p>
 
       <p>
-        Your application must be reviewed and approved
-        before you can receive an active referral link
-        and earn commissions.
+        Your application and promotion plan will be
+        reviewed before your affiliate account is approved.
+      </p>
+
+      <p>
+        Once approved, you will be able to receive an
+        active referral link and earn commissions on
+        qualifying sales.
       </p>
 
       <div class="pending-status">
@@ -712,71 +727,6 @@ const supabaseClient =
   supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-
-document
-  .querySelectorAll(
-    ".password-toggle"
-  )
-  .forEach(
-    function(
-      button
-    ) {
-
-      button.addEventListener(
-        "click",
-        function() {
-
-          const targetId =
-            button.getAttribute(
-              "data-target"
-            );
-
-
-          const input =
-            document.getElementById(
-              targetId
-            );
-
-
-          const isHidden =
-            input.type ===
-            "password";
-
-
-          input.type =
-            isHidden
-              ? "text"
-              : "password";
-
-
-          button.textContent =
-            isHidden
-              ? "🙈"
-              : "👁️";
-
-
-          button.setAttribute(
-            "aria-label",
-            isHidden
-              ? "Hide password"
-              : "Show password"
-          );
-
-
-          button.setAttribute(
-            "title",
-            isHidden
-              ? "Hide password"
-              : "Show password"
-          );
-
-        }
-      );
-
-    }
   );
 
 
@@ -965,6 +915,15 @@ document
           .value;
 
 
+      const applicationMessage =
+        document
+          .getElementById(
+            "application-message"
+          )
+          .value
+          .trim();
+
+
       const agreement =
         document
           .getElementById(
@@ -1040,6 +999,34 @@ document
 
 
       if (
+        applicationMessage.length < 30
+      ) {
+
+        showMessage(
+          "Please tell us a little more about why you want to join and how you plan to promote GiftedGift Empire."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        applicationMessage.length > 1500
+      ) {
+
+        showMessage(
+          "Your application message is too long. Please keep it under 1,500 characters."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
         !agreement
       ) {
 
@@ -1058,7 +1045,7 @@ document
 
 
       button.textContent =
-        "Creating Affiliate Account...";
+        "Submitting Application...";
 
 
       try {
@@ -1084,7 +1071,10 @@ document
                     fullName,
 
                   account_type:
-                    "affiliate"
+                    "affiliate",
+
+                  application_message:
+                    applicationMessage
 
                 }
 
