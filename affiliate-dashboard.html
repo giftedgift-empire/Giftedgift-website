@@ -1013,9 +1013,12 @@
             Commission Earnings
           </div>
 
-          <div class="stat-value">
-            —
-          </div>
+          <div
+  id="qualifying-sales-count"
+  class="stat-value"
+>
+  —
+</div>
 
           <div class="stat-note">
             Commission connection next
@@ -1612,7 +1615,102 @@ try {
       "—";
 
 }
+/*
+  =====================================================
+  LOAD QUALIFYING SALES
+  =====================================================
+*/
 
+
+try {
+
+
+  const salesResponse =
+    await fetch(
+      "/api/affiliate-sales",
+      {
+        method:
+          "GET",
+
+        headers: {
+
+          Authorization:
+            "Bearer " +
+            session.access_token,
+
+          Accept:
+            "application/json"
+
+        }
+
+      }
+    );
+
+
+
+  if (
+    !salesResponse.ok
+  ) {
+
+
+    const errorText =
+      await salesResponse.text();
+
+
+    console.error(
+      "Affiliate sales load failed:",
+      salesResponse.status,
+      errorText
+    );
+
+
+    document
+      .getElementById(
+        "qualifying-sales-count"
+      )
+      .textContent =
+        "—";
+
+
+  } else {
+
+
+    const salesData =
+      await salesResponse.json();
+
+
+    document
+      .getElementById(
+        "qualifying-sales-count"
+      )
+      .textContent =
+        Number(
+          salesData.qualifying_sales || 0
+        );
+
+
+  }
+
+
+} catch (
+  salesLoadError
+) {
+
+
+  console.error(
+    "Affiliate sales load error:",
+    salesLoadError
+  );
+
+
+  document
+    .getElementById(
+      "qualifying-sales-count"
+    )
+    .textContent =
+      "—";
+
+}
     /*
       SHOW DASHBOARD
     */
