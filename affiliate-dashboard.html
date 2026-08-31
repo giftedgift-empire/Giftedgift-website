@@ -963,12 +963,15 @@
           </div>
 
           <div class="stat-title">
-            Referral Clicks
-          </div>
+  Referral Clicks
+</div>
 
-          <div class="stat-value">
-            —
-          </div>
+<div
+  id="referral-click-count"
+  class="stat-value"
+>
+  —
+</div>
 
           <div class="stat-note">
             Tracking connection next
@@ -1524,7 +1527,91 @@ async function loadDashboard() {
           commissionRate
         );
 
+/*
+  =====================================================
+  LOAD REFERRAL CLICK COUNT
+  =====================================================
+*/
 
+
+try {
+
+
+  const {
+    count: referralClickCount,
+    error: referralClickError
+  } =
+    await supabaseClient
+      .from(
+        "affiliate_clicks"
+      )
+      .select(
+        "id",
+        {
+          count: "exact",
+          head: true
+        }
+      )
+      .eq(
+        "affiliate_id",
+        affiliate.id
+      );
+
+
+
+  if (
+    referralClickError
+  ) {
+
+    console.error(
+      "Affiliate click count error:",
+      referralClickError
+    );
+
+
+    document
+      .getElementById(
+        "referral-click-count"
+      )
+      .textContent =
+        "—";
+
+
+  } else {
+
+
+    document
+      .getElementById(
+        "referral-click-count"
+      )
+      .textContent =
+        Number(
+          referralClickCount || 0
+        );
+
+
+  }
+
+
+} catch (
+  clickCountError
+) {
+
+
+  console.error(
+    "Affiliate click count error:",
+    clickCountError
+  );
+
+
+  document
+    .getElementById(
+      "referral-click-count"
+    )
+    .textContent =
+      "—";
+
+}
 
     /*
       SHOW DASHBOARD
