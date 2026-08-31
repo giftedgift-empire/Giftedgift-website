@@ -68,6 +68,105 @@ export async function onRequestPost(context) {
       null;
 
 
+    /*
+      =====================================================
+      VALIDATE REFERRAL CODE
+      =====================================================
+    */
+
+
+    if (
+      !referralCode ||
+      referralCode.length > 100
+    ) {
+
+      return jsonResponse(
+        {
+          success: false,
+          error: "Invalid referral code."
+        },
+        400
+      );
+
+    }
+
+
+    /*
+      =====================================================
+      VALIDATE LANDING URL
+      =====================================================
+    */
+
+
+    if (
+      !landingUrl ||
+      landingUrl.length > 2000
+    ) {
+
+      return jsonResponse(
+        {
+          success: false,
+          error: "Invalid landing URL."
+        },
+        400
+      );
+
+    }
+
+
+    let parsedLandingUrl;
+
+
+    try {
+
+      parsedLandingUrl =
+        new URL(
+          landingUrl
+        );
+
+    } catch {
+
+      return jsonResponse(
+        {
+          success: false,
+          error: "Invalid landing URL."
+        },
+        400
+      );
+
+    }
+
+
+    const allowedHosts = [
+      "giftedgiftempire.com",
+      "www.giftedgiftempire.com"
+    ];
+
+
+    if (
+      !allowedHosts.includes(
+        parsedLandingUrl.hostname
+      )
+    ) {
+
+      return jsonResponse(
+        {
+          success: false,
+          error: "Landing URL is not allowed."
+        },
+        400
+      );
+
+    }
+
+
+    /*
+      =====================================================
+      OPTIONAL PRODUCT ID
+      =====================================================
+    */
+
+
     if (
       rawProductId !== null &&
       rawProductId !== undefined &&
@@ -104,36 +203,24 @@ export async function onRequestPost(context) {
     }
 
 
-    if (
-      !referralCode ||
-      referralCode.length > 100
-    ) {
+    /*
+      =====================================================
+      SUPABASE HEADERS
 
-      return jsonResponse(
-        {
-          success: false,
-          error: "Invalid referral code."
-        },
-        400
-      );
-
-    }
+      New sb_secret_ keys are sent using APIKEY only.
+      =====================================================
+    */
 
 
-    if (
-      !landingUrl ||
-      landingUrl.length > 2000
-    ) {
+    const supabaseHeaders = {
 
-      return jsonResponse(
-        {
-          success: false,
-          error: "Invalid landing URL."
-        },
-        400
-      );
+      apikey:
+        env.SUPABASE_SERVICE_ROLE_KEY,
 
-    }
+      Accept:
+        "application/json"
+
+    };
 
 
     /*
@@ -141,6 +228,7 @@ export async function onRequestPost(context) {
       1. FIND APPROVED AFFILIATE
       =====================================================
     */
+
 
     const affiliateLookupUrl =
       env.SUPABASE_URL +
@@ -159,20 +247,8 @@ export async function onRequestPost(context) {
         {
           method: "GET",
 
-          headers: {
-
-            apikey:
-              env.SUPABASE_SERVICE_ROLE_KEY,
-
-            Authorization:
-              "Bearer " +
-              env.SUPABASE_SERVICE_ROLE_KEY,
-
-            Accept:
-              "application/json"
-
-          }
-
+          headers:
+            supabaseHeaders
         }
       );
 
@@ -232,7 +308,7 @@ export async function onRequestPost(context) {
     }
 
 
-    const status =
+    const affiliateStatus =
       String(
         affiliate.status || ""
       )
@@ -241,7 +317,7 @@ export async function onRequestPost(context) {
 
 
     if (
-      status !==
+      affiliateStatus !==
       "approved"
     ) {
 
@@ -258,9 +334,10 @@ export async function onRequestPost(context) {
 
     /*
       =====================================================
-      2. OPTIONAL PRODUCT VALIDATION
+      2. OPTIONAL DIGITAL PRODUCT VALIDATION
       =====================================================
     */
+
 
     if (
       productId !== null
@@ -283,20 +360,8 @@ export async function onRequestPost(context) {
           {
             method: "GET",
 
-            headers: {
-
-              apikey:
-                env.SUPABASE_SERVICE_ROLE_KEY,
-
-              Authorization:
-                "Bearer " +
-                env.SUPABASE_SERVICE_ROLE_KEY,
-
-              Accept:
-                "application/json"
-
-            }
-
+            headers:
+              supabaseHeaders
           }
         );
 
@@ -355,9 +420,10 @@ export async function onRequestPost(context) {
 
     /*
       =====================================================
-      3. INSERT CLICK
+      3. CREATE CLICK RECORD
       =====================================================
     */
+
 
     const clickPayload = {
 
@@ -395,10 +461,6 @@ export async function onRequestPost(context) {
             apikey:
               env.SUPABASE_SERVICE_ROLE_KEY,
 
-            Authorization:
-              "Bearer " +
-              env.SUPABASE_SERVICE_ROLE_KEY,
-
             "Content-Type":
               "application/json",
 
@@ -411,7 +473,6 @@ export async function onRequestPost(context) {
             JSON.stringify(
               clickPayload
             )
-
         }
       );
 
@@ -446,9 +507,10 @@ export async function onRequestPost(context) {
 
     /*
       =====================================================
-      4. SUCCESS
+      SUCCESS
       =====================================================
     */
+
 
     return jsonResponse(
       {
@@ -461,7 +523,6 @@ export async function onRequestPost(context) {
   } catch (
     error
   ) {
-
 
     console.error(
       "Affiliate click function error:",
