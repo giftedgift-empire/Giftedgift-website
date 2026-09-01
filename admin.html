@@ -75,10 +75,71 @@
       opacity: 0.9;
     }
 
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 20px;
+    }
+
+    .forgot-password button {
+      width: auto;
+      padding: 0;
+      background: transparent;
+      color: #123a8c;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
     .message {
       margin-top: 18px;
       text-align: center;
       font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      color: #17662d;
+    }
+
+    .message.error {
+      color: #9c1c1c;
+    }
+
+    .message.info {
+      color: #123a8c;
+    }
+
+    .reset-box {
+      display: none;
+      margin-top: 22px;
+      padding-top: 22px;
+      border-top: 1px solid #ddd;
+    }
+
+    .reset-box h2 {
+      color: #123a8c;
+      font-size: 20px;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .reset-box p {
+      color: #666;
+      line-height: 1.5;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .secondary-button {
+      margin-top: 10px;
+      background: #123a8c;
+      color: white;
     }
   </style>
 </head>
@@ -102,6 +163,7 @@
       id="email"
       placeholder="Enter your admin email"
       required
+      autocomplete="email"
     >
 
     <label for="password">Password</label>
@@ -111,65 +173,423 @@
       id="password"
       placeholder="Enter your password"
       required
+      autocomplete="current-password"
     >
 
-    <button type="submit">
+    <div class="forgot-password">
+      <button
+        type="button"
+        id="forgot-password-button"
+      >
+        Forgot password?
+      </button>
+    </div>
+
+    <button
+      type="submit"
+      id="login-button"
+    >
       Sign In
     </button>
 
   </form>
 
+
+  <div
+    id="reset-box"
+    class="reset-box"
+  >
+
+    <h2>
+      Reset Admin Password
+    </h2>
+
+    <p>
+      Enter your admin email address.
+      A secure password reset link will be sent to your email.
+    </p>
+
+    <label for="reset-email">
+      Admin Email
+    </label>
+
+    <input
+      type="email"
+      id="reset-email"
+      placeholder="Enter your admin email"
+      autocomplete="email"
+    >
+
+    <button
+      type="button"
+      id="send-reset-button"
+    >
+      Send Reset Link
+    </button>
+
+    <button
+      type="button"
+      id="back-to-login-button"
+      class="secondary-button"
+    >
+      Back to Login
+    </button>
+
+  </div>
+
+
   <p id="message" class="message"></p>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+</script>
+
 
 <script>
-  const SUPABASE_URL =
-    "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
-  const supabaseClient = supabase.createClient(
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const supabaseClient =
+  supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
 
-  const form = document.getElementById("login-form");
-  const message = document.getElementById("message");
 
-  form.addEventListener("submit", async function(event) {
+const form =
+  document.getElementById(
+    "login-form"
+  );
+
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+
+const forgotPasswordButton =
+  document.getElementById(
+    "forgot-password-button"
+  );
+
+
+const resetBox =
+  document.getElementById(
+    "reset-box"
+  );
+
+
+const resetEmail =
+  document.getElementById(
+    "reset-email"
+  );
+
+
+const sendResetButton =
+  document.getElementById(
+    "send-reset-button"
+  );
+
+
+const backToLoginButton =
+  document.getElementById(
+    "back-to-login-button"
+  );
+
+
+const loginButton =
+  document.getElementById(
+    "login-button"
+  );
+
+
+
+function showMessage(
+  text,
+  type = "info"
+) {
+
+  message.textContent =
+    text;
+
+  message.className =
+    "message " +
+    type;
+
+}
+
+
+
+form.addEventListener(
+  "submit",
+  async function(event) {
 
     event.preventDefault();
 
-    message.textContent = "Signing in...";
+    showMessage(
+      "Signing in...",
+      "info"
+    );
+
+    loginButton.disabled =
+      true;
+
 
     const email =
-      document.getElementById("email").value.trim();
+      document
+        .getElementById(
+          "email"
+        )
+        .value
+        .trim();
+
 
     const password =
-      document.getElementById("password").value;
+      document
+        .getElementById(
+          "password"
+        )
+        .value;
 
-    const { data, error } =
-      await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
 
-    if (error) {
-      message.textContent =
-        "Login failed. Please check your email and password.";
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .signInWithPassword({
+          email: email,
+          password: password
+        });
+
+
+    if (
+      error
+    ) {
+
+      loginButton.disabled =
+        false;
+
+      showMessage(
+        "Login failed. Please check your email and password.",
+        "error"
+      );
 
       return;
+
     }
 
-    message.textContent =
-      "Login successful.";
 
-    window.location.href = "dashboard.html";
-  });
+    if (
+      !data?.user ||
+      data.user.id !== ADMIN_USER_ID
+    ) {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+      loginButton.disabled =
+        false;
+
+      showMessage(
+        "This account does not have administrator access.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      "Login successful.",
+      "success"
+    );
+
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+);
+
+
+
+forgotPasswordButton.addEventListener(
+  "click",
+  function() {
+
+    const currentEmail =
+      document
+        .getElementById(
+          "email"
+        )
+        .value
+        .trim();
+
+
+    if (
+      currentEmail
+    ) {
+
+      resetEmail.value =
+        currentEmail;
+
+    }
+
+
+    form.style.display =
+      "none";
+
+
+    resetBox.style.display =
+      "block";
+
+
+    showMessage(
+      "",
+      "info"
+    );
+
+  }
+);
+
+
+
+backToLoginButton.addEventListener(
+  "click",
+  function() {
+
+    resetBox.style.display =
+      "none";
+
+
+    form.style.display =
+      "block";
+
+
+    showMessage(
+      "",
+      "info"
+    );
+
+  }
+);
+
+
+
+sendResetButton.addEventListener(
+  "click",
+  async function() {
+
+    const email =
+      resetEmail
+        .value
+        .trim();
+
+
+    if (
+      !email
+    ) {
+
+      showMessage(
+        "Please enter your admin email address.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    sendResetButton.disabled =
+      true;
+
+
+    showMessage(
+      "Sending password reset link...",
+      "info"
+    );
+
+
+    try {
+
+      const redirectUrl =
+        window.location.origin +
+        "/admin-reset-password.html";
+
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .auth
+          .resetPasswordForEmail(
+            email,
+            {
+              redirectTo:
+                redirectUrl
+            }
+          );
+
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      showMessage(
+        "If this email belongs to the administrator account, a password reset link has been sent. Please check your inbox and spam folder.",
+        "success"
+      );
+
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        "Password reset error:",
+        error
+      );
+
+
+      showMessage(
+        "The password reset email could not be sent. Please try again.",
+        "error"
+      );
+
+
+    } finally {
+
+      sendResetButton.disabled =
+        false;
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
