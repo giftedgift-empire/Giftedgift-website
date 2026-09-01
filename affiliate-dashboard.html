@@ -358,7 +358,8 @@
       margin-top: 25px;
     }
 
-    .stats-section h2 {
+    .stats-section h2,
+    .withdrawal-section > h2 {
       margin: 0 0 7px;
 
       color: #123a8c;
@@ -366,7 +367,8 @@
       font-size: 22px;
     }
 
-    .stats-section > p {
+    .stats-section > p,
+    .withdrawal-section > p {
       margin: 0 0 17px;
 
       color: #666;
@@ -429,6 +431,277 @@
       line-height: 1.4;
     }
 
+    .withdrawal-section {
+      margin-top: 30px;
+    }
+
+    .payout-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 18px;
+    }
+
+    .available-balance-box {
+      margin: 18px 0;
+
+      padding: 18px;
+
+      border: 1px solid #d8e3f4;
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f5f9ff,
+          #fffdf3
+        );
+    }
+
+    .available-label {
+      color: #666;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      margin-bottom: 7px;
+    }
+
+    .available-value {
+      color: #123a8c;
+
+      font-size: 32px;
+      font-weight: 900;
+    }
+
+    .available-note {
+      margin-top: 8px;
+
+      color: #777;
+
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .payout-field {
+      margin-top: 16px;
+    }
+
+    .payout-field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #333;
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .payout-field select,
+    .payout-field textarea {
+      width: 100%;
+
+      padding: 12px 13px;
+
+      border: 1px solid #ccd4df;
+      border-radius: 9px;
+
+      background: white;
+      color: #222;
+
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+
+      outline: none;
+    }
+
+    .payout-field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .payout-field select:focus,
+    .payout-field textarea:focus {
+      border-color: #123a8c;
+
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .withdraw-button {
+      width: 100%;
+
+      margin-top: 18px;
+
+      border: none;
+      border-radius: 10px;
+
+      padding: 14px 18px;
+
+      background: #123a8c;
+      color: white;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .withdraw-button:hover {
+      opacity: 0.95;
+    }
+
+    .withdraw-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .payout-message {
+      display: none;
+
+      margin-top: 14px;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .payout-message.success {
+      display: block;
+
+      background: #e9f8ed;
+      color: #17662d;
+
+      border: 1px solid #b8e3c2;
+    }
+
+    .payout-message.error {
+      display: block;
+
+      background: #ffe8e8;
+      color: #941c1c;
+
+      border: 1px solid #f1b8b8;
+    }
+
+    .payout-message.info {
+      display: block;
+
+      background: #eef5ff;
+      color: #123a8c;
+
+      border: 1px solid #c8d9f5;
+    }
+
+    .payout-history-empty {
+      padding: 18px;
+
+      background: #f8f9fb;
+
+      border-radius: 10px;
+
+      color: #777;
+
+      text-align: center;
+
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .payout-item {
+      padding: 15px 0;
+
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .payout-item:last-child {
+      border-bottom: none;
+    }
+
+    .payout-item-top {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 12px;
+
+      margin-bottom: 8px;
+    }
+
+    .payout-item-amount {
+      color: #123a8c;
+
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .payout-status {
+      display: inline-block;
+
+      padding: 5px 9px;
+
+      border-radius: 999px;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      text-transform: capitalize;
+    }
+
+    .payout-status.pending {
+      background: #fff4bd;
+      color: #755700;
+    }
+
+    .payout-status.processing {
+      background: #e8f0ff;
+      color: #123a8c;
+    }
+
+    .payout-status.paid,
+    .payout-status.completed {
+      background: #e9f8ed;
+      color: #17662d;
+    }
+
+    .payout-status.rejected,
+    .payout-status.cancelled,
+    .payout-status.canceled {
+      background: #ffe8e8;
+      color: #941c1c;
+    }
+
+    .payout-meta {
+      color: #777;
+
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .security-note {
+      margin-top: 15px;
+
+      padding: 12px;
+
+      background: #fff9df;
+
+      border-left: 4px solid #f2bd16;
+      border-radius: 7px;
+
+      color: #665500;
+
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
     footer {
       padding: 22px 15px;
 
@@ -445,7 +718,8 @@
         grid-template-columns: 1fr;
       }
 
-      .dashboard-grid {
+      .dashboard-grid,
+      .payout-grid {
         grid-template-columns: 1fr;
       }
 
@@ -500,6 +774,10 @@
 
       .detail-value {
         text-align: left;
+      }
+
+      .available-value {
+        font-size: 28px;
       }
 
     }
@@ -885,6 +1163,149 @@
     </section>
 
 
+
+    <section class="withdrawal-section">
+
+      <h2>
+        Withdraw Earnings
+      </h2>
+
+      <p>
+        Request payment of your approved and available
+        affiliate commissions.
+      </p>
+
+
+      <div class="payout-grid">
+
+
+        <div class="card">
+
+          <h2>
+            Request Withdrawal
+          </h2>
+
+          <p class="card-description">
+            Only approved, unpaid commissions are available
+            for withdrawal.
+          </p>
+
+
+          <div class="available-balance-box">
+
+            <div class="available-label">
+              AVAILABLE TO WITHDRAW
+            </div>
+
+            <div
+              id="available-withdrawal-value"
+              class="available-value"
+            >
+              —
+            </div>
+
+            <div
+              id="available-withdrawal-note"
+              class="available-note"
+            >
+              Checking your available balance...
+            </div>
+
+          </div>
+
+
+          <div class="payout-field">
+
+            <label for="payout-method">
+              Payment Method
+            </label>
+
+            <select id="payout-method">
+
+              <option value="paypal">
+                PayPal
+              </option>
+
+              <option value="bank_transfer">
+                Bank Transfer
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="payout-field">
+
+            <label
+              for="payout-details"
+              id="payout-details-label"
+            >
+              PayPal Email Address
+            </label>
+
+            <textarea
+              id="payout-details"
+              maxlength="250"
+              placeholder="Enter the PayPal email address where you want to receive your payout."
+            ></textarea>
+
+          </div>
+
+
+          <button
+            type="button"
+            id="request-payout-button"
+            class="withdraw-button"
+            disabled
+          >
+            Request Withdrawal
+          </button>
+
+
+          <div
+            id="payout-request-message"
+            class="payout-message"
+          ></div>
+
+
+          <div class="security-note">
+            For security, the withdrawal amount is calculated
+            automatically from your approved commissions.
+            Affiliates cannot manually increase the amount.
+          </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+          <h2>
+            Payout Status
+          </h2>
+
+          <p class="card-description">
+            View your withdrawal requests and completed payouts.
+          </p>
+
+
+          <div id="payout-history">
+
+            <div class="payout-history-empty">
+              Loading payout history...
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
   </div>
 
 
@@ -942,6 +1363,23 @@ const dashboard =
 
 
 
+let currentAffiliateId =
+  null;
+
+
+let availableWithdrawalAmount =
+  0;
+
+
+let availableWithdrawalCurrency =
+  "EUR";
+
+
+let hasOpenPayoutRequest =
+  false;
+
+
+
 function normalizeEmail(
   value
 ) {
@@ -971,6 +1409,38 @@ function showError(
 
   errorBox.textContent =
     message;
+
+}
+
+
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
@@ -1079,6 +1549,1055 @@ function formatCurrency(
         2
       )
     );
+
+  }
+
+}
+
+
+
+function formatDateTime(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "—";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "—";
+
+  }
+
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      dateStyle:
+        "medium",
+
+      timeStyle:
+        "short"
+    }
+  );
+
+}
+
+
+
+function formatPaymentMethod(
+  value
+) {
+
+  const method =
+    String(
+      value || ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+  if (
+    method ===
+    "paypal"
+  ) {
+
+    return "PayPal";
+
+  }
+
+
+  if (
+    method ===
+    "bank_transfer"
+  ) {
+
+    return "Bank Transfer";
+
+  }
+
+
+  return (
+    value ||
+    "Payment"
+  );
+
+}
+
+
+
+function setPayoutMessage(
+  message,
+  type = "info"
+) {
+
+  const box =
+    document.getElementById(
+      "payout-request-message"
+    );
+
+
+  box.className =
+    "payout-message " +
+    type;
+
+
+  box.textContent =
+    message;
+
+}
+
+
+
+function clearPayoutMessage() {
+
+  const box =
+    document.getElementById(
+      "payout-request-message"
+    );
+
+
+  box.className =
+    "payout-message";
+
+
+  box.textContent =
+    "";
+
+}
+
+
+
+function updatePayoutDetailsUI() {
+
+  const method =
+    document
+      .getElementById(
+        "payout-method"
+      )
+      .value;
+
+
+  const label =
+    document.getElementById(
+      "payout-details-label"
+    );
+
+
+  const details =
+    document.getElementById(
+      "payout-details"
+    );
+
+
+  if (
+    method ===
+    "paypal"
+  ) {
+
+    label.textContent =
+      "PayPal Email Address";
+
+
+    details.placeholder =
+      "Enter the PayPal email address where you want to receive your payout.";
+
+  } else {
+
+    label.textContent =
+      "Bank Transfer Details";
+
+
+    details.placeholder =
+      "Enter the account holder name and the bank details needed to receive your payout.";
+
+  }
+
+}
+
+
+
+async function loadPayoutSection(
+  affiliateId
+) {
+
+  const availableValue =
+    document.getElementById(
+      "available-withdrawal-value"
+    );
+
+
+  const availableNote =
+    document.getElementById(
+      "available-withdrawal-note"
+    );
+
+
+  const requestButton =
+    document.getElementById(
+      "request-payout-button"
+    );
+
+
+  const history =
+    document.getElementById(
+      "payout-history"
+    );
+
+
+  availableValue.textContent =
+    "Checking...";
+
+
+  availableNote.textContent =
+    "Checking your approved commissions...";
+
+
+  requestButton.disabled =
+    true;
+
+
+  try {
+
+
+    const [
+      commissionResult,
+      payoutResult
+    ] =
+      await Promise.all([
+
+        supabaseClient
+          .from(
+            "affiliate_commissions"
+          )
+          .select(
+            "id,commission_amount,currency,status,reversed_at,paid_at"
+          )
+          .eq(
+            "affiliate_id",
+            affiliateId
+          ),
+
+        supabaseClient
+          .from(
+            "affiliate_payouts"
+          )
+          .select(
+            "id,amount,currency,payment_method,provider_reference,status,receipt_label,created_at,paid_at"
+          )
+          .eq(
+            "affiliate_id",
+            affiliateId
+          )
+          .order(
+            "created_at",
+            {
+              ascending:
+                false
+            }
+          )
+
+      ]);
+
+
+
+    if (
+      commissionResult.error
+    ) {
+
+      throw commissionResult.error;
+
+    }
+
+
+    if (
+      payoutResult.error
+    ) {
+
+      throw payoutResult.error;
+
+    }
+
+
+
+    const commissions =
+      Array.isArray(
+        commissionResult.data
+      )
+        ? commissionResult.data
+        : [];
+
+
+    const payouts =
+      Array.isArray(
+        payoutResult.data
+      )
+        ? payoutResult.data
+        : [];
+
+
+
+    /*
+      =====================================================
+      CHECK FOR OPEN PAYOUT REQUEST
+      =====================================================
+    */
+
+
+    hasOpenPayoutRequest =
+      payouts.some(
+        function(
+          payout
+        ) {
+
+          const payoutStatus =
+            String(
+              payout.status || ""
+            )
+              .trim()
+              .toLowerCase();
+
+
+          return (
+            payoutStatus ===
+              "pending" ||
+            payoutStatus ===
+              "processing"
+          );
+
+        }
+      );
+
+
+
+    /*
+      =====================================================
+      CALCULATE APPROVED / PENDING COMMISSIONS
+      =====================================================
+    */
+
+
+    const approvedTotals =
+      {};
+
+
+    const pendingTotals =
+      {};
+
+
+    commissions.forEach(
+      function(
+        row
+      ) {
+
+
+        if (
+          row.reversed_at ||
+          row.paid_at
+        ) {
+
+          return;
+
+        }
+
+
+        const amount =
+          Number(
+            row.commission_amount ||
+            0
+          );
+
+
+        if (
+          !Number.isFinite(
+            amount
+          ) ||
+          amount <= 0
+        ) {
+
+          return;
+
+        }
+
+
+        const currency =
+          String(
+            row.currency ||
+            "EUR"
+          )
+            .trim()
+            .toUpperCase();
+
+
+        const commissionStatus =
+          String(
+            row.status ||
+            ""
+          )
+            .trim()
+            .toLowerCase();
+
+
+
+        if (
+          commissionStatus ===
+          "approved"
+        ) {
+
+
+          approvedTotals[
+            currency
+          ] =
+            (
+              approvedTotals[
+                currency
+              ] ||
+              0
+            ) +
+            amount;
+
+        }
+
+
+
+        if (
+          commissionStatus ===
+          "pending"
+        ) {
+
+
+          pendingTotals[
+            currency
+          ] =
+            (
+              pendingTotals[
+                currency
+              ] ||
+              0
+            ) +
+            amount;
+
+        }
+
+
+      }
+    );
+
+
+
+    const approvedCurrencies =
+      Object.keys(
+        approvedTotals
+      );
+
+
+    const pendingCurrencies =
+      Object.keys(
+        pendingTotals
+      );
+
+
+
+    /*
+      =====================================================
+      DISPLAY AVAILABLE BALANCE
+      =====================================================
+    */
+
+
+    availableWithdrawalAmount =
+      0;
+
+
+    availableWithdrawalCurrency =
+      "EUR";
+
+
+
+    if (
+      hasOpenPayoutRequest
+    ) {
+
+
+      availableValue.textContent =
+        formatCurrency(
+          0,
+          "EUR"
+        );
+
+
+      availableNote.textContent =
+        "You already have a payout request being processed. A new request can be made after the current one is completed or rejected.";
+
+
+      requestButton.disabled =
+        true;
+
+
+    } else if (
+      approvedCurrencies.length ===
+      1
+    ) {
+
+
+      availableWithdrawalCurrency =
+        approvedCurrencies[
+          0
+        ];
+
+
+      availableWithdrawalAmount =
+        Number(
+          approvedTotals[
+            availableWithdrawalCurrency
+          ] ||
+          0
+        );
+
+
+      availableValue.textContent =
+        formatCurrency(
+          availableWithdrawalAmount,
+          availableWithdrawalCurrency
+        );
+
+
+      availableNote.textContent =
+        "This balance contains approved, unpaid commission that is currently available for withdrawal.";
+
+
+      requestButton.disabled =
+        !(
+          availableWithdrawalAmount >
+          0
+        );
+
+
+    } else if (
+      approvedCurrencies.length >
+      1
+    ) {
+
+
+      availableValue.textContent =
+        approvedCurrencies
+          .map(
+            function(
+              currency
+            ) {
+
+              return formatCurrency(
+                approvedTotals[
+                  currency
+                ],
+                currency
+              );
+
+            }
+          )
+          .join(
+            " + "
+          );
+
+
+      availableNote.textContent =
+        "You have approved commissions in more than one currency. These must be handled separately before withdrawal.";
+
+
+      requestButton.disabled =
+        true;
+
+
+    } else {
+
+
+      availableValue.textContent =
+        formatCurrency(
+          0,
+          "EUR"
+        );
+
+
+      if (
+        pendingCurrencies.length >
+        0
+      ) {
+
+
+        const pendingText =
+          pendingCurrencies
+            .map(
+              function(
+                currency
+              ) {
+
+                return formatCurrency(
+                  pendingTotals[
+                    currency
+                  ],
+                  currency
+                );
+
+              }
+            )
+            .join(
+              " + "
+            );
+
+
+        availableNote.textContent =
+          pendingText +
+          " commission is currently pending approval and cannot be withdrawn yet.";
+
+
+      } else {
+
+
+        availableNote.textContent =
+          "You do not currently have approved commission available to withdraw.";
+
+      }
+
+
+      requestButton.disabled =
+        true;
+
+    }
+
+
+
+    /*
+      =====================================================
+      PAYOUT HISTORY
+      =====================================================
+    */
+
+
+    if (
+      payouts.length === 0
+    ) {
+
+
+      history.innerHTML = `
+
+        <div class="payout-history-empty">
+          You have not requested a payout yet.
+        </div>
+
+      `;
+
+
+    } else {
+
+
+      history.innerHTML =
+        payouts
+          .map(
+            function(
+              payout
+            ) {
+
+
+              let status =
+                String(
+                  payout.status ||
+                  "pending"
+                )
+                  .trim()
+                  .toLowerCase();
+
+
+              if (
+                payout.paid_at
+              ) {
+
+                status =
+                  "paid";
+
+              }
+
+
+              const displayedStatus =
+                status
+                  .replace(
+                    /_/g,
+                    " "
+                  );
+
+
+              return `
+
+                <div class="payout-item">
+
+                  <div class="payout-item-top">
+
+                    <div class="payout-item-amount">
+                      ${escapeHTML(
+                        formatCurrency(
+                          payout.amount,
+                          payout.currency ||
+                          "EUR"
+                        )
+                      )}
+                    </div>
+
+                    <span
+                      class="payout-status ${escapeHTML(status)}"
+                    >
+                      ${escapeHTML(displayedStatus)}
+                    </span>
+
+                  </div>
+
+                  <div class="payout-meta">
+
+                    Method:
+                    <strong>
+                      ${escapeHTML(
+                        formatPaymentMethod(
+                          payout.payment_method
+                        )
+                      )}
+                    </strong>
+
+                    <br>
+
+                    Requested:
+                    ${escapeHTML(
+                      formatDateTime(
+                        payout.created_at
+                      )
+                    )}
+
+                    ${
+                      payout.paid_at
+                        ? `
+                          <br>
+                          Paid:
+                          ${escapeHTML(
+                            formatDateTime(
+                              payout.paid_at
+                            )
+                          )}
+                        `
+                        : ""
+                    }
+
+                    ${
+                      payout.provider_reference
+                        ? `
+                          <br>
+                          Reference:
+                          ${escapeHTML(
+                            payout.provider_reference
+                          )}
+                        `
+                        : ""
+                    }
+
+                    ${
+                      payout.receipt_label
+                        ? `
+                          <br>
+                          Receipt:
+                          ${escapeHTML(
+                            payout.receipt_label
+                          )}
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join(
+            ""
+          );
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Affiliate payout section error:",
+      error
+    );
+
+
+    availableValue.textContent =
+      "—";
+
+
+    availableNote.textContent =
+      "Your withdrawal information could not be loaded.";
+
+
+    requestButton.disabled =
+      true;
+
+
+    history.innerHTML = `
+
+      <div class="payout-history-empty">
+        Payout history could not be loaded.
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+async function requestPayout() {
+
+  clearPayoutMessage();
+
+
+  if (
+    !currentAffiliateId
+  ) {
+
+    setPayoutMessage(
+      "Your affiliate account is not ready.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    hasOpenPayoutRequest
+  ) {
+
+    setPayoutMessage(
+      "You already have a payout request being processed.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !Number.isFinite(
+      availableWithdrawalAmount
+    ) ||
+    availableWithdrawalAmount <=
+      0
+  ) {
+
+    setPayoutMessage(
+      "You do not currently have approved commission available to withdraw.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const method =
+    document
+      .getElementById(
+        "payout-method"
+      )
+      .value;
+
+
+  const details =
+    document
+      .getElementById(
+        "payout-details"
+      )
+      .value
+      .trim();
+
+
+  if (
+    !details
+  ) {
+
+    setPayoutMessage(
+      "Please enter your payout details.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    method ===
+      "paypal" &&
+    !details.includes(
+      "@"
+    )
+  ) {
+
+    setPayoutMessage(
+      "Please enter a valid PayPal email address.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "request-payout-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Submitting Request...";
+
+
+  setPayoutMessage(
+    "Submitting your withdrawal request...",
+    "info"
+  );
+
+
+  try {
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "request_affiliate_payout",
+          {
+
+            p_payment_method:
+              method,
+
+            p_payout_details:
+              details
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    if (
+      !data ||
+      data.success !==
+        true
+    ) {
+
+      throw new Error(
+        "The payout request could not be created."
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "payout-details"
+      )
+      .value =
+        "";
+
+
+    setPayoutMessage(
+      "Withdrawal request submitted successfully ✅",
+      "success"
+    );
+
+
+    await loadPayoutSection(
+      currentAffiliateId
+    );
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Payout request error:",
+      error
+    );
+
+
+    setPayoutMessage(
+
+      error &&
+      error.message
+        ? error.message
+        : "The withdrawal request could not be submitted.",
+
+      "error"
+
+    );
+
+
+  } finally {
+
+
+    button.textContent =
+      "Request Withdrawal";
+
+
+    if (
+      !hasOpenPayoutRequest &&
+      availableWithdrawalAmount >
+        0
+    ) {
+
+      button.disabled =
+        false;
+
+    }
 
   }
 
@@ -1235,6 +2754,11 @@ async function loadDashboard() {
       return;
 
     }
+
+
+
+    currentAffiliateId =
+      affiliate.id;
 
 
 
@@ -1913,6 +3437,19 @@ async function loadDashboard() {
 
     /*
       =====================================================
+      LOAD WITHDRAWAL / PAYOUT SECTION
+      =====================================================
+    */
+
+
+    await loadPayoutSection(
+      affiliate.id
+    );
+
+
+
+    /*
+      =====================================================
       SHOW DASHBOARD
       =====================================================
     */
@@ -2032,6 +3569,48 @@ document
 
 /*
   =====================================================
+  PAYOUT METHOD
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "payout-method"
+  )
+  .addEventListener(
+    "change",
+    function() {
+
+      updatePayoutDetailsUI();
+
+      clearPayoutMessage();
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  REQUEST WITHDRAWAL
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "request-payout-button"
+  )
+  .addEventListener(
+    "click",
+    requestPayout
+  );
+
+
+
+/*
+  =====================================================
   LOG OUT
   =====================================================
 */
@@ -2103,6 +3682,9 @@ supabaseClient
   START
   =====================================================
 */
+
+
+updatePayoutDetailsUI();
 
 
 loadDashboard();
