@@ -11,12 +11,18 @@
   >
 
   <title>
-    Manage Affiliate Program | GiftedGift Empire Admin
+    Affiliate Control Center | GiftedGift Empire Admin
   </title>
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
 
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
   ></script>
+
 
   <style>
 
@@ -40,9 +46,11 @@
     .top-inner {
       max-width: 1200px;
       margin: 0 auto;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 15px;
       flex-wrap: wrap;
     }
@@ -54,6 +62,7 @@
     }
 
     .admin-label {
+      margin-top: 3px;
       font-size: 13px;
       opacity: 0.9;
     }
@@ -62,8 +71,11 @@
       border: 1px solid rgba(255,255,255,0.45);
       background: transparent;
       color: white;
+
       padding: 9px 13px;
+
       border-radius: 8px;
+
       cursor: pointer;
       font-weight: 700;
     }
@@ -71,6 +83,7 @@
     .page {
       max-width: 1200px;
       margin: 0 auto;
+
       padding: 28px 15px 50px;
     }
 
@@ -80,81 +93,191 @@
 
     .title-row h1 {
       margin: 0 0 7px;
+
       color: #123a8c;
+
       font-size: 30px;
     }
 
     .title-row p {
       margin: 0;
+
       color: #666;
+
       line-height: 1.6;
     }
 
     .message {
       display: none;
+
       margin-bottom: 20px;
+
       padding: 14px;
+
       border-radius: 10px;
+
       line-height: 1.5;
+      font-weight: 700;
     }
 
     .message.error {
       display: block;
+
       background: #ffe9e9;
       color: #921c1c;
+
       border: 1px solid #f1b8b8;
     }
 
     .message.success {
       display: block;
+
       background: #eaf8ee;
       color: #17662d;
+
       border: 1px solid #b8e3c2;
     }
 
     .message.info {
       display: block;
+
       background: #eef5ff;
       color: #123a8c;
+
       border: 1px solid #cbdcf7;
     }
 
+
+    /*
+      =====================================================
+      MAIN STATS
+      =====================================================
+    */
+
     .stats {
       display: grid;
+
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(
+          4,
+          1fr
+        );
+
       gap: 12px;
-      margin-bottom: 24px;
+
+      margin-bottom: 25px;
     }
 
     .stat {
       background: white;
+
       border: 1px solid #e1e6ef;
       border-radius: 13px;
+
       padding: 17px;
+
       box-shadow:
         0 4px 15px rgba(0,0,0,0.04);
     }
 
     .stat-number {
       color: #123a8c;
-      font-size: 28px;
+
+      font-size: 27px;
       font-weight: 800;
+
       margin-bottom: 5px;
     }
 
     .stat-label {
       color: #666;
+
       font-size: 13px;
       font-weight: 700;
     }
 
+
+    /*
+      =====================================================
+      NAVIGATION TABS
+      =====================================================
+    */
+
+    .section-tabs {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+
+      margin-bottom: 22px;
+    }
+
+    .tab-button {
+      border: 1px solid #ccd6e7;
+      border-radius: 9px;
+
+      padding: 11px 15px;
+
+      background: white;
+      color: #123a8c;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      background: #123a8c;
+      color: white;
+
+      border-color: #123a8c;
+    }
+
+    .admin-section {
+      display: none;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+
+    /*
+      =====================================================
+      SHARED PANELS
+      =====================================================
+    */
+
+    .section-heading {
+      margin-bottom: 17px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 5px;
+
+      color: #123a8c;
+
+      font-size: 23px;
+    }
+
+    .section-heading p {
+      margin: 0;
+
+      color: #666;
+
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
     .controls {
       background: white;
+
       border: 1px solid #e1e6ef;
       border-radius: 13px;
+
       padding: 15px;
+
       margin-bottom: 20px;
+
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
@@ -162,12 +285,18 @@
     }
 
     .search-input,
-    .filter-select {
+    .filter-select,
+    .text-input,
+    .text-area {
       border: 1px solid #cdd4df;
       border-radius: 9px;
+
       padding: 11px 12px;
+
       font-size: 15px;
+
       background: white;
+      color: #222;
     }
 
     .search-input {
@@ -179,32 +308,59 @@
       min-width: 160px;
     }
 
+    .text-input,
+    .text-area {
+      width: 100%;
+    }
+
+    .text-area {
+      min-height: 85px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+    }
+
     .refresh-button {
       border: 0;
       border-radius: 9px;
+
       padding: 11px 15px;
+
       background: #123a8c;
       color: white;
+
       font-weight: 700;
+
       cursor: pointer;
     }
 
     .loading {
       padding: 35px 10px;
+
       text-align: center;
+
       color: #666;
       font-weight: 700;
     }
 
     .empty {
-      display: none;
-      padding: 35px 20px;
+      padding: 30px 20px;
+
       text-align: center;
+
       background: white;
+
       border-radius: 13px;
       border: 1px solid #e1e6ef;
+
       color: #666;
     }
+
+
+    /*
+      =====================================================
+      AFFILIATES
+      =====================================================
+    */
 
     .affiliate-list {
       display: grid;
@@ -213,9 +369,12 @@
 
     .affiliate-card {
       background: white;
+
       border: 1px solid #dfe5ee;
       border-radius: 15px;
+
       padding: 20px;
+
       box-shadow:
         0 5px 18px rgba(0,0,0,0.05);
     }
@@ -224,106 +383,144 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
+
       gap: 15px;
       flex-wrap: wrap;
+
       margin-bottom: 16px;
     }
 
     .affiliate-name {
       color: #123a8c;
+
       font-size: 20px;
       font-weight: 800;
+
       margin-bottom: 5px;
     }
 
     .affiliate-email {
       color: #555;
+
       font-size: 14px;
+
       word-break: break-word;
     }
 
     .status {
       display: inline-block;
-      padding: 7px 11px;
+
+      padding: 6px 10px;
+
       border-radius: 999px;
-      font-size: 12px;
+
+      font-size: 11px;
       font-weight: 800;
+
       text-transform: capitalize;
     }
 
     .status.pending {
       background: #fff4bd;
       color: #725500;
+
       border: 1px solid #f2bd16;
     }
 
-    .status.approved {
+    .status.approved,
+    .status.paid,
+    .status.completed {
       background: #e7f8ec;
       color: #17662d;
+
       border: 1px solid #b8e3c2;
     }
 
-    .status.rejected {
+    .status.processing {
+      background: #e8f0ff;
+      color: #123a8c;
+
+      border: 1px solid #cbdcf7;
+    }
+
+    .status.rejected,
+    .status.reversed,
+    .status.cancelled,
+    .status.canceled {
       background: #ffe8e8;
       color: #921c1c;
+
       border: 1px solid #efb7b7;
     }
 
     .status.suspended {
       background: #eee;
       color: #444;
+
       border: 1px solid #ccc;
     }
 
     .details {
       display: grid;
+
       grid-template-columns:
-        repeat(3, 1fr);
+        repeat(
+          3,
+          1fr
+        );
+
       gap: 12px;
+
       margin-bottom: 17px;
     }
 
     .detail {
       background: #f8f9fc;
+
       border-radius: 10px;
+
       padding: 12px;
     }
 
     .detail-label {
       display: block;
+
       color: #777;
+
       font-size: 11px;
       text-transform: uppercase;
       font-weight: 800;
+
       margin-bottom: 5px;
     }
 
     .detail-value {
       color: #333;
+
       font-size: 14px;
       font-weight: 700;
+
       word-break: break-word;
     }
 
-
-    /*
-      =====================================================
-      APPLICATION / PROMOTION PLAN
-      =====================================================
-    */
-
     .application-message-box {
       margin-bottom: 17px;
+
       padding: 16px;
+
       background: #eef5ff;
+
       border: 1px solid #c9dcfa;
       border-radius: 11px;
     }
 
     .application-message-title {
       display: block;
+
       margin-bottom: 8px;
+
       color: #123a8c;
+
       font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
@@ -331,9 +528,12 @@
 
     .application-message-text {
       margin: 0;
+
       color: #444;
+
       font-size: 14px;
       line-height: 1.7;
+
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -343,23 +543,21 @@
       font-style: italic;
     }
 
-
-    /*
-      =====================================================
-      COMMISSION
-      =====================================================
-    */
-
     .commission-area {
       padding: 15px;
+
       background: #f8f9fc;
+
       border-radius: 11px;
+
       margin-bottom: 15px;
     }
 
     .commission-area label {
       display: block;
+
       margin-bottom: 7px;
+
       font-weight: 800;
       color: #123a8c;
     }
@@ -367,15 +565,19 @@
     .commission-row {
       display: flex;
       align-items: center;
+
       gap: 8px;
       flex-wrap: wrap;
     }
 
     .commission-input {
       width: 130px;
+
       border: 1px solid #cdd4df;
       border-radius: 8px;
+
       padding: 10px;
+
       font-size: 15px;
     }
 
@@ -384,8 +586,154 @@
       color: #555;
     }
 
+
+    /*
+      =====================================================
+      COMMISSION + PAYOUT CARDS
+      =====================================================
+    */
+
+    .record-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .record-card {
+      background: white;
+
+      border: 1px solid #dfe5ee;
+      border-radius: 14px;
+
+      padding: 18px;
+
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .record-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      gap: 12px;
+      flex-wrap: wrap;
+
+      margin-bottom: 13px;
+    }
+
+    .record-title {
+      color: #123a8c;
+
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .record-subtitle {
+      margin-top: 4px;
+
+      color: #666;
+
+      font-size: 13px;
+    }
+
+    .record-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          4,
+          1fr
+        );
+
+      gap: 10px;
+
+      margin: 14px 0;
+    }
+
+    .record-detail {
+      background: #f8f9fc;
+
+      border-radius: 9px;
+
+      padding: 11px;
+    }
+
+    .record-detail span {
+      display: block;
+
+      color: #777;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      margin-bottom: 5px;
+    }
+
+    .record-detail strong {
+      color: #222;
+
+      font-size: 13px;
+
+      word-break: break-word;
+    }
+
+    .payout-details-box {
+      margin: 14px 0;
+
+      padding: 13px;
+
+      border-left: 4px solid #f2bd16;
+      border-radius: 7px;
+
+      background: #fff9df;
+
+      color: #665500;
+
+      white-space: pre-wrap;
+      word-break: break-word;
+
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .admin-form-box {
+      margin-top: 14px;
+
+      padding: 14px;
+
+      background: #f8f9fc;
+
+      border-radius: 10px;
+    }
+
+    .admin-form-box label {
+      display: block;
+
+      margin-top: 10px;
+      margin-bottom: 6px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      color: #333;
+    }
+
+    .admin-form-box label:first-child {
+      margin-top: 0;
+    }
+
+
+    /*
+      =====================================================
+      BUTTONS
+      =====================================================
+    */
+
     .actions {
       display: flex;
+
       gap: 9px;
       flex-wrap: wrap;
     }
@@ -393,9 +741,12 @@
     .action-button {
       border: none;
       border-radius: 8px;
+
       padding: 10px 13px;
+
       font-size: 13px;
       font-weight: 800;
+
       cursor: pointer;
     }
 
@@ -429,20 +780,44 @@
       color: #111;
     }
 
+    .processing-button {
+      background: #5870a5;
+      color: white;
+    }
+
+    .paid-button {
+      background: #17662d;
+      color: white;
+    }
+
     .action-button:disabled {
       opacity: 0.55;
       cursor: not-allowed;
     }
 
+
+    /*
+      =====================================================
+      ACCESS
+      =====================================================
+    */
+
     .access-box {
       display: none;
+
       max-width: 600px;
+
       margin: 70px auto;
+
       padding: 28px;
+
       text-align: center;
+
       background: white;
+
       border: 1px solid #e1e6ef;
       border-radius: 15px;
+
       box-shadow:
         0 6px 20px rgba(0,0,0,0.06);
     }
@@ -451,32 +826,59 @@
       color: #9c1c1c;
     }
 
-    @media (max-width: 800px) {
+
+    /*
+      =====================================================
+      RESPONSIVE
+      =====================================================
+    */
+
+    @media (max-width: 850px) {
 
       .stats {
         grid-template-columns:
-          repeat(2, 1fr);
+          repeat(
+            2,
+            1fr
+          );
       }
 
-      .details {
-        grid-template-columns: 1fr;
+      .details,
+      .record-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
       }
 
     }
 
-    @media (max-width: 500px) {
+
+    @media (max-width: 520px) {
 
       .stats {
         grid-template-columns:
           1fr 1fr;
       }
 
-      .affiliate-card {
-        padding: 16px;
+      .affiliate-card,
+      .record-card {
+        padding: 15px;
+      }
+
+      .details,
+      .record-grid {
+        grid-template-columns:
+          1fr;
       }
 
       .commission-input {
         width: 110px;
+      }
+
+      .tab-button {
+        flex: 1;
       }
 
     }
@@ -500,22 +902,24 @@
       </div>
 
       <div class="admin-label">
-        Affiliate Program Administration
+        Affiliate Control Center
       </div>
 
     </div>
 
+
     <button
       class="back-button"
       type="button"
-      onclick="history.back()"
+      onclick="window.location.href='dashboard.html'"
     >
-      ← Back
+      ← Admin Dashboard
     </button>
 
   </div>
 
 </header>
+
 
 
 <main class="page">
@@ -532,10 +936,11 @@
 
     <p>
       You must be signed in with the GiftedGift Empire
-      administrator account to manage affiliates.
+      administrator account to manage the affiliate program.
     </p>
 
   </div>
+
 
 
   <div id="admin-content">
@@ -544,16 +949,16 @@
     <section class="title-row">
 
       <h1>
-        Manage Affiliate Program
+        Affiliate Control Center
       </h1>
 
       <p>
-        Review affiliate applications and promotion plans,
-        approve or reject applicants, set commission rates,
-        manage referral codes and suspend accounts when necessary.
+        Manage affiliate applications, commission rates,
+        affiliate commissions and payout requests from one place.
       </p>
 
     </section>
+
 
 
     <div
@@ -562,12 +967,14 @@
     ></div>
 
 
+
     <section class="stats">
+
 
       <div class="stat">
 
         <div
-          id="total-count"
+          id="total-affiliates-stat"
           class="stat-number"
         >
           0
@@ -583,14 +990,14 @@
       <div class="stat">
 
         <div
-          id="pending-count"
+          id="approved-affiliates-stat"
           class="stat-number"
         >
           0
         </div>
 
         <div class="stat-label">
-          Pending
+          Approved Affiliates
         </div>
 
       </div>
@@ -599,14 +1006,14 @@
       <div class="stat">
 
         <div
-          id="approved-count"
+          id="pending-commissions-stat"
           class="stat-number"
         >
           0
         </div>
 
         <div class="stat-label">
-          Approved
+          Pending Commissions
         </div>
 
       </div>
@@ -615,96 +1022,329 @@
       <div class="stat">
 
         <div
-          id="suspended-count"
+          id="pending-payouts-stat"
           class="stat-number"
         >
           0
         </div>
 
         <div class="stat-label">
-          Suspended
+          Open Payout Requests
         </div>
 
       </div>
+
 
     </section>
 
 
-    <section class="controls">
 
-      <input
-        id="search-input"
-        class="search-input"
-        type="search"
-        placeholder="Search name, email, referral code or application..."
+    <section class="section-tabs">
+
+      <button
+        type="button"
+        class="tab-button active"
+        data-target="affiliates-section"
       >
-
-
-      <select
-        id="status-filter"
-        class="filter-select"
-      >
-
-        <option value="all">
-          All Statuses
-        </option>
-
-        <option value="pending">
-          Pending
-        </option>
-
-        <option value="approved">
-          Approved
-        </option>
-
-        <option value="rejected">
-          Rejected
-        </option>
-
-        <option value="suspended">
-          Suspended
-        </option>
-
-      </select>
+        Affiliates
+      </button>
 
 
       <button
-        id="refresh-button"
-        class="refresh-button"
         type="button"
+        class="tab-button"
+        data-target="commissions-section"
       >
-        Refresh
+        Commissions
+      </button>
+
+
+      <button
+        type="button"
+        class="tab-button"
+        data-target="payouts-section"
+      >
+        Payouts
       </button>
 
     </section>
 
 
-    <div
-      id="loading"
-      class="loading"
-    >
-      Loading affiliates...
-    </div>
 
-
-    <div
-      id="empty"
-      class="empty"
-    >
-      No affiliates found.
-    </div>
+    <!--
+      =====================================================
+      AFFILIATES
+      =====================================================
+    -->
 
 
     <section
-      id="affiliate-list"
-      class="affiliate-list"
-    ></section>
+      id="affiliates-section"
+      class="admin-section active"
+    >
+
+
+      <div class="section-heading">
+
+        <h2>
+          Affiliate Accounts
+        </h2>
+
+        <p>
+          Approve applications, set commission percentages,
+          manage referral codes and suspend accounts.
+        </p>
+
+      </div>
+
+
+
+      <section class="controls">
+
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search name, email, referral code or application..."
+        >
+
+
+        <select
+          id="status-filter"
+          class="filter-select"
+        >
+
+          <option value="all">
+            All Statuses
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="approved">
+            Approved
+          </option>
+
+          <option value="rejected">
+            Rejected
+          </option>
+
+          <option value="suspended">
+            Suspended
+          </option>
+
+        </select>
+
+
+        <button
+          id="refresh-affiliates-button"
+          class="refresh-button"
+          type="button"
+        >
+          Refresh
+        </button>
+
+      </section>
+
+
+      <div
+        id="affiliate-loading"
+        class="loading"
+      >
+        Loading affiliates...
+      </div>
+
+
+      <section
+        id="affiliate-list"
+        class="affiliate-list"
+      ></section>
+
+
+    </section>
+
+
+
+    <!--
+      =====================================================
+      COMMISSIONS
+      =====================================================
+    -->
+
+
+    <section
+      id="commissions-section"
+      class="admin-section"
+    >
+
+
+      <div class="section-heading">
+
+        <h2>
+          Affiliate Commissions
+        </h2>
+
+        <p>
+          Review commissions generated from qualifying sales.
+          Pending commissions must be approved before affiliates
+          can withdraw them.
+        </p>
+
+      </div>
+
+
+
+      <section class="controls">
+
+        <select
+          id="commission-filter"
+          class="filter-select"
+        >
+
+          <option value="all">
+            All Commissions
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="approved">
+            Approved
+          </option>
+
+          <option value="paid">
+            Paid
+          </option>
+
+          <option value="reversed">
+            Reversed
+          </option>
+
+        </select>
+
+
+        <button
+          id="refresh-commissions-button"
+          class="refresh-button"
+          type="button"
+        >
+          Refresh
+        </button>
+
+      </section>
+
+
+      <div
+        id="commission-loading"
+        class="loading"
+      >
+        Loading commissions...
+      </div>
+
+
+      <div
+        id="commission-list"
+        class="record-list"
+      ></div>
+
+
+    </section>
+
+
+
+    <!--
+      =====================================================
+      PAYOUTS
+      =====================================================
+    -->
+
+
+    <section
+      id="payouts-section"
+      class="admin-section"
+    >
+
+
+      <div class="section-heading">
+
+        <h2>
+          Withdrawal & Payout Requests
+        </h2>
+
+        <p>
+          Review affiliate withdrawal details, process payments
+          manually and record completed payouts.
+        </p>
+
+      </div>
+
+
+
+      <section class="controls">
+
+        <select
+          id="payout-filter"
+          class="filter-select"
+        >
+
+          <option value="all">
+            All Payouts
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="processing">
+            Processing
+          </option>
+
+          <option value="paid">
+            Paid
+          </option>
+
+          <option value="rejected">
+            Rejected
+          </option>
+
+        </select>
+
+
+        <button
+          id="refresh-payouts-button"
+          class="refresh-button"
+          type="button"
+        >
+          Refresh
+        </button>
+
+      </section>
+
+
+      <div
+        id="payout-loading"
+        class="loading"
+      >
+        Loading payout requests...
+      </div>
+
+
+      <div
+        id="payout-list"
+        class="record-list"
+      ></div>
+
+
+    </section>
 
 
   </div>
 
 
 </main>
+
 
 
 <script>
@@ -730,6 +1370,18 @@ const supabaseClient =
 
 
 let allAffiliates =
+  [];
+
+
+let allCommissions =
+  [];
+
+
+let allPayouts =
+  [];
+
+
+let payoutItems =
   [];
 
 
@@ -785,6 +1437,12 @@ function showMessage(
   box.textContent =
     text;
 
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
 }
 
 
@@ -838,7 +1496,126 @@ function formatDate(
   }
 
 
-  return date.toLocaleString();
+  return date.toLocaleString(
+    "en-GB",
+    {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }
+  );
+
+}
+
+
+
+function formatCurrency(
+  value,
+  currency = "EUR"
+) {
+
+  const amount =
+    Number(
+      value || 0
+    );
+
+
+  const currencyCode =
+    String(
+      currency || "EUR"
+    )
+      .trim()
+      .toUpperCase();
+
+
+  if (
+    !Number.isFinite(
+      amount
+    )
+  ) {
+
+    return currencyCode +
+      " 0.00";
+
+  }
+
+
+  try {
+
+    return new Intl.NumberFormat(
+      "en-IE",
+      {
+        style: "currency",
+        currency: currencyCode,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }
+    ).format(
+      amount
+    );
+
+  } catch {
+
+    return currencyCode +
+      " " +
+      amount.toFixed(
+        2
+      );
+
+  }
+
+}
+
+
+
+function formatPaymentMethod(
+  value
+) {
+
+  const method =
+    String(
+      value || ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+  if (
+    method === "paypal"
+  ) {
+
+    return "PayPal";
+
+  }
+
+
+  if (
+    method === "bank_transfer"
+  ) {
+
+    return "Bank Transfer";
+
+  }
+
+
+  return value || "Payment";
+
+}
+
+
+
+function affiliateForId(
+  affiliateId
+) {
+
+  return allAffiliates.find(
+    affiliate =>
+      String(
+        affiliate.id
+      ) ===
+      String(
+        affiliateId
+      )
+  ) || null;
 
 }
 
@@ -883,10 +1660,15 @@ function cleanNameForCode(
   affiliate
 ) {
 
+  const email =
+    String(
+      affiliate.email || ""
+    );
+
+
   const source =
     affiliate.full_name ||
-    affiliate.email
-      .split("@")[0] ||
+    email.split("@")[0] ||
     "AFFILIATE";
 
 
@@ -919,7 +1701,6 @@ async function createUniqueReferralCode(
     attempt < 10;
     attempt++
   ) {
-
 
     const code =
       "GGE-" +
@@ -981,19 +1762,32 @@ async function createUniqueReferralCode(
 
 
 
+/*
+  =====================================================
+  ADMIN AUTH
+  =====================================================
+*/
+
+
 async function verifyAdmin() {
 
   const {
-    data: {
-      session
-    }
+    data,
+    error
   } =
     await supabaseClient
       .auth
       .getSession();
 
 
+  const session =
+    data
+      ? data.session
+      : null;
+
+
   if (
+    error ||
     !session ||
     !session.user ||
     session.user.id !==
@@ -1027,14 +1821,116 @@ async function verifyAdmin() {
 
 
 
-async function loadAffiliates() {
+/*
+  =====================================================
+  TABS
+  =====================================================
+*/
+
+
+document
+  .querySelectorAll(
+    ".tab-button"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          document
+            .querySelectorAll(
+              ".tab-button"
+            )
+            .forEach(
+              tab =>
+                tab.classList.remove(
+                  "active"
+                )
+            );
+
+
+          document
+            .querySelectorAll(
+              ".admin-section"
+            )
+            .forEach(
+              section =>
+                section.classList.remove(
+                  "active"
+                )
+            );
+
+
+          this.classList.add(
+            "active"
+          );
+
+
+          const target =
+            document.getElementById(
+              this.dataset.target
+            );
+
+
+          if (
+            target
+          ) {
+
+            target.classList.add(
+              "active"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  LOAD EVERYTHING
+  =====================================================
+*/
+
+
+async function loadEverything() {
 
   clearMessage();
 
 
+  await loadAffiliates();
+
+
+  await Promise.all([
+    loadCommissions(),
+    loadPayouts()
+  ]);
+
+
+  updateMainStats();
+
+}
+
+
+
+/*
+  =====================================================
+  AFFILIATES
+  =====================================================
+*/
+
+
+async function loadAffiliates() {
+
   const loading =
     document.getElementById(
-      "loading"
+      "affiliate-loading"
     );
 
 
@@ -1071,8 +1967,7 @@ async function loadAffiliates() {
         .order(
           "created_at",
           {
-            ascending:
-              false
+            ascending: false
           }
         );
 
@@ -1087,14 +1982,13 @@ async function loadAffiliates() {
 
 
     allAffiliates =
-      data ||
-      [];
-
-
-    updateStats();
+      data || [];
 
 
     renderAffiliates();
+
+
+    updateMainStats();
 
 
   } catch (
@@ -1127,71 +2021,6 @@ async function loadAffiliates() {
 
 
 
-function updateStats() {
-
-  const total =
-    allAffiliates.length;
-
-
-  const pending =
-    allAffiliates.filter(
-      affiliate =>
-        affiliate.status ===
-        "pending"
-    ).length;
-
-
-  const approved =
-    allAffiliates.filter(
-      affiliate =>
-        affiliate.status ===
-        "approved"
-    ).length;
-
-
-  const suspended =
-    allAffiliates.filter(
-      affiliate =>
-        affiliate.status ===
-        "suspended"
-    ).length;
-
-
-  document
-    .getElementById(
-      "total-count"
-    )
-    .textContent =
-      total;
-
-
-  document
-    .getElementById(
-      "pending-count"
-    )
-    .textContent =
-      pending;
-
-
-  document
-    .getElementById(
-      "approved-count"
-    )
-    .textContent =
-      approved;
-
-
-  document
-    .getElementById(
-      "suspended-count"
-    )
-    .textContent =
-      suspended;
-
-}
-
-
-
 function filteredAffiliates() {
 
   const search =
@@ -1216,11 +2045,16 @@ function filteredAffiliates() {
     affiliate => {
 
 
+      const affiliateStatus =
+        String(
+          affiliate.status || ""
+        )
+          .toLowerCase();
+
+
       const matchesStatus =
-        status ===
-          "all" ||
-        affiliate.status ===
-          status;
+        status === "all" ||
+        affiliateStatus === status;
 
 
       const searchable =
@@ -1239,16 +2073,14 @@ function filteredAffiliates() {
           .toLowerCase();
 
 
-      const matchesSearch =
-        !search ||
-        searchable.includes(
-          search
-        );
-
-
       return (
         matchesStatus &&
-        matchesSearch
+        (
+          !search ||
+          searchable.includes(
+            search
+          )
+        )
       );
 
     }
@@ -1266,12 +2098,6 @@ function renderAffiliates() {
     );
 
 
-  const empty =
-    document.getElementById(
-      "empty"
-    );
-
-
   const affiliates =
     filteredAffiliates();
 
@@ -1284,8 +2110,13 @@ function renderAffiliates() {
     affiliates.length === 0
   ) {
 
-    empty.style.display =
-      "block";
+    list.innerHTML = `
+
+      <div class="empty">
+        No affiliates found.
+      </div>
+
+    `;
 
 
     return;
@@ -1293,227 +2124,226 @@ function renderAffiliates() {
   }
 
 
-  empty.style.display =
-    "none";
+  affiliates.forEach(
+    affiliate => {
 
 
-  for (
-    const affiliate
-    of affiliates
-  ) {
+      const card =
+        document.createElement(
+          "article"
+        );
 
 
-    const card =
-      document.createElement(
-        "article"
-      );
+      card.className =
+        "affiliate-card";
 
 
-    card.className =
-      "affiliate-card";
+      const commissionValue =
+        affiliate.commission_rate ===
+          null ||
+        affiliate.commission_rate ===
+          undefined
+
+          ? ""
+
+          : Number(
+              affiliate.commission_rate
+            );
 
 
-    const commissionValue =
-      affiliate.commission_rate ===
-        null ||
-      affiliate.commission_rate ===
-        undefined
+      const applicationMessage =
+        affiliate.application_message &&
+        String(
+          affiliate.application_message
+        ).trim()
 
-        ? ""
+          ? affiliate.application_message
 
-        : Number(
-            affiliate.commission_rate
-          );
+          : null;
 
 
-    const applicationMessage =
-      affiliate.application_message &&
-      String(
-        affiliate.application_message
-      ).trim()
+      card.innerHTML = `
 
-        ? affiliate.application_message
+        <div class="affiliate-top">
 
-        : null;
+          <div>
 
+            <div class="affiliate-name">
 
-    card.innerHTML = `
-
-      <div class="affiliate-top">
-
-        <div>
-
-          <div class="affiliate-name">
-            ${
-              escapeHtml(
+              ${escapeHtml(
                 affiliate.full_name ||
                 "Unnamed Affiliate"
-              )
-            }
+              )}
+
+            </div>
+
+            <div class="affiliate-email">
+
+              ${escapeHtml(
+                affiliate.email
+              )}
+
+            </div>
+
           </div>
 
-          <div class="affiliate-email">
-            ${
-              escapeHtml(
-                affiliate.email
-              )
-            }
-          </div>
+
+          <span class="status ${escapeHtml(
+            affiliate.status || ""
+          )}">
+
+            ${escapeHtml(
+              affiliate.status || ""
+            )}
+
+          </span>
 
         </div>
 
-        <span class="status ${
-          escapeHtml(
-            affiliate.status
-          )
-        }">
-          ${
-            escapeHtml(
-              affiliate.status
-            )
-          }
-        </span>
 
-      </div>
+        <div class="details">
 
+          <div class="detail">
 
-      <div class="details">
+            <span class="detail-label">
+              Referral Code
+            </span>
 
-        <div class="detail">
+            <span class="detail-value">
 
-          <span class="detail-label">
-            Referral Code
-          </span>
-
-          <span class="detail-value">
-            ${
-              escapeHtml(
+              ${escapeHtml(
                 affiliate.referral_code ||
                 "Not assigned yet"
-              )
-            }
-          </span>
+              )}
 
-        </div>
+            </span>
+
+          </div>
 
 
-        <div class="detail">
+          <div class="detail">
 
-          <span class="detail-label">
-            Applied
-          </span>
+            <span class="detail-label">
+              Applied
+            </span>
 
-          <span class="detail-value">
-            ${
-              escapeHtml(
+            <span class="detail-value">
+
+              ${escapeHtml(
                 formatDate(
                   affiliate.created_at
                 )
-              )
-            }
-          </span>
+              )}
 
-        </div>
+            </span>
+
+          </div>
 
 
-        <div class="detail">
+          <div class="detail">
 
-          <span class="detail-label">
-            Approved
-          </span>
+            <span class="detail-label">
+              Approved
+            </span>
 
-          <span class="detail-value">
-            ${
-              escapeHtml(
+            <span class="detail-value">
+
+              ${escapeHtml(
                 formatDate(
                   affiliate.approved_at
                 )
-              )
-            }
-          </span>
+              )}
+
+            </span>
+
+          </div>
 
         </div>
 
-      </div>
 
+        <div class="application-message-box">
 
-      <div class="application-message-box">
+          <span class="application-message-title">
+            Application / Promotion Plan
+          </span>
 
-        <span class="application-message-title">
-          Application / Promotion Plan
-        </span>
-
-        <p class="application-message-text ${
-          applicationMessage
-            ? ""
-            : "no-application-message"
-        }">
-          ${
+          <p class="application-message-text ${
             applicationMessage
-              ? escapeHtml(
-                  applicationMessage
-                )
-              : "No application message was submitted. This affiliate registered before the application-message field was added."
-          }
-        </p>
+              ? ""
+              : "no-application-message"
+          }">
 
-      </div>
+            ${
+              applicationMessage
+                ? escapeHtml(
+                    applicationMessage
+                  )
+                : "No application message was submitted."
+            }
 
-
-      <div class="commission-area">
-
-        <label
-          for="commission-${affiliate.id}"
-        >
-          Commission Rate
-        </label>
-
-        <div class="commission-row">
-
-          <input
-            id="commission-${affiliate.id}"
-            class="commission-input"
-            type="number"
-            min="0"
-            max="100"
-            step="0.01"
-            value="${commissionValue}"
-            placeholder="e.g. 20"
-          >
-
-          <span class="percent">
-            %
-          </span>
+          </p>
 
         </div>
 
-      </div>
+
+        <div class="commission-area">
+
+          <label
+            for="commission-${affiliate.id}"
+          >
+            Commission Rate
+          </label>
 
 
-      <div
-        class="actions"
-        id="actions-${affiliate.id}"
-      ></div>
+          <div class="commission-row">
 
-    `;
+            <input
+              id="commission-${affiliate.id}"
+              class="commission-input"
+              type="number"
+              min="0"
+              max="100"
+              step="0.01"
+              value="${escapeHtml(
+                commissionValue
+              )}"
+              placeholder="e.g. 20"
+            >
+
+            <span class="percent">
+              %
+            </span>
+
+          </div>
+
+        </div>
 
 
-    list.appendChild(
-      card
-    );
+        <div
+          class="actions"
+          id="actions-${affiliate.id}"
+        ></div>
+
+      `;
 
 
-    renderActions(
-      affiliate
-    );
+      list.appendChild(
+        card
+      );
 
-  }
+
+      renderAffiliateActions(
+        affiliate
+      );
+
+    }
+  );
 
 }
 
 
 
-function renderActions(
+function renderAffiliateActions(
   affiliate
 ) {
 
@@ -1537,13 +2367,17 @@ function renderActions(
     "";
 
 
-  if (
-    affiliate.status ===
-      "pending" ||
-    affiliate.status ===
-      "rejected"
-  ) {
+  const status =
+    String(
+      affiliate.status || ""
+    )
+      .toLowerCase();
 
+
+  if (
+    status === "pending" ||
+    status === "rejected"
+  ) {
 
     addActionButton(
       area,
@@ -1559,10 +2393,8 @@ function renderActions(
 
 
   if (
-    affiliate.status ===
-      "pending"
+    status === "pending"
   ) {
-
 
     addActionButton(
       area,
@@ -1578,17 +2410,15 @@ function renderActions(
 
 
   if (
-    affiliate.status ===
-      "approved"
+    status === "approved"
   ) {
-
 
     addActionButton(
       area,
-      "Save Commission",
+      "Save Commission %",
       "save-button",
       () =>
-        saveCommission(
+        saveAffiliateCommissionRate(
           affiliate
         )
     );
@@ -1625,10 +2455,8 @@ function renderActions(
 
 
   if (
-    affiliate.status ===
-      "suspended"
+    status === "suspended"
   ) {
-
 
     addActionButton(
       area,
@@ -1706,7 +2534,7 @@ function getCommissionRate(
   ) {
 
     throw new Error(
-      "Enter the commission percentage before approving this affiliate."
+      "Enter the commission percentage first."
     );
 
   }
@@ -1841,11 +2669,6 @@ async function approveAffiliate(
   ) {
 
 
-    console.error(
-      error
-    );
-
-
     showMessage(
       error.message ||
       "Affiliate could not be approved.",
@@ -1904,7 +2727,7 @@ async function rejectAffiliate(
 
     showMessage(
       error.message ||
-      "Affiliate application could not be rejected.",
+      "Affiliate could not be rejected.",
       "error"
     );
 
@@ -1925,7 +2748,7 @@ async function rejectAffiliate(
 
 
 
-async function saveCommission(
+async function saveAffiliateCommissionRate(
   affiliate
 ) {
 
@@ -1970,7 +2793,7 @@ async function saveCommission(
 
 
     showMessage(
-      "Commission rate updated successfully."
+      "Affiliate commission rate updated."
     );
 
 
@@ -1997,9 +2820,6 @@ async function saveCommission(
 async function suspendAffiliate(
   affiliate
 ) {
-
-  clearMessage();
-
 
   if (
     !confirm(
@@ -2036,8 +2856,7 @@ async function suspendAffiliate(
   ) {
 
     showMessage(
-      error.message ||
-      "Affiliate could not be suspended.",
+      error.message,
       "error"
     );
 
@@ -2061,9 +2880,6 @@ async function suspendAffiliate(
 async function reactivateAffiliate(
   affiliate
 ) {
-
-  clearMessage();
-
 
   if (
     !confirm(
@@ -2100,8 +2916,7 @@ async function reactivateAffiliate(
   ) {
 
     showMessage(
-      error.message ||
-      "Affiliate could not be reactivated.",
+      error.message,
       "error"
     );
 
@@ -2112,7 +2927,7 @@ async function reactivateAffiliate(
 
 
   showMessage(
-    "Affiliate reactivated successfully."
+    "Affiliate reactivated."
   );
 
 
@@ -2128,7 +2943,6 @@ async function copyReferralCode(
 
   try {
 
-
     await navigator
       .clipboard
       .writeText(
@@ -2142,10 +2956,7 @@ async function copyReferralCode(
     );
 
 
-  } catch (
-    error
-  ) {
-
+  } catch {
 
     showMessage(
       "Could not copy the referral code automatically.",
@@ -2156,6 +2967,1715 @@ async function copyReferralCode(
 
 }
 
+
+
+/*
+  =====================================================
+  COMMISSIONS
+  =====================================================
+*/
+
+
+async function loadCommissions() {
+
+  const loading =
+    document.getElementById(
+      "commission-loading"
+    );
+
+
+  loading.style.display =
+    "block";
+
+
+  try {
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "affiliate_commissions"
+        )
+        .select(
+          `
+            id,
+            affiliate_id,
+            product_id,
+            sale_amount,
+            commission_rate,
+            commission_amount,
+            currency,
+            status,
+            created_at,
+            approved_at,
+            paid_at,
+            reversed_at,
+            reversal_reason,
+            payment_provider,
+            provider_reference,
+            attribution_id
+          `
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    allCommissions =
+      data || [];
+
+
+    renderCommissions();
+
+
+    updateMainStats();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Commission load error:",
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Commissions could not be loaded.",
+      "error"
+    );
+
+
+  } finally {
+
+
+    loading.style.display =
+      "none";
+
+  }
+
+}
+
+
+
+function renderCommissions() {
+
+  const list =
+    document.getElementById(
+      "commission-list"
+    );
+
+
+  const filter =
+    document
+      .getElementById(
+        "commission-filter"
+      )
+      .value;
+
+
+  const rows =
+    allCommissions.filter(
+      row => {
+
+        let status =
+          String(
+            row.status || ""
+          )
+            .toLowerCase();
+
+
+        if (
+          row.reversed_at
+        ) {
+
+          status =
+            "reversed";
+
+        }
+
+
+        if (
+          row.paid_at
+        ) {
+
+          status =
+            "paid";
+
+        }
+
+
+        return (
+          filter === "all" ||
+          status === filter
+        );
+
+      }
+    );
+
+
+  list.innerHTML =
+    "";
+
+
+  if (
+    rows.length === 0
+  ) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+        No commissions found for this filter.
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  rows.forEach(
+    commission => {
+
+
+      const affiliate =
+        affiliateForId(
+          commission.affiliate_id
+        );
+
+
+      let status =
+        String(
+          commission.status ||
+          "pending"
+        )
+          .toLowerCase();
+
+
+      if (
+        commission.reversed_at
+      ) {
+
+        status =
+          "reversed";
+
+      } else if (
+        commission.paid_at
+      ) {
+
+        status =
+          "paid";
+
+      }
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "record-card";
+
+
+      card.innerHTML = `
+
+        <div class="record-top">
+
+          <div>
+
+            <div class="record-title">
+
+              ${escapeHtml(
+                affiliate
+                  ? (
+                      affiliate.full_name ||
+                      affiliate.email
+                    )
+                  : "Affiliate #" +
+                    commission.affiliate_id
+              )}
+
+            </div>
+
+            <div class="record-subtitle">
+
+              Commission #${escapeHtml(
+                commission.id
+              )}
+
+              ${
+                affiliate &&
+                affiliate.email
+                  ? " • " +
+                    escapeHtml(
+                      affiliate.email
+                    )
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+
+          <span class="status ${escapeHtml(status)}">
+
+            ${escapeHtml(status)}
+
+          </span>
+
+        </div>
+
+
+        <div class="record-grid">
+
+
+          <div class="record-detail">
+
+            <span>
+              Sale
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatCurrency(
+                  commission.sale_amount,
+                  commission.currency
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Commission Rate
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                Number(
+                  commission.commission_rate ||
+                  0
+                )
+              )}%
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Commission
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatCurrency(
+                  commission.commission_amount,
+                  commission.currency
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Product ID
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                commission.product_id
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Payment Provider
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                commission.payment_provider ||
+                "—"
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Provider Reference
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                commission.provider_reference ||
+                "—"
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Created
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatDate(
+                  commission.created_at
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Approved
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatDate(
+                  commission.approved_at
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+        ${
+          commission.reversal_reason
+            ? `
+
+              <div class="payout-details-box">
+
+                Reversal reason:
+                ${escapeHtml(
+                  commission.reversal_reason
+                )}
+
+              </div>
+
+            `
+            : ""
+        }
+
+
+        <div
+          class="actions"
+          id="commission-actions-${commission.id}"
+        ></div>
+
+      `;
+
+
+      list.appendChild(
+        card
+      );
+
+
+      const actions =
+        document.getElementById(
+          "commission-actions-" +
+          commission.id
+        );
+
+
+      if (
+        status === "pending"
+      ) {
+
+        addActionButton(
+          actions,
+          "Approve Commission",
+          "approve-button",
+          () =>
+            approveCommission(
+              commission
+            )
+        );
+
+
+        addActionButton(
+          actions,
+          "Reverse",
+          "reject-button",
+          () =>
+            reverseCommission(
+              commission
+            )
+        );
+
+      }
+
+
+      if (
+        status === "approved"
+      ) {
+
+        addActionButton(
+          actions,
+          "Reverse",
+          "reject-button",
+          () =>
+            reverseCommission(
+              commission
+            )
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+
+async function approveCommission(
+  commission
+) {
+
+  if (
+    !confirm(
+      "Approve this " +
+      formatCurrency(
+        commission.commission_amount,
+        commission.currency
+      ) +
+      " commission for withdrawal?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliate_commissions"
+      )
+      .update({
+
+        status:
+          "approved",
+
+        approved_at:
+          new Date()
+            .toISOString()
+
+      })
+      .eq(
+        "id",
+        commission.id
+      )
+      .is(
+        "reversed_at",
+        null
+      )
+      .is(
+        "paid_at",
+        null
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message ||
+      "Commission could not be approved.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Commission approved. It is now available for the affiliate to withdraw."
+  );
+
+
+  await loadCommissions();
+
+}
+
+
+
+async function reverseCommission(
+  commission
+) {
+
+  const reason =
+    prompt(
+      "Enter the reason for reversing this commission:"
+    );
+
+
+  if (
+    reason === null
+  ) {
+
+    return;
+
+  }
+
+
+  const cleanReason =
+    reason.trim();
+
+
+  if (
+    cleanReason.length < 3
+  ) {
+
+    showMessage(
+      "Please enter a valid reversal reason.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    commission.paid_at
+  ) {
+
+    showMessage(
+      "A commission that has already been paid cannot be reversed from this page.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliate_commissions"
+      )
+      .update({
+
+        status:
+          "reversed",
+
+        reversed_at:
+          new Date()
+            .toISOString(),
+
+        reversal_reason:
+          cleanReason
+
+      })
+      .eq(
+        "id",
+        commission.id
+      )
+      .is(
+        "paid_at",
+        null
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message ||
+      "Commission could not be reversed.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Commission reversed successfully."
+  );
+
+
+  await loadCommissions();
+
+}
+
+
+
+/*
+  =====================================================
+  PAYOUTS
+  =====================================================
+*/
+
+
+async function loadPayouts() {
+
+  const loading =
+    document.getElementById(
+      "payout-loading"
+    );
+
+
+  loading.style.display =
+    "block";
+
+
+  try {
+
+
+    const [
+      payoutResult,
+      itemResult
+    ] =
+      await Promise.all([
+
+        supabaseClient
+          .from(
+            "affiliate_payouts"
+          )
+          .select(
+            `
+              id,
+              affiliate_id,
+              amount,
+              currency,
+              payment_method,
+              provider_reference,
+              status,
+              receipt_label,
+              created_at,
+              paid_at,
+              payout_details
+            `
+          )
+          .order(
+            "created_at",
+            {
+              ascending:
+                false
+            }
+          ),
+
+        supabaseClient
+          .from(
+            "affiliate_payout_items"
+          )
+          .select(
+            `
+              id,
+              payout_id,
+              commission_id,
+              amount,
+              created_at
+            `
+          )
+
+      ]);
+
+
+    if (
+      payoutResult.error
+    ) {
+
+      throw payoutResult.error;
+
+    }
+
+
+    if (
+      itemResult.error
+    ) {
+
+      throw itemResult.error;
+
+    }
+
+
+    allPayouts =
+      payoutResult.data ||
+      [];
+
+
+    payoutItems =
+      itemResult.data ||
+      [];
+
+
+    renderPayouts();
+
+
+    updateMainStats();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Payout load error:",
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Payout requests could not be loaded.",
+      "error"
+    );
+
+
+  } finally {
+
+
+    loading.style.display =
+      "none";
+
+  }
+
+}
+
+
+
+function renderPayouts() {
+
+  const list =
+    document.getElementById(
+      "payout-list"
+    );
+
+
+  const filter =
+    document
+      .getElementById(
+        "payout-filter"
+      )
+      .value;
+
+
+  const rows =
+    allPayouts.filter(
+      payout => {
+
+
+        let status =
+          String(
+            payout.status ||
+            "pending"
+          )
+            .toLowerCase();
+
+
+        if (
+          payout.paid_at
+        ) {
+
+          status =
+            "paid";
+
+        }
+
+
+        return (
+          filter === "all" ||
+          status === filter
+        );
+
+      }
+    );
+
+
+  list.innerHTML =
+    "";
+
+
+  if (
+    rows.length === 0
+  ) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+        No payout requests found for this filter.
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  rows.forEach(
+    payout => {
+
+
+      const affiliate =
+        affiliateForId(
+          payout.affiliate_id
+        );
+
+
+      const items =
+        payoutItems.filter(
+          item =>
+            String(
+              item.payout_id
+            ) ===
+            String(
+              payout.id
+            )
+        );
+
+
+      let status =
+        String(
+          payout.status ||
+          "pending"
+        )
+          .toLowerCase();
+
+
+      if (
+        payout.paid_at
+      ) {
+
+        status =
+          "paid";
+
+      }
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "record-card";
+
+
+      card.innerHTML = `
+
+        <div class="record-top">
+
+          <div>
+
+            <div class="record-title">
+
+              ${escapeHtml(
+                affiliate
+                  ? (
+                      affiliate.full_name ||
+                      affiliate.email
+                    )
+                  : "Affiliate #" +
+                    payout.affiliate_id
+              )}
+
+            </div>
+
+
+            <div class="record-subtitle">
+
+              Payout #${escapeHtml(
+                payout.id
+              )}
+
+              ${
+                affiliate &&
+                affiliate.email
+                  ? " • " +
+                    escapeHtml(
+                      affiliate.email
+                    )
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+
+          <span class="status ${escapeHtml(status)}">
+
+            ${escapeHtml(status)}
+
+          </span>
+
+        </div>
+
+
+        <div class="record-grid">
+
+
+          <div class="record-detail">
+
+            <span>
+              Amount
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatCurrency(
+                  payout.amount,
+                  payout.currency
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Method
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatPaymentMethod(
+                  payout.payment_method
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Commissions
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                items.length
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Requested
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatDate(
+                  payout.created_at
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Paid
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatDate(
+                  payout.paid_at
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Provider Reference
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                payout.provider_reference ||
+                "—"
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Receipt
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                payout.receipt_label ||
+                "—"
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Affiliate ID
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                payout.affiliate_id
+              )}
+
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="payout-details-box">
+
+          <strong>
+            Payment Details
+          </strong>
+
+          <br>
+
+          ${escapeHtml(
+            payout.payout_details ||
+            "No payout details supplied."
+          )}
+
+        </div>
+
+
+        ${
+          status === "pending" ||
+          status === "processing"
+
+            ? `
+
+              <div class="admin-form-box">
+
+                <label
+                  for="provider-reference-${payout.id}"
+                >
+                  Payment / Transaction Reference
+                </label>
+
+                <input
+                  id="provider-reference-${payout.id}"
+                  class="text-input"
+                  type="text"
+                  maxlength="200"
+                  placeholder="Example: PayPal transaction ID or bank transfer reference"
+                  value="${escapeHtml(
+                    payout.provider_reference ||
+                    ""
+                  )}"
+                >
+
+
+                <label
+                  for="receipt-label-${payout.id}"
+                >
+                  Receipt / Payment Note
+                </label>
+
+                <input
+                  id="receipt-label-${payout.id}"
+                  class="text-input"
+                  type="text"
+                  maxlength="200"
+                  placeholder="Example: Paid via PayPal"
+                  value="${escapeHtml(
+                    payout.receipt_label ||
+                    ""
+                  )}"
+                >
+
+              </div>
+
+            `
+
+            : ""
+        }
+
+
+        <div
+          class="actions"
+          id="payout-actions-${payout.id}"
+        ></div>
+
+      `;
+
+
+      list.appendChild(
+        card
+      );
+
+
+      const actions =
+        document.getElementById(
+          "payout-actions-" +
+          payout.id
+        );
+
+
+      if (
+        status === "pending"
+      ) {
+
+        addActionButton(
+          actions,
+          "Mark Processing",
+          "processing-button",
+          () =>
+            markPayoutProcessing(
+              payout
+            )
+        );
+
+
+        addActionButton(
+          actions,
+          "Reject Payout",
+          "reject-button",
+          () =>
+            rejectPayout(
+              payout
+            )
+        );
+
+      }
+
+
+      if (
+        status === "pending" ||
+        status === "processing"
+      ) {
+
+        addActionButton(
+          actions,
+          "Mark Paid",
+          "paid-button",
+          () =>
+            completePayout(
+              payout
+            )
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+
+async function markPayoutProcessing(
+  payout
+) {
+
+  if (
+    !confirm(
+      "Mark this payout request as processing?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliate_payouts"
+      )
+      .update({
+
+        status:
+          "processing"
+
+      })
+      .eq(
+        "id",
+        payout.id
+      )
+      .is(
+        "paid_at",
+        null
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message ||
+      "Payout could not be marked processing.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Payout marked as processing."
+  );
+
+
+  await loadPayouts();
+
+}
+
+
+
+async function rejectPayout(
+  payout
+) {
+
+  if (
+    !confirm(
+      "Reject this payout request? The linked approved commissions will become available for a future withdrawal request."
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "affiliate_payouts"
+      )
+      .update({
+
+        status:
+          "rejected",
+
+        paid_at:
+          null
+
+      })
+      .eq(
+        "id",
+        payout.id
+      )
+      .is(
+        "paid_at",
+        null
+      );
+
+
+  if (
+    error
+  ) {
+
+    showMessage(
+      error.message ||
+      "Payout could not be rejected.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Payout request rejected."
+  );
+
+
+  await loadPayouts();
+
+}
+
+
+
+async function completePayout(
+  payout
+) {
+
+  const referenceInput =
+    document.getElementById(
+      "provider-reference-" +
+      payout.id
+    );
+
+
+  const receiptInput =
+    document.getElementById(
+      "receipt-label-" +
+      payout.id
+    );
+
+
+  const providerReference =
+    referenceInput
+      ? referenceInput.value.trim()
+      : "";
+
+
+  const receiptLabel =
+    receiptInput
+      ? receiptInput.value.trim()
+      : "";
+
+
+  if (
+    !providerReference
+  ) {
+
+    showMessage(
+      "Enter the payment or transaction reference before marking this payout as paid.",
+      "error"
+    );
+
+
+    if (
+      referenceInput
+    ) {
+
+      referenceInput.focus();
+
+    }
+
+
+    return;
+
+  }
+
+
+  if (
+    !confirm(
+      "Confirm that " +
+      formatCurrency(
+        payout.amount,
+        payout.currency
+      ) +
+      " has actually been paid to this affiliate?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_complete_affiliate_payout",
+          {
+
+            p_payout_id:
+              payout.id,
+
+            p_provider_reference:
+              providerReference,
+
+            p_receipt_label:
+              receiptLabel ||
+              null
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    if (
+      !data ||
+      data.success !== true
+    ) {
+
+      throw new Error(
+        "The payout could not be completed."
+      );
+
+    }
+
+
+    showMessage(
+      "Payout marked paid successfully. The linked commissions were also marked paid."
+    );
+
+
+    await Promise.all([
+      loadCommissions(),
+      loadPayouts()
+    ]);
+
+
+    updateMainStats();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Complete payout error:",
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Payout could not be completed.",
+      "error"
+    );
+
+  }
+
+}
+
+
+
+/*
+  =====================================================
+  MAIN STATS
+  =====================================================
+*/
+
+
+function updateMainStats() {
+
+  const totalAffiliates =
+    allAffiliates.length;
+
+
+  const approvedAffiliates =
+    allAffiliates.filter(
+      affiliate =>
+        String(
+          affiliate.status || ""
+        )
+          .toLowerCase() ===
+        "approved"
+    ).length;
+
+
+  const pendingCommissions =
+    allCommissions.filter(
+      commission => {
+
+        return (
+          !commission.reversed_at &&
+          !commission.paid_at &&
+          String(
+            commission.status || ""
+          )
+            .toLowerCase() ===
+          "pending"
+        );
+
+      }
+    ).length;
+
+
+  const pendingPayouts =
+    allPayouts.filter(
+      payout => {
+
+        const status =
+          String(
+            payout.status || ""
+          )
+            .toLowerCase();
+
+
+        return (
+          !payout.paid_at &&
+          (
+            status === "pending" ||
+            status === "processing"
+          )
+        );
+
+      }
+    ).length;
+
+
+  document
+    .getElementById(
+      "total-affiliates-stat"
+    )
+    .textContent =
+      totalAffiliates;
+
+
+  document
+    .getElementById(
+      "approved-affiliates-stat"
+    )
+    .textContent =
+      approvedAffiliates;
+
+
+  document
+    .getElementById(
+      "pending-commissions-stat"
+    )
+    .textContent =
+      pendingCommissions;
+
+
+  document
+    .getElementById(
+      "pending-payouts-stat"
+    )
+    .textContent =
+      pendingPayouts;
+
+}
+
+
+
+/*
+  =====================================================
+  EVENT LISTENERS
+  =====================================================
+*/
 
 
 document
@@ -2180,13 +4700,60 @@ document
 
 document
   .getElementById(
-    "refresh-button"
+    "commission-filter"
+  )
+  .addEventListener(
+    "change",
+    renderCommissions
+  );
+
+
+document
+  .getElementById(
+    "payout-filter"
+  )
+  .addEventListener(
+    "change",
+    renderPayouts
+  );
+
+
+document
+  .getElementById(
+    "refresh-affiliates-button"
   )
   .addEventListener(
     "click",
     loadAffiliates
   );
 
+
+document
+  .getElementById(
+    "refresh-commissions-button"
+  )
+  .addEventListener(
+    "click",
+    loadCommissions
+  );
+
+
+document
+  .getElementById(
+    "refresh-payouts-button"
+  )
+  .addEventListener(
+    "click",
+    loadPayouts
+  );
+
+
+
+/*
+  =====================================================
+  START
+  =====================================================
+*/
 
 
 async function startPage() {
@@ -2204,7 +4771,7 @@ async function startPage() {
   }
 
 
-  await loadAffiliates();
+  await loadEverything();
 
 }
 
