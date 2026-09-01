@@ -2,12 +2,20 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manage Digital Products | GiftedGift Empire</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Manage Digital Products | GiftedGift Empire
+</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -48,7 +56,8 @@ header h1 {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.08);
   margin-bottom: 25px;
 }
 
@@ -129,6 +138,22 @@ input[type="file"] {
   margin: 0;
 }
 
+.affiliate-option {
+  margin-top: 18px;
+  padding: 14px 15px;
+  background: #f8fbff;
+  border: 1px solid #d7e3f5;
+  border-radius: 9px;
+}
+
+.affiliate-option .checkbox-row {
+  margin-top: 0;
+}
+
+.affiliate-option .help {
+  margin-bottom: 0;
+}
+
 button {
   margin-top: 20px;
   background: #f2bd16;
@@ -174,6 +199,16 @@ button:disabled {
   word-break: break-word;
 }
 
+.affiliate-allowed {
+  color: #17662d;
+  font-weight: bold;
+}
+
+.affiliate-not-allowed {
+  color: #8b5e00;
+  font-weight: bold;
+}
+
 .actions button {
   margin-right: 8px;
   margin-top: 10px;
@@ -194,49 +229,90 @@ button:disabled {
   padding: 50px 20px;
   font-weight: bold;
 }
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div id="status">
   Checking admin login...
 </div>
 
-<div id="page" style="display:none;">
+
+<div
+  id="page"
+  style="display:none;"
+>
+
 
 <header>
-  <h1>GiftedGift Empire</h1>
-  <p>Manage Digital Products</p>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
+
+  <p>
+    Manage Digital Products
+  </p>
+
 </header>
+
 
 <main class="container">
 
-<a href="dashboard.html" class="top-link">
+
+<a
+  href="dashboard.html"
+  class="top-link"
+>
   ← Back to Dashboard
 </a>
 
+
 <div class="panel">
+
 
 <h2 id="form-title">
   Add Digital Product
 </h2>
 
+
 <form id="digital-form">
 
-<input type="hidden" id="digital-id">
 
-<input type="hidden" id="current-image-url">
+<input
+  type="hidden"
+  id="digital-id"
+>
 
-<input type="hidden" id="current-file-path">
 
-<input type="hidden" id="current-file-name">
+<input
+  type="hidden"
+  id="current-image-url"
+>
+
+
+<input
+  type="hidden"
+  id="current-file-path"
+>
+
+
+<input
+  type="hidden"
+  id="current-file-name"
+>
+
 
 
 <label for="name">
   Product Name
 </label>
+
 
 <input
   type="text"
@@ -245,9 +321,11 @@ button:disabled {
 >
 
 
+
 <label for="slug">
   Share Link Name
 </label>
+
 
 <input
   type="text"
@@ -256,15 +334,21 @@ button:disabled {
   required
 >
 
+
 <p class="help">
+
   Public product link:
+
   https://giftedgiftempire.com/<strong id="slug-preview">product-name</strong>
+
 </p>
+
 
 
 <label for="description">
   Description
 </label>
+
 
 <textarea
   id="description"
@@ -272,9 +356,11 @@ button:disabled {
 ></textarea>
 
 
+
 <label for="price">
   Price (€)
 </label>
+
 
 <input
   type="number"
@@ -284,11 +370,16 @@ button:disabled {
 >
 
 
+
 <label for="product-type">
   Product Type
 </label>
 
-<select id="product-type" required>
+
+<select
+  id="product-type"
+  required
+>
 
   <option value="paid">
     Paid
@@ -301,11 +392,16 @@ button:disabled {
 </select>
 
 
+
 <label for="category">
   Category
 </label>
 
-<select id="category" required>
+
+<select
+  id="category"
+  required
+>
 
   <option value="">
     Loading categories...
@@ -314,9 +410,11 @@ button:disabled {
 </select>
 
 
+
 <label for="cover-image">
   Cover Image
 </label>
+
 
 <input
   type="file"
@@ -324,24 +422,30 @@ button:disabled {
   accept="image/*"
 >
 
+
 <p class="help">
   Choose the product cover image from your phone.
 </p>
+
 
 <div
   id="image-preview"
   class="image-preview"
 >
+
   <img
     id="preview-img"
     alt="Digital product cover preview"
   >
+
 </div>
+
 
 
 <label for="digital-file">
   Digital File
 </label>
+
 
 <input
   type="file"
@@ -349,9 +453,12 @@ button:disabled {
   accept=".pdf,.epub,.zip,.doc,.docx,.txt"
 >
 
+
 <p class="help">
-  Upload the PDF, ebook or other digital file. Maximum 6 MB for now.
+  Upload the PDF, ebook or other digital file.
+  Maximum 6 MB for now.
 </p>
+
 
 <div
   id="file-status"
@@ -361,9 +468,11 @@ button:disabled {
 </div>
 
 
+
 <label for="checkout-url">
   Checkout / Payment Link
 </label>
+
 
 <input
   type="url"
@@ -371,14 +480,17 @@ button:disabled {
   placeholder="https://..."
 >
 
+
 <p class="help">
   You can leave this empty until your payment system is connected.
 </p>
 
 
+
 <label for="rating">
   Rating
 </label>
+
 
 <input
   type="number"
@@ -388,6 +500,7 @@ button:disabled {
   max="5"
   placeholder="Example: 4.5"
 >
+
 
 
 <div class="checkbox-row">
@@ -402,6 +515,7 @@ button:disabled {
   </label>
 
 </div>
+
 
 
 <div class="checkbox-row">
@@ -419,12 +533,43 @@ button:disabled {
 </div>
 
 
+
+<div class="affiliate-option">
+
+  <div class="checkbox-row">
+
+    <input
+      type="checkbox"
+      id="allow-affiliates"
+    >
+
+    <label for="allow-affiliates">
+      Allow Affiliates
+    </label>
+
+  </div>
+
+
+  <p
+    id="allow-affiliates-help"
+    class="help"
+  >
+    Turn this on if approved GiftedGift Empire affiliates
+    are allowed to promote this product and earn commission
+    from qualifying sales.
+  </p>
+
+</div>
+
+
+
 <button
   type="submit"
   id="save-button"
 >
   Save Digital Product
 </button>
+
 
 
 <button
@@ -436,36 +581,51 @@ button:disabled {
 </button>
 
 
+
 <p
   id="form-message"
   class="message"
 ></p>
 
+
 </form>
+
 
 </div>
 
 
+
 <div class="panel">
+
 
 <h2>
   Existing Digital Products
 </h2>
 
+
 <div id="digital-list">
   Loading digital products...
 </div>
 
+
 </div>
+
 
 </main>
 
+
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
 
 <script>
+
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -543,6 +703,7 @@ function cleanSlug(
       /^-+|-+$/g,
       ""
     );
+
 }
 
 
@@ -566,12 +727,17 @@ function suggestShortSlug(
 
 
   return fullSlug
-    .split("-")
+    .split(
+      "-"
+    )
     .slice(
       0,
       4
     )
-    .join("-");
+    .join(
+      "-"
+    );
+
 }
 
 
@@ -595,7 +761,81 @@ function updateSlugPreview() {
     .textContent =
       slug ||
       "product-name";
+
 }
+
+
+
+/*
+  =====================================================
+  AFFILIATE ELIGIBILITY UI
+  =====================================================
+*/
+
+
+function syncAffiliateEligibilityUI() {
+
+  const productType =
+    document
+      .getElementById(
+        "product-type"
+      )
+      .value;
+
+
+  const allowAffiliates =
+    document.getElementById(
+      "allow-affiliates"
+    );
+
+
+  const help =
+    document.getElementById(
+      "allow-affiliates-help"
+    );
+
+
+  if (
+    productType !==
+    "paid"
+  ) {
+
+    allowAffiliates.checked =
+      false;
+
+
+    allowAffiliates.disabled =
+      true;
+
+
+    help.textContent =
+      "Free digital products cannot generate paid affiliate commission.";
+
+
+  } else {
+
+
+    allowAffiliates.disabled =
+      false;
+
+
+    help.textContent =
+      "Turn this on if approved GiftedGift Empire affiliates are allowed to promote this product and earn commission from qualifying sales.";
+
+  }
+
+}
+
+
+
+document
+  .getElementById(
+    "product-type"
+  )
+  .addEventListener(
+    "change",
+    syncAffiliateEligibilityUI
+  );
 
 
 
@@ -626,6 +866,7 @@ document
 
 
       updateSlugPreview();
+
     }
   );
 
@@ -650,6 +891,7 @@ document
 
 
       updateSlugPreview();
+
     }
   );
 
@@ -717,6 +959,7 @@ const RESERVED_ROOT_SLUGS =
   ]);
 
 
+
 const GLOBAL_SLUG_TABLES = [
 
   {
@@ -770,6 +1013,7 @@ const GLOBAL_SLUG_TABLES = [
 ];
 
 
+
 async function checkGlobalSlugAvailability(
   slug,
   currentDigitalId = null
@@ -788,6 +1032,7 @@ async function checkGlobalSlugAvailability(
     throw new Error(
       "Please enter a valid Share Link Name."
     );
+
   }
 
 
@@ -800,6 +1045,7 @@ async function checkGlobalSlugAvailability(
     throw new Error(
       `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
     );
+
   }
 
 
@@ -822,11 +1068,6 @@ async function checkGlobalSlugAvailability(
         );
 
 
-    /*
-      When editing the current Digital Product,
-      allow it to keep its own existing slug.
-    */
-
     if (
       source.table ===
         "digital_products" &&
@@ -838,6 +1079,7 @@ async function checkGlobalSlugAvailability(
           "id",
           currentDigitalId
         );
+
     }
 
 
@@ -865,6 +1107,7 @@ async function checkGlobalSlugAvailability(
       throw new Error(
         "The Share Link Name could not be checked safely. Please try again."
       );
+
     }
 
 
@@ -872,17 +1115,21 @@ async function checkGlobalSlugAvailability(
       Array.isArray(
         data
       ) &&
-      data.length > 0
+      data.length >
+        0
     ) {
 
       throw new Error(
         `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
       );
+
     }
+
   }
 
 
   return true;
+
 }
 
 
@@ -912,6 +1159,7 @@ async function protectPage() {
 
 
     return;
+
   }
 
 
@@ -935,6 +1183,7 @@ async function protectPage() {
 
 
   await loadDigitalProducts();
+
 }
 
 
@@ -985,12 +1234,14 @@ async function loadCategoryOptions() {
 
 
     return;
+
   }
 
 
   if (
     !categories ||
-    categories.length === 0
+    categories.length ===
+      0
   ) {
 
     select.innerHTML =
@@ -998,6 +1249,7 @@ async function loadCategoryOptions() {
 
 
     return;
+
   }
 
 
@@ -1009,6 +1261,7 @@ async function loadCategoryOptions() {
       ) {
 
         return;
+
       }
 
 
@@ -1029,8 +1282,10 @@ async function loadCategoryOptions() {
       select.appendChild(
         option
       );
+
     }
   );
+
 }
 
 
@@ -1041,10 +1296,14 @@ document
   )
   .addEventListener(
     "change",
-    function(event) {
+    function(
+      event
+    ) {
 
       const file =
-        event.target.files[0];
+        event.target.files[
+          0
+        ];
 
 
       if (
@@ -1052,6 +1311,7 @@ document
       ) {
 
         return;
+
       }
 
 
@@ -1072,6 +1332,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1090,6 +1351,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1102,6 +1364,7 @@ document
       showImagePreview(
         temporaryURL
       );
+
     }
   );
 
@@ -1113,10 +1376,14 @@ document
   )
   .addEventListener(
     "change",
-    function(event) {
+    function(
+      event
+    ) {
 
       const file =
-        event.target.files[0];
+        event.target.files[
+          0
+        ];
 
 
       const status =
@@ -1134,6 +1401,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1156,12 +1424,14 @@ document
 
 
         return;
+
       }
 
 
       status.textContent =
         "Selected file: " +
         file.name;
+
     }
   );
 
@@ -1197,6 +1467,7 @@ function showImagePreview(
 
 
     return;
+
   }
 
 
@@ -1206,6 +1477,7 @@ function showImagePreview(
 
   preview.style.display =
     "block";
+
 }
 
 
@@ -1232,7 +1504,9 @@ async function verifyAdminSession() {
     throw new Error(
       "Admin login could not be verified."
     );
+
   }
+
 }
 
 
@@ -1285,6 +1559,7 @@ function makeSafeFileName(
 
     safeName =
       fallback;
+
   }
 
 
@@ -1292,6 +1567,7 @@ function makeSafeFileName(
     safeName,
     extension
   };
+
 }
 
 
@@ -1355,6 +1631,7 @@ async function uploadCoverImage(
         filePath,
         file,
         {
+
           cacheControl:
             "3600",
 
@@ -1364,6 +1641,7 @@ async function uploadCoverImage(
           contentType:
             file.type ||
             undefined
+
         }
       );
 
@@ -1378,6 +1656,7 @@ async function uploadCoverImage(
 
 
     throw uploadError;
+
   }
 
 
@@ -1409,10 +1688,12 @@ async function uploadCoverImage(
     throw new Error(
       "Cover image URL could not be created."
     );
+
   }
 
 
   return publicURLData.publicUrl;
+
 }
 
 
@@ -1463,6 +1744,7 @@ async function uploadDigitalFile(
     filePath +=
       "." +
       fileInfo.extension;
+
   }
 
 
@@ -1479,6 +1761,7 @@ async function uploadDigitalFile(
         filePath,
         file,
         {
+
           cacheControl:
             "3600",
 
@@ -1488,6 +1771,7 @@ async function uploadDigitalFile(
           contentType:
             file.type ||
             undefined
+
         }
       );
 
@@ -1502,6 +1786,7 @@ async function uploadDigitalFile(
 
 
     throw uploadError;
+
   }
 
 
@@ -1517,8 +1802,16 @@ async function uploadDigitalFile(
       originalName
 
   };
+
 }
 
+
+
+/*
+  =====================================================
+  LOAD DIGITAL PRODUCTS
+  =====================================================
+*/
 
 
 async function loadDigitalProducts() {
@@ -1567,12 +1860,14 @@ async function loadDigitalProducts() {
 
 
     return;
+
   }
 
 
   if (
     !products ||
-    products.length === 0
+    products.length ===
+      0
   ) {
 
     list.textContent =
@@ -1580,6 +1875,7 @@ async function loadDigitalProducts() {
 
 
     return;
+
   }
 
 
@@ -1589,6 +1885,7 @@ async function loadDigitalProducts() {
 
   products.forEach(
     product => {
+
 
       const item =
         document.createElement(
@@ -1609,6 +1906,7 @@ async function loadDigitalProducts() {
       ) {
 
         imageHTML = `
+
           <img
             src="${escapeAttribute(
               product.image_url
@@ -1618,7 +1916,9 @@ async function loadDigitalProducts() {
               "Digital Product"
             )}"
           >
+
         `;
+
       }
 
 
@@ -1632,9 +1932,10 @@ async function loadDigitalProducts() {
               ? "€" +
                 Number(
                   product.price
-                ).toFixed(
-                  2
                 )
+                  .toFixed(
+                    2
+                  )
               : "No price";
 
 
@@ -1642,6 +1943,15 @@ async function loadDigitalProducts() {
         product.active
           ? "Active"
           : "Inactive";
+
+
+      const affiliateAllowed =
+        (
+          product.product_type ===
+            "paid" &&
+          product.allow_affiliates ===
+            true
+        );
 
 
       const publicLink =
@@ -1657,32 +1967,45 @@ async function loadDigitalProducts() {
         ${imageHTML}
 
         <h3>
+
           ${escapeHTML(
             product.name ||
             "Digital Product"
           )}
+
         </h3>
 
+
         <p class="small">
+
           Category:
+
           ${escapeHTML(
             product.category ||
             ""
           )}
+
         </p>
+
 
         ${
           publicLink
             ? `
+
               <p class="small">
+
                 Public Link:
+
                 ${escapeHTML(
                   publicLink
                 )}
+
               </p>
+
             `
             : ""
         }
+
 
         <p>
           ${escapeHTML(
@@ -1690,28 +2013,64 @@ async function loadDigitalProducts() {
           )}
         </p>
 
+
         <p class="small">
+
           Type:
+
           ${escapeHTML(
             product.product_type ||
             "paid"
           )}
+
         </p>
 
+
         <p class="small">
+
           File:
+
           ${escapeHTML(
             product.file_name ||
             "No file"
           )}
+
         </p>
 
+
         <p class="small">
+
           Status:
+
           ${escapeHTML(
             statusHTML
           )}
+
         </p>
+
+
+        <p class="small">
+
+          Affiliate Promotion:
+
+          <span
+            class="${
+              affiliateAllowed
+                ? "affiliate-allowed"
+                : "affiliate-not-allowed"
+            }"
+          >
+
+            ${
+              affiliateAllowed
+                ? "Allowed ✅"
+                : "Not Allowed"
+            }
+
+          </span>
+
+        </p>
+
 
         <div class="actions">
 
@@ -1722,6 +2081,7 @@ async function loadDigitalProducts() {
             Edit
           </button>
 
+
           <button
             type="button"
             class="delete-btn"
@@ -1731,16 +2091,26 @@ async function loadDigitalProducts() {
           </button>
 
         </div>
+
       `;
 
 
       list.appendChild(
         item
       );
+
     }
   );
+
 }
 
+
+
+/*
+  =====================================================
+  SAVE DIGITAL PRODUCT
+  =====================================================
+*/
 
 
 document
@@ -1749,7 +2119,10 @@ document
   )
   .addEventListener(
     "submit",
-    async function(event) {
+    async function(
+      event
+    ) {
+
 
       event.preventDefault();
 
@@ -1801,6 +2174,14 @@ document
           .value;
 
 
+      const productType =
+        document
+          .getElementById(
+            "product-type"
+          )
+          .value;
+
+
       if (
         !name
       ) {
@@ -1817,6 +2198,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1836,6 +2218,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1855,6 +2238,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1875,16 +2259,13 @@ document
 
       const selectedFile =
         fileInput.files &&
-        fileInput.files.length > 0
-          ? fileInput.files[0]
+        fileInput.files.length >
+          0
+          ? fileInput.files[
+              0
+            ]
           : null;
 
-
-      /*
-        New products must have a digital file.
-        Existing products may keep their
-        previously uploaded file.
-      */
 
       if (
         !filePath &&
@@ -1899,6 +2280,7 @@ document
 
 
         return;
+
       }
 
 
@@ -1916,11 +2298,6 @@ document
 
       try {
 
-        /*
-          IMPORTANT:
-          Check the clean URL before uploading
-          the cover image or digital file.
-        */
 
         await checkGlobalSlugAvailability(
           slug,
@@ -1955,8 +2332,11 @@ document
 
         const selectedImage =
           imageInput.files &&
-          imageInput.files.length > 0
-            ? imageInput.files[0]
+          imageInput.files.length >
+            0
+            ? imageInput.files[
+                0
+              ]
             : null;
 
 
@@ -1976,6 +2356,7 @@ document
             await uploadCoverImage(
               selectedImage
             );
+
         }
 
 
@@ -2003,6 +2384,7 @@ document
 
           fileName =
             uploadedFile.name;
+
         }
 
 
@@ -2013,6 +2395,7 @@ document
           throw new Error(
             "Please choose a digital file."
           );
+
         }
 
 
@@ -2026,9 +2409,12 @@ document
 
         const digitalData = {
 
+
           name,
 
+
           slug,
+
 
           description:
             document
@@ -2037,6 +2423,7 @@ document
               )
               .value
               .trim(),
+
 
           price:
             document
@@ -2053,23 +2440,25 @@ document
                 )
               : null,
 
+
           product_type:
-            document
-              .getElementById(
-                "product-type"
-              )
-              .value,
+            productType,
+
 
           category,
+
 
           image_url:
             imageURL,
 
+
           file_path:
             filePath,
 
+
           file_name:
             fileName,
+
 
           checkout_url:
             document
@@ -2080,6 +2469,7 @@ document
               .trim()
             ||
             null,
+
 
           rating:
             document
@@ -2096,6 +2486,7 @@ document
                 )
               : null,
 
+
           featured:
             document
               .getElementById(
@@ -2103,12 +2494,26 @@ document
               )
               .checked,
 
+
           active:
             document
               .getElementById(
                 "active"
               )
-              .checked
+              .checked,
+
+
+          allow_affiliates:
+            (
+              productType ===
+                "paid" &&
+              document
+                .getElementById(
+                  "allow-affiliates"
+                )
+                .checked
+            )
+
 
         };
 
@@ -2137,7 +2542,9 @@ document
           saveError =
             result.error;
 
+
         } else {
+
 
           const result =
             await supabaseClient
@@ -2151,6 +2558,7 @@ document
 
           saveError =
             result.error;
+
         }
 
 
@@ -2171,6 +2579,7 @@ document
             throw new Error(
               "That Share Link Name is already being used. Please choose another one."
             );
+
           }
 
 
@@ -2178,6 +2587,7 @@ document
             saveError.message ||
             "Digital product could not be saved."
           );
+
         }
 
 
@@ -2196,6 +2606,7 @@ document
       } catch (
         error
       ) {
+
 
         console.error(
           error
@@ -2226,10 +2637,12 @@ document
               "slug"
             )
             .focus();
+
         }
 
 
       } finally {
+
 
         saveButton.disabled =
           false;
@@ -2243,11 +2656,19 @@ document
             .value
             ? "Update Digital Product"
             : "Save Digital Product";
+
       }
 
     }
   );
 
+
+
+/*
+  =====================================================
+  EDIT DIGITAL PRODUCT
+  =====================================================
+*/
 
 
 async function editDigitalProduct(
@@ -2283,6 +2704,7 @@ async function editDigitalProduct(
 
 
     return;
+
   }
 
 
@@ -2463,6 +2885,19 @@ async function editDigitalProduct(
 
   document
     .getElementById(
+      "allow-affiliates"
+    )
+    .checked =
+      Boolean(
+        data.allow_affiliates
+      );
+
+
+  syncAffiliateEligibilityUI();
+
+
+  document
+    .getElementById(
       "form-title"
     )
     .textContent =
@@ -2485,10 +2920,16 @@ async function editDigitalProduct(
       "inline-block";
 
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo(
+    {
+      top:
+        0,
+
+      behavior:
+        "smooth"
+    }
+  );
+
 }
 
 
@@ -2502,6 +2943,7 @@ function ensureCategoryOption(
   ) {
 
     return;
+
   }
 
 
@@ -2545,9 +2987,18 @@ function ensureCategoryOption(
     select.appendChild(
       option
     );
+
   }
+
 }
 
+
+
+/*
+  =====================================================
+  DELETE
+  =====================================================
+*/
 
 
 async function deleteDigitalProduct(
@@ -2565,6 +3016,7 @@ async function deleteDigitalProduct(
   ) {
 
     return;
+
   }
 
 
@@ -2597,10 +3049,12 @@ async function deleteDigitalProduct(
 
 
     return;
+
   }
 
 
   await loadDigitalProducts();
+
 }
 
 
@@ -2614,6 +3068,13 @@ document
     resetForm
   );
 
+
+
+/*
+  =====================================================
+  RESET FORM
+  =====================================================
+*/
 
 
 function resetForm() {
@@ -2687,6 +3148,14 @@ function resetForm() {
 
   document
     .getElementById(
+      "allow-affiliates"
+    )
+    .checked =
+      false;
+
+
+  document
+    .getElementById(
       "file-status"
     )
     .textContent =
@@ -2699,6 +3168,9 @@ function resetForm() {
 
 
   updateSlugPreview();
+
+
+  syncAffiliateEligibilityUI();
 
 
   document
@@ -2723,6 +3195,7 @@ function resetForm() {
     )
     .style.display =
       "none";
+
 }
 
 
@@ -2756,6 +3229,7 @@ function escapeHTML(
       /'/g,
       "&#039;"
     );
+
 }
 
 
@@ -2767,13 +3241,27 @@ function escapeAttribute(
   return escapeHTML(
     value
   );
+
 }
 
 
 
+/*
+  =====================================================
+  START
+  =====================================================
+*/
+
+
+syncAffiliateEligibilityUI();
+
+
 protectPage();
+
 
 </script>
 
+
 </body>
+
 </html>
