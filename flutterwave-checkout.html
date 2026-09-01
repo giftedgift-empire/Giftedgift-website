@@ -703,10 +703,102 @@ const dealId =
   );
 
 
+function getStoredAffiliateReferral() {
+
+  try {
+
+    const raw =
+      localStorage.getItem(
+        "gge_affiliate_referral"
+      );
+
+
+    if (!raw) {
+      return "";
+    }
+
+
+    const data =
+      JSON.parse(raw);
+
+
+    if (
+      !data ||
+      !data.referral_code ||
+      !data.expires_at
+    ) {
+
+      localStorage.removeItem(
+        "gge_affiliate_referral"
+      );
+
+      return "";
+    }
+
+
+    if (
+      Date.now() >
+      Number(data.expires_at)
+    ) {
+
+      localStorage.removeItem(
+        "gge_affiliate_referral"
+      );
+
+      return "";
+    }
+
+
+    return String(
+      data.referral_code
+    )
+      .trim()
+      .toUpperCase();
+
+
+  } catch (error) {
+
+    console.error(
+      "Affiliate referral read error:",
+      error
+    );
+
+    return "";
+  }
+}
+
+
 const referralCode =
-  params.get(
-    "ref"
+  String(
+    params.get("ref") ||
+    getStoredAffiliateReferral() ||
+    ""
+  )
+    .trim()
+    .toUpperCase();
+
+
+if (
+  referralCode &&
+  !params.get("ref")
+) {
+
+  const visibleUrl =
+    new URL(
+      window.location.href
+    );
+
+  visibleUrl.searchParams.set(
+    "ref",
+    referralCode
   );
+
+  window.history.replaceState(
+    {},
+    "",
+    visibleUrl.toString()
+  );
+}
 
 
 const flutterwaveReturn =
