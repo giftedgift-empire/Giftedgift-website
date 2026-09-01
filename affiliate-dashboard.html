@@ -2053,12 +2053,20 @@ async function loadPromotableProducts(
           "digital_products"
         )
         .select(
-          "id,name,slug,price,image_url,product_type,active"
-        )
+          "id,name,slug,price,image_url,product_type,active,allow_affiliates"
+          )
         .eq(
-          "active",
-          true
-        );
+  "active",
+  true
+)
+.eq(
+  "allow_affiliates",
+  true
+)
+.eq(
+  "product_type",
+  "paid"
+);
 
 
     if (
