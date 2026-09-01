@@ -359,6 +359,7 @@
     }
 
     .stats-section h2,
+    .products-section > h2,
     .withdrawal-section > h2 {
       margin: 0 0 7px;
 
@@ -368,6 +369,7 @@
     }
 
     .stats-section > p,
+    .products-section > p,
     .withdrawal-section > p {
       margin: 0 0 17px;
 
@@ -430,6 +432,191 @@
       font-size: 11px;
       line-height: 1.4;
     }
+
+
+    /*
+      =====================================================
+      PRODUCTS TO PROMOTE
+      =====================================================
+    */
+
+    .products-section {
+      margin-top: 30px;
+    }
+
+    .promote-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+
+      gap: 16px;
+    }
+
+    .promote-card {
+      background: white;
+
+      border: 1px solid #e1e6ee;
+      border-radius: 14px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 5px 18px rgba(0,0,0,0.05);
+    }
+
+    .promote-image {
+      width: 100%;
+      height: 190px;
+
+      object-fit: contain;
+
+      background: #f7f8fb;
+
+      display: block;
+    }
+
+    .promote-image-placeholder {
+      width: 100%;
+      height: 190px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #f7f8fb;
+      color: #999;
+
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .promote-content {
+      padding: 17px;
+    }
+
+    .promote-type {
+      display: inline-block;
+
+      margin-bottom: 9px;
+
+      padding: 5px 9px;
+
+      border-radius: 999px;
+
+      background: #eef4ff;
+      color: #123a8c;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .promote-name {
+      margin-bottom: 8px;
+
+      color: #222;
+
+      font-size: 17px;
+      font-weight: 800;
+
+      line-height: 1.35;
+    }
+
+    .promote-price {
+      color: #123a8c;
+
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .promote-commission {
+      margin-top: 8px;
+
+      color: #17662d;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      line-height: 1.55;
+    }
+
+    .promote-actions {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 8px;
+
+      margin-top: 15px;
+    }
+
+    .promote-button {
+      border: none;
+      border-radius: 8px;
+
+      padding: 11px 8px;
+
+      text-align: center;
+      text-decoration: none;
+
+      cursor: pointer;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .promote-view {
+      background: #eef4ff;
+      color: #123a8c;
+    }
+
+    .promote-copy {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .promote-button:hover {
+      opacity: 0.94;
+    }
+
+    .product-copy-message {
+      min-height: 18px;
+
+      margin-top: 9px;
+
+      color: #17662d;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .products-empty {
+      grid-column: 1 / -1;
+
+      padding: 25px;
+
+      background: white;
+
+      border: 1px solid #e1e6ee;
+      border-radius: 13px;
+
+      text-align: center;
+
+      color: #777;
+
+      line-height: 1.6;
+    }
+
+
+    /*
+      =====================================================
+      WITHDRAWAL
+      =====================================================
+    */
 
     .withdrawal-section {
       margin-top: 30px;
@@ -712,6 +899,13 @@
       font-size: 13px;
     }
 
+
+    /*
+      =====================================================
+      TABLET
+      =====================================================
+    */
+
     @media (max-width: 800px) {
 
       .summary-grid {
@@ -731,7 +925,22 @@
           );
       }
 
+      .promote-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
+      }
+
     }
+
+
+    /*
+      =====================================================
+      MOBILE
+      =====================================================
+    */
 
     @media (max-width: 500px) {
 
@@ -763,7 +972,8 @@
         width: 100%;
       }
 
-      .stats-grid {
+      .stats-grid,
+      .promote-grid {
         grid-template-columns: 1fr;
       }
 
@@ -828,6 +1038,13 @@
   <div id="dashboard">
 
 
+    <!--
+      =====================================================
+      WELCOME
+      =====================================================
+    -->
+
+
     <section class="welcome-section">
 
       <div class="welcome-badge">
@@ -839,12 +1056,20 @@
       </h1>
 
       <p>
-        Manage your GiftedGift Empire referral information
-        and monitor your affiliate account.
+        Manage your GiftedGift Empire referral information,
+        promote eligible products, track commissions and
+        request payouts.
       </p>
 
     </section>
 
+
+
+    <!--
+      =====================================================
+      ACCOUNT SUMMARY
+      =====================================================
+    -->
 
 
     <section class="summary-grid">
@@ -902,18 +1127,26 @@
 
 
 
+    <!--
+      =====================================================
+      REFERRAL + ACCOUNT
+      =====================================================
+    -->
+
+
     <section class="dashboard-grid">
 
 
       <div class="card">
 
         <h2>
-          Your Referral Link
+          Your General Referral Link
         </h2>
 
         <p class="card-description">
-          Share your unique referral link when promoting
-          eligible GiftedGift Empire products and offers.
+          Share this link if you want to send someone to
+          GiftedGift Empire generally. You can also copy
+          individual product links below.
         </p>
 
 
@@ -1044,6 +1277,13 @@
 
 
 
+    <!--
+      =====================================================
+      PERFORMANCE
+      =====================================================
+    -->
+
+
     <section class="stats-section">
 
       <h2>
@@ -1162,6 +1402,47 @@
 
     </section>
 
+
+
+    <!--
+      =====================================================
+      PRODUCTS TO PROMOTE
+      =====================================================
+    -->
+
+
+    <section class="products-section">
+
+      <h2>
+        Products to Promote
+      </h2>
+
+      <p>
+        Choose an eligible GiftedGift Empire product and
+        copy your personal affiliate link to promote it.
+      </p>
+
+
+      <div
+        id="promote-products"
+        class="promote-grid"
+      >
+
+        <div class="products-empty">
+          Loading products you can promote...
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!--
+      =====================================================
+      WITHDRAWALS
+      =====================================================
+    -->
 
 
     <section class="withdrawal-section">
@@ -1733,6 +2014,363 @@ function updatePayoutDetailsUI() {
 
 
 
+/*
+  =====================================================
+  LOAD PRODUCTS TO PROMOTE
+  =====================================================
+*/
+
+
+async function loadPromotableProducts(
+  referralCode,
+  commissionRate
+) {
+
+  const container =
+    document.getElementById(
+      "promote-products"
+    );
+
+
+  container.innerHTML = `
+
+    <div class="products-empty">
+      Loading products you can promote...
+    </div>
+
+  `;
+
+
+  try {
+
+
+    const {
+      data: products,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "digital_products"
+        )
+        .select(
+          "id,name,slug,price,image_url,product_type,active"
+        )
+        .eq(
+          "active",
+          true
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    const eligibleProducts =
+      (
+        Array.isArray(
+          products
+        )
+          ? products
+          : []
+      )
+        .filter(
+          function(
+            product
+          ) {
+
+            const productType =
+              String(
+                product.product_type ||
+                ""
+              )
+                .trim()
+                .toLowerCase();
+
+
+            const price =
+              Number(
+                product.price ||
+                0
+              );
+
+
+            return (
+              product.active ===
+                true &&
+              productType ===
+                "paid" &&
+              Number.isFinite(
+                price
+              ) &&
+              price > 0
+            );
+
+          }
+        );
+
+
+    if (
+      eligibleProducts.length ===
+      0
+    ) {
+
+      container.innerHTML = `
+
+        <div class="products-empty">
+          There are currently no products available
+          for affiliate promotion.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    const rate =
+      Number(
+        commissionRate ||
+        0
+      );
+
+
+    container.innerHTML =
+      eligibleProducts
+        .map(
+          function(
+            product,
+            index
+          ) {
+
+
+            const price =
+              Number(
+                product.price ||
+                0
+              );
+
+
+            const estimatedCommission =
+              Math.round(
+                (
+                  price *
+                  rate /
+                  100
+                ) *
+                100
+              ) /
+              100;
+
+
+            let productUrl;
+
+
+            if (
+              product.slug
+            ) {
+
+              productUrl =
+                new URL(
+                  "/" +
+                  encodeURIComponent(
+                    product.slug
+                  ),
+                  window.location.origin
+                );
+
+            } else {
+
+              productUrl =
+                new URL(
+                  "/flutterwave-checkout.html",
+                  window.location.origin
+                );
+
+
+              productUrl.searchParams.set(
+                "product_id",
+                product.id
+              );
+
+            }
+
+
+            productUrl.searchParams.set(
+              "ref",
+              referralCode
+            );
+
+
+            const finalAffiliateUrl =
+              productUrl.toString();
+
+
+            const imageHTML =
+              product.image_url
+
+                ? `
+
+                  <img
+                    class="promote-image"
+                    src="${escapeHTML(
+                      product.image_url
+                    )}"
+                    alt="${escapeHTML(
+                      product.name ||
+                      "Digital Product"
+                    )}"
+                    loading="lazy"
+                  >
+
+                `
+
+                : `
+
+                  <div class="promote-image-placeholder">
+                    Digital Product
+                  </div>
+
+                `;
+
+
+            return `
+
+              <article class="promote-card">
+
+                ${imageHTML}
+
+                <div class="promote-content">
+
+                  <div class="promote-type">
+                    Digital Product
+                  </div>
+
+
+                  <div class="promote-name">
+                    ${escapeHTML(
+                      product.name ||
+                      "Digital Product"
+                    )}
+                  </div>
+
+
+                  <div class="promote-price">
+                    ${escapeHTML(
+                      formatCurrency(
+                        price,
+                        "EUR"
+                      )
+                    )}
+                  </div>
+
+
+                  <div class="promote-commission">
+
+                    Your commission rate:
+                    ${escapeHTML(
+                      formatCommissionRate(
+                        rate
+                      )
+                    )}
+
+                    <br>
+
+                    Estimated commission:
+                    ${escapeHTML(
+                      formatCurrency(
+                        estimatedCommission,
+                        "EUR"
+                      )
+                    )}
+                    per qualifying sale
+
+                  </div>
+
+
+                  <div class="promote-actions">
+
+                    <a
+                      class="promote-button promote-view"
+                      href="${escapeHTML(
+                        finalAffiliateUrl
+                      )}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      View Product
+                    </a>
+
+
+                    <button
+                      type="button"
+                      class="promote-button promote-copy"
+                      data-affiliate-link="${escapeHTML(
+                        finalAffiliateUrl
+                      )}"
+                      data-message-id="product-copy-${index}"
+                    >
+                      Copy Affiliate Link
+                    </button>
+
+                  </div>
+
+
+                  <div
+                    id="product-copy-${index}"
+                    class="product-copy-message"
+                  ></div>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        )
+        .join(
+          ""
+        );
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Promotable products load error:",
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="products-empty">
+        Products could not be loaded right now.
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+/*
+  =====================================================
+  LOAD PAYOUT SECTION
+  =====================================================
+*/
+
+
 async function loadPayoutSection(
   affiliateId
 ) {
@@ -1816,7 +2454,6 @@ async function loadPayoutSection(
       ]);
 
 
-
     if (
       commissionResult.error
     ) {
@@ -1835,7 +2472,6 @@ async function loadPayoutSection(
     }
 
 
-
     const commissions =
       Array.isArray(
         commissionResult.data
@@ -1852,10 +2488,9 @@ async function loadPayoutSection(
         : [];
 
 
-
     /*
       =====================================================
-      CHECK FOR OPEN PAYOUT REQUEST
+      OPEN PAYOUT
       =====================================================
     */
 
@@ -1885,10 +2520,9 @@ async function loadPayoutSection(
       );
 
 
-
     /*
       =====================================================
-      CALCULATE APPROVED / PENDING COMMISSIONS
+      COMMISSION TOTALS
       =====================================================
     */
 
@@ -1954,12 +2588,10 @@ async function loadPayoutSection(
             .toLowerCase();
 
 
-
         if (
           commissionStatus ===
           "approved"
         ) {
-
 
           approvedTotals[
             currency
@@ -1975,12 +2607,10 @@ async function loadPayoutSection(
         }
 
 
-
         if (
           commissionStatus ===
           "pending"
         ) {
-
 
           pendingTotals[
             currency
@@ -2000,7 +2630,6 @@ async function loadPayoutSection(
     );
 
 
-
     const approvedCurrencies =
       Object.keys(
         approvedTotals
@@ -2013,14 +2642,6 @@ async function loadPayoutSection(
       );
 
 
-
-    /*
-      =====================================================
-      DISPLAY AVAILABLE BALANCE
-      =====================================================
-    */
-
-
     availableWithdrawalAmount =
       0;
 
@@ -2029,11 +2650,16 @@ async function loadPayoutSection(
       "EUR";
 
 
+    /*
+      =====================================================
+      AVAILABLE BALANCE
+      =====================================================
+    */
+
 
     if (
       hasOpenPayoutRequest
     ) {
-
 
       availableValue.textContent =
         formatCurrency(
@@ -2043,7 +2669,7 @@ async function loadPayoutSection(
 
 
       availableNote.textContent =
-        "You already have a payout request being processed. A new request can be made after the current one is completed or rejected.";
+        "You already have a payout request being processed. A new request can be made after the current request is completed or rejected.";
 
 
       requestButton.disabled =
@@ -2181,7 +2807,6 @@ async function loadPayoutSection(
     }
 
 
-
     /*
       =====================================================
       PAYOUT HISTORY
@@ -2190,9 +2815,9 @@ async function loadPayoutSection(
 
 
     if (
-      payouts.length === 0
+      payouts.length ===
+      0
     ) {
-
 
       history.innerHTML = `
 
@@ -2248,6 +2873,7 @@ async function loadPayoutSection(
                   <div class="payout-item-top">
 
                     <div class="payout-item-amount">
+
                       ${escapeHTML(
                         formatCurrency(
                           payout.amount,
@@ -2255,6 +2881,7 @@ async function loadPayoutSection(
                           "EUR"
                         )
                       )}
+
                     </div>
 
                     <span
@@ -2265,15 +2892,18 @@ async function loadPayoutSection(
 
                   </div>
 
+
                   <div class="payout-meta">
 
                     Method:
                     <strong>
+
                       ${escapeHTML(
                         formatPaymentMethod(
                           payout.payment_method
                         )
                       )}
+
                     </strong>
 
                     <br>
@@ -2288,13 +2918,16 @@ async function loadPayoutSection(
                     ${
                       payout.paid_at
                         ? `
+
                           <br>
+
                           Paid:
                           ${escapeHTML(
                             formatDateTime(
                               payout.paid_at
                             )
                           )}
+
                         `
                         : ""
                     }
@@ -2302,11 +2935,14 @@ async function loadPayoutSection(
                     ${
                       payout.provider_reference
                         ? `
+
                           <br>
+
                           Reference:
                           ${escapeHTML(
                             payout.provider_reference
                           )}
+
                         `
                         : ""
                     }
@@ -2314,11 +2950,14 @@ async function loadPayoutSection(
                     ${
                       payout.receipt_label
                         ? `
+
                           <br>
+
                           Receipt:
                           ${escapeHTML(
                             payout.receipt_label
                           )}
+
                         `
                         : ""
                     }
@@ -2373,6 +3012,13 @@ async function loadPayoutSection(
 
 }
 
+
+
+/*
+  =====================================================
+  REQUEST PAYOUT
+  =====================================================
+*/
 
 
 async function requestPayout() {
@@ -2605,17 +3251,17 @@ async function requestPayout() {
 
 
 
+/*
+  =====================================================
+  LOAD DASHBOARD
+  =====================================================
+*/
+
+
 async function loadDashboard() {
 
 
   try {
-
-
-    /*
-      =====================================================
-      GET LOGGED-IN USER
-      =====================================================
-    */
 
 
     const {
@@ -2627,7 +3273,6 @@ async function loadDashboard() {
         .getSession();
 
 
-
     if (
       sessionError
     ) {
@@ -2637,12 +3282,10 @@ async function loadDashboard() {
     }
 
 
-
     const session =
       sessionData
         ? sessionData.session
         : null;
-
 
 
     if (
@@ -2658,7 +3301,6 @@ async function loadDashboard() {
     }
 
 
-
     const user =
       session.user;
 
@@ -2669,10 +3311,9 @@ async function loadDashboard() {
       );
 
 
-
     /*
       =====================================================
-      FIND AFFILIATE PROFILE
+      FIND AFFILIATE
       =====================================================
     */
 
@@ -2695,7 +3336,6 @@ async function loadDashboard() {
         .maybeSingle();
 
 
-
     if (
       affiliateError
     ) {
@@ -2703,7 +3343,6 @@ async function loadDashboard() {
       throw affiliateError;
 
     }
-
 
 
     if (
@@ -2714,6 +3353,7 @@ async function loadDashboard() {
         .auth
         .signOut();
 
+
       window.location.href =
         "/affiliate-login.html";
 
@@ -2722,21 +3362,20 @@ async function loadDashboard() {
     }
 
 
-
     /*
       =====================================================
-      REQUIRE APPROVED STATUS
+      REQUIRE APPROVED
       =====================================================
     */
 
 
     const status =
       String(
-        affiliate.status || ""
+        affiliate.status ||
+        ""
       )
         .trim()
         .toLowerCase();
-
 
 
     if (
@@ -2748,6 +3387,7 @@ async function loadDashboard() {
         .auth
         .signOut();
 
+
       window.location.href =
         "/affiliate-login.html";
 
@@ -2756,10 +3396,8 @@ async function loadDashboard() {
     }
 
 
-
     currentAffiliateId =
       affiliate.id;
-
 
 
     /*
@@ -2777,13 +3415,16 @@ async function loadDashboard() {
 
 
     const referralCode =
-      affiliate.referral_code ||
-      "";
+      String(
+        affiliate.referral_code ||
+        ""
+      )
+        .trim()
+        .toUpperCase();
 
 
     const commissionRate =
       affiliate.commission_rate;
-
 
 
     if (
@@ -2799,14 +3440,12 @@ async function loadDashboard() {
     }
 
 
-
     const referralLink =
       window.location.origin +
       "/?ref=" +
       encodeURIComponent(
         referralCode
       );
-
 
 
     /*
@@ -2902,10 +3541,9 @@ async function loadDashboard() {
         );
 
 
-
     /*
       =====================================================
-      LOAD REFERRAL CLICK COUNT
+      REFERRAL CLICKS
       =====================================================
     */
 
@@ -2934,7 +3572,6 @@ async function loadDashboard() {
           );
 
 
-
       if (
         referralClickError
       ) {
@@ -2952,7 +3589,9 @@ async function loadDashboard() {
           .textContent =
             "—";
 
+
       } else {
+
 
         document
           .getElementById(
@@ -2960,20 +3599,21 @@ async function loadDashboard() {
           )
           .textContent =
             Number(
-              referralClickCount || 0
+              referralClickCount ||
+              0
             );
 
       }
 
 
     } catch (
-      clickCountError
+      error
     ) {
 
 
       console.error(
         "Affiliate click count error:",
-        clickCountError
+        error
       );
 
 
@@ -2987,10 +3627,9 @@ async function loadDashboard() {
     }
 
 
-
     /*
       =====================================================
-      LOAD QUALIFYING SALES
+      QUALIFYING SALES
       =====================================================
     */
 
@@ -3002,6 +3641,7 @@ async function loadDashboard() {
         await fetch(
           "/api/affiliate-sales",
           {
+
             method:
               "GET",
 
@@ -3018,7 +3658,6 @@ async function loadDashboard() {
 
           }
         );
-
 
 
       if (
@@ -3044,6 +3683,7 @@ async function loadDashboard() {
           .textContent =
             "—";
 
+
       } else {
 
 
@@ -3057,20 +3697,21 @@ async function loadDashboard() {
           )
           .textContent =
             Number(
-              salesData.qualifying_sales || 0
+              salesData.qualifying_sales ||
+              0
             );
 
       }
 
 
     } catch (
-      salesLoadError
+      error
     ) {
 
 
       console.error(
         "Affiliate sales load error:",
-        salesLoadError
+        error
       );
 
 
@@ -3084,10 +3725,9 @@ async function loadDashboard() {
     }
 
 
-
     /*
       =====================================================
-      LOAD COMMISSION EARNINGS
+      COMMISSION EARNINGS
       =====================================================
     */
 
@@ -3116,11 +3756,9 @@ async function loadDashboard() {
           );
 
 
-
       if (
         commissionError
       ) {
-
 
         console.error(
           "Affiliate commission load error:",
@@ -3148,14 +3786,16 @@ async function loadDashboard() {
               : []
           )
             .reduce(
-              (
+              function(
                 total,
                 row
-              ) => {
+              ) {
+
 
                 const amount =
                   Number(
-                    row.commission_amount || 0
+                    row.commission_amount ||
+                    0
                   );
 
 
@@ -3194,13 +3834,13 @@ async function loadDashboard() {
 
 
     } catch (
-      commissionLoadError
+      error
     ) {
 
 
       console.error(
         "Affiliate commission load error:",
-        commissionLoadError
+        error
       );
 
 
@@ -3214,10 +3854,9 @@ async function loadDashboard() {
     }
 
 
-
     /*
       =====================================================
-      LOAD PAID OUT TOTAL
+      PAID OUT
       =====================================================
     */
 
@@ -3245,7 +3884,6 @@ async function loadDashboard() {
             "is",
             null
           );
-
 
 
       if (
@@ -3278,8 +3916,67 @@ async function loadDashboard() {
             : [];
 
 
+        const currencyTotals =
+          {};
+
+
+        paidRows.forEach(
+          function(
+            row
+          ) {
+
+
+            const amount =
+              Number(
+                row.amount ||
+                0
+              );
+
+
+            if (
+              !Number.isFinite(
+                amount
+              )
+            ) {
+
+              return;
+
+            }
+
+
+            const currency =
+              String(
+                row.currency ||
+                "EUR"
+              )
+                .trim()
+                .toUpperCase();
+
+
+            currencyTotals[
+              currency
+            ] =
+              (
+                currencyTotals[
+                  currency
+                ] ||
+                0
+              ) +
+              amount;
+
+          }
+        );
+
+
+        const currencies =
+          Object.keys(
+            currencyTotals
+          );
+
+
         if (
-          paidRows.length === 0
+          currencies.length ===
+          0
         ) {
 
 
@@ -3297,116 +3994,29 @@ async function loadDashboard() {
         } else {
 
 
-          const currencyTotals =
-            {};
+          document
+            .getElementById(
+              "paid-out-value"
+            )
+            .textContent =
+              currencies
+                .map(
+                  function(
+                    currency
+                  ) {
 
-
-          paidRows.forEach(
-            function(
-              row
-            ) {
-
-
-              const amount =
-                Number(
-                  row.amount || 0
-                );
-
-
-              if (
-                !Number.isFinite(
-                  amount
-                )
-              ) {
-
-                return;
-
-              }
-
-
-              const currency =
-                String(
-                  row.currency ||
-                  "EUR"
-                )
-                  .trim()
-                  .toUpperCase();
-
-
-              if (
-                !currencyTotals[
-                  currency
-                ]
-              ) {
-
-                currencyTotals[
-                  currency
-                ] =
-                  0;
-
-              }
-
-
-              currencyTotals[
-                currency
-              ] +=
-                amount;
-
-
-            }
-          );
-
-
-          const currencies =
-            Object.keys(
-              currencyTotals
-            );
-
-
-          if (
-            currencies.length === 0
-          ) {
-
-
-            document
-              .getElementById(
-                "paid-out-value"
-              )
-              .textContent =
-                formatCurrency(
-                  0,
-                  "EUR"
-                );
-
-
-          } else {
-
-
-            document
-              .getElementById(
-                "paid-out-value"
-              )
-              .textContent =
-                currencies
-                  .map(
-                    function(
-                      currency
-                    ) {
-
-                      return formatCurrency(
-                        currencyTotals[
-                          currency
-                        ],
+                    return formatCurrency(
+                      currencyTotals[
                         currency
-                      );
+                      ],
+                      currency
+                    );
 
-                    }
-                  )
-                  .join(
-                    " + "
-                  );
-
-          }
+                  }
+                )
+                .join(
+                  " + "
+                );
 
         }
 
@@ -3414,13 +4024,13 @@ async function loadDashboard() {
 
 
     } catch (
-      payoutLoadError
+      error
     ) {
 
 
       console.error(
         "Affiliate payout load error:",
-        payoutLoadError
+        error
       );
 
 
@@ -3434,10 +4044,22 @@ async function loadDashboard() {
     }
 
 
+    /*
+      =====================================================
+      PRODUCTS
+      =====================================================
+    */
+
+
+    await loadPromotableProducts(
+      referralCode,
+      commissionRate
+    );
+
 
     /*
       =====================================================
-      LOAD WITHDRAWAL / PAYOUT SECTION
+      WITHDRAWALS
       =====================================================
     */
 
@@ -3445,7 +4067,6 @@ async function loadDashboard() {
     await loadPayoutSection(
       affiliate.id
     );
-
 
 
     /*
@@ -3458,8 +4079,10 @@ async function loadDashboard() {
     loadingBox.style.display =
       "none";
 
+
     errorBox.style.display =
       "none";
+
 
     dashboard.style.display =
       "block";
@@ -3482,14 +4105,13 @@ async function loadDashboard() {
 
   }
 
-
 }
 
 
 
 /*
   =====================================================
-  COPY REFERRAL LINK
+  COPY GENERAL REFERRAL LINK
   =====================================================
 */
 
@@ -3558,6 +4180,108 @@ document
 
         message.textContent =
           "Select and copy your referral link above.";
+
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  COPY PRODUCT AFFILIATE LINK
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "promote-products"
+  )
+  .addEventListener(
+    "click",
+    async function(
+      event
+    ) {
+
+
+      const button =
+        event.target.closest(
+          ".promote-copy"
+        );
+
+
+      if (
+        !button
+      ) {
+
+        return;
+
+      }
+
+
+      const link =
+        button.getAttribute(
+          "data-affiliate-link"
+        );
+
+
+      const messageId =
+        button.getAttribute(
+          "data-message-id"
+        );
+
+
+      const message =
+        document.getElementById(
+          messageId
+        );
+
+
+      if (
+        !link
+      ) {
+
+        return;
+
+      }
+
+
+      try {
+
+
+        await navigator
+          .clipboard
+          .writeText(
+            link
+          );
+
+
+        if (
+          message
+        ) {
+
+          message.textContent =
+            "Affiliate link copied ✅";
+
+        }
+
+
+      } catch (
+        error
+      ) {
+
+
+        if (
+          message
+        ) {
+
+          message.textContent =
+            "Copy failed. Please try again.";
+
+        }
 
       }
 
