@@ -2828,11 +2828,25 @@ async function loadPayoutSection(
         "This balance contains approved, unpaid commission that is currently available for withdrawal.";
 
 
-      requestButton.disabled =
-        !(
-          availableWithdrawalAmount >
-          0
-        );
+      const minimumPayout =
+  availableWithdrawalCurrency === "EUR"
+    ? 20
+    : 0;
+
+if (
+  availableWithdrawalCurrency === "EUR" &&
+  availableWithdrawalAmount < minimumPayout
+) {
+  availableNote.textContent =
+    "Minimum withdrawal is €20.00. Keep earning until your available balance reaches €20.00.";
+}
+
+requestButton.disabled =
+  availableWithdrawalAmount <= 0 ||
+  (
+    availableWithdrawalCurrency === "EUR" &&
+    availableWithdrawalAmount < minimumPayout
+  );
 
 
     } else if (
