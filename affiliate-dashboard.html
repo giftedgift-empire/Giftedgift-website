@@ -2578,8 +2578,8 @@ async function loadPayoutSection(
             "affiliate_payouts"
           )
           .select(
-            "id,amount,currency,payment_method,provider_reference,status,receipt_label,created_at,paid_at"
-          )
+  "id,amount,currency,payout_currency,payment_method,provider_reference,status,receipt_label,scheduled_payout_date,created_at,paid_at"
+)
           .eq(
             "affiliate_id",
             affiliateId
