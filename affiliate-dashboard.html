@@ -3144,7 +3144,35 @@ async function requestPayout() {
         "payout-method"
       )
       .value;
+const payoutCurrency =
+  document
+    .getElementById(
+      "payout-currency"
+    )
+    .value
+    .trim()
+    .toUpperCase();
 
+
+if (
+  ![
+    "EUR",
+    "NGN",
+    "GBP",
+    "USD"
+  ].includes(
+    payoutCurrency
+  )
+) {
+
+  setPayoutMessage(
+    "Please choose a valid payout currency.",
+    "error"
+  );
+
+  return;
+
+}
 
   let details =
     "";
