@@ -3019,9 +3019,35 @@ async function loadPayoutSection(
 
                     </strong>
 
-                    <br>
+<br>
 
-                    Requested:
+Preferred Currency:
+<strong>
+  ${escapeHTML(
+    String(
+      payout.payout_currency ||
+      payout.currency ||
+      "EUR"
+    )
+  )}
+</strong>
+
+<br>
+
+Scheduled Payout:
+<strong>
+  ${
+    payout.scheduled_payout_date
+      ? escapeHTML(
+          payout.scheduled_payout_date
+        )
+      : "—"
+  }
+</strong>
+
+<br>
+
+Requested:
                     ${escapeHTML(
                       formatDateTime(
                         payout.created_at
