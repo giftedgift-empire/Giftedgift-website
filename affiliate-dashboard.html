@@ -688,7 +688,7 @@
     }
 
     .payout-field select,
-    .payout-field textarea {
+    .payout-field input {
       width: 100%;
 
       padding: 12px 13px;
@@ -705,17 +705,44 @@
       outline: none;
     }
 
-    .payout-field textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
     .payout-field select:focus,
-    .payout-field textarea:focus {
+    .payout-field input:focus {
       border-color: #123a8c;
 
       box-shadow:
         0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .payout-fields-group {
+      margin-top: 5px;
+    }
+
+    .payout-fields-group[hidden] {
+      display: none;
+    }
+
+    .payout-field-help {
+      margin-top: 6px;
+
+      color: #777;
+
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .bank-info-box {
+      margin-top: 15px;
+
+      padding: 11px 12px;
+
+      border-radius: 8px;
+
+      background: #f5f8ff;
+
+      color: #555;
+
+      font-size: 12px;
+      line-height: 1.55;
     }
 
     .withdraw-button {
@@ -1038,13 +1065,6 @@
   <div id="dashboard">
 
 
-    <!--
-      =====================================================
-      WELCOME
-      =====================================================
-    -->
-
-
     <section class="welcome-section">
 
       <div class="welcome-badge">
@@ -1063,13 +1083,6 @@
 
     </section>
 
-
-
-    <!--
-      =====================================================
-      ACCOUNT SUMMARY
-      =====================================================
-    -->
 
 
     <section class="summary-grid">
@@ -1125,13 +1138,6 @@
 
     </section>
 
-
-
-    <!--
-      =====================================================
-      REFERRAL + ACCOUNT
-      =====================================================
-    -->
 
 
     <section class="dashboard-grid">
@@ -1277,13 +1283,6 @@
 
 
 
-    <!--
-      =====================================================
-      PERFORMANCE
-      =====================================================
-    -->
-
-
     <section class="stats-section">
 
       <h2>
@@ -1404,13 +1403,6 @@
 
 
 
-    <!--
-      =====================================================
-      PRODUCTS TO PROMOTE
-      =====================================================
-    -->
-
-
     <section class="products-section">
 
       <h2>
@@ -1436,13 +1428,6 @@
 
     </section>
 
-
-
-    <!--
-      =====================================================
-      WITHDRAWALS
-      =====================================================
-    -->
 
 
     <section class="withdrawal-section">
@@ -1516,20 +1501,123 @@
           </div>
 
 
-          <div class="payout-field">
+          <!-- PAYPAL -->
 
-            <label
-              for="payout-details"
-              id="payout-details-label"
-            >
-              PayPal Email Address
-            </label>
+          <div
+            id="paypal-payout-fields"
+            class="payout-fields-group"
+          >
 
-            <textarea
-              id="payout-details"
-              maxlength="250"
-              placeholder="Enter the PayPal email address where you want to receive your payout."
-            ></textarea>
+            <div class="payout-field">
+
+              <label for="paypal-email">
+                PayPal Email Address
+              </label>
+
+              <input
+                type="email"
+                id="paypal-email"
+                maxlength="120"
+                autocomplete="email"
+                placeholder="example@email.com"
+              >
+
+              <div class="payout-field-help">
+                Enter the email address connected to the
+                PayPal account where you want to receive
+                your payout.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- BANK TRANSFER -->
+
+          <div
+            id="bank-payout-fields"
+            class="payout-fields-group"
+            hidden
+          >
+
+            <div class="payout-field">
+
+              <label for="bank-account-holder">
+                Account Holder Name
+              </label>
+
+              <input
+                type="text"
+                id="bank-account-holder"
+                maxlength="80"
+                autocomplete="name"
+                placeholder="Full name on the bank account"
+              >
+
+            </div>
+
+
+            <div class="payout-field">
+
+              <label for="bank-name">
+                Bank Name
+              </label>
+
+              <input
+                type="text"
+                id="bank-name"
+                maxlength="80"
+                placeholder="Name of your bank"
+              >
+
+            </div>
+
+
+            <div class="payout-field">
+
+              <label for="bank-account-number">
+                Account Number / IBAN
+              </label>
+
+              <input
+                type="text"
+                id="bank-account-number"
+                maxlength="50"
+                autocomplete="off"
+                placeholder="Enter account number or IBAN"
+              >
+
+            </div>
+
+
+            <div class="payout-field">
+
+              <label for="bank-swift">
+                BIC / SWIFT
+              </label>
+
+              <input
+                type="text"
+                id="bank-swift"
+                maxlength="20"
+                autocomplete="off"
+                placeholder="Optional if not required"
+              >
+
+              <div class="payout-field-help">
+                BIC/SWIFT may be required for some
+                international bank transfers.
+              </div>
+
+            </div>
+
+
+            <div class="bank-info-box">
+              Please make sure the account holder name and
+              bank information are correct before submitting
+              your withdrawal request.
+            </div>
 
           </div>
 
@@ -1975,15 +2063,15 @@ function updatePayoutDetailsUI() {
       .value;
 
 
-  const label =
+  const paypalFields =
     document.getElementById(
-      "payout-details-label"
+      "paypal-payout-fields"
     );
 
 
-  const details =
+  const bankFields =
     document.getElementById(
-      "payout-details"
+      "bank-payout-fields"
     );
 
 
@@ -1992,21 +2080,19 @@ function updatePayoutDetailsUI() {
     "paypal"
   ) {
 
-    label.textContent =
-      "PayPal Email Address";
+    paypalFields.hidden =
+      false;
 
-
-    details.placeholder =
-      "Enter the PayPal email address where you want to receive your payout.";
+    bankFields.hidden =
+      true;
 
   } else {
 
-    label.textContent =
-      "Bank Transfer Details";
+    paypalFields.hidden =
+      true;
 
-
-    details.placeholder =
-      "Enter the account holder name and the bank details needed to receive your payout.";
+    bankFields.hidden =
+      false;
 
   }
 
@@ -2016,7 +2102,7 @@ function updatePayoutDetailsUI() {
 
 /*
   =====================================================
-  LOAD PRODUCTS TO PROMOTE
+  PRODUCTS TO PROMOTE
   =====================================================
 */
 
@@ -2054,19 +2140,19 @@ async function loadPromotableProducts(
         )
         .select(
           "id,name,slug,price,image_url,product_type,active,allow_affiliates"
-          )
+        )
         .eq(
-  "active",
-  true
-)
-.eq(
-  "allow_affiliates",
-  true
-)
-.eq(
-  "product_type",
-  "paid"
-);
+          "active",
+          true
+        )
+        .eq(
+          "allow_affiliates",
+          true
+        )
+        .eq(
+          "product_type",
+          "paid"
+        );
 
 
     if (
@@ -2496,13 +2582,6 @@ async function loadPayoutSection(
         : [];
 
 
-    /*
-      =====================================================
-      OPEN PAYOUT
-      =====================================================
-    */
-
-
     hasOpenPayoutRequest =
       payouts.some(
         function(
@@ -2526,13 +2605,6 @@ async function loadPayoutSection(
 
         }
       );
-
-
-    /*
-      =====================================================
-      COMMISSION TOTALS
-      =====================================================
-    */
 
 
     const approvedTotals =
@@ -2656,13 +2728,6 @@ async function loadPayoutSection(
 
     availableWithdrawalCurrency =
       "EUR";
-
-
-    /*
-      =====================================================
-      AVAILABLE BALANCE
-      =====================================================
-    */
 
 
     if (
@@ -2813,13 +2878,6 @@ async function loadPayoutSection(
         true;
 
     }
-
-
-    /*
-      =====================================================
-      PAYOUT HISTORY
-      =====================================================
-    */
 
 
     if (
@@ -3088,39 +3146,162 @@ async function requestPayout() {
       .value;
 
 
-  const details =
-    document
-      .getElementById(
-        "payout-details"
-      )
-      .value
-      .trim();
+  let details =
+    "";
 
 
   if (
-    !details
+    method ===
+    "paypal"
   ) {
 
-    setPayoutMessage(
-      "Please enter your payout details.",
-      "error"
-    );
 
-    return;
+    const paypalEmail =
+      document
+        .getElementById(
+          "paypal-email"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (
+      !emailPattern.test(
+        paypalEmail
+      )
+    ) {
+
+      setPayoutMessage(
+        "Please enter a valid PayPal email address.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    details =
+      "PayPal Email: " +
+      paypalEmail;
+
+
+  } else {
+
+
+    const accountHolder =
+      document
+        .getElementById(
+          "bank-account-holder"
+        )
+        .value
+        .trim();
+
+
+    const bankName =
+      document
+        .getElementById(
+          "bank-name"
+        )
+        .value
+        .trim();
+
+
+    const accountNumber =
+      document
+        .getElementById(
+          "bank-account-number"
+        )
+        .value
+        .trim();
+
+
+    const swift =
+      document
+        .getElementById(
+          "bank-swift"
+        )
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    if (
+      !accountHolder
+    ) {
+
+      setPayoutMessage(
+        "Please enter the account holder name.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !bankName
+    ) {
+
+      setPayoutMessage(
+        "Please enter the bank name.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !accountNumber
+    ) {
+
+      setPayoutMessage(
+        "Please enter the account number or IBAN.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    details =
+      "Account Holder: " +
+      accountHolder +
+      " | Bank: " +
+      bankName +
+      " | Account/IBAN: " +
+      accountNumber;
+
+
+    if (
+      swift
+    ) {
+
+      details +=
+        " | BIC/SWIFT: " +
+        swift;
+
+    }
 
   }
 
 
   if (
-    method ===
-      "paypal" &&
-    !details.includes(
-      "@"
-    )
+    details.length >
+    250
   ) {
 
     setPayoutMessage(
-      "Please enter a valid PayPal email address.",
+      "Your payout details are too long. Please shorten them.",
       "error"
     );
 
@@ -3195,7 +3376,39 @@ async function requestPayout() {
 
     document
       .getElementById(
-        "payout-details"
+        "paypal-email"
+      )
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "bank-account-holder"
+      )
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "bank-name"
+      )
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "bank-account-number"
+      )
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "bank-swift"
       )
       .value =
         "";
@@ -3319,13 +3532,6 @@ async function loadDashboard() {
       );
 
 
-    /*
-      =====================================================
-      FIND AFFILIATE
-      =====================================================
-    */
-
-
     const {
       data: affiliate,
       error: affiliateError
@@ -3370,13 +3576,6 @@ async function loadDashboard() {
     }
 
 
-    /*
-      =====================================================
-      REQUIRE APPROVED
-      =====================================================
-    */
-
-
     const status =
       String(
         affiliate.status ||
@@ -3406,13 +3605,6 @@ async function loadDashboard() {
 
     currentAffiliateId =
       affiliate.id;
-
-
-    /*
-      =====================================================
-      PROFILE VALUES
-      =====================================================
-    */
 
 
     const fullName =
@@ -3454,13 +3646,6 @@ async function loadDashboard() {
       encodeURIComponent(
         referralCode
       );
-
-
-    /*
-      =====================================================
-      DISPLAY ACCOUNT
-      =====================================================
-    */
 
 
     document
@@ -3550,9 +3735,7 @@ async function loadDashboard() {
 
 
     /*
-      =====================================================
       REFERRAL CLICKS
-      =====================================================
     */
 
 
@@ -3636,9 +3819,7 @@ async function loadDashboard() {
 
 
     /*
-      =====================================================
       QUALIFYING SALES
-      =====================================================
     */
 
 
@@ -3734,9 +3915,7 @@ async function loadDashboard() {
 
 
     /*
-      =====================================================
       COMMISSION EARNINGS
-      =====================================================
     */
 
 
@@ -3863,9 +4042,7 @@ async function loadDashboard() {
 
 
     /*
-      =====================================================
       PAID OUT
-      =====================================================
     */
 
 
@@ -4052,36 +4229,15 @@ async function loadDashboard() {
     }
 
 
-    /*
-      =====================================================
-      PRODUCTS
-      =====================================================
-    */
-
-
     await loadPromotableProducts(
       referralCode,
       commissionRate
     );
 
 
-    /*
-      =====================================================
-      WITHDRAWALS
-      =====================================================
-    */
-
-
     await loadPayoutSection(
       affiliate.id
     );
-
-
-    /*
-      =====================================================
-      SHOW DASHBOARD
-      =====================================================
-    */
 
 
     loadingBox.style.display =
