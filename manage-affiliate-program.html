@@ -1274,7 +1274,8 @@
         </h2>
 
         <p>
-          Review affiliate withdrawal details, process payments
+          Review affiliate withdrawal details, preferred payout
+          currencies and scheduled payout dates, process payments
           manually and record completed payouts.
         </p>
 
@@ -1598,6 +1599,127 @@ function formatPaymentMethod(
 
 
   return value || "Payment";
+
+}
+
+
+
+function formatPayoutCurrency(
+  value
+) {
+
+  const currency =
+    String(
+      value || "EUR"
+    )
+      .trim()
+      .toUpperCase();
+
+
+  const labels = {
+
+    EUR:
+      "EUR (€)",
+
+    NGN:
+      "NGN (₦)",
+
+    GBP:
+      "GBP (£)",
+
+    USD:
+      "USD ($)"
+
+  };
+
+
+  return labels[currency] ||
+    currency;
+
+}
+
+
+
+function formatScheduledPayoutDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "—";
+
+  }
+
+
+  const text =
+    String(
+      value
+    )
+      .trim();
+
+
+  const match =
+    /^(\d{4})-(\d{2})-(\d{2})$/
+      .exec(
+        text
+      );
+
+
+  if (
+    !match
+  ) {
+
+    return text;
+
+  }
+
+
+  const year =
+    Number(
+      match[1]
+    );
+
+
+  const month =
+    Number(
+      match[2]
+    ) - 1;
+
+
+  const day =
+    Number(
+      match[3]
+    );
+
+
+  const date =
+    new Date(
+      year,
+      month,
+      day
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return text;
+
+  }
+
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      dateStyle:
+        "medium"
+    }
+  );
 
 }
 
@@ -3711,6 +3833,7 @@ async function loadPayouts() {
     ] =
       await Promise.all([
 
+
         supabaseClient
           .from(
             "affiliate_payouts"
@@ -3721,10 +3844,12 @@ async function loadPayouts() {
               affiliate_id,
               amount,
               currency,
+              payout_currency,
               payment_method,
               provider_reference,
               status,
               receipt_label,
+              scheduled_payout_date,
               created_at,
               paid_at,
               payout_details
@@ -3737,6 +3862,7 @@ async function loadPayouts() {
                 false
             }
           ),
+
 
         supabaseClient
           .from(
@@ -3751,6 +3877,7 @@ async function loadPayouts() {
               created_at
             `
           )
+
 
       ]);
 
@@ -3929,6 +4056,31 @@ function renderPayouts() {
       }
 
 
+      const accountingCurrency =
+        String(
+          payout.currency ||
+          "EUR"
+        )
+          .trim()
+          .toUpperCase();
+
+
+      const preferredPayoutCurrency =
+        String(
+          payout.payout_currency ||
+          payout.currency ||
+          "EUR"
+        )
+          .trim()
+          .toUpperCase();
+
+
+      const scheduledPayout =
+        formatScheduledPayoutDate(
+          payout.scheduled_payout_date
+        );
+
+
       const card =
         document.createElement(
           "article"
@@ -4004,8 +4156,61 @@ function renderPayouts() {
               ${escapeHtml(
                 formatCurrency(
                   payout.amount,
-                  payout.currency
+                  accountingCurrency
                 )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Accounting Currency
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                accountingCurrency
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Preferred Payout Currency
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                formatPayoutCurrency(
+                  preferredPayoutCurrency
+                )
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="record-detail">
+
+            <span>
+              Scheduled Payout
+            </span>
+
+            <strong>
+
+              ${escapeHtml(
+                scheduledPayout
               )}
 
             </strong>
@@ -4355,7 +4560,7 @@ async function rejectPayout(
 
   if (
     !confirm(
-      "Reject this payout request? The linked approved commissions will become available for a future withdrawal request."
+      "Reject this payout request?"
     )
   ) {
 
@@ -4471,6 +4676,20 @@ async function completePayout(
   }
 
 
+  const preferredCurrency =
+    formatPayoutCurrency(
+      payout.payout_currency ||
+      payout.currency ||
+      "EUR"
+    );
+
+
+  const scheduledPayout =
+    formatScheduledPayoutDate(
+      payout.scheduled_payout_date
+    );
+
+
   if (
     !confirm(
       "Confirm that " +
@@ -4478,7 +4697,11 @@ async function completePayout(
         payout.amount,
         payout.currency
       ) +
-      " has actually been paid to this affiliate?"
+      " has actually been paid to this affiliate?" +
+      "\n\nPreferred payout currency: " +
+      preferredCurrency +
+      "\nScheduled payout: " +
+      scheduledPayout
     )
   ) {
 
