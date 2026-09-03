@@ -24,7 +24,6 @@
     content="noindex, nofollow"
   >
 
-
   <style>
 
     * {
@@ -669,82 +668,67 @@
     <div class="stats-grid">
 
       <div class="stat-card">
-
         <div class="stat-label">
           Total Products
         </div>
-
         <div
           id="stat-total"
           class="stat-value"
         >
           0
         </div>
-
       </div>
 
 
       <div class="stat-card">
-
         <div class="stat-label">
           Draft
         </div>
-
         <div
           id="stat-draft"
           class="stat-value"
         >
           0
         </div>
-
       </div>
 
 
       <div class="stat-card">
-
         <div class="stat-label">
           Pending Review
         </div>
-
         <div
           id="stat-pending"
           class="stat-value"
         >
           0
         </div>
-
       </div>
 
 
       <div class="stat-card">
-
         <div class="stat-label">
           Approved
         </div>
-
         <div
           id="stat-approved"
           class="stat-value"
         >
           0
         </div>
-
       </div>
 
 
       <div class="stat-card">
-
         <div class="stat-label">
           Rejected
         </div>
-
         <div
           id="stat-rejected"
           class="stat-value"
         >
           0
         </div>
-
       </div>
 
     </div>
@@ -791,7 +775,6 @@
         id="product-form"
         onsubmit="return false;"
       >
-
 
         <div class="form-grid">
 
@@ -1127,7 +1110,6 @@
 
           </div>
 
-
         </div>
 
 
@@ -1208,7 +1190,6 @@
       </div>
 
     </section>
-
 
   </div>
 
@@ -2397,6 +2378,20 @@
     const uploadedThisAttempt = [];
 
 
+    /*
+    -----------------------------------------------------
+    SAFETY FLAG
+
+    Once the second metadata save succeeds,
+    the newly uploaded file paths belong to the draft
+    and must NOT be deleted if Submit for Review fails.
+    -----------------------------------------------------
+    */
+
+    let metadataSavedWithFiles =
+      false;
+
+
     try {
 
       /*
@@ -2551,6 +2546,15 @@
 
 
       /*
+      The database now safely references the
+      newly uploaded files.
+      */
+
+      metadataSavedWithFiles =
+        true;
+
+
+      /*
       ===================================================
       REMOVE OLD REPLACED FILES
       ===================================================
@@ -2683,12 +2687,21 @@
 
 
       /*
-        CLEAN UP NEW FILES ONLY IF
-        FINAL METADATA DID NOT SAVE.
-        Existing draft remains safe.
+      ===================================================
+      SAFE CLEANUP
+
+      Only delete newly uploaded files if the final
+      database save containing their paths DID NOT
+      succeed.
+
+      If metadataSavedWithFiles is true, those files
+      now belong to the saved draft and must remain,
+      even if Submit for Review later fails.
+      ===================================================
       */
 
       if (
+        !metadataSavedWithFiles &&
         uploadedThisAttempt.length
       ) {
 
@@ -3772,7 +3785,7 @@
   /*
   =====================================================
   START
-  =====================i================================
+  =====================================================
   */
 
   initializePage();
