@@ -80,20 +80,19 @@
 
     h2 {
       color: #123a8c;
-      margin:
-        0 0 8px;
+      margin: 0 0 8px;
     }
 
     .intro {
-      margin:
-        0 0 24px;
+      margin: 0 0 24px;
       color: #666;
       line-height: 1.6;
     }
 
     .important-box {
       background: #fffaeb;
-      border: 1px solid #fedf89;
+      border:
+        1px solid #fedf89;
       border-left:
         5px solid #f2bd16;
       border-radius: 12px;
@@ -104,6 +103,18 @@
 
     .important-box strong {
       color: #123a8c;
+    }
+
+    .privacy-box {
+      background: #eff8ff;
+      border:
+        1px solid #b2ddff;
+      border-radius: 11px;
+      padding: 13px 14px;
+      margin-top: 15px;
+      color: #175cd3;
+      font-size: 13px;
+      line-height: 1.55;
     }
 
     .section-title {
@@ -117,8 +128,7 @@
       display: block;
       font-weight: 700;
       color: #333;
-      margin:
-        17px 0 7px;
+      margin: 17px 0 7px;
     }
 
     input,
@@ -162,6 +172,18 @@
       line-height: 1.5;
     }
 
+    .required-note {
+      margin-top: 8px;
+      background: #fffaeb;
+      border:
+        1px solid #fedf89;
+      border-radius: 9px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #7a2e0e;
+      line-height: 1.5;
+    }
+
     .agreement-box {
       margin-top: 26px;
       background: #f8f9fc;
@@ -182,8 +204,7 @@
     }
 
     .agreement-points {
-      margin:
-        12px 0 18px;
+      margin: 12px 0 18px;
       padding-left: 21px;
       color: #444;
       line-height: 1.6;
@@ -289,10 +310,8 @@
 
     .seller-code {
       display: inline-block;
-      margin:
-        15px 0;
-      padding:
-        10px 14px;
+      margin: 15px 0;
+      padding: 10px 14px;
       background: #f4f6f9;
       border-radius: 9px;
       font-family: monospace;
@@ -372,6 +391,8 @@
         <form id="creator-application-form">
 
 
+          <!-- PERSONAL INFORMATION -->
+
           <h3 class="section-title">
             Your Information
           </h3>
@@ -408,6 +429,7 @@
             type="email"
             id="contact-email"
             autocomplete="email"
+            readonly
             required
           >
 
@@ -418,14 +440,86 @@
 
 
           <label for="phone">
-            Phone Number
+            Phone Number *
           </label>
 
           <input
             type="tel"
             id="phone"
             autocomplete="tel"
+            placeholder="Example: +33 6 12 34 56 78"
+            required
+          >
+
+          <p class="small-note">
+            Include your country calling code.
+          </p>
+
+
+          <!-- ADDRESS -->
+
+          <h3 class="section-title">
+            Address
+          </h3>
+
+
+          <label for="address-line1">
+            Address Line 1 *
+          </label>
+
+          <input
+            type="text"
+            id="address-line1"
+            autocomplete="address-line1"
+            required
+          >
+
+
+          <label for="address-line2">
+            Address Line 2
+          </label>
+
+          <input
+            type="text"
+            id="address-line2"
+            autocomplete="address-line2"
             placeholder="Optional"
+          >
+
+
+          <label for="city">
+            City / Town *
+          </label>
+
+          <input
+            type="text"
+            id="city"
+            autocomplete="address-level2"
+            required
+          >
+
+
+          <label for="state-region">
+            State / Region / Province
+          </label>
+
+          <input
+            type="text"
+            id="state-region"
+            autocomplete="address-level1"
+            placeholder="If applicable"
+          >
+
+
+          <label for="postal-code">
+            Postal / ZIP Code
+          </label>
+
+          <input
+            type="text"
+            id="postal-code"
+            autocomplete="postal-code"
+            placeholder="If applicable"
           >
 
 
@@ -441,9 +535,26 @@
           >
 
 
+          <div class="privacy-box">
+            Your phone number, email and address are
+            private account information. They are used
+            by GiftedGift Empire for Creator account
+            administration and will not be displayed
+            publicly on your product listings.
+          </div>
+
+
+          <!-- ONLINE PRESENCE -->
+
           <h3 class="section-title">
-            Online Presence
+            Online Presence *
           </h3>
+
+          <div class="required-note">
+            Please provide at least one website or social
+            media profile so GiftedGift Empire can review
+            your Creator application.
+          </div>
 
 
           <label for="website-url">
@@ -501,6 +612,8 @@
           >
 
 
+          <!-- PRODUCTS -->
+
           <h3 class="section-title">
             About Your Digital Products
           </h3>
@@ -538,6 +651,7 @@
               confirm that you understand the basic
               selling rules of GiftedGift Empire.
             </p>
+
 
             <ul class="agreement-points">
 
@@ -628,6 +742,7 @@
           <div
             id="form-message"
             class="message"
+            aria-live="polite"
           ></div>
 
         </form>
@@ -878,7 +993,7 @@
 
 
       /*
-        PREFILL LOGIN EMAIL
+        PREFILL CREATOR LOGIN EMAIL
       */
 
       document.getElementById(
@@ -928,99 +1043,168 @@
 
 
           const fullName =
-            document.getElementById(
-              "full-name"
-            ).value.trim();
+            document
+              .getElementById(
+                "full-name"
+              )
+              .value
+              .trim();
 
 
           const businessName =
-            document.getElementById(
-              "business-name"
-            ).value.trim();
+            document
+              .getElementById(
+                "business-name"
+              )
+              .value
+              .trim();
 
 
           const contactEmail =
-            document.getElementById(
-              "contact-email"
-            ).value
+            (
+              currentUser.email || ""
+            )
               .trim()
               .toLowerCase();
 
 
           const phone =
-            document.getElementById(
-              "phone"
-            ).value.trim();
+            document
+              .getElementById(
+                "phone"
+              )
+              .value
+              .trim();
+
+
+          const addressLine1 =
+            document
+              .getElementById(
+                "address-line1"
+              )
+              .value
+              .trim();
+
+
+          const addressLine2 =
+            document
+              .getElementById(
+                "address-line2"
+              )
+              .value
+              .trim();
+
+
+          const city =
+            document
+              .getElementById(
+                "city"
+              )
+              .value
+              .trim();
+
+
+          const stateRegion =
+            document
+              .getElementById(
+                "state-region"
+              )
+              .value
+              .trim();
+
+
+          const postalCode =
+            document
+              .getElementById(
+                "postal-code"
+              )
+              .value
+              .trim();
 
 
           const country =
-            document.getElementById(
-              "country"
-            ).value.trim();
+            document
+              .getElementById(
+                "country"
+              )
+              .value
+              .trim();
 
 
           const websiteURL =
-            document.getElementById(
-              "website-url"
-            ).value.trim();
+            document
+              .getElementById(
+                "website-url"
+              )
+              .value
+              .trim();
 
 
           const facebookURL =
-            document.getElementById(
-              "facebook-url"
-            ).value.trim();
+            document
+              .getElementById(
+                "facebook-url"
+              )
+              .value
+              .trim();
 
 
           const instagramURL =
-            document.getElementById(
-              "instagram-url"
-            ).value.trim();
+            document
+              .getElementById(
+                "instagram-url"
+              )
+              .value
+              .trim();
 
 
           const tiktokURL =
-            document.getElementById(
-              "tiktok-url"
-            ).value.trim();
+            document
+              .getElementById(
+                "tiktok-url"
+              )
+              .value
+              .trim();
 
 
           const youtubeURL =
-            document.getElementById(
-              "youtube-url"
-            ).value.trim();
+            document
+              .getElementById(
+                "youtube-url"
+              )
+              .value
+              .trim();
 
 
           const applicationMessage =
-            document.getElementById(
-              "application-message"
-            ).value.trim();
+            document
+              .getElementById(
+                "application-message"
+              )
+              .value
+              .trim();
 
 
           const agreementAccepted =
-            document.getElementById(
-              "agreement-accepted"
-            ).checked;
+            document
+              .getElementById(
+                "agreement-accepted"
+              )
+              .checked;
 
 
           /*
-            CLIENT-SIDE CHECKS
+          =================================================
+          BASIC INFORMATION
+          =================================================
           */
 
-          if (fullName.length < 2) {
+          if (
+            fullName.length < 2
+          ) {
 
             showMessage(
               "Please enter your full name.",
-              "error"
-            );
-
-            return;
-
-          }
-
-
-          if (country.length < 2) {
-
-            showMessage(
-              "Please enter your country.",
               "error"
             );
 
@@ -1035,7 +1219,7 @@
           ) {
 
             showMessage(
-              "Please enter a valid contact email.",
+              "Your Creator login email could not be verified. Please log out and log in again.",
               "error"
             );
 
@@ -1043,6 +1227,118 @@
 
           }
 
+
+          /*
+          =================================================
+          PHONE
+          =================================================
+          */
+
+          const phoneDigits =
+            phone.replace(
+              /\D/g,
+              ""
+            );
+
+
+          if (
+            phoneDigits.length < 7
+          ) {
+
+            showMessage(
+              "Please enter a valid phone number including your country code.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+          =================================================
+          ADDRESS
+          =================================================
+          */
+
+          if (
+            addressLine1.length < 3
+          ) {
+
+            showMessage(
+              "Please enter your address.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            city.length < 2
+          ) {
+
+            showMessage(
+              "Please enter your city or town.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            country.length < 2
+          ) {
+
+            showMessage(
+              "Please enter your country.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+          =================================================
+          ONLINE PRESENCE
+          AT LEAST ONE IS REQUIRED
+          =================================================
+          */
+
+          const hasOnlinePresence =
+            Boolean(
+              websiteURL ||
+              facebookURL ||
+              instagramURL ||
+              tiktokURL ||
+              youtubeURL
+            );
+
+
+          if (
+            !hasOnlinePresence
+          ) {
+
+            showMessage(
+              "Please provide at least one website or social media profile.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+          =================================================
+          PRODUCT INFORMATION
+          =================================================
+          */
 
           if (
             applicationMessage.length < 10
@@ -1058,7 +1354,15 @@
           }
 
 
-          if (!agreementAccepted) {
+          /*
+          =================================================
+          AGREEMENT
+          =================================================
+          */
+
+          if (
+            !agreementAccepted
+          ) {
 
             showMessage(
               "You must accept the Creator Seller Agreement before submitting your application.",
@@ -1070,30 +1374,44 @@
           }
 
 
+          /*
+          =================================================
+          SOCIAL LINKS
+          =================================================
+          */
+
           const socialLinks = {};
 
 
           if (facebookURL) {
+
             socialLinks.facebook =
               facebookURL;
+
           }
 
 
           if (instagramURL) {
+
             socialLinks.instagram =
               instagramURL;
+
           }
 
 
           if (tiktokURL) {
+
             socialLinks.tiktok =
               tiktokURL;
+
           }
 
 
           if (youtubeURL) {
+
             socialLinks.youtube =
               youtubeURL;
+
           }
 
 
@@ -1111,8 +1429,9 @@
 
 
           /*
-            DATABASE FUNCTION CREATED
-            IN STAGE 1
+          =================================================
+          SUBMIT TO SUPABASE
+          =================================================
           */
 
           const {
@@ -1134,7 +1453,7 @@
                     contactEmail,
 
                   p_phone:
-                    phone || null,
+                    phone,
 
                   p_country:
                     country,
@@ -1149,7 +1468,22 @@
                     applicationMessage,
 
                   p_agreement_accepted:
-                    true
+                    true,
+
+                  p_address_line1:
+                    addressLine1,
+
+                  p_address_line2:
+                    addressLine2 || null,
+
+                  p_city:
+                    city,
+
+                  p_state_region:
+                    stateRegion || null,
+
+                  p_postal_code:
+                    postalCode || null
 
                 }
               );
@@ -1170,7 +1504,7 @@
             );
 
 
-            let errorText =
+            const errorText =
               error.message ||
               "We could not submit your application.";
 
@@ -1203,7 +1537,9 @@
 
 
           /*
-            SUCCESS
+          =================================================
+          SUCCESS
+          =================================================
           */
 
           applicationArea.style.display =
@@ -1213,10 +1549,13 @@
             "block";
 
 
-          document.getElementById(
-            "seller-code"
-          ).textContent =
-            data || "Creator Application";
+          document
+            .getElementById(
+              "seller-code"
+            )
+            .textContent =
+              data ||
+              "Creator Application";
 
 
           window.scrollTo({
