@@ -1,0 +1,2470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Manage Creators | GiftedGift Empire
+  </title>
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1250px;
+      margin: 0 auto;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 25px;
+    }
+
+    .top-bar p {
+      margin: 6px 0 0;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    .back-row {
+      margin-bottom: 18px;
+    }
+
+    .back-row a {
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
+      border:
+        1px solid rgba(18, 58, 140, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .panel h2 {
+      margin: 0 0 6px;
+      color: #123a8c;
+    }
+
+    .intro {
+      margin: 0;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(5, minmax(130px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: #f8f9fc;
+      border:
+        1px solid #e1e6ef;
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .stat-value {
+      color: #123a8c;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns:
+        minmax(220px, 1fr)
+        190px
+        auto;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border:
+        1px solid #ccd3de;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      background: white;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18, 58, 140, 0.08);
+    }
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    button {
+      font-family: Arial, sans-serif;
+    }
+
+    .refresh-button {
+      border: none;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      padding: 11px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .refresh-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 13px 14px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border:
+        1px solid #abefc6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border:
+        1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      color: #175cd3;
+      border:
+        1px solid #b2ddff;
+    }
+
+    .creator-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .creator-card {
+      background: white;
+      border:
+        1px solid #dfe4ec;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .creator-card-header {
+      padding: 17px 18px;
+      background: #f8f9fc;
+      border-bottom:
+        1px solid #e3e7ee;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .creator-name {
+      margin: 0;
+      color: #123a8c;
+      font-size: 20px;
+    }
+
+    .creator-business {
+      margin-top: 4px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .seller-code {
+      margin-top: 7px;
+      display: inline-block;
+      background: white;
+      border:
+        1px solid #dde3ec;
+      padding: 6px 9px;
+      border-radius: 7px;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-pending {
+      background: #fffaeb;
+      color: #b54708;
+      border:
+        1px solid #fedf89;
+    }
+
+    .status-approved {
+      background: #ecfdf3;
+      color: #067647;
+      border:
+        1px solid #abefc6;
+    }
+
+    .status-rejected {
+      background: #fef3f2;
+      color: #b42318;
+      border:
+        1px solid #fecdca;
+    }
+
+    .status-suspended {
+      background: #fef3f2;
+      color: #b42318;
+      border:
+        1px solid #fecdca;
+    }
+
+    .creator-body {
+      padding: 18px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .detail-box {
+      border:
+        1px solid #e1e6ee;
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    .detail-label {
+      color: #777;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .detail-value {
+      color: #222;
+      font-size: 14px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .online-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .online-links a {
+      display: inline-block;
+      color: #123a8c;
+      background: #eef4ff;
+      border:
+        1px solid #d4e1ff;
+      text-decoration: none;
+      padding: 7px 9px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .split-box {
+      margin-top: 16px;
+      background: #f8f9fc;
+      border:
+        1px solid #e1e6ee;
+      border-radius: 11px;
+      padding: 13px;
+      line-height: 1.5;
+    }
+
+    .review-area {
+      margin-top: 18px;
+      border-top:
+        1px solid #e4e8ef;
+      padding-top: 18px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(150px, 190px)
+        1fr;
+      gap: 12px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .small-note {
+      margin: 7px 0 0;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .action-button {
+      border: none;
+      border-radius: 9px;
+      min-height: 42px;
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .approve-button {
+      background: #067647;
+      color: white;
+    }
+
+    .reject-button {
+      background: #b42318;
+      color: white;
+    }
+
+    .suspend-button {
+      background: #b54708;
+      color: white;
+    }
+
+    .reactivate-button {
+      background: #123a8c;
+      color: white;
+    }
+
+    .action-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .reason-box {
+      margin-top: 12px;
+    }
+
+    .reason-notice {
+      margin-top: 12px;
+      border-radius: 9px;
+      padding: 11px 12px;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .reason-notice.rejected {
+      background: #fef3f2;
+      color: #b42318;
+      border:
+        1px solid #fecdca;
+    }
+
+    .reason-notice.suspended {
+      background: #fffaeb;
+      color: #b54708;
+      border:
+        1px solid #fedf89;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 15px;
+      color: #666;
+      background: white;
+      border-radius: 14px;
+      border:
+        1px solid #e1e6ee;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 35px;
+      color: #666;
+    }
+
+    .private-note {
+      margin-top: 18px;
+      background: #eff8ff;
+      border:
+        1px solid #b2ddff;
+      color: #175cd3;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @media (
+      max-width: 800px
+    ) {
+
+      .stats-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (
+      max-width: 480px
+    ) {
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .page {
+        padding:
+          18px 12px 45px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .creator-body {
+        padding: 14px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header class="top-bar">
+
+    <div class="top-bar-inner">
+
+      <h1>
+        GiftedGift Empire
+      </h1>
+
+      <p>
+        Admin — Creator Management
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <main class="page">
+
+    <div class="back-row">
+
+      <a href="admin.html">
+        ← Back to Admin Dashboard
+      </a>
+
+    </div>
+
+
+    <div
+      id="page-message"
+      class="message"
+      aria-live="polite"
+    ></div>
+
+
+    <section class="panel">
+
+      <h2>
+        Creator Applications
+      </h2>
+
+      <p class="intro">
+        Review Creator applications and control who
+        is allowed to sell digital products through
+        GiftedGift Empire.
+      </p>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-label">
+            Total Creators
+          </div>
+
+          <div
+            id="stat-total"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-label">
+            Pending
+          </div>
+
+          <div
+            id="stat-pending"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-label">
+            Approved
+          </div>
+
+          <div
+            id="stat-approved"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-label">
+            Rejected
+          </div>
+
+          <div
+            id="stat-rejected"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-label">
+            Suspended
+          </div>
+
+          <div
+            id="stat-suspended"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="controls">
+
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search name, email, seller code, country or application..."
+        >
+
+
+        <select id="status-filter">
+
+          <option value="all">
+            All statuses
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="approved">
+            Approved
+          </option>
+
+          <option value="rejected">
+            Rejected
+          </option>
+
+          <option value="suspended">
+            Suspended
+          </option>
+
+        </select>
+
+
+        <button
+          type="button"
+          id="refresh-button"
+          class="refresh-button"
+          onclick="loadCreators()"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+
+      <div class="private-note">
+        Creator contact details and addresses shown
+        on this page are private Admin information.
+        They must not be displayed on public product
+        pages.
+      </div>
+
+    </section>
+
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Checking Admin access...
+    </div>
+
+
+    <div
+      id="creator-list"
+      class="creator-list"
+      style="display:none;"
+    ></div>
+
+  </main>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+
+  <script>
+
+    /*
+    =====================================================
+    SUPABASE
+    =====================================================
+    */
+
+    const SUPABASE_URL =
+      "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /*
+    =====================================================
+    STATE
+    =====================================================
+    */
+
+    let allCreators = [];
+
+    let adminUser = null;
+
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+    const creatorList =
+      document.getElementById(
+        "creator-list"
+      );
+
+    const pageMessage =
+      document.getElementById(
+        "page-message"
+      );
+
+
+    /*
+    =====================================================
+    MESSAGE
+    =====================================================
+    */
+
+    function showMessage(
+      text,
+      type = "info"
+    ) {
+
+      pageMessage.className =
+        "message " + type;
+
+      pageMessage.textContent =
+        text;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function clearMessage() {
+
+      pageMessage.className =
+        "message";
+
+      pageMessage.textContent =
+        "";
+
+    }
+
+
+    /*
+    =====================================================
+    ESCAPE USER-CONTROLLED TEXT
+    =====================================================
+    */
+
+    function escapeHTML(
+      value
+    ) {
+
+      return String(
+        value ?? ""
+      )
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    SAFE URL
+    =====================================================
+    */
+
+    function safeURL(
+      value
+    ) {
+
+      if (!value) {
+        return null;
+      }
+
+
+      try {
+
+        const url =
+          new URL(
+            value
+          );
+
+
+        if (
+          url.protocol !==
+            "https:" &&
+          url.protocol !==
+            "http:"
+        ) {
+
+          return null;
+
+        }
+
+
+        return url.href;
+
+      }
+
+      catch (error) {
+
+        return null;
+
+      }
+
+    }
+
+
+    /*
+    =====================================================
+    FORMAT DATE
+    =====================================================
+    */
+
+    function formatDate(
+      value
+    ) {
+
+      if (!value) {
+        return "Not available";
+      }
+
+
+      const date =
+        new Date(
+          value
+        );
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "Not available";
+
+      }
+
+
+      return date.toLocaleString();
+
+    }
+
+
+    /*
+    =====================================================
+    FORMAT RATE
+    =====================================================
+    */
+
+    function formatRate(
+      value
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+
+      if (
+        Number.isNaN(
+          number
+        )
+      ) {
+
+        return "0";
+
+      }
+
+
+      return number
+        .toFixed(2)
+        .replace(
+          /\.00$/,
+          ""
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    STATUS BADGE
+    =====================================================
+    */
+
+    function statusBadge(
+      status
+    ) {
+
+      const safeStatus =
+        String(
+          status || "unknown"
+        )
+          .toLowerCase();
+
+
+      return `
+        <span
+          class="
+            status-badge
+            status-${escapeHTML(
+              safeStatus
+            )}
+          "
+        >
+          ${escapeHTML(
+            safeStatus
+          )}
+        </span>
+      `;
+
+    }
+
+
+    /*
+    =====================================================
+    ONLINE PRESENCE
+    =====================================================
+    */
+
+    function createOnlineLinks(
+      creator
+    ) {
+
+      const links = [];
+
+
+      const addLink = (
+        label,
+        value
+      ) => {
+
+        const safe =
+          safeURL(
+            value
+          );
+
+
+        if (!safe) {
+          return;
+        }
+
+
+        links.push(`
+          <a
+            href="${escapeHTML(
+              safe
+            )}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${escapeHTML(
+              label
+            )}
+          </a>
+        `);
+
+      };
+
+
+      addLink(
+        "Website",
+        creator.website_url
+      );
+
+
+      const socials =
+        creator.social_links &&
+        typeof creator.social_links ===
+          "object"
+          ? creator.social_links
+          : {};
+
+
+      addLink(
+        "Facebook",
+        socials.facebook
+      );
+
+      addLink(
+        "Instagram",
+        socials.instagram
+      );
+
+      addLink(
+        "TikTok",
+        socials.tiktok
+      );
+
+      addLink(
+        "YouTube",
+        socials.youtube
+      );
+
+
+      if (
+        links.length === 0
+      ) {
+
+        return `
+          <span>
+            Not provided
+          </span>
+        `;
+
+      }
+
+
+      return `
+        <div class="online-links">
+          ${links.join("")}
+        </div>
+      `;
+
+    }
+
+
+    /*
+    =====================================================
+    ADDRESS
+    =====================================================
+    */
+
+    function creatorAddress(
+      creator
+    ) {
+
+      const parts = [
+        creator.address_line1,
+        creator.address_line2,
+        creator.city,
+        creator.state_region,
+        creator.postal_code,
+        creator.country
+      ]
+        .filter(
+          item =>
+            item &&
+            String(
+              item
+            ).trim()
+        );
+
+
+      if (
+        parts.length === 0
+      ) {
+
+        return "Not provided";
+
+      }
+
+
+      return parts
+        .map(
+          escapeHTML
+        )
+        .join(
+          "<br>"
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    ADMIN ACCESS CHECK
+    =====================================================
+    */
+
+    async function checkAdminAccess() {
+
+      loading.style.display =
+        "block";
+
+      creatorList.style.display =
+        "none";
+
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        sessionError ||
+        !sessionData.session ||
+        !sessionData.session.user
+      ) {
+
+        window.location.replace(
+          "admin.html"
+        );
+
+        return false;
+
+      }
+
+
+      adminUser =
+        sessionData.session.user;
+
+
+      /*
+        DATABASE-LEVEL ADMIN CHECK
+      */
+
+      const {
+        data: isAdmin,
+        error: adminError
+      } =
+        await supabaseClient
+          .rpc(
+            "is_site_admin"
+          );
+
+
+      if (
+        adminError ||
+        isAdmin !== true
+      ) {
+
+        console.error(
+          "Admin authorization failed:",
+          adminError
+        );
+
+
+        window.location.replace(
+          "admin.html"
+        );
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
+
+
+    /*
+    =====================================================
+    LOAD CREATORS
+    =====================================================
+    */
+
+    async function loadCreators() {
+
+      clearMessage();
+
+
+      const refreshButton =
+        document.getElementById(
+          "refresh-button"
+        );
+
+
+      refreshButton.disabled =
+        true;
+
+      refreshButton.textContent =
+        "Loading...";
+
+
+      loading.style.display =
+        "block";
+
+      loading.textContent =
+        "Loading Creator applications...";
+
+
+      creatorList.style.display =
+        "none";
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from(
+            "creator_accounts"
+          )
+          .select(`
+            creator_id,
+            seller_code,
+            full_name,
+            business_name,
+            contact_email,
+            phone,
+            address_line1,
+            address_line2,
+            city,
+            state_region,
+            postal_code,
+            country,
+            website_url,
+            social_links,
+            application_message,
+            seller_agreement_accepted,
+            seller_agreement_version,
+            seller_agreement_accepted_at,
+            status,
+            creator_share_rate,
+            platform_fee_rate,
+            settlement_currency,
+            approved_at,
+            rejected_at,
+            rejection_reason,
+            suspended_at,
+            suspension_reason,
+            created_at,
+            updated_at
+          `)
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          );
+
+
+      refreshButton.disabled =
+        false;
+
+      refreshButton.textContent =
+        "Refresh";
+
+
+      loading.style.display =
+        "none";
+
+      creatorList.style.display =
+        "grid";
+
+
+      if (error) {
+
+        console.error(
+          "Creator load error:",
+          error
+        );
+
+
+        creatorList.innerHTML =
+          "";
+
+
+        showMessage(
+          "We could not load Creator applications. Please try again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      allCreators =
+        Array.isArray(
+          data
+        )
+          ? data
+          : [];
+
+
+      updateStats();
+
+      renderCreators();
+
+    }
+
+
+    /*
+    =====================================================
+    STATS
+    =====================================================
+    */
+
+    function updateStats() {
+
+      const count =
+        status =>
+          allCreators.filter(
+            creator =>
+              creator.status ===
+              status
+          ).length;
+
+
+      document.getElementById(
+        "stat-total"
+      ).textContent =
+        allCreators.length;
+
+
+      document.getElementById(
+        "stat-pending"
+      ).textContent =
+        count(
+          "pending"
+        );
+
+
+      document.getElementById(
+        "stat-approved"
+      ).textContent =
+        count(
+          "approved"
+        );
+
+
+      document.getElementById(
+        "stat-rejected"
+      ).textContent =
+        count(
+          "rejected"
+        );
+
+
+      document.getElementById(
+        "stat-suspended"
+      ).textContent =
+        count(
+          "suspended"
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    FILTER
+    =====================================================
+    */
+
+    function getFilteredCreators() {
+
+      const search =
+        document
+          .getElementById(
+            "search-input"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const status =
+        document
+          .getElementById(
+            "status-filter"
+          )
+          .value;
+
+
+      return allCreators.filter(
+        creator => {
+
+          if (
+            status !== "all" &&
+            creator.status !==
+              status
+          ) {
+
+            return false;
+
+          }
+
+
+          if (!search) {
+
+            return true;
+
+          }
+
+
+          const socialText =
+            JSON.stringify(
+              creator.social_links ||
+              {}
+            );
+
+
+          const searchable =
+            [
+              creator.full_name,
+              creator.business_name,
+              creator.contact_email,
+              creator.phone,
+              creator.seller_code,
+              creator.country,
+              creator.city,
+              creator.application_message,
+              creator.website_url,
+              socialText
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+
+          return searchable.includes(
+            search
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    RENDER
+    =====================================================
+    */
+
+    function renderCreators() {
+
+      const creators =
+        getFilteredCreators();
+
+
+      if (
+        creators.length === 0
+      ) {
+
+        creatorList.innerHTML = `
+          <div class="empty-state">
+            No Creator applications match
+            your current search or filter.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      creatorList.innerHTML =
+        creators
+          .map(
+            creator =>
+              creatorCard(
+                creator
+              )
+          )
+          .join("");
+
+    }
+
+
+    /*
+    =====================================================
+    CREATOR CARD
+    =====================================================
+    */
+
+    function creatorCard(
+      creator
+    ) {
+
+      const creatorId =
+        escapeHTML(
+          creator.creator_id
+        );
+
+
+      const currentShare =
+        formatRate(
+          creator.creator_share_rate
+        );
+
+
+      const platformShare =
+        formatRate(
+          creator.platform_fee_rate
+        );
+
+
+      let actions = "";
+
+
+      /*
+        PENDING
+      */
+
+      if (
+        creator.status ===
+        "pending"
+      ) {
+
+        actions = `
+          <button
+            type="button"
+            class="
+              action-button
+              approve-button
+            "
+            onclick="
+              reviewCreator(
+                '${creatorId}',
+                'approve'
+              )
+            "
+          >
+            Approve Creator
+          </button>
+
+          <button
+            type="button"
+            class="
+              action-button
+              reject-button
+            "
+            onclick="
+              reviewCreator(
+                '${creatorId}',
+                'reject'
+              )
+            "
+          >
+            Reject Application
+          </button>
+        `;
+
+      }
+
+
+      /*
+        APPROVED
+      */
+
+      else if (
+        creator.status ===
+        "approved"
+      ) {
+
+        actions = `
+          <button
+            type="button"
+            class="
+              action-button
+              suspend-button
+            "
+            onclick="
+              reviewCreator(
+                '${creatorId}',
+                'suspend'
+              )
+            "
+          >
+            Suspend Creator
+          </button>
+        `;
+
+      }
+
+
+      /*
+        REJECTED
+      */
+
+      else if (
+        creator.status ===
+        "rejected"
+      ) {
+
+        actions = `
+          <button
+            type="button"
+            class="
+              action-button
+              approve-button
+            "
+            onclick="
+              reviewCreator(
+                '${creatorId}',
+                'approve'
+              )
+            "
+          >
+            Approve After Review
+          </button>
+        `;
+
+      }
+
+
+      /*
+        SUSPENDED
+      */
+
+      else if (
+        creator.status ===
+        "suspended"
+      ) {
+
+        actions = `
+          <button
+            type="button"
+            class="
+              action-button
+              reactivate-button
+            "
+            onclick="
+              reviewCreator(
+                '${creatorId}',
+                'reactivate'
+              )
+            "
+          >
+            Reactivate Creator
+          </button>
+        `;
+
+      }
+
+
+      let reasonNotice = "";
+
+
+      if (
+        creator.status ===
+          "rejected" &&
+        creator.rejection_reason
+      ) {
+
+        reasonNotice = `
+          <div
+            class="
+              reason-notice
+              rejected
+            "
+          >
+            <strong>
+              Rejection reason:
+            </strong>
+
+            ${escapeHTML(
+              creator.rejection_reason
+            )}
+          </div>
+        `;
+
+      }
+
+
+      if (
+        creator.status ===
+          "suspended" &&
+        creator.suspension_reason
+      ) {
+
+        reasonNotice = `
+          <div
+            class="
+              reason-notice
+              suspended
+            "
+          >
+            <strong>
+              Suspension reason:
+            </strong>
+
+            ${escapeHTML(
+              creator.suspension_reason
+            )}
+          </div>
+        `;
+
+      }
+
+
+      const agreement =
+        creator
+          .seller_agreement_accepted
+          ? "Accepted"
+          : "Not recorded";
+
+
+      return `
+        <article
+          class="creator-card"
+          id="creator-${creatorId}"
+        >
+
+          <div class="creator-card-header">
+
+            <div>
+
+              <h3 class="creator-name">
+                ${escapeHTML(
+                  creator.full_name ||
+                  "Unnamed Creator"
+                )}
+              </h3>
+
+              <div class="creator-business">
+                ${
+                  creator.business_name
+                    ? escapeHTML(
+                        creator.business_name
+                      )
+                    : "No business / brand name"
+                }
+              </div>
+
+              <div class="seller-code">
+                ${escapeHTML(
+                  creator.seller_code ||
+                  "No seller code"
+                )}
+              </div>
+
+            </div>
+
+
+            <div>
+              ${statusBadge(
+                creator.status
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="creator-body">
+
+            <div class="details-grid">
+
+
+              <div class="detail-box">
+
+                <div class="detail-label">
+                  Contact Email
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    creator.contact_email ||
+                    "Not provided"
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-box">
+
+                <div class="detail-label">
+                  Phone Number
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    creator.phone ||
+                    "Not provided"
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-box">
+
+                <div class="detail-label">
+                  Country
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    creator.country ||
+                    "Not provided"
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-box">
+
+                <div class="detail-label">
+                  Applied
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    formatDate(
+                      creator.created_at
+                    )
+                  )}
+                </div>
+
+              </div>
+
+
+              <div
+                class="
+                  detail-box
+                  full-width
+                "
+              >
+
+                <div class="detail-label">
+                  Private Address
+                </div>
+
+                <div class="detail-value">
+                  ${creatorAddress(
+                    creator
+                  )}
+                </div>
+
+              </div>
+
+
+              <div
+                class="
+                  detail-box
+                  full-width
+                "
+              >
+
+                <div class="detail-label">
+                  Online Presence
+                </div>
+
+                <div class="detail-value">
+                  ${createOnlineLinks(
+                    creator
+                  )}
+                </div>
+
+              </div>
+
+
+              <div
+                class="
+                  detail-box
+                  full-width
+                "
+              >
+
+                <div class="detail-label">
+                  What They Want to Sell
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    creator.application_message ||
+                    "Not provided"
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-box">
+
+                <div class="detail-label">
+                  Seller Agreement
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    agreement
+                  )}
+                  ${
+                    creator
+                      .seller_agreement_version
+                      ? `<br>Version: ${
+                          escapeHTML(
+                            creator
+                              .seller_agreement_version
+                          )
+                        }`
+                      : ""
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="detail-box">
+
+                <div class="detail-label">
+                  Agreement Date
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(
+                    formatDate(
+                      creator
+                        .seller_agreement_accepted_at
+                    )
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="split-box">
+
+              <strong>
+                Current Marketplace Split:
+              </strong>
+
+              Creator
+              <strong>
+                ${escapeHTML(
+                  currentShare
+                )}%
+              </strong>
+
+              /
+
+              GiftedGift Empire
+              <strong>
+                ${escapeHTML(
+                  platformShare
+                )}%
+              </strong>
+
+              <br>
+
+              Settlement currency:
+              <strong>
+                ${escapeHTML(
+                  creator.settlement_currency ||
+                  "EUR"
+                )}
+              </strong>
+
+            </div>
+
+
+            ${reasonNotice}
+
+
+            <div class="review-area">
+
+              <div class="review-grid">
+
+
+                <div>
+
+                  <label
+                    class="field-label"
+                    for="rate-${creatorId}"
+                  >
+                    Creator Share %
+                  </label>
+
+                  <input
+                    type="number"
+                    id="rate-${creatorId}"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    value="${escapeHTML(
+                      currentShare
+                    )}"
+                    ${
+                      (
+                        creator.status ===
+                          "pending" ||
+                        creator.status ===
+                          "rejected"
+                      )
+                        ? ""
+                        : "disabled"
+                    }
+                  >
+
+                  <p class="small-note">
+                    Used when approving or
+                    re-approving the Creator.
+                  </p>
+
+                </div>
+
+
+                <div>
+
+                  <label
+                    class="field-label"
+                    for="reason-${creatorId}"
+                  >
+                    Review Reason / Note
+                  </label>
+
+                  <textarea
+                    id="reason-${creatorId}"
+                    placeholder="Required when rejecting or suspending."
+                  ></textarea>
+
+                </div>
+
+              </div>
+
+
+              <div class="action-row">
+
+                ${actions}
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+      `;
+
+    }
+
+
+    /*
+    =====================================================
+    ADMIN REVIEW ACTION
+    =====================================================
+    */
+
+    async function reviewCreator(
+      creatorId,
+      action
+    ) {
+
+      clearMessage();
+
+
+      const reasonInput =
+        document.getElementById(
+          "reason-" +
+          creatorId
+        );
+
+
+      const rateInput =
+        document.getElementById(
+          "rate-" +
+          creatorId
+        );
+
+
+      const reason =
+        reasonInput
+          ? reasonInput
+              .value
+              .trim()
+          : "";
+
+
+      /*
+        REJECTION AND SUSPENSION
+        MUST HAVE A REASON
+      */
+
+      if (
+        (
+          action === "reject" ||
+          action === "suspend"
+        ) &&
+        reason.length < 3
+      ) {
+
+        showMessage(
+          "Please enter a reason before rejecting or suspending this Creator.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      let creatorShareRate =
+        null;
+
+
+      /*
+        SHARE RATE IS USED
+        WHEN APPROVING
+      */
+
+      if (
+        action === "approve"
+      ) {
+
+        creatorShareRate =
+          Number(
+            rateInput.value
+          );
+
+
+        if (
+          !Number.isFinite(
+            creatorShareRate
+          ) ||
+          creatorShareRate < 0 ||
+          creatorShareRate > 100
+        ) {
+
+          showMessage(
+            "Creator share rate must be between 0% and 100%.",
+            "error"
+          );
+
+          return;
+
+        }
+
+      }
+
+
+      const actionLabels = {
+
+        approve:
+          "approve this Creator",
+
+        reject:
+          "reject this Creator application",
+
+        suspend:
+          "suspend this Creator",
+
+        reactivate:
+          "reactivate this Creator"
+
+      };
+
+
+      const confirmed =
+        window.confirm(
+          "Are you sure you want to " +
+          (
+            actionLabels[
+              action
+            ] ||
+            "perform this action"
+          ) +
+          "?"
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+      /*
+        DISABLE CARD BUTTONS
+      */
+
+      const card =
+        document.getElementById(
+          "creator-" +
+          creatorId
+        );
+
+
+      const buttons =
+        card
+          ? card.querySelectorAll(
+              ".action-button"
+            )
+          : [];
+
+
+      buttons.forEach(
+        button => {
+
+          button.disabled =
+            true;
+
+        }
+      );
+
+
+      /*
+        SECURE DATABASE FUNCTION
+      */
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .rpc(
+            "admin_review_creator",
+            {
+
+              p_creator_id:
+                creatorId,
+
+              p_action:
+                action,
+
+              p_reason:
+                reason || null,
+
+              p_creator_share_rate:
+                creatorShareRate
+
+            }
+          );
+
+
+      if (error) {
+
+        console.error(
+          "Creator review error:",
+          error
+        );
+
+
+        buttons.forEach(
+          button => {
+
+            button.disabled =
+              false;
+
+          }
+        );
+
+
+        showMessage(
+          error.message ||
+          "The Creator account could not be updated.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      let successText =
+        "Creator account updated successfully.";
+
+
+      if (
+        action === "approve"
+      ) {
+
+        successText =
+          "Creator approved successfully.";
+
+      }
+
+      else if (
+        action === "reject"
+      ) {
+
+        successText =
+          "Creator application rejected.";
+
+      }
+
+      else if (
+        action === "suspend"
+      ) {
+
+        successText =
+          "Creator account suspended.";
+
+      }
+
+      else if (
+        action === "reactivate"
+      ) {
+
+        successText =
+          "Creator account reactivated.";
+
+      }
+
+
+      await loadCreators();
+
+
+      showMessage(
+        successText,
+        "success"
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    SEARCH + FILTER EVENTS
+    =====================================================
+    */
+
+    document
+      .getElementById(
+        "search-input"
+      )
+      .addEventListener(
+        "input",
+        renderCreators
+      );
+
+
+    document
+      .getElementById(
+        "status-filter"
+      )
+      .addEventListener(
+        "change",
+        renderCreators
+      );
+
+
+    /*
+    =====================================================
+    START
+    =====================================================
+    */
+
+    async function initializePage() {
+
+      const allowed =
+        await checkAdminAccess();
+
+
+      if (!allowed) {
+        return;
+      }
+
+
+      await loadCreators();
+
+    }
+
+
+    initializePage();
+
+  </script>
+
+</body>
+
+</html>
