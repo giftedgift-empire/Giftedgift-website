@@ -242,35 +242,6 @@
       line-height: 1.55;
     }
 
-    .referral-code-box {
-      margin-bottom: 18px;
-
-      padding: 16px;
-
-      background: #f7f9fd;
-
-      border: 1px solid #dce5f4;
-      border-radius: 11px;
-    }
-
-    .referral-code-label {
-      margin-bottom: 7px;
-
-      color: #666;
-
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .referral-code {
-      color: #123a8c;
-
-      font-size: 21px;
-      font-weight: 800;
-
-      word-break: break-all;
-    }
-
     .link-box {
       display: flex;
       gap: 9px;
@@ -305,10 +276,6 @@
       font-weight: 800;
 
       cursor: pointer;
-    }
-
-    .copy-button:hover {
-      opacity: 0.94;
     }
 
     .copy-message {
@@ -436,7 +403,7 @@
 
     /*
       =====================================================
-      PRODUCTS TO PROMOTE
+      PRODUCTS
       =====================================================
     */
 
@@ -579,10 +546,6 @@
       color: #111;
     }
 
-    .promote-button:hover {
-      opacity: 0.94;
-    }
-
     .product-copy-message {
       min-height: 18px;
 
@@ -713,6 +676,11 @@
         0 0 0 3px rgba(18,58,140,0.08);
     }
 
+    .payout-field input:disabled {
+      background: #f2f2f2;
+      color: #777;
+    }
+
     .payout-fields-group {
       margin-top: 5px;
     }
@@ -762,10 +730,6 @@
       font-weight: 800;
 
       cursor: pointer;
-    }
-
-    .withdraw-button:hover {
-      opacity: 0.95;
     }
 
     .withdraw-button:disabled {
@@ -927,12 +891,6 @@
     }
 
 
-    /*
-      =====================================================
-      TABLET
-      =====================================================
-    */
-
     @media (max-width: 800px) {
 
       .summary-grid {
@@ -962,12 +920,6 @@
 
     }
 
-
-    /*
-      =====================================================
-      MOBILE
-      =====================================================
-    */
 
     @media (max-width: 500px) {
 
@@ -1156,7 +1108,6 @@
         </p>
 
 
-
         <div class="link-box">
 
           <input
@@ -1260,7 +1211,6 @@
 
         </div>
 
-
       </div>
 
 
@@ -1307,7 +1257,6 @@
         </div>
 
 
-
         <div class="stat-card">
 
           <div class="stat-icon">
@@ -1332,7 +1281,6 @@
         </div>
 
 
-
         <div class="stat-card">
 
           <div class="stat-icon">
@@ -1355,7 +1303,6 @@
           </div>
 
         </div>
-
 
 
         <div class="stat-card">
@@ -1437,8 +1384,8 @@
           </h2>
 
           <p class="card-description">
-            Only approved, unpaid commissions are available
-            for withdrawal.
+            Only approved, unpaid commission balances are
+            available for withdrawal.
           </p>
 
 
@@ -1463,112 +1410,115 @@
             </div>
 
           </div>
-<div class="payout-field">
 
-  <label for="withdrawal-amount">
-    Withdrawal Amount (€)
-  </label>
-
-  <input
-    id="withdrawal-amount"
-    type="number"
-    min="20"
-    step="0.01"
-    inputmode="decimal"
-    placeholder="Enter amount to withdraw"
-  >
-
-  <div class="payout-field-help">
-    Minimum withdrawal is €20.00.
-    You cannot request more than your available balance.
-  </div>
-
-</div>
 
           <div class="payout-field">
 
-  <label for="payout-method">
-    Payment Method
-  </label>
+            <label for="withdrawal-amount">
+              Withdrawal Amount (€)
+            </label>
 
-  <select id="payout-method">
+            <input
+              id="withdrawal-amount"
+              type="number"
+              min="20"
+              step="0.01"
+              inputmode="decimal"
+              placeholder="Enter amount to withdraw"
+            >
 
-    <option value="paypal">
-      PayPal
-    </option>
+            <div class="payout-field-help">
+              Minimum withdrawal is €20.00.
+              You cannot request more than your available balance.
+            </div>
 
-    <option value="bank_transfer">
-      Bank Transfer
-    </option>
-
-  </select>
-
-</div>
-
-
-<div class="payout-field">
-
-  <label for="payout-currency">
-    Preferred Payout Currency
-  </label>
-
-  <select id="payout-currency">
-
-    <option value="EUR">
-      EUR (€) — Euro
-    </option>
-
-    <option value="NGN">
-      NGN (₦) — Nigerian Naira
-    </option>
-
-    <option value="GBP">
-      GBP (£) — British Pound
-    </option>
-
-    <option value="USD">
-      USD ($) — US Dollar
-    </option>
-
-  </select>
-
-  <div class="payout-field-help">
-    Your commission balance is currently calculated in EUR.
-    This tells GiftedGift Empire which supported currency
-    you prefer to receive when your payout is processed.
-  </div>
-
-</div>
+          </div>
 
 
-<div class="bank-info-box">
+          <div class="payout-field">
 
-  <strong>Affiliate Payout Policy</strong>
+            <label for="payout-method">
+              Payment Method
+            </label>
 
-  <br><br>
+            <select id="payout-method">
 
-  Minimum withdrawal:
-  <strong>€20</strong>
+              <option value="paypal">
+                PayPal
+              </option>
 
-  <br>
+              <option value="bank_transfer">
+                Bank Transfer
+              </option>
 
-  Weekly cutoff:
-  <strong>Thursday at 11:59 PM</strong>
+            </select>
 
-  <br>
-
-  Payout day:
-  <strong>Every Friday</strong>
-
-  <br><br>
-
-  Requests submitted after the weekly cutoff are scheduled
-  for the following Friday.
-
-</div>
+          </div>
 
 
-          <!-- PAYPAL -->
+          <div class="payout-field">
+
+            <label for="payout-currency">
+              Preferred Payout Currency
+            </label>
+
+            <select id="payout-currency">
+
+              <option value="EUR">
+                EUR (€) — Euro
+              </option>
+
+              <option value="NGN">
+                NGN (₦) — Nigerian Naira
+              </option>
+
+              <option value="GBP">
+                GBP (£) — British Pound
+              </option>
+
+              <option value="USD">
+                USD ($) — US Dollar
+              </option>
+
+            </select>
+
+            <div class="payout-field-help">
+              Your commission balance is currently calculated in EUR.
+              This tells GiftedGift Empire which supported currency
+              you prefer to receive when your payout is processed.
+            </div>
+
+          </div>
+
+
+          <div class="bank-info-box">
+
+            <strong>
+              Affiliate Payout Policy
+            </strong>
+
+            <br><br>
+
+            Minimum withdrawal:
+            <strong>€20</strong>
+
+            <br>
+
+            Weekly cutoff:
+            <strong>Thursday at 11:59 PM</strong>
+
+            <br>
+
+            Payout day:
+            <strong>Every Friday</strong>
+
+            <br><br>
+
+            Requests submitted after the weekly cutoff are
+            scheduled for the following Friday.
+
+          </div>
+
 
           <div
             id="paypal-payout-fields"
@@ -1599,8 +1549,6 @@
 
           </div>
 
-
-          <!-- BANK TRANSFER -->
 
           <div
             id="bank-payout-fields"
@@ -1706,9 +1654,12 @@
 
 
           <div class="security-note">
-            For security, the withdrawal amount is calculated
-            automatically from your approved commissions.
-            Affiliates cannot manually increase the amount.
+            For security, your available balance is calculated
+            automatically from your approved commissions and
+            previous payout activity. You may choose your
+            withdrawal amount, but the system will not allow
+            you to request less than the minimum or more than
+            your available balance.
           </div>
 
         </div>
@@ -1779,7 +1730,6 @@ const supabaseClient =
   );
 
 
-
 const loadingBox =
   document.getElementById(
     "loading-box"
@@ -1796,7 +1746,6 @@ const dashboard =
   document.getElementById(
     "dashboard"
   );
-
 
 
 let currentAffiliateId =
@@ -1936,23 +1885,24 @@ function formatCurrency(
     );
 
 
-  if (
-    !Number.isFinite(
-      number
-    )
-  ) {
-
-    return "€0.00";
-
-  }
-
-
   const currencyCode =
     String(
       currency || "EUR"
     )
       .trim()
       .toUpperCase();
+
+
+  if (
+    !Number.isFinite(
+      number
+    )
+  ) {
+
+    return currencyCode +
+      " 0.00";
+
+  }
 
 
   try {
@@ -2115,6 +2065,46 @@ function clearPayoutMessage() {
 
   box.textContent =
     "";
+
+}
+
+
+
+function canRequestWithdrawal() {
+
+  if (
+    hasOpenPayoutRequest
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    !Number.isFinite(
+      availableWithdrawalAmount
+    ) ||
+    availableWithdrawalAmount <= 0
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    availableWithdrawalCurrency ===
+      "EUR" &&
+    availableWithdrawalAmount < 20
+  ) {
+
+    return false;
+
+  }
+
+
+  return true;
 
 }
 
@@ -2554,6 +2544,12 @@ async function loadPayoutSection(
     );
 
 
+  const amountInput =
+    document.getElementById(
+      "withdrawal-amount"
+    );
+
+
   const history =
     document.getElementById(
       "payout-history"
@@ -2569,6 +2565,10 @@ async function loadPayoutSection(
 
 
   requestButton.disabled =
+    true;
+
+
+  amountInput.disabled =
     true;
 
 
@@ -2598,8 +2598,8 @@ async function loadPayoutSection(
             "affiliate_payouts"
           )
           .select(
-  "id,amount,currency,payout_currency,payment_method,provider_reference,status,receipt_label,scheduled_payout_date,created_at,paid_at"
-)
+            "id,amount,currency,payout_currency,payment_method,provider_reference,status,receipt_label,scheduled_payout_date,created_at,paid_at"
+          )
           .eq(
             "affiliate_id",
             affiliateId
@@ -2655,26 +2655,40 @@ async function loadPayoutSection(
           payout
         ) {
 
-          const payoutStatus =
+          const status =
             String(
-              payout.status || ""
+              payout.status ||
+              ""
             )
               .trim()
               .toLowerCase();
 
 
           return (
-            payoutStatus ===
-              "pending" ||
-            payoutStatus ===
-              "processing"
+            !payout.paid_at &&
+            (
+              status ===
+                "pending" ||
+              status ===
+                "processing"
+            )
           );
 
         }
       );
 
 
-    const approvedTotals =
+    /*
+      Total approved/paid commission value.
+
+      Paid commissions remain part of historical commission
+      value. We subtract actual non-rejected payouts below.
+
+      This lets partial withdrawals work correctly.
+    */
+
+
+    const withdrawableBaseTotals =
       {};
 
 
@@ -2689,8 +2703,7 @@ async function loadPayoutSection(
 
 
         if (
-          row.reversed_at ||
-          row.paid_at
+          row.reversed_at
         ) {
 
           return;
@@ -2726,7 +2739,7 @@ async function loadPayoutSection(
             .toUpperCase();
 
 
-        const commissionStatus =
+        const status =
           String(
             row.status ||
             ""
@@ -2736,27 +2749,8 @@ async function loadPayoutSection(
 
 
         if (
-          commissionStatus ===
-          "approved"
-        ) {
-
-          approvedTotals[
-            currency
-          ] =
-            (
-              approvedTotals[
-                currency
-              ] ||
-              0
-            ) +
-            amount;
-
-        }
-
-
-        if (
-          commissionStatus ===
-          "pending"
+          status ===
+            "pending"
         ) {
 
           pendingTotals[
@@ -2770,16 +2764,218 @@ async function loadPayoutSection(
             ) +
             amount;
 
+          return;
+
         }
 
+
+        if (
+          status ===
+            "approved" ||
+          status ===
+            "paid" ||
+          row.paid_at
+        ) {
+
+          withdrawableBaseTotals[
+            currency
+          ] =
+            (
+              withdrawableBaseTotals[
+                currency
+              ] ||
+              0
+            ) +
+            amount;
+
+        }
 
       }
     );
 
 
-    const approvedCurrencies =
+    /*
+      Subtract every payout that has actually reserved
+      or paid money.
+
+      Rejected/cancelled payouts do NOT reduce the balance.
+    */
+
+
+    const allocatedPayoutTotals =
+      {};
+
+
+    payouts.forEach(
+      function(
+        payout
+      ) {
+
+
+        let status =
+          String(
+            payout.status ||
+            ""
+          )
+            .trim()
+            .toLowerCase();
+
+
+        if (
+          payout.paid_at
+        ) {
+
+          status =
+            "paid";
+
+        }
+
+
+        if (
+          [
+            "rejected",
+            "cancelled",
+            "canceled"
+          ].includes(
+            status
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          ![
+            "pending",
+            "processing",
+            "paid",
+            "completed"
+          ].includes(
+            status
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        const amount =
+          Number(
+            payout.amount ||
+            0
+          );
+
+
+        if (
+          !Number.isFinite(
+            amount
+          ) ||
+          amount <= 0
+        ) {
+
+          return;
+
+        }
+
+
+        const currency =
+          String(
+            payout.currency ||
+            "EUR"
+          )
+            .trim()
+            .toUpperCase();
+
+
+        allocatedPayoutTotals[
+          currency
+        ] =
+          (
+            allocatedPayoutTotals[
+              currency
+            ] ||
+            0
+          ) +
+          amount;
+
+      }
+    );
+
+
+    const currencySet =
+      new Set([
+        ...Object.keys(
+          withdrawableBaseTotals
+        ),
+        ...Object.keys(
+          allocatedPayoutTotals
+        )
+      ]);
+
+
+    const availableTotals =
+      {};
+
+
+    currencySet.forEach(
+      function(
+        currency
+      ) {
+
+
+        const commissionTotal =
+          Number(
+            withdrawableBaseTotals[
+              currency
+            ] ||
+            0
+          );
+
+
+        const allocatedTotal =
+          Number(
+            allocatedPayoutTotals[
+              currency
+            ] ||
+            0
+          );
+
+
+        const remaining =
+          Math.max(
+            0,
+            Math.round(
+              (
+                commissionTotal -
+                allocatedTotal
+              ) *
+              100
+            ) /
+            100
+          );
+
+
+        if (
+          remaining > 0
+        ) {
+
+          availableTotals[
+            currency
+          ] =
+            remaining;
+
+        }
+
+      }
+    );
+
+
+    const availableCurrencies =
       Object.keys(
-        approvedTotals
+        availableTotals
       );
 
 
@@ -2797,40 +2993,30 @@ async function loadPayoutSection(
       "EUR";
 
 
+    amountInput.value =
+      "";
+
+
+    amountInput.removeAttribute(
+      "max"
+    );
+
+
     if (
-      hasOpenPayoutRequest
-    ) {
-
-      availableValue.textContent =
-        formatCurrency(
-          0,
-          "EUR"
-        );
-
-
-      availableNote.textContent =
-        "You already have a payout request being processed. A new request can be made after the current request is completed or rejected.";
-
-
-      requestButton.disabled =
-        true;
-
-
-    } else if (
-      approvedCurrencies.length ===
+      availableCurrencies.length ===
       1
     ) {
 
 
       availableWithdrawalCurrency =
-        approvedCurrencies[
+        availableCurrencies[
           0
         ];
 
 
       availableWithdrawalAmount =
         Number(
-          approvedTotals[
+          availableTotals[
             availableWithdrawalCurrency
           ] ||
           0
@@ -2844,46 +3030,90 @@ async function loadPayoutSection(
         );
 
 
-      availableNote.textContent =
-        "This balance contains approved, unpaid commission that is currently available for withdrawal.";
+      amountInput.max =
+        availableWithdrawalAmount
+          .toFixed(
+            2
+          );
 
 
-      const minimumPayout =
-  availableWithdrawalCurrency === "EUR"
-    ? 20
-    : 0;
+      amountInput.placeholder =
+        "Enter amount up to " +
+        formatCurrency(
+          availableWithdrawalAmount,
+          availableWithdrawalCurrency
+        );
 
-if (
-  availableWithdrawalCurrency === "EUR" &&
-  availableWithdrawalAmount < minimumPayout
-) {
-  availableNote.textContent =
-    "Minimum withdrawal is €20.00. Keep earning until your available balance reaches €20.00.";
-}
 
-requestButton.disabled =
-  availableWithdrawalAmount <= 0 ||
-  (
-    availableWithdrawalCurrency === "EUR" &&
-    availableWithdrawalAmount < minimumPayout
-  );
+      if (
+        hasOpenPayoutRequest
+      ) {
+
+
+        availableNote.textContent =
+          "This is your remaining balance. You already have a payout request being processed, so another withdrawal can be requested after the current request is completed or rejected.";
+
+
+        requestButton.disabled =
+          true;
+
+
+        amountInput.disabled =
+          true;
+
+
+      } else if (
+        availableWithdrawalCurrency ===
+          "EUR" &&
+        availableWithdrawalAmount <
+          20
+      ) {
+
+
+        availableNote.textContent =
+          "Minimum withdrawal is €20.00. Keep earning until your available balance reaches €20.00.";
+
+
+        requestButton.disabled =
+          true;
+
+
+        amountInput.disabled =
+          true;
+
+
+      } else {
+
+
+        availableNote.textContent =
+          "This is your approved commission balance remaining after previous payout activity.";
+
+
+        requestButton.disabled =
+          false;
+
+
+        amountInput.disabled =
+          false;
+
+      }
 
 
     } else if (
-      approvedCurrencies.length >
+      availableCurrencies.length >
       1
     ) {
 
 
       availableValue.textContent =
-        approvedCurrencies
+        availableCurrencies
           .map(
             function(
               currency
             ) {
 
               return formatCurrency(
-                approvedTotals[
+                availableTotals[
                   currency
                 ],
                 currency
@@ -2897,10 +3127,14 @@ requestButton.disabled =
 
 
       availableNote.textContent =
-        "You have approved commissions in more than one currency. These must be handled separately before withdrawal.";
+        "You have available commissions in more than one accounting currency. These must be handled separately.";
 
 
       requestButton.disabled =
+        true;
+
+
+      amountInput.disabled =
         true;
 
 
@@ -2915,6 +3149,15 @@ requestButton.disabled =
 
 
       if (
+        hasOpenPayoutRequest
+      ) {
+
+
+        availableNote.textContent =
+          "You already have a payout request being processed.";
+
+
+      } else if (
         pendingCurrencies.length >
         0
       ) {
@@ -2958,7 +3201,16 @@ requestButton.disabled =
       requestButton.disabled =
         true;
 
+
+      amountInput.disabled =
+        true;
+
     }
+
+
+    /*
+      PAYOUT HISTORY
+    */
 
 
     if (
@@ -3006,11 +3258,10 @@ requestButton.disabled =
 
 
               const displayedStatus =
-                status
-                  .replace(
-                    /_/g,
-                    " "
-                  );
+                status.replace(
+                  /_/g,
+                  " "
+                );
 
 
               return `
@@ -3031,10 +3282,17 @@ requestButton.disabled =
 
                     </div>
 
+
                     <span
-                      class="payout-status ${escapeHTML(status)}"
+                      class="payout-status ${escapeHTML(
+                        status
+                      )}"
                     >
-                      ${escapeHTML(displayedStatus)}
+
+                      ${escapeHTML(
+                        displayedStatus
+                      )}
+
                     </span>
 
                   </div>
@@ -3053,35 +3311,39 @@ requestButton.disabled =
 
                     </strong>
 
-<br>
+                    <br>
 
-Preferred Currency:
-<strong>
-  ${escapeHTML(
-    String(
-      payout.payout_currency ||
-      payout.currency ||
-      "EUR"
-    )
-  )}
-</strong>
+                    Preferred Currency:
+                    <strong>
 
-<br>
+                      ${escapeHTML(
+                        String(
+                          payout.payout_currency ||
+                          payout.currency ||
+                          "EUR"
+                        )
+                      )}
 
-Scheduled Payout:
-<strong>
-  ${
-    payout.scheduled_payout_date
-      ? escapeHTML(
-          payout.scheduled_payout_date
-        )
-      : "—"
-  }
-</strong>
+                    </strong>
 
-<br>
+                    <br>
 
-Requested:
+                    Scheduled Payout:
+                    <strong>
+
+                      ${
+                        payout.scheduled_payout_date
+                          ? escapeHTML(
+                              payout.scheduled_payout_date
+                            )
+                          : "—"
+                      }
+
+                    </strong>
+
+                    <br>
+
+                    Requested:
                     ${escapeHTML(
                       formatDateTime(
                         payout.created_at
@@ -3173,6 +3435,10 @@ Requested:
       true;
 
 
+    amountInput.disabled =
+      true;
+
+
     history.innerHTML = `
 
       <div class="payout-history-empty">
@@ -3231,8 +3497,7 @@ async function requestPayout() {
     !Number.isFinite(
       availableWithdrawalAmount
     ) ||
-    availableWithdrawalAmount <=
-      0
+    availableWithdrawalAmount <= 0
   ) {
 
     setPayoutMessage(
@@ -3245,44 +3510,176 @@ async function requestPayout() {
   }
 
 
+  /*
+    WITHDRAWAL AMOUNT
+  */
+
+
+  const amountInput =
+    document.getElementById(
+      "withdrawal-amount"
+    );
+
+
+  const amountText =
+    amountInput
+      .value
+      .trim();
+
+
+  if (
+    !/^\d+(\.\d{1,2})?$/.test(
+      amountText
+    )
+  ) {
+
+    setPayoutMessage(
+      "Please enter a valid withdrawal amount with no more than two decimal places.",
+      "error"
+    );
+
+    amountInput.focus();
+
+    return;
+
+  }
+
+
+  const requestedAmount =
+    Math.round(
+      Number(
+        amountText
+      ) *
+      100
+    ) /
+    100;
+
+
+  const requestedCents =
+    Math.round(
+      requestedAmount *
+      100
+    );
+
+
+  const availableCents =
+    Math.round(
+      availableWithdrawalAmount *
+      100
+    );
+
+
+  if (
+    !Number.isFinite(
+      requestedAmount
+    ) ||
+    requestedAmount <= 0
+  ) {
+
+    setPayoutMessage(
+      "Please enter a valid withdrawal amount.",
+      "error"
+    );
+
+    amountInput.focus();
+
+    return;
+
+  }
+
+
+  if (
+    availableWithdrawalCurrency ===
+      "EUR" &&
+    requestedCents <
+      2000
+  ) {
+
+    setPayoutMessage(
+      "Minimum withdrawal is €20.00.",
+      "error"
+    );
+
+    amountInput.focus();
+
+    return;
+
+  }
+
+
+  if (
+    requestedCents >
+    availableCents
+  ) {
+
+    setPayoutMessage(
+      "You cannot withdraw more than your available balance of " +
+      formatCurrency(
+        availableWithdrawalAmount,
+        availableWithdrawalCurrency
+      ) +
+      ".",
+      "error"
+    );
+
+    amountInput.focus();
+
+    return;
+
+  }
+
+
+  /*
+    PAYMENT METHOD
+  */
+
+
   const method =
     document
       .getElementById(
         "payout-method"
       )
       .value;
-const payoutCurrency =
-  document
-    .getElementById(
-      "payout-currency"
+
+
+  const payoutCurrency =
+    document
+      .getElementById(
+        "payout-currency"
+      )
+      .value
+      .trim()
+      .toUpperCase();
+
+
+  if (
+    ![
+      "EUR",
+      "NGN",
+      "GBP",
+      "USD"
+    ].includes(
+      payoutCurrency
     )
-    .value
-    .trim()
-    .toUpperCase();
+  ) {
 
+    setPayoutMessage(
+      "Please choose a valid payout currency.",
+      "error"
+    );
 
-if (
-  ![
-    "EUR",
-    "NGN",
-    "GBP",
-    "USD"
-  ].includes(
-    payoutCurrency
-  )
-) {
+    return;
 
-  setPayoutMessage(
-    "Please choose a valid payout currency.",
-    "error"
-  );
+  }
 
-  return;
-
-}
 
   let details =
     "";
+
+
+  /*
+    PAYPAL
+  */
 
 
   if (
@@ -3327,6 +3724,11 @@ if (
 
 
   } else {
+
+
+    /*
+      BANK TRANSFER
+    */
 
 
     const accountHolder =
@@ -3445,6 +3847,11 @@ if (
   }
 
 
+  /*
+    SUBMIT
+  */
+
+
   const button =
     document.getElementById(
       "request-payout-button"
@@ -3482,9 +3889,12 @@ if (
 
             p_payout_details:
               details,
-              
+
             p_payout_currency:
-      payoutCurrency
+              payoutCurrency,
+
+            p_requested_amount:
+              requestedAmount
 
           }
         );
@@ -3510,6 +3920,10 @@ if (
       );
 
     }
+
+
+    amountInput.value =
+      "";
 
 
     document
@@ -3552,14 +3966,19 @@ if (
         "";
 
 
-    setPayoutMessage(
-      "Withdrawal request submitted successfully ✅",
-      "success"
+    await loadPayoutSection(
+      currentAffiliateId
     );
 
 
-    await loadPayoutSection(
-      currentAffiliateId
+    setPayoutMessage(
+      "Withdrawal request for " +
+      formatCurrency(
+        requestedAmount,
+        availableWithdrawalCurrency
+      ) +
+      " submitted successfully ✅",
+      "success"
     );
 
 
@@ -3593,16 +4012,8 @@ if (
       "Request Withdrawal";
 
 
-    if (
-      !hasOpenPayoutRequest &&
-      availableWithdrawalAmount >
-        0
-    ) {
-
-      button.disabled =
-        false;
-
-    }
+    button.disabled =
+      !canRequestWithdrawal();
 
   }
 
@@ -3618,7 +4029,6 @@ if (
 
 
 async function loadDashboard() {
-
 
   try {
 
@@ -3821,8 +4231,6 @@ async function loadDashboard() {
         referralCode;
 
 
-
-
     document
       .getElementById(
         "referral-link"
@@ -3985,18 +4393,6 @@ async function loadDashboard() {
         !salesResponse.ok
       ) {
 
-
-        const errorText =
-          await salesResponse.text();
-
-
-        console.error(
-          "Affiliate sales load failed:",
-          salesResponse.status,
-          errorText
-        );
-
-
         document
           .getElementById(
             "qualifying-sales-count"
@@ -4079,12 +4475,6 @@ async function loadDashboard() {
         commissionError
       ) {
 
-        console.error(
-          "Affiliate commission load error:",
-          commissionError
-        );
-
-
         document
           .getElementById(
             "commission-earnings-value"
@@ -4118,21 +4508,11 @@ async function loadDashboard() {
                   );
 
 
-                if (
-                  !Number.isFinite(
-                    amount
-                  )
-                ) {
-
-                  return total;
-
-                }
-
-
-                return (
-                  total +
+                return Number.isFinite(
                   amount
-                );
+                )
+                  ? total + amount
+                  : total;
 
               },
               0
@@ -4155,12 +4535,6 @@ async function loadDashboard() {
     } catch (
       error
     ) {
-
-
-      console.error(
-        "Affiliate commission load error:",
-        error
-      );
 
 
       document
@@ -4207,13 +4581,6 @@ async function loadDashboard() {
         payoutError
       ) {
 
-
-        console.error(
-          "Affiliate payout load error:",
-          payoutError
-        );
-
-
         document
           .getElementById(
             "paid-out-value"
@@ -4225,64 +4592,63 @@ async function loadDashboard() {
       } else {
 
 
-        const paidRows =
-          Array.isArray(
-            payoutRows
-          )
-            ? payoutRows
-            : [];
-
-
         const currencyTotals =
           {};
 
 
-        paidRows.forEach(
-          function(
-            row
-          ) {
-
-
-            const amount =
-              Number(
-                row.amount ||
-                0
-              );
-
-
-            if (
-              !Number.isFinite(
-                amount
-              )
+        (
+          Array.isArray(
+            payoutRows
+          )
+            ? payoutRows
+            : []
+        )
+          .forEach(
+            function(
+              row
             ) {
 
-              return;
+
+              const amount =
+                Number(
+                  row.amount ||
+                  0
+                );
+
+
+              if (
+                !Number.isFinite(
+                  amount
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              const currency =
+                String(
+                  row.currency ||
+                  "EUR"
+                )
+                  .trim()
+                  .toUpperCase();
+
+
+              currencyTotals[
+                currency
+              ] =
+                (
+                  currencyTotals[
+                    currency
+                  ] ||
+                  0
+                ) +
+                amount;
 
             }
-
-
-            const currency =
-              String(
-                row.currency ||
-                "EUR"
-              )
-                .trim()
-                .toUpperCase();
-
-
-            currencyTotals[
-              currency
-            ] =
-              (
-                currencyTotals[
-                  currency
-                ] ||
-                0
-              ) +
-              amount;
-
-          }
-        );
+          );
 
 
         const currencies =
@@ -4291,51 +4657,38 @@ async function loadDashboard() {
           );
 
 
-        if (
-          currencies.length ===
-          0
-        ) {
+        document
+          .getElementById(
+            "paid-out-value"
+          )
+          .textContent =
 
+            currencies.length ===
+              0
 
-          document
-            .getElementById(
-              "paid-out-value"
-            )
-            .textContent =
-              formatCurrency(
-                0,
-                "EUR"
-              );
-
-
-        } else {
-
-
-          document
-            .getElementById(
-              "paid-out-value"
-            )
-            .textContent =
-              currencies
-                .map(
-                  function(
-                    currency
-                  ) {
-
-                    return formatCurrency(
-                      currencyTotals[
-                        currency
-                      ],
-                      currency
-                    );
-
-                  }
+              ? formatCurrency(
+                  0,
+                  "EUR"
                 )
-                .join(
-                  " + "
-                );
 
-        }
+              : currencies
+                  .map(
+                    function(
+                      currency
+                    ) {
+
+                      return formatCurrency(
+                        currencyTotals[
+                          currency
+                        ],
+                        currency
+                      );
+
+                    }
+                  )
+                  .join(
+                    " + "
+                  );
 
       }
 
@@ -4343,12 +4696,6 @@ async function loadDashboard() {
     } catch (
       error
     ) {
-
-
-      console.error(
-        "Affiliate payout load error:",
-        error
-      );
 
 
       document
