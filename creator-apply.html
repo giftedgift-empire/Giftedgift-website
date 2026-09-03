@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Apply as a Creator | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Apply to sell your original digital products through GiftedGift Empire."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+      text-align: center;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 25px;
+    }
+
+    .top-bar p {
+      margin: 7px 0 0;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 28px 18px 55px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 26px 20px;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+      border:
+        1px solid rgba(18, 58, 140, 0.08);
+    }
+
+    h2 {
+      color: #123a8c;
+      margin:
+        0 0 8px;
+    }
+
+    .intro {
+      margin:
+        0 0 24px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .important-box {
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+      border-left:
+        5px solid #f2bd16;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 22px;
+      line-height: 1.55;
+    }
+
+    .important-box strong {
+      color: #123a8c;
+    }
+
+    .section-title {
+      margin-top: 28px;
+      margin-bottom: 5px;
+      color: #123a8c;
+      font-size: 19px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      color: #333;
+      margin:
+        17px 0 7px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border:
+        1px solid #cfd5df;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      outline: none;
+      background: white;
+    }
+
+    input {
+      min-height: 48px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18, 58, 140, 0.08);
+    }
+
+    input[readonly] {
+      background: #f4f6f9;
+      color: #555;
+    }
+
+    .small-note {
+      margin-top: 7px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .agreement-box {
+      margin-top: 26px;
+      background: #f8f9fc;
+      border:
+        1px solid #dde3ec;
+      border-radius: 14px;
+      padding: 17px;
+    }
+
+    .agreement-box h3 {
+      margin-top: 0;
+      color: #123a8c;
+    }
+
+    .agreement-box p {
+      line-height: 1.55;
+      color: #555;
+    }
+
+    .agreement-points {
+      margin:
+        12px 0 18px;
+      padding-left: 21px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      margin-top: 18px;
+    }
+
+    .checkbox-row input {
+      width: 20px;
+      min-height: 20px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .main-button {
+      width: 100%;
+      min-height: 52px;
+      border: none;
+      border-radius: 11px;
+      background: #123a8c;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+
+    .main-button:hover {
+      background: #0d2f76;
+    }
+
+    .main-button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .secondary-button {
+      width: 100%;
+      min-height: 48px;
+      border:
+        1px solid #123a8c;
+      border-radius: 11px;
+      background: white;
+      color: #123a8c;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border:
+        1px solid #abefc6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border:
+        1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      color: #175cd3;
+      border:
+        1px solid #b2ddff;
+    }
+
+    .success-panel {
+      display: none;
+      text-align: center;
+    }
+
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .seller-code {
+      display: inline-block;
+      margin:
+        15px 0;
+      padding:
+        10px 14px;
+      background: #f4f6f9;
+      border-radius: 9px;
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px 10px;
+      color: #666;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header class="top-bar">
+
+    <h1>
+      GiftedGift Empire
+    </h1>
+
+    <p>
+      Creator Application
+    </p>
+
+  </header>
+
+
+  <main class="page">
+
+    <div class="card">
+
+      <div
+        id="loading"
+        class="loading"
+      >
+        Checking your Creator account...
+      </div>
+
+
+      <!-- APPLICATION AREA -->
+
+      <div
+        id="application-area"
+        style="display:none;"
+      >
+
+        <h2>
+          Apply to Become a Creator
+        </h2>
+
+        <p class="intro">
+          Apply to sell your original digital products
+          through GiftedGift Empire. Your account must
+          be reviewed and approved before you can submit
+          products for sale.
+        </p>
+
+
+        <div class="important-box">
+
+          <strong>
+            Important:
+          </strong>
+
+          Creating an account does not automatically
+          make you an approved seller. GiftedGift Empire
+          reviews Creator applications before activating
+          selling privileges.
+
+        </div>
+
+
+        <form id="creator-application-form">
+
+
+          <h3 class="section-title">
+            Your Information
+          </h3>
+
+
+          <label for="full-name">
+            Full Name *
+          </label>
+
+          <input
+            type="text"
+            id="full-name"
+            autocomplete="name"
+            required
+          >
+
+
+          <label for="business-name">
+            Business / Brand Name
+          </label>
+
+          <input
+            type="text"
+            id="business-name"
+            placeholder="Optional"
+          >
+
+
+          <label for="contact-email">
+            Contact Email *
+          </label>
+
+          <input
+            type="email"
+            id="contact-email"
+            autocomplete="email"
+            required
+          >
+
+          <p class="small-note">
+            This is the email GiftedGift Empire may use
+            to contact you about your Creator account.
+          </p>
+
+
+          <label for="phone">
+            Phone Number
+          </label>
+
+          <input
+            type="tel"
+            id="phone"
+            autocomplete="tel"
+            placeholder="Optional"
+          >
+
+
+          <label for="country">
+            Country *
+          </label>
+
+          <input
+            type="text"
+            id="country"
+            autocomplete="country-name"
+            required
+          >
+
+
+          <h3 class="section-title">
+            Online Presence
+          </h3>
+
+
+          <label for="website-url">
+            Website
+          </label>
+
+          <input
+            type="url"
+            id="website-url"
+            placeholder="https://..."
+          >
+
+
+          <label for="facebook-url">
+            Facebook Page / Profile
+          </label>
+
+          <input
+            type="url"
+            id="facebook-url"
+            placeholder="https://..."
+          >
+
+
+          <label for="instagram-url">
+            Instagram
+          </label>
+
+          <input
+            type="url"
+            id="instagram-url"
+            placeholder="https://..."
+          >
+
+
+          <label for="tiktok-url">
+            TikTok
+          </label>
+
+          <input
+            type="url"
+            id="tiktok-url"
+            placeholder="https://..."
+          >
+
+
+          <label for="youtube-url">
+            YouTube
+          </label>
+
+          <input
+            type="url"
+            id="youtube-url"
+            placeholder="https://..."
+          >
+
+
+          <h3 class="section-title">
+            About Your Digital Products
+          </h3>
+
+
+          <label for="application-message">
+            What digital products do you want to sell? *
+          </label>
+
+          <textarea
+            id="application-message"
+            minlength="10"
+            required
+            placeholder="Tell us about the eBooks, guides, templates, courses, planners, resources or other original digital products you want to sell."
+          ></textarea>
+
+
+          <p class="small-note">
+            You will provide the actual product files and
+            proof of ownership when submitting products
+            after your Creator account is approved.
+          </p>
+
+
+          <!-- AGREEMENT -->
+
+          <div class="agreement-box">
+
+            <h3>
+              Creator Seller Agreement
+            </h3>
+
+            <p>
+              By applying to become a Creator, you
+              confirm that you understand the basic
+              selling rules of GiftedGift Empire.
+            </p>
+
+            <ul class="agreement-points">
+
+              <li>
+                You must own or have the legal right
+                to sell every digital product you submit.
+              </li>
+
+              <li>
+                Pirated, stolen or illegally copied
+                products are prohibited.
+              </li>
+
+              <li>
+                PLR or licensed content must not be
+                falsely presented as your original work.
+              </li>
+
+              <li>
+                Products making deceptive, illegal,
+                fraudulent, medical or financial claims
+                may be rejected or removed.
+              </li>
+
+              <li>
+                Every product must be approved by
+                GiftedGift Empire before it becomes
+                available for sale.
+              </li>
+
+              <li>
+                The default sale split is 70% to the
+                Creator and 30% to GiftedGift Empire,
+                unless another rate has been specifically
+                agreed.
+              </li>
+
+              <li>
+                Creator withdrawals have a minimum
+                threshold of €20.
+              </li>
+
+              <li>
+                Refunds, reversals and chargebacks may
+                affect Creator earnings where applicable.
+              </li>
+
+            </ul>
+
+
+            <div class="checkbox-row">
+
+              <input
+                type="checkbox"
+                id="agreement-accepted"
+                required
+              >
+
+              <label for="agreement-accepted">
+                I confirm that the information I provided
+                is accurate and I accept the GiftedGift
+                Empire Creator Seller Agreement.
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="submit"
+            id="submit-button"
+            class="main-button"
+          >
+            Submit Creator Application
+          </button>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            onclick="logoutCreator()"
+          >
+            Logout
+          </button>
+
+
+          <div
+            id="form-message"
+            class="message"
+          ></div>
+
+        </form>
+
+      </div>
+
+
+      <!-- SUCCESS -->
+
+      <div
+        id="success-panel"
+        class="success-panel"
+      >
+
+        <div class="success-icon">
+          ✅
+        </div>
+
+        <h2>
+          Application Submitted
+        </h2>
+
+        <p class="intro">
+          Your Creator application has been received.
+          GiftedGift Empire will review your application
+          before you can submit products for sale.
+        </p>
+
+        <p>
+          Your Creator reference:
+        </p>
+
+        <div
+          id="seller-code"
+          class="seller-code"
+        ></div>
+
+
+        <button
+          type="button"
+          class="main-button"
+          onclick="goToCreatorPortal()"
+        >
+          Go to Creator Portal
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+
+  <script>
+
+    /*
+    =====================================================
+    SUPABASE
+    =====================================================
+    */
+
+    const SUPABASE_URL =
+      "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /*
+    =====================================================
+    REFERENCES
+    =====================================================
+    */
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+    const applicationArea =
+      document.getElementById(
+        "application-area"
+      );
+
+    const successPanel =
+      document.getElementById(
+        "success-panel"
+      );
+
+    const formMessage =
+      document.getElementById(
+        "form-message"
+      );
+
+
+    let currentUser = null;
+
+
+    /*
+    =====================================================
+    MESSAGE
+    =====================================================
+    */
+
+    function showMessage(
+      text,
+      type = "info"
+    ) {
+
+      formMessage.className =
+        "message " + type;
+
+      formMessage.textContent =
+        text;
+
+    }
+
+
+    function clearMessage() {
+
+      formMessage.className =
+        "message";
+
+      formMessage.textContent =
+        "";
+
+    }
+
+
+    /*
+    =====================================================
+    INITIAL ACCESS CHECK
+    =====================================================
+    */
+
+    async function initializeApplication() {
+
+      loading.style.display =
+        "block";
+
+      applicationArea.style.display =
+        "none";
+
+      successPanel.style.display =
+        "none";
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        error ||
+        !data.session ||
+        !data.session.user
+      ) {
+
+        window.location.replace(
+          "creator-login.html"
+        );
+
+        return;
+
+      }
+
+
+      currentUser =
+        data.session.user;
+
+
+      /*
+        CHECK WHETHER USER HAS
+        ALREADY APPLIED
+      */
+
+      const {
+        data: creator,
+        error: creatorError
+      } =
+        await supabaseClient
+          .from(
+            "creator_accounts"
+          )
+          .select(`
+            seller_code,
+            status
+          `)
+          .eq(
+            "creator_id",
+            currentUser.id
+          )
+          .maybeSingle();
+
+
+      if (creatorError) {
+
+        console.error(
+          "Creator lookup error:",
+          creatorError
+        );
+
+        loading.style.display =
+          "none";
+
+        applicationArea.style.display =
+          "block";
+
+        showMessage(
+          "We could not check your Creator application. Please try again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        ALREADY HAS CREATOR ACCOUNT
+      */
+
+      if (creator) {
+
+        window.location.replace(
+          "creator-login.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        PREFILL LOGIN EMAIL
+      */
+
+      document.getElementById(
+        "contact-email"
+      ).value =
+        currentUser.email || "";
+
+
+      loading.style.display =
+        "none";
+
+      applicationArea.style.display =
+        "block";
+
+    }
+
+
+    /*
+    =====================================================
+    APPLICATION SUBMISSION
+    =====================================================
+    */
+
+    document
+      .getElementById(
+        "creator-application-form"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+
+          if (!currentUser) {
+
+            showMessage(
+              "Your session has expired. Please log in again.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const fullName =
+            document.getElementById(
+              "full-name"
+            ).value.trim();
+
+
+          const businessName =
+            document.getElementById(
+              "business-name"
+            ).value.trim();
+
+
+          const contactEmail =
+            document.getElementById(
+              "contact-email"
+            ).value
+              .trim()
+              .toLowerCase();
+
+
+          const phone =
+            document.getElementById(
+              "phone"
+            ).value.trim();
+
+
+          const country =
+            document.getElementById(
+              "country"
+            ).value.trim();
+
+
+          const websiteURL =
+            document.getElementById(
+              "website-url"
+            ).value.trim();
+
+
+          const facebookURL =
+            document.getElementById(
+              "facebook-url"
+            ).value.trim();
+
+
+          const instagramURL =
+            document.getElementById(
+              "instagram-url"
+            ).value.trim();
+
+
+          const tiktokURL =
+            document.getElementById(
+              "tiktok-url"
+            ).value.trim();
+
+
+          const youtubeURL =
+            document.getElementById(
+              "youtube-url"
+            ).value.trim();
+
+
+          const applicationMessage =
+            document.getElementById(
+              "application-message"
+            ).value.trim();
+
+
+          const agreementAccepted =
+            document.getElementById(
+              "agreement-accepted"
+            ).checked;
+
+
+          /*
+            CLIENT-SIDE CHECKS
+          */
+
+          if (fullName.length < 2) {
+
+            showMessage(
+              "Please enter your full name.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (country.length < 2) {
+
+            showMessage(
+              "Please enter your country.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            !contactEmail ||
+            !contactEmail.includes("@")
+          ) {
+
+            showMessage(
+              "Please enter a valid contact email.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            applicationMessage.length < 10
+          ) {
+
+            showMessage(
+              "Please tell us more about the digital products you want to sell.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (!agreementAccepted) {
+
+            showMessage(
+              "You must accept the Creator Seller Agreement before submitting your application.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const socialLinks = {};
+
+
+          if (facebookURL) {
+            socialLinks.facebook =
+              facebookURL;
+          }
+
+
+          if (instagramURL) {
+            socialLinks.instagram =
+              instagramURL;
+          }
+
+
+          if (tiktokURL) {
+            socialLinks.tiktok =
+              tiktokURL;
+          }
+
+
+          if (youtubeURL) {
+            socialLinks.youtube =
+              youtubeURL;
+          }
+
+
+          const button =
+            document.getElementById(
+              "submit-button"
+            );
+
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Submitting Application...";
+
+
+          /*
+            DATABASE FUNCTION CREATED
+            IN STAGE 1
+          */
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient
+              .rpc(
+                "submit_creator_application",
+                {
+
+                  p_full_name:
+                    fullName,
+
+                  p_business_name:
+                    businessName || null,
+
+                  p_contact_email:
+                    contactEmail,
+
+                  p_phone:
+                    phone || null,
+
+                  p_country:
+                    country,
+
+                  p_website_url:
+                    websiteURL || null,
+
+                  p_social_links:
+                    socialLinks,
+
+                  p_application_message:
+                    applicationMessage,
+
+                  p_agreement_accepted:
+                    true
+
+                }
+              );
+
+
+          button.disabled =
+            false;
+
+          button.textContent =
+            "Submit Creator Application";
+
+
+          if (error) {
+
+            console.error(
+              "Application error:",
+              error
+            );
+
+
+            let errorText =
+              error.message ||
+              "We could not submit your application.";
+
+
+            if (
+              errorText
+                .toLowerCase()
+                .includes(
+                  "already have"
+                )
+            ) {
+
+              window.location.replace(
+                "creator-login.html"
+              );
+
+              return;
+
+            }
+
+
+            showMessage(
+              errorText,
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+            SUCCESS
+          */
+
+          applicationArea.style.display =
+            "none";
+
+          successPanel.style.display =
+            "block";
+
+
+          document.getElementById(
+            "seller-code"
+          ).textContent =
+            data || "Creator Application";
+
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+        }
+      );
+
+
+    /*
+    =====================================================
+    CREATOR PORTAL
+    =====================================================
+    */
+
+    function goToCreatorPortal() {
+
+      window.location.href =
+        "creator-login.html";
+
+    }
+
+
+    /*
+    =====================================================
+    LOGOUT
+    =====================================================
+    */
+
+    async function logoutCreator() {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+
+      window.location.replace(
+        "creator-login.html"
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    START
+    =====================================================
+    */
+
+    initializeApplication();
+
+  </script>
+
+</body>
+
+</html>
