@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Creator Dashboard | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Manage your GiftedGift Empire Creator account."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f7f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .top-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 25px;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    .logout-button {
+      border:
+        1px solid rgba(255,255,255,0.7);
+      background: transparent;
+      color: white;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 28px 18px 55px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 50px 20px;
+      color: #666;
+      font-weight: 700;
+    }
+
+    #dashboard {
+      display: none;
+    }
+
+    .welcome-card {
+      background: white;
+      border-radius: 17px;
+      padding: 24px 20px;
+      border:
+        1px solid rgba(18,58,140,0.08);
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+
+    .welcome-card h2 {
+      margin: 0 0 7px;
+      color: #123a8c;
+    }
+
+    .welcome-card p {
+      color: #666;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    .approved-badge {
+      display: inline-block;
+      margin-top: 14px;
+      background: #ecfdf3;
+      color: #067647;
+      border:
+        1px solid #abefc6;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(190px, 1fr)
+        );
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      border:
+        1px solid #e0e5ed;
+      box-shadow:
+        0 5px 18px rgba(0,0,0,0.04);
+    }
+
+    .stat-label {
+      color: #777;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      color: #123a8c;
+      font-size: 22px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 21px;
+      border:
+        1px solid #e0e5ed;
+      box-shadow:
+        0 5px 18px rgba(0,0,0,0.04);
+      margin-bottom: 20px;
+    }
+
+    .section h3 {
+      margin: 0 0 6px;
+      color: #123a8c;
+    }
+
+    .section-intro {
+      margin: 0 0 18px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .account-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+      gap: 13px;
+    }
+
+    .detail {
+      border:
+        1px solid #e1e6ee;
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    .detail-label {
+      color: #777;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .marketplace-box {
+      background: #f8f9fc;
+      border:
+        1px solid #e1e6ee;
+      border-radius: 12px;
+      padding: 16px;
+      line-height: 1.6;
+    }
+
+    .marketplace-box strong {
+      color: #123a8c;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(210px,1fr)
+        );
+      gap: 14px;
+    }
+
+    .feature-card {
+      border:
+        1px solid #dde3ec;
+      border-radius: 12px;
+      padding: 17px;
+      background: #fafbfc;
+    }
+
+    .feature-card h4 {
+      margin: 0 0 7px;
+      color: #123a8c;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: #666;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #fffaeb;
+      border:
+        1px solid #fedf89;
+      color: #b54708;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .website-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #123a8c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .error-box {
+      display: none;
+      background: #fef3f2;
+      color: #b42318;
+      border:
+        1px solid #fecdca;
+      border-radius: 11px;
+      padding: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    @media (
+      max-width: 650px
+    ) {
+
+      .account-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding:
+          20px 13px 45px;
+      }
+
+      .welcome-card,
+      .section {
+        padding: 17px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <header class="top-bar">
+
+    <div class="top-inner">
+
+      <div class="brand">
+
+        <h1>
+          GiftedGift Empire
+        </h1>
+
+        <p>
+          Creator Dashboard
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="logout-button"
+        onclick="logoutCreator()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="page">
+
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Checking your Creator account...
+    </div>
+
+
+    <div
+      id="error-box"
+      class="error-box"
+    ></div>
+
+
+    <div id="dashboard">
+
+
+      <!-- WELCOME -->
+
+      <section class="welcome-card">
+
+        <h2 id="welcome-name">
+          Welcome
+        </h2>
+
+        <p>
+          Your GiftedGift Empire Creator account
+          has been approved. This is your private
+          Creator workspace.
+        </p>
+
+        <span class="approved-badge">
+          ✓ Approved Creator
+        </span>
+
+      </section>
+
+
+      <!-- ACCOUNT SUMMARY -->
+
+      <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Seller Code
+          </div>
+
+          <div
+            id="seller-code"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Creator Share
+          </div>
+
+          <div
+            id="creator-share"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Platform Share
+          </div>
+
+          <div
+            id="platform-share"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Settlement Currency
+          </div>
+
+          <div
+            id="settlement-currency"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ACCOUNT INFORMATION -->
+
+      <section class="section">
+
+        <h3>
+          Creator Account
+        </h3>
+
+        <p class="section-intro">
+          Your approved Creator account information.
+        </p>
+
+
+        <div class="account-grid">
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Full Name
+            </div>
+
+            <div
+              id="full-name"
+              class="detail-value"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Business / Brand
+            </div>
+
+            <div
+              id="business-name"
+              class="detail-value"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Account Email
+            </div>
+
+            <div
+              id="contact-email"
+              class="detail-value"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Approved On
+            </div>
+
+            <div
+              id="approved-at"
+              class="detail-value"
+            >
+              —
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- MARKETPLACE TERMS -->
+
+      <section class="section">
+
+        <h3>
+          Your Marketplace Agreement
+        </h3>
+
+        <p class="section-intro">
+          These are the current commercial terms
+          attached to your Creator account.
+        </p>
+
+
+        <div class="marketplace-box">
+
+          Creator earnings share:
+          <strong id="split-creator">
+            —
+          </strong>
+
+          <br>
+
+          GiftedGift Empire platform share:
+          <strong id="split-platform">
+            —
+          </strong>
+
+          <br>
+
+          Minimum Creator withdrawal:
+          <strong>
+            €20
+          </strong>
+
+          <br>
+
+          Settlement currency:
+          <strong id="split-currency">
+            —
+          </strong>
+
+        </div>
+
+      </section>
+
+
+      <!-- WORKSPACE -->
+
+      <section class="section">
+
+        <h3>
+          Creator Workspace
+        </h3>
+
+        <p class="section-intro">
+          More Creator tools will appear here
+          as your marketplace features are activated.
+        </p>
+
+
+        <div class="feature-grid">
+
+
+          <div class="feature-card">
+
+            <h4>
+              My Digital Products
+            </h4>
+
+            <p>
+              Submit original digital products
+              for GiftedGift Empire review and
+              manage your approved listings.
+            </p>
+
+            <span class="coming-soon">
+              Building Next
+            </span>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <h4>
+              Sales & Earnings
+            </h4>
+
+            <p>
+              View completed sales and your
+              Creator earnings once the sales
+              ledger is activated.
+            </p>
+
+            <span class="coming-soon">
+              Coming Next
+            </span>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <h4>
+              Withdrawals
+            </h4>
+
+            <p>
+              Request Creator payouts once
+              your available balance reaches
+              the minimum withdrawal amount.
+            </p>
+
+            <span class="coming-soon">
+              Coming Later
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <h3>
+          GiftedGift Empire
+        </h3>
+
+        <p class="section-intro">
+          Return to the public website at any time.
+        </p>
+
+        <a
+          href="index.html"
+          class="website-link"
+        >
+          ← Visit GiftedGift Empire
+        </a>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+
+  <script>
+
+    /*
+    =====================================================
+    SUPABASE
+    =====================================================
+    */
+
+    const SUPABASE_URL =
+      "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /*
+    =====================================================
+    PAGE REFERENCES
+    =====================================================
+    */
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+
+    const dashboard =
+      document.getElementById(
+        "dashboard"
+      );
+
+
+    const errorBox =
+      document.getElementById(
+        "error-box"
+      );
+
+
+    /*
+    =====================================================
+    FORMAT RATE
+    =====================================================
+    */
+
+    function formatRate(
+      value
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+
+      if (
+        !Number.isFinite(
+          number
+        )
+      ) {
+
+        return "0%";
+
+      }
+
+
+      return (
+        number
+          .toFixed(2)
+          .replace(
+            /\.00$/,
+            ""
+          ) +
+        "%"
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    FORMAT DATE
+    =====================================================
+    */
+
+    function formatDate(
+      value
+    ) {
+
+      if (!value) {
+
+        return "Not available";
+
+      }
+
+
+      const date =
+        new Date(
+          value
+        );
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "Not available";
+
+      }
+
+
+      return date
+        .toLocaleString();
+
+    }
+
+
+    /*
+    =====================================================
+    LOAD CREATOR
+    =====================================================
+    */
+
+    async function initializeDashboard() {
+
+      loading.style.display =
+        "block";
+
+
+      dashboard.style.display =
+        "none";
+
+
+      errorBox.style.display =
+        "none";
+
+
+      /*
+        REQUIRE LOGIN
+      */
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        sessionError ||
+        !sessionData.session ||
+        !sessionData.session.user
+      ) {
+
+        window.location.replace(
+          "creator-login.html"
+        );
+
+        return;
+
+      }
+
+
+      const user =
+        sessionData.session.user;
+
+
+      /*
+        LOAD ONLY THIS CREATOR'S ACCOUNT.
+        RLS ALSO PROTECTS THIS DATABASE ROW.
+      */
+
+      const {
+        data: creator,
+        error: creatorError
+      } =
+        await supabaseClient
+          .from(
+            "creator_accounts"
+          )
+          .select(`
+            creator_id,
+            seller_code,
+            full_name,
+            business_name,
+            contact_email,
+            status,
+            creator_share_rate,
+            platform_fee_rate,
+            settlement_currency,
+            approved_at
+          `)
+          .eq(
+            "creator_id",
+            user.id
+          )
+          .maybeSingle();
+
+
+      loading.style.display =
+        "none";
+
+
+      if (creatorError) {
+
+        console.error(
+          "Creator dashboard error:",
+          creatorError
+        );
+
+
+        errorBox.textContent =
+          "We could not load your Creator account. Please try again.";
+
+
+        errorBox.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      /*
+        NO CREATOR APPLICATION
+      */
+
+      if (!creator) {
+
+        window.location.replace(
+          "creator-apply.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        ONLY APPROVED CREATORS
+        MAY ENTER THIS DASHBOARD
+      */
+
+      if (
+        creator.status !==
+        "approved"
+      ) {
+
+        window.location.replace(
+          "creator-login.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        SHOW APPROVED DASHBOARD
+      */
+
+      document
+        .getElementById(
+          "welcome-name"
+        )
+        .textContent =
+          "Welcome, " +
+          (
+            creator.full_name ||
+            "Creator"
+          );
+
+
+      document
+        .getElementById(
+          "seller-code"
+        )
+        .textContent =
+          creator.seller_code ||
+          "Not available";
+
+
+      document
+        .getElementById(
+          "creator-share"
+        )
+        .textContent =
+          formatRate(
+            creator.creator_share_rate
+          );
+
+
+      document
+        .getElementById(
+          "platform-share"
+        )
+        .textContent =
+          formatRate(
+            creator.platform_fee_rate
+          );
+
+
+      document
+        .getElementById(
+          "settlement-currency"
+        )
+        .textContent =
+          creator.settlement_currency ||
+          "EUR";
+
+
+      document
+        .getElementById(
+          "full-name"
+        )
+        .textContent =
+          creator.full_name ||
+          "Not provided";
+
+
+      document
+        .getElementById(
+          "business-name"
+        )
+        .textContent =
+          creator.business_name ||
+          "Not provided";
+
+
+      document
+        .getElementById(
+          "contact-email"
+        )
+        .textContent =
+          creator.contact_email ||
+          user.email ||
+          "Not available";
+
+
+      document
+        .getElementById(
+          "approved-at"
+        )
+        .textContent =
+          formatDate(
+            creator.approved_at
+          );
+
+
+      document
+        .getElementById(
+          "split-creator"
+        )
+        .textContent =
+          formatRate(
+            creator.creator_share_rate
+          );
+
+
+      document
+        .getElementById(
+          "split-platform"
+        )
+        .textContent =
+          formatRate(
+            creator.platform_fee_rate
+          );
+
+
+      document
+        .getElementById(
+          "split-currency"
+        )
+        .textContent =
+          creator.settlement_currency ||
+          "EUR";
+
+
+      dashboard.style.display =
+        "block";
+
+    }
+
+
+    /*
+    =====================================================
+    LOGOUT
+    =====================================================
+    */
+
+    async function logoutCreator() {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+
+      window.location.replace(
+        "creator-login.html"
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    START
+    =====================================================
+    */
+
+    initializeDashboard();
+
+  </script>
+
+</body>
+
+</html>
