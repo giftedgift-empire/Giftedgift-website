@@ -4560,7 +4560,7 @@ async function rejectPayout(
 
   if (
     !confirm(
-      "Reject this payout request?"
+      "Reject this payout request? The linked approved commissions will be released and become available for a future withdrawal."
     )
   ) {
 
@@ -4569,54 +4569,87 @@ async function rejectPayout(
   }
 
 
-  const {
-    error
-  } =
-    await supabaseClient
-      .from(
-        "affiliate_payouts"
-      )
-      .update({
+  try {
 
-        status:
-          "rejected",
 
-        paid_at:
-          null
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_reject_affiliate_payout",
+          {
 
-      })
-      .eq(
-        "id",
-        payout.id
-      )
-      .is(
-        "paid_at",
-        null
+            p_payout_id:
+              payout.id
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    if (
+      !data ||
+      data.success !== true
+    ) {
+
+      throw new Error(
+        "The payout request could not be rejected."
+      );
+
+    }
+
+
+    const released =
+      Number(
+        data.released_commissions ||
+        0
       );
 
 
-  if (
-    error
-  ) {
-
     showMessage(
-      error.message ||
-      "Payout could not be rejected.",
-      "error"
+      "Payout rejected successfully. " +
+      released +
+      " linked commission(s) were released for a future withdrawal."
     );
 
 
-    return;
+    await Promise.all([
+      loadCommissions(),
+      loadPayouts()
+    ]);
+
+
+    updateMainStats();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Reject payout error:",
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Payout request could not be rejected.",
+      "error"
+    );
 
   }
-
-
-  showMessage(
-    "Payout request rejected."
-  );
-
-
-  await loadPayouts();
 
 }
 
