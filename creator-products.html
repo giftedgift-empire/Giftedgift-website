@@ -1,0 +1,3784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    My Digital Products | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Manage and submit your digital products as an approved GiftedGift Empire Creator."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f7f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .top-inner {
+      width: 100%;
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 25px;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .top-button {
+      border:
+        1px solid rgba(255,255,255,0.7);
+      background: transparent;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1150px;
+      margin: auto;
+      padding: 25px 16px 60px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 45px 15px;
+      color: #666;
+      font-weight: 700;
+    }
+
+    #page-content {
+      display: none;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 13px 14px;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      color: #175cd3;
+      border: 1px solid #b2ddff;
+    }
+
+    .welcome {
+      background: white;
+      border:
+        1px solid rgba(18,58,140,0.08);
+      border-radius: 16px;
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .welcome h2 {
+      margin: 0 0 7px;
+      color: #123a8c;
+    }
+
+    .welcome p {
+      margin: 0;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(150px,1fr)
+        );
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #e0e5ed;
+    }
+
+    .stat-label {
+      color: #777;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      color: #123a8c;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e0e5ed;
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.05);
+      padding: 21px;
+      margin-bottom: 22px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .panel h3 {
+      color: #123a8c;
+      margin: 0 0 6px;
+    }
+
+    .panel-intro {
+      margin: 0;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .new-button {
+      border: none;
+      background: #123a8c;
+      color: white;
+      min-height: 42px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .editing-banner {
+      display: none;
+      background: #eff8ff;
+      color: #175cd3;
+      border: 1px solid #b2ddff;
+      border-radius: 10px;
+      padding: 11px 13px;
+      margin-bottom: 17px;
+      line-height: 1.5;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+      gap: 15px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 7px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #cfd5df;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      background: white;
+      outline: none;
+    }
+
+    input {
+      min-height: 46px;
+    }
+
+    textarea {
+      min-height: 115px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .small-note {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 6px 0 0;
+    }
+
+    .upload-box {
+      border:
+        1px dashed #b8c3d2;
+      border-radius: 11px;
+      background: #fafbfc;
+      padding: 14px;
+    }
+
+    .file-status {
+      margin-top: 9px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .cover-preview {
+      display: none;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 11px;
+      border: 1px solid #dde3ec;
+    }
+
+    .declaration-box {
+      background: #f8f9fc;
+      border: 1px solid #dde3ec;
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .checkbox-row input {
+      width: 20px;
+      min-height: 20px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 21px;
+    }
+
+    .save-button,
+    .submit-button,
+    .cancel-button {
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      min-height: 46px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .save-button {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .submit-button {
+      background: #123a8c;
+      color: white;
+    }
+
+    .cancel-button {
+      background: #e9edf3;
+      color: #333;
+    }
+
+    .save-button:disabled,
+    .submit-button:disabled,
+    .cancel-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .important-note {
+      background: #fffaeb;
+      color: #7a2e0e;
+      border: 1px solid #fedf89;
+      border-radius: 10px;
+      padding: 12px 13px;
+      line-height: 1.5;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .products-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .product-card {
+      border: 1px solid #dfe4ec;
+      border-radius: 13px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .product-main {
+      padding: 15px;
+      display: grid;
+      grid-template-columns:
+        100px 1fr;
+      gap: 15px;
+    }
+
+    .product-cover {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 9px;
+      border: 1px solid #dde3ec;
+      background: #f3f5f8;
+    }
+
+    .cover-placeholder {
+      width: 100px;
+      height: 100px;
+      border-radius: 9px;
+      background: #f1f4f8;
+      border: 1px solid #dde3ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+      padding: 7px;
+    }
+
+    .product-title {
+      color: #123a8c;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .product-code {
+      font-family: monospace;
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .product-meta {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-draft {
+      background: #eef2f6;
+      color: #475467;
+    }
+
+    .status-pending {
+      background: #fffaeb;
+      color: #b54708;
+      border: 1px solid #fedf89;
+    }
+
+    .status-approved {
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .status-rejected,
+    .status-suspended {
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .status-archived {
+      background: #f2f4f7;
+      color: #475467;
+    }
+
+    .rejection-box {
+      margin-top: 10px;
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+      border-radius: 8px;
+      padding: 9px 10px;
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    .product-actions {
+      border-top: 1px solid #e4e8ef;
+      padding: 11px 15px;
+      background: #fafbfc;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .edit-button {
+      border: none;
+      background: #123a8c;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .locked-note {
+      color: #777;
+      font-size: 13px;
+      padding: 7px 0;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #666;
+      background: #f8f9fc;
+      padding: 35px 15px;
+      border-radius: 11px;
+      border: 1px solid #e1e6ee;
+    }
+
+    @media (
+      max-width: 680px
+    ) {
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+
+      .product-main {
+        grid-template-columns: 78px 1fr;
+      }
+
+      .product-cover,
+      .cover-placeholder {
+        width: 78px;
+        height: 78px;
+      }
+
+      .form-actions button {
+        width: 100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="top-inner">
+
+    <div class="brand">
+
+      <h1>
+        GiftedGift Empire
+      </h1>
+
+      <p>
+        My Digital Products
+      </p>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <button
+        type="button"
+        class="top-button"
+        onclick="goDashboard()"
+      >
+        Dashboard
+      </button>
+
+      <button
+        type="button"
+        class="top-button"
+        onclick="logoutCreator()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Checking your Creator account...
+  </div>
+
+
+  <div
+    id="page-content"
+  >
+
+
+    <div
+      id="page-message"
+      class="message"
+      aria-live="polite"
+    ></div>
+
+
+    <section class="welcome">
+
+      <h2>
+        My Digital Products
+      </h2>
+
+      <p>
+        Create and manage digital products for
+        GiftedGift Empire. Save unfinished products
+        as drafts and submit completed products for
+        Admin review.
+      </p>
+
+    </section>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Total Products
+        </div>
+
+        <div
+          id="stat-total"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Draft
+        </div>
+
+        <div
+          id="stat-draft"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Pending Review
+        </div>
+
+        <div
+          id="stat-pending"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Approved
+        </div>
+
+        <div
+          id="stat-approved"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Rejected
+        </div>
+
+        <div
+          id="stat-rejected"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT FORM -->
+
+    <section class="panel">
+
+      <div class="panel-header">
+
+        <div>
+
+          <h3>
+            Add / Edit Digital Product
+          </h3>
+
+          <p class="panel-intro">
+            Drafts may be saved before every field
+            or file is completed.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="new-button"
+          onclick="startNewProduct()"
+        >
+          + New Product
+        </button>
+
+      </div>
+
+
+      <div
+        id="editing-banner"
+        class="editing-banner"
+      ></div>
+
+
+      <form
+        id="product-form"
+        onsubmit="return false;"
+      >
+
+
+        <div class="form-grid">
+
+
+          <div class="full-width">
+
+            <label for="product-title">
+              Product Title
+            </label>
+
+            <input
+              type="text"
+              id="product-title"
+              maxlength="180"
+              placeholder="Example: Social Media Growth Guide"
+            >
+
+          </div>
+
+
+          <div class="full-width">
+
+            <label for="product-description">
+              Product Description
+            </label>
+
+            <textarea
+              id="product-description"
+              placeholder="Explain what the product contains, who it is for and what the customer will receive."
+            ></textarea>
+
+          </div>
+
+
+          <div>
+
+            <label for="product-category">
+              Category
+            </label>
+
+            <input
+              type="text"
+              id="product-category"
+              maxlength="100"
+              placeholder="Example: Business & Marketing"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label for="product-type">
+              Product Type
+            </label>
+
+            <select id="product-type">
+
+              <option value="">
+                Select product type
+              </option>
+
+              <option value="ebook">
+                eBook
+              </option>
+
+              <option value="guide">
+                Guide
+              </option>
+
+              <option value="template">
+                Template
+              </option>
+
+              <option value="printable">
+                Printable
+              </option>
+
+              <option value="planner">
+                Planner
+              </option>
+
+              <option value="course">
+                Course
+              </option>
+
+              <option value="resource">
+                Digital Resource
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label for="product-price">
+              Selling Price
+            </label>
+
+            <input
+              type="number"
+              id="product-price"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label for="product-currency">
+              Currency
+            </label>
+
+            <select id="product-currency">
+
+              <option value="EUR">
+                EUR — Euro
+              </option>
+
+              <option value="USD">
+                USD — US Dollar
+              </option>
+
+              <option value="GBP">
+                GBP — British Pound
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- COVER IMAGE -->
+
+          <div class="full-width">
+
+            <label for="cover-file">
+              Product Cover Image
+            </label>
+
+            <div class="upload-box">
+
+              <input
+                type="file"
+                id="cover-file"
+                accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
+              >
+
+              <p class="small-note">
+                Upload from your phone/gallery or files.
+                Maximum size: 10 MB.
+              </p>
+
+              <div
+                id="cover-file-status"
+                class="file-status"
+              >
+                No cover uploaded yet.
+              </div>
+
+              <img
+                id="cover-preview"
+                class="cover-preview"
+                alt="Product cover preview"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- DIGITAL FILE -->
+
+          <div class="full-width">
+
+            <label for="digital-file">
+              Digital Product File
+            </label>
+
+            <div class="upload-box">
+
+              <input
+                type="file"
+                id="digital-file"
+              >
+
+              <p class="small-note">
+                Upload the actual file customers will
+                receive after a valid purchase.
+                Maximum size: 200 MB.
+                Executable and web-script files are prohibited.
+              </p>
+
+              <div
+                id="digital-file-status"
+                class="file-status"
+              >
+                No digital product file uploaded yet.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- RIGHTS -->
+
+          <div>
+
+            <label for="rights-basis">
+              Your Right to Sell This Product
+            </label>
+
+            <select id="rights-basis">
+
+              <option value="">
+                Select
+              </option>
+
+              <option value="original">
+                I created / own this product
+              </option>
+
+              <option value="licensed">
+                I have a licence to sell it
+              </option>
+
+              <option value="plr">
+                PLR / resale rights
+              </option>
+
+              <option value="other">
+                Other legal selling rights
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label for="proof-file">
+              Ownership / Rights Proof
+            </label>
+
+            <div class="upload-box">
+
+              <input
+                type="file"
+                id="proof-file"
+                accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.heif,.txt,.doc,.docx"
+              >
+
+              <p class="small-note">
+                Optional if you provide a sufficient
+                written explanation below.
+                Maximum size: 25 MB.
+              </p>
+
+              <div
+                id="proof-file-status"
+                class="file-status"
+              >
+                No proof file uploaded yet.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="full-width">
+
+            <label for="proof-notes">
+              Proof / Rights Explanation
+            </label>
+
+            <textarea
+              id="proof-notes"
+              placeholder="Explain how you created the product or describe the licence/rights that allow you to sell it."
+            ></textarea>
+
+          </div>
+
+
+          <div class="full-width">
+
+            <label for="refund-terms">
+              Refund Terms
+            </label>
+
+            <textarea
+              id="refund-terms"
+              placeholder="Explain the refund terms that apply to this digital product."
+            ></textarea>
+
+          </div>
+
+
+          <div class="full-width">
+
+            <div class="declaration-box">
+
+              <div class="checkbox-row">
+
+                <input
+                  type="checkbox"
+                  id="rights-declaration"
+                >
+
+                <label for="rights-declaration">
+                  I confirm that I own this product
+                  or have the legal right to sell it.
+                  I understand that pirated, stolen,
+                  illegally copied or falsely represented
+                  products are prohibited on
+                  GiftedGift Empire.
+                </label>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="important-note">
+          Saving a draft does not send the product
+          to GiftedGift Empire for approval.
+          Once you choose <strong>Submit for Review</strong>,
+          the product and its files are locked while
+          Admin reviews them.
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            id="save-button"
+            class="save-button"
+            onclick="saveCurrentProduct(false)"
+          >
+            Save Draft
+          </button>
+
+
+          <button
+            type="button"
+            id="submit-button"
+            class="submit-button"
+            onclick="saveCurrentProduct(true)"
+          >
+            Submit for Review
+          </button>
+
+
+          <button
+            type="button"
+            id="cancel-button"
+            class="cancel-button"
+            onclick="startNewProduct()"
+          >
+            Clear Form
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <!-- MY PRODUCTS -->
+
+    <section class="panel">
+
+      <div class="panel-header">
+
+        <div>
+
+          <h3>
+            My Products
+          </h3>
+
+          <p class="panel-intro">
+            Track the review status of every
+            Creator product you submit.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="products-list"
+        class="products-list"
+      >
+        Loading products...
+      </div>
+
+    </section>
+
+
+  </div>
+
+</main>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  const COVER_BUCKET =
+    "creator-product-covers";
+
+  const DIGITAL_BUCKET =
+    "creator-product-files";
+
+  const PROOF_BUCKET =
+    "creator-product-proofs";
+
+
+  /*
+  =====================================================
+  STATE
+  =====================================================
+  */
+
+  let currentUser = null;
+
+  let currentCreator = null;
+
+  let allProducts = [];
+
+  let editingProductId = null;
+
+  let existingCoverPath = null;
+
+  let existingDigitalPath = null;
+
+  let existingDigitalName = null;
+
+  let existingProofPath = null;
+
+
+  /*
+  =====================================================
+  REFERENCES
+  =====================================================
+  */
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  const pageContent =
+    document.getElementById(
+      "page-content"
+    );
+
+  const pageMessage =
+    document.getElementById(
+      "page-message"
+    );
+
+  const saveButton =
+    document.getElementById(
+      "save-button"
+    );
+
+  const submitButton =
+    document.getElementById(
+      "submit-button"
+    );
+
+  const cancelButton =
+    document.getElementById(
+      "cancel-button"
+    );
+
+
+  /*
+  =====================================================
+  MESSAGE
+  =====================================================
+  */
+
+  function showMessage(
+    text,
+    type = "info"
+  ) {
+
+    pageMessage.className =
+      "message " + type;
+
+    pageMessage.textContent =
+      text;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function clearMessage() {
+
+    pageMessage.className =
+      "message";
+
+    pageMessage.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  HTML SAFETY
+  =====================================================
+  */
+
+  function escapeHTML(
+    value
+  ) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  /*
+  =====================================================
+  FORMAT
+  =====================================================
+  */
+
+  function formatMoney(
+    amount,
+    currency
+  ) {
+
+    if (
+      amount === null ||
+      amount === undefined ||
+      amount === ""
+    ) {
+
+      return "Price not set";
+
+    }
+
+
+    const number =
+      Number(
+        amount
+      );
+
+
+    if (
+      !Number.isFinite(
+        number
+      )
+    ) {
+
+      return "Price not set";
+
+    }
+
+
+    try {
+
+      return new Intl
+        .NumberFormat(
+          undefined,
+          {
+            style: "currency",
+            currency:
+              currency || "EUR"
+          }
+        )
+        .format(
+          number
+        );
+
+    }
+
+    catch (error) {
+
+      return (
+        String(
+          currency || "EUR"
+        ) +
+        " " +
+        number.toFixed(2)
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  FILE NAMES
+  =====================================================
+  */
+
+  function safeFileName(
+    fileName
+  ) {
+
+    const cleaned =
+      String(
+        fileName || "file"
+      )
+        .replace(
+          /[^A-Za-z0-9._-]+/g,
+          "-"
+        )
+        .replace(
+          /-+/g,
+          "-"
+        );
+
+
+    return (
+      cleaned ||
+      "file"
+    );
+
+  }
+
+
+  function fileExtension(
+    fileName
+  ) {
+
+    const match =
+      String(
+        fileName || ""
+      )
+        .toLowerCase()
+        .match(
+          /\.([a-z0-9]+)$/
+        );
+
+
+    return match
+      ? match[1]
+      : "";
+
+  }
+
+
+  /*
+  =====================================================
+  FILE VALIDATION
+  =====================================================
+  */
+
+  function validateCoverFile(
+    file
+  ) {
+
+    if (!file) {
+      return;
+    }
+
+
+    if (
+      file.size >
+      10 * 1024 * 1024
+    ) {
+
+      throw new Error(
+        "Cover image must be 10 MB or smaller."
+      );
+
+    }
+
+
+    const allowedExtensions =
+      [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "heic",
+        "heif"
+      ];
+
+
+    if (
+      !allowedExtensions.includes(
+        fileExtension(
+          file.name
+        )
+      )
+    ) {
+
+      throw new Error(
+        "Cover image must be JPG, PNG, WEBP, HEIC or HEIF."
+      );
+
+    }
+
+  }
+
+
+  function validateDigitalFile(
+    file
+  ) {
+
+    if (!file) {
+      return;
+    }
+
+
+    if (
+      file.size >
+      200 * 1024 * 1024
+    ) {
+
+      throw new Error(
+        "Digital product file must be 200 MB or smaller."
+      );
+
+    }
+
+
+    const blockedExtensions =
+      [
+        "exe",
+        "msi",
+        "bat",
+        "cmd",
+        "com",
+        "scr",
+        "ps1",
+        "sh",
+        "js",
+        "mjs",
+        "html",
+        "htm",
+        "php"
+      ];
+
+
+    if (
+      blockedExtensions.includes(
+        fileExtension(
+          file.name
+        )
+      )
+    ) {
+
+      throw new Error(
+        "This file type is not allowed for security reasons."
+      );
+
+    }
+
+  }
+
+
+  function validateProofFile(
+    file
+  ) {
+
+    if (!file) {
+      return;
+    }
+
+
+    if (
+      file.size >
+      25 * 1024 * 1024
+    ) {
+
+      throw new Error(
+        "Ownership proof file must be 25 MB or smaller."
+      );
+
+    }
+
+
+    const allowedExtensions =
+      [
+        "pdf",
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "heic",
+        "heif",
+        "txt",
+        "doc",
+        "docx"
+      ];
+
+
+    if (
+      !allowedExtensions.includes(
+        fileExtension(
+          file.name
+        )
+      )
+    ) {
+
+      throw new Error(
+        "Proof file must be PDF, image, TXT, DOC or DOCX."
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD ACCOUNT
+  =====================================================
+  */
+
+  async function initializePage() {
+
+    loading.style.display =
+      "block";
+
+    pageContent.style.display =
+      "none";
+
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError ||
+      !sessionData.session ||
+      !sessionData.session.user
+    ) {
+
+      window.location.replace(
+        "creator-login.html"
+      );
+
+      return;
+
+    }
+
+
+    currentUser =
+      sessionData.session.user;
+
+
+    const {
+      data: creator,
+      error: creatorError
+    } =
+      await supabaseClient
+        .from(
+          "creator_accounts"
+        )
+        .select(`
+          creator_id,
+          seller_code,
+          full_name,
+          status
+        `)
+        .eq(
+          "creator_id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (
+      creatorError ||
+      !creator
+    ) {
+
+      window.location.replace(
+        "creator-login.html"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      creator.status !==
+      "approved"
+    ) {
+
+      window.location.replace(
+        "creator-login.html"
+      );
+
+      return;
+
+    }
+
+
+    currentCreator =
+      creator;
+
+
+    loading.style.display =
+      "none";
+
+    pageContent.style.display =
+      "block";
+
+
+    startNewProduct();
+
+    await loadProducts();
+
+  }
+
+
+  /*
+  =====================================================
+  COLLECT FORM
+  =====================================================
+  */
+
+  function collectFormValues() {
+
+    const priceValue =
+      document
+        .getElementById(
+          "product-price"
+        )
+        .value
+        .trim();
+
+
+    const price =
+      priceValue === ""
+        ? null
+        : Number(
+            priceValue
+          );
+
+
+    return {
+
+      title:
+        document
+          .getElementById(
+            "product-title"
+          )
+          .value
+          .trim(),
+
+      description:
+        document
+          .getElementById(
+            "product-description"
+          )
+          .value
+          .trim(),
+
+      category:
+        document
+          .getElementById(
+            "product-category"
+          )
+          .value
+          .trim(),
+
+      price,
+
+      currency:
+        document
+          .getElementById(
+            "product-currency"
+          )
+          .value,
+
+      productType:
+        document
+          .getElementById(
+            "product-type"
+          )
+          .value,
+
+      rightsBasis:
+        document
+          .getElementById(
+            "rights-basis"
+          )
+          .value,
+
+      proofNotes:
+        document
+          .getElementById(
+            "proof-notes"
+          )
+          .value
+          .trim(),
+
+      refundTerms:
+        document
+          .getElementById(
+            "refund-terms"
+          )
+          .value
+          .trim(),
+
+      rightsDeclaration:
+        document
+          .getElementById(
+            "rights-declaration"
+          )
+          .checked
+
+    };
+
+  }
+
+
+  /*
+  =====================================================
+  SUBMISSION VALIDATION
+  =====================================================
+  */
+
+  function validateForSubmission(
+    values
+  ) {
+
+    if (
+      values.title.length < 2
+    ) {
+
+      throw new Error(
+        "Please enter a product title."
+      );
+
+    }
+
+
+    if (
+      values.description.length < 20
+    ) {
+
+      throw new Error(
+        "Please provide a fuller product description."
+      );
+
+    }
+
+
+    if (
+      values.category.length < 2
+    ) {
+
+      throw new Error(
+        "Please enter a product category."
+      );
+
+    }
+
+
+    if (
+      !Number.isFinite(
+        values.price
+      ) ||
+      values.price <= 0
+    ) {
+
+      throw new Error(
+        "Please enter a valid selling price greater than zero."
+      );
+
+    }
+
+
+    if (
+      !values.productType
+    ) {
+
+      throw new Error(
+        "Please select a digital product type."
+      );
+
+    }
+
+
+    const coverFile =
+      document
+        .getElementById(
+          "cover-file"
+        )
+        .files[0];
+
+
+    if (
+      !coverFile &&
+      !existingCoverPath
+    ) {
+
+      throw new Error(
+        "Please upload a product cover image."
+      );
+
+    }
+
+
+    const digitalFile =
+      document
+        .getElementById(
+          "digital-file"
+        )
+        .files[0];
+
+
+    if (
+      !digitalFile &&
+      !existingDigitalPath
+    ) {
+
+      throw new Error(
+        "Please upload the digital product file."
+      );
+
+    }
+
+
+    if (
+      !values.rightsBasis
+    ) {
+
+      throw new Error(
+        "Please state what rights you have to sell this product."
+      );
+
+    }
+
+
+    if (
+      !values.rightsDeclaration
+    ) {
+
+      throw new Error(
+        "You must confirm that you have the legal right to sell this product."
+      );
+
+    }
+
+
+    const proofFile =
+      document
+        .getElementById(
+          "proof-file"
+        )
+        .files[0];
+
+
+    if (
+      !proofFile &&
+      !existingProofPath &&
+      values.proofNotes.length < 10
+    ) {
+
+      throw new Error(
+        "Please upload ownership proof or provide a sufficient explanation of your selling rights."
+      );
+
+    }
+
+
+    if (
+      values.refundTerms.length < 10
+    ) {
+
+      throw new Error(
+        "Please provide the refund terms for this product."
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  SAVE METADATA RPC
+  =====================================================
+  */
+
+  async function saveMetadata(
+    productId,
+    values,
+    paths
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "save_creator_product_draft",
+          {
+
+            p_product_id:
+              productId || null,
+
+            p_title:
+              values.title || null,
+
+            p_description:
+              values.description || null,
+
+            p_category:
+              values.category || null,
+
+            p_price:
+              values.price,
+
+            p_currency:
+              values.currency || "EUR",
+
+            p_product_type:
+              values.productType || null,
+
+            p_cover_image_path:
+              paths.coverPath || null,
+
+            p_digital_file_path:
+              paths.digitalPath || null,
+
+            p_digital_file_name:
+              paths.digitalName || null,
+
+            p_proof_file_path:
+              paths.proofPath || null,
+
+            p_proof_notes:
+              values.proofNotes || null,
+
+            p_rights_basis:
+              values.rightsBasis || null,
+
+            p_rights_declaration:
+              values.rightsDeclaration,
+
+            p_refund_terms:
+              values.refundTerms || null
+
+          }
+        );
+
+
+    if (error) {
+
+      throw error;
+
+    }
+
+
+    return data;
+
+  }
+
+
+  /*
+  =====================================================
+  UPLOAD FILE
+  =====================================================
+  */
+
+  async function uploadFile(
+    bucket,
+    productId,
+    folder,
+    file
+  ) {
+
+    const path =
+
+      currentUser.id +
+      "/" +
+      productId +
+      "/" +
+      folder +
+      "/" +
+      Date.now() +
+      "-" +
+      safeFileName(
+        file.name
+      );
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          bucket
+        )
+        .upload(
+          path,
+          file,
+          {
+            cacheControl:
+              "3600",
+
+            upsert:
+              false,
+
+            contentType:
+              file.type ||
+              undefined
+          }
+        );
+
+
+    if (error) {
+
+      throw error;
+
+    }
+
+
+    return path;
+
+  }
+
+
+  /*
+  =====================================================
+  REMOVE FILE QUIETLY
+  =====================================================
+  */
+
+  async function removeFileQuietly(
+    bucket,
+    path
+  ) {
+
+    if (!path) {
+      return;
+    }
+
+
+    try {
+
+      await supabaseClient
+        .storage
+        .from(
+          bucket
+        )
+        .remove(
+          [path]
+        );
+
+    }
+
+    catch (error) {
+
+      console.warn(
+        "Old file cleanup warning:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  SAVE / SUBMIT
+  =====================================================
+  */
+
+  async function saveCurrentProduct(
+    submitAfterSave
+  ) {
+
+    clearMessage();
+
+
+    const values =
+      collectFormValues();
+
+
+    if (
+      values.price !== null &&
+      (
+        !Number.isFinite(
+          values.price
+        ) ||
+        values.price < 0
+      )
+    ) {
+
+      showMessage(
+        "Please enter a valid product price.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      submitAfterSave
+    ) {
+
+      try {
+
+        validateForSubmission(
+          values
+        );
+
+      }
+
+      catch (error) {
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    const coverFile =
+      document
+        .getElementById(
+          "cover-file"
+        )
+        .files[0];
+
+
+    const digitalFile =
+      document
+        .getElementById(
+          "digital-file"
+        )
+        .files[0];
+
+
+    const proofFile =
+      document
+        .getElementById(
+          "proof-file"
+        )
+        .files[0];
+
+
+    try {
+
+      validateCoverFile(
+        coverFile
+      );
+
+      validateDigitalFile(
+        digitalFile
+      );
+
+      validateProofFile(
+        proofFile
+      );
+
+    }
+
+    catch (error) {
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    saveButton.disabled =
+      true;
+
+    submitButton.disabled =
+      true;
+
+    cancelButton.disabled =
+      true;
+
+
+    saveButton.textContent =
+      "Saving...";
+
+    submitButton.textContent =
+      submitAfterSave
+        ? "Submitting..."
+        : "Submit for Review";
+
+
+    let productId =
+      editingProductId;
+
+
+    /*
+    -----------------------------------------------------
+    EXISTING FILE STATE
+    -----------------------------------------------------
+    */
+
+    let newCoverPath =
+      existingCoverPath;
+
+    let newDigitalPath =
+      existingDigitalPath;
+
+    let newDigitalName =
+      existingDigitalName;
+
+    let newProofPath =
+      existingProofPath;
+
+
+    const uploadedThisAttempt = [];
+
+
+    try {
+
+      /*
+      ===================================================
+      FIRST SAVE
+
+      Creates Product UUID when this is a new draft.
+      Also changes rejected product back to draft.
+      ===================================================
+      */
+
+      productId =
+        await saveMetadata(
+          productId,
+          values,
+          {
+            coverPath:
+              existingCoverPath,
+
+            digitalPath:
+              existingDigitalPath,
+
+            digitalName:
+              existingDigitalName,
+
+            proofPath:
+              existingProofPath
+          }
+        );
+
+
+      editingProductId =
+        productId;
+
+
+      /*
+      ===================================================
+      COVER UPLOAD
+      ===================================================
+      */
+
+      if (
+        coverFile
+      ) {
+
+        newCoverPath =
+          await uploadFile(
+            COVER_BUCKET,
+            productId,
+            "cover",
+            coverFile
+          );
+
+
+        uploadedThisAttempt.push({
+          bucket:
+            COVER_BUCKET,
+          path:
+            newCoverPath
+        });
+
+      }
+
+
+      /*
+      ===================================================
+      DIGITAL PRODUCT UPLOAD
+      ===================================================
+      */
+
+      if (
+        digitalFile
+      ) {
+
+        newDigitalPath =
+          await uploadFile(
+            DIGITAL_BUCKET,
+            productId,
+            "product",
+            digitalFile
+          );
+
+
+        newDigitalName =
+          digitalFile.name;
+
+
+        uploadedThisAttempt.push({
+          bucket:
+            DIGITAL_BUCKET,
+          path:
+            newDigitalPath
+        });
+
+      }
+
+
+      /*
+      ===================================================
+      PROOF UPLOAD
+      ===================================================
+      */
+
+      if (
+        proofFile
+      ) {
+
+        newProofPath =
+          await uploadFile(
+            PROOF_BUCKET,
+            productId,
+            "proof",
+            proofFile
+          );
+
+
+        uploadedThisAttempt.push({
+          bucket:
+            PROOF_BUCKET,
+          path:
+            newProofPath
+        });
+
+      }
+
+
+      /*
+      ===================================================
+      SECOND SAVE
+
+      Saves final private file paths.
+      ===================================================
+      */
+
+      await saveMetadata(
+        productId,
+        values,
+        {
+          coverPath:
+            newCoverPath,
+
+          digitalPath:
+            newDigitalPath,
+
+          digitalName:
+            newDigitalName,
+
+          proofPath:
+            newProofPath
+        }
+      );
+
+
+      /*
+      ===================================================
+      REMOVE OLD REPLACED FILES
+      ===================================================
+      */
+
+      if (
+        coverFile &&
+        existingCoverPath &&
+        existingCoverPath !==
+          newCoverPath
+      ) {
+
+        await removeFileQuietly(
+          COVER_BUCKET,
+          existingCoverPath
+        );
+
+      }
+
+
+      if (
+        digitalFile &&
+        existingDigitalPath &&
+        existingDigitalPath !==
+          newDigitalPath
+      ) {
+
+        await removeFileQuietly(
+          DIGITAL_BUCKET,
+          existingDigitalPath
+        );
+
+      }
+
+
+      if (
+        proofFile &&
+        existingProofPath &&
+        existingProofPath !==
+          newProofPath
+      ) {
+
+        await removeFileQuietly(
+          PROOF_BUCKET,
+          existingProofPath
+        );
+
+      }
+
+
+      existingCoverPath =
+        newCoverPath;
+
+      existingDigitalPath =
+        newDigitalPath;
+
+      existingDigitalName =
+        newDigitalName;
+
+      existingProofPath =
+        newProofPath;
+
+
+      /*
+      ===================================================
+      SUBMIT TO ADMIN
+      ===================================================
+      */
+
+      if (
+        submitAfterSave
+      ) {
+
+        const {
+          error:
+            submitError
+        } =
+          await supabaseClient
+            .rpc(
+              "submit_creator_product",
+              {
+                p_product_id:
+                  productId
+              }
+            );
+
+
+        if (
+          submitError
+        ) {
+
+          throw submitError;
+
+        }
+
+
+        showMessage(
+          "Your product has been submitted to GiftedGift Empire for review.",
+          "success"
+        );
+
+
+        startNewProduct();
+
+      }
+
+      else {
+
+        updateEditingBanner();
+
+
+        showMessage(
+          "Draft saved successfully.",
+          "success"
+        );
+
+      }
+
+
+      await loadProducts();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Product save error:",
+        error
+      );
+
+
+      /*
+        CLEAN UP NEW FILES ONLY IF
+        FINAL METADATA DID NOT SAVE.
+        Existing draft remains safe.
+      */
+
+      if (
+        uploadedThisAttempt.length
+      ) {
+
+        for (
+          const item
+          of uploadedThisAttempt
+        ) {
+
+          await removeFileQuietly(
+            item.bucket,
+            item.path
+          );
+
+        }
+
+      }
+
+
+      showMessage(
+        error.message ||
+        "We could not save this product.",
+        "error"
+      );
+
+    }
+
+    finally {
+
+      saveButton.disabled =
+        false;
+
+      submitButton.disabled =
+        false;
+
+      cancelButton.disabled =
+        false;
+
+
+      saveButton.textContent =
+        "Save Draft";
+
+      submitButton.textContent =
+        "Submit for Review";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD PRODUCTS
+  =====================================================
+  */
+
+  async function loadProducts() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "creator_products"
+        )
+        .select(`
+          id,
+          product_code,
+          title,
+          description,
+          category,
+          price,
+          currency,
+          product_type,
+          cover_image_path,
+          digital_file_path,
+          digital_file_name,
+          proof_file_path,
+          proof_notes,
+          rights_basis,
+          rights_declaration,
+          refund_terms,
+          status,
+          rejection_reason,
+          submitted_at,
+          approved_at,
+          created_at,
+          updated_at
+        `)
+        .eq(
+          "creator_id",
+          currentUser.id
+        )
+        .order(
+          "created_at",
+          {
+            ascending:
+              false
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Load products error:",
+        error
+      );
+
+
+      document
+        .getElementById(
+          "products-list"
+        )
+        .innerHTML =
+          `
+            <div class="empty-state">
+              We could not load your products.
+            </div>
+          `;
+
+      return;
+
+    }
+
+
+    allProducts =
+      Array.isArray(
+        data
+      )
+        ? data
+        : [];
+
+
+    updateStats();
+
+    await renderProducts();
+
+  }
+
+
+  /*
+  =====================================================
+  STATS
+  =====================================================
+  */
+
+  function updateStats() {
+
+    const count =
+      status =>
+        allProducts
+          .filter(
+            item =>
+              item.status ===
+              status
+          )
+          .length;
+
+
+    document
+      .getElementById(
+        "stat-total"
+      )
+      .textContent =
+        allProducts.length;
+
+
+    document
+      .getElementById(
+        "stat-draft"
+      )
+      .textContent =
+        count(
+          "draft"
+        );
+
+
+    document
+      .getElementById(
+        "stat-pending"
+      )
+      .textContent =
+        count(
+          "pending"
+        );
+
+
+    document
+      .getElementById(
+        "stat-approved"
+      )
+      .textContent =
+        count(
+          "approved"
+        );
+
+
+    document
+      .getElementById(
+        "stat-rejected"
+      )
+      .textContent =
+        count(
+          "rejected"
+        );
+
+  }
+
+
+  /*
+  =====================================================
+  SIGNED COVER
+  =====================================================
+  */
+
+  async function signedCoverURL(
+    path
+  ) {
+
+    if (!path) {
+      return null;
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          COVER_BUCKET
+        )
+        .createSignedUrl(
+          path,
+          3600
+        );
+
+
+    if (
+      error ||
+      !data
+    ) {
+
+      return null;
+
+    }
+
+
+    return (
+      data.signedUrl ||
+      null
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  RENDER PRODUCTS
+  =====================================================
+  */
+
+  async function renderProducts() {
+
+    const list =
+      document.getElementById(
+        "products-list"
+      );
+
+
+    if (
+      allProducts.length ===
+      0
+    ) {
+
+      list.innerHTML =
+        `
+          <div class="empty-state">
+            You have not created any digital products yet.
+            Use the form above to create your first draft.
+          </div>
+        `;
+
+      return;
+
+    }
+
+
+    const cards =
+      await Promise.all(
+
+        allProducts.map(
+          async product => {
+
+            const coverURL =
+              await signedCoverURL(
+                product.cover_image_path
+              );
+
+
+            const canEdit =
+              product.status ===
+                "draft" ||
+              product.status ===
+                "rejected";
+
+
+            let rejection =
+              "";
+
+
+            if (
+              product.status ===
+                "rejected" &&
+              product.rejection_reason
+            ) {
+
+              rejection =
+                `
+                  <div class="rejection-box">
+                    <strong>
+                      Admin rejection reason:
+                    </strong>
+                    ${escapeHTML(
+                      product.rejection_reason
+                    )}
+                  </div>
+                `;
+
+            }
+
+
+            return `
+              <article class="product-card">
+
+                <div class="product-main">
+
+                  ${
+                    coverURL
+                      ? `
+                          <img
+                            src="${escapeHTML(
+                              coverURL
+                            )}"
+                            class="product-cover"
+                            alt="Product cover"
+                          >
+                        `
+                      : `
+                          <div class="cover-placeholder">
+                            No cover
+                          </div>
+                        `
+                  }
+
+
+                  <div>
+
+                    <div class="product-title">
+                      ${escapeHTML(
+                        product.title ||
+                        "Untitled Draft"
+                      )}
+                    </div>
+
+
+                    <div class="product-code">
+                      ${escapeHTML(
+                        product.product_code
+                      )}
+                    </div>
+
+
+                    <div class="product-meta">
+
+                      ${
+                        product.product_type
+                          ? escapeHTML(
+                              product.product_type
+                            )
+                          : "Type not set"
+                      }
+
+                      ·
+
+                      ${
+                        product.category
+                          ? escapeHTML(
+                              product.category
+                            )
+                          : "Category not set"
+                      }
+
+                      <br>
+
+                      ${escapeHTML(
+                        formatMoney(
+                          product.price,
+                          product.currency
+                        )
+                      )}
+
+                    </div>
+
+
+                    <span
+                      class="
+                        status-badge
+                        status-${escapeHTML(
+                          product.status
+                        )}
+                      "
+                    >
+                      ${escapeHTML(
+                        product.status
+                      )}
+                    </span>
+
+
+                    ${rejection}
+
+                  </div>
+
+                </div>
+
+
+                <div class="product-actions">
+
+                  ${
+                    canEdit
+                      ? `
+                          <button
+                            type="button"
+                            class="edit-button"
+                            onclick="editProduct(
+                              '${escapeHTML(
+                                product.id
+                              )}'
+                            )"
+                          >
+                            ${
+                              product.status ===
+                                "rejected"
+                                ? "Edit & Resubmit"
+                                : "Edit Draft"
+                            }
+                          </button>
+                        `
+                      : `
+                          <div class="locked-note">
+                            ${
+                              product.status ===
+                                "pending"
+                                ? "This product is currently under Admin review."
+                                : product.status ===
+                                    "approved"
+                                  ? "This product has been approved."
+                                  : "This product cannot currently be edited."
+                            }
+                          </div>
+                        `
+                  }
+
+                </div>
+
+              </article>
+            `;
+
+          }
+        )
+
+      );
+
+
+    list.innerHTML =
+      cards.join("");
+
+  }
+
+
+  /*
+  =====================================================
+  EDIT PRODUCT
+  =====================================================
+  */
+
+  async function editProduct(
+    productId
+  ) {
+
+    clearMessage();
+
+
+    const product =
+      allProducts.find(
+        item =>
+          item.id ===
+          productId
+      );
+
+
+    if (!product) {
+
+      showMessage(
+        "Product could not be found.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      product.status !==
+        "draft" &&
+      product.status !==
+        "rejected"
+    ) {
+
+      showMessage(
+        "This product cannot currently be edited.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    editingProductId =
+      product.id;
+
+
+    existingCoverPath =
+      product.cover_image_path ||
+      null;
+
+    existingDigitalPath =
+      product.digital_file_path ||
+      null;
+
+    existingDigitalName =
+      product.digital_file_name ||
+      null;
+
+    existingProofPath =
+      product.proof_file_path ||
+      null;
+
+
+    document
+      .getElementById(
+        "product-title"
+      )
+      .value =
+        product.title || "";
+
+
+    document
+      .getElementById(
+        "product-description"
+      )
+      .value =
+        product.description || "";
+
+
+    document
+      .getElementById(
+        "product-category"
+      )
+      .value =
+        product.category || "";
+
+
+    document
+      .getElementById(
+        "product-price"
+      )
+      .value =
+        product.price ?? "";
+
+
+    document
+      .getElementById(
+        "product-currency"
+      )
+      .value =
+        product.currency || "EUR";
+
+
+    document
+      .getElementById(
+        "product-type"
+      )
+      .value =
+        product.product_type || "";
+
+
+    document
+      .getElementById(
+        "rights-basis"
+      )
+      .value =
+        product.rights_basis || "";
+
+
+    document
+      .getElementById(
+        "proof-notes"
+      )
+      .value =
+        product.proof_notes || "";
+
+
+    document
+      .getElementById(
+        "refund-terms"
+      )
+      .value =
+        product.refund_terms || "";
+
+
+    document
+      .getElementById(
+        "rights-declaration"
+      )
+      .checked =
+        Boolean(
+          product.rights_declaration
+        );
+
+
+    document
+      .getElementById(
+        "cover-file"
+      )
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "digital-file"
+      )
+      .value =
+        "";
+
+
+    document
+      .getElementById(
+        "proof-file"
+      )
+      .value =
+        "";
+
+
+    updateFileStatuses();
+
+    updateEditingBanner();
+
+
+    const preview =
+      document.getElementById(
+        "cover-preview"
+      );
+
+
+    if (
+      existingCoverPath
+    ) {
+
+      const url =
+        await signedCoverURL(
+          existingCoverPath
+        );
+
+
+      if (url) {
+
+        preview.src =
+          url;
+
+        preview.style.display =
+          "block";
+
+      }
+
+    }
+
+
+    window.scrollTo({
+      top:
+        document
+          .getElementById(
+            "product-form"
+          )
+          .getBoundingClientRect()
+          .top +
+        window.scrollY -
+        100,
+
+      behavior:
+        "smooth"
+    });
+
+  }
+
+
+  /*
+  =====================================================
+  NEW PRODUCT / RESET
+  =====================================================
+  */
+
+  function startNewProduct() {
+
+    editingProductId =
+      null;
+
+    existingCoverPath =
+      null;
+
+    existingDigitalPath =
+      null;
+
+    existingDigitalName =
+      null;
+
+    existingProofPath =
+      null;
+
+
+    document
+      .getElementById(
+        "product-form"
+      )
+      .reset();
+
+
+    document
+      .getElementById(
+        "product-currency"
+      )
+      .value =
+        "EUR";
+
+
+    document
+      .getElementById(
+        "cover-preview"
+      )
+      .removeAttribute(
+        "src"
+      );
+
+
+    document
+      .getElementById(
+        "cover-preview"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "editing-banner"
+      )
+      .style.display =
+        "none";
+
+
+    updateFileStatuses();
+
+  }
+
+
+  /*
+  =====================================================
+  EDITING BANNER
+  =====================================================
+  */
+
+  function updateEditingBanner() {
+
+    const banner =
+      document.getElementById(
+        "editing-banner"
+      );
+
+
+    if (
+      !editingProductId
+    ) {
+
+      banner.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    const product =
+      allProducts.find(
+        item =>
+          item.id ===
+          editingProductId
+      );
+
+
+    banner.textContent =
+      product &&
+      product.product_code
+        ? "Editing " +
+          product.product_code
+        : "Editing saved product draft";
+
+
+    banner.style.display =
+      "block";
+
+  }
+
+
+  /*
+  =====================================================
+  FILE STATUS
+  =====================================================
+  */
+
+  function updateFileStatuses() {
+
+    document
+      .getElementById(
+        "cover-file-status"
+      )
+      .textContent =
+        existingCoverPath
+          ? "A cover image is already saved. Choose another file only if you want to replace it."
+          : "No cover uploaded yet.";
+
+
+    document
+      .getElementById(
+        "digital-file-status"
+      )
+      .textContent =
+        existingDigitalPath
+          ? (
+              "Saved digital file: " +
+              (
+                existingDigitalName ||
+                "Private product file"
+              )
+            )
+          : "No digital product file uploaded yet.";
+
+
+    document
+      .getElementById(
+        "proof-file-status"
+      )
+      .textContent =
+        existingProofPath
+          ? "A private ownership/proof file is already saved."
+          : "No proof file uploaded yet.";
+
+  }
+
+
+  /*
+  =====================================================
+  COVER PREVIEW
+  =====================================================
+  */
+
+  document
+    .getElementById(
+      "cover-file"
+    )
+    .addEventListener(
+      "change",
+      function() {
+
+        const file =
+          this.files[0];
+
+
+        if (!file) {
+          return;
+        }
+
+
+        try {
+
+          validateCoverFile(
+            file
+          );
+
+        }
+
+        catch (error) {
+
+          this.value =
+            "";
+
+          showMessage(
+            error.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const preview =
+          document.getElementById(
+            "cover-preview"
+          );
+
+
+        preview.src =
+          URL.createObjectURL(
+            file
+          );
+
+
+        preview.style.display =
+          "block";
+
+
+        document
+          .getElementById(
+            "cover-file-status"
+          )
+          .textContent =
+            "Selected: " +
+            file.name;
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "digital-file"
+    )
+    .addEventListener(
+      "change",
+      function() {
+
+        const file =
+          this.files[0];
+
+
+        if (!file) {
+          return;
+        }
+
+
+        try {
+
+          validateDigitalFile(
+            file
+          );
+
+        }
+
+        catch (error) {
+
+          this.value =
+            "";
+
+          showMessage(
+            error.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        document
+          .getElementById(
+            "digital-file-status"
+          )
+          .textContent =
+            "Selected: " +
+            file.name;
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "proof-file"
+    )
+    .addEventListener(
+      "change",
+      function() {
+
+        const file =
+          this.files[0];
+
+
+        if (!file) {
+          return;
+        }
+
+
+        try {
+
+          validateProofFile(
+            file
+          );
+
+        }
+
+        catch (error) {
+
+          this.value =
+            "";
+
+          showMessage(
+            error.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        document
+          .getElementById(
+            "proof-file-status"
+          )
+          .textContent =
+            "Selected: " +
+            file.name;
+
+      }
+    );
+
+
+  /*
+  =====================================================
+  NAVIGATION
+  =====================================================
+  */
+
+  function goDashboard() {
+
+    window.location.href =
+      "creator-dashboard.html";
+
+  }
+
+
+  async function logoutCreator() {
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    window.location.replace(
+      "creator-login.html"
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  START
+  =====================i================================
+  */
+
+  initializePage();
+
+</script>
+
+</body>
+
+</html>
