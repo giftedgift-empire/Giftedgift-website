@@ -128,8 +128,7 @@
     label {
       display: block;
       font-weight: 700;
-      margin:
-        16px 0 7px;
+      margin: 16px 0 7px;
       color: #333;
     }
 
@@ -175,6 +174,31 @@
 
     .eye-button:hover {
       background: #f1f4fa;
+    }
+
+    .password-rules {
+      margin-top: 12px;
+      padding: 13px 15px;
+      background: #f8f9fc;
+      border:
+        1px solid #dde3ec;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.55;
+    }
+
+    .password-rules strong {
+      color: #123a8c;
+    }
+
+    .password-rules ul {
+      margin: 7px 0 0;
+      padding-left: 20px;
+    }
+
+    .password-rules li {
+      margin: 3px 0;
     }
 
     .main-button {
@@ -255,21 +279,24 @@
       display: block;
       background: #ecfdf3;
       color: #067647;
-      border: 1px solid #abefc6;
+      border:
+        1px solid #abefc6;
     }
 
     .message.error {
       display: block;
       background: #fef3f2;
       color: #b42318;
-      border: 1px solid #fecdca;
+      border:
+        1px solid #fecdca;
     }
 
     .message.info {
       display: block;
       background: #eff8ff;
       color: #175cd3;
-      border: 1px solid #b2ddff;
+      border:
+        1px solid #b2ddff;
     }
 
     .small-note {
@@ -292,17 +319,20 @@
 
     .status-box.pending {
       background: #fffaeb;
-      border: 1px solid #fedf89;
+      border:
+        1px solid #fedf89;
     }
 
     .status-box.rejected {
       background: #fef3f2;
-      border: 1px solid #fecdca;
+      border:
+        1px solid #fecdca;
     }
 
     .status-box.suspended {
       background: #fef3f2;
-      border: 1px solid #fecdca;
+      border:
+        1px solid #fecdca;
     }
 
     .status-title {
@@ -346,8 +376,15 @@
 <body>
 
   <header class="top-bar">
-    <h1>GiftedGift Empire</h1>
-    <p>Creator & Seller Portal</p>
+
+    <h1>
+      GiftedGift Empire
+    </h1>
+
+    <p>
+      Creator & Seller Portal
+    </p>
+
   </header>
 
 
@@ -355,7 +392,10 @@
 
     <div class="card">
 
-      <div id="loading" class="loading">
+      <div
+        id="loading"
+        class="loading"
+      >
         Checking your creator account...
       </div>
 
@@ -364,7 +404,9 @@
 
       <div id="auth-area">
 
-        <h2>Creator Portal</h2>
+        <h2>
+          Creator Portal
+        </h2>
 
         <p class="intro">
           Sign in to manage your creator account or create
@@ -471,7 +513,7 @@
         </section>
 
 
-        <!-- SIGNUP -->
+        <!-- CREATE ACCOUNT -->
 
         <section
           id="signup-section"
@@ -493,7 +535,7 @@
 
 
             <label for="signup-password">
-              Password
+              Create Password
             </label>
 
             <div class="password-wrap">
@@ -501,7 +543,8 @@
               <input
                 type="password"
                 id="signup-password"
-                minlength="8"
+                minlength="12"
+                maxlength="128"
                 autocomplete="new-password"
                 required
               >
@@ -521,6 +564,38 @@
             </div>
 
 
+            <div class="password-rules">
+
+              <strong>
+                Your password must contain:
+              </strong>
+
+              <ul>
+                <li>
+                  At least 12 characters
+                </li>
+
+                <li>
+                  At least 1 uppercase letter
+                </li>
+
+                <li>
+                  At least 1 lowercase letter
+                </li>
+
+                <li>
+                  At least 1 number
+                </li>
+
+                <li>
+                  At least 1 special character
+                  such as !, @, #, $, %, &, * or _
+                </li>
+              </ul>
+
+            </div>
+
+
             <label for="signup-confirm-password">
               Confirm Password
             </label>
@@ -530,7 +605,8 @@
               <input
                 type="password"
                 id="signup-confirm-password"
-                minlength="8"
+                minlength="12"
+                maxlength="128"
                 autocomplete="new-password"
                 required
               >
@@ -551,10 +627,10 @@
 
 
             <p class="small-note">
-              Use at least 8 characters. After creating your
-              account, you will submit your Creator application.
-              You cannot sell until GiftedGift Empire approves
-              your application.
+              After creating your account, you will submit
+              your Creator application. You cannot sell
+              until GiftedGift Empire approves your
+              application.
             </p>
 
 
@@ -578,13 +654,16 @@
           class="form-section"
         >
 
-          <h2>Reset Password</h2>
+          <h2>
+            Reset Password
+          </h2>
 
           <p class="intro">
             Enter the email address connected to your
             creator account. We will send you a secure
             password-reset link.
           </p>
+
 
           <form id="forgot-form">
 
@@ -599,6 +678,7 @@
               required
             >
 
+
             <button
               type="submit"
               id="forgot-button"
@@ -606,6 +686,7 @@
             >
               Send Reset Link
             </button>
+
 
             <button
               type="button"
@@ -627,11 +708,15 @@
           class="form-section"
         >
 
-          <h2>Create New Password</h2>
+          <h2>
+            Create New Password
+          </h2>
 
           <p class="intro">
-            Enter your new password below.
+            Enter a new strong password for your
+            Creator account.
           </p>
+
 
           <form id="recovery-form">
 
@@ -644,7 +729,8 @@
               <input
                 type="password"
                 id="new-password"
-                minlength="8"
+                minlength="12"
+                maxlength="128"
                 autocomplete="new-password"
                 required
               >
@@ -664,6 +750,38 @@
             </div>
 
 
+            <div class="password-rules">
+
+              <strong>
+                Your new password must contain:
+              </strong>
+
+              <ul>
+                <li>
+                  At least 12 characters
+                </li>
+
+                <li>
+                  At least 1 uppercase letter
+                </li>
+
+                <li>
+                  At least 1 lowercase letter
+                </li>
+
+                <li>
+                  At least 1 number
+                </li>
+
+                <li>
+                  At least 1 special character
+                  such as !, @, #, $, %, &, * or _
+                </li>
+              </ul>
+
+            </div>
+
+
             <label for="confirm-new-password">
               Confirm New Password
             </label>
@@ -673,7 +791,8 @@
               <input
                 type="password"
                 id="confirm-new-password"
-                minlength="8"
+                minlength="12"
+                maxlength="128"
                 autocomplete="new-password"
                 required
               >
@@ -709,6 +828,7 @@
         <div
           id="auth-message"
           class="message"
+          aria-live="polite"
         ></div>
 
       </div>
@@ -721,7 +841,9 @@
         class="status-panel"
       >
 
-        <h2>Your Creator Account</h2>
+        <h2>
+          Your Creator Account
+        </h2>
 
         <p
           id="creator-email"
@@ -739,16 +861,21 @@
             class="status-title"
           ></div>
 
-          <div id="status-text"></div>
+          <div
+            id="status-text"
+          ></div>
+
 
           <div
             id="seller-code-wrap"
             style="display:none;"
           >
+
             <span
               id="seller-code"
               class="creator-code"
             ></span>
+
           </div>
 
         </div>
@@ -768,9 +895,11 @@
 
 
     <div class="back-home">
+
       <a href="index.html">
         ← Back to GiftedGift Empire
       </a>
+
     </div>
 
   </main>
@@ -810,16 +939,24 @@
     */
 
     const authArea =
-      document.getElementById("auth-area");
+      document.getElementById(
+        "auth-area"
+      );
 
     const statusPanel =
-      document.getElementById("status-panel");
+      document.getElementById(
+        "status-panel"
+      );
 
     const loading =
-      document.getElementById("loading");
+      document.getElementById(
+        "loading"
+      );
 
     const authMessage =
-      document.getElementById("auth-message");
+      document.getElementById(
+        "auth-message"
+      );
 
 
     /*
@@ -862,9 +999,15 @@
     function hideAllAuthSections() {
 
       document
-        .querySelectorAll(".form-section")
+        .querySelectorAll(
+          ".form-section"
+        )
         .forEach(section => {
-          section.classList.remove("active");
+
+          section.classList.remove(
+            "active"
+          );
+
         });
 
     }
@@ -876,17 +1019,32 @@
 
       hideAllAuthSections();
 
-      document
-        .getElementById("login-section")
-        .classList.add("active");
 
       document
-        .getElementById("login-tab")
-        .classList.add("active");
+        .getElementById(
+          "login-section"
+        )
+        .classList.add(
+          "active"
+        );
+
 
       document
-        .getElementById("signup-tab")
-        .classList.remove("active");
+        .getElementById(
+          "login-tab"
+        )
+        .classList.add(
+          "active"
+        );
+
+
+      document
+        .getElementById(
+          "signup-tab"
+        )
+        .classList.remove(
+          "active"
+        );
 
     }
 
@@ -897,17 +1055,32 @@
 
       hideAllAuthSections();
 
-      document
-        .getElementById("signup-section")
-        .classList.add("active");
 
       document
-        .getElementById("signup-tab")
-        .classList.add("active");
+        .getElementById(
+          "signup-section"
+        )
+        .classList.add(
+          "active"
+        );
+
 
       document
-        .getElementById("login-tab")
-        .classList.remove("active");
+        .getElementById(
+          "signup-tab"
+        )
+        .classList.add(
+          "active"
+        );
+
+
+      document
+        .getElementById(
+          "login-tab"
+        )
+        .classList.remove(
+          "active"
+        );
 
     }
 
@@ -918,9 +1091,14 @@
 
       hideAllAuthSections();
 
+
       document
-        .getElementById("forgot-section")
-        .classList.add("active");
+        .getElementById(
+          "forgot-section"
+        )
+        .classList.add(
+          "active"
+        );
 
     }
 
@@ -931,9 +1109,82 @@
 
       hideAllAuthSections();
 
+
       document
-        .getElementById("recovery-section")
-        .classList.add("active");
+        .getElementById(
+          "recovery-section"
+        )
+        .classList.add(
+          "active"
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    STRONG PASSWORD VALIDATION
+    =====================================================
+    */
+
+    function getPasswordError(
+      password
+    ) {
+
+      if (
+        password.length < 12
+      ) {
+
+        return "Password must contain at least 12 characters.";
+
+      }
+
+
+      if (
+        !/[A-Z]/.test(
+          password
+        )
+      ) {
+
+        return "Password must include at least one uppercase letter.";
+
+      }
+
+
+      if (
+        !/[a-z]/.test(
+          password
+        )
+      ) {
+
+        return "Password must include at least one lowercase letter.";
+
+      }
+
+
+      if (
+        !/[0-9]/.test(
+          password
+        )
+      ) {
+
+        return "Password must include at least one number.";
+
+      }
+
+
+      if (
+        !/[^A-Za-z0-9\s]/.test(
+          password
+        )
+      ) {
+
+        return "Password must include at least one special character such as !, @, #, $, %, &, * or _.";
+
+      }
+
+
+      return "";
 
     }
 
@@ -950,13 +1201,21 @@
     ) {
 
       const input =
-        document.getElementById(inputId);
+        document.getElementById(
+          inputId
+        );
 
-      if (input.type === "password") {
 
-        input.type = "text";
+      if (
+        input.type ===
+        "password"
+      ) {
 
-        button.textContent = "🙈";
+        input.type =
+          "text";
+
+        button.textContent =
+          "🙈";
 
         button.setAttribute(
           "aria-label",
@@ -967,9 +1226,11 @@
 
       else {
 
-        input.type = "password";
+        input.type =
+          "password";
 
-        button.textContent = "👁";
+        button.textContent =
+          "👁";
 
         button.setAttribute(
           "aria-label",
@@ -994,10 +1255,15 @@
           window.location.search
         );
 
+
       if (
-        params.get("recovery") === "1"
+        params.get(
+          "recovery"
+        ) === "1"
       ) {
+
         return true;
+
       }
 
 
@@ -1007,7 +1273,9 @@
           "type=recovery"
         )
       ) {
+
         return true;
+
       }
 
 
@@ -1041,9 +1309,14 @@
         "none";
 
 
-      const { data, error } =
+      const {
+        data,
+        error
+      } =
         await supabaseClient
-          .from("creator_accounts")
+          .from(
+            "creator_accounts"
+          )
           .select(`
             seller_code,
             status,
@@ -1068,10 +1341,13 @@
           error
         );
 
+
         authArea.style.display =
           "block";
 
+
         showLogin();
+
 
         showMessage(
           "We could not check your Creator account. Please try again.",
@@ -1084,7 +1360,8 @@
 
 
       /*
-        LOGGED IN BUT HAS NOT APPLIED YET
+        LOGGED IN BUT HAS NOT
+        SUBMITTED APPLICATION
       */
 
       if (!data) {
@@ -1099,11 +1376,12 @@
 
 
       /*
-        APPROVED
+        APPROVED CREATOR
       */
 
       if (
-        data.status === "approved"
+        data.status ===
+        "approved"
       ) {
 
         window.location.replace(
@@ -1129,7 +1407,7 @@
 
     /*
     =====================================================
-    STATUS SCREEN
+    CREATOR STATUS SCREEN
     =====================================================
     */
 
@@ -1145,10 +1423,12 @@
         "block";
 
 
-      document.getElementById(
-        "creator-email"
-      ).textContent =
-        user.email || "";
+      document
+        .getElementById(
+          "creator-email"
+        )
+        .textContent =
+          user.email || "";
 
 
       const box =
@@ -1180,6 +1460,7 @@
       code.textContent =
         account.seller_code || "";
 
+
       codeWrap.style.display =
         account.seller_code
           ? "block"
@@ -1191,15 +1472,18 @@
 
 
       if (
-        account.status === "pending"
+        account.status ===
+        "pending"
       ) {
 
         box.classList.add(
           "pending"
         );
 
+
         title.textContent =
           "Application Under Review";
+
 
         text.textContent =
           "Your Creator application has been received. GiftedGift Empire must approve your account before you can submit or sell digital products.";
@@ -1208,15 +1492,18 @@
 
 
       else if (
-        account.status === "rejected"
+        account.status ===
+        "rejected"
       ) {
 
         box.classList.add(
           "rejected"
         );
 
+
         title.textContent =
           "Application Not Approved";
+
 
         text.textContent =
           account.rejection_reason
@@ -1228,15 +1515,18 @@
 
 
       else if (
-        account.status === "suspended"
+        account.status ===
+        "suspended"
       ) {
 
         box.classList.add(
           "suspended"
         );
 
+
         title.textContent =
           "Creator Account Suspended";
+
 
         text.textContent =
           account.suspension_reason
@@ -1251,6 +1541,7 @@
 
         title.textContent =
           "Creator Account";
+
 
         text.textContent =
           "Your Creator account status could not be determined.";
@@ -1267,7 +1558,9 @@
     */
 
     document
-      .getElementById("login-form")
+      .getElementById(
+        "login-form"
+      )
       .addEventListener(
         "submit",
         async event => {
@@ -1286,6 +1579,7 @@
               .trim()
               .toLowerCase();
 
+
           const password =
             document
               .getElementById(
@@ -1299,7 +1593,9 @@
               "login-button"
             );
 
-          button.disabled = true;
+
+          button.disabled =
+            true;
 
           button.textContent =
             "Logging in...";
@@ -1317,7 +1613,8 @@
               });
 
 
-          button.disabled = false;
+          button.disabled =
+            false;
 
           button.textContent =
             "Login";
@@ -1329,6 +1626,7 @@
               "Login error:",
               error
             );
+
 
             showMessage(
               error.message ||
@@ -1363,7 +1661,9 @@
     */
 
     document
-      .getElementById("signup-form")
+      .getElementById(
+        "signup-form"
+      )
       .addEventListener(
         "submit",
         async event => {
@@ -1399,6 +1699,36 @@
               .value;
 
 
+          /*
+          ================================================
+          PASSWORD STRENGTH
+          ================================================
+          */
+
+          const passwordError =
+            getPasswordError(
+              password
+            );
+
+
+          if (passwordError) {
+
+            showMessage(
+              passwordError,
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+          ================================================
+          CONFIRM PASSWORD
+          ================================================
+          */
+
           if (
             password !==
             confirmPassword
@@ -1414,26 +1744,14 @@
           }
 
 
-          if (
-            password.length < 8
-          ) {
-
-            showMessage(
-              "Your password must contain at least 8 characters.",
-              "error"
-            );
-
-            return;
-
-          }
-
-
           const button =
             document.getElementById(
               "signup-button"
             );
 
-          button.disabled = true;
+
+          button.disabled =
+            true;
 
           button.textContent =
             "Creating account...";
@@ -1453,17 +1771,22 @@
             await supabaseClient
               .auth
               .signUp({
+
                 email,
                 password,
 
                 options: {
+
                   emailRedirectTo:
                     redirectURL
+
                 }
+
               });
 
 
-          button.disabled = false;
+          button.disabled =
+            false;
 
           button.textContent =
             "Create Creator Account";
@@ -1475,6 +1798,7 @@
               "Signup error:",
               error
             );
+
 
             showMessage(
               error.message ||
@@ -1488,7 +1812,7 @@
 
 
           /*
-            IF EMAIL CONFIRMATION IS REQUIRED
+            EMAIL CONFIRMATION REQUIRED
           */
 
           if (
@@ -1508,7 +1832,7 @@
 
 
           /*
-            IF SUPABASE LOGS USER IN IMMEDIATELY
+            USER LOGGED IN IMMEDIATELY
           */
 
           if (
@@ -1542,7 +1866,9 @@
     */
 
     document
-      .getElementById("forgot-form")
+      .getElementById(
+        "forgot-form"
+      )
       .addEventListener(
         "submit",
         async event => {
@@ -1567,7 +1893,9 @@
               "forgot-button"
             );
 
-          button.disabled = true;
+
+          button.disabled =
+            true;
 
           button.textContent =
             "Sending...";
@@ -1580,7 +1908,9 @@
             ).href;
 
 
-          const { error } =
+          const {
+            error
+          } =
             await supabaseClient
               .auth
               .resetPasswordForEmail(
@@ -1592,7 +1922,8 @@
               );
 
 
-          button.disabled = false;
+          button.disabled =
+            false;
 
           button.textContent =
             "Send Reset Link";
@@ -1604,6 +1935,7 @@
               "Password reset error:",
               error
             );
+
 
             showMessage(
               error.message ||
@@ -1632,7 +1964,9 @@
     */
 
     document
-      .getElementById("recovery-form")
+      .getElementById(
+        "recovery-form"
+      )
       .addEventListener(
         "submit",
         async event => {
@@ -1658,6 +1992,36 @@
               .value;
 
 
+          /*
+          ================================================
+          NEW PASSWORD STRENGTH
+          ================================================
+          */
+
+          const passwordError =
+            getPasswordError(
+              password
+            );
+
+
+          if (passwordError) {
+
+            showMessage(
+              passwordError,
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+          ================================================
+          CONFIRM NEW PASSWORD
+          ================================================
+          */
+
           if (
             password !==
             confirmPassword
@@ -1673,32 +2037,22 @@
           }
 
 
-          if (
-            password.length < 8
-          ) {
-
-            showMessage(
-              "Your password must contain at least 8 characters.",
-              "error"
-            );
-
-            return;
-
-          }
-
-
           const button =
             document.getElementById(
               "recovery-button"
             );
 
-          button.disabled = true;
+
+          button.disabled =
+            true;
 
           button.textContent =
             "Saving password...";
 
 
-          const { error } =
+          const {
+            error
+          } =
             await supabaseClient
               .auth
               .updateUser({
@@ -1706,7 +2060,8 @@
               });
 
 
-          button.disabled = false;
+          button.disabled =
+            false;
 
           button.textContent =
             "Save New Password";
@@ -1718,6 +2073,7 @@
               "Password update error:",
               error
             );
+
 
             showMessage(
               error.message ||
@@ -1732,7 +2088,6 @@
 
           /*
             SIGN OUT AFTER RESET
-            SO THE USER LOGS IN CLEANLY.
           */
 
           await supabaseClient
@@ -1771,6 +2126,7 @@
         .auth
         .signOut();
 
+
       window.location.replace(
         "creator-login.html"
       );
@@ -1803,6 +2159,7 @@
             statusPanel.style.display =
               "none";
 
+
             showRecovery();
 
             return;
@@ -1811,8 +2168,8 @@
 
 
           /*
-            DON'T AUTO-ROUTE DURING
-            PASSWORD RECOVERY.
+            DO NOT AUTO-ROUTE WHILE
+            RESETTING PASSWORD
           */
 
           if (
@@ -1864,8 +2221,10 @@
           error
         );
 
+
         authArea.style.display =
           "block";
+
 
         showLogin();
 
@@ -1875,7 +2234,7 @@
 
 
       /*
-        PASSWORD RECOVERY PAGE
+        PASSWORD RECOVERY
       */
 
       if (
@@ -1887,6 +2246,7 @@
 
         statusPanel.style.display =
           "none";
+
 
         showRecovery();
 
@@ -1923,6 +2283,7 @@
 
       statusPanel.style.display =
         "none";
+
 
       showLogin();
 
