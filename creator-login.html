@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Creator Login | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Sign in or create your GiftedGift Empire creator account."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+      text-align: center;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 25px;
+    }
+
+    .top-bar p {
+      margin: 7px 0 0;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 28px 18px 50px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 25px 20px;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+      border:
+        1px solid rgba(18, 58, 140, 0.08);
+    }
+
+    h2 {
+      color: #123a8c;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #666;
+      line-height: 1.55;
+      margin-top: 0;
+      margin-bottom: 22px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 22px;
+      background: #f1f4fa;
+      padding: 6px;
+      border-radius: 12px;
+    }
+
+    .tab-button {
+      border: none;
+      border-radius: 9px;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: #555;
+    }
+
+    .tab-button.active {
+      background: #123a8c;
+      color: white;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin:
+        16px 0 7px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border:
+        1px solid #cfd5df;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18, 58, 140, 0.08);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 58px;
+    }
+
+    .eye-button {
+      position: absolute;
+      right: 7px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      min-width: 42px;
+      min-height: 38px;
+      font-size: 19px;
+      border-radius: 8px;
+    }
+
+    .eye-button:hover {
+      background: #f1f4fa;
+    }
+
+    .main-button {
+      width: 100%;
+      border: none;
+      border-radius: 11px;
+      background: #123a8c;
+      color: white;
+      min-height: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .main-button:hover {
+      background: #0d2f76;
+    }
+
+    .main-button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .secondary-button {
+      width: 100%;
+      border:
+        1px solid #123a8c;
+      border-radius: 11px;
+      background: white;
+      color: #123a8c;
+      min-height: 48px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .danger-button {
+      width: 100%;
+      border:
+        1px solid #b42318;
+      border-radius: 11px;
+      background: white;
+      color: #b42318;
+      min-height: 46px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+
+    .link-button {
+      border: none;
+      background: transparent;
+      color: #123a8c;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    .forgot-row {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 13px 14px;
+      border-radius: 10px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      color: #175cd3;
+      border: 1px solid #b2ddff;
+    }
+
+    .small-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .status-panel {
+      display: none;
+    }
+
+    .status-box {
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 16px;
+      line-height: 1.55;
+    }
+
+    .status-box.pending {
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+    }
+
+    .status-box.rejected {
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+
+    .status-box.suspended {
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+
+    .status-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #123a8c;
+    }
+
+    .creator-code {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 11px;
+      background: white;
+      border-radius: 8px;
+      font-family: monospace;
+      font-weight: 700;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-home a {
+      color: #123a8c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 22px;
+      color: #666;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header class="top-bar">
+    <h1>GiftedGift Empire</h1>
+    <p>Creator & Seller Portal</p>
+  </header>
+
+
+  <main class="page">
+
+    <div class="card">
+
+      <div id="loading" class="loading">
+        Checking your creator account...
+      </div>
+
+
+      <!-- AUTH AREA -->
+
+      <div id="auth-area">
+
+        <h2>Creator Portal</h2>
+
+        <p class="intro">
+          Sign in to manage your creator account or create
+          an account to apply to sell digital products on
+          GiftedGift Empire.
+        </p>
+
+
+        <div class="tabs">
+
+          <button
+            type="button"
+            id="login-tab"
+            class="tab-button active"
+            onclick="showLogin()"
+          >
+            Login
+          </button>
+
+          <button
+            type="button"
+            id="signup-tab"
+            class="tab-button"
+            onclick="showSignup()"
+          >
+            Create Account
+          </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <section
+          id="login-section"
+          class="form-section active"
+        >
+
+          <form id="login-form">
+
+            <label for="login-email">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="login-email"
+              autocomplete="email"
+              required
+            >
+
+
+            <label for="login-password">
+              Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="login-password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="eye-button"
+                aria-label="Show password"
+                onclick="togglePassword(
+                  'login-password',
+                  this
+                )"
+              >
+                👁
+              </button>
+
+            </div>
+
+
+            <div class="forgot-row">
+
+              <button
+                type="button"
+                class="link-button"
+                onclick="showForgotPassword()"
+              >
+                Forgot password?
+              </button>
+
+            </div>
+
+
+            <button
+              type="submit"
+              id="login-button"
+              class="main-button"
+            >
+              Login
+            </button>
+
+          </form>
+
+        </section>
+
+
+        <!-- SIGNUP -->
+
+        <section
+          id="signup-section"
+          class="form-section"
+        >
+
+          <form id="signup-form">
+
+            <label for="signup-email">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="signup-email"
+              autocomplete="email"
+              required
+            >
+
+
+            <label for="signup-password">
+              Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="signup-password"
+                minlength="8"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="eye-button"
+                aria-label="Show password"
+                onclick="togglePassword(
+                  'signup-password',
+                  this
+                )"
+              >
+                👁
+              </button>
+
+            </div>
+
+
+            <label for="signup-confirm-password">
+              Confirm Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="signup-confirm-password"
+                minlength="8"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="eye-button"
+                aria-label="Show password"
+                onclick="togglePassword(
+                  'signup-confirm-password',
+                  this
+                )"
+              >
+                👁
+              </button>
+
+            </div>
+
+
+            <p class="small-note">
+              Use at least 8 characters. After creating your
+              account, you will submit your Creator application.
+              You cannot sell until GiftedGift Empire approves
+              your application.
+            </p>
+
+
+            <button
+              type="submit"
+              id="signup-button"
+              class="main-button"
+            >
+              Create Creator Account
+            </button>
+
+          </form>
+
+        </section>
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <section
+          id="forgot-section"
+          class="form-section"
+        >
+
+          <h2>Reset Password</h2>
+
+          <p class="intro">
+            Enter the email address connected to your
+            creator account. We will send you a secure
+            password-reset link.
+          </p>
+
+          <form id="forgot-form">
+
+            <label for="forgot-email">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="forgot-email"
+              autocomplete="email"
+              required
+            >
+
+            <button
+              type="submit"
+              id="forgot-button"
+              class="main-button"
+            >
+              Send Reset Link
+            </button>
+
+            <button
+              type="button"
+              class="secondary-button"
+              onclick="showLogin()"
+            >
+              Back to Login
+            </button>
+
+          </form>
+
+        </section>
+
+
+        <!-- SET NEW PASSWORD -->
+
+        <section
+          id="recovery-section"
+          class="form-section"
+        >
+
+          <h2>Create New Password</h2>
+
+          <p class="intro">
+            Enter your new password below.
+          </p>
+
+          <form id="recovery-form">
+
+            <label for="new-password">
+              New Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="new-password"
+                minlength="8"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="eye-button"
+                aria-label="Show password"
+                onclick="togglePassword(
+                  'new-password',
+                  this
+                )"
+              >
+                👁
+              </button>
+
+            </div>
+
+
+            <label for="confirm-new-password">
+              Confirm New Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="confirm-new-password"
+                minlength="8"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="eye-button"
+                aria-label="Show password"
+                onclick="togglePassword(
+                  'confirm-new-password',
+                  this
+                )"
+              >
+                👁
+              </button>
+
+            </div>
+
+
+            <button
+              type="submit"
+              id="recovery-button"
+              class="main-button"
+            >
+              Save New Password
+            </button>
+
+          </form>
+
+        </section>
+
+
+        <div
+          id="auth-message"
+          class="message"
+        ></div>
+
+      </div>
+
+
+      <!-- CREATOR STATUS AREA -->
+
+      <div
+        id="status-panel"
+        class="status-panel"
+      >
+
+        <h2>Your Creator Account</h2>
+
+        <p
+          id="creator-email"
+          class="small-note"
+        ></p>
+
+
+        <div
+          id="status-box"
+          class="status-box"
+        >
+
+          <div
+            id="status-title"
+            class="status-title"
+          ></div>
+
+          <div id="status-text"></div>
+
+          <div
+            id="seller-code-wrap"
+            style="display:none;"
+          >
+            <span
+              id="seller-code"
+              class="creator-code"
+            ></span>
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="danger-button"
+          onclick="logoutCreator()"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="back-home">
+      <a href="index.html">
+        ← Back to GiftedGift Empire
+      </a>
+    </div>
+
+  </main>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+
+  <script>
+
+    /*
+    =====================================================
+    SUPABASE
+    =====================================================
+    */
+
+    const SUPABASE_URL =
+      "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /*
+    =====================================================
+    PAGE REFERENCES
+    =====================================================
+    */
+
+    const authArea =
+      document.getElementById("auth-area");
+
+    const statusPanel =
+      document.getElementById("status-panel");
+
+    const loading =
+      document.getElementById("loading");
+
+    const authMessage =
+      document.getElementById("auth-message");
+
+
+    /*
+    =====================================================
+    MESSAGE
+    =====================================================
+    */
+
+    function showMessage(
+      text,
+      type = "info"
+    ) {
+
+      authMessage.className =
+        "message " + type;
+
+      authMessage.textContent =
+        text;
+
+    }
+
+
+    function clearMessage() {
+
+      authMessage.className =
+        "message";
+
+      authMessage.textContent =
+        "";
+
+    }
+
+
+    /*
+    =====================================================
+    FORM VIEW
+    =====================================================
+    */
+
+    function hideAllAuthSections() {
+
+      document
+        .querySelectorAll(".form-section")
+        .forEach(section => {
+          section.classList.remove("active");
+        });
+
+    }
+
+
+    function showLogin() {
+
+      clearMessage();
+
+      hideAllAuthSections();
+
+      document
+        .getElementById("login-section")
+        .classList.add("active");
+
+      document
+        .getElementById("login-tab")
+        .classList.add("active");
+
+      document
+        .getElementById("signup-tab")
+        .classList.remove("active");
+
+    }
+
+
+    function showSignup() {
+
+      clearMessage();
+
+      hideAllAuthSections();
+
+      document
+        .getElementById("signup-section")
+        .classList.add("active");
+
+      document
+        .getElementById("signup-tab")
+        .classList.add("active");
+
+      document
+        .getElementById("login-tab")
+        .classList.remove("active");
+
+    }
+
+
+    function showForgotPassword() {
+
+      clearMessage();
+
+      hideAllAuthSections();
+
+      document
+        .getElementById("forgot-section")
+        .classList.add("active");
+
+    }
+
+
+    function showRecovery() {
+
+      clearMessage();
+
+      hideAllAuthSections();
+
+      document
+        .getElementById("recovery-section")
+        .classList.add("active");
+
+    }
+
+
+    /*
+    =====================================================
+    PASSWORD EYE
+    =====================================================
+    */
+
+    function togglePassword(
+      inputId,
+      button
+    ) {
+
+      const input =
+        document.getElementById(inputId);
+
+      if (input.type === "password") {
+
+        input.type = "text";
+
+        button.textContent = "🙈";
+
+        button.setAttribute(
+          "aria-label",
+          "Hide password"
+        );
+
+      }
+
+      else {
+
+        input.type = "password";
+
+        button.textContent = "👁";
+
+        button.setAttribute(
+          "aria-label",
+          "Show password"
+        );
+
+      }
+
+    }
+
+
+    /*
+    =====================================================
+    RECOVERY DETECTION
+    =====================================================
+    */
+
+    function isRecoveryFlow() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      if (
+        params.get("recovery") === "1"
+      ) {
+        return true;
+      }
+
+
+      if (
+        window.location.hash &&
+        window.location.hash.includes(
+          "type=recovery"
+        )
+      ) {
+        return true;
+      }
+
+
+      return false;
+
+    }
+
+
+    /*
+    =====================================================
+    CREATOR ACCOUNT ROUTING
+    =====================================================
+    */
+
+    async function routeCreator(
+      user
+    ) {
+
+      if (!user) {
+        return;
+      }
+
+
+      loading.style.display =
+        "block";
+
+      authArea.style.display =
+        "none";
+
+      statusPanel.style.display =
+        "none";
+
+
+      const { data, error } =
+        await supabaseClient
+          .from("creator_accounts")
+          .select(`
+            seller_code,
+            status,
+            rejection_reason,
+            suspension_reason
+          `)
+          .eq(
+            "creator_id",
+            user.id
+          )
+          .maybeSingle();
+
+
+      loading.style.display =
+        "none";
+
+
+      if (error) {
+
+        console.error(
+          "Creator account lookup failed:",
+          error
+        );
+
+        authArea.style.display =
+          "block";
+
+        showLogin();
+
+        showMessage(
+          "We could not check your Creator account. Please try again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        LOGGED IN BUT HAS NOT APPLIED YET
+      */
+
+      if (!data) {
+
+        window.location.replace(
+          "creator-apply.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        APPROVED
+      */
+
+      if (
+        data.status === "approved"
+      ) {
+
+        window.location.replace(
+          "creator-dashboard.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        PENDING / REJECTED / SUSPENDED
+      */
+
+      showCreatorStatus(
+        user,
+        data
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    STATUS SCREEN
+    =====================================================
+    */
+
+    function showCreatorStatus(
+      user,
+      account
+    ) {
+
+      authArea.style.display =
+        "none";
+
+      statusPanel.style.display =
+        "block";
+
+
+      document.getElementById(
+        "creator-email"
+      ).textContent =
+        user.email || "";
+
+
+      const box =
+        document.getElementById(
+          "status-box"
+        );
+
+      const title =
+        document.getElementById(
+          "status-title"
+        );
+
+      const text =
+        document.getElementById(
+          "status-text"
+        );
+
+      const codeWrap =
+        document.getElementById(
+          "seller-code-wrap"
+        );
+
+      const code =
+        document.getElementById(
+          "seller-code"
+        );
+
+
+      code.textContent =
+        account.seller_code || "";
+
+      codeWrap.style.display =
+        account.seller_code
+          ? "block"
+          : "none";
+
+
+      box.className =
+        "status-box";
+
+
+      if (
+        account.status === "pending"
+      ) {
+
+        box.classList.add(
+          "pending"
+        );
+
+        title.textContent =
+          "Application Under Review";
+
+        text.textContent =
+          "Your Creator application has been received. GiftedGift Empire must approve your account before you can submit or sell digital products.";
+
+      }
+
+
+      else if (
+        account.status === "rejected"
+      ) {
+
+        box.classList.add(
+          "rejected"
+        );
+
+        title.textContent =
+          "Application Not Approved";
+
+        text.textContent =
+          account.rejection_reason
+            ? "Reason: " +
+              account.rejection_reason
+            : "Your Creator application was not approved.";
+
+      }
+
+
+      else if (
+        account.status === "suspended"
+      ) {
+
+        box.classList.add(
+          "suspended"
+        );
+
+        title.textContent =
+          "Creator Account Suspended";
+
+        text.textContent =
+          account.suspension_reason
+            ? "Reason: " +
+              account.suspension_reason
+            : "Your Creator account is currently suspended. Please contact GiftedGift Empire for assistance.";
+
+      }
+
+
+      else {
+
+        title.textContent =
+          "Creator Account";
+
+        text.textContent =
+          "Your Creator account status could not be determined.";
+
+      }
+
+    }
+
+
+    /*
+    =====================================================
+    LOGIN
+    =====================================================
+    */
+
+    document
+      .getElementById("login-form")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+
+          const email =
+            document
+              .getElementById(
+                "login-email"
+              )
+              .value
+              .trim()
+              .toLowerCase();
+
+          const password =
+            document
+              .getElementById(
+                "login-password"
+              )
+              .value;
+
+
+          const button =
+            document.getElementById(
+              "login-button"
+            );
+
+          button.disabled = true;
+
+          button.textContent =
+            "Logging in...";
+
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient
+              .auth
+              .signInWithPassword({
+                email,
+                password
+              });
+
+
+          button.disabled = false;
+
+          button.textContent =
+            "Login";
+
+
+          if (error) {
+
+            console.error(
+              "Login error:",
+              error
+            );
+
+            showMessage(
+              error.message ||
+              "Login failed. Please check your email and password.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            data &&
+            data.user
+          ) {
+
+            await routeCreator(
+              data.user
+            );
+
+          }
+
+        }
+      );
+
+
+    /*
+    =====================================================
+    CREATE ACCOUNT
+    =====================================================
+    */
+
+    document
+      .getElementById("signup-form")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+
+          const email =
+            document
+              .getElementById(
+                "signup-email"
+              )
+              .value
+              .trim()
+              .toLowerCase();
+
+
+          const password =
+            document
+              .getElementById(
+                "signup-password"
+              )
+              .value;
+
+
+          const confirmPassword =
+            document
+              .getElementById(
+                "signup-confirm-password"
+              )
+              .value;
+
+
+          if (
+            password !==
+            confirmPassword
+          ) {
+
+            showMessage(
+              "The passwords do not match.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            password.length < 8
+          ) {
+
+            showMessage(
+              "Your password must contain at least 8 characters.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "signup-button"
+            );
+
+          button.disabled = true;
+
+          button.textContent =
+            "Creating account...";
+
+
+          const redirectURL =
+            new URL(
+              "creator-login.html",
+              window.location.href
+            ).href;
+
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient
+              .auth
+              .signUp({
+                email,
+                password,
+
+                options: {
+                  emailRedirectTo:
+                    redirectURL
+                }
+              });
+
+
+          button.disabled = false;
+
+          button.textContent =
+            "Create Creator Account";
+
+
+          if (error) {
+
+            console.error(
+              "Signup error:",
+              error
+            );
+
+            showMessage(
+              error.message ||
+              "We could not create your account.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+            IF EMAIL CONFIRMATION IS REQUIRED
+          */
+
+          if (
+            data &&
+            data.user &&
+            !data.session
+          ) {
+
+            showMessage(
+              "Your account was created. Please check your email and confirm your email address, then return here to log in.",
+              "success"
+            );
+
+            return;
+
+          }
+
+
+          /*
+            IF SUPABASE LOGS USER IN IMMEDIATELY
+          */
+
+          if (
+            data &&
+            data.user &&
+            data.session
+          ) {
+
+            await routeCreator(
+              data.user
+            );
+
+            return;
+
+          }
+
+
+          showMessage(
+            "Your account was created. Please check your email before logging in.",
+            "success"
+          );
+
+        }
+      );
+
+
+    /*
+    =====================================================
+    FORGOT PASSWORD
+    =====================================================
+    */
+
+    document
+      .getElementById("forgot-form")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+
+          const email =
+            document
+              .getElementById(
+                "forgot-email"
+              )
+              .value
+              .trim()
+              .toLowerCase();
+
+
+          const button =
+            document.getElementById(
+              "forgot-button"
+            );
+
+          button.disabled = true;
+
+          button.textContent =
+            "Sending...";
+
+
+          const recoveryURL =
+            new URL(
+              "creator-login.html?recovery=1",
+              window.location.href
+            ).href;
+
+
+          const { error } =
+            await supabaseClient
+              .auth
+              .resetPasswordForEmail(
+                email,
+                {
+                  redirectTo:
+                    recoveryURL
+                }
+              );
+
+
+          button.disabled = false;
+
+          button.textContent =
+            "Send Reset Link";
+
+
+          if (error) {
+
+            console.error(
+              "Password reset error:",
+              error
+            );
+
+            showMessage(
+              error.message ||
+              "We could not send the password reset email.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          showMessage(
+            "If an account exists for that email address, a password-reset link has been sent. Please check your inbox and spam folder.",
+            "success"
+          );
+
+        }
+      );
+
+
+    /*
+    =====================================================
+    SAVE NEW PASSWORD
+    =====================================================
+    */
+
+    document
+      .getElementById("recovery-form")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+
+          const password =
+            document
+              .getElementById(
+                "new-password"
+              )
+              .value;
+
+
+          const confirmPassword =
+            document
+              .getElementById(
+                "confirm-new-password"
+              )
+              .value;
+
+
+          if (
+            password !==
+            confirmPassword
+          ) {
+
+            showMessage(
+              "The passwords do not match.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (
+            password.length < 8
+          ) {
+
+            showMessage(
+              "Your password must contain at least 8 characters.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "recovery-button"
+            );
+
+          button.disabled = true;
+
+          button.textContent =
+            "Saving password...";
+
+
+          const { error } =
+            await supabaseClient
+              .auth
+              .updateUser({
+                password
+              });
+
+
+          button.disabled = false;
+
+          button.textContent =
+            "Save New Password";
+
+
+          if (error) {
+
+            console.error(
+              "Password update error:",
+              error
+            );
+
+            showMessage(
+              error.message ||
+              "We could not update your password.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+            SIGN OUT AFTER RESET
+            SO THE USER LOGS IN CLEANLY.
+          */
+
+          await supabaseClient
+            .auth
+            .signOut();
+
+
+          window.history.replaceState(
+            {},
+            document.title,
+            "creator-login.html"
+          );
+
+
+          showLogin();
+
+
+          showMessage(
+            "Your password has been changed successfully. You can now log in with your new password.",
+            "success"
+          );
+
+        }
+      );
+
+
+    /*
+    =====================================================
+    LOGOUT
+    =====================================================
+    */
+
+    async function logoutCreator() {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+      window.location.replace(
+        "creator-login.html"
+      );
+
+    }
+
+
+    /*
+    =====================================================
+    AUTH EVENTS
+    =====================================================
+    */
+
+    supabaseClient
+      .auth
+      .onAuthStateChange(
+        async (
+          event,
+          session
+        ) => {
+
+          if (
+            event ===
+            "PASSWORD_RECOVERY"
+          ) {
+
+            authArea.style.display =
+              "block";
+
+            statusPanel.style.display =
+              "none";
+
+            showRecovery();
+
+            return;
+
+          }
+
+
+          /*
+            DON'T AUTO-ROUTE DURING
+            PASSWORD RECOVERY.
+          */
+
+          if (
+            event === "SIGNED_IN" &&
+            session &&
+            session.user &&
+            !isRecoveryFlow()
+          ) {
+
+            await routeCreator(
+              session.user
+            );
+
+          }
+
+        }
+      );
+
+
+    /*
+    =====================================================
+    INITIAL PAGE LOAD
+    =====================================================
+    */
+
+    async function initializePage() {
+
+      loading.style.display =
+        "block";
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      loading.style.display =
+        "none";
+
+
+      if (error) {
+
+        console.error(
+          "Session check error:",
+          error
+        );
+
+        authArea.style.display =
+          "block";
+
+        showLogin();
+
+        return;
+
+      }
+
+
+      /*
+        PASSWORD RECOVERY PAGE
+      */
+
+      if (
+        isRecoveryFlow()
+      ) {
+
+        authArea.style.display =
+          "block";
+
+        statusPanel.style.display =
+          "none";
+
+        showRecovery();
+
+        return;
+
+      }
+
+
+      /*
+        ALREADY LOGGED IN
+      */
+
+      if (
+        data &&
+        data.session &&
+        data.session.user
+      ) {
+
+        await routeCreator(
+          data.session.user
+        );
+
+        return;
+
+      }
+
+
+      /*
+        NOT LOGGED IN
+      */
+
+      authArea.style.display =
+        "block";
+
+      statusPanel.style.display =
+        "none";
+
+      showLogin();
+
+    }
+
+
+    initializePage();
+
+  </script>
+
+</body>
+
+</html>
