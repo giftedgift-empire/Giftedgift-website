@@ -523,14 +523,28 @@
       flex-wrap: wrap;
     }
 
-    .edit-button {
+    .edit-button,
+    .delete-button {
       border: none;
-      background: #123a8c;
       color: white;
       padding: 9px 13px;
       border-radius: 8px;
       font-weight: 700;
       cursor: pointer;
+    }
+
+    .edit-button {
+      background: #123a8c;
+    }
+
+    .delete-button {
+      background: #b42318;
+    }
+
+    .edit-button:disabled,
+    .delete-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .locked-note {
@@ -668,67 +682,82 @@
     <div class="stats-grid">
 
       <div class="stat-card">
+
         <div class="stat-label">
           Total Products
         </div>
+
         <div
           id="stat-total"
           class="stat-value"
         >
           0
         </div>
+
       </div>
 
 
       <div class="stat-card">
+
         <div class="stat-label">
           Draft
         </div>
+
         <div
           id="stat-draft"
           class="stat-value"
         >
           0
         </div>
+
       </div>
 
 
       <div class="stat-card">
+
         <div class="stat-label">
           Pending Review
         </div>
+
         <div
           id="stat-pending"
           class="stat-value"
         >
           0
         </div>
+
       </div>
 
 
       <div class="stat-card">
+
         <div class="stat-label">
           Approved
         </div>
+
         <div
           id="stat-approved"
           class="stat-value"
         >
           0
         </div>
+
       </div>
 
 
       <div class="stat-card">
+
         <div class="stat-label">
           Rejected
         </div>
+
         <div
           id="stat-rejected"
           class="stat-value"
         >
           0
         </div>
+
       </div>
 
     </div>
@@ -1116,7 +1145,8 @@
         <div class="important-note">
           Saving a draft does not send the product
           to GiftedGift Empire for approval.
-          Once you choose <strong>Submit for Review</strong>,
+          Once you choose
+          <strong>Submit for Review</strong>,
           the product and its files are locked while
           Admin reviews them.
         </div>
@@ -2378,16 +2408,6 @@
     const uploadedThisAttempt = [];
 
 
-    /*
-    -----------------------------------------------------
-    SAFETY FLAG
-
-    Once the second metadata save succeeds,
-    the newly uploaded file paths belong to the draft
-    and must NOT be deleted if Submit for Review fails.
-    -----------------------------------------------------
-    */
-
     let metadataSavedWithFiles =
       false;
 
@@ -2397,9 +2417,6 @@
       /*
       ===================================================
       FIRST SAVE
-
-      Creates Product UUID when this is a new draft.
-      Also changes rejected product back to draft.
       ===================================================
       */
 
@@ -2521,8 +2538,6 @@
       /*
       ===================================================
       SECOND SAVE
-
-      Saves final private file paths.
       ===================================================
       */
 
@@ -2544,11 +2559,6 @@
         }
       );
 
-
-      /*
-      The database now safely references the
-      newly uploaded files.
-      */
 
       metadataSavedWithFiles =
         true;
@@ -2686,20 +2696,6 @@
       );
 
 
-      /*
-      ===================================================
-      SAFE CLEANUP
-
-      Only delete newly uploaded files if the final
-      database save containing their paths DID NOT
-      succeed.
-
-      If metadataSavedWithFiles is true, those files
-      now belong to the saved draft and must remain,
-      even if Submit for Review later fails.
-      ===================================================
-      */
-
       if (
         !metadataSavedWithFiles &&
         uploadedThisAttempt.length
@@ -2745,6 +2741,275 @@
 
       submitButton.textContent =
         "Submit for Review";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  DELETE CREATOR PRODUCT
+  =====================================================
+  */
+
+  async function deleteCreatorProduct(
+    productId
+  ) {
+
+    clearMessage();
+
+
+    const product =
+      allProducts.find(
+        item =>
+          item.id ===
+          productId
+      );
+
+
+    if (!product) {
+
+      showMessage(
+        "Product could not be found.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      product.status !==
+        "draft" &&
+      product.status !==
+        "rejected"
+    ) {
+
+      showMessage(
+        "Only draft or rejected products can be deleted.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const productName =
+      product.title ||
+      product.product_code ||
+      "this product";
+
+
+    const confirmed =
+      window.confirm(
+        'Permanently delete "' +
+        productName +
+        '"?\n\n' +
+        "Its uploaded cover, digital file and ownership proof will also be removed. " +
+        "This action cannot be undone."
+      );
+
+
+    if (!confirmed) {
+
+      return;
+
+    }
+
+
+    try {
+
+      /*
+      ===================================================
+      DELETE COVER
+      ===================================================
+      */
+
+      if (
+        product.cover_image_path
+      ) {
+
+        const {
+          error:
+            coverDeleteError
+        } =
+          await supabaseClient
+            .storage
+            .from(
+              COVER_BUCKET
+            )
+            .remove(
+              [
+                product.cover_image_path
+              ]
+            );
+
+
+        if (
+          coverDeleteError
+        ) {
+
+          throw new Error(
+            "Could not remove the product cover. " +
+            coverDeleteError.message
+          );
+
+        }
+
+      }
+
+
+      /*
+      ===================================================
+      DELETE DIGITAL PRODUCT FILE
+      ===================================================
+      */
+
+      if (
+        product.digital_file_path
+      ) {
+
+        const {
+          error:
+            digitalDeleteError
+        } =
+          await supabaseClient
+            .storage
+            .from(
+              DIGITAL_BUCKET
+            )
+            .remove(
+              [
+                product.digital_file_path
+              ]
+            );
+
+
+        if (
+          digitalDeleteError
+        ) {
+
+          throw new Error(
+            "Could not remove the digital product file. " +
+            digitalDeleteError.message
+          );
+
+        }
+
+      }
+
+
+      /*
+      ===================================================
+      DELETE OWNERSHIP PROOF
+      ===================================================
+      */
+
+      if (
+        product.proof_file_path
+      ) {
+
+        const {
+          error:
+            proofDeleteError
+        } =
+          await supabaseClient
+            .storage
+            .from(
+              PROOF_BUCKET
+            )
+            .remove(
+              [
+                product.proof_file_path
+              ]
+            );
+
+
+        if (
+          proofDeleteError
+        ) {
+
+          throw new Error(
+            "Could not remove the ownership proof file. " +
+            proofDeleteError.message
+          );
+
+        }
+
+      }
+
+
+      /*
+      ===================================================
+      DELETE PRODUCT DATABASE RECORD
+
+      Database RPC again verifies:
+      - logged-in Creator
+      - approved Creator account
+      - product ownership
+      - draft/rejected status
+      ===================================================
+      */
+
+      const {
+        error:
+          deleteError
+      } =
+        await supabaseClient
+          .rpc(
+            "delete_my_creator_product",
+            {
+              p_product_id:
+                productId
+            }
+          );
+
+
+      if (
+        deleteError
+      ) {
+
+        throw deleteError;
+
+      }
+
+
+      if (
+        editingProductId ===
+        productId
+      ) {
+
+        startNewProduct();
+
+      }
+
+
+      showMessage(
+        "Product deleted permanently.",
+        "success"
+      );
+
+
+      await loadProducts();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Delete product error:",
+        error
+      );
+
+
+      showMessage(
+        error.message ||
+        "We could not delete this product.",
+        "error"
+      );
 
     }
 
@@ -3151,6 +3416,18 @@
                                 : "Edit Draft"
                             }
                           </button>
+
+                          <button
+                            type="button"
+                            class="delete-button"
+                            onclick="deleteCreatorProduct(
+                              '${escapeHTML(
+                                product.id
+                              )}'
+                            )"
+                          >
+                            Delete
+                          </button>
                         `
                       : `
                           <div class="locked-note">
@@ -3161,7 +3438,10 @@
                                 : product.status ===
                                     "approved"
                                   ? "This product has been approved."
-                                  : "This product cannot currently be edited."
+                                  : product.status ===
+                                      "suspended"
+                                    ? "This product is currently suspended and cannot be edited or deleted."
+                                    : "This product cannot currently be edited or deleted."
                             }
                           </div>
                         `
@@ -3370,6 +3650,14 @@
       document.getElementById(
         "cover-preview"
       );
+
+
+    preview.removeAttribute(
+      "src"
+    );
+
+    preview.style.display =
+      "none";
 
 
     if (
