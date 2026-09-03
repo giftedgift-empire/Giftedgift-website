@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Creator Product Review | GiftedGift Empire Admin
+  </title>
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .top-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 24px;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .top-button {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.7);
+      padding: 9px 13px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px 16px 60px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 45px 15px;
+      color: #666;
+      font-weight: 700;
+    }
+
+    #page-content {
+      display: none;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 13px 14px;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .intro {
+      background: white;
+      border: 1px solid #e0e5ed;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .intro h2 {
+      margin: 0 0 7px;
+      color: #123a8c;
+    }
+
+    .intro p {
+      margin: 0;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(140px, 1fr)
+        );
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #e0e5ed;
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #777;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      color: #123a8c;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .controls {
+      background: white;
+      border: 1px solid #e0e5ed;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 1fr 220px auto;
+      gap: 10px;
+    }
+
+    .controls input,
+    .controls select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid #ccd3dd;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+    }
+
+    .refresh-button {
+      border: none;
+      background: #123a8c;
+      color: white;
+      min-height: 44px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .products-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow:
+        0 5px 18px rgba(0,0,0,0.04);
+    }
+
+    .product-header {
+      padding: 17px;
+      border-bottom: 1px solid #e3e7ee;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 17px;
+    }
+
+    .cover {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #dde3ec;
+      background: #f3f5f8;
+    }
+
+    .cover-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      border: 1px solid #dde3ec;
+      background: #f3f5f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    .product-title {
+      color: #123a8c;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .product-code {
+      color: #666;
+      font-family: monospace;
+      font-size: 12px;
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-draft {
+      background: #eef2f6;
+      color: #475467;
+    }
+
+    .status-pending {
+      background: #fffaeb;
+      color: #b54708;
+      border: 1px solid #fedf89;
+    }
+
+    .status-approved {
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .status-rejected,
+    .status-suspended {
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .status-archived {
+      background: #f2f4f7;
+      color: #475467;
+    }
+
+    .details {
+      padding: 17px;
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+      gap: 15px;
+    }
+
+    .detail-box {
+      border: 1px solid #e1e6ee;
+      border-radius: 10px;
+      padding: 13px;
+      background: #fafbfc;
+      overflow-wrap: anywhere;
+    }
+
+    .detail-box.full {
+      grid-column: 1 / -1;
+    }
+
+    .detail-label {
+      color: #777;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .detail-value {
+      color: #333;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .file-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .file-button {
+      border: 1px solid #123a8c;
+      background: white;
+      color: #123a8c;
+      padding: 8px 11px;
+      border-radius: 7px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .review-actions {
+      border-top: 1px solid #e3e7ee;
+      padding: 14px 17px;
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      background: #fafbfc;
+    }
+
+    .approve-button,
+    .reject-button,
+    .suspend-button,
+    .reactivate-button {
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .approve-button,
+    .reactivate-button {
+      background: #067647;
+      color: white;
+    }
+
+    .reject-button,
+    .suspend-button {
+      background: #b42318;
+      color: white;
+    }
+
+    .review-note {
+      color: #777;
+      font-size: 13px;
+      padding: 8px 0;
+    }
+
+    .rejection-box {
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .empty {
+      background: white;
+      border: 1px solid #e0e5ed;
+      padding: 35px 15px;
+      border-radius: 12px;
+      text-align: center;
+      color: #666;
+    }
+
+    @media (
+      max-width: 720px
+    ) {
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-box.full {
+        grid-column: auto;
+      }
+
+      .product-header {
+        grid-template-columns: 85px 1fr;
+      }
+
+      .cover,
+      .cover-placeholder {
+        width: 85px;
+        height: 85px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="top-inner">
+
+    <div class="brand">
+
+      <h1>
+        GiftedGift Empire
+      </h1>
+
+      <p>
+        Creator Product Review
+      </p>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <button
+        type="button"
+        class="top-button"
+        onclick="goDashboard()"
+      >
+        Admin Dashboard
+      </button>
+
+      <button
+        type="button"
+        class="top-button"
+        onclick="logoutAdmin()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Checking Admin authorization...
+  </div>
+
+
+  <div
+    id="page-content"
+  >
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <section class="intro">
+
+      <h2>
+        Creator Product Review
+      </h2>
+
+      <p>
+        Review digital products submitted by approved
+        GiftedGift Empire Creators. Check the product,
+        files, ownership information and refund terms
+        before approving a listing.
+      </p>
+
+    </section>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-label">
+          Total Products
+        </div>
+        <div
+          id="stat-total"
+          class="stat-value"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-label">
+          Pending
+        </div>
+        <div
+          id="stat-pending"
+          class="stat-value"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-label">
+          Approved
+        </div>
+        <div
+          id="stat-approved"
+          class="stat-value"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-label">
+          Rejected
+        </div>
+        <div
+          id="stat-rejected"
+          class="stat-value"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-label">
+          Suspended
+        </div>
+        <div
+          id="stat-suspended"
+          class="stat-value"
+        >
+          0
+        </div>
+      </div>
+
+    </div>
+
+
+    <section class="controls">
+
+      <input
+        type="search"
+        id="search"
+        placeholder="Search product, code, Creator, seller code or email..."
+        oninput="renderProducts()"
+      >
+
+
+      <select
+        id="status-filter"
+        onchange="renderProducts()"
+      >
+
+        <option value="all">
+          All Statuses
+        </option>
+
+        <option value="pending">
+          Pending Review
+        </option>
+
+        <option value="approved">
+          Approved
+        </option>
+
+        <option value="rejected">
+          Rejected
+        </option>
+
+        <option value="suspended">
+          Suspended
+        </option>
+
+        <option value="draft">
+          Creator Drafts
+        </option>
+
+        <option value="archived">
+          Archived
+        </option>
+
+      </select>
+
+
+      <button
+        type="button"
+        class="refresh-button"
+        onclick="loadData()"
+      >
+        Refresh
+      </button>
+
+    </section>
+
+
+    <div
+      id="products-list"
+      class="products-list"
+    >
+      Loading...
+    </div>
+
+
+  </div>
+
+</main>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  const COVER_BUCKET =
+    "creator-product-covers";
+
+  const DIGITAL_BUCKET =
+    "creator-product-files";
+
+  const PROOF_BUCKET =
+    "creator-product-proofs";
+
+
+  let allProducts = [];
+
+  let creatorMap = {};
+
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  const pageContent =
+    document.getElementById(
+      "page-content"
+    );
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  function escapeHTML(
+    value
+  ) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  function showMessage(
+    text,
+    type = "success"
+  ) {
+
+    message.className =
+      "message " + type;
+
+    message.textContent =
+      text;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function clearMessage() {
+
+    message.className =
+      "message";
+
+    message.textContent =
+      "";
+
+  }
+
+
+  function formatMoney(
+    amount,
+    currency
+  ) {
+
+    if (
+      amount === null ||
+      amount === undefined
+    ) {
+
+      return "Not set";
+
+    }
+
+
+    try {
+
+      return new Intl.NumberFormat(
+        undefined,
+        {
+          style: "currency",
+          currency:
+            currency || "EUR"
+        }
+      ).format(
+        Number(amount)
+      );
+
+    }
+
+    catch (error) {
+
+      return (
+        String(
+          currency || "EUR"
+        ) +
+        " " +
+        Number(amount).toFixed(2)
+      );
+
+    }
+
+  }
+
+
+  function formatDate(
+    value
+  ) {
+
+    if (!value) {
+
+      return "—";
+
+    }
+
+
+    const date =
+      new Date(
+        value
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "—";
+
+    }
+
+
+    return date.toLocaleString();
+
+  }
+
+
+  async function initializePage() {
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError ||
+      !sessionData.session
+    ) {
+
+      window.location.replace(
+        "admin.html"
+      );
+
+      return;
+
+    }
+
+
+    const {
+      data: isAdmin,
+      error: adminError
+    } =
+      await supabaseClient
+        .rpc(
+          "is_site_admin"
+        );
+
+
+    if (
+      adminError ||
+      isAdmin !== true
+    ) {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+      window.location.replace(
+        "admin.html"
+      );
+
+      return;
+
+    }
+
+
+    loading.style.display =
+      "none";
+
+    pageContent.style.display =
+      "block";
+
+
+    await loadData();
+
+  }
+
+
+  async function loadData() {
+
+    clearMessage();
+
+
+    document
+      .getElementById(
+        "products-list"
+      )
+      .innerHTML =
+        `
+          <div class="empty">
+            Loading Creator products...
+          </div>
+        `;
+
+
+    const {
+      data: products,
+      error: productsError
+    } =
+      await supabaseClient
+        .from(
+          "creator_products"
+        )
+        .select(`
+          id,
+          creator_id,
+          product_code,
+          title,
+          description,
+          category,
+          price,
+          currency,
+          product_type,
+          cover_image_path,
+          digital_file_path,
+          digital_file_name,
+          proof_file_path,
+          proof_notes,
+          rights_basis,
+          rights_declaration,
+          refund_terms,
+          status,
+          public_slug,
+          affiliate_eligible,
+          submitted_at,
+          approved_at,
+          rejection_reason,
+          created_at,
+          updated_at
+        `)
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (
+      productsError
+    ) {
+
+      console.error(
+        productsError
+      );
+
+      showMessage(
+        "Could not load Creator products.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    allProducts =
+      Array.isArray(products)
+        ? products
+        : [];
+
+
+    const creatorIds =
+      [
+        ...new Set(
+          allProducts
+            .map(
+              item =>
+                item.creator_id
+            )
+            .filter(Boolean)
+        )
+      ];
+
+
+    creatorMap = {};
+
+
+    if (
+      creatorIds.length
+    ) {
+
+      const {
+        data: creators,
+        error: creatorsError
+      } =
+        await supabaseClient
+          .from(
+            "creator_accounts"
+          )
+          .select(`
+            creator_id,
+            seller_code,
+            full_name,
+            business_name,
+            contact_email,
+            phone,
+            country,
+            status,
+            creator_share_rate,
+            platform_fee_rate
+          `)
+          .in(
+            "creator_id",
+            creatorIds
+          );
+
+
+      if (
+        creatorsError
+      ) {
+
+        console.error(
+          creatorsError
+        );
+
+      }
+
+      else {
+
+        for (
+          const creator
+          of creators || []
+        ) {
+
+          creatorMap[
+            creator.creator_id
+          ] =
+            creator;
+
+        }
+
+      }
+
+    }
+
+
+    updateStats();
+
+    await renderProducts();
+
+  }
+
+
+  function updateStats() {
+
+    const count =
+      status =>
+        allProducts.filter(
+          product =>
+            product.status === status
+        ).length;
+
+
+    document
+      .getElementById(
+        "stat-total"
+      )
+      .textContent =
+        allProducts.length;
+
+
+    document
+      .getElementById(
+        "stat-pending"
+      )
+      .textContent =
+        count("pending");
+
+
+    document
+      .getElementById(
+        "stat-approved"
+      )
+      .textContent =
+        count("approved");
+
+
+    document
+      .getElementById(
+        "stat-rejected"
+      )
+      .textContent =
+        count("rejected");
+
+
+    document
+      .getElementById(
+        "stat-suspended"
+      )
+      .textContent =
+        count("suspended");
+
+  }
+
+
+  async function getSignedURL(
+    bucket,
+    path
+  ) {
+
+    if (!path) {
+
+      return null;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          bucket
+        )
+        .createSignedUrl(
+          path,
+          600
+        );
+
+
+    if (
+      error ||
+      !data
+    ) {
+
+      console.error(
+        error
+      );
+
+      return null;
+
+    }
+
+
+    return data.signedUrl || null;
+
+  }
+
+
+  async function openPrivateFile(
+    bucket,
+    path
+  ) {
+
+    if (!path) {
+
+      showMessage(
+        "No file was uploaded.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const newWindow =
+      window.open(
+        "about:blank",
+        "_blank"
+      );
+
+
+    const url =
+      await getSignedURL(
+        bucket,
+        path
+      );
+
+
+    if (!url) {
+
+      if (newWindow) {
+
+        newWindow.close();
+
+      }
+
+
+      showMessage(
+        "Could not open the private file.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (newWindow) {
+
+      newWindow.location =
+        url;
+
+    }
+
+    else {
+
+      window.location.href =
+        url;
+
+    }
+
+  }
+
+
+  async function renderProducts() {
+
+    const search =
+      document
+        .getElementById(
+          "search"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const statusFilter =
+      document
+        .getElementById(
+          "status-filter"
+        )
+        .value;
+
+
+    const filtered =
+      allProducts.filter(
+        product => {
+
+          if (
+            statusFilter !== "all" &&
+            product.status !== statusFilter
+          ) {
+
+            return false;
+
+          }
+
+
+          const creator =
+            creatorMap[
+              product.creator_id
+            ] || {};
+
+
+          const haystack =
+            [
+              product.title,
+              product.product_code,
+              product.category,
+              product.product_type,
+              creator.full_name,
+              creator.business_name,
+              creator.seller_code,
+              creator.contact_email
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+
+          return (
+            !search ||
+            haystack.includes(
+              search
+            )
+          );
+
+        }
+      );
+
+
+    const list =
+      document.getElementById(
+        "products-list"
+      );
+
+
+    if (
+      filtered.length === 0
+    ) {
+
+      list.innerHTML =
+        `
+          <div class="empty">
+            No Creator products match this view.
+          </div>
+        `;
+
+      return;
+
+    }
+
+
+    const cards =
+      await Promise.all(
+
+        filtered.map(
+          async product => {
+
+            const creator =
+              creatorMap[
+                product.creator_id
+              ] || {};
+
+
+            const coverURL =
+              await getSignedURL(
+                COVER_BUCKET,
+                product.cover_image_path
+              );
+
+
+            let actions =
+              "";
+
+
+            if (
+              product.status ===
+              "pending"
+            ) {
+
+              actions = `
+                <button
+                  type="button"
+                  class="approve-button"
+                  onclick="reviewProduct(
+                    '${escapeHTML(product.id)}',
+                    'approve'
+                  )"
+                >
+                  Approve Product
+                </button>
+
+                <button
+                  type="button"
+                  class="reject-button"
+                  onclick="reviewProduct(
+                    '${escapeHTML(product.id)}',
+                    'reject'
+                  )"
+                >
+                  Reject Product
+                </button>
+              `;
+
+            }
+
+            else if (
+              product.status ===
+              "approved"
+            ) {
+
+              actions = `
+                <button
+                  type="button"
+                  class="suspend-button"
+                  onclick="reviewProduct(
+                    '${escapeHTML(product.id)}',
+                    'suspend'
+                  )"
+                >
+                  Suspend Product
+                </button>
+              `;
+
+            }
+
+            else if (
+              product.status ===
+              "suspended"
+            ) {
+
+              actions = `
+                <button
+                  type="button"
+                  class="reactivate-button"
+                  onclick="reviewProduct(
+                    '${escapeHTML(product.id)}',
+                    'reactivate'
+                  )"
+                >
+                  Reactivate Product
+                </button>
+              `;
+
+            }
+
+            else {
+
+              actions = `
+                <div class="review-note">
+                  No Admin review action is available
+                  for this product in its current status.
+                </div>
+              `;
+
+            }
+
+
+            const rejectionBox =
+              product.rejection_reason
+                ? `
+                    <div class="rejection-box">
+                      <strong>
+                        Rejection reason:
+                      </strong>
+                      ${escapeHTML(
+                        product.rejection_reason
+                      )}
+                    </div>
+                  `
+                : "";
+
+
+            return `
+              <article class="product-card">
+
+                <div class="product-header">
+
+                  ${
+                    coverURL
+                      ? `
+                          <img
+                            src="${escapeHTML(
+                              coverURL
+                            )}"
+                            class="cover"
+                            alt="Creator product cover"
+                          >
+                        `
+                      : `
+                          <div class="cover-placeholder">
+                            No cover uploaded
+                          </div>
+                        `
+                  }
+
+
+                  <div>
+
+                    <div class="product-title">
+                      ${escapeHTML(
+                        product.title ||
+                        "Untitled Product"
+                      )}
+                    </div>
+
+
+                    <div class="product-code">
+                      ${escapeHTML(
+                        product.product_code
+                      )}
+                    </div>
+
+
+                    <div class="meta">
+
+                      Creator:
+                      <strong>
+                        ${escapeHTML(
+                          creator.full_name ||
+                          "Unknown Creator"
+                        )}
+                      </strong>
+
+                      <br>
+
+                      Seller Code:
+                      ${escapeHTML(
+                        creator.seller_code ||
+                        "—"
+                      )}
+
+                      <br>
+
+                      ${
+                        creator.business_name
+                          ? (
+                              "Business: " +
+                              escapeHTML(
+                                creator.business_name
+                              ) +
+                              "<br>"
+                            )
+                          : ""
+                      }
+
+                      Email:
+                      ${escapeHTML(
+                        creator.contact_email ||
+                        "—"
+                      )}
+
+                      <br>
+
+                      Price:
+                      ${escapeHTML(
+                        formatMoney(
+                          product.price,
+                          product.currency
+                        )
+                      )}
+
+                    </div>
+
+
+                    <span
+                      class="
+                        status
+                        status-${escapeHTML(
+                          product.status
+                        )}
+                      "
+                    >
+                      ${escapeHTML(
+                        product.status
+                      )}
+                    </span>
+
+
+                    ${rejectionBox}
+
+                  </div>
+
+                </div>
+
+
+                <div class="details">
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Product Type
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.product_type ||
+                        "Not set"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Category
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.category ||
+                        "Not set"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box full">
+
+                    <div class="detail-label">
+                      Description
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.description ||
+                        "No description"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Right To Sell
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.rights_basis ||
+                        "Not stated"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Rights Declaration
+                    </div>
+
+                    <div class="detail-value">
+                      ${
+                        product.rights_declaration
+                          ? "Confirmed ✅"
+                          : "Not confirmed ❌"
+                      }
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box full">
+
+                    <div class="detail-label">
+                      Ownership / Rights Explanation
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.proof_notes ||
+                        "No written explanation"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box full">
+
+                    <div class="detail-label">
+                      Refund Terms
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.refund_terms ||
+                        "Not provided"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Private Product File
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        product.digital_file_name ||
+                        (
+                          product.digital_file_path
+                            ? "Private file uploaded"
+                            : "No file"
+                        )
+                      )}
+                    </div>
+
+                    <div class="file-actions">
+
+                      ${
+                        product.digital_file_path
+                          ? `
+                              <button
+                                type="button"
+                                class="file-button"
+                                onclick="openPrivateFile(
+                                  '${DIGITAL_BUCKET}',
+                                  '${escapeHTML(
+                                    product.digital_file_path
+                                  )}'
+                                )"
+                              >
+                                Open Product File
+                              </button>
+                            `
+                          : ""
+                      }
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Ownership Proof File
+                    </div>
+
+                    <div class="detail-value">
+                      ${
+                        product.proof_file_path
+                          ? "Private proof uploaded"
+                          : "No proof file uploaded"
+                      }
+                    </div>
+
+                    <div class="file-actions">
+
+                      ${
+                        product.proof_file_path
+                          ? `
+                              <button
+                                type="button"
+                                class="file-button"
+                                onclick="openPrivateFile(
+                                  '${PROOF_BUCKET}',
+                                  '${escapeHTML(
+                                    product.proof_file_path
+                                  )}'
+                                )"
+                              >
+                                Open Proof File
+                              </button>
+                            `
+                          : ""
+                      }
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Submitted
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        formatDate(
+                          product.submitted_at
+                        )
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Approved
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        formatDate(
+                          product.approved_at
+                        )
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Creator Split
+                    </div>
+
+                    <div class="detail-value">
+                      ${
+                        creator.creator_share_rate ??
+                        "—"
+                      }%
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Platform Split
+                    </div>
+
+                    <div class="detail-value">
+                      ${
+                        creator.platform_fee_rate ??
+                        "—"
+                      }%
+                    </div>
+
+                  </div>
+
+
+                  ${
+                    product.public_slug
+                      ? `
+                          <div class="detail-box full">
+
+                            <div class="detail-label">
+                              Public Slug
+                            </div>
+
+                            <div class="detail-value">
+                              ${escapeHTML(
+                                product.public_slug
+                              )}
+                            </div>
+
+                          </div>
+                        `
+                      : ""
+                  }
+
+                </div>
+
+
+                <div class="review-actions">
+                  ${actions}
+                </div>
+
+              </article>
+            `;
+
+          }
+        )
+
+      );
+
+
+    list.innerHTML =
+      cards.join("");
+
+  }
+
+
+  async function reviewProduct(
+    productId,
+    action
+  ) {
+
+    clearMessage();
+
+
+    let reason =
+      null;
+
+
+    if (
+      action === "reject"
+    ) {
+
+      reason =
+        prompt(
+          "Enter the reason for rejecting this Creator product:"
+        );
+
+
+      if (
+        reason === null
+      ) {
+
+        return;
+
+      }
+
+
+      reason =
+        reason.trim();
+
+
+      if (
+        reason.length < 3
+      ) {
+
+        showMessage(
+          "Please provide a proper rejection reason.",
+          "error"
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    if (
+      action === "suspend"
+    ) {
+
+      reason =
+        prompt(
+          "Enter the reason for suspending this Creator product:"
+        );
+
+
+      if (
+        reason === null
+      ) {
+
+        return;
+
+      }
+
+
+      reason =
+        reason.trim();
+
+
+      if (
+        reason.length < 3
+      ) {
+
+        showMessage(
+          "Please provide a proper suspension reason.",
+          "error"
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    const confirmationText = {
+
+      approve:
+        "Approve this Creator product?",
+
+      reject:
+        "Reject this Creator product?",
+
+      suspend:
+        "Suspend this approved Creator product?",
+
+      reactivate:
+        "Reactivate this Creator product?"
+
+    }[action];
+
+
+    if (
+      !confirm(
+        confirmationText ||
+        "Continue with this action?"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_review_creator_product",
+          {
+
+            p_product_id:
+              productId,
+
+            p_action:
+              action,
+
+            p_reason:
+              reason
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      showMessage(
+        error.message ||
+        "The product review action failed.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const successText = {
+
+      approve:
+        "Creator product approved successfully.",
+
+      reject:
+        "Creator product rejected successfully.",
+
+      suspend:
+        "Creator product suspended successfully.",
+
+      reactivate:
+        "Creator product reactivated successfully."
+
+    }[action];
+
+
+    showMessage(
+      successText ||
+      "Product updated successfully.",
+      "success"
+    );
+
+
+    await loadData();
+
+  }
+
+
+  function goDashboard() {
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+
+
+  async function logoutAdmin() {
+
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+    window.location.replace(
+      "admin.html"
+    );
+
+  }
+
+
+  initializePage();
+
+</script>
+
+
+</body>
+
+</html>
