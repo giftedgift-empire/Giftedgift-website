@@ -24,7 +24,6 @@
     content="index, follow"
   >
 
-
   <style>
 
     * {
@@ -75,12 +74,16 @@
       padding: 28px 16px 60px;
     }
 
-    .hero {
+    .hero,
+    .panel {
       background: white;
-      border-radius: 18px;
       border: 1px solid #e0e5ed;
       box-shadow:
         0 6px 22px rgba(0,0,0,0.05);
+    }
+
+    .hero {
+      border-radius: 18px;
       padding: 25px;
       margin-bottom: 22px;
     }
@@ -108,11 +111,7 @@
     }
 
     .panel {
-      background: white;
       border-radius: 16px;
-      border: 1px solid #e0e5ed;
-      box-shadow:
-        0 6px 20px rgba(0,0,0,0.04);
       padding: 22px;
       margin-bottom: 22px;
     }
@@ -199,7 +198,8 @@
       font-size: 13px;
     }
 
-    .submit-button {
+    .submit-button,
+    .copy-button {
       width: 100%;
       border: none;
       background: #123a8c;
@@ -259,7 +259,7 @@
 
     .ticket-number {
       display: inline-block;
-      margin-top: 7px;
+      margin: 7px 0 12px;
       font-family: monospace;
       font-size: 18px;
       font-weight: 800;
@@ -268,14 +268,39 @@
       border: 1px solid #b7c4d8;
       border-radius: 8px;
       padding: 9px 11px;
+      cursor: pointer;
+    }
+
+    .copy-button {
+      width: auto;
+      min-height: 40px;
+      padding: 9px 13px;
+      font-size: 13px;
     }
 
     .help-card {
+      width: 100%;
+      display: block;
+      text-align: left;
       border: 1px solid #e0e5ed;
       border-radius: 12px;
       padding: 15px;
       margin-bottom: 13px;
       background: #fafbfc;
+      cursor: pointer;
+      transition:
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .help-card:hover,
+    .help-card:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 4px 14px rgba(18,58,140,0.08);
+      transform: translateY(-1px);
+      outline: none;
     }
 
     .help-card h3 {
@@ -291,6 +316,14 @@
       font-size: 14px;
     }
 
+    .help-card .tap-note {
+      display: block;
+      margin-top: 8px;
+      color: #123a8c;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
     .notice {
       background: #fffaeb;
       border: 1px solid #fedf89;
@@ -302,10 +335,7 @@
     }
 
     .contact-link {
-      display: inline-block;
-      margin-top: 9px;
-      color: #123a8c;
-      font-weight: 700;
+      display: block;
       text-decoration: none;
     }
 
@@ -314,23 +344,53 @@
     }
 
     .faq-item {
-      background: white;
       border: 1px solid #e0e5ed;
       border-radius: 12px;
-      padding: 17px;
       margin-bottom: 12px;
+      overflow: hidden;
+      background: white;
     }
 
-    .faq-item h3 {
+    .faq-question {
+      width: 100%;
+      border: none;
+      background: white;
+      padding: 17px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
       color: #123a8c;
-      margin: 0 0 7px;
       font-size: 17px;
+      font-weight: 800;
     }
 
-    .faq-item p {
-      margin: 0;
+    .faq-question:hover,
+    .faq-question:focus {
+      background: #f8faff;
+      outline: none;
+    }
+
+    .faq-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 17px 17px;
       color: #666;
       line-height: 1.6;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
     }
 
     .honeypot {
@@ -438,7 +498,19 @@
     <div
       id="success-ticket-number"
       class="ticket-number"
+      onclick="copyTicketNumber()"
+      title="Tap to copy"
     ></div>
+
+    <br>
+
+    <button
+      type="button"
+      class="copy-button"
+      onclick="copyTicketNumber()"
+    >
+      Copy Ticket Number
+    </button>
 
     <p>
       GiftedGift Empire Support can use this number
@@ -451,9 +523,10 @@
   <div class="support-grid">
 
 
-    <!-- SUPPORT FORM -->
-
-    <section class="panel">
+    <section
+      class="panel"
+      id="support-form-section"
+    >
 
       <h2>
         Submit a Support Request
@@ -477,11 +550,8 @@
         onsubmit="submitSupportTicket(event)"
       >
 
-
         <div class="form-grid">
 
-
-          <!-- NAME -->
 
           <div>
 
@@ -499,8 +569,6 @@
 
           </div>
 
-
-          <!-- EMAIL -->
 
           <div>
 
@@ -522,8 +590,6 @@
 
           </div>
 
-
-          <!-- CATEGORY -->
 
           <div>
 
@@ -580,8 +646,6 @@
             </select>
 
 
-            <!-- SOMETHING ELSE BOX -->
-
             <div
               id="other-category-box"
               class="other-category-box"
@@ -608,8 +672,6 @@
           </div>
 
 
-          <!-- ORDER / REFERENCE -->
-
           <div>
 
             <label for="order-reference">
@@ -631,8 +693,6 @@
           </div>
 
 
-          <!-- SUBJECT -->
-
           <div class="full">
 
             <label for="support-subject">
@@ -649,8 +709,6 @@
 
           </div>
 
-
-          <!-- MESSAGE -->
 
           <div class="full">
 
@@ -673,8 +731,6 @@
           </div>
 
 
-          <!-- HONEYPOT -->
-
           <div
             class="honeypot"
             aria-hidden="true"
@@ -693,8 +749,6 @@
 
           </div>
 
-
-          <!-- SUBMIT -->
 
           <div class="full">
 
@@ -716,10 +770,7 @@
     </section>
 
 
-    <!-- HELP / CONTACT -->
-
     <aside>
-
 
       <section class="panel">
 
@@ -729,105 +780,132 @@
 
 
         <div class="notice">
-
           Do not include passwords,
           card PINs, CVV/security codes,
           one-time passwords or other highly
-          sensitive information in your
-          support message.
-
+          sensitive information in your support message.
         </div>
 
 
-        <div class="help-card">
+        <button
+          type="button"
+          class="help-card"
+          onclick="openCustomerSupport()"
+        >
 
           <h3>
             Customer Support
           </h3>
 
           <p>
-            Use the support form for order,
-            payment, delivery, refund,
-            digital-download and account issues.
+            Help with orders, payments, delivery,
+            refunds, downloads and account issues.
           </p>
 
-        </div>
+          <span class="tap-note">
+            Tap to go to the support form →
+          </span>
+
+        </button>
 
 
-        <div class="help-card">
+        <button
+          type="button"
+          class="help-card"
+          onclick="chooseSupportCategory('creator_support')"
+        >
 
           <h3>
             Creator Support
           </h3>
 
           <p>
-            Approved Creators and Creator applicants
-            should select Creator / Seller Support.
+            For Creator applications, Seller Codes,
+            products, dashboard or Creator account issues.
           </p>
 
-        </div>
+          <span class="tap-note">
+            Tap to select Creator Support →
+          </span>
+
+        </button>
 
 
-        <div class="help-card">
+        <button
+          type="button"
+          class="help-card"
+          onclick="chooseSupportCategory('affiliate_support')"
+        >
 
           <h3>
             Affiliate Support
           </h3>
 
           <p>
-            Affiliates should select Affiliate Support
-            for referral, commission, dashboard or
+            For referral, commission, dashboard or
             payout-related assistance.
           </p>
 
-        </div>
+          <span class="tap-note">
+            Tap to select Affiliate Support →
+          </span>
+
+        </button>
 
 
-        <div class="help-card">
+        <button
+          type="button"
+          class="help-card"
+          onclick="chooseSupportCategory('other')"
+        >
 
           <h3>
             Something Else
           </h3>
 
           <p>
-            If your enquiry does not match any listed
-            category, choose Something else and briefly
-            tell us what you need help with.
+            Choose this when your enquiry does not match
+            any of the listed support categories.
           </p>
 
-        </div>
+          <span class="tap-note">
+            Tap to describe your enquiry →
+          </span>
+
+        </button>
 
 
-        <div class="help-card">
+        <a
+          href="contact.html"
+          class="contact-link"
+        >
 
-          <h3>
-            General Business Enquiries
-          </h3>
+          <div class="help-card">
 
-          <p>
-            For partnerships, advertising or other
-            general enquiries that are not support
-            tickets, use our Contact page.
-          </p>
+            <h3>
+              General Business Enquiries
+            </h3>
 
-          <a
-            class="contact-link"
-            href="contact.html"
-          >
-            Go to Contact Page →
-          </a>
+            <p>
+              For partnerships, advertising or other
+              general business enquiries that are not
+              support tickets.
+            </p>
 
-        </div>
+            <span class="tap-note">
+              Go to Contact Page →
+            </span>
+
+          </div>
+
+        </a>
 
       </section>
 
     </aside>
 
-
   </div>
 
-
-  <!-- FAQ -->
 
   <section class="panel faq">
 
@@ -836,112 +914,202 @@
     </h2>
 
     <p class="panel-intro">
-      These answers cover some common
-      GiftedGift Empire support issues.
+      Tap any question to open the answer.
     </p>
 
 
     <div class="faq-item">
 
-      <h3>
-        I have a problem with an order. What should I include?
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          I have a problem with an order. What should I include?
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Include your order or reference number,
         the email used for the purchase and a clear
         description of the issue.
-      </p>
+      </div>
 
     </div>
 
 
     <div class="faq-item">
 
-      <h3>
-        I paid but did not receive my digital product.
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          I paid but did not receive my digital product.
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Select Digital Download and include the payment
         or order reference. Do not submit card security
         details or passwords.
-      </p>
+      </div>
 
     </div>
 
 
     <div class="faq-item">
 
-      <h3>
-        How do I request a refund?
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          How do I request a refund?
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Select Refund / Return and include the relevant
         order number and reason for your request.
         Refund eligibility depends on the applicable
         product and refund terms.
-      </p>
+      </div>
 
     </div>
 
 
     <div class="faq-item">
 
-      <h3>
-        I cannot access my account.
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          I cannot access my account.
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Select Account / Login and explain what happens
         when you try to sign in. Never send your password
         through the support form.
-      </p>
+      </div>
 
     </div>
 
 
     <div class="faq-item">
 
-      <h3>
-        I am a Creator and need help.
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          I am a Creator and need help.
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Select Creator / Seller Support and include your
         Seller Code when relevant.
-      </p>
+      </div>
 
     </div>
 
 
     <div class="faq-item">
 
-      <h3>
-        I am an Affiliate and need help with earnings or payouts.
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          I am an Affiliate and need help with earnings or payouts.
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Select Affiliate Support and include your
         referral code, payout reference or other relevant
         information when available.
-      </p>
+      </div>
 
     </div>
 
 
     <div class="faq-item">
 
-      <h3>
-        My enquiry is not listed. What should I choose?
-      </h3>
+      <button
+        type="button"
+        class="faq-question"
+        onclick="toggleFaq(this)"
+        aria-expanded="false"
+      >
 
-      <p>
+        <span>
+          My enquiry is not listed. What should I choose?
+        </span>
+
+        <span class="faq-icon">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
         Choose Something else. A small box will appear
         where you can briefly tell GiftedGift Empire
         what your enquiry is about.
-      </p>
+      </div>
 
     </div>
 
@@ -981,12 +1149,6 @@
 
 <script>
 
-  /*
-  =====================================================
-  SUPABASE
-  =====================================================
-  */
-
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
@@ -1013,12 +1175,6 @@
     );
 
 
-  /*
-  =====================================================
-  MESSAGE
-  =====================================================
-  */
-
   function showFormMessage(
     text,
     type
@@ -1044,11 +1200,93 @@
   }
 
 
-  /*
-  =====================================================
-  SOMETHING ELSE CATEGORY
-  =====================================================
-  */
+  function scrollToSupportForm() {
+
+    document
+      .getElementById(
+        "support-form-section"
+      )
+      .scrollIntoView({
+        behavior:
+          "smooth",
+        block:
+          "start"
+      });
+
+  }
+
+
+  function openCustomerSupport() {
+
+    scrollToSupportForm();
+
+    setTimeout(
+      () => {
+
+        document
+          .getElementById(
+            "support-category"
+          )
+          .focus();
+
+      },
+      500
+    );
+
+  }
+
+
+  function chooseSupportCategory(
+    category
+  ) {
+
+    const select =
+      document.getElementById(
+        "support-category"
+      );
+
+
+    select.value =
+      category;
+
+
+    toggleOtherCategory();
+
+    scrollToSupportForm();
+
+
+    setTimeout(
+      () => {
+
+        if (
+          category ===
+          "other"
+        ) {
+
+          document
+            .getElementById(
+              "other-category-detail"
+            )
+            .focus();
+
+        }
+
+        else {
+
+          document
+            .getElementById(
+              "support-subject"
+            )
+            .focus();
+
+        }
+
+      },
+      500
+    );
+
+  }
+
 
   function toggleOtherCategory() {
 
@@ -1075,7 +1313,8 @@
 
 
     if (
-      category === "other"
+      category ===
+      "other"
     ) {
 
       box.style.display =
@@ -1102,11 +1341,88 @@
   }
 
 
-  /*
-  =====================================================
-  PREFILL LOGGED-IN EMAIL WHEN AVAILABLE
-  =====================================================
-  */
+  function toggleFaq(
+    button
+  ) {
+
+    const item =
+      button.parentElement;
+
+
+    const isOpen =
+      item.classList.contains(
+        "open"
+      );
+
+
+    item.classList.toggle(
+      "open"
+    );
+
+
+    button.setAttribute(
+      "aria-expanded",
+      String(
+        !isOpen
+      )
+    );
+
+  }
+
+
+  async function copyTicketNumber() {
+
+    const ticketNumber =
+      document
+        .getElementById(
+          "success-ticket-number"
+        )
+        .textContent
+        .trim();
+
+
+    if (
+      !ticketNumber
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      await navigator
+        .clipboard
+        .writeText(
+          ticketNumber
+        );
+
+
+      alert(
+        "Ticket number copied."
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      alert(
+        "Ticket number: " +
+        ticketNumber
+      );
+
+    }
+
+  }
+
 
   async function prefillSignedInUser() {
 
@@ -1150,12 +1466,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  SUBMIT SUPPORT TICKET
-  =====================================================
-  */
 
   async function submitSupportTicket(
     event
@@ -1237,12 +1547,6 @@
         .trim();
 
 
-    /*
-    -----------------------------------------------------
-    FRONTEND VALIDATION
-    -----------------------------------------------------
-    */
-
     if (
       name.length < 2
     ) {
@@ -1286,8 +1590,10 @@
 
 
     if (
-      category === "other" &&
-      otherCategoryDetail.length < 3
+      category ===
+        "other" &&
+      otherCategoryDetail.length <
+        3
     ) {
 
       showFormMessage(
@@ -1328,22 +1634,13 @@
     }
 
 
-    /*
-    -----------------------------------------------------
-    SOMETHING ELSE DETAIL
-
-    Database category remains "other".
-    The additional enquiry type is safely included
-    at the beginning of the support message.
-    -----------------------------------------------------
-    */
-
     let finalMessage =
       message;
 
 
     if (
-      category === "other"
+      category ===
+      "other"
     ) {
 
       finalMessage =
@@ -1354,12 +1651,6 @@
 
     }
 
-
-    /*
-    -----------------------------------------------------
-    SUBMIT
-    -----------------------------------------------------
-    */
 
     submitButton.disabled =
       true;
@@ -1386,7 +1677,8 @@
               email,
 
             p_order_reference:
-              orderReference || null,
+              orderReference ||
+              null,
 
             p_category:
               category,
@@ -1398,7 +1690,8 @@
               finalMessage,
 
             p_company_website:
-              companyWebsite || null
+              companyWebsite ||
+              null
 
           }
         );
@@ -1431,12 +1724,6 @@
 
     }
 
-
-    /*
-    -----------------------------------------------------
-    SUCCESS
-    -----------------------------------------------------
-    */
 
     document
       .getElementById(
@@ -1477,12 +1764,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  START
-  =====================================================
-  */
 
   toggleOtherCategory();
 
