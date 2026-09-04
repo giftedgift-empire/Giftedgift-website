@@ -167,6 +167,23 @@
       margin-top: 8px;
     }
 
+    .delete-ticket-btn {
+      width: 100%;
+      margin-top: 18px;
+      background: #b42318;
+      color: white;
+    }
+
+    .delete-note-btn {
+      margin-top: 8px;
+      min-height: 34px;
+      padding: 7px 10px;
+      background: #fff;
+      color: #b42318;
+      border: 1px solid #f1b6b2;
+      font-size: 12px;
+    }
+
     .tickets {
       display: grid;
       gap: 16px;
@@ -362,6 +379,25 @@
       font-size: 11px;
     }
 
+    .danger-zone {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid #f1c7c4;
+    }
+
+    .danger-zone h3 {
+      margin: 0 0 7px;
+      color: #b42318;
+      font-size: 16px;
+    }
+
+    .danger-zone p {
+      margin: 0;
+      color: #666;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
     .empty {
       background: white;
       border: 1px solid #dfe4ec;
@@ -464,8 +500,6 @@
   ></div>
 
 
-  <!-- STATS -->
-
   <section class="stats">
 
     <div class="stat">
@@ -549,8 +583,6 @@
 
   </section>
 
-
-  <!-- SEARCH / FILTERS -->
 
   <section class="tools">
 
@@ -671,12 +703,6 @@
 
 <script>
 
-  /*
-  =====================================================
-  SUPABASE
-  =====================================================
-  */
-
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
@@ -698,12 +724,6 @@
   let notes =
     [];
 
-
-  /*
-  =====================================================
-  SECURITY
-  =====================================================
-  */
 
   async function checkAdmin() {
 
@@ -761,12 +781,6 @@
   }
 
 
-  /*
-  =====================================================
-  PAGE MESSAGE
-  =====================================================
-  */
-
   function showPageMessage(
     text,
     type
@@ -807,12 +821,6 @@
   }
 
 
-  /*
-  =====================================================
-  ESCAPE USER CONTENT
-  =====================================================
-  */
-
   function escapeHtml(
     value
   ) {
@@ -843,12 +851,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  CATEGORY LABEL
-  =====================================================
-  */
 
   function categoryLabel(
     category
@@ -893,12 +895,6 @@
   }
 
 
-  /*
-  =====================================================
-  STATUS LABEL
-  =====================================================
-  */
-
   function statusLabel(
     status
   ) {
@@ -926,12 +922,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  DATE
-  =====================================================
-  */
 
   function formatDate(
     value
@@ -961,12 +951,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  LOAD SUPPORT DATA
-  =====================================================
-  */
 
   async function loadSupportData() {
 
@@ -1069,12 +1053,6 @@
   }
 
 
-  /*
-  =====================================================
-  STATS
-  =====================================================
-  */
-
   function updateStats() {
 
     document
@@ -1134,12 +1112,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  RENDER TICKETS
-  =====================================================
-  */
 
   function renderTickets() {
 
@@ -1268,12 +1240,6 @@
   }
 
 
-  /*
-  =====================================================
-  BUILD CARD
-  =====================================================
-  */
-
   function buildTicketCard(
     ticket
   ) {
@@ -1291,6 +1257,7 @@
         ? ticketNotes
             .map(
               note => `
+
                 <div class="note-item">
 
                   <div>
@@ -1301,7 +1268,16 @@
                     ${escapeHtml(formatDate(note.created_at))}
                   </div>
 
+                  <button
+                    type="button"
+                    class="delete-note-btn"
+                    onclick="deletePrivateNote(${note.id})"
+                  >
+                    Delete Note
+                  </button>
+
                 </div>
+
               `
             )
             .join(
@@ -1459,8 +1435,6 @@
           <div class="message-box">${escapeHtml(ticket.message)}</div>
 
 
-          <!-- STATUS / PRIORITY -->
-
           <div class="actions">
 
 
@@ -1568,8 +1542,6 @@
           </div>
 
 
-          <!-- CONTACT CUSTOMER -->
-
           <div style="margin-top:12px;">
 
             <a
@@ -1581,8 +1553,6 @@
 
           </div>
 
-
-          <!-- PRIVATE NOTES -->
 
           <div class="notes-section">
 
@@ -1614,6 +1584,32 @@
           </div>
 
 
+          <div class="danger-zone">
+
+            <h3>
+              Delete Ticket
+            </h3>
+
+            <p>
+              Permanently delete this ticket if it is
+              spam, a duplicate, a test ticket or was
+              created by mistake.
+            </p>
+
+            <button
+              type="button"
+              class="delete-ticket-btn"
+              onclick="deleteTicket(
+                '${ticket.id}',
+                '${escapeHtml(ticket.ticket_number)}'
+              )"
+            >
+              Delete Ticket Permanently
+            </button>
+
+          </div>
+
+
         </div>
 
       </article>
@@ -1622,12 +1618,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  SAVE STATUS / PRIORITY
-  =====================================================
-  */
 
   async function saveTicket(
     ticketId
@@ -1702,12 +1692,6 @@
 
   }
 
-
-  /*
-  =====================================================
-  ADD PRIVATE NOTE
-  =====================================================
-  */
 
   async function addNote(
     ticketId
@@ -1787,11 +1771,151 @@
   }
 
 
-  /*
-  =====================================================
-  START
-  =====================================================
-  */
+  async function deletePrivateNote(
+    noteId
+  ) {
+
+    const confirmed =
+      confirm(
+        "Delete this private Admin note permanently?"
+      );
+
+
+    if (
+      !confirmed
+    ) {
+
+      return;
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_delete_support_note",
+          {
+            p_note_id:
+              noteId
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      showPageMessage(
+        error.message ||
+        "Could not delete private note.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showPageMessage(
+      "Private Admin note deleted.",
+      "success"
+    );
+
+
+    await loadSupportData();
+
+  }
+
+
+  async function deleteTicket(
+    ticketId,
+    ticketNumber
+  ) {
+
+    const firstConfirm =
+      confirm(
+        "Permanently delete support ticket " +
+        ticketNumber +
+        "?\n\nUse this mainly for tests, spam, duplicates or mistakes."
+      );
+
+
+    if (
+      !firstConfirm
+    ) {
+
+      return;
+
+    }
+
+
+    const secondConfirm =
+      confirm(
+        "This cannot be undone. Delete " +
+        ticketNumber +
+        " permanently?"
+      );
+
+
+    if (
+      !secondConfirm
+    ) {
+
+      return;
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_delete_support_ticket",
+          {
+            p_ticket_id:
+              ticketId
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      showPageMessage(
+        error.message ||
+        "Could not delete support ticket.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showPageMessage(
+      "Support ticket deleted permanently.",
+      "success"
+    );
+
+
+    await loadSupportData();
+
+  }
+
 
   async function startPage() {
 
