@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Creator Product | GiftedGift Empire
+  </title>
+
+  <meta
+    id="meta-description"
+    name="description"
+    content="Discover this digital product on GiftedGift Empire."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <link
+    id="canonical-link"
+    rel="canonical"
+    href="https://giftedgiftempire.com/creator-product.html"
+  >
+
+
+  <!-- SOCIAL / AD SHARING -->
+
+  <meta
+    id="og-title"
+    property="og:title"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Discover this digital product on GiftedGift Empire."
+  >
+
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/"
+  >
+
+  <meta
+    property="og:type"
+    content="product"
+  >
+
+  <meta
+    id="og-image"
+    property="og:image"
+    content=""
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+
+      color: #222;
+    }
+
+
+    header {
+      background: #123a8c;
+
+      color: white;
+
+      padding: 18px 20px;
+    }
+
+
+    .header-inner {
+      width: 100%;
+
+      max-width: 1150px;
+
+      margin: auto;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 18px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 55px;
+
+      height: 55px;
+
+      object-fit: contain;
+
+      background: white;
+
+      padding: 4px;
+
+      border-radius: 10px;
+    }
+
+
+    .brand-name {
+      color: #f2bd16;
+
+      font-size: 24px;
+
+      font-weight: 800;
+    }
+
+
+    .header-link {
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+
+    .page {
+      width: 100%;
+
+      max-width: 1150px;
+
+      margin: auto;
+
+      padding: 24px 16px 60px;
+    }
+
+
+    .breadcrumb {
+      margin-bottom: 18px;
+
+      color: #666;
+
+      font-size: 14px;
+    }
+
+
+    .breadcrumb a {
+      color: #123a8c;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+
+    .loading,
+    .error-box {
+      background: white;
+
+      border: 1px solid #dfe4ec;
+
+      border-radius: 15px;
+
+      padding: 35px 20px;
+
+      text-align: center;
+
+      box-shadow:
+        0 5px 20px
+        rgba(0,0,0,0.05);
+    }
+
+
+    .error-box {
+      display: none;
+
+      color: #b42318;
+    }
+
+
+    .product-page {
+      display: none;
+    }
+
+
+    .product-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(280px, 0.9fr)
+        minmax(0, 1.1fr);
+
+      gap: 35px;
+
+      align-items: start;
+    }
+
+
+    .image-panel {
+      background: white;
+
+      border: 1px solid #dfe4ec;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      box-shadow:
+        0 5px 20px
+        rgba(0,0,0,0.05);
+    }
+
+
+    .product-image-wrap {
+      width: 100%;
+
+      min-height: 380px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: #f8f9fc;
+
+      border-radius: 13px;
+
+      overflow: hidden;
+    }
+
+
+    .product-image {
+      width: 100%;
+
+      max-height: 560px;
+
+      object-fit: contain;
+
+      display: none;
+    }
+
+
+    .image-placeholder {
+      color: #777;
+
+      text-align: center;
+
+      line-height: 1.6;
+
+      padding: 25px;
+    }
+
+
+    .details-panel {
+      background: white;
+
+      border: 1px solid #dfe4ec;
+
+      border-radius: 18px;
+
+      padding: 27px;
+
+      box-shadow:
+        0 5px 20px
+        rgba(0,0,0,0.05);
+    }
+
+
+    .digital-badge {
+      display: inline-block;
+
+      background: #edf2ff;
+
+      color: #123a8c;
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      margin-bottom: 14px;
+    }
+
+
+    .product-title {
+      margin: 0 0 13px;
+
+      color: #123a8c;
+
+      font-size: 34px;
+
+      line-height: 1.18;
+    }
+
+
+    .seller-line {
+      color: #666;
+
+      margin-bottom: 20px;
+
+      line-height: 1.5;
+    }
+
+
+    .seller-code {
+      font-weight: 700;
+
+      color: #333;
+    }
+
+
+    .price {
+      font-size: 34px;
+
+      font-weight: 900;
+
+      color: #111;
+
+      margin: 16px 0 20px;
+    }
+
+
+    .description {
+      color: #555;
+
+      line-height: 1.75;
+
+      white-space: pre-wrap;
+
+      margin-bottom: 24px;
+    }
+
+
+    .buy-button {
+      width: 100%;
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 15px 18px;
+
+      min-height: 52px;
+
+      background: #f2bd16;
+
+      color: #111;
+
+      font-size: 17px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      margin-bottom: 11px;
+    }
+
+
+    .share-button {
+      width: 100%;
+
+      border: 1px solid #123a8c;
+
+      border-radius: 10px;
+
+      padding: 13px 18px;
+
+      min-height: 48px;
+
+      background: white;
+
+      color: #123a8c;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .trust-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+      gap: 12px;
+
+      margin-top: 22px;
+    }
+
+
+    .trust-item {
+      background: #f8f9fc;
+
+      border: 1px solid #e4e8ef;
+
+      border-radius: 11px;
+
+      padding: 13px;
+
+      text-align: center;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+    }
+
+
+    .trust-icon {
+      display: block;
+
+      font-size: 21px;
+
+      margin-bottom: 6px;
+    }
+
+
+    .section {
+      background: white;
+
+      border: 1px solid #dfe4ec;
+
+      border-radius: 16px;
+
+      padding: 24px;
+
+      margin-top: 24px;
+
+      box-shadow:
+        0 4px 18px
+        rgba(0,0,0,0.04);
+    }
+
+
+    .section h2 {
+      color: #123a8c;
+
+      margin: 0 0 12px;
+    }
+
+
+    .section p {
+      color: #555;
+
+      line-height: 1.7;
+
+      margin: 0;
+    }
+
+
+    .support-links {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 15px;
+    }
+
+
+    .support-links a {
+      display: inline-block;
+
+      text-decoration: none;
+
+      color: #123a8c;
+
+      background: #edf2ff;
+
+      border-radius: 8px;
+
+      padding: 10px 13px;
+
+      font-weight: 700;
+    }
+
+
+    footer {
+      background: #123a8c;
+
+      color: white;
+
+      text-align: center;
+
+      padding: 25px 16px;
+
+      line-height: 1.6;
+    }
+
+
+    footer a {
+      color: #f2bd16;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+
+    @media (max-width: 800px) {
+
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .product-title {
+        font-size: 29px;
+      }
+
+      .price {
+        font-size: 30px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image-wrap {
+        min-height: 280px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+
+      <img
+        src="my-logo.png"
+        alt="GiftedGift Empire"
+      >
+
+      <span class="brand-name">
+        GiftedGift Empire
+      </span>
+
+    </a>
+
+
+    <a
+      href="shop.html"
+      class="header-link"
+    >
+      Continue Shopping
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div class="breadcrumb">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    &nbsp;›&nbsp;
+
+    <a href="shop.html">
+      Shop
+    </a>
+
+    &nbsp;›&nbsp;
+
+    <span id="breadcrumb-title">
+      Creator Product
+    </span>
+
+  </div>
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading product...
+  </div>
+
+
+  <div
+    id="error-box"
+    class="error-box"
+  >
+    This Creator product is unavailable,
+    has not been approved, or could not be found.
+  </div>
+
+
+  <div
+    id="product-page"
+    class="product-page"
+  >
+
+
+    <section class="product-layout">
+
+
+      <!-- PRODUCT COVER -->
+
+      <div class="image-panel">
+
+        <div class="product-image-wrap">
+
+          <img
+            id="product-image"
+            class="product-image"
+            src=""
+            alt=""
+          >
+
+          <div
+            id="image-placeholder"
+            class="image-placeholder"
+          >
+            Loading product cover...
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT INFORMATION -->
+
+      <div class="details-panel">
+
+        <div
+          id="product-type"
+          class="digital-badge"
+        >
+          Digital Product
+        </div>
+
+
+        <h1
+          id="product-title"
+          class="product-title"
+        ></h1>
+
+
+        <div class="seller-line">
+
+          Verified Creator on GiftedGift Empire
+
+          <br>
+
+          Seller Code:
+          <span
+            id="seller-code"
+            class="seller-code"
+          ></span>
+
+        </div>
+
+
+        <div
+          id="product-price"
+          class="price"
+        ></div>
+
+
+        <div
+          id="product-description"
+          class="description"
+        ></div>
+
+
+        <button
+          type="button"
+          id="buy-button"
+          class="buy-button"
+        >
+          Buy Now
+        </button>
+
+
+        <button
+          type="button"
+          class="share-button"
+          onclick="shareProduct()"
+        >
+          Share / Copy Product Link
+        </button>
+
+
+        <div class="trust-grid">
+
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              🔒
+            </span>
+
+            Secure checkout
+
+          </div>
+
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              📥
+            </span>
+
+            Digital product delivery
+
+          </div>
+
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              💬
+            </span>
+
+            Customer support available
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        About This Product
+      </h2>
+
+      <p id="about-product"></p>
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        Buying Through GiftedGift Empire
+      </h2>
+
+      <p>
+        This product has been reviewed and approved
+        for listing on the GiftedGift Empire Creator
+        Marketplace. The Creator's original digital file
+        is not publicly exposed. Access to purchased
+        digital content will be handled through the
+        secure checkout and delivery system.
+      </p>
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        Refunds & Support
+      </h2>
+
+      <p>
+        Refund eligibility depends on the applicable
+        product terms and GiftedGift Empire policies.
+        If you experience a payment, account or digital
+        delivery issue, contact Customer Service and
+        include your order reference.
+      </p>
+
+
+      <div class="support-links">
+
+        <a href="customer-service.html">
+          Customer Service
+        </a>
+
+        <a href="contact.html">
+          Contact GiftedGift Empire
+        </a>
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+
+</main>
+
+
+<footer>
+
+  <div>
+    © GiftedGift Empire
+  </div>
+
+  <div>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="shop.html">
+      Shop
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="customer-service.html">
+      Customer Service
+    </a>
+
+  </div>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  let currentProduct =
+    null;
+
+
+  let canonicalProductUrl =
+    "";
+
+
+  /*
+  =====================================================
+  GET SLUG
+
+  Supports:
+  1. Future Cloudflare injected clean slug
+  2. ?slug= fallback during testing
+  =====================================================
+  */
+
+  function getProductSlug() {
+
+    if (
+      window.__CREATOR_PRODUCT_SLUG
+    ) {
+
+      return String(
+        window.__CREATOR_PRODUCT_SLUG
+      ).trim();
+
+    }
+
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    return (
+      params.get(
+        "slug"
+      ) || ""
+    ).trim();
+
+  }
+
+
+  /*
+  =====================================================
+  FORMAT PRICE
+  =====================================================
+  */
+
+  function formatMoney(
+    value,
+    currency
+  ) {
+
+    try {
+
+      return new Intl.NumberFormat(
+        undefined,
+        {
+          style:
+            "currency",
+
+          currency:
+            currency || "EUR"
+        }
+      ).format(
+        Number(
+          value || 0
+        )
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      return (
+        (currency || "EUR") +
+        " " +
+        Number(
+          value || 0
+        ).toFixed(
+          2
+        )
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  CLEAN PRODUCT URL
+
+  Tracking parameters are intentionally excluded
+  from the canonical/share URL.
+  =====================================================
+  */
+
+  function buildCanonicalUrl(
+    slug
+  ) {
+
+    if (
+      window.__CREATOR_PRODUCT_SLUG
+    ) {
+
+      return (
+        window.location.origin +
+        window.location.pathname
+      );
+
+    }
+
+
+    return (
+      window.location.origin +
+      "/creator-product.html?slug=" +
+      encodeURIComponent(
+        slug
+      )
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  PRESERVE AD / AFFILIATE PARAMETERS FOR CHECKOUT
+  =====================================================
+  */
+
+  function buildCheckoutUrl(
+    slug
+  ) {
+
+    const currentParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const checkoutParams =
+      new URLSearchParams();
+
+
+    checkoutParams.set(
+      "slug",
+      slug
+    );
+
+
+    currentParams.forEach(
+      (
+        value,
+        key
+      ) => {
+
+        if (
+          key !==
+          "slug"
+        ) {
+
+          checkoutParams.set(
+            key,
+            value
+          );
+
+        }
+
+      }
+    );
+
+
+    return (
+      "creator-checkout.html?" +
+      checkoutParams.toString()
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  PRODUCT COVER
+  =====================================================
+  */
+
+  async function loadCover(
+    path,
+    title
+  ) {
+
+    const image =
+      document.getElementById(
+        "product-image"
+      );
+
+
+    const placeholder =
+      document.getElementById(
+        "image-placeholder"
+      );
+
+
+    if (
+      !path
+    ) {
+
+      placeholder.textContent =
+        "No product cover available.";
+
+      return;
+
+    }
+
+
+    /*
+    -----------------------------------------------------
+    FIRST TRY: TEMPORARY SIGNED URL
+    -----------------------------------------------------
+    */
+
+    const {
+      data: signedData,
+      error: signedError
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          "creator-product-covers"
+        )
+        .createSignedUrl(
+          path,
+          3600
+        );
+
+
+    if (
+      !signedError &&
+      signedData &&
+      signedData.signedUrl
+    ) {
+
+      image.src =
+        signedData.signedUrl;
+
+      image.alt =
+        title;
+
+      image.style.display =
+        "block";
+
+      placeholder.style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "og-image"
+        )
+        .setAttribute(
+          "content",
+          signedData.signedUrl
+        );
+
+
+      return;
+
+    }
+
+
+    /*
+    -----------------------------------------------------
+    FALLBACK: DOWNLOAD AS BLOB
+    -----------------------------------------------------
+    */
+
+    const {
+      data: fileData,
+      error: fileError
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          "creator-product-covers"
+        )
+        .download(
+          path
+        );
+
+
+    if (
+      fileError ||
+      !fileData
+    ) {
+
+      console.error(
+        "Cover error:",
+        signedError,
+        fileError
+      );
+
+
+      placeholder.textContent =
+        "Product cover could not be loaded.";
+
+      return;
+
+    }
+
+
+    const objectUrl =
+      URL.createObjectURL(
+        fileData
+      );
+
+
+    image.src =
+      objectUrl;
+
+    image.alt =
+      title;
+
+    image.style.display =
+      "block";
+
+    placeholder.style.display =
+      "none";
+
+  }
+
+
+  /*
+  =====================================================
+  SEO
+  =====================================================
+  */
+
+  function updateSeo(
+    product
+  ) {
+
+    const description =
+      String(
+        product.description || ""
+      )
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim()
+        .slice(
+          0,
+          155
+        );
+
+
+    document.title =
+      product.title +
+      " | GiftedGift Empire";
+
+
+    document
+      .getElementById(
+        "meta-description"
+      )
+      .setAttribute(
+        "content",
+        description ||
+        "Digital product available through GiftedGift Empire."
+      );
+
+
+    document
+      .getElementById(
+        "canonical-link"
+      )
+      .setAttribute(
+        "href",
+        canonicalProductUrl
+      );
+
+
+    document
+      .getElementById(
+        "og-title"
+      )
+      .setAttribute(
+        "content",
+        product.title +
+        " | GiftedGift Empire"
+      );
+
+
+    document
+      .getElementById(
+        "og-description"
+      )
+      .setAttribute(
+        "content",
+        description
+      );
+
+
+    document
+      .getElementById(
+        "og-url"
+      )
+      .setAttribute(
+        "content",
+        canonicalProductUrl
+      );
+
+
+    /*
+    -----------------------------------------------------
+    PRODUCT JSON-LD
+    -----------------------------------------------------
+    */
+
+    const jsonLd = {
+
+      "@context":
+        "https://schema.org",
+
+      "@type":
+        "Product",
+
+      name:
+        product.title,
+
+      description:
+        product.description,
+
+      sku:
+        product.product_code,
+
+      category:
+        product.category,
+
+      offers: {
+
+        "@type":
+          "Offer",
+
+        url:
+          canonicalProductUrl,
+
+        priceCurrency:
+          product.currency,
+
+        price:
+          Number(
+            product.price
+          ).toFixed(
+            2
+          ),
+
+        availability:
+          "https://schema.org/InStock",
+
+        seller: {
+
+          "@type":
+            "Organization",
+
+          name:
+            "GiftedGift Empire Marketplace"
+
+        }
+
+      }
+
+    };
+
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.textContent =
+      JSON.stringify(
+        jsonLd
+      );
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  RENDER PRODUCT
+  =====================================================
+  */
+
+  async function renderProduct(
+    product
+  ) {
+
+    currentProduct =
+      product;
+
+
+    canonicalProductUrl =
+      buildCanonicalUrl(
+        product.public_slug
+      );
+
+
+    document
+      .getElementById(
+        "breadcrumb-title"
+      )
+      .textContent =
+        product.title;
+
+
+    document
+      .getElementById(
+        "product-title"
+      )
+      .textContent =
+        product.title;
+
+
+    document
+      .getElementById(
+        "product-description"
+      )
+      .textContent =
+        product.description ||
+        "";
+
+
+    document
+      .getElementById(
+        "about-product"
+      )
+      .textContent =
+        product.description ||
+        "No additional description is available.";
+
+
+    document
+      .getElementById(
+        "seller-code"
+      )
+      .textContent =
+        product.creator_seller_code;
+
+
+    document
+      .getElementById(
+        "product-price"
+      )
+      .textContent =
+        formatMoney(
+          product.price,
+          product.currency
+        );
+
+
+    const typeText =
+      String(
+        product.product_type ||
+        "Digital Product"
+      );
+
+
+    document
+      .getElementById(
+        "product-type"
+      )
+      .textContent =
+        typeText
+          .charAt(
+            0
+          )
+          .toUpperCase() +
+        typeText.slice(
+          1
+        );
+
+
+    document
+      .getElementById(
+        "buy-button"
+      )
+      .onclick =
+        function() {
+
+          window.location.href =
+            buildCheckoutUrl(
+              product.public_slug
+            );
+
+        };
+
+
+    updateSeo(
+      product
+    );
+
+
+    await loadCover(
+      product.cover_image_path,
+      product.title
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  SHARE PRODUCT
+  =====================================================
+  */
+
+  async function shareProduct() {
+
+    if (
+      !currentProduct
+    ) {
+
+      return;
+
+    }
+
+
+    const shareData = {
+
+      title:
+        currentProduct.title,
+
+      text:
+        "View " +
+        currentProduct.title +
+        " on GiftedGift Empire.",
+
+      url:
+        canonicalProductUrl
+
+    };
+
+
+    if (
+      navigator.share
+    ) {
+
+      try {
+
+        await navigator.share(
+          shareData
+        );
+
+        return;
+
+      }
+
+      catch (
+        error
+      ) {
+
+        if (
+          error.name ===
+          "AbortError"
+        ) {
+
+          return;
+
+        }
+
+      }
+
+    }
+
+
+    try {
+
+      await navigator
+        .clipboard
+        .writeText(
+          canonicalProductUrl
+        );
+
+
+      alert(
+        "Product link copied."
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      alert(
+        canonicalProductUrl
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD PRODUCT
+  =====================================================
+  */
+
+  async function loadProduct() {
+
+    const slug =
+      getProductSlug();
+
+
+    if (
+      !slug
+    ) {
+
+      document
+        .getElementById(
+          "loading"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "error-box"
+        )
+        .style.display =
+          "block";
+
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "get_public_creator_product_by_slug",
+          {
+            p_slug:
+              slug
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Product load error:",
+        error
+      );
+
+    }
+
+
+    const product =
+      Array.isArray(
+        data
+      )
+        ? data[0]
+        : null;
+
+
+    if (
+      error ||
+      !product
+    ) {
+
+      document
+        .getElementById(
+          "loading"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "error-box"
+        )
+        .style.display =
+          "block";
+
+
+      return;
+
+    }
+
+
+    await renderProduct(
+      product
+    );
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "product-page"
+      )
+      .style.display =
+        "block";
+
+  }
+
+
+  loadProduct();
+
+</script>
+
+
+<!--
+Existing consent-controlled website tracking.
+These remain subject to your cookie-consent system.
+-->
+
+<script
+  src="cookie-consent.js"
+  defer
+></script>
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
+
+</body>
+
+</html>
