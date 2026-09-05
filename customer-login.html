@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Customer Login | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Sign in to your GiftedGift Empire customer account to manage purchases and access eligible digital downloads."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #123a8c;
+      padding: 18px 20px;
+      color: white;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-size: 24px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .header-link {
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      padding: 42px 16px 70px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 18px;
+      box-shadow:
+        0 7px 24px rgba(0,0,0,0.06);
+      padding: 27px;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #123a8c;
+      font-size: 30px;
+    }
+
+    .intro {
+      color: #555;
+      line-height: 1.65;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    .secure-note {
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      color: #067647;
+      border-radius: 10px;
+      padding: 14px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      min-height: 49px;
+      border: 1px solid #ccd3dd;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 70px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: #123a8c;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .forgot-row {
+      text-align: right;
+      margin-top: -7px;
+      margin-bottom: 20px;
+    }
+
+    .forgot-row a {
+      color: #123a8c;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .button {
+      width: 100%;
+      min-height: 52px;
+      border: none;
+      border-radius: 9px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      border-radius: 10px;
+      padding: 13px;
+      margin-bottom: 18px;
+      line-height: 1.55;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      color: #b42318;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      color: #067647;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      color: #175cd3;
+    }
+
+    .signup-link {
+      margin-top: 24px;
+      text-align: center;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .signup-link a {
+      color: #123a8c;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #98a2b3;
+      margin: 25px 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #e4e7ec;
+      flex: 1;
+    }
+
+    .shop-button {
+      display: block;
+      text-align: center;
+      border: 1px solid #123a8c;
+      border-radius: 9px;
+      padding: 14px 18px;
+      color: #123a8c;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    footer a {
+      color: #f2bd16;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 520px) {
+
+      .card {
+        padding: 22px 18px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      GiftedGift Empire
+    </a>
+
+    <a
+      href="shop.html"
+      class="header-link"
+    >
+      ← Back to Shop
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <section class="card">
+
+    <h1>
+      Customer Login
+    </h1>
+
+    <p class="intro">
+
+      Sign in to manage your GiftedGift Empire
+      purchases and access your eligible digital
+      products.
+
+    </p>
+
+
+    <div class="secure-note">
+
+      🔒 Your purchases are connected to your
+      authenticated customer account securely.
+
+    </div>
+
+
+    <div
+      id="login-message"
+      class="message"
+    ></div>
+
+
+    <form
+      id="login-form"
+      onsubmit="customerLogin(event)"
+    >
+
+
+      <div class="field">
+
+        <label for="email">
+          Email Address *
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          maxlength="254"
+          required
+          autocomplete="email"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="password">
+          Password *
+        </label>
+
+        <div class="password-wrap">
+
+          <input
+            type="password"
+            id="password"
+            required
+            autocomplete="current-password"
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            onclick="togglePassword()"
+          >
+            Show
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="forgot-row">
+
+        <a href="customer-forgot-password.html">
+          Forgot Password?
+        </a>
+
+      </div>
+
+
+      <button
+        type="submit"
+        id="login-button"
+        class="button"
+      >
+        Sign In
+      </button>
+
+    </form>
+
+
+    <div class="signup-link">
+
+      Don't have a customer account?
+
+      <br>
+
+      <a href="customer-signup.html">
+        Create Customer Account
+      </a>
+
+    </div>
+
+
+    <div class="divider">
+      OR
+    </div>
+
+
+    <a
+      href="shop.html"
+      class="shop-button"
+    >
+      Continue Shopping
+    </a>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  © GiftedGift Empire
+
+  <br><br>
+
+  <a href="customer-service.html">
+    Customer Service
+  </a>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+  =====================================================
+  URL
+  =====================================================
+  */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  /*
+  =====================================================
+  MESSAGE
+  =====================================================
+  */
+
+  function showMessage(
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "login-message"
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearMessage() {
+
+    const box =
+      document.getElementById(
+        "login-message"
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  SHOW / HIDE PASSWORD
+  =====================================================
+  */
+
+  function togglePassword() {
+
+    const input =
+      document.getElementById(
+        "password"
+      );
+
+
+    const button =
+      document.querySelector(
+        ".show-password"
+      );
+
+
+    if (
+      input.type ===
+      "password"
+    ) {
+
+      input.type =
+        "text";
+
+      button.textContent =
+        "Hide";
+
+    }
+
+    else {
+
+      input.type =
+        "password";
+
+      button.textContent =
+        "Show";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  REDIRECT DESTINATION
+  =====================================================
+  */
+
+  function getSafeNextPage() {
+
+    const requested =
+      String(
+        params.get("next") ||
+        ""
+      ).trim();
+
+
+    /*
+      Only allow local relative HTML pages.
+      This prevents outside redirect abuse.
+    */
+
+    if (
+      requested &&
+      !requested.includes("://") &&
+      !requested.startsWith("//") &&
+      !requested.startsWith("/") &&
+      /^[A-Za-z0-9._\-/?=&%]+$/.test(
+        requested
+      )
+    ) {
+
+      return requested;
+
+    }
+
+
+    return "customer-account.html";
+
+  }
+
+
+  /*
+  =====================================================
+  LOGIN
+  =====================================================
+  */
+
+  async function customerLogin(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    clearMessage();
+
+
+    const email =
+      document
+        .getElementById(
+          "email"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+      document
+        .getElementById(
+          "password"
+        )
+        .value;
+
+
+    if (
+      !email ||
+      !password
+    ) {
+
+      showMessage(
+        "Please enter your email and password.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "login-button"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Signing In...";
+
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .signInWithPassword({
+
+            email:
+              email,
+
+            password:
+              password
+
+          });
+
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      const user =
+        data?.user;
+
+
+      if (
+        !user
+      ) {
+
+        throw new Error(
+          "Your account could not be signed in."
+        );
+
+      }
+
+
+      /*
+      =================================================
+      REQUIRE VERIFIED EMAIL
+      =================================================
+      */
+
+      if (
+        !user.email_confirmed_at
+      ) {
+
+        await supabaseClient
+          .auth
+          .signOut();
+
+
+        showMessage(
+          "Please verify your email address before signing in.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      showMessage(
+        "Signed in successfully. Opening your account...",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          window.location.href =
+            getSafeNextPage();
+
+        },
+        700
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Customer login:",
+        error
+      );
+
+
+      let message =
+        error.message ||
+        "Could not sign in.";
+
+
+      const lowerMessage =
+        String(
+          message
+        ).toLowerCase();
+
+
+      if (
+        lowerMessage.includes(
+          "invalid login credentials"
+        )
+      ) {
+
+        message =
+          "The email or password is incorrect.";
+
+      }
+
+
+      showMessage(
+        message,
+        "error"
+      );
+
+    }
+
+    finally {
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Sign In";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  PAGE START
+  =====================================================
+  */
+
+  async function startPage() {
+
+    if (
+      params.get("verified") ===
+      "1"
+    ) {
+
+      showMessage(
+        "Your email verification is complete. You can now sign in.",
+        "success"
+      );
+
+    }
+
+
+    if (
+      params.get("reset") ===
+      "1"
+    ) {
+
+      showMessage(
+        "Your password has been updated. You can now sign in.",
+        "success"
+      );
+
+    }
+
+
+    try {
+
+      const {
+        data
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        data?.session?.user
+      ) {
+
+        window.location.replace(
+          getSafeNextPage()
+        );
+
+      }
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Session check:",
+        error
+      );
+
+    }
+
+  }
+
+
+  startPage();
+
+</script>
+
+
+<script
+  src="cookie-consent.js"
+  defer
+></script>
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
+
+</body>
+
+</html>
