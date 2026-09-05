@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    My Account | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Manage your GiftedGift Empire purchases and securely access your eligible digital products."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-size: 24px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .header-link,
+    .logout-button {
+      color: white;
+      background: transparent;
+      border: none;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 8px 0;
+    }
+
+    .logout-button {
+      color: #f2bd16;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 16px 65px;
+    }
+
+    .loading {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 16px;
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .account-content {
+      display: none;
+    }
+
+    .welcome-card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+    }
+
+    .welcome-card h1 {
+      color: #123a8c;
+      margin-top: 0;
+      margin-bottom: 9px;
+    }
+
+    .welcome-text {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .account-info {
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      border-radius: 11px;
+      padding: 15px;
+      line-height: 1.7;
+      color: #175cd3;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      color: #123a8c;
+      margin: 0;
+    }
+
+    .refresh-button {
+      border: 1px solid #123a8c;
+      background: white;
+      color: #123a8c;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .message {
+      display: none;
+      border-radius: 10px;
+      padding: 13px;
+      margin-bottom: 18px;
+      line-height: 1.55;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      color: #b42318;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      color: #067647;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      color: #175cd3;
+    }
+
+    .downloads-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(280px, 1fr)
+        );
+      gap: 18px;
+    }
+
+    .purchase-card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow:
+        0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .source-badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #eef4ff;
+      color: #123a8c;
+      margin-bottom: 12px;
+    }
+
+    .product-name {
+      color: #123a8c;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      border-bottom: 1px solid #f0f2f5;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .detail-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #667085;
+    }
+
+    .detail-value {
+      text-align: right;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .status-good {
+      color: #067647;
+    }
+
+    .status-warning {
+      color: #b54708;
+    }
+
+    .status-bad {
+      color: #b42318;
+    }
+
+    .download-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 9px;
+      padding: 13px 16px;
+      margin-top: 17px;
+      font-weight: 900;
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .unavailable-button {
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      padding: 13px 16px;
+      margin-top: 17px;
+      background: #e4e7ec;
+      color: #667085;
+      font-weight: 800;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      background: white;
+      border: 1px dashed #b9c2d0;
+      border-radius: 15px;
+      text-align: center;
+      padding: 35px 20px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .empty-state h3 {
+      color: #123a8c;
+      margin-top: 0;
+    }
+
+    .shop-button {
+      display: inline-block;
+      margin-top: 13px;
+      background: #123a8c;
+      color: white;
+      border-radius: 9px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .security-note {
+      margin-top: 25px;
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      border-radius: 11px;
+      padding: 15px;
+      color: #067647;
+      line-height: 1.65;
+    }
+
+    footer {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    footer a {
+      color: #f2bd16;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding-top: 20px;
+      }
+
+      .welcome-card {
+        padding: 20px 17px;
+      }
+
+      .downloads-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      GiftedGift Empire
+    </a>
+
+
+    <div class="header-actions">
+
+      <a
+        href="shop.html"
+        class="header-link"
+      >
+        Shop
+      </a>
+
+      <button
+        type="button"
+        class="logout-button"
+        onclick="customerLogout()"
+      >
+        Sign Out
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading your secure customer account...
+  </div>
+
+
+  <div
+    id="account-content"
+    class="account-content"
+  >
+
+
+    <section class="welcome-card">
+
+      <h1 id="welcome-title">
+        My Account
+      </h1>
+
+      <p class="welcome-text">
+
+        Welcome to your GiftedGift Empire customer
+        account. Your eligible purchases from the main
+        store and Creator Marketplace can appear here.
+
+      </p>
+
+
+      <div class="account-info">
+
+        Signed in as:
+
+        <strong id="customer-email"></strong>
+
+      </div>
+
+    </section>
+
+
+    <div
+      id="account-message"
+      class="message"
+    ></div>
+
+
+    <section>
+
+      <div class="section-title">
+
+        <h2>
+          My Downloads
+        </h2>
+
+        <button
+          type="button"
+          class="refresh-button"
+          onclick="loadMyDownloads()"
+        >
+          Refresh Purchases
+        </button>
+
+      </div>
+
+
+      <div id="downloads-container"></div>
+
+
+      <div class="security-note">
+
+        🔒 Digital files remain private.
+
+        <br><br>
+
+        GiftedGift Empire checks your authenticated
+        account and purchase status before secure
+        download access is provided.
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+
+</main>
+
+
+<footer>
+
+  © GiftedGift Empire
+
+  <br><br>
+
+  <a href="customer-service.html">
+    Customer Service
+  </a>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+  =====================================================
+  STATE
+  =====================================================
+  */
+
+  let currentUser =
+    null;
+
+
+  /*
+  =====================================================
+  MESSAGE
+  =====================================================
+  */
+
+  function showMessage(
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "account-message"
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearMessage() {
+
+    const box =
+      document.getElementById(
+        "account-message"
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  DATE
+  =====================================================
+  */
+
+  function formatDate(
+    value
+  ) {
+
+    if (
+      !value
+    ) {
+
+      return "—";
+
+    }
+
+
+    try {
+
+      return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+          dateStyle:
+            "medium"
+        }
+      ).format(
+        new Date(
+          value
+        )
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      return "—";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  DISPLAY TEXT
+  =====================================================
+  */
+
+  function sourceLabel(
+    source
+  ) {
+
+    if (
+      source ===
+      "creator_marketplace"
+    ) {
+
+      return "Creator Marketplace";
+
+    }
+
+
+    if (
+      source ===
+      "giftedgift_flutterwave"
+    ) {
+
+      return "GiftedGift Empire • Flutterwave";
+
+    }
+
+
+    if (
+      source ===
+      "giftedgift_digital"
+    ) {
+
+      return "GiftedGift Empire Digital";
+
+    }
+
+
+    return "GiftedGift Empire";
+
+  }
+
+
+  function prettyStatus(
+    value
+  ) {
+
+    if (
+      !value
+    ) {
+
+      return "—";
+
+    }
+
+
+    return String(
+      value
+    )
+      .replace(
+        /_/g,
+        " "
+      )
+      .replace(
+        /\b\w/g,
+        character =>
+          character.toUpperCase()
+      );
+
+  }
+
+
+  function statusClass(
+    value
+  ) {
+
+    const status =
+      String(
+        value || ""
+      ).toLowerCase();
+
+
+    if (
+      [
+        "paid",
+        "available",
+        "fulfilled",
+        "completed",
+        "successful",
+        "success"
+      ].includes(
+        status
+      )
+    ) {
+
+      return "status-good";
+
+    }
+
+
+    if (
+      [
+        "pending",
+        "processing",
+        "partially_refunded"
+      ].includes(
+        status
+      )
+    ) {
+
+      return "status-warning";
+
+    }
+
+
+    if (
+      [
+        "failed",
+        "cancelled",
+        "refunded",
+        "revoked"
+      ].includes(
+        status
+      )
+    ) {
+
+      return "status-bad";
+
+    }
+
+
+    return "";
+
+  }
+
+
+  /*
+  =====================================================
+  SAFE DETAIL ROW
+  =====================================================
+  */
+
+  function createDetailRow(
+    label,
+    value,
+    valueClass = ""
+  ) {
+
+    const row =
+      document.createElement(
+        "div"
+      );
+
+
+    row.className =
+      "detail-row";
+
+
+    const labelBox =
+      document.createElement(
+        "span"
+      );
+
+
+    labelBox.className =
+      "detail-label";
+
+
+    labelBox.textContent =
+      label;
+
+
+    const valueBox =
+      document.createElement(
+        "span"
+      );
+
+
+    valueBox.className =
+      "detail-value " +
+      valueClass;
+
+
+    valueBox.textContent =
+      value || "—";
+
+
+    row.appendChild(
+      labelBox
+    );
+
+
+    row.appendChild(
+      valueBox
+    );
+
+
+    return row;
+
+  }
+
+
+  /*
+  =====================================================
+  RENDER DOWNLOADS
+  =====================================================
+  */
+
+  function renderDownloads(
+    purchases
+  ) {
+
+    const container =
+      document.getElementById(
+        "downloads-container"
+      );
+
+
+    container.textContent =
+      "";
+
+
+    if (
+      !Array.isArray(
+        purchases
+      ) ||
+      purchases.length === 0
+    ) {
+
+      const empty =
+        document.createElement(
+          "div"
+        );
+
+
+      empty.className =
+        "empty-state";
+
+
+      const title =
+        document.createElement(
+          "h3"
+        );
+
+
+      title.textContent =
+        "No Digital Purchases Found";
+
+
+      const text =
+        document.createElement(
+          "p"
+        );
+
+
+      text.textContent =
+        "We could not find any eligible digital purchases connected to this verified customer account yet.";
+
+
+      const shopLink =
+        document.createElement(
+          "a"
+        );
+
+
+      shopLink.href =
+        "shop.html";
+
+
+      shopLink.className =
+        "shop-button";
+
+
+      shopLink.textContent =
+        "Browse Products";
+
+
+      empty.appendChild(
+        title
+      );
+
+
+      empty.appendChild(
+        text
+      );
+
+
+      empty.appendChild(
+        shopLink
+      );
+
+
+      container.appendChild(
+        empty
+      );
+
+
+      return;
+
+    }
+
+
+    const grid =
+      document.createElement(
+        "div"
+      );
+
+
+    grid.className =
+      "downloads-grid";
+
+
+    purchases.forEach(
+      purchase => {
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+
+        card.className =
+          "purchase-card";
+
+
+        const badge =
+          document.createElement(
+            "div"
+          );
+
+
+        badge.className =
+          "source-badge";
+
+
+        badge.textContent =
+          sourceLabel(
+            purchase.purchase_source
+          );
+
+
+        const productName =
+          document.createElement(
+            "div"
+          );
+
+
+        productName.className =
+          "product-name";
+
+
+        productName.textContent =
+          purchase.product_name ||
+          "Digital Product";
+
+
+        card.appendChild(
+          badge
+        );
+
+
+        card.appendChild(
+          productName
+        );
+
+
+        if (
+          purchase.order_number
+        ) {
+
+          card.appendChild(
+            createDetailRow(
+              "Order",
+              purchase.order_number
+            )
+          );
+
+        }
+
+
+        card.appendChild(
+          createDetailRow(
+            "Payment",
+            prettyStatus(
+              purchase.payment_status
+            ),
+            statusClass(
+              purchase.payment_status
+            )
+          )
+        );
+
+
+        if (
+          purchase.delivery_status
+        ) {
+
+          card.appendChild(
+            createDetailRow(
+              "Delivery",
+              prettyStatus(
+                purchase.delivery_status
+              ),
+              statusClass(
+                purchase.delivery_status
+              )
+            )
+          );
+
+        }
+
+
+        if (
+          purchase.refund_status
+        ) {
+
+          card.appendChild(
+            createDetailRow(
+              "Refund",
+              prettyStatus(
+                purchase.refund_status
+              ),
+              statusClass(
+                purchase.refund_status
+              )
+            )
+          );
+
+        }
+
+
+        card.appendChild(
+          createDetailRow(
+            "Purchased",
+            formatDate(
+              purchase.paid_at ||
+              purchase.purchased_at
+            )
+          )
+        );
+
+
+        if (
+          purchase.can_download
+        ) {
+
+          const downloadLink =
+            document.createElement(
+              "a"
+            );
+
+
+          const downloadParams =
+            new URLSearchParams();
+
+
+          downloadParams.set(
+            "source",
+            purchase.purchase_source
+          );
+
+
+          downloadParams.set(
+            "order",
+            purchase.source_order_id
+          );
+
+
+          downloadLink.href =
+            "customer-download.html?" +
+            downloadParams.toString();
+
+
+          downloadLink.className =
+            "download-button";
+
+
+          downloadLink.textContent =
+            "Download Product";
+
+
+          card.appendChild(
+            downloadLink
+          );
+
+        }
+
+        else {
+
+          const unavailable =
+            document.createElement(
+              "button"
+            );
+
+
+          unavailable.type =
+            "button";
+
+
+          unavailable.disabled =
+            true;
+
+
+          unavailable.className =
+            "unavailable-button";
+
+
+          unavailable.textContent =
+            "Download Not Available";
+
+
+          card.appendChild(
+            unavailable
+          );
+
+        }
+
+
+        grid.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+    container.appendChild(
+      grid
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD MY DOWNLOADS
+  =====================================================
+  */
+
+  async function loadMyDownloads() {
+
+    clearMessage();
+
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .rpc(
+            "get_my_downloads"
+          );
+
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      renderDownloads(
+        data || []
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "My Downloads:",
+        error
+      );
+
+
+      showMessage(
+        error.message ||
+        "Your purchases could not be loaded.",
+        "error"
+      );
+
+
+      renderDownloads(
+        []
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  LOGOUT
+  =====================================================
+  */
+
+  async function customerLogout() {
+
+    try {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Sign out:",
+        error
+      );
+
+    }
+
+
+    window.location.replace(
+      "customer-login.html"
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  PAGE START
+  =====================================================
+  */
+
+  async function startAccount() {
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      const session =
+        data?.session;
+
+
+      if (
+        !session?.user
+      ) {
+
+        window.location.replace(
+          "customer-login.html?next=customer-account.html"
+        );
+
+        return;
+
+      }
+
+
+      currentUser =
+        session.user;
+
+
+      if (
+        !currentUser.email_confirmed_at
+      ) {
+
+        await supabaseClient
+          .auth
+          .signOut();
+
+
+        window.location.replace(
+          "customer-login.html"
+        );
+
+        return;
+
+      }
+
+
+      const fullName =
+        String(
+          currentUser
+            .user_metadata
+            ?.full_name ||
+          ""
+        ).trim();
+
+
+      if (
+        fullName
+      ) {
+
+        document
+          .getElementById(
+            "welcome-title"
+          )
+          .textContent =
+            "Welcome, " +
+            fullName;
+
+      }
+
+
+      document
+        .getElementById(
+          "customer-email"
+        )
+        .textContent =
+          currentUser.email ||
+          "";
+
+
+      document
+        .getElementById(
+          "loading"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "account-content"
+        )
+        .style.display =
+          "block";
+
+
+      await loadMyDownloads();
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Customer account:",
+        error
+      );
+
+
+      window.location.replace(
+        "customer-login.html"
+      );
+
+    }
+
+  }
+
+
+  startAccount();
+
+</script>
+
+
+<script
+  src="cookie-consent.js"
+  defer
+></script>
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
+
+</body>
+
+</html>
