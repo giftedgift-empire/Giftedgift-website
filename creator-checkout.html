@@ -24,6 +24,7 @@
     content="noindex, nofollow"
   >
 
+
   <style>
 
     * {
@@ -90,7 +91,10 @@
       align-items: start;
     }
 
-    .panel {
+    .panel,
+    .order-box,
+    .paid-box,
+    .return-box {
       background: white;
       border: 1px solid #dfe4ec;
       border-radius: 16px;
@@ -100,7 +104,9 @@
     }
 
     .panel h1,
-    .panel h2 {
+    .panel h2,
+    .order-box h2,
+    .return-box h2 {
       color: #123a8c;
       margin-top: 0;
     }
@@ -179,7 +185,6 @@
       display: block;
       margin-bottom: 7px;
       font-weight: 700;
-      color: #333;
     }
 
     input {
@@ -209,22 +214,22 @@
       line-height: 1.5;
     }
 
-    .notice {
-      background: #fffaeb;
-      border: 1px solid #fedf89;
-      border-radius: 10px;
-      padding: 13px;
-      color: #7a2e0e;
-      line-height: 1.55;
-      margin-bottom: 18px;
-    }
-
     .secure-note {
       background: #ecfdf3;
       border: 1px solid #abefc6;
       border-radius: 10px;
       padding: 13px;
       color: #067647;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .notice {
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+      border-radius: 10px;
+      padding: 13px;
+      color: #7a2e0e;
       line-height: 1.55;
       margin-bottom: 18px;
     }
@@ -245,15 +250,21 @@
       color: #111;
     }
 
-    .primary-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
     .secondary-button {
-      margin-top: 10px;
       background: #123a8c;
       color: white;
+      margin-top: 10px;
+    }
+
+    .flutterwave-button {
+      background: #f5a623;
+      color: #111;
+      margin-top: 4px;
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .message {
@@ -303,25 +314,18 @@
       text-align: center;
     }
 
-    .checkout-content {
+    .checkout-content,
+    .order-box,
+    .paid-box,
+    .return-box {
       display: none;
     }
 
-    .order-box {
-      display: none;
+    .order-box,
+    .paid-box,
+    .return-box {
       max-width: 680px;
       margin: auto;
-      background: white;
-      border: 1px solid #dfe4ec;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow:
-        0 5px 20px rgba(0,0,0,0.05);
-    }
-
-    .order-box h2 {
-      margin-top: 0;
-      color: #123a8c;
     }
 
     .order-number {
@@ -335,7 +339,6 @@
       font-weight: 800;
       color: #123a8c;
       background: #f8fafc;
-      cursor: pointer;
       word-break: break-word;
     }
 
@@ -347,13 +350,28 @@
 
     .payment-section h3 {
       color: #123a8c;
-      margin-top: 0;
     }
 
     .payment-note {
-      margin-bottom: 18px;
       color: #555;
       line-height: 1.55;
+    }
+
+    .payment-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0;
+      color: #777;
+      font-weight: 700;
+    }
+
+    .payment-divider::before,
+    .payment-divider::after {
+      content: "";
+      height: 1px;
+      background: #dfe4ec;
+      flex: 1;
     }
 
     #paypal-button-container {
@@ -361,28 +379,15 @@
       min-height: 45px;
     }
 
-    .sandbox-badge {
-      display: inline-block;
-      background: #fff7ed;
-      color: #9a3412;
-      border: 1px solid #fdba74;
-      border-radius: 999px;
-      padding: 6px 10px;
-      margin-bottom: 16px;
-      font-size: 12px;
+    .provider-title {
+      margin-bottom: 12px;
       font-weight: 800;
+      color: #333;
     }
 
     .paid-box {
-      display: none;
-      max-width: 680px;
-      margin: auto;
-      background: white;
-      border: 1px solid #abefc6;
-      border-radius: 16px;
+      border-color: #abefc6;
       padding: 28px;
-      box-shadow:
-        0 5px 20px rgba(0,0,0,0.05);
     }
 
     .paid-box h2 {
@@ -413,6 +418,11 @@
       padding: 14px;
       color: #175cd3;
       line-height: 1.55;
+    }
+
+    .spinner {
+      font-size: 34px;
+      margin-bottom: 10px;
     }
 
     footer {
@@ -491,11 +501,7 @@
   </div>
 
 
-  <!--
-  =====================================================
-  CHECKOUT
-  =====================================================
-  -->
+  <!-- CHECKOUT FORM -->
 
   <div
     id="checkout-content"
@@ -504,8 +510,6 @@
 
     <div class="checkout-grid">
 
-
-      <!-- PRODUCT SUMMARY -->
 
       <section class="panel">
 
@@ -558,9 +562,7 @@
 
           <div class="summary-row">
 
-            <span>
-              Product
-            </span>
+            <span>Product</span>
 
             <span id="summary-product-price">
               —
@@ -571,9 +573,7 @@
 
           <div class="summary-row">
 
-            <span>
-              Tax
-            </span>
+            <span>Tax</span>
 
             <span id="summary-tax">
               €0.00
@@ -584,9 +584,7 @@
 
           <div class="summary-row summary-total">
 
-            <span>
-              Total
-            </span>
+            <span>Total</span>
 
             <span id="summary-total">
               —
@@ -599,8 +597,6 @@
       </section>
 
 
-      <!-- BUYER DETAILS -->
-
       <section class="panel">
 
         <h1>
@@ -611,8 +607,7 @@
         <div class="secure-note">
 
           🔒 Your order price is calculated securely
-          from the approved GiftedGift Empire product
-          record.
+          from the approved GiftedGift Empire product record.
 
         </div>
 
@@ -671,8 +666,7 @@
             <p class="small-note">
 
               Use an email address you can access.
-              It will be associated with your
-              digital purchase.
+              It will be associated with your digital purchase.
 
             </p>
 
@@ -698,11 +692,7 @@
   </div>
 
 
-  <!--
-  =====================================================
-  ORDER CREATED / PAYMENT
-  =====================================================
-  -->
+  <!-- PAYMENT OPTIONS -->
 
   <section
     id="order-box"
@@ -715,15 +705,13 @@
 
 
     <p>
-      Your order number is:
+      Order number:
     </p>
 
 
     <div
       id="order-number"
       class="order-number"
-      onclick="copyOrderNumber()"
-      title="Tap to copy"
     ></div>
 
 
@@ -741,30 +729,17 @@
     </p>
 
 
-    <button
-      type="button"
-      class="button secondary-button"
-      onclick="copyOrderNumber()"
-    >
-      Copy Order Number
-    </button>
-
-
     <div class="payment-section">
 
-      <span class="sandbox-badge">
-        PAYPAL SANDBOX TEST
-      </span>
-
       <h3>
-        Pay securely with PayPal
+        Choose a Payment Method
       </h3>
 
       <p class="payment-note">
 
-        Choose the PayPal option below to complete
-        this test order. No real money should be
-        used during Sandbox testing.
+        Your order will only be marked paid after
+        GiftedGift Empire verifies the payment
+        directly with the payment provider.
 
       </p>
 
@@ -775,20 +750,92 @@
       ></div>
 
 
-      <div
-        id="paypal-button-container"
-      ></div>
+      <div id="paypal-area">
+
+        <div class="provider-title">
+          PayPal
+        </div>
+
+        <div
+          id="paypal-button-container"
+        ></div>
+
+      </div>
+
+
+      <div class="payment-divider">
+        OR
+      </div>
+
+
+      <div id="flutterwave-area">
+
+        <div class="provider-title">
+          Flutterwave
+        </div>
+
+        <button
+          type="button"
+          id="flutterwave-button"
+          class="button flutterwave-button"
+          onclick="startFlutterwavePayment()"
+        >
+          Pay with Flutterwave
+        </button>
+
+        <p class="small-note">
+
+          Available payment methods are determined
+          by Flutterwave based on your country,
+          currency and account settings.
+
+        </p>
+
+      </div>
+
 
     </div>
 
   </section>
 
 
-  <!--
-  =====================================================
-  PAID
-  =====================================================
-  -->
+  <!-- FLUTTERWAVE RETURN -->
+
+  <section
+    id="return-box"
+    class="return-box"
+  >
+
+    <div
+      id="return-spinner"
+      class="spinner"
+    >
+      ⏳
+    </div>
+
+    <h2 id="return-title">
+      Checking Your Payment
+    </h2>
+
+    <p id="return-message">
+      Please wait while GiftedGift Empire verifies
+      your payment securely.
+    </p>
+
+    <button
+      type="button"
+      id="retry-flutterwave-button"
+      class="button flutterwave-button"
+      style="display:none;"
+      onclick="retryFlutterwave()"
+    >
+      Try Flutterwave Again
+    </button>
+
+  </section>
+
+
+  <!-- PAYMENT SUCCESS -->
 
   <section
     id="paid-box"
@@ -839,10 +886,9 @@
 
       <br><br>
 
-      The private digital file is still protected.
-      We will connect the secure customer download
-      system after the payment gateways are fully
-      tested.
+      The digital file remains private and protected.
+      We will connect your secure download access
+      after payment-gateway testing is complete.
 
     </div>
 
@@ -895,10 +941,7 @@
 
   /*
   =====================================================
-  PAYPAL SANDBOX PUBLIC CLIENT ID
-
-  Public Client ID only.
-  NEVER put PayPal Client Secret here.
+  PAYPAL PUBLIC CLIENT ID
   =====================================================
   */
 
@@ -915,21 +958,23 @@
   let currentProduct =
     null;
 
-
   let currentOrder =
     null;
-
 
   let checkoutRequestId =
     null;
 
-
   let currentPayPalOrderId =
     null;
 
-
   let paypalRendered =
     false;
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
 
   /*
@@ -937,12 +982,6 @@
   URL
   =====================================================
   */
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
 
   function getSlug() {
 
@@ -956,10 +995,21 @@
 
     }
 
-
     return (
       params.get("slug") || ""
     ).trim();
+
+  }
+
+
+  function isFlutterwaveReturn() {
+
+    return (
+      params.get(
+        "flutterwave_return"
+      ) ===
+      "1"
+    );
 
   }
 
@@ -1015,7 +1065,7 @@
 
   /*
   =====================================================
-  FORM MESSAGE
+  MESSAGES
   =====================================================
   */
 
@@ -1029,11 +1079,9 @@
         "form-message"
       );
 
-
     box.className =
       "message " +
       type;
-
 
     box.textContent =
       text;
@@ -1048,22 +1096,14 @@
         "form-message"
       );
 
-
     box.className =
       "message";
-
 
     box.textContent =
       "";
 
   }
 
-
-  /*
-  =====================================================
-  PAYMENT MESSAGE
-  =====================================================
-  */
 
   function showPaymentMessage(
     text,
@@ -1075,11 +1115,9 @@
         "payment-message"
       );
 
-
     box.className =
       "message " +
       type;
-
 
     box.textContent =
       text;
@@ -1094,10 +1132,8 @@
         "payment-message"
       );
 
-
     box.className =
       "message";
-
 
     box.textContent =
       "";
@@ -1107,7 +1143,7 @@
 
   /*
   =====================================================
-  EDGE FUNCTION ERROR HANDLING
+  EDGE FUNCTIONS
   =====================================================
   */
 
@@ -1130,11 +1166,13 @@
         );
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       let message =
         error.message ||
-        "The secure payment request failed.";
+        "The secure request failed.";
 
 
       try {
@@ -1147,7 +1185,6 @@
 
           const details =
             await error.context.json();
-
 
           if (
             details?.error
@@ -1239,7 +1276,6 @@
             key
           );
 
-
         if (
           value
         ) {
@@ -1262,17 +1298,30 @@
 
   /*
   =====================================================
-  CHECKOUT REQUEST ID
+  SESSION STORAGE
   =====================================================
   */
+
+  function requestStorageKey(
+    slug
+  ) {
+
+    return (
+      "gge_creator_checkout_request_" +
+      slug
+    );
+
+  }
+
 
   function getCheckoutRequestId(
     slug
   ) {
 
     const key =
-      "gge_creator_checkout_request_" +
-      slug;
+      requestStorageKey(
+        slug
+      );
 
 
     const existing =
@@ -1305,9 +1354,127 @@
   }
 
 
+  function getExistingRequestId(
+    slug
+  ) {
+
+    return sessionStorage.getItem(
+      requestStorageKey(
+        slug
+      )
+    );
+
+  }
+
+
+  function saveCurrentOrder(
+    order
+  ) {
+
+    currentOrder =
+      order;
+
+
+    sessionStorage.setItem(
+      "gge_creator_current_order_id",
+      order.order_id
+    );
+
+
+    sessionStorage.setItem(
+      "gge_creator_current_order_number",
+      order.order_number
+    );
+
+
+    sessionStorage.setItem(
+      "gge_creator_current_order",
+      JSON.stringify(
+        order
+      )
+    );
+
+  }
+
+
+  function restoreCurrentOrder() {
+
+    try {
+
+      const saved =
+        sessionStorage.getItem(
+          "gge_creator_current_order"
+        );
+
+
+      if (
+        saved
+      ) {
+
+        return JSON.parse(
+          saved
+        );
+
+      }
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Could not restore order:",
+        error
+      );
+
+    }
+
+
+    return null;
+
+  }
+
+
+  function clearCheckoutSession() {
+
+    const slug =
+      getSlug();
+
+
+    if (
+      slug
+    ) {
+
+      sessionStorage.removeItem(
+        requestStorageKey(
+          slug
+        )
+      );
+
+    }
+
+
+    sessionStorage.removeItem(
+      "gge_creator_current_order_id"
+    );
+
+
+    sessionStorage.removeItem(
+      "gge_creator_current_order_number"
+    );
+
+
+    sessionStorage.removeItem(
+      "gge_creator_current_order"
+    );
+
+  }
+
+
   /*
   =====================================================
-  PREFILL AUTH USER
+  USER PREFILL
   =====================================================
   */
 
@@ -1366,7 +1533,7 @@
 
   /*
   =====================================================
-  COVER
+  PRODUCT COVER
   =====================================================
   */
 
@@ -1424,7 +1591,6 @@
         error
       );
 
-
       placeholder.textContent =
         "Cover could not be loaded.";
 
@@ -1436,14 +1602,11 @@
     image.src =
       data.signedUrl;
 
-
     image.alt =
       title;
 
-
     image.style.display =
       "block";
-
 
     placeholder.style.display =
       "none";
@@ -1474,10 +1637,25 @@
     }
 
 
-    checkoutRequestId =
-      getCheckoutRequestId(
-        slug
-      );
+    if (
+      isFlutterwaveReturn()
+    ) {
+
+      checkoutRequestId =
+        getExistingRequestId(
+          slug
+        );
+
+    }
+
+    else {
+
+      checkoutRequestId =
+        getCheckoutRequestId(
+          slug
+        );
+
+    }
 
 
     const {
@@ -1512,7 +1690,6 @@
         error
       );
 
-
       showProductError();
 
       return;
@@ -1535,15 +1712,30 @@
     );
 
 
-    await prefillSignedInUser();
-
-
     document
       .getElementById(
         "loading"
       )
       .style.display =
         "none";
+
+
+    if (
+      isFlutterwaveReturn()
+    ) {
+
+      currentOrder =
+        restoreCurrentOrder();
+
+
+      await handleFlutterwaveReturn();
+
+      return;
+
+    }
+
+
+    await prefillSignedInUser();
 
 
     document
@@ -1650,6 +1842,23 @@
       );
 
 
+    backParams.delete(
+      "flutterwave_return"
+    );
+
+    backParams.delete(
+      "status"
+    );
+
+    backParams.delete(
+      "tx_ref"
+    );
+
+    backParams.delete(
+      "transaction_id"
+    );
+
+
     backParams.set(
       "slug",
       product.public_slug
@@ -1669,7 +1878,7 @@
 
   /*
   =====================================================
-  CREATE CREATOR ORDER
+  START CREATOR ORDER
   =====================================================
   */
 
@@ -1752,7 +1961,6 @@
     button.disabled =
       true;
 
-
     button.textContent =
       "Preparing Order...";
 
@@ -1815,23 +2023,12 @@
       }
 
 
-      currentOrder =
-        order;
-
-
-      sessionStorage.setItem(
-        "gge_creator_current_order_id",
-        order.order_id
+      saveCurrentOrder(
+        order
       );
 
 
-      sessionStorage.setItem(
-        "gge_creator_current_order_number",
-        order.order_number
-      );
-
-
-      showOrderPayment(
+      await showOrderPayment(
         order
       );
 
@@ -1860,7 +2057,6 @@
       button.disabled =
         false;
 
-
       button.textContent =
         "Continue to Payment";
 
@@ -1871,7 +2067,7 @@
 
   /*
   =====================================================
-  SHOW PAYMENT STEP
+  PAYMENT SCREEN
   =====================================================
   */
 
@@ -1948,13 +2144,13 @@
     ) {
 
       console.error(
-        "PayPal SDK error:",
+        "PayPal SDK:",
         error
       );
 
 
       showPaymentMessage(
-        "PayPal could not be loaded. Please refresh and try again.",
+        "PayPal could not be loaded. You may still use Flutterwave.",
         "error"
       );
 
@@ -1965,7 +2161,7 @@
 
   /*
   =====================================================
-  LOAD PAYPAL SDK
+  PAYPAL SDK
   =====================================================
   */
 
@@ -1984,37 +2180,6 @@
         ) {
 
           resolve();
-
-          return;
-
-        }
-
-
-        const existing =
-          document.getElementById(
-            "paypal-sdk"
-          );
-
-
-        if (
-          existing
-        ) {
-
-          existing.addEventListener(
-            "load",
-            () => resolve()
-          );
-
-
-          existing.addEventListener(
-            "error",
-            () => reject(
-              new Error(
-                "PayPal SDK failed to load."
-              )
-            )
-          );
-
 
           return;
 
@@ -2073,15 +2238,12 @@
 
 
         script.onerror =
-          () => {
-
+          () =>
             reject(
               new Error(
                 "PayPal SDK failed to load."
               )
             );
-
-          };
 
 
         document.head.appendChild(
@@ -2103,23 +2265,10 @@
   function renderPayPalButtons() {
 
     if (
-      paypalRendered
-    ) {
-
-      return;
-
-    }
-
-
-    if (
+      paypalRendered ||
       !window.paypal ||
       !currentOrder
     ) {
-
-      showPaymentMessage(
-        "PayPal is not ready.",
-        "error"
-      );
 
       return;
 
@@ -2134,24 +2283,11 @@
       .Buttons({
 
         style: {
-
-          layout:
-            "vertical",
-
-          shape:
-            "rect",
-
-          label:
-            "paypal"
-
+          layout: "vertical",
+          shape: "rect",
+          label: "paypal"
         },
 
-
-        /*
-        ===============================================
-        CREATE PAYPAL ORDER SERVER-SIDE
-        ===============================================
-        */
 
         createOrder:
           async function() {
@@ -2171,26 +2307,13 @@
                 await invokeEdgeFunction(
                   "creator-paypal-create-order",
                   {
-
                     order_id:
                       currentOrder.order_id,
 
                     request_id:
                       checkoutRequestId
-
                   }
                 );
-
-
-              if (
-                !result?.paypal_order_id
-              ) {
-
-                throw new Error(
-                  "PayPal order ID was not returned."
-                );
-
-              }
 
 
               currentPayPalOrderId =
@@ -2209,18 +2332,11 @@
               error
             ) {
 
-              console.error(
-                "Create PayPal order:",
-                error
-              );
-
-
               showPaymentMessage(
                 error.message ||
                 "Could not start PayPal payment.",
                 "error"
               );
-
 
               throw error;
 
@@ -2228,12 +2344,6 @@
 
           },
 
-
-        /*
-        ===============================================
-        BUYER APPROVED PAYPAL
-        ===============================================
-        */
 
         onApprove:
           async function(
@@ -2254,17 +2364,6 @@
                   currentPayPalOrderId ||
                   ""
                 ).trim();
-
-
-              if (
-                !paypalOrderId
-              ) {
-
-                throw new Error(
-                  "PayPal order ID is missing."
-                );
-
-              }
 
 
               const result =
@@ -2307,15 +2406,9 @@
               error
             ) {
 
-              console.error(
-                "Capture PayPal order:",
-                error
-              );
-
-
               showPaymentMessage(
                 error.message ||
-                "The payment could not be securely verified. Please do not pay again until the order is checked.",
+                "The payment could not be securely verified.",
                 "error"
               );
 
@@ -2324,28 +2417,16 @@
           },
 
 
-        /*
-        ===============================================
-        BUYER CANCELLED
-        ===============================================
-        */
-
         onCancel:
           function() {
 
             showPaymentMessage(
-              "PayPal checkout was cancelled. Your Creator order has not been marked as paid.",
+              "PayPal checkout was cancelled. Your order has not been marked paid.",
               "info"
             );
 
           },
 
-
-        /*
-        ===============================================
-        PAYPAL ERROR
-        ===============================================
-        */
 
         onError:
           function(
@@ -2368,26 +2449,6 @@
       })
       .render(
         "#paypal-button-container"
-      )
-      .catch(
-        error => {
-
-          console.error(
-            "PayPal render error:",
-            error
-          );
-
-
-          paypalRendered =
-            false;
-
-
-          showPaymentMessage(
-            "The PayPal payment button could not be displayed.",
-            "error"
-          );
-
-        }
       );
 
   }
@@ -2395,7 +2456,336 @@
 
   /*
   =====================================================
-  PAYMENT SUCCESS
+  FLUTTERWAVE
+  =====================================================
+  */
+
+  async function startFlutterwavePayment() {
+
+    if (
+      !currentOrder
+    ) {
+
+      showPaymentMessage(
+        "Creator order is missing.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "flutterwave-button"
+      );
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Opening Flutterwave...";
+
+
+    showPaymentMessage(
+      "Preparing your secure Flutterwave checkout...",
+      "info"
+    );
+
+
+    try {
+
+      const result =
+        await invokeEdgeFunction(
+          "creator-flutterwave-create-payment",
+          {
+
+            order_id:
+              currentOrder.order_id,
+
+            request_id:
+              checkoutRequestId
+
+          }
+        );
+
+
+      if (
+        !result?.checkout_url
+      ) {
+
+        throw new Error(
+          "Flutterwave checkout link was not returned."
+        );
+
+      }
+
+
+      currentOrder.payment_provider =
+        "flutterwave";
+
+
+      currentOrder.flutterwave_tx_ref =
+        result.flutterwave_tx_ref;
+
+
+      currentOrder.checkout_url =
+        result.checkout_url;
+
+
+      saveCurrentOrder(
+        currentOrder
+      );
+
+
+      window.location.assign(
+        result.checkout_url
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Flutterwave create payment:",
+        error
+      );
+
+
+      showPaymentMessage(
+        error.message ||
+        "Could not start Flutterwave payment.",
+        "error"
+      );
+
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Pay with Flutterwave";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  FLUTTERWAVE RETURN
+  =====================================================
+  */
+
+  async function handleFlutterwaveReturn() {
+
+    const returnBox =
+      document.getElementById(
+        "return-box"
+      );
+
+
+    returnBox.style.display =
+      "block";
+
+
+    const status =
+      String(
+        params.get("status") ||
+        ""
+      ).trim();
+
+
+    const txRef =
+      String(
+        params.get("tx_ref") ||
+        ""
+      ).trim();
+
+
+    const transactionId =
+      String(
+        params.get(
+          "transaction_id"
+        ) ||
+        ""
+      ).trim();
+
+
+    if (
+      !checkoutRequestId ||
+      !currentOrder?.order_id
+    ) {
+
+      showReturnFailure(
+        "We could not recover the checkout session. Please contact Customer Service with your payment details before trying to pay again.",
+        false
+      );
+
+      return;
+
+    }
+
+
+    if (
+      status !==
+      "successful"
+    ) {
+
+      showReturnFailure(
+        "Flutterwave did not report this payment as successful. Your order has not been marked paid.",
+        true
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !txRef ||
+      !transactionId
+    ) {
+
+      showReturnFailure(
+        "Flutterwave returned incomplete payment information. Your order has not been marked paid.",
+        false
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      const result =
+        await invokeEdgeFunction(
+          "creator-flutterwave-verify-payment",
+          {
+
+            order_id:
+              currentOrder.order_id,
+
+            request_id:
+              checkoutRequestId,
+
+            transaction_id:
+              transactionId,
+
+            tx_ref:
+              txRef
+
+          }
+        );
+
+
+      if (
+        result?.payment_status !==
+        "paid"
+      ) {
+
+        throw new Error(
+          "Payment has not been confirmed as paid."
+        );
+
+      }
+
+
+      showPaidSuccess(
+        result
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Flutterwave verification:",
+        error
+      );
+
+
+      showReturnFailure(
+        error.message ||
+        "Your payment could not be verified securely. Please do not make another payment until this order is checked.",
+        false
+      );
+
+    }
+
+  }
+
+
+  function showReturnFailure(
+    message,
+    allowRetry
+  ) {
+
+    document
+      .getElementById(
+        "return-spinner"
+      )
+      .textContent =
+        "⚠️";
+
+
+    document
+      .getElementById(
+        "return-title"
+      )
+      .textContent =
+        "Payment Not Confirmed";
+
+
+    document
+      .getElementById(
+        "return-message"
+      )
+      .textContent =
+        message;
+
+
+    if (
+      allowRetry &&
+      currentOrder?.checkout_url
+    ) {
+
+      document
+        .getElementById(
+          "retry-flutterwave-button"
+        )
+        .style.display =
+          "block";
+
+    }
+
+  }
+
+
+  function retryFlutterwave() {
+
+    if (
+      currentOrder?.checkout_url
+    ) {
+
+      window.location.assign(
+        currentOrder.checkout_url
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  PAID SUCCESS
   =====================================================
   */
 
@@ -2403,12 +2793,25 @@
     result
   ) {
 
-    clearPaymentMessage();
+    document
+      .getElementById(
+        "checkout-content"
+      )
+      .style.display =
+        "none";
 
 
     document
       .getElementById(
         "order-box"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "return-box"
       )
       .style.display =
         "none";
@@ -2447,36 +2850,7 @@
         "block";
 
 
-    /*
-    Payment is complete.
-    Remove the old request token so a future
-    intentional purchase can create a new order.
-    */
-
-    const slug =
-      getSlug();
-
-
-    if (
-      slug
-    ) {
-
-      sessionStorage.removeItem(
-        "gge_creator_checkout_request_" +
-        slug
-      );
-
-    }
-
-
-    sessionStorage.removeItem(
-      "gge_creator_current_order_id"
-    );
-
-
-    sessionStorage.removeItem(
-      "gge_creator_current_order_number"
-    );
+    clearCheckoutSession();
 
 
     window.scrollTo({
@@ -2489,62 +2863,7 @@
 
   /*
   =====================================================
-  COPY ORDER NUMBER
-  =====================================================
-  */
-
-  async function copyOrderNumber() {
-
-    const orderNumber =
-      document
-        .getElementById(
-          "order-number"
-        )
-        .textContent
-        .trim();
-
-
-    if (
-      !orderNumber
-    ) {
-
-      return;
-
-    }
-
-
-    try {
-
-      await navigator
-        .clipboard
-        .writeText(
-          orderNumber
-        );
-
-
-      alert(
-        "Order number copied."
-      );
-
-    }
-
-    catch (
-      error
-    ) {
-
-      alert(
-        "Order number: " +
-        orderNumber
-      );
-
-    }
-
-  }
-
-
-  /*
-  =====================================================
-  START PAGE
+  START
   =====================================================
   */
 
