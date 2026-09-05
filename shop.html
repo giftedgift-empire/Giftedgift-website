@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,343 +10,606 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Shop Products & Affiliate Picks | GiftedGift Empire</title>
+  <title>
+    Shop Products & Affiliate Picks | GiftedGift Empire
+  </title>
 
-<meta
-  name="description"
-  content="Shop useful products, digital products and carefully selected affiliate recommendations from GiftedGift Empire."
->
+  <meta
+    name="description"
+    content="Shop physical products, digital products, Creator Marketplace products and carefully selected affiliate recommendations from GiftedGift Empire."
+  >
 
-<meta
-  name="robots"
-  content="index, follow, max-image-preview:large"
->
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
 
-<link
-  rel="canonical"
-  href="https://giftedgiftempire.com/shop"
->
+  <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/shop"
+  >
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f7f7f7;
+
       color: #222;
     }
 
+
     header {
       background: #123a8c;
+
       color: white;
+
       padding: 25px 20px;
     }
 
+
     header h1 {
       color: #f2bd16;
+
       margin: 0 0 20px;
     }
 
+
     nav {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 18px;
     }
 
+
     nav a {
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
     }
+
 
     nav a:hover {
       color: #f2bd16;
     }
 
+
     .hero {
       text-align: center;
+
       padding: 55px 20px 35px;
+
       background: white;
     }
+
 
     .hero h1 {
       font-size: 38px;
+
       margin: 0 0 15px;
     }
 
+
     .hero p {
-      max-width: 720px;
+      max-width: 760px;
+
       margin: auto;
+
       line-height: 1.7;
+
       color: #555;
     }
 
+
     .shop {
       max-width: 1150px;
+
       margin: auto;
+
       padding: 35px 20px 55px;
     }
 
+
     .filter-section {
       background: white;
+
       padding: 20px;
+
       border-radius: 12px;
+
       margin-bottom: 30px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.06);
     }
+
 
     .filter-title {
       font-weight: bold;
+
       margin-bottom: 12px;
     }
 
+
     .filters {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 10px;
     }
 
+
     .filter-button {
       border: 1px solid #d5d5d5;
+
       background: white;
+
       color: #222;
+
       padding: 10px 15px;
+
       border-radius: 30px;
+
       cursor: pointer;
+
       font-weight: bold;
     }
+
 
     .filter-button:hover,
     .filter-button.active {
       background: #123a8c;
+
       color: white;
+
       border-color: #123a8c;
     }
+
 
     .category-line {
       margin-top: 18px;
     }
 
+
     .category-link {
       display: inline-block;
-      margin: 4px 7px 4px 0;
+
+      margin:
+        4px
+        7px
+        4px
+        0;
+
       text-decoration: none;
+
       color: #123a8c;
+
       background: #eef3ff;
+
       padding: 8px 12px;
+
       border-radius: 20px;
+
       font-size: 14px;
+
       font-weight: bold;
     }
+
 
     .category-link.active {
       background: #f2bd16;
+
       color: #111;
     }
 
+
     .foodstuff-link-wrap {
-      margin: 18px 0 28px;
+      margin:
+        18px
+        0
+        28px;
+
       text-align: center;
     }
+
 
     .foodstuff-link {
       display: inline-block;
+
       background: #25D366;
+
       color: white;
+
       text-decoration: none;
+
       padding: 14px 22px;
+
       border-radius: 10px;
+
       font-size: 17px;
+
       font-weight: bold;
     }
+
 
     .shop-heading {
       text-align: center;
+
       font-size: 31px;
-      margin: 0 0 30px;
+
+      margin:
+        0
+        0
+        30px;
     }
+
 
     .products {
       display: grid;
+
       grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
+        repeat(
+          auto-fit,
+          minmax(250px, 1fr)
+        );
+
       gap: 25px;
     }
 
+
     .product {
       position: relative;
+
       background: white;
+
       padding: 20px;
+
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.08);
+
       display: flex;
+
       flex-direction: column;
     }
 
+
     .product-image {
       width: 100%;
+
       height: 250px;
+
       object-fit: contain;
+
       border-radius: 8px;
+
       background: #f7f7f7;
     }
 
-    .type-badge {
-      display: inline-block;
-      width: fit-content;
-      margin-top: 14px;
-      padding: 6px 10px;
-      border-radius: 20px;
-      background: #123a8c;
-      color: white;
-      font-size: 12px;
+
+    .image-placeholder {
+      width: 100%;
+
+      height: 250px;
+
+      border-radius: 8px;
+
+      background: #eef1f5;
+
+      color: #777;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 20px;
+
       font-weight: bold;
     }
+
+
+    .type-badge {
+      display: inline-block;
+
+      width: fit-content;
+
+      margin-top: 14px;
+
+      padding: 6px 10px;
+
+      border-radius: 20px;
+
+      background: #123a8c;
+
+      color: white;
+
+      font-size: 12px;
+
+      font-weight: bold;
+    }
+
 
     .affiliate-badge {
       background: #6a3dad;
     }
 
+
     .digital-badge {
       background: #146c43;
     }
 
-    .category {
-      margin: 10px 0 0;
-      font-size: 14px;
-      font-weight: bold;
+
+    .creator-badge {
+      background: #8a4b08;
+    }
+
+
+    .creator-line {
+      margin:
+        9px
+        0
+        0;
+
+      color: #555;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+    }
+
+
+    .creator-line strong {
       color: #123a8c;
     }
 
+
+    .category {
+      margin:
+        10px
+        0
+        0;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      color: #123a8c;
+    }
+
+
     .product h3 {
-      margin: 14px 0 8px;
+      margin:
+        14px
+        0
+        8px;
+
       font-size: 22px;
     }
 
+
     .description {
       line-height: 1.6;
+
       color: #555;
+
       flex-grow: 1;
     }
 
+
     .price {
       font-size: 21px;
+
       font-weight: bold;
+
       color: #111;
-      margin: 12px 0 5px;
+
+      margin:
+        12px
+        0
+        5px;
     }
+
 
     .affiliate-price-wrap {
       display: flex;
+
       flex-wrap: wrap;
+
       align-items: center;
+
       gap: 9px;
-      margin: 14px 0 7px;
+
+      margin:
+        14px
+        0
+        7px;
     }
+
 
     .original-price {
       color: #777;
+
       text-decoration: line-through;
+
       font-size: 17px;
     }
 
+
     .sale-price {
       color: #123a8c;
+
       font-size: 24px;
+
       font-weight: 800;
     }
+
 
     .discount-badge {
       display: inline-block;
+
       padding: 6px 9px;
+
       border-radius: 6px;
+
       background: #d93025;
+
       color: white;
+
       font-size: 12px;
+
       font-weight: 800;
+
       white-space: nowrap;
     }
 
+
     .rating {
       margin: 7px 0;
+
       font-weight: bold;
     }
 
+
     .product-button {
       display: inline-block;
+
       text-align: center;
+
       margin-top: 14px;
+
       padding: 12px 18px;
+
       background: #f2bd16;
+
       color: #111;
+
       text-decoration: none;
+
       font-weight: bold;
+
       border-radius: 7px;
     }
+
 
     .product-button:hover {
       opacity: 0.9;
     }
 
+
     .disabled-button {
       background: #ddd;
+
       color: #666;
+
       cursor: not-allowed;
     }
 
-    .affiliate-note {
+
+    .affiliate-note,
+    .creator-note {
       margin-top: 8px;
+
       font-size: 11px;
+
       color: #777;
+
       text-align: center;
     }
+
+
+    .creator-note {
+      color: #8a4b08;
+    }
+
 
     .message {
       text-align: center;
+
       padding: 40px 20px;
+
       color: #555;
+
       grid-column: 1 / -1;
     }
 
+
     footer {
       margin-top: 50px;
+
       padding: 30px 20px;
+
       text-align: center;
+
       background: #123a8c;
+
       color: white;
     }
 
-    @media (max-width: 600px) {
+
+    @media (
+      max-width: 600px
+    ) {
 
       .hero h1 {
         font-size: 30px;
       }
 
+
       nav {
         gap: 12px;
       }
 
+
       .shop {
         padding-left: 14px;
+
         padding-right: 14px;
       }
+
 
       .sale-price {
         font-size: 22px;
       }
+
     }
+
   </style>
+
 </head>
 
 
 <body>
 
+
 <header>
 
-  <h1>GiftedGift Empire</h1>
+  <h1>
+    GiftedGift Empire
+  </h1>
+
 
   <nav>
 
@@ -397,9 +661,9 @@
   </h1>
 
   <p id="shop-description">
-    Shop physical products, digital products and
-    carefully selected affiliate recommendations
-    in one place.
+    Shop physical products, digital products,
+    Creator Marketplace products and carefully
+    selected affiliate recommendations in one place.
   </p>
 
 </section>
@@ -407,11 +671,14 @@
 
 <main class="shop">
 
+
   <section class="filter-section">
+
 
     <div class="filter-title">
       Product Type
     </div>
+
 
     <div class="filters">
 
@@ -423,6 +690,7 @@
         All Products
       </button>
 
+
       <button
         class="filter-button"
         data-type="physical"
@@ -431,6 +699,7 @@
         Physical
       </button>
 
+
       <button
         class="filter-button"
         data-type="digital"
@@ -438,6 +707,16 @@
       >
         Digital
       </button>
+
+
+      <button
+        class="filter-button"
+        data-type="creator"
+        type="button"
+      >
+        Creator Marketplace
+      </button>
+
 
       <button
         class="filter-button"
@@ -468,12 +747,14 @@
         Categories
       </div>
 
+
       <a
         class="category-link"
         href="shop.html"
       >
         All Categories
       </a>
+
 
       <a
         class="category-link"
@@ -483,6 +764,7 @@
         Home & Living
       </a>
 
+
       <a
         class="category-link"
         data-category="Fashion & Accessories"
@@ -490,6 +772,7 @@
       >
         Fashion & Accessories
       </a>
+
 
       <a
         class="category-link"
@@ -499,6 +782,7 @@
         Useful Finds
       </a>
 
+
       <a
         class="category-link"
         data-category="Beauty & Lifestyle"
@@ -506,6 +790,9 @@
       >
         Beauty & Lifestyle
       </a>
+
+
+      <span id="dynamic-category-links"></span>
 
     </div>
 
@@ -524,10 +811,13 @@
     id="products"
     class="products"
   >
+
     <p class="message">
       Loading products...
     </p>
+
   </div>
+
 
 </main>
 
@@ -540,11 +830,20 @@
     </strong>
   </p>
 
+
+  <p>
+    GiftedGift Empire includes products sold directly,
+    approved Creator Marketplace products and selected
+    affiliate recommendations.
+  </p>
+
+
   <p>
     Some products on this website contain affiliate
     links. We may earn a commission when you purchase
     through certain links, at no extra cost to you.
   </p>
+
 
   <p>
     © 2026 GiftedGift Empire.
@@ -561,6 +860,12 @@
 
 <script>
 
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
@@ -576,6 +881,12 @@
     );
 
 
+  /*
+  =====================================================
+  PAGE STATE
+  =====================================================
+  */
+
   const params =
     new URLSearchParams(
       window.location.search
@@ -583,7 +894,9 @@
 
 
   const selectedCategory =
-    params.get("category");
+    params.get(
+      "category"
+    );
 
 
   let selectedType =
@@ -594,9 +907,11 @@
     [];
 
 
-  /* ==============================
-     BASIC HELPERS
-  ============================== */
+  /*
+  =====================================================
+  BASIC HELPERS
+  =====================================================
+  */
 
   function firstValue(
     object,
@@ -619,11 +934,14 @@
       ) {
 
         return value;
+
       }
+
     }
 
 
     return null;
+
   }
 
 
@@ -631,15 +949,108 @@
     value
   ) {
 
-    const div =
-      document.createElement(
-        "div"
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
       );
 
-    div.textContent =
-      value ?? "";
+  }
 
-    return div.innerHTML;
+
+  function safeLinkUrl(
+    value
+  ) {
+
+    const url =
+      String(
+        value || ""
+      ).trim();
+
+
+    if (
+      !url
+    ) {
+
+      return "";
+
+    }
+
+
+    if (
+      url.startsWith(
+        "/"
+      ) ||
+      url.startsWith(
+        "./"
+      ) ||
+      url.startsWith(
+        "../"
+      ) ||
+      !url.includes(
+        ":"
+      )
+    ) {
+
+      return url;
+
+    }
+
+
+    try {
+
+      const parsed =
+        new URL(
+          url,
+          window.location.origin
+        );
+
+
+      if (
+        parsed.protocol ===
+          "https:" ||
+        parsed.protocol ===
+          "http:"
+      ) {
+
+        return parsed.href;
+
+      }
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Invalid URL:",
+        error
+      );
+
+    }
+
+
+    return "";
+
   }
 
 
@@ -648,13 +1059,78 @@
   ) {
 
     const number =
-      Number(value);
+      Number(
+        value
+      );
 
 
     return (
-      Number.isFinite(number) &&
+      Number.isFinite(
+        number
+      ) &&
       number >= 0
     );
+
+  }
+
+
+  function formatMoney(
+    value,
+    currency = "EUR"
+  ) {
+
+    if (
+      !validPrice(
+        value
+      )
+    ) {
+
+      return "";
+
+    }
+
+
+    try {
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          style:
+            "currency",
+
+          currency:
+            currency || "EUR",
+
+          minimumFractionDigits:
+            2,
+
+          maximumFractionDigits:
+            2
+        }
+      ).format(
+        Number(
+          value
+        )
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      return (
+        (currency || "EUR") +
+        " " +
+        Number(
+          value
+        ).toFixed(
+          2
+        )
+      );
+
+    }
+
   }
 
 
@@ -662,25 +1138,11 @@
     value
   ) {
 
-    if (
-      !validPrice(value)
-    ) {
-
-      return "";
-    }
-
-
-    return new Intl.NumberFormat(
-      "en-US",
-      {
-        style: "currency",
-        currency: "EUR",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }
-    ).format(
-      Number(value)
+    return formatMoney(
+      value,
+      "EUR"
     );
+
   }
 
 
@@ -690,22 +1152,31 @@
   ) {
 
     const original =
-      Number(originalPrice);
+      Number(
+        originalPrice
+      );
 
 
     const sale =
-      Number(salePrice);
+      Number(
+        salePrice
+      );
 
 
     if (
-      !Number.isFinite(original) ||
-      !Number.isFinite(sale) ||
+      !Number.isFinite(
+        original
+      ) ||
+      !Number.isFinite(
+        sale
+      ) ||
       original <= 0 ||
       sale < 0 ||
       sale >= original
     ) {
 
       return null;
+
     }
 
 
@@ -719,12 +1190,102 @@
       ) *
       100
     );
+
   }
 
 
-  /* ==============================
-     NORMALIZE PHYSICAL PRODUCTS
-  ============================== */
+  /*
+  =====================================================
+  TRACKING PARAMETERS
+
+  If somebody reaches Shop through an ad/referral,
+  preserve important attribution parameters when
+  they open a Creator product.
+  =====================================================
+  */
+
+  function getTrackingParameters() {
+
+    const allowedKeys =
+      new Set([
+
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content",
+        "fbclid",
+        "gclid",
+        "ttclid",
+        "msclkid",
+        "ref",
+        "referral",
+        "affiliate",
+        "affiliate_code",
+        "referral_code"
+
+      ]);
+
+
+    const tracking =
+      new URLSearchParams();
+
+
+    params.forEach(
+      (
+        value,
+        key
+      ) => {
+
+        if (
+          allowedKeys.has(
+            key
+          )
+        ) {
+
+          tracking.set(
+            key,
+            value
+          );
+
+        }
+
+      }
+    );
+
+
+    return tracking;
+
+  }
+
+
+  function buildCreatorLandingUrl(
+    slug
+  ) {
+
+    const landingParams =
+      getTrackingParameters();
+
+
+    landingParams.set(
+      "slug",
+      slug
+    );
+
+
+    return (
+      "creator-product.html?" +
+      landingParams.toString()
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  NORMALIZE PHYSICAL PRODUCTS
+  =====================================================
+  */
 
   function normalizePhysical(
     product
@@ -737,13 +1298,14 @@
 
       type:
         "physical",
+
       slug:
-  firstValue(
-    product,
-    [
-      "slug"
-    ]
-  ) || "",
+        firstValue(
+          product,
+          [
+            "slug"
+          ]
+        ) || "",
 
       typeLabel:
         "Physical Product",
@@ -791,6 +1353,9 @@
           ]
         ),
 
+      currency:
+        "EUR",
+
       originalPrice:
         null,
 
@@ -810,13 +1375,17 @@
 
       available:
         product.in_stock === true
+
     };
+
   }
 
 
-  /* ==============================
-     NORMALIZE DIGITAL PRODUCTS
-  ============================== */
+  /*
+  =====================================================
+  NORMALIZE GIFTEDGIFT DIGITAL PRODUCTS
+  =====================================================
+  */
 
   function normalizeDigital(
     product
@@ -828,12 +1397,12 @@
         product.id,
 
       slug:
-  firstValue(
-    product,
-    [
-      "slug"
-    ]
-  ) || "",
+        firstValue(
+          product,
+          [
+            "slug"
+          ]
+        ) || "",
 
       type:
         "digital",
@@ -885,6 +1454,9 @@
           ]
         ),
 
+      currency:
+        "EUR",
+
       originalPrice:
         null,
 
@@ -922,13 +1494,17 @@
 
       available:
         product.active === true
+
     };
+
   }
 
 
-  /* ==============================
-     NORMALIZE AFFILIATE PRODUCTS
-  ============================== */
+  /*
+  =====================================================
+  NORMALIZE AFFILIATE PRODUCTS
+  =====================================================
+  */
 
   function normalizeAffiliate(
     product
@@ -964,14 +1540,15 @@
 
       type:
         "affiliate",
-      
-slug:
-  firstValue(
-    product,
-    [
-      "slug"
-    ]
-  ) || "",
+
+      slug:
+        firstValue(
+          product,
+          [
+            "slug"
+          ]
+        ) || "",
+
       typeLabel:
         "Affiliate Product",
 
@@ -1015,6 +1592,9 @@ slug:
       price:
         salePrice,
 
+      currency:
+        "EUR",
+
       salePrice:
         salePrice,
 
@@ -1047,13 +1627,95 @@ slug:
       available:
         product.active !== false &&
         product.in_stock !== false
+
     };
+
   }
 
 
-  /* ==============================
-     DATABASE
-  ============================== */
+  /*
+  =====================================================
+  NORMALIZE CREATOR MARKETPLACE PRODUCT
+  =====================================================
+  */
+
+  function normalizeCreatorProduct(
+    product
+  ) {
+
+    return {
+
+      id:
+        product.id,
+
+      type:
+        "creator",
+
+      slug:
+        product.public_slug || "",
+
+      typeLabel:
+        "Creator Marketplace",
+
+      name:
+        product.title ||
+        "Creator Digital Product",
+
+      description:
+        product.description || "",
+
+      category:
+        product.category || "",
+
+      image:
+        "",
+
+      coverPath:
+        product.cover_image_path || "",
+
+      price:
+        product.price,
+
+      currency:
+        product.currency ||
+        "EUR",
+
+      originalPrice:
+        null,
+
+      salePrice:
+        null,
+
+      rating:
+        null,
+
+      creatorSellerCode:
+        product.creator_seller_code || "",
+
+      creatorProductType:
+        product.product_type || "digital",
+
+      affiliateEligible:
+        product.affiliate_eligible === true,
+
+      createdAt:
+        "",
+
+      available:
+        Boolean(
+          product.public_slug
+        )
+
+    };
+
+  }
+
+
+  /*
+  =====================================================
+  STANDARD TABLE LOADER
+  =====================================================
+  */
 
   async function getTableRows(
     tableName
@@ -1064,26 +1726,189 @@ slug:
       error
     } =
       await supabaseClient
-        .from(tableName)
-        .select("*");
+        .from(
+          tableName
+        )
+        .select(
+          "*"
+        );
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       console.error(
         `Could not load ${tableName}:`,
         error
       );
 
+
       return [];
+
     }
 
 
-    return Array.isArray(data)
+    return Array.isArray(
+      data
+    )
       ? data
       : [];
+
   }
 
+
+  /*
+  =====================================================
+  LOAD APPROVED CREATOR PRODUCTS
+
+  This does NOT query creator_products directly.
+  The secure RPC only returns products which satisfy
+  the approved public marketplace rules.
+  =====================================================
+  */
+
+  async function getCreatorProducts() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "get_public_creator_products",
+          {
+
+            p_limit:
+              100,
+
+            p_offset:
+              0
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Could not load Creator Marketplace products:",
+        error
+      );
+
+
+      return [];
+
+    }
+
+
+    return Array.isArray(
+      data
+    )
+      ? data
+      : [];
+
+  }
+
+
+  /*
+  =====================================================
+  CREATOR COVER IMAGES
+  =====================================================
+  */
+
+  async function loadCreatorCoverUrl(
+    coverPath
+  ) {
+
+    if (
+      !coverPath
+    ) {
+
+      return "";
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          "creator-product-covers"
+        )
+        .createSignedUrl(
+          coverPath,
+          3600
+        );
+
+
+    if (
+      error ||
+      !data?.signedUrl
+    ) {
+
+      console.error(
+        "Could not load Creator cover:",
+        error
+      );
+
+
+      return "";
+
+    }
+
+
+    return data.signedUrl;
+
+  }
+
+
+  async function prepareCreatorProducts(
+    rows
+  ) {
+
+    const normalized =
+      rows
+        .map(
+          normalizeCreatorProduct
+        )
+        .filter(
+          product =>
+            product.available
+        );
+
+
+    await Promise.all(
+
+      normalized.map(
+        async product => {
+
+          product.image =
+            await loadCreatorCoverUrl(
+              product.coverPath
+            );
+
+        }
+      )
+
+    );
+
+
+    return normalized;
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD EVERYTHING
+  =====================================================
+  */
 
   async function loadAllProducts() {
 
@@ -1098,7 +1923,8 @@ slug:
       const [
         physicalRows,
         digitalRows,
-        affiliateRows
+        affiliateRows,
+        creatorRows
       ] =
         await Promise.all([
 
@@ -1112,7 +1938,9 @@ slug:
 
           getTableRows(
             "affiliate_products"
-          )
+          ),
+
+          getCreatorProducts()
 
         ]);
 
@@ -1150,37 +1978,78 @@ slug:
           );
 
 
-      allProducts = [
+      const creator =
+        await prepareCreatorProducts(
+          creatorRows
+        );
+
+
+      /*
+      ---------------------------------------------------
+      Creator Marketplace products are placed first.
+
+      They do not currently expose created_at through
+      the safe public RPC, so we do not fake a date.
+      ---------------------------------------------------
+      */
+
+      const standardProducts = [
+
         ...physical,
         ...digital,
         ...affiliate
+
       ];
 
 
-      allProducts.sort(
-        (a, b) => {
+      standardProducts.sort(
+        (
+          a,
+          b
+        ) => {
 
           const aTime =
             new Date(
-              a.createdAt || 0
+              a.createdAt ||
+              0
             ).getTime();
 
 
           const bTime =
             new Date(
-              b.createdAt || 0
+              b.createdAt ||
+              0
             ).getTime();
 
 
-          return bTime - aTime;
+          return (
+            bTime -
+            aTime
+          );
+
         }
       );
+
+
+      allProducts = [
+
+        ...creator,
+        ...standardProducts
+
+      ];
+
+
+      buildDynamicCategories();
 
 
       applyFilters();
 
 
-    } catch (error) {
+    }
+
+    catch (
+      error
+    ) {
 
       console.error(
         error
@@ -1192,32 +2061,204 @@ slug:
           Products could not be loaded right now.
         </p>
       `;
+
     }
+
   }
 
 
-  /* ==============================
-     FILTERS
-  ============================== */
+  /*
+  =====================================================
+  DYNAMIC CATEGORIES
+
+  This allows Creator categories such as Business
+  to appear even when they were not hard-coded in
+  the original Shop page.
+  =====================================================
+  */
+
+  function buildDynamicCategories() {
+
+    const container =
+      document.getElementById(
+        "dynamic-category-links"
+      );
+
+
+    const existingCategories =
+      new Set();
+
+
+    document
+      .querySelectorAll(
+        ".category-link[data-category]"
+      )
+      .forEach(
+        link => {
+
+          existingCategories.add(
+            String(
+              link.dataset.category
+            )
+              .trim()
+              .toLowerCase()
+          );
+
+        }
+      );
+
+
+    const extraCategories =
+      [];
+
+
+    allProducts.forEach(
+      product => {
+
+        const category =
+          String(
+            product.category ||
+            ""
+          ).trim();
+
+
+        if (
+          !category
+        ) {
+
+          return;
+
+        }
+
+
+        const key =
+          category.toLowerCase();
+
+
+        if (
+          existingCategories.has(
+            key
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        existingCategories.add(
+          key
+        );
+
+
+        extraCategories.push(
+          category
+        );
+
+      }
+    );
+
+
+    extraCategories.sort(
+      (
+        a,
+        b
+      ) =>
+        a.localeCompare(
+          b
+        )
+    );
+
+
+    container.innerHTML =
+      extraCategories
+        .map(
+          category => {
+
+            const active =
+              selectedCategory &&
+              category ===
+                selectedCategory
+                ? " active"
+                : "";
+
+
+            return `
+              <a
+                class="category-link${active}"
+                data-category="${escapeHTML(category)}"
+                href="shop.html?category=${encodeURIComponent(category)}"
+              >
+                ${escapeHTML(category)}
+              </a>
+            `;
+
+          }
+        )
+        .join(
+          ""
+        );
+
+  }
+
+
+  /*
+  =====================================================
+  FILTERS
+  =====================================================
+  */
+
+  function productMatchesType(
+    product
+  ) {
+
+    if (
+      selectedType ===
+      "all"
+    ) {
+
+      return true;
+
+    }
+
+
+    /*
+      Creator Marketplace products are digital,
+      so the general Digital filter includes them.
+    */
+
+    if (
+      selectedType ===
+      "digital"
+    ) {
+
+      return (
+        product.type ===
+          "digital" ||
+        product.type ===
+          "creator"
+      );
+
+    }
+
+
+    return (
+      product.type ===
+      selectedType
+    );
+
+  }
+
 
   function applyFilters() {
 
     let visibleProducts =
-      [...allProducts];
-
-
-    if (
-      selectedType !==
-      "all"
-    ) {
-
-      visibleProducts =
-        visibleProducts.filter(
-          item =>
-            item.type ===
-            selectedType
-        );
-    }
+      allProducts.filter(
+        product =>
+          productMatchesType(
+            product
+          )
+      );
 
 
     if (
@@ -1233,13 +2274,16 @@ slug:
       visibleProducts =
         visibleProducts.filter(
           item =>
+
             String(
-              item.category || ""
+              item.category ||
+              ""
             )
               .trim()
               .toLowerCase() ===
             wantedCategory
         );
+
     }
 
 
@@ -1249,6 +2293,7 @@ slug:
     renderProducts(
       visibleProducts
     );
+
   }
 
 
@@ -1283,14 +2328,17 @@ slug:
       description.textContent =
         `Browse products in the ${selectedCategory} category.`;
 
-    } else {
+    }
+
+    else {
 
       title.textContent =
         "Shop GiftedGift Empire";
 
 
       description.textContent =
-        "Shop physical products, digital products and carefully selected affiliate recommendations in one place.";
+        "Shop physical products, digital products, Creator Marketplace products and carefully selected affiliate recommendations in one place.";
+
     }
 
 
@@ -1305,6 +2353,9 @@ slug:
       digital:
         "Digital Products",
 
+      creator:
+        "Creator Marketplace",
+
       affiliate:
         "Affiliate Products"
 
@@ -1312,34 +2363,68 @@ slug:
 
 
     heading.textContent =
-      labels[selectedType] ||
+      labels[
+        selectedType
+      ] ||
       "All Products";
+
   }
 
 
-  /* ==============================
-     PRODUCT BUTTONS
-  ============================== */
+  /*
+  =====================================================
+  PRODUCT BUTTONS
+  =====================================================
+  */
 
   function getProductButton(
     product
   ) {
+
+    /*
+    ---------------------------------------------------
+    PHYSICAL
+    ---------------------------------------------------
+    */
 
     if (
       product.type ===
       "physical"
     ) {
 
+      const href =
+        product.slug
+          ? (
+              "/" +
+              encodeURIComponent(
+                product.slug
+              )
+            )
+          : (
+              "product.html?id=" +
+              encodeURIComponent(
+                product.id
+              )
+            );
+
+
       return `
         <a
           class="product-button"
-          href="${product.slug ? "/" + encodeURIComponent(product.slug) : "product.html?id=" + encodeURIComponent(product.id)}"
+          href="${escapeHTML(href)}"
         >
           View Product
         </a>
       `;
+
     }
 
+
+    /*
+    ---------------------------------------------------
+    GIFTEDGIFT DIGITAL PRODUCT
+    ---------------------------------------------------
+    */
 
     if (
       product.type ===
@@ -1353,14 +2438,31 @@ slug:
         "paid"
       ) {
 
+        const href =
+          product.slug
+            ? (
+                "/" +
+                encodeURIComponent(
+                  product.slug
+                )
+              )
+            : (
+                "checkout.html?product_id=" +
+                encodeURIComponent(
+                  product.id
+                )
+              );
+
+
         return `
           <a
             class="product-button"
-            href="${product.slug ? "/" + encodeURIComponent(product.slug) : "checkout.html?product_id=" + encodeURIComponent(product.id)}"
+            href="${escapeHTML(href)}"
           >
             Buy Digital Product
           </a>
         `;
+
       }
 
 
@@ -1368,14 +2470,27 @@ slug:
         product.checkoutUrl
       ) {
 
-        return `
-          <a
-            class="product-button"
-            href="${escapeHTML(product.checkoutUrl)}"
-          >
-            Get Digital Product
-          </a>
-        `;
+        const safeUrl =
+          safeLinkUrl(
+            product.checkoutUrl
+          );
+
+
+        if (
+          safeUrl
+        ) {
+
+          return `
+            <a
+              class="product-button"
+              href="${escapeHTML(safeUrl)}"
+            >
+              Get Digital Product
+            </a>
+          `;
+
+        }
+
       }
 
 
@@ -1386,18 +2501,64 @@ slug:
           Currently Unavailable
         </span>
       `;
+
     }
 
 
     /*
-      AFFILIATE PRODUCTS
+    ---------------------------------------------------
+    CREATOR MARKETPLACE
 
-      IMPORTANT:
-      Affiliate products now open their own
-      GiftedGift Empire landing page first.
+    Always opens the dedicated Creator landing page.
+    ---------------------------------------------------
+    */
 
-      Example:
-      affiliate-product.html?id=7
+    if (
+      product.type ===
+      "creator"
+    ) {
+
+      if (
+        product.slug
+      ) {
+
+        const creatorUrl =
+          buildCreatorLandingUrl(
+            product.slug
+          );
+
+
+        return `
+          <a
+            class="product-button"
+            href="${escapeHTML(creatorUrl)}"
+          >
+            View Creator Product
+          </a>
+
+          <div class="creator-note">
+            Approved Creator Marketplace product
+          </div>
+        `;
+
+      }
+
+
+      return `
+        <span
+          class="product-button disabled-button"
+        >
+          Product Unavailable
+        </span>
+      `;
+
+    }
+
+
+    /*
+    ---------------------------------------------------
+    AFFILIATE
+    ---------------------------------------------------
     */
 
     if (
@@ -1411,10 +2572,26 @@ slug:
         product.id !== ""
       ) {
 
+        const href =
+          product.slug
+            ? (
+                "/" +
+                encodeURIComponent(
+                  product.slug
+                )
+              )
+            : (
+                "affiliate-products.html?id=" +
+                encodeURIComponent(
+                  product.id
+                )
+              );
+
+
         return `
           <a
             class="product-button"
-            href="${product.slug ? "/" + encodeURIComponent(product.slug) : "affiliate-products.html?id=" + encodeURIComponent(product.id)}"
+            href="${escapeHTML(href)}"
           >
             View Product
           </a>
@@ -1423,6 +2600,7 @@ slug:
             Affiliate recommendation
           </div>
         `;
+
       }
 
 
@@ -1433,16 +2611,20 @@ slug:
           Product Unavailable
         </span>
       `;
+
     }
 
 
     return "";
+
   }
 
 
-  /* ==============================
-     PRICE DISPLAY
-  ============================== */
+  /*
+  =====================================================
+  PRICE DISPLAY
+  =====================================================
+  */
 
   function getPriceHTML(
     product
@@ -1450,7 +2632,7 @@ slug:
 
     if (
       product.type ===
-      "affiliate" &&
+        "affiliate" &&
       validPrice(
         product.originalPrice
       ) &&
@@ -1495,6 +2677,7 @@ slug:
 
         </div>
       `;
+
     }
 
 
@@ -1506,19 +2689,64 @@ slug:
 
       return `
         <p class="price">
-          ${formatEuro(product.price)}
+          ${
+            formatMoney(
+              product.price,
+              product.currency ||
+              "EUR"
+            )
+          }
         </p>
       `;
+
     }
 
 
     return "";
+
   }
 
 
-  /* ==============================
-     RENDER PRODUCTS
-  ============================== */
+  /*
+  =====================================================
+  PRODUCT IMAGE
+  =====================================================
+  */
+
+  function getProductImageHTML(
+    product
+  ) {
+
+    if (
+      product.image
+    ) {
+
+      return `
+        <img
+          class="product-image"
+          src="${escapeHTML(product.image)}"
+          alt="${escapeHTML(product.name)}"
+          loading="lazy"
+        >
+      `;
+
+    }
+
+
+    return `
+      <div class="image-placeholder">
+        Product image unavailable
+      </div>
+    `;
+
+  }
+
+
+  /*
+  =====================================================
+  RENDER PRODUCTS
+  =====================================================
+  */
 
   function renderProducts(
     products
@@ -1532,7 +2760,8 @@ slug:
 
     if (
       !products ||
-      products.length === 0
+      products.length ===
+        0
     ) {
 
       container.innerHTML = `
@@ -1541,7 +2770,9 @@ slug:
         </p>
       `;
 
+
       return;
+
     }
 
 
@@ -1563,15 +2794,9 @@ slug:
 
 
         const image =
-          product.image
-            ? `
-              <img
-                class="product-image"
-                src="${escapeHTML(product.image)}"
-                alt="${escapeHTML(product.name)}"
-              >
-            `
-            : "";
+          getProductImageHTML(
+            product
+          );
 
 
         let badgeClass =
@@ -1585,6 +2810,7 @@ slug:
 
           badgeClass =
             "digital-badge";
+
         }
 
 
@@ -1595,6 +2821,18 @@ slug:
 
           badgeClass =
             "affiliate-badge";
+
+        }
+
+
+        if (
+          product.type ===
+          "creator"
+        ) {
+
+          badgeClass =
+            "creator-badge";
+
         }
 
 
@@ -1603,6 +2841,28 @@ slug:
             ? `
               <p class="category">
                 ${escapeHTML(product.category)}
+              </p>
+            `
+            : "";
+
+
+        const creatorInfo =
+          product.type ===
+            "creator"
+            ? `
+              <p class="creator-line">
+                ✓ Verified Creator
+
+                ${
+                  product.creatorSellerCode
+                    ? `
+                      ·
+                      <strong>
+                        ${escapeHTML(product.creatorSellerCode)}
+                      </strong>
+                    `
+                    : ""
+                }
               </p>
             `
             : "";
@@ -1632,14 +2892,18 @@ slug:
           product.rating !== ""
             ? `
               <p class="rating">
-                ⭐ ${escapeHTML(String(product.rating))} / 5
+                ⭐
+                ${escapeHTML(String(product.rating))}
+                / 5
               </p>
             `
             : "";
 
 
         card.innerHTML = `
+
           ${image}
+
 
           <span
             class="type-badge ${badgeClass}"
@@ -1647,33 +2911,47 @@ slug:
             ${escapeHTML(product.typeLabel)}
           </span>
 
+
+          ${creatorInfo}
+
+
           ${category}
+
 
           <h3>
             ${escapeHTML(product.name)}
           </h3>
 
+
           ${description}
+
 
           ${price}
 
+
           ${rating}
 
+
           ${getProductButton(product)}
+
         `;
 
 
         container.appendChild(
           card
         );
+
       }
     );
+
   }
 
 
-  /* ==============================
-     PRODUCT TYPE BUTTONS
-  ============================== */
+  /*
+  =====================================================
+  PRODUCT TYPE BUTTONS
+  =====================================================
+  */
 
   document
     .querySelectorAll(
@@ -1709,19 +2987,21 @@ slug:
 
 
             applyFilters();
+
           }
         );
+
       }
     );
 
 
-  /* ==============================
-     ACTIVE CATEGORY
-  ============================== */
+  /*
+  =====================================================
+  ACTIVE CATEGORY
+  =====================================================
+  */
 
-  if (
-    selectedCategory
-  ) {
+  function markActiveCategory() {
 
     document
       .querySelectorAll(
@@ -1730,31 +3010,79 @@ slug:
       .forEach(
         link => {
 
+          link.classList.remove(
+            "active"
+          );
+
+
           if (
-            link.dataset.category ===
             selectedCategory
+          ) {
+
+            if (
+              String(
+                link.dataset.category ||
+                ""
+              ) ===
+              selectedCategory
+            ) {
+
+              link.classList.add(
+                "active"
+              );
+
+            }
+
+          }
+
+          else if (
+            !link.dataset.category
           ) {
 
             link.classList.add(
               "active"
             );
+
           }
+
         }
       );
+
   }
 
 
-  /* ==============================
-     START
-  ============================== */
+  /*
+  =====================================================
+  START
+  =====================================================
+  */
 
-  loadAllProducts();
+  async function startShop() {
+
+    await loadAllProducts();
+
+
+    markActiveCategory();
+
+  }
+
+
+  startShop();
 
 </script>
 
 
-<script src="cookie-consent.js"></script>
+<script
+  src="cookie-consent.js"
+></script>
+
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
 
 </body>
 
-</html>
+</html>    
