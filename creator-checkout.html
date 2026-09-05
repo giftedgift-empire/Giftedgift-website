@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Creator Checkout | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Secure checkout for approved Creator Marketplace digital products on GiftedGift Empire."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-weight: 800;
+      font-size: 24px;
+      text-decoration: none;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      padding: 28px 16px 60px;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(280px, 0.85fr)
+        minmax(0, 1.15fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 16px;
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+      padding: 22px;
+    }
+
+    .panel h1,
+    .panel h2 {
+      color: #123a8c;
+      margin-top: 0;
+    }
+
+    .product-cover-wrap {
+      width: 100%;
+      min-height: 300px;
+      border-radius: 12px;
+      background: #f7f8fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .product-cover {
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      display: none;
+    }
+
+    .cover-placeholder {
+      color: #777;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 25px;
+      margin: 0 0 9px;
+      color: #123a8c;
+    }
+
+    .seller-code {
+      color: #666;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: 900;
+      margin: 18px 0 0;
+    }
+
+    .summary {
+      margin-top: 22px;
+      border-top: 1px solid #e7eaf0;
+      padding-top: 16px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 7px 0;
+      line-height: 1.5;
+    }
+
+    .summary-total {
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid #d8dde7;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      min-height: 47px;
+      border: 1px solid #ccd3dd;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    .small-note {
+      margin: 6px 0 0;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .notice {
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+      border-radius: 10px;
+      padding: 13px;
+      color: #7a2e0e;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .secure-note {
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      border-radius: 10px;
+      padding: 13px;
+      color: #067647;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .button {
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      padding: 14px 18px;
+      min-height: 50px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .primary-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .secondary-button {
+      margin-top: 10px;
+      background: #123a8c;
+      color: white;
+    }
+
+    .message {
+      display: none;
+      border-radius: 10px;
+      padding: 13px;
+      margin-bottom: 17px;
+      line-height: 1.55;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      color: #b42318;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      color: #067647;
+    }
+
+    .loading {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 15px;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    .error-box {
+      display: none;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      border-radius: 15px;
+      padding: 25px;
+      color: #b42318;
+      text-align: center;
+    }
+
+    .checkout-content {
+      display: none;
+    }
+
+    .success-box {
+      display: none;
+      background: white;
+      border: 1px solid #abefc6;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .success-box h2 {
+      color: #067647;
+      margin-top: 0;
+    }
+
+    .order-number {
+      display: inline-block;
+      margin: 10px 0 14px;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 17px;
+      font-weight: 800;
+      color: #123a8c;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+
+    .payment-pending {
+      margin-top: 18px;
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      border-radius: 10px;
+      padding: 14px;
+      line-height: 1.55;
+      color: #9a3412;
+    }
+
+    footer {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    footer a {
+      color: #f2bd16;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (
+      max-width: 760px
+    ) {
+
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-cover-wrap {
+        min-height: 240px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      GiftedGift Empire
+    </a>
+
+    <a
+      id="back-product-link"
+      href="shop.html"
+      class="back-link"
+    >
+      ← Back to Product
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading secure checkout...
+  </div>
+
+
+  <div
+    id="error-box"
+    class="error-box"
+  >
+    This Creator product is unavailable or could not be loaded.
+  </div>
+
+
+  <div
+    id="checkout-content"
+    class="checkout-content"
+  >
+
+    <div class="checkout-grid">
+
+
+      <!-- ORDER SUMMARY -->
+
+      <section class="panel">
+
+        <div class="product-cover-wrap">
+
+          <img
+            id="product-cover"
+            class="product-cover"
+            src=""
+            alt=""
+          >
+
+          <div
+            id="cover-placeholder"
+            class="cover-placeholder"
+          >
+            Loading product cover...
+          </div>
+
+        </div>
+
+
+        <h2
+          id="product-title"
+          class="product-title"
+        ></h2>
+
+
+        <div class="seller-code">
+
+          Verified Creator
+
+          <br>
+
+          Seller Code:
+          <strong id="seller-code"></strong>
+
+        </div>
+
+
+        <div
+          id="product-price"
+          class="price"
+        ></div>
+
+
+        <div class="summary">
+
+          <div class="summary-row">
+
+            <span>
+              Product
+            </span>
+
+            <span id="summary-product-price">
+              —
+            </span>
+
+          </div>
+
+
+          <div class="summary-row">
+
+            <span>
+              Tax
+            </span>
+
+            <span id="summary-tax">
+              €0.00
+            </span>
+
+          </div>
+
+
+          <div class="summary-row summary-total">
+
+            <span>
+              Total
+            </span>
+
+            <span id="summary-total">
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- BUYER DETAILS -->
+
+      <section class="panel">
+
+        <h1>
+          Secure Checkout
+        </h1>
+
+
+        <div class="secure-note">
+          🔒 Your payment amount is calculated securely
+          from the approved GiftedGift Empire product record.
+        </div>
+
+
+        <div class="notice">
+          Do not send passwords, card PINs or security codes
+          through this form.
+        </div>
+
+
+        <div
+          id="form-message"
+          class="message"
+        ></div>
+
+
+        <form
+          id="checkout-form"
+          onsubmit="startCheckout(event)"
+        >
+
+
+          <div class="field">
+
+            <label for="buyer-name">
+              Full Name *
+            </label>
+
+            <input
+              type="text"
+              id="buyer-name"
+              maxlength="150"
+              required
+              autocomplete="name"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="buyer-email">
+              Email Address *
+            </label>
+
+            <input
+              type="email"
+              id="buyer-email"
+              maxlength="254"
+              required
+              autocomplete="email"
+            >
+
+            <p class="small-note">
+              Use an email address you can access.
+              This will later be connected to your secure
+              digital-product access.
+            </p>
+
+          </div>
+
+
+          <button
+            type="submit"
+            id="checkout-button"
+            class="button primary-button"
+          >
+            Continue Secure Checkout
+          </button>
+
+
+        </form>
+
+      </section>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ORDER CREATED -->
+
+  <section
+    id="success-box"
+    class="success-box"
+  >
+
+    <h2>
+      Order Prepared Successfully ✅
+    </h2>
+
+
+    <p>
+      Your Creator Marketplace order has been created.
+      Keep this order number:
+    </p>
+
+
+    <div
+      id="success-order-number"
+      class="order-number"
+      onclick="copyOrderNumber()"
+      title="Tap to copy"
+    ></div>
+
+
+    <p>
+      Total:
+      <strong id="success-total"></strong>
+    </p>
+
+
+    <p>
+      Payment status:
+      <strong>Pending</strong>
+    </p>
+
+
+    <button
+      type="button"
+      class="button secondary-button"
+      onclick="copyOrderNumber()"
+    >
+      Copy Order Number
+    </button>
+
+
+    <div class="payment-pending">
+
+      The order is ready for payment, but the
+      Creator Marketplace payment connection is the
+      next stage we are building.
+
+      <br><br>
+
+      No payment has been taken yet.
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<footer>
+
+  © GiftedGift Empire
+
+  <br>
+
+  <a href="customer-service.html">
+    Customer Service
+  </a>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+  =====================================================
+  STATE
+  =====================================================
+  */
+
+  let currentProduct =
+    null;
+
+
+  let currentOrder =
+    null;
+
+
+  let checkoutRequestId =
+    null;
+
+
+  /*
+  =====================================================
+  URL
+  =====================================================
+  */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  function getSlug() {
+
+    if (
+      window.__CREATOR_PRODUCT_SLUG
+    ) {
+
+      return String(
+        window.__CREATOR_PRODUCT_SLUG
+      ).trim();
+
+    }
+
+
+    return (
+      params.get(
+        "slug"
+      ) || ""
+    ).trim();
+
+  }
+
+
+  /*
+  =====================================================
+  MONEY
+  =====================================================
+  */
+
+  function formatMoney(
+    value,
+    currency
+  ) {
+
+    try {
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          style:
+            "currency",
+
+          currency:
+            currency || "EUR",
+
+          minimumFractionDigits:
+            2,
+
+          maximumFractionDigits:
+            2
+        }
+      ).format(
+        Number(
+          value || 0
+        )
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      return (
+        (currency || "EUR") +
+        " " +
+        Number(
+          value || 0
+        ).toFixed(
+          2
+        )
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  MESSAGE
+  =====================================================
+  */
+
+  function showMessage(
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "form-message"
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearMessage() {
+
+    const box =
+      document.getElementById(
+        "form-message"
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  ATTRIBUTION
+
+  Preserve only the same campaign/referral fields
+  the secure RPC accepts.
+  =====================================================
+  */
+
+  function buildAttribution() {
+
+    const allowed = [
+
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+      "fbclid",
+      "gclid",
+      "ttclid",
+      "msclkid",
+      "ref",
+      "referral",
+      "affiliate",
+      "affiliate_code",
+      "referral_code"
+
+    ];
+
+
+    const attribution =
+      {};
+
+
+    allowed.forEach(
+      key => {
+
+        const value =
+          params.get(
+            key
+          );
+
+
+        if (
+          value
+        ) {
+
+          attribution[
+            key
+          ] =
+            value;
+
+        }
+
+      }
+    );
+
+
+    return attribution;
+
+  }
+
+
+  /*
+  =====================================================
+  REQUEST ID
+
+  One checkout attempt gets one UUID.
+  Reusing it protects against double tapping.
+  =====================================================
+  */
+
+  function getCheckoutRequestId(
+    slug
+  ) {
+
+    const key =
+      "gge_creator_checkout_request_" +
+      slug;
+
+
+    const existing =
+      sessionStorage.getItem(
+        key
+      );
+
+
+    if (
+      existing
+    ) {
+
+      return existing;
+
+    }
+
+
+    const requestId =
+      crypto.randomUUID();
+
+
+    sessionStorage.setItem(
+      key,
+      requestId
+    );
+
+
+    return requestId;
+
+  }
+
+
+  /*
+  =====================================================
+  PREFILL SIGNED-IN EMAIL
+  =====================================================
+  */
+
+  async function prefillSignedInUser() {
+
+    const {
+      data
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    const user =
+      data?.session?.user;
+
+
+    if (
+      user?.email
+    ) {
+
+      const input =
+        document.getElementById(
+          "buyer-email"
+        );
+
+
+      if (
+        !input.value
+      ) {
+
+        input.value =
+          user.email;
+
+      }
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  COVER
+  =====================================================
+  */
+
+  async function loadCover(
+    path,
+    title
+  ) {
+
+    const image =
+      document.getElementById(
+        "product-cover"
+      );
+
+
+    const placeholder =
+      document.getElementById(
+        "cover-placeholder"
+      );
+
+
+    if (
+      !path
+    ) {
+
+      placeholder.textContent =
+        "No cover image available.";
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(
+          "creator-product-covers"
+        )
+        .createSignedUrl(
+          path,
+          3600
+        );
+
+
+    if (
+      error ||
+      !data?.signedUrl
+    ) {
+
+      console.error(
+        "Cover error:",
+        error
+      );
+
+
+      placeholder.textContent =
+        "Cover could not be loaded.";
+
+      return;
+
+    }
+
+
+    image.src =
+      data.signedUrl;
+
+
+    image.alt =
+      title;
+
+
+    image.style.display =
+      "block";
+
+
+    placeholder.style.display =
+      "none";
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD PRODUCT
+  =====================================================
+  */
+
+  async function loadProduct() {
+
+    const slug =
+      getSlug();
+
+
+    if (
+      !slug
+    ) {
+
+      showProductError();
+
+      return;
+
+    }
+
+
+    checkoutRequestId =
+      getCheckoutRequestId(
+        slug
+      );
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "get_public_creator_product_by_slug",
+          {
+            p_slug:
+              slug
+          }
+        );
+
+
+    const product =
+      Array.isArray(
+        data
+      )
+        ? data[0]
+        : null;
+
+
+    if (
+      error ||
+      !product
+    ) {
+
+      console.error(
+        "Product error:",
+        error
+      );
+
+
+      showProductError();
+
+      return;
+
+    }
+
+
+    currentProduct =
+      product;
+
+
+    renderProduct(
+      product
+    );
+
+
+    await loadCover(
+      product.cover_image_path,
+      product.title
+    );
+
+
+    await prefillSignedInUser();
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "checkout-content"
+      )
+      .style.display =
+        "block";
+
+  }
+
+
+  /*
+  =====================================================
+  PRODUCT ERROR
+  =====================================================
+  */
+
+  function showProductError() {
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "error-box"
+      )
+      .style.display =
+        "block";
+
+  }
+
+
+  /*
+  =====================================================
+  RENDER PRODUCT
+  =====================================================
+  */
+
+  function renderProduct(
+    product
+  ) {
+
+    const formattedPrice =
+      formatMoney(
+        product.price,
+        product.currency
+      );
+
+
+    document
+      .getElementById(
+        "product-title"
+      )
+      .textContent =
+        product.title;
+
+
+    document
+      .getElementById(
+        "seller-code"
+      )
+      .textContent =
+        product.creator_seller_code;
+
+
+    document
+      .getElementById(
+        "product-price"
+      )
+      .textContent =
+        formattedPrice;
+
+
+    document
+      .getElementById(
+        "summary-product-price"
+      )
+      .textContent =
+        formattedPrice;
+
+
+    /*
+    Current marketplace tax engine is 0.
+    The RPC remains authoritative.
+    */
+
+    document
+      .getElementById(
+        "summary-tax"
+      )
+      .textContent =
+        formatMoney(
+          0,
+          product.currency
+        );
+
+
+    document
+      .getElementById(
+        "summary-total"
+      )
+      .textContent =
+        formattedPrice;
+
+
+    /*
+    Preserve tracking params when returning
+    to the product landing page.
+    */
+
+    const backParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    backParams.set(
+      "slug",
+      product.public_slug
+    );
+
+
+    document
+      .getElementById(
+        "back-product-link"
+      )
+      .href =
+        "creator-product.html?" +
+        backParams.toString();
+
+  }
+
+
+  /*
+  =====================================================
+  START SECURE CHECKOUT
+  =====================================================
+  */
+
+  async function startCheckout(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    clearMessage();
+
+
+    if (
+      !currentProduct
+    ) {
+
+      showMessage(
+        "Product could not be loaded.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    const name =
+      document
+        .getElementById(
+          "buyer-name"
+        )
+        .value
+        .trim();
+
+
+    const email =
+      document
+        .getElementById(
+          "buyer-email"
+        )
+        .value
+        .trim();
+
+
+    if (
+      name.length < 2
+    ) {
+
+      showMessage(
+        "Please enter your full name.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    if (
+      !email
+    ) {
+
+      showMessage(
+        "Please enter your email address.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "checkout-button"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Preparing Order...";
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "start_creator_checkout",
+          {
+
+            p_public_slug:
+              currentProduct.public_slug,
+
+            p_buyer_name:
+              name,
+
+            p_buyer_email:
+              email,
+
+            p_attribution:
+              buildAttribution(),
+
+            p_request_id:
+              checkoutRequestId
+
+          }
+        );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Continue Secure Checkout";
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Checkout error:",
+        error
+      );
+
+
+      showMessage(
+        error.message ||
+        "Could not prepare your order.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    const order =
+      Array.isArray(
+        data
+      )
+        ? data[0]
+        : null;
+
+
+    if (
+      !order
+    ) {
+
+      showMessage(
+        "The order could not be created.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    currentOrder =
+      order;
+
+
+    sessionStorage.setItem(
+      "gge_creator_current_order_id",
+      order.order_id
+    );
+
+
+    sessionStorage.setItem(
+      "gge_creator_current_order_number",
+      order.order_number
+    );
+
+
+    showOrderSuccess(
+      order
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  SUCCESS
+  =====================================================
+  */
+
+  function showOrderSuccess(
+    order
+  ) {
+
+    document
+      .getElementById(
+        "checkout-content"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "success-order-number"
+      )
+      .textContent =
+        order.order_number;
+
+
+    document
+      .getElementById(
+        "success-total"
+      )
+      .textContent =
+        formatMoney(
+          order.total_amount,
+          order.currency
+        );
+
+
+    document
+      .getElementById(
+        "success-box"
+      )
+      .style.display =
+        "block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /*
+  =====================================================
+  COPY ORDER NUMBER
+  =====================================================
+  */
+
+  async function copyOrderNumber() {
+
+    const orderNumber =
+      document
+        .getElementById(
+          "success-order-number"
+        )
+        .textContent
+        .trim();
+
+
+    if (
+      !orderNumber
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      await navigator
+        .clipboard
+        .writeText(
+          orderNumber
+        );
+
+
+      alert(
+        "Order number copied."
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      alert(
+        "Order number: " +
+        orderNumber
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  START
+  =====================================================
+  */
+
+  loadProduct();
+
+</script>
+
+
+<script
+  src="cookie-consent.js"
+  defer
+></script>
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
+
+</body>
+
+</html>
