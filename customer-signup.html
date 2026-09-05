@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Create Customer Account | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Create your GiftedGift Empire customer account to manage purchases and securely access your digital products."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 55%,
+          #ffffff 100%
+        );
+      color: #222;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #123a8c;
+      padding: 18px 20px;
+      color: white;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-size: 24px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .header-link {
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 520px;
+      margin: auto;
+      padding: 36px 16px 60px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 18px;
+      box-shadow:
+        0 7px 24px rgba(0,0,0,0.06);
+      padding: 26px;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #123a8c;
+      font-size: 30px;
+    }
+
+    .intro {
+      margin-top: 0;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .account-benefit {
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      color: #175cd3;
+      border-radius: 10px;
+      padding: 14px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      min-height: 49px;
+      border: 1px solid #ccd3dd;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 70px;
+    }
+
+    .show-password {
+      position: absolute;
+      top: 50%;
+      right: 11px;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: #123a8c;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .small-note {
+      margin: 6px 0 0;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .password-rules {
+      margin-top: 11px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .password-rule {
+      margin: 5px 0;
+      font-size: 13px;
+      color: #667085;
+    }
+
+    .password-rule.valid {
+      color: #067647;
+      font-weight: 700;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 20px 0;
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .checkbox-row label {
+      font-weight: 400;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .checkbox-row a {
+      color: #123a8c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button {
+      width: 100%;
+      min-height: 52px;
+      border: none;
+      border-radius: 9px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      border-radius: 10px;
+      padding: 13px;
+      margin-bottom: 18px;
+      line-height: 1.55;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      color: #b42318;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      color: #067647;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      color: #175cd3;
+    }
+
+    .login-link {
+      margin-top: 22px;
+      text-align: center;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .login-link a {
+      color: #123a8c;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #123a8c;
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    footer a {
+      color: #f2bd16;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 520px) {
+
+      .card {
+        padding: 22px 18px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      GiftedGift Empire
+    </a>
+
+    <a
+      href="shop.html"
+      class="header-link"
+    >
+      ← Back to Shop
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <section class="card">
+
+
+    <h1>
+      Create Customer Account
+    </h1>
+
+
+    <p class="intro">
+
+      Create your GiftedGift Empire customer account
+      to manage your purchases and securely access
+      eligible digital products.
+
+    </p>
+
+
+    <div class="account-benefit">
+
+      🔒 Your account will help GiftedGift Empire
+      connect eligible purchases made with your
+      verified email to your private My Downloads area.
+
+    </div>
+
+
+    <div
+      id="signup-message"
+      class="message"
+    ></div>
+
+
+    <form
+      id="signup-form"
+      onsubmit="createCustomerAccount(event)"
+    >
+
+
+      <div class="field">
+
+        <label for="full-name">
+          Full Name *
+        </label>
+
+        <input
+          type="text"
+          id="full-name"
+          maxlength="150"
+          required
+          autocomplete="name"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="email">
+          Email Address *
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          maxlength="254"
+          required
+          autocomplete="email"
+        >
+
+        <p class="small-note">
+
+          Use the same email address you use when
+          purchasing products whenever possible.
+
+        </p>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="password">
+          Password *
+        </label>
+
+
+        <div class="password-wrap">
+
+          <input
+            type="password"
+            id="password"
+            required
+            minlength="12"
+            autocomplete="new-password"
+            oninput="checkPasswordRules()"
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            onclick="togglePassword('password', this)"
+          >
+            Show
+          </button>
+
+        </div>
+
+
+        <div class="password-rules">
+
+          <div
+            id="rule-length"
+            class="password-rule"
+          >
+            ○ At least 12 characters
+          </div>
+
+          <div
+            id="rule-upper"
+            class="password-rule"
+          >
+            ○ At least one uppercase letter
+          </div>
+
+          <div
+            id="rule-lower"
+            class="password-rule"
+          >
+            ○ At least one lowercase letter
+          </div>
+
+          <div
+            id="rule-number"
+            class="password-rule"
+          >
+            ○ At least one number
+          </div>
+
+          <div
+            id="rule-special"
+            class="password-rule"
+          >
+            ○ At least one special character
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="confirm-password">
+          Confirm Password *
+        </label>
+
+
+        <div class="password-wrap">
+
+          <input
+            type="password"
+            id="confirm-password"
+            required
+            minlength="12"
+            autocomplete="new-password"
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            onclick="togglePassword('confirm-password', this)"
+          >
+            Show
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="checkbox-row">
+
+        <input
+          type="checkbox"
+          id="terms"
+          required
+        >
+
+        <label for="terms">
+
+          I agree to the GiftedGift Empire
+          <a href="terms.html">
+            Terms
+          </a>
+          and
+          <a href="privacy.html">
+            Privacy Policy
+          </a>.
+
+        </label>
+
+      </div>
+
+
+      <button
+        type="submit"
+        id="signup-button"
+        class="button"
+      >
+        Create Customer Account
+      </button>
+
+
+    </form>
+
+
+    <div class="login-link">
+
+      Already have a customer account?
+
+      <br>
+
+      <a href="customer-login.html">
+        Sign In
+      </a>
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+<footer>
+
+  © GiftedGift Empire
+
+  <br><br>
+
+  <a href="customer-service.html">
+    Customer Service
+  </a>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+  =====================================================
+  MESSAGE
+  =====================================================
+  */
+
+  function showMessage(
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "signup-message"
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearMessage() {
+
+    const box =
+      document.getElementById(
+        "signup-message"
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  SHOW / HIDE PASSWORD
+  =====================================================
+  */
+
+  function togglePassword(
+    inputId,
+    button
+  ) {
+
+    const input =
+      document.getElementById(
+        inputId
+      );
+
+
+    if (
+      input.type ===
+      "password"
+    ) {
+
+      input.type =
+        "text";
+
+
+      button.textContent =
+        "Hide";
+
+    }
+
+    else {
+
+      input.type =
+        "password";
+
+
+      button.textContent =
+        "Show";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  PASSWORD RULES
+  =====================================================
+  */
+
+  function passwordChecks(
+    password
+  ) {
+
+    return {
+
+      length:
+        password.length >= 12,
+
+      upper:
+        /[A-Z]/.test(
+          password
+        ),
+
+      lower:
+        /[a-z]/.test(
+          password
+        ),
+
+      number:
+        /[0-9]/.test(
+          password
+        ),
+
+      special:
+        /[^A-Za-z0-9]/.test(
+          password
+        )
+
+    };
+
+  }
+
+
+  function updateRule(
+    elementId,
+    valid,
+    text
+  ) {
+
+    const element =
+      document.getElementById(
+        elementId
+      );
+
+
+    if (
+      valid
+    ) {
+
+      element.className =
+        "password-rule valid";
+
+
+      element.textContent =
+        "✓ " +
+        text;
+
+    }
+
+    else {
+
+      element.className =
+        "password-rule";
+
+
+      element.textContent =
+        "○ " +
+        text;
+
+    }
+
+  }
+
+
+  function checkPasswordRules() {
+
+    const password =
+      document
+        .getElementById(
+          "password"
+        )
+        .value;
+
+
+    const checks =
+      passwordChecks(
+        password
+      );
+
+
+    updateRule(
+      "rule-length",
+      checks.length,
+      "At least 12 characters"
+    );
+
+
+    updateRule(
+      "rule-upper",
+      checks.upper,
+      "At least one uppercase letter"
+    );
+
+
+    updateRule(
+      "rule-lower",
+      checks.lower,
+      "At least one lowercase letter"
+    );
+
+
+    updateRule(
+      "rule-number",
+      checks.number,
+      "At least one number"
+    );
+
+
+    updateRule(
+      "rule-special",
+      checks.special,
+      "At least one special character"
+    );
+
+  }
+
+
+  function isStrongPassword(
+    password
+  ) {
+
+    const checks =
+      passwordChecks(
+        password
+      );
+
+
+    return (
+      checks.length &&
+      checks.upper &&
+      checks.lower &&
+      checks.number &&
+      checks.special
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  CREATE CUSTOMER ACCOUNT
+  =====================================================
+  */
+
+  async function createCustomerAccount(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    clearMessage();
+
+
+    const fullName =
+      document
+        .getElementById(
+          "full-name"
+        )
+        .value
+        .trim();
+
+
+    const email =
+      document
+        .getElementById(
+          "email"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+      document
+        .getElementById(
+          "password"
+        )
+        .value;
+
+
+    const confirmPassword =
+      document
+        .getElementById(
+          "confirm-password"
+        )
+        .value;
+
+
+    const termsAccepted =
+      document
+        .getElementById(
+          "terms"
+        )
+        .checked;
+
+
+    if (
+      fullName.length < 2
+    ) {
+
+      showMessage(
+        "Please enter your full name.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !email
+    ) {
+
+      showMessage(
+        "Please enter your email address.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !isStrongPassword(
+        password
+      )
+    ) {
+
+      showMessage(
+        "Your password must meet all of the security requirements.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      password !==
+      confirmPassword
+    ) {
+
+      showMessage(
+        "The two passwords do not match.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !termsAccepted
+    ) {
+
+      showMessage(
+        "Please accept the Terms and Privacy Policy.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "signup-button"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Creating Account...";
+
+
+    try {
+
+      const redirectUrl =
+        new URL(
+          "customer-login.html?verified=1",
+          window.location.href
+        ).href;
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .signUp({
+
+            email:
+              email,
+
+            password:
+              password,
+
+            options: {
+
+              emailRedirectTo:
+                redirectUrl,
+
+              data: {
+
+                full_name:
+                  fullName,
+
+                account_type:
+                  "customer"
+
+              }
+
+            }
+
+          });
+
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      if (
+        data?.user &&
+        data?.session
+      ) {
+
+        showMessage(
+          "Your account was created successfully. You are now signed in.",
+          "success"
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.href =
+              "customer-account.html";
+
+          },
+          1200
+        );
+
+
+        return;
+
+      }
+
+
+      showMessage(
+        "Account created successfully. Please check your email and verify your email address before signing in.",
+        "success"
+      );
+
+
+      document
+        .getElementById(
+          "signup-form"
+        )
+        .reset();
+
+
+      checkPasswordRules();
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Customer signup:",
+        error
+      );
+
+
+      let message =
+        error.message ||
+        "Your customer account could not be created.";
+
+
+      if (
+        String(
+          message
+        )
+          .toLowerCase()
+          .includes(
+            "already registered"
+          )
+      ) {
+
+        message =
+          "An account already exists with this email address. Please sign in instead.";
+
+      }
+
+
+      showMessage(
+        message,
+        "error"
+      );
+
+    }
+
+    finally {
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Create Customer Account";
+
+    }
+
+  }
+
+</script>
+
+
+<script
+  src="cookie-consent.js"
+  defer
+></script>
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
+
+</body>
+
+</html>
