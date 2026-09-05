@@ -410,6 +410,14 @@
       margin-top: 18px;
     }
 
+    #download-product-button {
+      margin-top: 20px;
+    }
+
+    #download-message {
+      margin-top: 18px;
+    }
+
     .delivery-note {
       margin-top: 18px;
       background: #eff8ff;
@@ -880,15 +888,35 @@
     </div>
 
 
+    <!-- SECURE DOWNLOAD -->
+
+    <div
+      id="download-message"
+      class="message"
+    ></div>
+
+
+    <button
+      type="button"
+      id="download-product-button"
+      class="button primary-button"
+      onclick="downloadCreatorProduct()"
+    >
+      Download Your Product
+    </button>
+
+
     <div class="delivery-note">
 
       Your payment is confirmed.
 
       <br><br>
 
-      The digital file remains private and protected.
-      We will connect your secure download access
-      after payment-gateway testing is complete.
+      Your Creator product file remains private
+      and protected. When you tap
+      <strong>Download Your Product</strong>,
+      GiftedGift Empire verifies this paid order
+      and generates a short-lived secure download link.
 
     </div>
 
@@ -2857,6 +2885,136 @@
       top: 0,
       behavior: "smooth"
     });
+
+  }
+
+
+  /*
+  =====================================================
+  SECURE CREATOR DOWNLOAD
+  =====================================================
+  */
+
+  async function downloadCreatorProduct() {
+
+    const button =
+      document.getElementById(
+        "download-product-button"
+      );
+
+
+    const messageBox =
+      document.getElementById(
+        "download-message"
+      );
+
+
+    if (
+      !currentOrder?.order_id ||
+      !checkoutRequestId
+    ) {
+
+      messageBox.className =
+        "message error";
+
+
+      messageBox.textContent =
+        "Secure download session is unavailable. Please contact Customer Service with your order number.";
+
+
+      return;
+
+    }
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Preparing Secure Download...";
+
+
+    messageBox.className =
+      "message info";
+
+
+    messageBox.textContent =
+      "Verifying your purchase and preparing your file...";
+
+
+    try {
+
+      const result =
+        await invokeEdgeFunction(
+          "creator-download-product",
+          {
+
+            order_id:
+              currentOrder.order_id,
+
+            request_id:
+              checkoutRequestId
+
+          }
+        );
+
+
+      if (
+        !result?.download_url
+      ) {
+
+        throw new Error(
+          "Secure download link was not returned."
+        );
+
+      }
+
+
+      messageBox.className =
+        "message success";
+
+
+      messageBox.textContent =
+        "Your secure download is ready. The link expires shortly.";
+
+
+      window.location.assign(
+        result.download_url
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Creator download:",
+        error
+      );
+
+
+      messageBox.className =
+        "message error";
+
+
+      messageBox.textContent =
+        error.message ||
+        "Could not prepare your secure download.";
+
+    }
+
+    finally {
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Download Your Product";
+
+    }
 
   }
 
