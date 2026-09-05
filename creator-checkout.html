@@ -16,14 +16,13 @@
 
   <meta
     name="description"
-    content="Secure checkout for approved Creator Marketplace digital products on GiftedGift Empire."
+    content="Secure checkout for Creator Marketplace digital products on GiftedGift Empire."
   >
 
   <meta
     name="robots"
     content="noindex, nofollow"
   >
-
 
   <style>
 
@@ -42,6 +41,7 @@
           #ffffff 100%
         );
       color: #222;
+      min-height: 100vh;
     }
 
     header {
@@ -63,8 +63,8 @@
 
     .brand {
       color: #f2bd16;
-      font-weight: 800;
       font-size: 24px;
+      font-weight: 800;
       text-decoration: none;
     }
 
@@ -140,6 +140,11 @@
       color: #666;
       line-height: 1.5;
       font-size: 13px;
+    }
+
+    .verified {
+      color: #067647;
+      font-weight: 800;
     }
 
     .price {
@@ -273,6 +278,13 @@
       color: #067647;
     }
 
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      color: #175cd3;
+    }
+
     .loading {
       background: white;
       border: 1px solid #dfe4ec;
@@ -295,19 +307,21 @@
       display: none;
     }
 
-    .success-box {
+    .order-box {
       display: none;
+      max-width: 680px;
+      margin: auto;
       background: white;
-      border: 1px solid #abefc6;
+      border: 1px solid #dfe4ec;
       border-radius: 16px;
       padding: 24px;
       box-shadow:
         0 5px 20px rgba(0,0,0,0.05);
     }
 
-    .success-box h2 {
-      color: #067647;
+    .order-box h2 {
       margin-top: 0;
+      color: #123a8c;
     }
 
     .order-number {
@@ -322,16 +336,83 @@
       color: #123a8c;
       background: #f8fafc;
       cursor: pointer;
+      word-break: break-word;
     }
 
-    .payment-pending {
-      margin-top: 18px;
+    .payment-section {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .payment-section h3 {
+      color: #123a8c;
+      margin-top: 0;
+    }
+
+    .payment-note {
+      margin-bottom: 18px;
+      color: #555;
+      line-height: 1.55;
+    }
+
+    #paypal-button-container {
+      width: 100%;
+      min-height: 45px;
+    }
+
+    .sandbox-badge {
+      display: inline-block;
       background: #fff7ed;
+      color: #9a3412;
       border: 1px solid #fdba74;
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .paid-box {
+      display: none;
+      max-width: 680px;
+      margin: auto;
+      background: white;
+      border: 1px solid #abefc6;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .paid-box h2 {
+      color: #067647;
+      margin-top: 0;
+    }
+
+    .paid-check {
+      font-size: 44px;
+      margin-bottom: 10px;
+    }
+
+    .paid-details {
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      border-radius: 10px;
+      padding: 15px;
+      line-height: 1.8;
+      color: #05603a;
+      margin-top: 18px;
+    }
+
+    .delivery-note {
+      margin-top: 18px;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
       border-radius: 10px;
       padding: 14px;
+      color: #175cd3;
       line-height: 1.55;
-      color: #9a3412;
     }
 
     footer {
@@ -347,9 +428,7 @@
       font-weight: 700;
     }
 
-    @media (
-      max-width: 760px
-    ) {
+    @media (max-width: 760px) {
 
       .checkout-grid {
         grid-template-columns: 1fr;
@@ -412,6 +491,12 @@
   </div>
 
 
+  <!--
+  =====================================================
+  CHECKOUT
+  =====================================================
+  -->
+
   <div
     id="checkout-content"
     class="checkout-content"
@@ -420,7 +505,7 @@
     <div class="checkout-grid">
 
 
-      <!-- ORDER SUMMARY -->
+      <!-- PRODUCT SUMMARY -->
 
       <section class="panel">
 
@@ -451,7 +536,9 @@
 
         <div class="seller-code">
 
-          Verified Creator
+          <span class="verified">
+            ✓ Verified Creator
+          </span>
 
           <br>
 
@@ -522,14 +609,19 @@
 
 
         <div class="secure-note">
-          🔒 Your payment amount is calculated securely
-          from the approved GiftedGift Empire product record.
+
+          🔒 Your order price is calculated securely
+          from the approved GiftedGift Empire product
+          record.
+
         </div>
 
 
         <div class="notice">
-          Do not send passwords, card PINs or security codes
-          through this form.
+
+          Never send your card PIN, banking password
+          or security codes through this form.
+
         </div>
 
 
@@ -577,9 +669,11 @@
             >
 
             <p class="small-note">
+
               Use an email address you can access.
-              This will later be connected to your secure
-              digital-product access.
+              It will be associated with your
+              digital purchase.
+
             </p>
 
           </div>
@@ -590,7 +684,7 @@
             id="checkout-button"
             class="button primary-button"
           >
-            Continue Secure Checkout
+            Continue to Payment
           </button>
 
 
@@ -604,26 +698,29 @@
   </div>
 
 
-  <!-- ORDER CREATED -->
+  <!--
+  =====================================================
+  ORDER CREATED / PAYMENT
+  =====================================================
+  -->
 
   <section
-    id="success-box"
-    class="success-box"
+    id="order-box"
+    class="order-box"
   >
 
     <h2>
-      Order Prepared Successfully ✅
+      Order Prepared ✅
     </h2>
 
 
     <p>
-      Your Creator Marketplace order has been created.
-      Keep this order number:
+      Your order number is:
     </p>
 
 
     <div
-      id="success-order-number"
+      id="order-number"
       class="order-number"
       onclick="copyOrderNumber()"
       title="Tap to copy"
@@ -632,13 +729,15 @@
 
     <p>
       Total:
-      <strong id="success-total"></strong>
+      <strong id="order-total"></strong>
     </p>
 
 
     <p>
       Payment status:
-      <strong>Pending</strong>
+      <strong id="order-payment-status">
+        Pending
+      </strong>
     </p>
 
 
@@ -651,15 +750,99 @@
     </button>
 
 
-    <div class="payment-pending">
+    <div class="payment-section">
 
-      The order is ready for payment, but the
-      Creator Marketplace payment connection is the
-      next stage we are building.
+      <span class="sandbox-badge">
+        PAYPAL SANDBOX TEST
+      </span>
+
+      <h3>
+        Pay securely with PayPal
+      </h3>
+
+      <p class="payment-note">
+
+        Choose the PayPal option below to complete
+        this test order. No real money should be
+        used during Sandbox testing.
+
+      </p>
+
+
+      <div
+        id="payment-message"
+        class="message"
+      ></div>
+
+
+      <div
+        id="paypal-button-container"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+  =====================================================
+  PAID
+  =====================================================
+  -->
+
+  <section
+    id="paid-box"
+    class="paid-box"
+  >
+
+    <div class="paid-check">
+      ✅
+    </div>
+
+
+    <h2>
+      Payment Successful
+    </h2>
+
+
+    <p>
+      Your payment has been securely verified.
+    </p>
+
+
+    <div class="paid-details">
+
+      Order:
+      <strong id="paid-order-number"></strong>
+
+      <br>
+
+      Total:
+      <strong id="paid-total"></strong>
+
+      <br>
+
+      Payment status:
+      <strong>Paid</strong>
+
+      <br>
+
+      Delivery status:
+      <strong>Available</strong>
+
+    </div>
+
+
+    <div class="delivery-note">
+
+      Your payment is confirmed.
 
       <br><br>
 
-      No payment has been taken yet.
+      The private digital file is still protected.
+      We will connect the secure customer download
+      system after the payment gateways are fully
+      tested.
 
     </div>
 
@@ -673,7 +856,7 @@
 
   © GiftedGift Empire
 
-  <br>
+  <br><br>
 
   <a href="customer-service.html">
     Customer Service
@@ -712,6 +895,19 @@
 
   /*
   =====================================================
+  PAYPAL SANDBOX PUBLIC CLIENT ID
+
+  Public Client ID only.
+  NEVER put PayPal Client Secret here.
+  =====================================================
+  */
+
+  const PAYPAL_CLIENT_ID =
+    "AQEwW30fuW09fPr4dtGUuWD0S3tlKblHPpZffcy0POvsuPhSI3b400ykmO893Fp4dO2yXtHR8Ey8nDGI";
+
+
+  /*
+  =====================================================
   STATE
   =====================================================
   */
@@ -726,6 +922,14 @@
 
   let checkoutRequestId =
     null;
+
+
+  let currentPayPalOrderId =
+    null;
+
+
+  let paypalRendered =
+    false;
 
 
   /*
@@ -754,9 +958,7 @@
 
 
     return (
-      params.get(
-        "slug"
-      ) || ""
+      params.get("slug") || ""
     ).trim();
 
   }
@@ -791,25 +993,19 @@
             2
         }
       ).format(
-        Number(
-          value || 0
-        )
+        Number(value || 0)
       );
 
     }
 
-    catch (
-      error
-    ) {
+    catch (error) {
 
       return (
         (currency || "EUR") +
         " " +
         Number(
           value || 0
-        ).toFixed(
-          2
-        )
+        ).toFixed(2)
       );
 
     }
@@ -819,11 +1015,11 @@
 
   /*
   =====================================================
-  MESSAGE
+  FORM MESSAGE
   =====================================================
   */
 
-  function showMessage(
+  function showFormMessage(
     text,
     type
   ) {
@@ -845,7 +1041,7 @@
   }
 
 
-  function clearMessage() {
+  function clearFormMessage() {
 
     const box =
       document.getElementById(
@@ -865,10 +1061,145 @@
 
   /*
   =====================================================
-  ATTRIBUTION
+  PAYMENT MESSAGE
+  =====================================================
+  */
 
-  Preserve only the same campaign/referral fields
-  the secure RPC accepts.
+  function showPaymentMessage(
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "payment-message"
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearPaymentMessage() {
+
+    const box =
+      document.getElementById(
+        "payment-message"
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  EDGE FUNCTION ERROR HANDLING
+  =====================================================
+  */
+
+  async function invokeEdgeFunction(
+    functionName,
+    body
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .functions
+        .invoke(
+          functionName,
+          {
+            body
+          }
+        );
+
+
+    if (error) {
+
+      let message =
+        error.message ||
+        "The secure payment request failed.";
+
+
+      try {
+
+        if (
+          error.context &&
+          typeof error.context.json ===
+            "function"
+        ) {
+
+          const details =
+            await error.context.json();
+
+
+          if (
+            details?.error
+          ) {
+
+            message =
+              details.error;
+
+          }
+
+        }
+
+      }
+
+      catch (
+        parseError
+      ) {
+
+        console.error(
+          "Function error parsing:",
+          parseError
+        );
+
+      }
+
+
+      throw new Error(
+        message
+      );
+
+    }
+
+
+    if (
+      data?.error
+    ) {
+
+      throw new Error(
+        data.error
+      );
+
+    }
+
+
+    return data;
+
+  }
+
+
+  /*
+  =====================================================
+  ATTRIBUTION
   =====================================================
   */
 
@@ -881,10 +1212,12 @@
       "utm_campaign",
       "utm_term",
       "utm_content",
+
       "fbclid",
       "gclid",
       "ttclid",
       "msclkid",
+
       "ref",
       "referral",
       "affiliate",
@@ -929,10 +1262,7 @@
 
   /*
   =====================================================
-  REQUEST ID
-
-  One checkout attempt gets one UUID.
-  Reusing it protects against double tapping.
+  CHECKOUT REQUEST ID
   =====================================================
   */
 
@@ -977,42 +1307,57 @@
 
   /*
   =====================================================
-  PREFILL SIGNED-IN EMAIL
+  PREFILL AUTH USER
   =====================================================
   */
 
   async function prefillSignedInUser() {
 
-    const {
-      data
-    } =
-      await supabaseClient
-        .auth
-        .getSession();
+    try {
+
+      const {
+        data
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
 
 
-    const user =
-      data?.session?.user;
-
-
-    if (
-      user?.email
-    ) {
-
-      const input =
-        document.getElementById(
-          "buyer-email"
-        );
+      const user =
+        data?.session?.user;
 
 
       if (
-        !input.value
+        user?.email
       ) {
 
-        input.value =
-          user.email;
+        const input =
+          document.getElementById(
+            "buyer-email"
+          );
+
+
+        if (
+          !input.value
+        ) {
+
+          input.value =
+            user.email;
+
+        }
 
       }
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Session prefill:",
+        error
+      );
 
     }
 
@@ -1211,12 +1556,6 @@
   }
 
 
-  /*
-  =====================================================
-  PRODUCT ERROR
-  =====================================================
-  */
-
   function showProductError() {
 
     document
@@ -1286,11 +1625,6 @@
         formattedPrice;
 
 
-    /*
-    Current marketplace tax engine is 0.
-    The RPC remains authoritative.
-    */
-
     document
       .getElementById(
         "summary-tax"
@@ -1309,11 +1643,6 @@
       .textContent =
         formattedPrice;
 
-
-    /*
-    Preserve tracking params when returning
-    to the product landing page.
-    */
 
     const backParams =
       new URLSearchParams(
@@ -1340,7 +1669,7 @@
 
   /*
   =====================================================
-  START SECURE CHECKOUT
+  CREATE CREATOR ORDER
   =====================================================
   */
 
@@ -1351,18 +1680,17 @@
     event.preventDefault();
 
 
-    clearMessage();
+    clearFormMessage();
 
 
     if (
       !currentProduct
     ) {
 
-      showMessage(
+      showFormMessage(
         "Product could not be loaded.",
         "error"
       );
-
 
       return;
 
@@ -1391,11 +1719,10 @@
       name.length < 2
     ) {
 
-      showMessage(
+      showFormMessage(
         "Please enter your full name.",
         "error"
       );
-
 
       return;
 
@@ -1406,11 +1733,10 @@
       !email
     ) {
 
-      showMessage(
+      showFormMessage(
         "Please enter your email address.",
         "error"
       );
-
 
       return;
 
@@ -1431,43 +1757,87 @@
       "Preparing Order...";
 
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .rpc(
-          "start_creator_checkout",
-          {
+    try {
 
-            p_public_slug:
-              currentProduct.public_slug,
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .rpc(
+            "start_creator_checkout",
+            {
 
-            p_buyer_name:
-              name,
+              p_public_slug:
+                currentProduct.public_slug,
 
-            p_buyer_email:
-              email,
+              p_buyer_name:
+                name,
 
-            p_attribution:
-              buildAttribution(),
+              p_buyer_email:
+                email,
 
-            p_request_id:
-              checkoutRequestId
+              p_attribution:
+                buildAttribution(),
 
-          }
+              p_request_id:
+                checkoutRequestId
+
+            }
+          );
+
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      const order =
+        Array.isArray(
+          data
+        )
+          ? data[0]
+          : null;
+
+
+      if (
+        !order
+      ) {
+
+        throw new Error(
+          "The order could not be created."
         );
 
-
-    button.disabled =
-      false;
+      }
 
 
-    button.textContent =
-      "Continue Secure Checkout";
+      currentOrder =
+        order;
 
 
-    if (
+      sessionStorage.setItem(
+        "gge_creator_current_order_id",
+        order.order_id
+      );
+
+
+      sessionStorage.setItem(
+        "gge_creator_current_order_number",
+        order.order_number
+      );
+
+
+      showOrderPayment(
+        order
+      );
+
+    }
+
+    catch (
       error
     ) {
 
@@ -1477,71 +1847,35 @@
       );
 
 
-      showMessage(
+      showFormMessage(
         error.message ||
         "Could not prepare your order.",
         "error"
       );
 
-
-      return;
-
     }
 
+    finally {
 
-    const order =
-      Array.isArray(
-        data
-      )
-        ? data[0]
-        : null;
+      button.disabled =
+        false;
 
 
-    if (
-      !order
-    ) {
-
-      showMessage(
-        "The order could not be created.",
-        "error"
-      );
-
-
-      return;
+      button.textContent =
+        "Continue to Payment";
 
     }
-
-
-    currentOrder =
-      order;
-
-
-    sessionStorage.setItem(
-      "gge_creator_current_order_id",
-      order.order_id
-    );
-
-
-    sessionStorage.setItem(
-      "gge_creator_current_order_number",
-      order.order_number
-    );
-
-
-    showOrderSuccess(
-      order
-    );
 
   }
 
 
   /*
   =====================================================
-  SUCCESS
+  SHOW PAYMENT STEP
   =====================================================
   */
 
-  function showOrderSuccess(
+  async function showOrderPayment(
     order
   ) {
 
@@ -1555,7 +1889,7 @@
 
     document
       .getElementById(
-        "success-order-number"
+        "order-number"
       )
       .textContent =
         order.order_number;
@@ -1563,7 +1897,7 @@
 
     document
       .getElementById(
-        "success-total"
+        "order-total"
       )
       .textContent =
         formatMoney(
@@ -1574,10 +1908,575 @@
 
     document
       .getElementById(
-        "success-box"
+        "order-payment-status"
+      )
+      .textContent =
+        String(
+          order.payment_status ||
+          "pending"
+        );
+
+
+    document
+      .getElementById(
+        "order-box"
       )
       .style.display =
         "block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+
+    try {
+
+      await loadPayPalSDK(
+        order.currency ||
+        "EUR"
+      );
+
+
+      renderPayPalButtons();
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "PayPal SDK error:",
+        error
+      );
+
+
+      showPaymentMessage(
+        "PayPal could not be loaded. Please refresh and try again.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD PAYPAL SDK
+  =====================================================
+  */
+
+  function loadPayPalSDK(
+    currency
+  ) {
+
+    return new Promise(
+      (
+        resolve,
+        reject
+      ) => {
+
+        if (
+          window.paypal
+        ) {
+
+          resolve();
+
+          return;
+
+        }
+
+
+        const existing =
+          document.getElementById(
+            "paypal-sdk"
+          );
+
+
+        if (
+          existing
+        ) {
+
+          existing.addEventListener(
+            "load",
+            () => resolve()
+          );
+
+
+          existing.addEventListener(
+            "error",
+            () => reject(
+              new Error(
+                "PayPal SDK failed to load."
+              )
+            )
+          );
+
+
+          return;
+
+        }
+
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+
+        script.id =
+          "paypal-sdk";
+
+
+        script.src =
+          "https://www.paypal.com/sdk/js" +
+          "?client-id=" +
+          encodeURIComponent(
+            PAYPAL_CLIENT_ID
+          ) +
+          "&currency=" +
+          encodeURIComponent(
+            String(
+              currency ||
+              "EUR"
+            ).toUpperCase()
+          ) +
+          "&intent=capture" +
+          "&components=buttons";
+
+
+        script.onload =
+          () => {
+
+            if (
+              window.paypal
+            ) {
+
+              resolve();
+
+            }
+
+            else {
+
+              reject(
+                new Error(
+                  "PayPal SDK did not initialize."
+                )
+              );
+
+            }
+
+          };
+
+
+        script.onerror =
+          () => {
+
+            reject(
+              new Error(
+                "PayPal SDK failed to load."
+              )
+            );
+
+          };
+
+
+        document.head.appendChild(
+          script
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  PAYPAL BUTTONS
+  =====================================================
+  */
+
+  function renderPayPalButtons() {
+
+    if (
+      paypalRendered
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      !window.paypal ||
+      !currentOrder
+    ) {
+
+      showPaymentMessage(
+        "PayPal is not ready.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    paypalRendered =
+      true;
+
+
+    window.paypal
+      .Buttons({
+
+        style: {
+
+          layout:
+            "vertical",
+
+          shape:
+            "rect",
+
+          label:
+            "paypal"
+
+        },
+
+
+        /*
+        ===============================================
+        CREATE PAYPAL ORDER SERVER-SIDE
+        ===============================================
+        */
+
+        createOrder:
+          async function() {
+
+            clearPaymentMessage();
+
+
+            showPaymentMessage(
+              "Connecting securely to PayPal...",
+              "info"
+            );
+
+
+            try {
+
+              const result =
+                await invokeEdgeFunction(
+                  "creator-paypal-create-order",
+                  {
+
+                    order_id:
+                      currentOrder.order_id,
+
+                    request_id:
+                      checkoutRequestId
+
+                  }
+                );
+
+
+              if (
+                !result?.paypal_order_id
+              ) {
+
+                throw new Error(
+                  "PayPal order ID was not returned."
+                );
+
+              }
+
+
+              currentPayPalOrderId =
+                result.paypal_order_id;
+
+
+              clearPaymentMessage();
+
+
+              return result
+                .paypal_order_id;
+
+            }
+
+            catch (
+              error
+            ) {
+
+              console.error(
+                "Create PayPal order:",
+                error
+              );
+
+
+              showPaymentMessage(
+                error.message ||
+                "Could not start PayPal payment.",
+                "error"
+              );
+
+
+              throw error;
+
+            }
+
+          },
+
+
+        /*
+        ===============================================
+        BUYER APPROVED PAYPAL
+        ===============================================
+        */
+
+        onApprove:
+          async function(
+            data
+          ) {
+
+            showPaymentMessage(
+              "Payment approved. Verifying securely with PayPal...",
+              "info"
+            );
+
+
+            try {
+
+              const paypalOrderId =
+                String(
+                  data?.orderID ||
+                  currentPayPalOrderId ||
+                  ""
+                ).trim();
+
+
+              if (
+                !paypalOrderId
+              ) {
+
+                throw new Error(
+                  "PayPal order ID is missing."
+                );
+
+              }
+
+
+              const result =
+                await invokeEdgeFunction(
+                  "creator-paypal-capture-order",
+                  {
+
+                    order_id:
+                      currentOrder.order_id,
+
+                    request_id:
+                      checkoutRequestId,
+
+                    paypal_order_id:
+                      paypalOrderId
+
+                  }
+                );
+
+
+              if (
+                result?.payment_status !==
+                "paid"
+              ) {
+
+                throw new Error(
+                  "Payment has not been confirmed as paid."
+                );
+
+              }
+
+
+              showPaidSuccess(
+                result
+              );
+
+            }
+
+            catch (
+              error
+            ) {
+
+              console.error(
+                "Capture PayPal order:",
+                error
+              );
+
+
+              showPaymentMessage(
+                error.message ||
+                "The payment could not be securely verified. Please do not pay again until the order is checked.",
+                "error"
+              );
+
+            }
+
+          },
+
+
+        /*
+        ===============================================
+        BUYER CANCELLED
+        ===============================================
+        */
+
+        onCancel:
+          function() {
+
+            showPaymentMessage(
+              "PayPal checkout was cancelled. Your Creator order has not been marked as paid.",
+              "info"
+            );
+
+          },
+
+
+        /*
+        ===============================================
+        PAYPAL ERROR
+        ===============================================
+        */
+
+        onError:
+          function(
+            error
+          ) {
+
+            console.error(
+              "PayPal button error:",
+              error
+            );
+
+
+            showPaymentMessage(
+              "PayPal encountered an error. Please try again.",
+              "error"
+            );
+
+          }
+
+      })
+      .render(
+        "#paypal-button-container"
+      )
+      .catch(
+        error => {
+
+          console.error(
+            "PayPal render error:",
+            error
+          );
+
+
+          paypalRendered =
+            false;
+
+
+          showPaymentMessage(
+            "The PayPal payment button could not be displayed.",
+            "error"
+          );
+
+        }
+      );
+
+  }
+
+
+  /*
+  =====================================================
+  PAYMENT SUCCESS
+  =====================================================
+  */
+
+  function showPaidSuccess(
+    result
+  ) {
+
+    clearPaymentMessage();
+
+
+    document
+      .getElementById(
+        "order-box"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "paid-order-number"
+      )
+      .textContent =
+        result.order_number ||
+        currentOrder?.order_number ||
+        "";
+
+
+    document
+      .getElementById(
+        "paid-total"
+      )
+      .textContent =
+        formatMoney(
+          result.total_amount ||
+          currentOrder?.total_amount,
+
+          result.currency ||
+          currentOrder?.currency ||
+          "EUR"
+        );
+
+
+    document
+      .getElementById(
+        "paid-box"
+      )
+      .style.display =
+        "block";
+
+
+    /*
+    Payment is complete.
+    Remove the old request token so a future
+    intentional purchase can create a new order.
+    */
+
+    const slug =
+      getSlug();
+
+
+    if (
+      slug
+    ) {
+
+      sessionStorage.removeItem(
+        "gge_creator_checkout_request_" +
+        slug
+      );
+
+    }
+
+
+    sessionStorage.removeItem(
+      "gge_creator_current_order_id"
+    );
+
+
+    sessionStorage.removeItem(
+      "gge_creator_current_order_number"
+    );
 
 
     window.scrollTo({
@@ -1599,7 +2498,7 @@
     const orderNumber =
       document
         .getElementById(
-          "success-order-number"
+          "order-number"
         )
         .textContent
         .trim();
@@ -1645,7 +2544,7 @@
 
   /*
   =====================================================
-  START
+  START PAGE
   =====================================================
   */
 
