@@ -480,8 +480,6 @@
       ></div>
 
 
-      <!-- NORMAL CARD PAYMENT FORM -->
-
       <div
         id="payment-box"
         class="payment-box"
@@ -598,8 +596,6 @@
       </div>
 
 
-      <!-- VERIFYING RETURNED PAYMENT -->
-
       <div
         id="verification-box"
         class="verification-box"
@@ -616,8 +612,6 @@
 
       </div>
 
-
-      <!-- SUCCESSFUL DOWNLOAD -->
 
       <div
         id="download-area"
@@ -918,6 +912,235 @@ function formatPrice(
 
 
 
+/*
+  =========================================================
+  PREFILL LOGGED-IN CUSTOMER DETAILS
+  =========================================================
+*/
+
+
+async function prefillLoggedInCustomer() {
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      error
+    ) {
+
+      console.warn(
+        "Customer session check:",
+        error
+      );
+
+      return;
+    }
+
+
+    const user =
+      data?.session?.user;
+
+
+    if (
+      !user
+    ) {
+
+      return;
+    }
+
+
+    const emailInput =
+      document.getElementById(
+        "customer-email"
+      );
+
+
+    const nameInput =
+      document.getElementById(
+        "customer-name"
+      );
+
+
+    if (
+      emailInput &&
+      !emailInput.value
+    ) {
+
+      emailInput.value =
+        user.email ||
+        "";
+    }
+
+
+    const fullName =
+      String(
+        user.user_metadata
+          ?.full_name ||
+        ""
+      ).trim();
+
+
+    if (
+      nameInput &&
+      !nameInput.value &&
+      fullName
+    ) {
+
+      nameInput.value =
+        fullName;
+    }
+
+
+  } catch (
+    error
+  ) {
+
+    console.warn(
+      "Customer prefill:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/*
+  =========================================================
+  LINK FLUTTERWAVE PURCHASE TO LOGGED-IN CUSTOMER
+  =========================================================
+*/
+
+
+async function linkFlutterwavePurchaseToCustomer(
+  txRef,
+  secureDownloadToken
+) {
+
+  try {
+
+
+    const {
+      data:
+        sessionData,
+
+      error:
+        sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError
+    ) {
+
+      console.warn(
+        "Customer session check:",
+        sessionError
+      );
+
+      return false;
+    }
+
+
+    const session =
+      sessionData?.session;
+
+
+    /*
+      Guest checkout stays available.
+      If the buyer is not signed in,
+      payment and immediate download
+      still work normally.
+    */
+
+
+    if (
+      !session?.user
+    ) {
+
+      return false;
+    }
+
+
+    if (
+      !session
+        .user
+        .email_confirmed_at
+    ) {
+
+      console.warn(
+        "Customer account email is not verified."
+      );
+
+      return false;
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "attach_my_flutterwave_digital_order",
+          {
+
+            p_tx_ref:
+              txRef,
+
+            p_download_token:
+              secureDownloadToken
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.warn(
+        "Flutterwave Customer Account linking:",
+        error
+      );
+
+      return false;
+    }
+
+
+    return (
+      data === true
+    );
+
+
+  } catch (
+    error
+  ) {
+
+    console.warn(
+      "Flutterwave Customer Account linking:",
+      error
+    );
+
+    return false;
+  }
+
+}
+
+
+
 async function loadProduct() {
 
   const loading =
@@ -1091,12 +1314,6 @@ async function loadProduct() {
 
     content.style.display =
       "block";
-
-
-    /*
-      If Flutterwave has returned the customer after
-      payment, immediately begin secure verification.
-    */
 
 
     if (
@@ -1625,11 +1842,6 @@ async function startCardPayment() {
     }
 
 
-    /*
-      Flutterwave now handles the card entry securely.
-    */
-
-
     window.location.href =
       data.payment_link;
 
@@ -1681,11 +1893,6 @@ async function handleFlutterwaveReturn() {
     document.getElementById(
       "verification-box"
     );
-
-
-  /*
-    Flutterwave may return a cancelled/failed checkout.
-  */
 
 
   if (
@@ -1803,6 +2010,22 @@ async function handleFlutterwaveReturn() {
       data.download_token;
 
 
+    /*
+      Connect the successful Flutterwave purchase
+      to the logged-in GiftedGift Empire customer.
+
+      The Flutterwave payment email does NOT need
+      to match the customer's GiftedGift account email.
+    */
+
+
+    const linkedToCustomer =
+      await linkFlutterwavePurchaseToCustomer(
+        returnedTxRef,
+        data.download_token
+      );
+
+
     verificationBox.style.display =
       "none";
 
@@ -1815,10 +2038,23 @@ async function handleFlutterwaveReturn() {
         "block";
 
 
-    showMessage(
-      "Payment completed and verified successfully.",
-      "success"
-    );
+    if (
+      linkedToCustomer
+    ) {
+
+      showMessage(
+        "Payment completed successfully. This purchase has also been added to your Customer Account.",
+        "success"
+      );
+
+    } else {
+
+      showMessage(
+        "Payment completed and verified successfully.",
+        "success"
+      );
+
+    }
 
 
   } catch (
@@ -1993,6 +2229,8 @@ document
     downloadProduct
   );
 
+
+prefillLoggedInCustomer();
 
 loadProduct();
 
