@@ -1,0 +1,3193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Newsletter Management | GiftedGift Empire Admin
+  </title>
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+  </script>
+
+
+  <style>
+
+    :root {
+      --blue: #123a8c;
+      --dark-blue: #071e52;
+      --gold: #f2bd16;
+      --gold-dark: #d8a90e;
+      --green: #18864b;
+      --red: #b42318;
+      --orange: #b75b00;
+      --light: #f5f7fb;
+      --white: #ffffff;
+      --text: #20242a;
+      --muted: #68707a;
+      --border: #dfe4ec;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        var(--light);
+
+      color:
+        var(--text);
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .admin-header {
+      background:
+        var(--blue);
+
+      color:
+        white;
+
+      padding:
+        18px 20px;
+
+      box-shadow:
+        0 3px 14px
+        rgba(0, 0, 0, 0.14);
+    }
+
+    .header-inner {
+      max-width:
+        1250px;
+
+      margin:
+        auto;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        16px;
+    }
+
+    .brand {
+      font-size:
+        23px;
+
+      font-weight:
+        800;
+    }
+
+    .brand span {
+      color:
+        var(--gold);
+    }
+
+    .back-link {
+      color:
+        white;
+
+      text-decoration:
+        none;
+
+      font-weight:
+        700;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.35);
+
+      padding:
+        9px 13px;
+
+      border-radius:
+        8px;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      display:
+        none;
+
+      max-width:
+        1250px;
+
+      margin:
+        auto;
+
+      padding:
+        30px 18px 60px;
+    }
+
+    .loading {
+      max-width:
+        700px;
+
+      margin:
+        80px auto;
+
+      background:
+        white;
+
+      padding:
+        30px;
+
+      border-radius:
+        15px;
+
+      text-align:
+        center;
+
+      border:
+        1px solid
+        var(--border);
+
+      color:
+        var(--muted);
+    }
+
+    .page-heading {
+      margin-bottom:
+        25px;
+    }
+
+    .page-heading h1 {
+      margin:
+        0 0 8px;
+
+      color:
+        var(--blue);
+
+      font-size:
+        32px;
+    }
+
+    .page-heading p {
+      margin:
+        0;
+
+      color:
+        var(--muted);
+
+      line-height:
+        1.6;
+    }
+
+
+    /* =========================
+       STAT CARDS
+    ========================= */
+
+    .stats {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        15px;
+
+      margin-bottom:
+        25px;
+    }
+
+    .stat-card {
+      background:
+        white;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        14px;
+
+      padding:
+        20px;
+
+      box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.05);
+    }
+
+    .stat-label {
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.7px;
+    }
+
+    .stat-number {
+      margin-top:
+        7px;
+
+      font-size:
+        30px;
+
+      font-weight:
+        800;
+
+      color:
+        var(--blue);
+    }
+
+
+    /* =========================
+       GENERAL CARD
+    ========================= */
+
+    .card {
+      background:
+        white;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        15px;
+
+      padding:
+        24px;
+
+      margin-bottom:
+        24px;
+
+      box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.05);
+    }
+
+    .card-heading {
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      margin-bottom:
+        20px;
+    }
+
+    .card-heading h2 {
+      margin:
+        0 0 5px;
+
+      color:
+        var(--blue);
+
+      font-size:
+        23px;
+    }
+
+    .card-heading p {
+      margin:
+        0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.5;
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        16px;
+    }
+
+    .field {
+      margin-bottom:
+        16px;
+    }
+
+    .field.full {
+      grid-column:
+        1 / -1;
+    }
+
+    label {
+      display:
+        block;
+
+      margin-bottom:
+        7px;
+
+      font-weight:
+        700;
+
+      color:
+        #30343b;
+    }
+
+    .optional {
+      color:
+        var(--muted);
+
+      font-weight:
+        400;
+
+      font-size:
+        12px;
+    }
+
+    input,
+    textarea,
+    select {
+      width:
+        100%;
+
+      padding:
+        13px 14px;
+
+      border:
+        1px solid
+        #ccd3df;
+
+      border-radius:
+        9px;
+
+      font:
+        inherit;
+
+      background:
+        white;
+
+      color:
+        #222;
+
+      outline:
+        none;
+    }
+
+    textarea {
+      min-height:
+        230px;
+
+      resize:
+        vertical;
+
+      line-height:
+        1.6;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color:
+        var(--blue);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(18,58,140,0.08);
+    }
+
+    .character-count {
+      text-align:
+        right;
+
+      margin-top:
+        5px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    button {
+      font:
+        inherit;
+    }
+
+    .button-row {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      flex-wrap:
+        wrap;
+
+      margin-top:
+        8px;
+    }
+
+    .button {
+      border:
+        none;
+
+      border-radius:
+        9px;
+
+      padding:
+        12px 18px;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+
+      text-decoration:
+        none;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        6px;
+    }
+
+    .button:disabled {
+      opacity:
+        0.55;
+
+      cursor:
+        not-allowed;
+    }
+
+    .button-primary {
+      background:
+        var(--blue);
+
+      color:
+        white;
+    }
+
+    .button-gold {
+      background:
+        var(--gold);
+
+      color:
+        #111;
+    }
+
+    .button-light {
+      background:
+        #edf2ff;
+
+      color:
+        var(--blue);
+
+      border:
+        1px solid
+        #cbd7f2;
+    }
+
+    .button-danger {
+      background:
+        #fff0ee;
+
+      color:
+        var(--red);
+
+      border:
+        1px solid
+        #f0bbb5;
+    }
+
+    .button-warning {
+      background:
+        #fff7e8;
+
+      color:
+        #8a4b00;
+
+      border:
+        1px solid
+        #ead09e;
+    }
+
+    .small-button {
+      padding:
+        7px 10px;
+
+      font-size:
+        12px;
+
+      border-radius:
+        7px;
+    }
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message {
+      display:
+        none;
+
+      margin-top:
+        15px;
+
+      padding:
+        13px 15px;
+
+      border-radius:
+        9px;
+
+      line-height:
+        1.5;
+    }
+
+    .message.success {
+      display:
+        block;
+
+      background:
+        #eaf8ef;
+
+      color:
+        #17652d;
+
+      border:
+        1px solid
+        #b7dfc1;
+    }
+
+    .message.error {
+      display:
+        block;
+
+      background:
+        #ffeded;
+
+      color:
+        #941c1c;
+
+      border:
+        1px solid
+        #efb4b4;
+    }
+
+
+    /* =========================
+       PREVIEW
+    ========================= */
+
+    .preview-box {
+      display:
+        none;
+
+      margin-top:
+        22px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        12px;
+
+      overflow:
+        hidden;
+
+      background:
+        #f4f6fa;
+    }
+
+    .preview-box.show {
+      display:
+        block;
+    }
+
+    .preview-heading {
+      padding:
+        11px 15px;
+
+      background:
+        #eef1f5;
+
+      border-bottom:
+        1px solid
+        var(--border);
+
+      font-weight:
+        800;
+
+      color:
+        var(--blue);
+    }
+
+    .preview-email {
+      max-width:
+        650px;
+
+      margin:
+        22px auto;
+
+      background:
+        white;
+
+      border:
+        1px solid
+        #e0e5ed;
+
+      border-radius:
+        12px;
+
+      overflow:
+        hidden;
+    }
+
+    .preview-email-header {
+      background:
+        var(--blue);
+
+      color:
+        white;
+
+      text-align:
+        center;
+
+      padding:
+        21px;
+
+      font-size:
+        22px;
+
+      font-weight:
+        800;
+    }
+
+    .preview-email-header span {
+      color:
+        var(--gold);
+    }
+
+    .preview-email-body {
+      padding:
+        27px 23px;
+
+      line-height:
+        1.75;
+
+      color:
+        #333;
+    }
+
+    .preview-email-body p {
+      margin:
+        0 0 18px;
+    }
+
+    .preview-cta {
+      text-align:
+        center;
+
+      margin:
+        25px 0;
+    }
+
+    .preview-cta a {
+      display:
+        inline-block;
+
+      background:
+        var(--gold);
+
+      color:
+        #111;
+
+      text-decoration:
+        none;
+
+      padding:
+        13px 21px;
+
+      border-radius:
+        8px;
+
+      font-weight:
+        800;
+    }
+
+    .preview-footer {
+      background:
+        #f7f8fb;
+
+      padding:
+        20px;
+
+      text-align:
+        center;
+
+      color:
+        #777;
+
+      font-size:
+        12px;
+
+      border-top:
+        1px solid
+        #e5e7eb;
+    }
+
+    .preview-footer a {
+      color:
+        var(--blue);
+
+      font-weight:
+        700;
+    }
+
+
+    /* =========================
+       SUBSCRIBERS
+    ========================= */
+
+    .toolbar {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      flex-wrap:
+        wrap;
+
+      margin-bottom:
+        18px;
+    }
+
+    .toolbar input {
+      flex:
+        1;
+
+      min-width:
+        220px;
+    }
+
+    .toolbar select {
+      width:
+        auto;
+
+      min-width:
+        150px;
+    }
+
+    .table-wrapper {
+      overflow-x:
+        auto;
+    }
+
+    table {
+      width:
+        100%;
+
+      border-collapse:
+        collapse;
+
+      min-width:
+        800px;
+    }
+
+    th {
+      padding:
+        12px 11px;
+
+      text-align:
+        left;
+
+      color:
+        var(--blue);
+
+      background:
+        #f5f7fb;
+
+      font-size:
+        13px;
+
+      border-bottom:
+        1px solid
+        var(--border);
+    }
+
+    td {
+      padding:
+        13px 11px;
+
+      border-bottom:
+        1px solid
+        #edf0f4;
+
+      vertical-align:
+        top;
+
+      font-size:
+        14px;
+    }
+
+    .subscriber-name {
+      font-weight:
+        800;
+
+      margin-bottom:
+        3px;
+    }
+
+    .subscriber-email {
+      color:
+        var(--muted);
+
+      word-break:
+        break-word;
+    }
+
+    .badge {
+      display:
+        inline-block;
+
+      padding:
+        5px 9px;
+
+      border-radius:
+        20px;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+    }
+
+    .badge-subscribed {
+      background:
+        #e8f7ee;
+
+      color:
+        var(--green);
+    }
+
+    .badge-unsubscribed {
+      background:
+        #fff0ee;
+
+      color:
+        var(--red);
+    }
+
+    .empty {
+      padding:
+        25px;
+
+      text-align:
+        center;
+
+      color:
+        var(--muted);
+
+      background:
+        #fafbfc;
+
+      border-radius:
+        10px;
+    }
+
+
+    /* =========================
+       BROADCASTS
+    ========================= */
+
+    .broadcast-list {
+      display:
+        grid;
+
+      gap:
+        11px;
+    }
+
+    .broadcast-item {
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        10px;
+
+      padding:
+        14px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+    }
+
+    .broadcast-subject {
+      font-weight:
+        800;
+
+      color:
+        #2d333c;
+
+      margin-bottom:
+        5px;
+    }
+
+    .broadcast-meta {
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+    }
+
+    .status-badge {
+      padding:
+        6px 10px;
+
+      border-radius:
+        20px;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      background:
+        #edf2ff;
+
+      color:
+        var(--blue);
+
+      text-transform:
+        capitalize;
+
+      white-space:
+        nowrap;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 760px
+    ) {
+
+      .header-inner {
+        align-items:
+          flex-start;
+      }
+
+      .brand {
+        font-size:
+          19px;
+      }
+
+      .page-heading h1 {
+        font-size:
+          27px;
+      }
+
+      .stats {
+        grid-template-columns:
+          1fr;
+      }
+
+      .form-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .field.full {
+        grid-column:
+          auto;
+      }
+
+      .card {
+        padding:
+          18px;
+      }
+
+      .card-heading {
+        flex-direction:
+          column;
+      }
+
+      .toolbar {
+        align-items:
+          stretch;
+      }
+
+      .toolbar input,
+      .toolbar select,
+      .toolbar .button {
+        width:
+          100%;
+      }
+
+      .broadcast-item {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="admin-header">
+
+  <div class="header-inner">
+
+    <div class="brand">
+      GiftedGift
+      <span>
+        Empire
+      </span>
+      Admin
+    </div>
+
+    <a
+      href="dashboard.html"
+      class="back-link"
+    >
+      ← Dashboard
+    </a>
+
+  </div>
+
+</header>
+
+
+<div
+  id="loading"
+  class="loading"
+>
+  Checking Admin access...
+</div>
+
+
+<main
+  id="page"
+  class="page"
+>
+
+
+  <div class="page-heading">
+
+    <h1>
+      💌 Newsletter Management
+    </h1>
+
+    <p>
+      Manage subscribers and send GiftedGift Empire
+      newsletter campaigns securely from your Admin dashboard.
+    </p>
+
+  </div>
+
+
+  <!-- =========================
+       STATS
+  ========================= -->
+
+  <section class="stats">
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Total Contacts
+      </div>
+
+      <div
+        id="stat-total"
+        class="stat-number"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Subscribed
+      </div>
+
+      <div
+        id="stat-subscribed"
+        class="stat-number"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Unsubscribed
+      </div>
+
+      <div
+        id="stat-unsubscribed"
+        class="stat-number"
+      >
+        0
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SEND NEWSLETTER
+  ========================= -->
+
+  <section class="card">
+
+    <div class="card-heading">
+
+      <div>
+
+        <h2>
+          Send Newsletter
+        </h2>
+
+        <p>
+          This will send to currently subscribed contacts
+          in the GiftedGift Empire Newsletter segment.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <form id="newsletter-form">
+
+      <div class="form-grid">
+
+
+        <div class="field full">
+
+          <label for="subject">
+            Email Subject
+          </label>
+
+          <input
+            type="text"
+            id="subject"
+            maxlength="150"
+            placeholder="Example: New Deals Have Arrived 🎉"
+            required
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="preview-text">
+            Preview Text
+            <span class="optional">
+              (optional)
+            </span>
+          </label>
+
+          <input
+            type="text"
+            id="preview-text"
+            maxlength="200"
+            placeholder="Short text people may see beside the subject in their inbox"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="message">
+            Newsletter Message
+          </label>
+
+          <textarea
+            id="message"
+            maxlength="20000"
+            placeholder="Write your newsletter here..."
+            required
+          ></textarea>
+
+          <div
+            id="message-count"
+            class="character-count"
+          >
+            0 / 20,000
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="cta-label">
+            Button Text
+            <span class="optional">
+              (optional)
+            </span>
+          </label>
+
+          <input
+            type="text"
+            id="cta-label"
+            maxlength="80"
+            placeholder="Example: Shop Now"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="cta-url">
+            Button Link
+            <span class="optional">
+              (optional)
+            </span>
+          </label>
+
+          <input
+            type="url"
+            id="cta-url"
+            maxlength="1000"
+            placeholder="https://giftedgiftempire.com/deals.html"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="button-row">
+
+        <button
+          type="button"
+          id="preview-button"
+          class="button button-light"
+        >
+          👁 Preview Email
+        </button>
+
+
+        <button
+          type="submit"
+          id="send-button"
+          class="button button-primary"
+        >
+          📧 Send Newsletter
+        </button>
+
+      </div>
+
+
+      <div
+        id="send-message"
+        class="message"
+      ></div>
+
+
+      <div
+        id="preview-box"
+        class="preview-box"
+      >
+
+        <div class="preview-heading">
+          Email Preview
+        </div>
+
+
+        <div class="preview-email">
+
+          <div class="preview-email-header">
+
+            GiftedGift
+
+            <span>
+              Empire
+            </span>
+
+          </div>
+
+
+          <div
+            id="preview-body"
+            class="preview-email-body"
+          ></div>
+
+
+          <div class="preview-footer">
+
+            You are receiving this email because you
+            subscribed to the GiftedGift Empire newsletter.
+
+            <br><br>
+
+            <a href="#">
+              Unsubscribe from this newsletter
+            </a>
+
+            <br><br>
+
+            © 2026 GiftedGift Empire
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </section>
+
+
+  <!-- =========================
+       SUBSCRIBERS
+  ========================= -->
+
+  <section class="card">
+
+    <div class="card-heading">
+
+      <div>
+
+        <h2>
+          Subscribers
+        </h2>
+
+        <p
+          id="segment-name"
+        >
+          GiftedGift Empire Newsletter
+        </p>
+
+      </div>
+
+
+      <button
+        id="refresh-button"
+        type="button"
+        class="button button-light"
+      >
+        ↻ Refresh
+      </button>
+
+    </div>
+
+
+    <div class="toolbar">
+
+      <input
+        type="search"
+        id="subscriber-search"
+        placeholder="Search name or email..."
+      >
+
+
+      <select id="subscriber-filter">
+
+        <option value="all">
+          All Contacts
+        </option>
+
+        <option value="subscribed">
+          Subscribed
+        </option>
+
+        <option value="unsubscribed">
+          Unsubscribed
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div
+      id="subscriber-message"
+      class="message"
+    ></div>
+
+
+    <div
+      id="subscriber-table-wrapper"
+      class="table-wrapper"
+    >
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Subscriber
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Source
+            </th>
+
+            <th>
+              Joined
+            </th>
+
+            <th>
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="subscriber-list"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      id="subscriber-empty"
+      class="empty"
+      style="display:none;"
+    >
+      No subscribers found.
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       RECENT CAMPAIGNS
+  ========================= -->
+
+  <section class="card">
+
+    <div class="card-heading">
+
+      <div>
+
+        <h2>
+          Recent Newsletter Campaigns
+        </h2>
+
+        <p>
+          Recent Broadcasts sent or created for the
+          newsletter segment.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="broadcast-list"
+      class="broadcast-list"
+    >
+
+      <div class="empty">
+        No newsletter campaigns yet.
+      </div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+  /* =========================
+     CONFIG
+  ========================= */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const NEWSLETTER_ADMIN_URL =
+    SUPABASE_URL +
+    "/functions/v1/newsletter-admin";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  let newsletterData = {
+
+    stats: {
+      total: 0,
+      subscribed: 0,
+      unsubscribed: 0
+    },
+
+    contacts: [],
+
+    broadcasts: []
+
+  };
+
+
+  let currentSession =
+    null;
+
+
+  /* =========================
+     ESCAPE HTML
+  ========================= */
+
+  function escapeHTML(
+    value
+  ) {
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.textContent =
+      value == null
+        ? ""
+        : String(
+            value
+          );
+
+
+    return div.innerHTML;
+
+  }
+
+
+  /* =========================
+     DATE
+  ========================= */
+
+  function formatDate(
+    value
+  ) {
+
+    if (!value) {
+      return "—";
+    }
+
+
+    const date =
+      new Date(
+        value
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "—";
+
+    }
+
+
+    return date.toLocaleString(
+      undefined,
+      {
+        dateStyle:
+          "medium",
+
+        timeStyle:
+          "short"
+      }
+    );
+
+  }
+
+
+  /* =========================
+     MESSAGES
+  ========================= */
+
+  function showMessage(
+    elementId,
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        elementId
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearMessage(
+    elementId
+  ) {
+
+    const box =
+      document.getElementById(
+        elementId
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /* =========================
+     AUTH HEADER
+  ========================= */
+
+  async function getAccessToken() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      error ||
+      !data?.session
+    ) {
+
+      throw new Error(
+        "Your Admin session has expired. Please sign in again."
+      );
+
+    }
+
+
+    currentSession =
+      data.session;
+
+
+    return data.session.access_token;
+
+  }
+
+
+  /* =========================
+     EDGE FUNCTION
+  ========================= */
+
+  async function adminRequest(
+    method,
+    body = null
+  ) {
+
+    const token =
+      await getAccessToken();
+
+
+    const options = {
+
+      method,
+
+      headers: {
+
+        "Authorization":
+          "Bearer " +
+          token,
+
+        "Content-Type":
+          "application/json"
+
+      }
+
+    };
+
+
+    if (
+      body !==
+      null
+    ) {
+
+      options.body =
+        JSON.stringify(
+          body
+        );
+
+    }
+
+
+    const response =
+      await fetch(
+        NEWSLETTER_ADMIN_URL,
+        options
+      );
+
+
+    let result;
+
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch {
+
+      result = {
+        success:
+          false,
+
+        error:
+          "The server returned an invalid response."
+      };
+
+    }
+
+
+    if (
+      !response.ok ||
+      result.success !==
+        true
+    ) {
+
+      throw new Error(
+        result.error ||
+        "Newsletter request failed."
+      );
+
+    }
+
+
+    return result;
+
+  }
+
+
+  /* =========================
+     ADMIN AUTH CHECK
+  ========================= */
+
+  async function checkAdmin() {
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+
+    try {
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        sessionError ||
+        !sessionData?.session
+      ) {
+
+        window.location.href =
+          "admin.html";
+
+        return;
+
+      }
+
+
+      currentSession =
+        sessionData.session;
+
+
+      const {
+        data: isAdmin,
+        error: adminError
+      } =
+        await supabaseClient
+          .rpc(
+            "is_site_admin"
+          );
+
+
+      if (
+        adminError ||
+        isAdmin !== true
+      ) {
+
+        loading.textContent =
+          "Admin access required.";
+
+        return;
+
+      }
+
+
+      loading.style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "page"
+        )
+        .style.display =
+          "block";
+
+
+      await loadNewsletter();
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      loading.textContent =
+        error instanceof Error
+          ? error.message
+          : "Could not verify Admin access.";
+
+    }
+
+  }
+
+
+  /* =========================
+     LOAD NEWSLETTER
+  ========================= */
+
+  async function loadNewsletter() {
+
+    const refreshButton =
+      document.getElementById(
+        "refresh-button"
+      );
+
+
+    refreshButton.disabled =
+      true;
+
+
+    refreshButton.textContent =
+      "Loading...";
+
+
+    clearMessage(
+      "subscriber-message"
+    );
+
+
+    try {
+
+      const result =
+        await adminRequest(
+          "GET"
+        );
+
+
+      newsletterData = {
+
+        stats:
+          result.stats ||
+          {
+            total: 0,
+            subscribed: 0,
+            unsubscribed: 0
+          },
+
+        contacts:
+          Array.isArray(
+            result.contacts
+          )
+            ? result.contacts
+            : [],
+
+        broadcasts:
+          Array.isArray(
+            result.broadcasts
+          )
+            ? result.broadcasts
+            : []
+
+      };
+
+
+      document
+        .getElementById(
+          "stat-total"
+        )
+        .textContent =
+          newsletterData
+            .stats
+            .total || 0;
+
+
+      document
+        .getElementById(
+          "stat-subscribed"
+        )
+        .textContent =
+          newsletterData
+            .stats
+            .subscribed || 0;
+
+
+      document
+        .getElementById(
+          "stat-unsubscribed"
+        )
+        .textContent =
+          newsletterData
+            .stats
+            .unsubscribed || 0;
+
+
+      if (
+        result.segment?.name
+      ) {
+
+        document
+          .getElementById(
+            "segment-name"
+          )
+          .textContent =
+            result.segment.name;
+
+      }
+
+
+      renderSubscribers();
+
+      renderBroadcasts();
+
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        "Newsletter load:",
+        error
+      );
+
+
+      showMessage(
+        "subscriber-message",
+        error instanceof Error
+          ? error.message
+          : "Could not load newsletter data.",
+        "error"
+      );
+
+
+    } finally {
+
+      refreshButton.disabled =
+        false;
+
+
+      refreshButton.textContent =
+        "↻ Refresh";
+
+    }
+
+  }
+
+
+  /* =========================
+     SUBSCRIBERS
+  ========================= */
+
+  function renderSubscribers() {
+
+    const search =
+      String(
+        document
+          .getElementById(
+            "subscriber-search"
+          )
+          .value || ""
+      )
+        .trim()
+        .toLowerCase();
+
+
+    const filter =
+      document
+        .getElementById(
+          "subscriber-filter"
+        )
+        .value;
+
+
+    const contacts =
+      newsletterData
+        .contacts
+        .filter(
+          contact => {
+
+            const matchesSearch =
+              !search ||
+              String(
+                contact.email ||
+                ""
+              )
+                .toLowerCase()
+                .includes(
+                  search
+                ) ||
+              String(
+                contact.name ||
+                ""
+              )
+                .toLowerCase()
+                .includes(
+                  search
+                );
+
+
+            let matchesFilter =
+              true;
+
+
+            if (
+              filter ===
+              "subscribed"
+            ) {
+
+              matchesFilter =
+                contact.subscribed ===
+                true;
+
+            }
+
+
+            if (
+              filter ===
+              "unsubscribed"
+            ) {
+
+              matchesFilter =
+                contact.unsubscribed ===
+                true;
+
+            }
+
+
+            return (
+              matchesSearch &&
+              matchesFilter
+            );
+
+          }
+        );
+
+
+    const tbody =
+      document.getElementById(
+        "subscriber-list"
+      );
+
+
+    const empty =
+      document.getElementById(
+        "subscriber-empty"
+      );
+
+
+    const table =
+      document.getElementById(
+        "subscriber-table-wrapper"
+      );
+
+
+    if (
+      contacts.length ===
+      0
+    ) {
+
+      tbody.innerHTML =
+        "";
+
+
+      table.style.display =
+        "none";
+
+
+      empty.style.display =
+        "block";
+
+
+      return;
+
+    }
+
+
+    table.style.display =
+      "block";
+
+
+    empty.style.display =
+      "none";
+
+
+    tbody.innerHTML =
+      contacts.map(
+        contact => {
+
+
+          const email =
+            String(
+              contact.email ||
+              ""
+            );
+
+
+          const name =
+            String(
+              contact.name ||
+              ""
+            );
+
+
+          const statusHTML =
+            contact.unsubscribed ===
+            true
+              ? `
+                <span
+                  class="badge badge-unsubscribed"
+                >
+                  Unsubscribed
+                </span>
+              `
+              : `
+                <span
+                  class="badge badge-subscribed"
+                >
+                  Subscribed
+                </span>
+              `;
+
+
+          const unsubscribeButton =
+            contact.unsubscribed ===
+            true
+              ? ""
+              : `
+                <button
+                  type="button"
+                  class="button button-warning small-button"
+                  onclick="unsubscribeSubscriber('${escapeForJS(email)}')"
+                >
+                  Unsubscribe
+                </button>
+              `;
+
+
+          return `
+
+            <tr>
+
+              <td>
+
+                <div class="subscriber-name">
+                  ${escapeHTML(name || "Subscriber")}
+                </div>
+
+                <div class="subscriber-email">
+                  ${escapeHTML(email)}
+                </div>
+
+              </td>
+
+
+              <td>
+                ${statusHTML}
+              </td>
+
+
+              <td>
+                ${escapeHTML(contact.source || "Website")}
+              </td>
+
+
+              <td>
+                ${escapeHTML(
+                  formatDate(
+                    contact.consented_at ||
+                    contact.created_at
+                  )
+                )}
+              </td>
+
+
+              <td>
+
+                <div class="button-row">
+
+                  ${unsubscribeButton}
+
+                  <button
+                    type="button"
+                    class="button button-danger small-button"
+                    onclick="deleteSubscriber('${escapeForJS(email)}')"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      )
+      .join("");
+
+  }
+
+
+  function escapeForJS(
+    value
+  ) {
+
+    return String(
+      value || ""
+    )
+      .replaceAll(
+        "\\",
+        "\\\\"
+      )
+      .replaceAll(
+        "'",
+        "\\'"
+      )
+      .replaceAll(
+        "\n",
+        "\\n"
+      )
+      .replaceAll(
+        "\r",
+        "\\r"
+      );
+
+  }
+
+
+  /* =========================
+     UNSUBSCRIBE
+  ========================= */
+
+  async function unsubscribeSubscriber(
+    email
+  ) {
+
+    const confirmed =
+      confirm(
+        "Unsubscribe this person from future GiftedGift Empire newsletters?\n\n" +
+        email
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    clearMessage(
+      "subscriber-message"
+    );
+
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+            action:
+              "unsubscribe_contact",
+
+            email
+          }
+        );
+
+
+      showMessage(
+        "subscriber-message",
+        result.message ||
+        "Subscriber unsubscribed.",
+        "success"
+      );
+
+
+      await loadNewsletter();
+
+
+    } catch (
+      error
+    ) {
+
+      showMessage(
+        "subscriber-message",
+        error instanceof Error
+          ? error.message
+          : "Could not unsubscribe this contact.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================
+     DELETE
+  ========================= */
+
+  async function deleteSubscriber(
+    email
+  ) {
+
+    const confirmed =
+      confirm(
+        "Permanently delete this newsletter contact?\n\n" +
+        email +
+        "\n\nThis action cannot be undone."
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const secondConfirmation =
+      confirm(
+        "Are you sure you want to permanently delete this subscriber?"
+      );
+
+
+    if (
+      !secondConfirmation
+    ) {
+      return;
+    }
+
+
+    clearMessage(
+      "subscriber-message"
+    );
+
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+            action:
+              "delete_contact",
+
+            email
+          }
+        );
+
+
+      showMessage(
+        "subscriber-message",
+        result.message ||
+        "Subscriber deleted.",
+        "success"
+      );
+
+
+      await loadNewsletter();
+
+
+    } catch (
+      error
+    ) {
+
+      showMessage(
+        "subscriber-message",
+        error instanceof Error
+          ? error.message
+          : "Could not delete this subscriber.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================
+     BROADCASTS
+  ========================= */
+
+  function renderBroadcasts() {
+
+    const box =
+      document.getElementById(
+        "broadcast-list"
+      );
+
+
+    const broadcasts =
+      newsletterData
+        .broadcasts || [];
+
+
+    if (
+      broadcasts.length ===
+      0
+    ) {
+
+      box.innerHTML = `
+
+        <div class="empty">
+          No newsletter campaigns yet.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    box.innerHTML =
+      broadcasts.map(
+        item => {
+
+          const date =
+            item.sent_at ||
+            item.scheduled_at ||
+            item.created_at;
+
+
+          return `
+
+            <div class="broadcast-item">
+
+              <div>
+
+                <div class="broadcast-subject">
+
+                  ${escapeHTML(
+                    item.subject ||
+                    "Newsletter Broadcast"
+                  )}
+
+                </div>
+
+
+                <div class="broadcast-meta">
+
+                  Created:
+                  ${escapeHTML(
+                    formatDate(
+                      item.created_at
+                    )
+                  )}
+
+                  ${
+                    item.sent_at
+                      ? `
+                        <br>
+                        Sent:
+                        ${escapeHTML(
+                          formatDate(
+                            item.sent_at
+                          )
+                        )}
+                      `
+                      : ""
+                  }
+
+                  ${
+                    !item.sent_at &&
+                    item.scheduled_at
+                      ? `
+                        <br>
+                        Scheduled:
+                        ${escapeHTML(
+                          formatDate(
+                            item.scheduled_at
+                          )
+                        )}
+                      `
+                      : ""
+                  }
+
+                </div>
+
+              </div>
+
+
+              <span class="status-badge">
+
+                ${escapeHTML(
+                  item.status ||
+                  "unknown"
+                )}
+
+              </span>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+  }
+
+
+  /* =========================
+     PREVIEW
+  ========================= */
+
+  function buildPreview() {
+
+    const message =
+      document
+        .getElementById(
+          "message"
+        )
+        .value
+        .trim();
+
+
+    const ctaLabel =
+      document
+        .getElementById(
+          "cta-label"
+        )
+        .value
+        .trim();
+
+
+    const ctaUrl =
+      document
+        .getElementById(
+          "cta-url"
+        )
+        .value
+        .trim();
+
+
+    if (!message) {
+
+      alert(
+        "Please write the newsletter message first."
+      );
+
+      return;
+
+    }
+
+
+    if (
+      (ctaLabel && !ctaUrl) ||
+      (!ctaLabel && ctaUrl)
+    ) {
+
+      alert(
+        "If you use a button, please provide both its text and link."
+      );
+
+      return;
+
+    }
+
+
+    const paragraphs =
+      message
+        .split(
+          /\n{2,}/
+        )
+        .map(
+          paragraph =>
+            paragraph
+              .trim()
+        )
+        .filter(
+          Boolean
+        )
+        .map(
+          paragraph => `
+
+            <p>
+              ${escapeHTML(paragraph)
+                .replaceAll(
+                  "\n",
+                  "<br>"
+                )}
+            </p>
+
+          `
+        )
+        .join("");
+
+
+    const cta =
+      ctaLabel &&
+      ctaUrl
+        ? `
+
+          <div class="preview-cta">
+
+            <a
+              href="${escapeHTML(ctaUrl)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ${escapeHTML(ctaLabel)}
+            </a>
+
+          </div>
+
+        `
+        : "";
+
+
+    document
+      .getElementById(
+        "preview-body"
+      )
+      .innerHTML = `
+
+        <p>
+          Hello there,
+        </p>
+
+        ${paragraphs}
+
+        ${cta}
+
+        <p>
+          Thank you for being part of
+          GiftedGift Empire.
+        </p>
+
+      `;
+
+
+    document
+      .getElementById(
+        "preview-box"
+      )
+      .classList
+      .add(
+        "show"
+      );
+
+
+    document
+      .getElementById(
+        "preview-box"
+      )
+      .scrollIntoView(
+        {
+          behavior:
+            "smooth",
+
+          block:
+            "start"
+        }
+      );
+
+  }
+
+
+  /* =========================
+     SEND BROADCAST
+  ========================= */
+
+  async function sendNewsletter(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    clearMessage(
+      "send-message"
+    );
+
+
+    const subject =
+      document
+        .getElementById(
+          "subject"
+        )
+        .value
+        .trim();
+
+
+    const previewText =
+      document
+        .getElementById(
+          "preview-text"
+        )
+        .value
+        .trim();
+
+
+    const message =
+      document
+        .getElementById(
+          "message"
+        )
+        .value
+        .trim();
+
+
+    const ctaLabel =
+      document
+        .getElementById(
+          "cta-label"
+        )
+        .value
+        .trim();
+
+
+    const ctaUrl =
+      document
+        .getElementById(
+          "cta-url"
+        )
+        .value
+        .trim();
+
+
+    if (
+      !subject ||
+      !message
+    ) {
+
+      showMessage(
+        "send-message",
+        "Please enter the subject and newsletter message.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      (ctaLabel && !ctaUrl) ||
+      (!ctaLabel && ctaUrl)
+    ) {
+
+      showMessage(
+        "send-message",
+        "If you use a button, please provide both its text and link.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const recipients =
+      Number(
+        newsletterData
+          .stats
+          .subscribed ||
+        0
+      );
+
+
+    if (
+      recipients <
+      1
+    ) {
+
+      showMessage(
+        "send-message",
+        "There are currently no subscribed contacts to send this newsletter to.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const confirmed =
+      confirm(
+        "Send this newsletter now?\n\n" +
+        "Subject: " +
+        subject +
+        "\n\nSubscribed recipients: " +
+        recipients +
+        "\n\nOnce sending begins, recipients may receive the email immediately."
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const sendButton =
+      document.getElementById(
+        "send-button"
+      );
+
+
+    sendButton.disabled =
+      true;
+
+
+    sendButton.textContent =
+      "Sending...";
+
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+
+            action:
+              "send_broadcast",
+
+            subject,
+
+            preview_text:
+              previewText,
+
+            message,
+
+            cta_label:
+              ctaLabel,
+
+            cta_url:
+              ctaUrl
+
+          }
+        );
+
+
+      showMessage(
+        "send-message",
+        result.message ||
+        "Newsletter has been queued for sending.",
+        "success"
+      );
+
+
+      document
+        .getElementById(
+          "newsletter-form"
+        )
+        .reset();
+
+
+      document
+        .getElementById(
+          "message-count"
+        )
+        .textContent =
+          "0 / 20,000";
+
+
+      document
+        .getElementById(
+          "preview-box"
+        )
+        .classList
+        .remove(
+          "show"
+        );
+
+
+      await loadNewsletter();
+
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        "Newsletter send:",
+        error
+      );
+
+
+      showMessage(
+        "send-message",
+        error instanceof Error
+          ? error.message
+          : "Could not send the newsletter.",
+        "error"
+      );
+
+
+    } finally {
+
+      sendButton.disabled =
+        false;
+
+
+      sendButton.textContent =
+        "📧 Send Newsletter";
+
+    }
+
+  }
+
+
+  /* =========================
+     EVENTS
+  ========================= */
+
+  document
+    .getElementById(
+      "newsletter-form"
+    )
+    .addEventListener(
+      "submit",
+      sendNewsletter
+    );
+
+
+  document
+    .getElementById(
+      "preview-button"
+    )
+    .addEventListener(
+      "click",
+      buildPreview
+    );
+
+
+  document
+    .getElementById(
+      "refresh-button"
+    )
+    .addEventListener(
+      "click",
+      loadNewsletter
+    );
+
+
+  document
+    .getElementById(
+      "subscriber-search"
+    )
+    .addEventListener(
+      "input",
+      renderSubscribers
+    );
+
+
+  document
+    .getElementById(
+      "subscriber-filter"
+    )
+    .addEventListener(
+      "change",
+      renderSubscribers
+    );
+
+
+  document
+    .getElementById(
+      "message"
+    )
+    .addEventListener(
+      "input",
+      function () {
+
+        document
+          .getElementById(
+            "message-count"
+          )
+          .textContent =
+            this.value.length +
+            " / 20,000";
+
+      }
+    );
+
+
+  /* =========================
+     START
+  ========================= */
+
+  checkAdmin();
+
+</script>
+
+
+</body>
+
+</html>
