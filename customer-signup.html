@@ -715,7 +715,7 @@
     return {
 
       length:
-        password.length >= 12,
+        password.length >= 8,
 
       upper:
         /[A-Z]/.test(
@@ -802,7 +802,7 @@
     updateRule(
       "rule-length",
       checks.length,
-      "At least 12 characters"
+      "At least 8 characters"
     );
 
 
