@@ -1312,7 +1312,54 @@
 
         </div>
 
+<div class="field full">
 
+  <label for="newsletter-image">
+    Newsletter Image
+    <span class="optional">
+      (optional)
+    </span>
+  </label>
+
+  <input
+    type="file"
+    id="newsletter-image"
+    accept="image/jpeg,image/png,image/webp,image/gif"
+  >
+
+  <div
+    id="newsletter-image-preview-box"
+    style="
+      display:none;
+      margin-top:12px;
+    "
+  >
+
+    <img
+      id="newsletter-image-preview"
+      alt="Newsletter image preview"
+      style="
+        width:100%;
+        max-width:650px;
+        height:auto;
+        display:block;
+        border-radius:10px;
+        border:1px solid #dfe4ec;
+      "
+    >
+
+    <button
+      type="button"
+      id="remove-newsletter-image"
+      class="button button-danger small-button"
+      style="margin-top:10px;"
+    >
+      Remove Image
+    </button>
+
+  </div>
+
+</div>
         <div class="field full">
 
           <label for="message">
@@ -1665,6 +1712,13 @@
 
   let currentSession =
     null;
+
+let selectedNewsletterImage =
+  null;
+
+
+let newsletterImagePreviewUrl =
+  "";
 
 
   /* =========================
