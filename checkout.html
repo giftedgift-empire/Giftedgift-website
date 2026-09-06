@@ -1063,10 +1063,10 @@ function showSuccess(
   message
 ) {
 
-  const box =
-    document.getElementById(
-      "message"
-    );
+    const box =
+      document.getElementById(
+        "message"
+      );
 
 
   box.className =
@@ -1943,6 +1943,146 @@ async function capturePayPalOrder(
 
 
 
+/*
+  =========================================================
+  LINK COMPLETED PAYPAL PURCHASE TO LOGGED-IN CUSTOMER
+  =========================================================
+*/
+
+
+async function linkPayPalPurchaseToCustomer(
+  orderId,
+  secureDownloadToken
+) {
+
+
+  try {
+
+
+    const {
+      data:
+        sessionData,
+
+      error:
+        sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError
+    ) {
+
+
+      console.warn(
+        "Customer session check:",
+        sessionError
+      );
+
+
+      return false;
+
+    }
+
+
+    const session =
+      sessionData?.session;
+
+
+    /*
+      Guest checkout remains allowed.
+      If the buyer is not signed in,
+      the payment still succeeds normally.
+    */
+
+
+    if (
+      !session?.user
+    ) {
+
+      return false;
+
+    }
+
+
+    if (
+      !session
+        .user
+        .email_confirmed_at
+    ) {
+
+
+      console.warn(
+        "Customer account email is not verified."
+      );
+
+
+      return false;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "attach_my_paypal_digital_order",
+          {
+
+            p_paypal_order_id:
+              orderId,
+
+            p_download_token:
+              secureDownloadToken
+
+          }
+        );
+
+
+    if (
+      error
+    ) {
+
+
+      console.warn(
+        "PayPal customer-account linking:",
+        error
+      );
+
+
+      return false;
+
+    }
+
+
+    return (
+      data === true
+    );
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.warn(
+      "PayPal customer-account linking:",
+      error
+    );
+
+
+    return false;
+
+  }
+
+}
+
+
+
 async function maybeConfigurePayPal() {
 
 
@@ -2039,6 +2179,22 @@ async function maybeConfigurePayPal() {
                   capture.download_token;
 
 
+                /*
+                  Link this completed purchase to the
+                  authenticated GiftedGift Empire customer.
+
+                  PayPal's payer email does NOT need to match
+                  the GiftedGift Empire customer email.
+                */
+
+
+                const linkedToCustomer =
+                  await linkPayPalPurchaseToCustomer(
+                    data.orderId,
+                    capture.download_token
+                  );
+
+
                 const paymentSection =
                   document.getElementById(
                     "payment-section"
@@ -2073,9 +2229,24 @@ async function maybeConfigurePayPal() {
                     "block";
 
 
-                showSuccess(
-                  "Payment completed successfully."
-                );
+                if (
+                  linkedToCustomer
+                ) {
+
+
+                  showSuccess(
+                    "Payment completed successfully. This purchase has also been added to your Customer Account."
+                  );
+
+
+                } else {
+
+
+                  showSuccess(
+                    "Payment completed successfully."
+                  );
+
+                }
 
 
               } catch (
