@@ -2,372 +2,1126 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>African Foodstuffs | GiftedGift Empire</title>
+  <meta charset="UTF-8">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
 
-* {
-  box-sizing: border-box;
-}
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f6f7f9;
-  color: #222;
-}
+  <title>
+    African Foodstuffs | GiftedGift Empire
+  </title>
 
-header {
-  background: #123a8c;
-  color: white;
-  text-align: center;
-  padding: 35px 18px;
-}
+  <meta
+    id="page-description-meta"
+    name="description"
+    content="Shop quality African foodstuffs from GiftedGift Empire and place your order directly through WhatsApp."
+  >
 
-header h1 {
-  color: #f2bd16;
-  margin: 0 0 10px;
-  font-size: 38px;
-}
+  <meta
+    id="robots-meta"
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
 
-header p {
-  max-width: 650px;
-  margin: auto;
-  line-height: 1.6;
-  font-size: 18px;
-}
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 28px 16px 70px;
-}
+  <link
+    id="canonical-link"
+    rel="canonical"
+    href="https://giftedgiftempire.com/foodstuffs.html"
+  >
 
-.top-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 25px;
-}
 
-.top-links a {
-  text-decoration: none;
-  padding: 11px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-}
+  <!-- =========================
+       FAVICON
+  ========================= -->
 
-.home-link {
-  background: #123a8c;
-  color: white;
-}
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
 
-.shop-link {
-  background: #f2bd16;
-  color: #111;
-}
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
 
-.notice {
-  background: #fff8dd;
-  padding: 17px;
-  border-radius: 12px;
-  line-height: 1.6;
-  margin-bottom: 28px;
-}
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
 
-.products-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fit, minmax(260px, 1fr));
-  gap: 22px;
-}
 
-.product-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
+  <!-- =========================
+       OPEN GRAPH
+       Facebook / WhatsApp
+  ========================= -->
 
-.product-image {
-  width: 100%;
-  height: 300px;
-  background: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  <meta
+    id="og-type"
+    property="og:type"
+    content="website"
+  >
 
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
 
-.no-image {
-  color: #777;
-  font-weight: bold;
-}
+  <meta
+    id="og-title"
+    property="og:title"
+    content="African Foodstuffs | GiftedGift Empire"
+  >
 
-.product-body {
-  padding: 20px;
-}
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Shop quality African foodstuffs from GiftedGift Empire and place your order directly through WhatsApp."
+  >
 
-.product-name {
-  color: #123a8c;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/foodstuffs.html"
+  >
 
-.product-description {
-  color: #666;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
+  <meta
+    id="og-image"
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
 
-.product-price {
-  font-size: 23px;
-  font-weight: bold;
-  margin-bottom: 13px;
-}
+  <meta
+    id="og-image-alt"
+    property="og:image:alt"
+    content="GiftedGift Empire"
+  >
 
-.stock {
-  display: inline-block;
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: bold;
-}
 
-.in-stock {
-  background: #e3f6e8;
-  color: #176b31;
-}
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
 
-.out-stock {
-  background: #fdeaea;
-  color: #9b1c1c;
-}
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
 
-.product-link {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 11px 16px;
-  border-radius: 8px;
-  background: #f2bd16;
-  color: #111;
-  text-decoration: none;
-  font-weight: bold;
-}
+  <meta
+    id="twitter-title"
+    name="twitter:title"
+    content="African Foodstuffs | GiftedGift Empire"
+  >
 
-.quantity-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 18px;
-}
+  <meta
+    id="twitter-description"
+    name="twitter:description"
+    content="Shop quality African foodstuffs from GiftedGift Empire and place your order directly through WhatsApp."
+  >
 
-.quantity-row button {
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 8px;
-  background: #123a8c;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-}
+  <meta
+    id="twitter-image"
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
 
-.quantity {
-  min-width: 35px;
-  text-align: center;
-  font-size: 19px;
-  font-weight: bold;
-}
 
-.unavailable {
-  margin-top: 18px;
-  color: #9b1c1c;
-  font-weight: bold;
-}
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
 
-.order-section {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  margin-top: 35px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
 
-.order-section h2 {
-  margin-top: 0;
-  color: #123a8c;
-}
+  <style>
 
-.summary-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.summary-total {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  font-size: 23px;
-  font-weight: bold;
-  color: #123a8c;
-  margin-top: 18px;
-}
 
-.empty-summary {
-  color: #777;
-  padding: 10px 0;
-}
+    body {
+      margin: 0;
 
-.form-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
+      font-family:
+        Arial,
+        sans-serif;
 
-.field label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 7px;
-}
+      background: #f6f7f9;
 
-.field input,
-.field textarea {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 16px;
-}
+      color: #222;
+    }
 
-.field textarea {
-  min-height: 100px;
-  resize: vertical;
-}
 
-.full-width {
-  grid-column: 1 / -1;
-}
+    /* =========================
+       HEADER
+    ========================= */
 
-.whatsapp-button {
-  width: 100%;
-  margin-top: 22px;
-  border: none;
-  border-radius: 10px;
-  padding: 17px;
-  background: #25D366;
-  color: white;
-  font-size: 19px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .site-header {
+      background: #123a8c;
 
-.whatsapp-button:hover {
-  opacity: 0.92;
-}
+      color: white;
 
-.message {
-  display: none;
-  margin-top: 15px;
-  padding: 14px;
-  border-radius: 9px;
-}
+      padding: 16px 20px;
 
-.message.error {
-  display: block;
-  background: #fdeaea;
-  color: #9b1c1c;
-}
+      border-bottom:
+        4px solid #f2bd16;
+    }
 
-footer {
-  background: #123a8c;
-  color: white;
-  text-align: center;
-  padding: 40px 18px;
-  margin-top: 50px;
-}
 
-#loading {
-  text-align: center;
-  padding: 50px 20px;
-  font-weight: bold;
-}
+    .header-inner {
+      max-width: 1200px;
 
-@media (max-width: 600px) {
+      margin: auto;
+    }
 
-  header h1 {
-    font-size: 31px;
-  }
 
-  .product-image {
-    height: 330px;
-  }
+    .brand {
+      display: flex;
 
-  .order-section {
-    padding: 20px 17px;
-  }
+      align-items: center;
 
-}
+      gap: 11px;
 
-</style>
+      width: fit-content;
+
+      margin-bottom: 16px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 54px;
+
+      height: 54px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 27px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap:
+        6px
+        18px;
+    }
+
+
+    nav a {
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
+    }
+
+
+    nav a:hover,
+    nav a.active {
+      color: #f2bd16;
+    }
+
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .food-hero {
+      background:
+        linear-gradient(
+          135deg,
+          #eef4ff,
+          #fff9e7
+        );
+
+      text-align: center;
+
+      padding:
+        52px
+        18px
+        42px;
+    }
+
+
+    .food-hero h1 {
+      color: #123a8c;
+
+      margin:
+        0
+        0
+        12px;
+
+      font-size: 38px;
+    }
+
+
+    .food-hero p {
+      max-width: 700px;
+
+      margin: auto;
+
+      color: #555;
+
+      line-height: 1.7;
+
+      font-size: 18px;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .container {
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding:
+        28px
+        16px
+        70px;
+    }
+
+
+    .top-links {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-bottom: 25px;
+    }
+
+
+    .top-links a {
+      text-decoration: none;
+
+      padding:
+        11px
+        16px;
+
+      border-radius: 8px;
+
+      font-weight: bold;
+    }
+
+
+    .home-link {
+      background: #123a8c;
+
+      color: white;
+    }
+
+
+    .shop-link {
+      background: #f2bd16;
+
+      color: #111;
+    }
+
+
+    .notice {
+      background: #fff8dd;
+
+      padding: 17px;
+
+      border-radius: 12px;
+
+      line-height: 1.6;
+
+      margin-bottom: 28px;
+
+      border-left:
+        4px solid #f2bd16;
+    }
+
+
+    /* =========================
+       PRODUCTS
+    ========================= */
+
+    .products-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            260px,
+            1fr
+          )
+        );
+
+      gap: 22px;
+    }
+
+
+    .product-card {
+      background: white;
+
+      border-radius: 15px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0
+        4px
+        16px
+        rgba(
+          0,
+          0,
+          0,
+          0.08
+        );
+    }
+
+
+    .product-image {
+      width: 100%;
+
+      height: 300px;
+
+      background: #eee;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+
+    .product-image img {
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: contain;
+    }
+
+
+    .no-image {
+      color: #777;
+
+      font-weight: bold;
+
+      text-align: center;
+
+      padding: 20px;
+    }
+
+
+    .product-body {
+      padding: 20px;
+    }
+
+
+    .product-name {
+      color: #123a8c;
+
+      font-size: 22px;
+
+      font-weight: bold;
+
+      margin-bottom: 10px;
+    }
+
+
+    .product-description {
+      color: #666;
+
+      line-height: 1.5;
+
+      margin-bottom: 12px;
+
+      white-space: pre-line;
+    }
+
+
+    .product-price {
+      font-size: 23px;
+
+      font-weight: bold;
+
+      margin-bottom: 13px;
+    }
+
+
+    .stock {
+      display: inline-block;
+
+      padding:
+        7px
+        12px;
+
+      border-radius: 20px;
+
+      font-size: 13px;
+
+      font-weight: bold;
+    }
+
+
+    .in-stock {
+      background: #e3f6e8;
+
+      color: #176b31;
+    }
+
+
+    .out-stock {
+      background: #fdeaea;
+
+      color: #9b1c1c;
+    }
+
+
+    .product-link {
+      display: inline-block;
+
+      margin-top: 16px;
+
+      padding:
+        11px
+        16px;
+
+      border-radius: 8px;
+
+      background: #f2bd16;
+
+      color: #111;
+
+      text-decoration: none;
+
+      font-weight: bold;
+    }
+
+
+    .product-link:hover {
+      background: #d8a90e;
+    }
+
+
+    .quantity-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      margin-top: 18px;
+    }
+
+
+    .quantity-row button {
+      width: 42px;
+
+      height: 42px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: #123a8c;
+
+      color: white;
+
+      font-size: 22px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+
+    .quantity-row button:hover {
+      opacity: 0.92;
+    }
+
+
+    .quantity {
+      min-width: 35px;
+
+      text-align: center;
+
+      font-size: 19px;
+
+      font-weight: bold;
+    }
+
+
+    .unavailable {
+      margin-top: 18px;
+
+      color: #9b1c1c;
+
+      font-weight: bold;
+    }
+
+
+    /* =========================
+       ORDER SECTION
+    ========================= */
+
+    .order-section {
+      background: white;
+
+      border-radius: 16px;
+
+      padding: 24px;
+
+      margin-top: 35px;
+
+      box-shadow:
+        0
+        4px
+        16px
+        rgba(
+          0,
+          0,
+          0,
+          0.08
+        );
+    }
+
+
+    .order-section h2 {
+      margin-top: 0;
+
+      color: #123a8c;
+    }
+
+
+    .summary-item {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding:
+        10px
+        0;
+
+      border-bottom:
+        1px solid #eee;
+    }
+
+
+    .summary-total {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      font-size: 23px;
+
+      font-weight: bold;
+
+      color: #123a8c;
+
+      margin-top: 18px;
+    }
+
+
+    .empty-summary {
+      color: #777;
+
+      padding:
+        10px
+        0;
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            220px,
+            1fr
+          )
+        );
+
+      gap: 15px;
+
+      margin-top: 20px;
+    }
+
+
+    .field label {
+      display: block;
+
+      font-weight: bold;
+
+      margin-bottom: 7px;
+    }
+
+
+    .field input,
+    .field textarea {
+      width: 100%;
+
+      padding: 13px;
+
+      border:
+        1px solid #bbb;
+
+      border-radius: 8px;
+
+      font-family: inherit;
+
+      font-size: 16px;
+    }
+
+
+    .field input:focus,
+    .field textarea:focus {
+      outline:
+        2px solid
+        rgba(
+          18,
+          58,
+          140,
+          0.2
+        );
+
+      border-color: #123a8c;
+    }
+
+
+    .field textarea {
+      min-height: 100px;
+
+      resize: vertical;
+    }
+
+
+    .full-width {
+      grid-column:
+        1 / -1;
+    }
+
+
+    .whatsapp-button {
+      width: 100%;
+
+      margin-top: 22px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 17px;
+
+      background: #25D366;
+
+      color: white;
+
+      font-size: 19px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+
+    .whatsapp-button:hover {
+      opacity: 0.92;
+    }
+
+
+    .message {
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 14px;
+
+      border-radius: 9px;
+    }
+
+
+    .message.error {
+      display: block;
+
+      background: #fdeaea;
+
+      color: #9b1c1c;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #123a8c;
+
+      color: white;
+
+      text-align: center;
+
+      padding:
+        35px
+        18px;
+
+      margin-top: 50px;
+    }
+
+
+    .footer-logo {
+      width: 48px;
+
+      height: 48px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 19px;
+
+      font-weight: bold;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        18px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+
+      margin-top: 17px;
+    }
+
+
+    #loading {
+      text-align: center;
+
+      padding:
+        50px
+        20px;
+
+      font-weight: bold;
+
+      color: #555;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 600px
+    ) {
+
+      .site-header {
+        padding:
+          14px
+          15px;
+      }
+
+
+      .brand img {
+        width: 48px;
+
+        height: 48px;
+      }
+
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          13px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
+
+      .food-hero {
+        padding:
+          40px
+          16px
+          34px;
+      }
+
+
+      .food-hero h1 {
+        font-size: 31px;
+      }
+
+
+      .food-hero p {
+        font-size: 16px;
+      }
+
+
+      .product-image {
+        height: 330px;
+      }
+
+
+      .order-section {
+        padding:
+          20px
+          17px;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
-<header>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="site-header">
+
+  <div class="header-inner">
+
+
+    <a
+      href="/index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
+
+      <img
+        src="/my-logo.png"
+        alt="GiftedGift Empire logo"
+      >
+
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <nav>
+
+      <a href="/index.html">
+        Home
+      </a>
+
+      <a
+        href="/shop.html"
+        class="active"
+      >
+        Shop
+      </a>
+
+      <a href="/categories.html">
+        Categories
+      </a>
+
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
+      <a href="/blog.html">
+        Blog
+      </a>
+
+      <a href="/deals.html">
+        Deals
+      </a>
+
+      <a href="/about.html">
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="food-hero">
 
   <h1 id="page-title">
     African Foodstuffs
   </h1>
 
+
   <p id="page-description">
+
     Quality African foodstuffs available per pack.
-    Choose what you need and submit your order directly
-    to us on WhatsApp.
+    Choose what you need and submit your order
+    directly to us on WhatsApp.
+
   </p>
 
-</header>
+</section>
 
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="container">
+
 
   <div class="top-links">
 
     <a
-      href="index.html"
+      href="/index.html"
       class="home-link"
     >
       ← Home
     </a>
 
+
     <a
-      href="shop.html"
+      href="/shop.html"
       class="shop-link"
     >
       Shop
     </a>
 
+
     <a
       id="all-foodstuffs-link"
-      href="foodstuffs.html"
+      href="/foodstuffs.html"
       class="shop-link"
       style="display:none;"
     >
@@ -384,6 +1138,7 @@ footer {
     <br><br>
 
     Your product total will be calculated automatically.
+
     Delivery/postage cost will be confirmed with you
     personally on WhatsApp before your order is completed.
 
@@ -401,9 +1156,17 @@ footer {
   ></div>
 
 
+  <!-- =========================
+       ORDER
+  ========================= -->
+
   <section class="order-section">
 
-    <h2>Your Foodstuff Order</h2>
+
+    <h2>
+      Your Foodstuff Order
+    </h2>
+
 
     <div id="summary">
 
@@ -424,6 +1187,7 @@ footer {
         Product Total
       </span>
 
+
       <span id="total-price">
         €0.00
       </span>
@@ -441,7 +1205,7 @@ footer {
 
       <div class="field">
 
-        <label>
+        <label for="customer-name">
           Full Name
         </label>
 
@@ -449,6 +1213,7 @@ footer {
           id="customer-name"
           type="text"
           placeholder="Your full name"
+          autocomplete="name"
         >
 
       </div>
@@ -456,7 +1221,7 @@ footer {
 
       <div class="field">
 
-        <label>
+        <label for="customer-phone">
           Phone Number
         </label>
 
@@ -464,6 +1229,7 @@ footer {
           id="customer-phone"
           type="tel"
           placeholder="Your phone number"
+          autocomplete="tel"
         >
 
       </div>
@@ -471,7 +1237,7 @@ footer {
 
       <div class="field full-width">
 
-        <label>
+        <label for="customer-address">
           Delivery Address
         </label>
 
@@ -479,6 +1245,7 @@ footer {
           id="customer-address"
           type="text"
           placeholder="Street address"
+          autocomplete="street-address"
         >
 
       </div>
@@ -486,7 +1253,7 @@ footer {
 
       <div class="field">
 
-        <label>
+        <label for="customer-postal">
           Postal Code
         </label>
 
@@ -494,6 +1261,7 @@ footer {
           id="customer-postal"
           type="text"
           placeholder="Postal code"
+          autocomplete="postal-code"
         >
 
       </div>
@@ -501,7 +1269,7 @@ footer {
 
       <div class="field">
 
-        <label>
+        <label for="customer-city">
           City
         </label>
 
@@ -509,6 +1277,7 @@ footer {
           id="customer-city"
           type="text"
           placeholder="City"
+          autocomplete="address-level2"
         >
 
       </div>
@@ -516,7 +1285,7 @@ footer {
 
       <div class="field full-width">
 
-        <label>
+        <label for="customer-country">
           Country
         </label>
 
@@ -525,6 +1294,7 @@ footer {
           type="text"
           placeholder="Country"
           value="France"
+          autocomplete="country-name"
         >
 
       </div>
@@ -532,7 +1302,7 @@ footer {
 
       <div class="field full-width">
 
-        <label>
+        <label for="customer-note">
           Order Note (optional)
         </label>
 
@@ -549,6 +1319,7 @@ footer {
     <div
       id="message"
       class="message"
+      role="alert"
     ></div>
 
 
@@ -565,21 +1336,78 @@ footer {
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <strong>
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+  >
+
+
+  <div class="footer-brand">
     GiftedGift Empire
-  </strong>
+  </div>
 
-  <br><br>
 
-  © 2026 GiftedGift Empire.
-  All rights reserved.
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+    <a href="/privacy-policy.html">
+      Privacy Policy
+    </a>
+
+    <a href="/terms-conditions.html">
+      Terms & Conditions
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
+    All rights reserved.
+
+  </div>
 
 </footer>
 
 
 <script>
+
+
+/* =========================
+   CONFIGURATION
+========================= */
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -597,6 +1425,16 @@ const SITE_URL =
   "https://giftedgiftempire.com";
 
 
+const FOODSTUFFS_PAGE_URL =
+  SITE_URL +
+  "/foodstuffs.html";
+
+
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_URL +
+  "/my-logo.png";
+
+
 const supabaseClient =
   supabase.createClient(
     SUPABASE_URL,
@@ -604,30 +1442,45 @@ const supabaseClient =
   );
 
 
+document.getElementById(
+  "year"
+).textContent =
+  new Date().getFullYear();
+
+
+/* =========================
+   PAGE ELEMENTS
+========================= */
+
 const loading =
   document.getElementById(
     "loading"
   );
+
 
 const productsBox =
   document.getElementById(
     "products"
   );
 
+
 const summaryBox =
   document.getElementById(
     "summary"
   );
+
 
 const summaryTotal =
   document.getElementById(
     "summary-total"
   );
 
+
 const totalPriceBox =
   document.getElementById(
     "total-price"
   );
+
 
 const messageBox =
   document.getElementById(
@@ -635,10 +1488,27 @@ const messageBox =
   );
 
 
+/* =========================
+   PAGE / ROUTER ID
+========================= */
+
+const pageParameters =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const rawFoodstuffId =
+  window.__FOODSTUFF_ID ||
+  pageParameters.get(
+    "id"
+  ) ||
+  0;
+
+
 const cleanFoodstuffId =
   Number(
-    window.__FOODSTUFF_ID ||
-    0
+    rawFoodstuffId
   );
 
 
@@ -649,12 +1519,25 @@ const isSingleFoodstuff =
   cleanFoodstuffId > 0;
 
 
-let products = [];
+/* =========================
+   STATE
+========================= */
 
-let quantities = {};
+let products =
+  [];
 
 
-function escapeHtml(value) {
+let quantities =
+  {};
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHtml(
+  value
+) {
 
   return String(
     value ?? ""
@@ -679,17 +1562,157 @@ function escapeHtml(value) {
       "'",
       "&#039;"
     );
+
 }
 
 
-function money(value) {
+function money(
+  value
+) {
+
+  const amount =
+    Number(
+      value
+    );
+
+
+  if (
+    !Number.isFinite(
+      amount
+    )
+  ) {
+
+    return "€0.00";
+
+  }
+
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style:
+        "currency",
+
+      currency:
+        "EUR",
+
+      minimumFractionDigits:
+        2,
+
+      maximumFractionDigits:
+        2
+    }
+  ).format(
+    amount
+  );
+
+}
+
+
+function cleanDescription(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+
+}
+
+
+function descriptionPreview(
+  value
+) {
+
+  const text =
+    cleanDescription(
+      value
+    );
+
+
+  if (
+    !text
+  ) {
+
+    return (
+      "Shop quality African foodstuffs " +
+      "from GiftedGift Empire."
+    );
+
+  }
+
+
+  if (
+    text.length <= 155
+  ) {
+
+    return text;
+
+  }
+
 
   return (
-    "€" +
-    Number(
-      value || 0
-    ).toFixed(2)
+    text.slice(
+      0,
+      152
+    ) +
+    "..."
   );
+
+}
+
+
+function safeImageURL(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_URL
+      );
+
+
+    if (
+      url.protocol !== "https:" &&
+      url.protocol !== "http:"
+    ) {
+
+      return null;
+
+    }
+
+
+    return url.href;
+
+
+  } catch (
+    error
+  ) {
+
+    return null;
+
+  }
+
 }
 
 
@@ -709,31 +1732,495 @@ function getProductUrl(
         product.slug
       )
     );
+
   }
 
 
-  return (
-    SITE_URL +
-    "/foodstuffs.html"
-  );
+  if (
+    product &&
+    product.id
+  ) {
+
+    return (
+      FOODSTUFFS_PAGE_URL +
+      "?id=" +
+      encodeURIComponent(
+        product.id
+      )
+    );
+
+  }
+
+
+  return FOODSTUFFS_PAGE_URL;
+
 }
 
 
-function showError(text) {
+/* =========================
+   SEO HELPERS
+========================= */
+
+function setMetaContent(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (
+    element
+  ) {
+
+    element.setAttribute(
+      "content",
+      value
+    );
+
+  }
+
+}
+
+
+function setStructuredData(
+  data
+) {
+
+  let script =
+    document.getElementById(
+      "foodstuff-structured-data"
+    );
+
+
+  if (
+    !script
+  ) {
+
+    script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.id =
+      "foodstuff-structured-data";
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  script.textContent =
+    JSON.stringify(
+      data
+    );
+
+}
+
+
+/* =========================
+   MAIN COLLECTION SEO
+========================= */
+
+function updateCollectionSEO(
+  foodstuffProducts
+) {
+
+  const listItems =
+    foodstuffProducts.map(
+      (
+        product,
+        index
+      ) => {
+
+        return {
+
+          "@type":
+            "ListItem",
+
+          "position":
+            index + 1,
+
+          "name":
+            product.name ||
+            "African Foodstuff",
+
+          "url":
+            getProductUrl(
+              product
+            )
+
+        };
+
+      }
+    );
+
+
+  setStructuredData({
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "CollectionPage",
+
+    "name":
+      "African Foodstuffs | GiftedGift Empire",
+
+    "description":
+      "Shop quality African foodstuffs from GiftedGift Empire and place your order directly through WhatsApp.",
+
+    "url":
+      FOODSTUFFS_PAGE_URL,
+
+    "isPartOf": {
+
+      "@type":
+        "WebSite",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL
+
+    },
+
+    "mainEntity": {
+
+      "@type":
+        "ItemList",
+
+      "numberOfItems":
+        listItems.length,
+
+      "itemListElement":
+        listItems
+
+    }
+
+  });
+
+}
+
+
+/* =========================
+   SINGLE PRODUCT SEO
+========================= */
+
+function updateProductSEO(
+  product
+) {
+
+  const name =
+    product.name ||
+    "African Foodstuff";
+
+
+  const pageTitle =
+    name +
+    " | GiftedGift Empire";
+
+
+  const description =
+    descriptionPreview(
+      product.description
+    );
+
+
+  const canonicalURL =
+    getProductUrl(
+      product
+    );
+
+
+  const image =
+    safeImageURL(
+      product.image_url
+    ) ||
+    DEFAULT_SOCIAL_IMAGE;
+
+
+  document.title =
+    pageTitle;
+
+
+  setMetaContent(
+    "page-description-meta",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "canonical-link"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.href =
+      canonicalURL;
+
+  }
+
+
+  setMetaContent(
+    "og-type",
+    "product"
+  );
+
+
+  setMetaContent(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "og-description",
+    description
+  );
+
+
+  setMetaContent(
+    "og-url",
+    canonicalURL
+  );
+
+
+  setMetaContent(
+    "og-image",
+    image
+  );
+
+
+  setMetaContent(
+    "og-image-alt",
+    name
+  );
+
+
+  setMetaContent(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "twitter-description",
+    description
+  );
+
+
+  setMetaContent(
+    "twitter-image",
+    image
+  );
+
+
+  const schema = {
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "Product",
+
+    "name":
+      name,
+
+    "description":
+      cleanDescription(
+        product.description
+      ) ||
+      (
+        "African foodstuff available " +
+        "from GiftedGift Empire."
+      ),
+
+    "url":
+      canonicalURL,
+
+    "sku":
+      String(
+        product.id
+      ),
+
+    "brand": {
+
+      "@type":
+        "Brand",
+
+      "name":
+        "GiftedGift Empire"
+
+    }
+
+  };
+
+
+  if (
+    product.category
+  ) {
+
+    schema.category =
+      product.category;
+
+  }
+
+
+  const imageURL =
+    safeImageURL(
+      product.image_url
+    );
+
+
+  if (
+    imageURL
+  ) {
+
+    schema.image =
+      [
+        imageURL
+      ];
+
+  }
+
+
+  const price =
+    Number(
+      product.price
+    );
+
+
+  if (
+    Number.isFinite(
+      price
+    ) &&
+    price >= 0
+  ) {
+
+    schema.offers = {
+
+      "@type":
+        "Offer",
+
+      "url":
+        canonicalURL,
+
+      "priceCurrency":
+        "EUR",
+
+      "price":
+        price.toFixed(
+          2
+        ),
+
+      "availability":
+        product.in_stock
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+
+      "seller": {
+
+        "@type":
+          "Organization",
+
+        "name":
+          "GiftedGift Empire",
+
+        "url":
+          SITE_URL
+
+      }
+
+    };
+
+  }
+
+
+  setStructuredData(
+    schema
+  );
+
+}
+
+
+/* =========================
+   NOINDEX BROKEN SINGLE URL
+========================= */
+
+function markSinglePageNoIndex() {
+
+  if (
+    !isSingleFoodstuff
+  ) {
+
+    return;
+
+  }
+
+
+  const robots =
+    document.getElementById(
+      "robots-meta"
+    );
+
+
+  if (
+    robots
+  ) {
+
+    robots.setAttribute(
+      "content",
+      "noindex, follow"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+function showError(
+  text
+) {
 
   messageBox.className =
     "message error";
 
+
   messageBox.textContent =
     text;
 
+
   messageBox.scrollIntoView({
+
     behavior:
       "smooth",
 
     block:
       "center"
+
   });
+
 }
 
 
@@ -742,10 +2229,16 @@ function clearMessage() {
   messageBox.className =
     "message";
 
+
   messageBox.textContent =
     "";
+
 }
 
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
 
 async function loadProducts() {
 
@@ -772,6 +2265,7 @@ async function loadProducts() {
         "id",
         cleanFoodstuffId
       );
+
   }
 
 
@@ -800,16 +2294,22 @@ async function loadProducts() {
     "none";
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
+      "Foodstuffs loading error:",
       error
     );
+
 
     productsBox.innerHTML =
       "<p>Foodstuffs could not be loaded.</p>";
 
+
     return;
+
   }
 
 
@@ -817,13 +2317,21 @@ async function loadProducts() {
     data || [];
 
 
+  /* =========================
+     SINGLE PRODUCT NOT FOUND
+  ========================= */
+
   if (
     isSingleFoodstuff &&
     products.length === 0
   ) {
 
+    markSinglePageNoIndex();
+
+
     productsBox.innerHTML =
       "<p>This foodstuff is not currently available.</p>";
+
 
     document
       .getElementById(
@@ -835,14 +2343,32 @@ async function loadProducts() {
 
     document
       .getElementById(
+        "page-description"
+      )
+      .textContent =
+        "This foodstuff is not currently available.";
+
+
+    document
+      .getElementById(
         "all-foodstuffs-link"
       )
       .style.display =
         "inline-block";
 
+
+    document.title =
+      "Foodstuff Not Available | GiftedGift Empire";
+
+
     return;
+
   }
 
+
+  /* =========================
+     SINGLE PRODUCT
+  ========================= */
 
   if (
     isSingleFoodstuff &&
@@ -868,7 +2394,11 @@ async function loadProducts() {
       )
       .textContent =
         product.description ||
-        "Choose your quantity and submit your order directly to GiftedGift Empire on WhatsApp.";
+        (
+          "Choose your quantity and submit " +
+          "your order directly to " +
+          "GiftedGift Empire on WhatsApp."
+        );
 
 
     document
@@ -879,12 +2409,25 @@ async function loadProducts() {
         "inline-block";
 
 
-    document.title =
-      (
-        product.name ||
-        "African Foodstuff"
-      ) +
-      " | GiftedGift Empire";
+    updateProductSEO(
+      product
+    );
+
+  }
+
+
+  /* =========================
+     MAIN FOODSTUFFS PAGE SEO
+  ========================= */
+
+  if (
+    !isSingleFoodstuff
+  ) {
+
+    updateCollectionSEO(
+      products
+    );
+
   }
 
 
@@ -893,15 +2436,21 @@ async function loadProducts() {
 
       quantities[
         product.id
-      ] = 0;
+      ] =
+        0;
 
     }
   );
 
 
   renderProducts();
+
 }
 
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
 
 function renderProducts() {
 
@@ -912,7 +2461,9 @@ function renderProducts() {
     productsBox.innerHTML =
       "<p>No foodstuffs are currently available.</p>";
 
+
     return;
+
   }
 
 
@@ -924,32 +2475,45 @@ function renderProducts() {
 
           const image =
             product.image_url
+
               ? `
+
                 <img
                   src="${escapeHtml(product.image_url)}"
                   alt="${escapeHtml(product.name)}"
+                  loading="lazy"
                 >
+
               `
+
               : `
+
                 <div class="no-image">
                   No picture available
                 </div>
+
               `;
 
 
           const description =
             product.description
+
               ? `
+
                 <div class="product-description">
                   ${escapeHtml(product.description)}
                 </div>
+
               `
+
               : "";
 
 
           const controls =
             product.in_stock
+
               ? `
+
                 <div class="quantity-row">
 
                   <button
@@ -958,9 +2522,11 @@ function renderProducts() {
                       ${Number(product.id)},
                       -1
                     )"
+                    aria-label="Reduce ${escapeHtml(product.name)} quantity"
                   >
                     −
                   </button>
+
 
                   <span
                     class="quantity"
@@ -969,22 +2535,28 @@ function renderProducts() {
                     0
                   </span>
 
+
                   <button
                     type="button"
                     onclick="changeQuantity(
                       ${Number(product.id)},
                       1
                     )"
+                    aria-label="Increase ${escapeHtml(product.name)} quantity"
                   >
                     +
                   </button>
 
                 </div>
+
               `
+
               : `
+
                 <div class="unavailable">
                   Currently unavailable
                 </div>
+
               `;
 
 
@@ -993,14 +2565,18 @@ function renderProducts() {
               !isSingleFoodstuff &&
               product.slug
             )
+
               ? `
+
                 <a
                   class="product-link"
                   href="/${encodeURIComponent(product.slug)}"
                 >
                   View Product
                 </a>
+
               `
+
               : "";
 
 
@@ -1008,12 +2584,14 @@ function renderProducts() {
 
             <article class="product-card">
 
+
               <div class="product-image">
                 ${image}
               </div>
 
 
               <div class="product-body">
+
 
                 <div class="product-name">
                   ${escapeHtml(product.name)}
@@ -1026,16 +2604,23 @@ function renderProducts() {
                 <div class="product-price">
 
                   ${money(product.price)}
-                  ${escapeHtml(product.unit)}
+
+                  ${
+                    product.unit
+                      ? escapeHtml(product.unit)
+                      : ""
+                  }
 
                 </div>
 
 
-                <span class="stock ${
-                  product.in_stock
-                    ? "in-stock"
-                    : "out-stock"
-                }">
+                <span
+                  class="stock ${
+                    product.in_stock
+                      ? "in-stock"
+                      : "out-stock"
+                  }"
+                >
 
                   ${
                     product.in_stock
@@ -1048,18 +2633,26 @@ function renderProducts() {
 
                 ${controls}
 
+
                 ${productLink}
+
 
               </div>
 
             </article>
+
           `;
 
         }
       )
       .join("");
+
 }
 
+
+/* =========================
+   QUANTITY
+========================= */
 
 function changeQuantity(
   productId,
@@ -1084,6 +2677,7 @@ function changeQuantity(
   ) {
 
     return;
+
   }
 
 
@@ -1105,6 +2699,7 @@ function changeQuantity(
 
     quantity =
       0;
+
   }
 
 
@@ -1114,6 +2709,7 @@ function changeQuantity(
 
     quantity =
       99;
+
   }
 
 
@@ -1133,8 +2729,13 @@ function changeQuantity(
 
 
   updateSummary();
+
 }
 
+
+/* =========================
+   SELECTED ITEMS
+========================= */
 
 function getSelectedItems() {
 
@@ -1149,6 +2750,7 @@ function getSelectedItems() {
     )
     .map(
       product => {
+
 
         const quantity =
           Number(
@@ -1166,15 +2768,24 @@ function getSelectedItems() {
 
 
         return {
+
           ...product,
+
           quantity,
+
           lineTotal
+
         };
 
       }
     );
+
 }
 
+
+/* =========================
+   ORDER SUMMARY
+========================= */
 
 function updateSummary() {
 
@@ -1187,9 +2798,11 @@ function updateSummary() {
   ) {
 
     summaryBox.innerHTML = `
+
       <div class="empty-summary">
         No foodstuff selected yet.
       </div>
+
     `;
 
 
@@ -1202,6 +2815,7 @@ function updateSummary() {
 
 
     return;
+
   }
 
 
@@ -1219,9 +2833,11 @@ function updateSummary() {
               <br>
 
               <small>
+
                 ${item.quantity}
                 ×
                 ${money(item.price)}
+
               </small>
 
             </span>
@@ -1261,8 +2877,13 @@ function updateSummary() {
 
   summaryTotal.style.display =
     "flex";
+
 }
 
+
+/* =========================
+   WHATSAPP ORDER
+========================= */
 
 function submitWhatsAppOrder() {
 
@@ -1281,7 +2902,9 @@ function submitWhatsAppOrder() {
       "Please select at least one foodstuff before submitting your order."
     );
 
+
     return;
+
   }
 
 
@@ -1361,7 +2984,9 @@ function submitWhatsAppOrder() {
       "Please complete your name, phone number and delivery address before submitting."
     );
 
+
     return;
+
   }
 
 
@@ -1388,8 +3013,9 @@ function submitWhatsAppOrder() {
           index
         ) => {
 
+
           let line =
-            `${index + 1}. ${item.name}
+`${index + 1}. ${item.name}
 ${item.quantity} pack(s) × ${money(item.price)} = ${money(item.lineTotal)}`;
 
 
@@ -1401,6 +3027,7 @@ ${item.quantity} pack(s) × ${money(item.price)} = ${money(item.lineTotal)}`;
 
 Product Link:
 ${getProductUrl(item)}`;
+
           }
 
 
@@ -1413,7 +3040,8 @@ ${getProductUrl(item)}`;
       );
 
 
-  let message = `Hello GiftedGift Empire,
+  let message =
+`Hello GiftedGift Empire,
 
 I would like to place an African foodstuff order.
 
@@ -1461,14 +3089,22 @@ Please confirm my order and delivery cost. Thank you.`;
 
   window.location.href =
     whatsappUrl;
+
 }
 
+
+/* =========================
+   START
+========================= */
 
 loadProducts();
 
 </script>
 
-<script src="cookie-consent.js"></script>
+
+<script src="/cookie-consent.js"></script>
+
 
 </body>
+
 </html>
