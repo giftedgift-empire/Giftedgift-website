@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Categories | GiftedGift Empire</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Categories | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+
+  <!-- =========================
+       FAVICON / BROWSER LOGO
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="my-logo.png"
+  >
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -18,103 +65,225 @@
       color: #222;
     }
 
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: #123a8c;
       color: white;
-      padding: 25px 20px;
+      padding: 18px 20px;
     }
 
-    header h1 {
-      color: #f2bd16;
-      margin: 0 0 20px;
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
     }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    .brand-name {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 6px 18px;
     }
 
     nav a {
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
+
+      padding: 7px 0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
     nav a:hover {
       color: #f2bd16;
     }
 
-    .hero {
-      text-align: center;
-      background: white;
-      padding: 50px 20px 35px;
+    nav a.active {
+      color: #f2bd16;
+
+      border-bottom-color:
+        #f2bd16;
     }
 
-    .hero h2 {
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+
+      background: white;
+
+      padding:
+        50px 20px 35px;
+    }
+
+    .hero h1 {
       font-size: 38px;
-      margin-bottom: 15px;
+
+      margin:
+        0 0 15px;
+
+      color: #123a8c;
     }
 
     .hero p {
       color: #555;
+
       max-width: 650px;
+
       margin: auto;
+
       line-height: 1.7;
     }
 
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
     .categories {
       max-width: 1100px;
+
       margin: auto;
-      padding: 45px 20px;
+
+      padding:
+        45px 20px;
     }
 
     .category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(240px, 1fr)
+        );
+
       gap: 25px;
     }
 
     .category-card {
       background: white;
+
       border-radius: 14px;
+
       overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.08);
     }
 
     .category-card img {
       width: 100%;
       height: 210px;
+
       object-fit: cover;
+
       display: block;
     }
 
-    .category-content {
-      padding: 28px 22px;
+    .category-image-placeholder {
+      width: 100%;
+      height: 210px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #edf3ff,
+          #fff8dc
+        );
     }
 
-    .category-card h3 {
+    .category-content {
+      padding:
+        28px 22px;
+    }
+
+    .category-card h2 {
       font-size: 24px;
-      margin-top: 0;
-      margin-bottom: 12px;
+
+      margin:
+        0 0 12px;
+
       color: #123a8c;
     }
 
     .category-card p {
       color: #555;
+
       line-height: 1.6;
+
       min-height: 52px;
     }
 
     .category-card a {
       display: inline-block;
+
       margin-top: 12px;
+
       background: #f2bd16;
       color: #111;
+
       text-decoration: none;
+
       font-weight: bold;
-      padding: 11px 18px;
+
+      padding:
+        11px 18px;
+
       border-radius: 7px;
+    }
+
+    .category-card a:hover {
+      background: #d8a90e;
     }
 
     .category-card.foodstuffs a {
@@ -124,72 +293,217 @@
 
     .loading-message {
       text-align: center;
+
       grid-column: 1 / -1;
+
       font-weight: bold;
+
       color: #555;
+
       padding: 30px;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       margin-top: 40px;
+
       background: #123a8c;
       color: white;
+
       text-align: center;
-      padding: 30px 20px;
+
+      padding:
+        30px 20px;
     }
 
+    .footer-logo {
+      width: 46px;
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      margin-bottom: 8px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
-      .hero h2 {
+
+      header {
+        padding:
+          15px 16px;
+      }
+
+      .brand img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+      nav {
+        gap:
+          4px 14px;
+      }
+
+      nav a {
+        font-size: 14px;
+      }
+
+      .hero h1 {
         font-size: 32px;
       }
 
       .categories {
-        padding: 35px 16px;
+        padding:
+          35px 16px;
       }
 
-      .category-card img {
+      .category-card img,
+      .category-image-placeholder {
         height: 240px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-  <h1>GiftedGift Empire</h1>
+  <div class="header-inner">
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="categories.html">Categories</a>
-    <a href="blog.html">Blog</a>
-    <a href="deals.html">Deals</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
-  </nav>
+
+    <a
+      href="index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
+
+      <img
+        src="my-logo.png"
+        alt="GiftedGift Empire logo"
+        width="58"
+        height="58"
+      >
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <nav>
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="shop.html">
+        Shop
+      </a>
+
+      <a
+        href="categories.html"
+        class="active"
+      >
+        Categories
+      </a>
+
+      <a href="daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
+      <a href="blog.html">
+        Blog
+      </a>
+
+      <a href="deals.html">
+        Deals
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
-  <h2>Shop by Category</h2>
+  <h1>
+    Shop by Category
+  </h1>
 
   <p>
-    Browse products by category and discover useful items,
-    digital products, lifestyle finds, African foodstuffs
-    and carefully selected recommendations.
+
+    Browse products by category and discover
+    useful items, digital products, lifestyle
+    finds, African foodstuffs and carefully
+    selected recommendations.
+
   </p>
 
 </section>
 
 
+<!-- =========================
+     CATEGORIES
+========================= -->
+
 <main class="categories">
 
-  <div id="category-grid" class="category-grid">
+  <div
+    id="category-grid"
+    class="category-grid"
+  >
 
     <div class="loading-message">
       Loading categories...
@@ -200,25 +514,45 @@
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
+  <img
+    src="my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    width="46"
+    height="46"
+    loading="lazy"
+  >
+
   <p>
-    <strong>GiftedGift Empire</strong>
+    <strong>
+      GiftedGift Empire
+    </strong>
   </p>
 
   <p>
-    © 2026 GiftedGift Empire. All rights reserved.
+    © 2026 GiftedGift Empire.
+    All rights reserved.
   </p>
 
 </footer>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
 
 <script>
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
 
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
@@ -231,10 +565,72 @@ const supabaseClient =
   );
 
 
+function categoryDescription(
+  category
+) {
+
+  if (
+    category.description &&
+    String(
+      category.description
+    ).trim()
+  ) {
+
+    return String(
+      category.description
+    ).trim();
+
+  }
+
+
+  const name =
+    String(
+      category.name || ""
+    )
+      .toLowerCase()
+      .trim();
+
+
+  const descriptions = {
+
+    "home & living":
+      "Beautiful and practical products for a comfortable home.",
+
+    "beauty & lifestyle":
+      "Beauty, self-care and lifestyle finds for everyday living.",
+
+    "fashion & accessories":
+      "Stylish fashion and accessories selected for your wardrobe.",
+
+    "tech & gadgets":
+      "Useful technology and smart gadgets for everyday life.",
+
+    "digital products":
+      "eBooks, guides, templates and useful digital resources.",
+
+    "african foodstuffs":
+      "Quality African foodstuffs and pantry essentials for your kitchen.",
+
+    "useful finds":
+      "Practical products carefully selected for everyday life."
+
+  };
+
+
+  return (
+    descriptions[name] ||
+    "Discover carefully selected products in this category."
+  );
+
+}
+
+
 async function loadCategories() {
 
   const grid =
-    document.getElementById("category-grid");
+    document.getElementById(
+      "category-grid"
+    );
 
 
   const {
@@ -259,13 +655,18 @@ async function loadCategories() {
       error
     );
 
+
     grid.innerHTML = `
+
       <div class="loading-message">
         Categories could not be loaded.
       </div>
+
     `;
 
+
     return;
+
   }
 
 
@@ -275,134 +676,184 @@ async function loadCategories() {
   ) {
 
     grid.innerHTML = `
+
       <div class="loading-message">
         No categories are available yet.
       </div>
+
     `;
 
+
     return;
+
   }
 
 
-  grid.innerHTML = "";
+  grid.innerHTML =
+    "";
 
 
-  categories.forEach(category => {
-
-    const card =
-      document.createElement("div");
+  categories.forEach(
+    category => {
 
 
-    const categoryName =
-      category.name ||
-      "Category";
+      const card =
+        document.createElement(
+          "article"
+        );
 
 
-    const categorySlug =
-      String(
-        category.slug || ""
-      ).toLowerCase();
+      const categoryName =
+        category.name ||
+        "Category";
 
 
-    const isFoodstuffs =
-      categorySlug ===
-        "african-foodstuffs" ||
-      categoryName
-        .toLowerCase()
-        .trim() ===
-        "african foodstuffs";
+      const categorySlug =
+        String(
+          category.slug || ""
+        )
+          .toLowerCase();
 
 
-    card.className =
-      isFoodstuffs
-        ? "category-card foodstuffs"
-        : "category-card";
+      const isFoodstuffs =
+        categorySlug ===
+          "african-foodstuffs" ||
+
+        categoryName
+          .toLowerCase()
+          .trim() ===
+          "african foodstuffs";
 
 
-    const description =
-      category.description || "";
+      card.className =
+        isFoodstuffs
+
+          ? "category-card foodstuffs"
+
+          : "category-card";
 
 
-    /*
-      African Foodstuffs has its own
-      WhatsApp ordering page.
-
-      All other categories go to
-      the normal filtered Shop.
-    */
-
-    const shopLink =
-      isFoodstuffs
-        ? "foodstuffs.html"
-        : "shop.html?category=" +
-          encodeURIComponent(
-            categoryName
-          );
+      const description =
+        categoryDescription(
+          category
+        );
 
 
-    let imageHTML = "";
+      const shopLink =
+        isFoodstuffs
+
+          ? "foodstuffs.html"
+
+          : "shop.html?category=" +
+            encodeURIComponent(
+              categoryName
+            );
 
 
-    if (category.image_url) {
+      const imageHTML =
+        category.image_url
 
-      imageHTML = `
-        <img
-          src="${escapeHTML(category.image_url)}"
-          alt="${escapeHTML(categoryName)}"
-        >
+          ? `
+
+            <img
+              src="${escapeHTML(
+                category.image_url
+              )}"
+              alt="${escapeHTML(
+                categoryName
+              )}"
+              loading="lazy"
+            >
+
+          `
+
+          : `
+
+            <div
+              class="category-image-placeholder"
+              aria-hidden="true"
+            ></div>
+
+          `;
+
+
+      card.innerHTML = `
+
+        ${imageHTML}
+
+
+        <div class="category-content">
+
+
+          <h2>
+            ${escapeHTML(
+              categoryName
+            )}
+          </h2>
+
+
+          <p>
+            ${escapeHTML(
+              description
+            )}
+          </p>
+
+
+          <a href="${escapeHTML(shopLink)}">
+            Shop Now →
+          </a>
+
+
+        </div>
+
       `;
 
+
+      grid.appendChild(
+        card
+      );
+
     }
-
-
-    card.innerHTML = `
-
-      ${imageHTML}
-
-      <div class="category-content">
-
-        <h3>
-          ${escapeHTML(categoryName)}
-        </h3>
-
-        <p>
-          ${escapeHTML(description)}
-        </p>
-
-        <a href="${shopLink}">
-          Shop Now
-        </a>
-
-      </div>
-
-    `;
-
-
-    grid.appendChild(card);
-
-  });
+  );
 
 }
 
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   div.textContent =
     value == null
+
       ? ""
-      : String(value);
+
+      : String(
+          value
+        );
+
 
   return div.innerHTML;
+
 }
 
 
 loadCategories();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+
+<script src="cookie-consent.js"></script>
+
+<script src="/affiliate-tracking.js"></script>
+
 
 </body>
+
 </html>
