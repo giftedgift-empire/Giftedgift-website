@@ -10,6 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
   <title>
     Creator Product | GiftedGift Empire
   </title>
@@ -17,12 +22,18 @@
   <meta
     id="meta-description"
     name="description"
-    content="Discover this digital product on GiftedGift Empire."
+    content="Discover approved Creator Marketplace digital products available through GiftedGift Empire."
   >
 
   <meta
+    id="robots-meta"
     name="robots"
-    content="index, follow"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
   >
 
   <link
@@ -32,25 +43,32 @@
   >
 
 
-  <!-- SOCIAL / AD SHARING -->
+  <!-- =========================
+       FAVICON
+  ========================= -->
 
-  <meta
-    id="og-title"
-    property="og:title"
-    content="GiftedGift Empire"
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
   >
 
-  <meta
-    id="og-description"
-    property="og:description"
-    content="Discover this digital product on GiftedGift Empire."
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
   >
 
-  <meta
-    id="og-url"
-    property="og:url"
-    content="https://giftedgiftempire.com/"
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
   >
+
+
+  <!-- =========================
+       OPEN GRAPH
+       FACEBOOK / WHATSAPP
+  ========================= -->
 
   <meta
     property="og:type"
@@ -58,9 +76,66 @@
   >
 
   <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    id="og-title"
+    property="og:title"
+    content="Creator Product | GiftedGift Empire"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Discover approved Creator Marketplace digital products available through GiftedGift Empire."
+  >
+
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/creator-product.html"
+  >
+
+  <meta
     id="og-image"
     property="og:image"
-    content=""
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    id="og-image-alt"
+    property="og:image:alt"
+    content="GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    id="twitter-title"
+    name="twitter:title"
+    content="Creator Product | GiftedGift Empire"
+  >
+
+  <meta
+    id="twitter-description"
+    name="twitter:description"
+    content="Discover approved Creator Marketplace digital products available through GiftedGift Empire."
+  >
+
+  <meta
+    id="twitter-image"
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
   >
 
 
@@ -69,6 +144,7 @@
     * {
       box-sizing: border-box;
     }
+
 
     body {
       margin: 0;
@@ -89,31 +165,28 @@
     }
 
 
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: #123a8c;
 
       color: white;
 
-      padding: 18px 20px;
+      padding: 16px 20px;
+
+      border-bottom:
+        4px solid #f2bd16;
     }
 
 
     .header-inner {
       width: 100%;
 
-      max-width: 1150px;
+      max-width: 1200px;
 
       margin: auto;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 18px;
-
-      flex-wrap: wrap;
     }
 
 
@@ -122,44 +195,94 @@
 
       align-items: center;
 
-      gap: 12px;
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 16px;
 
       text-decoration: none;
     }
 
 
     .brand img {
-      width: 55px;
+      width: 54px;
 
-      height: 55px;
+      height: 54px;
 
       object-fit: contain;
 
       background: white;
 
-      padding: 4px;
+      padding: 3px;
 
-      border-radius: 10px;
+      border-radius: 50%;
     }
 
 
     .brand-name {
-      color: #f2bd16;
-
-      font-size: 24px;
+      font-size: 27px;
 
       font-weight: 800;
     }
 
 
-    .header-link {
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap:
+        6px
+        18px;
+    }
+
+
+    nav a {
       color: white;
 
       text-decoration: none;
 
-      font-weight: 700;
+      font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
+
+    nav a:hover,
+    nav a.active {
+      color: #f2bd16;
+    }
+
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
 
     .page {
       width: 100%;
@@ -168,7 +291,10 @@
 
       margin: auto;
 
-      padding: 24px 16px 60px;
+      padding:
+        24px
+        16px
+        60px;
     }
 
 
@@ -190,20 +316,34 @@
     }
 
 
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
     .loading,
     .error-box {
       background: white;
 
-      border: 1px solid #dfe4ec;
+      border:
+        1px solid #dfe4ec;
 
       border-radius: 15px;
 
-      padding: 35px 20px;
+      padding:
+        35px
+        20px;
 
       text-align: center;
 
       box-shadow:
-        0 5px 20px
+        0
+        5px
+        20px
         rgba(0,0,0,0.05);
     }
 
@@ -215,17 +355,34 @@
     }
 
 
+    .error-box a {
+      color: #123a8c;
+
+      font-weight: bold;
+    }
+
+
     .product-page {
       display: none;
     }
 
 
+    /* =========================
+       PRODUCT
+    ========================= */
+
     .product-layout {
       display: grid;
 
       grid-template-columns:
-        minmax(280px, 0.9fr)
-        minmax(0, 1.1fr);
+        minmax(
+          280px,
+          0.9fr
+        )
+        minmax(
+          0,
+          1.1fr
+        );
 
       gap: 35px;
 
@@ -233,18 +390,25 @@
     }
 
 
-    .image-panel {
+    .image-panel,
+    .details-panel {
       background: white;
 
-      border: 1px solid #dfe4ec;
+      border:
+        1px solid #dfe4ec;
 
       border-radius: 18px;
 
-      padding: 20px;
-
       box-shadow:
-        0 5px 20px
+        0
+        5px
+        20px
         rgba(0,0,0,0.05);
+    }
+
+
+    .image-panel {
+      padding: 20px;
     }
 
 
@@ -290,17 +454,7 @@
 
 
     .details-panel {
-      background: white;
-
-      border: 1px solid #dfe4ec;
-
-      border-radius: 18px;
-
       padding: 27px;
-
-      box-shadow:
-        0 5px 20px
-        rgba(0,0,0,0.05);
     }
 
 
@@ -311,7 +465,9 @@
 
       color: #123a8c;
 
-      padding: 7px 11px;
+      padding:
+        7px
+        11px;
 
       border-radius: 999px;
 
@@ -324,13 +480,18 @@
 
 
     .product-title {
-      margin: 0 0 13px;
+      margin:
+        0
+        0
+        13px;
 
       color: #123a8c;
 
       font-size: 34px;
 
       line-height: 1.18;
+
+      overflow-wrap: anywhere;
     }
 
 
@@ -357,7 +518,10 @@
 
       color: #111;
 
-      margin: 16px 0 20px;
+      margin:
+        16px
+        0
+        20px;
     }
 
 
@@ -368,9 +532,15 @@
 
       white-space: pre-wrap;
 
+      overflow-wrap: anywhere;
+
       margin-bottom: 24px;
     }
 
+
+    /* =========================
+       ACTIONS
+    ========================= */
 
     .buy-button {
       width: 100%;
@@ -379,7 +549,9 @@
 
       border-radius: 10px;
 
-      padding: 15px 18px;
+      padding:
+        15px
+        18px;
 
       min-height: 52px;
 
@@ -397,14 +569,22 @@
     }
 
 
+    .buy-button:hover {
+      background: #d8a90e;
+    }
+
+
     .share-button {
       width: 100%;
 
-      border: 1px solid #123a8c;
+      border:
+        1px solid #123a8c;
 
       border-radius: 10px;
 
-      padding: 13px 18px;
+      padding:
+        13px
+        18px;
 
       min-height: 48px;
 
@@ -420,11 +600,26 @@
     }
 
 
+    .share-button:hover {
+      background: #f2f6ff;
+    }
+
+
+    /* =========================
+       TRUST
+    ========================= */
+
     .trust-grid {
       display: grid;
 
       grid-template-columns:
-        repeat(3, minmax(0,1fr));
+        repeat(
+          3,
+          minmax(
+            0,
+            1fr
+          )
+        );
 
       gap: 12px;
 
@@ -435,7 +630,8 @@
     .trust-item {
       background: #f8f9fc;
 
-      border: 1px solid #e4e8ef;
+      border:
+        1px solid #e4e8ef;
 
       border-radius: 11px;
 
@@ -458,10 +654,15 @@
     }
 
 
+    /* =========================
+       SECTIONS
+    ========================= */
+
     .section {
       background: white;
 
-      border: 1px solid #dfe4ec;
+      border:
+        1px solid #dfe4ec;
 
       border-radius: 16px;
 
@@ -470,7 +671,9 @@
       margin-top: 24px;
 
       box-shadow:
-        0 4px 18px
+        0
+        4px
+        18px
         rgba(0,0,0,0.04);
     }
 
@@ -478,7 +681,10 @@
     .section h2 {
       color: #123a8c;
 
-      margin: 0 0 12px;
+      margin:
+        0
+        0
+        12px;
     }
 
 
@@ -488,6 +694,8 @@
       line-height: 1.7;
 
       margin: 0;
+
+      white-space: pre-line;
     }
 
 
@@ -513,11 +721,17 @@
 
       border-radius: 8px;
 
-      padding: 10px 13px;
+      padding:
+        10px
+        13px;
 
       font-weight: 700;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: #123a8c;
@@ -526,41 +740,139 @@
 
       text-align: center;
 
-      padding: 25px 16px;
-
-      line-height: 1.6;
+      padding:
+        32px
+        18px;
     }
 
 
-    footer a {
-      color: #f2bd16;
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-weight: 800;
+
+      font-size: 18px;
+    }
+
+
+    .footer-links {
+      margin-top: 17px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 14px;
+    }
+
+
+    .footer-links a {
+      color: white;
 
       text-decoration: none;
 
-      font-weight: 700;
+      font-size: 14px;
     }
 
 
-    @media (max-width: 800px) {
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      margin-top: 18px;
+
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 800px
+    ) {
 
       .product-layout {
         grid-template-columns: 1fr;
       }
 
+
       .product-title {
         font-size: 29px;
       }
+
 
       .price {
         font-size: 30px;
       }
 
+
       .trust-grid {
         grid-template-columns: 1fr;
       }
 
+
       .product-image-wrap {
         min-height: 280px;
+      }
+
+    }
+
+
+    @media (
+      max-width: 600px
+    ) {
+
+      header {
+        padding:
+          14px
+          15px;
+      }
+
+
+      .brand img {
+        width: 48px;
+
+        height: 48px;
+      }
+
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          13px;
+      }
+
+
+      nav a {
+        font-size: 14px;
       }
 
     }
@@ -573,33 +885,84 @@
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
   <div class="header-inner">
 
+
     <a
-      href="index.html"
+      href="/index.html"
       class="brand"
+      aria-label="GiftedGift Empire home"
     >
 
       <img
-        src="my-logo.png"
-        alt="GiftedGift Empire"
+        src="/my-logo.png"
+        alt="GiftedGift Empire logo"
       >
 
-      <span class="brand-name">
-        GiftedGift Empire
-      </span>
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
 
     </a>
 
 
-    <a
-      href="shop.html"
-      class="header-link"
-    >
-      Continue Shopping
-    </a>
+    <nav>
+
+      <a href="/index.html">
+        Home
+      </a>
+
+      <a
+        href="/shop.html"
+        class="active"
+      >
+        Shop
+      </a>
+
+      <a href="/categories.html">
+        Categories
+      </a>
+
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
+      <a href="/blog.html">
+        Blog
+      </a>
+
+      <a href="/deals.html">
+        Deals
+      </a>
+
+      <a href="/about.html">
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
 
   </div>
 
@@ -609,15 +972,19 @@
 <main class="page">
 
 
+  <!-- =========================
+       BREADCRUMB
+  ========================= -->
+
   <div class="breadcrumb">
 
-    <a href="index.html">
+    <a href="/index.html">
       Home
     </a>
 
     &nbsp;›&nbsp;
 
-    <a href="shop.html">
+    <a href="/shop.html">
       Shop
     </a>
 
@@ -630,9 +997,15 @@
   </div>
 
 
+  <!-- =========================
+       STATUS
+  ========================= -->
+
   <div
     id="loading"
     class="loading"
+    role="status"
+    aria-live="polite"
   >
     Loading product...
   </div>
@@ -642,10 +1015,24 @@
     id="error-box"
     class="error-box"
   >
-    This Creator product is unavailable,
-    has not been approved, or could not be found.
+
+    <strong>
+      This Creator product is unavailable,
+      has not been approved, or could not be found.
+    </strong>
+
+    <br><br>
+
+    <a href="/shop.html">
+      Return to Shop
+    </a>
+
   </div>
 
+
+  <!-- =========================
+       PRODUCT PAGE
+  ========================= -->
 
   <div
     id="product-page"
@@ -656,7 +1043,7 @@
     <section class="product-layout">
 
 
-      <!-- PRODUCT COVER -->
+      <!-- COVER -->
 
       <div class="image-panel">
 
@@ -681,9 +1068,10 @@
       </div>
 
 
-      <!-- PRODUCT INFORMATION -->
+      <!-- DETAILS -->
 
       <div class="details-panel">
+
 
         <div
           id="product-type"
@@ -701,11 +1089,12 @@
 
         <div class="seller-line">
 
-          Verified Creator on GiftedGift Empire
+          ✓ Verified Creator on GiftedGift Empire
 
           <br>
 
           Seller Code:
+
           <span
             id="seller-code"
             class="seller-code"
@@ -784,9 +1173,12 @@
 
       </div>
 
-
     </section>
 
+
+    <!-- =========================
+         ABOUT PRODUCT
+    ========================= -->
 
     <section class="section">
 
@@ -799,6 +1191,10 @@
     </section>
 
 
+    <!-- =========================
+         MARKETPLACE INFO
+    ========================= -->
+
     <section class="section">
 
       <h2>
@@ -808,14 +1204,18 @@
       <p>
         This product has been reviewed and approved
         for listing on the GiftedGift Empire Creator
-        Marketplace. The Creator's original digital file
-        is not publicly exposed. Access to purchased
-        digital content will be handled through the
-        secure checkout and delivery system.
+        Marketplace. The Creator's original digital
+        file is not publicly exposed. Access to
+        purchased digital content is handled through
+        the secure checkout and delivery system.
       </p>
 
     </section>
 
+
+    <!-- =========================
+         SUPPORT
+    ========================= -->
 
     <section class="section">
 
@@ -834,11 +1234,11 @@
 
       <div class="support-links">
 
-        <a href="customer-service.html">
+        <a href="/customer-service.html">
           Customer Service
         </a>
 
-        <a href="contact.html">
+        <a href="/contact.html">
           Contact GiftedGift Empire
         </a>
 
@@ -849,33 +1249,69 @@
 
   </div>
 
-
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <div>
-    © GiftedGift Empire
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+  >
+
+
+  <div class="footer-brand">
+    GiftedGift Empire
   </div>
 
-  <div>
 
-    <a href="index.html">
+  <div class="footer-links">
+
+    <a href="/index.html">
       Home
     </a>
 
-    &nbsp; | &nbsp;
-
-    <a href="shop.html">
+    <a href="/shop.html">
       Shop
     </a>
 
-    &nbsp; | &nbsp;
+    <a href="/categories.html">
+      Categories
+    </a>
 
-    <a href="customer-service.html">
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
       Customer Service
     </a>
+
+    <a href="/privacy-policy.html">
+      Privacy Policy
+    </a>
+
+    <a href="/terms-conditions.html">
+      Terms & Conditions
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
+    All rights reserved.
 
   </div>
 
@@ -889,848 +1325,1038 @@
 
 <script>
 
-  /*
-  =====================================================
-  SUPABASE
-  =====================================================
-  */
 
-  const SUPABASE_URL =
-    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+/* =========================
+   CONFIGURATION
+========================= */
 
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+const SITE_ORIGIN =
+  "https://giftedgiftempire.com";
 
 
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_ORIGIN +
+  "/my-logo.png";
 
 
-  let currentProduct =
-    null;
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
 
-  let canonicalProductUrl =
-    "";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-  /*
-  =====================================================
-  GET SLUG
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
-  Supports:
-  1. Future Cloudflare injected clean slug
-  2. ?slug= fallback during testing
-  =====================================================
-  */
 
-  function getProductSlug() {
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
 
-    if (
+
+let currentProduct =
+  null;
+
+
+let canonicalProductUrl =
+  "";
+
+
+/* =========================
+   GET SLUG
+========================= */
+
+function getProductSlug() {
+
+  if (
+    window.__CREATOR_PRODUCT_SLUG
+  ) {
+
+    return String(
       window.__CREATOR_PRODUCT_SLUG
-    ) {
-
-      return String(
-        window.__CREATOR_PRODUCT_SLUG
-      ).trim();
-
-    }
-
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    return (
-      params.get(
-        "slug"
-      ) || ""
     ).trim();
 
   }
 
 
-  /*
-  =====================================================
-  FORMAT PRICE
-  =====================================================
-  */
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
-  function formatMoney(
-    value,
-    currency
+
+  return (
+    params.get(
+      "slug"
+    ) ||
+    ""
+  ).trim();
+
+}
+
+
+/* =========================
+   FORMAT MONEY
+========================= */
+
+function formatMoney(
+  value,
+  currency
+) {
+
+  const amount =
+    Number(
+      value
+    );
+
+
+  if (
+    !Number.isFinite(
+      amount
+    )
   ) {
 
-    try {
-
-      return new Intl.NumberFormat(
-        undefined,
-        {
-          style:
-            "currency",
-
-          currency:
-            currency || "EUR"
-        }
-      ).format(
-        Number(
-          value || 0
-        )
-      );
-
-    }
-
-    catch (
-      error
-    ) {
-
-      return (
-        (currency || "EUR") +
-        " " +
-        Number(
-          value || 0
-        ).toFixed(
-          2
-        )
-      );
-
-    }
+    return "";
 
   }
 
 
-  /*
-  =====================================================
-  CLEAN PRODUCT URL
+  try {
 
-  Tracking parameters are intentionally excluded
-  from the canonical/share URL.
-  =====================================================
-  */
+    return new Intl.NumberFormat(
+      "en-US",
+      {
+        style:
+          "currency",
 
-  function buildCanonicalUrl(
-    slug
+        currency:
+          currency ||
+          "EUR",
+
+        minimumFractionDigits:
+          2,
+
+        maximumFractionDigits:
+          2
+      }
+    ).format(
+      amount
+    );
+
+
+  } catch (
+    error
   ) {
 
-    if (
-      window.__CREATOR_PRODUCT_SLUG
-    ) {
+    return (
+      (
+        currency ||
+        "EUR"
+      ) +
+      " " +
+      amount.toFixed(
+        2
+      )
+    );
 
-      return (
-        window.location.origin +
-        window.location.pathname
-      );
+  }
 
-    }
+}
 
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+function cleanDescription(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+
+}
+
+
+function descriptionPreview(
+  value
+) {
+
+  const description =
+    cleanDescription(
+      value
+    );
+
+
+  if (
+    !description
+  ) {
+
+    return (
+      "Approved Creator Marketplace digital product " +
+      "available through GiftedGift Empire."
+    );
+
+  }
+
+
+  if (
+    description.length <= 155
+  ) {
+
+    return description;
+
+  }
+
+
+  return (
+    description.slice(
+      0,
+      152
+    ) +
+    "..."
+  );
+
+}
+
+
+/* =========================
+   CANONICAL URL
+========================= */
+
+function buildCanonicalUrl(
+  slug
+) {
+
+  if (
+    window.__CREATOR_PRODUCT_SLUG
+  ) {
 
     return (
       window.location.origin +
-      "/creator-product.html?slug=" +
-      encodeURIComponent(
-        slug
-      )
+      window.location.pathname
     );
 
   }
 
 
-  /*
-  =====================================================
-  PRESERVE AD / AFFILIATE PARAMETERS FOR CHECKOUT
-  =====================================================
-  */
-
-  function buildCheckoutUrl(
-    slug
-  ) {
-
-    const currentParams =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const checkoutParams =
-      new URLSearchParams();
-
-
-    checkoutParams.set(
-      "slug",
+  return (
+    window.location.origin +
+    "/creator-product.html?slug=" +
+    encodeURIComponent(
       slug
+    )
+  );
+
+}
+
+
+/* =========================
+   CHECKOUT URL
+========================= */
+
+function buildCheckoutUrl(
+  slug
+) {
+
+  const currentParams =
+    new URLSearchParams(
+      window.location.search
     );
 
 
-    currentParams.forEach(
-      (
-        value,
-        key
-      ) => {
+  const checkoutParams =
+    new URLSearchParams();
 
-        if (
-          key !==
-          "slug"
-        ) {
 
-          checkoutParams.set(
-            key,
-            value
-          );
+  checkoutParams.set(
+    "slug",
+    slug
+  );
 
-        }
+
+  currentParams.forEach(
+    (
+      value,
+      key
+    ) => {
+
+      if (
+        key !== "slug"
+      ) {
+
+        checkoutParams.set(
+          key,
+          value
+        );
 
       }
+
+    }
+  );
+
+
+  return (
+    "/creator-checkout.html?" +
+    checkoutParams.toString()
+  );
+
+}
+
+
+/* =========================
+   SEO META HELPERS
+========================= */
+
+function setMeta(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(
+      id
     );
 
 
-    return (
-      "creator-checkout.html?" +
-      checkoutParams.toString()
-    );
-
-  }
-
-
-  /*
-  =====================================================
-  PRODUCT COVER
-  =====================================================
-  */
-
-  async function loadCover(
-    path,
-    title
+  if (
+    element
   ) {
 
-    const image =
-      document.getElementById(
-        "product-image"
-      );
-
-
-    const placeholder =
-      document.getElementById(
-        "image-placeholder"
-      );
-
-
-    if (
-      !path
-    ) {
-
-      placeholder.textContent =
-        "No product cover available.";
-
-      return;
-
-    }
-
-
-    /*
-    -----------------------------------------------------
-    FIRST TRY: TEMPORARY SIGNED URL
-    -----------------------------------------------------
-    */
-
-    const {
-      data: signedData,
-      error: signedError
-    } =
-      await supabaseClient
-        .storage
-        .from(
-          "creator-product-covers"
-        )
-        .createSignedUrl(
-          path,
-          3600
-        );
-
-
-    if (
-      !signedError &&
-      signedData &&
-      signedData.signedUrl
-    ) {
-
-      image.src =
-        signedData.signedUrl;
-
-      image.alt =
-        title;
-
-      image.style.display =
-        "block";
-
-      placeholder.style.display =
-        "none";
-
-
-      document
-        .getElementById(
-          "og-image"
-        )
-        .setAttribute(
-          "content",
-          signedData.signedUrl
-        );
-
-
-      return;
-
-    }
-
-
-    /*
-    -----------------------------------------------------
-    FALLBACK: DOWNLOAD AS BLOB
-    -----------------------------------------------------
-    */
-
-    const {
-      data: fileData,
-      error: fileError
-    } =
-      await supabaseClient
-        .storage
-        .from(
-          "creator-product-covers"
-        )
-        .download(
-          path
-        );
-
-
-    if (
-      fileError ||
-      !fileData
-    ) {
-
-      console.error(
-        "Cover error:",
-        signedError,
-        fileError
-      );
-
-
-      placeholder.textContent =
-        "Product cover could not be loaded.";
-
-      return;
-
-    }
-
-
-    const objectUrl =
-      URL.createObjectURL(
-        fileData
-      );
-
-
-    image.src =
-      objectUrl;
-
-    image.alt =
-      title;
-
-    image.style.display =
-      "block";
-
-    placeholder.style.display =
-      "none";
+    element.setAttribute(
+      "content",
+      value
+    );
 
   }
 
+}
+
+
+/* =========================
+   NOINDEX INVALID PRODUCT
+========================= */
+
+function markNoIndex() {
+
+  const robots =
+    document.getElementById(
+      "robots-meta"
+    );
+
+
+  if (
+    robots
+  ) {
+
+    robots.setAttribute(
+      "content",
+      "noindex, follow"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   PRODUCT SEO
+========================= */
+
+function updateSeo(
+  product
+) {
+
+  const title =
+    product.title ||
+    "Creator Product";
+
+
+  const description =
+    descriptionPreview(
+      product.description
+    );
+
+
+  const pageTitle =
+    title +
+    " | GiftedGift Empire";
+
+
+  document.title =
+    pageTitle;
+
+
+  setMeta(
+    "meta-description",
+    description
+  );
+
+
+  document
+    .getElementById(
+      "canonical-link"
+    )
+    .setAttribute(
+      "href",
+      canonicalProductUrl
+    );
+
+
+  setMeta(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMeta(
+    "og-description",
+    description
+  );
+
+
+  setMeta(
+    "og-url",
+    canonicalProductUrl
+  );
+
 
   /*
-  =====================================================
-  SEO
-  =====================================================
+    Creator product covers are stored privately.
+
+    Do not place temporary signed URLs into permanent
+    social metadata because those URLs expire.
+
+    The stable GiftedGift Empire logo remains the
+    reliable social fallback.
   */
 
-  function updateSeo(
+  setMeta(
+    "og-image",
+    DEFAULT_SOCIAL_IMAGE
+  );
+
+
+  setMeta(
+    "og-image-alt",
+    title +
+    " on GiftedGift Empire"
+  );
+
+
+  setMeta(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMeta(
+    "twitter-description",
+    description
+  );
+
+
+  setMeta(
+    "twitter-image",
+    DEFAULT_SOCIAL_IMAGE
+  );
+
+
+  updateStructuredData(
     product
+  );
+
+}
+
+
+/* =========================
+   STRUCTURED DATA
+========================= */
+
+function updateStructuredData(
+  product
+) {
+
+  let schema =
+    document.getElementById(
+      "creator-product-structured-data"
+    );
+
+
+  if (
+    !schema
   ) {
 
-    const description =
-      String(
-        product.description || ""
-      )
-        .replace(
-          /\s+/g,
-          " "
-        )
-        .trim()
-        .slice(
-          0,
-          155
-        );
-
-
-    document.title =
-      product.title +
-      " | GiftedGift Empire";
-
-
-    document
-      .getElementById(
-        "meta-description"
-      )
-      .setAttribute(
-        "content",
-        description ||
-        "Digital product available through GiftedGift Empire."
-      );
-
-
-    document
-      .getElementById(
-        "canonical-link"
-      )
-      .setAttribute(
-        "href",
-        canonicalProductUrl
-      );
-
-
-    document
-      .getElementById(
-        "og-title"
-      )
-      .setAttribute(
-        "content",
-        product.title +
-        " | GiftedGift Empire"
-      );
-
-
-    document
-      .getElementById(
-        "og-description"
-      )
-      .setAttribute(
-        "content",
-        description
-      );
-
-
-    document
-      .getElementById(
-        "og-url"
-      )
-      .setAttribute(
-        "content",
-        canonicalProductUrl
-      );
-
-
-    /*
-    -----------------------------------------------------
-    PRODUCT JSON-LD
-    -----------------------------------------------------
-    */
-
-    const jsonLd = {
-
-      "@context":
-        "https://schema.org",
-
-      "@type":
-        "Product",
-
-      name:
-        product.title,
-
-      description:
-        product.description,
-
-      sku:
-        product.product_code,
-
-      category:
-        product.category,
-
-      offers: {
-
-        "@type":
-          "Offer",
-
-        url:
-          canonicalProductUrl,
-
-        priceCurrency:
-          product.currency,
-
-        price:
-          Number(
-            product.price
-          ).toFixed(
-            2
-          ),
-
-        availability:
-          "https://schema.org/InStock",
-
-        seller: {
-
-          "@type":
-            "Organization",
-
-          name:
-            "GiftedGift Empire Marketplace"
-
-        }
-
-      }
-
-    };
-
-
-    const script =
+    schema =
       document.createElement(
         "script"
       );
 
 
-    script.type =
+    schema.type =
       "application/ld+json";
 
 
-    script.textContent =
-      JSON.stringify(
-        jsonLd
-      );
+    schema.id =
+      "creator-product-structured-data";
 
 
     document.head.appendChild(
-      script
+      schema
     );
 
   }
 
 
-  /*
-  =====================================================
-  RENDER PRODUCT
-  =====================================================
-  */
+  const price =
+    Number(
+      product.price
+    );
 
-  async function renderProduct(
-    product
+
+  const productSchema = {
+
+    "@type":
+      "Product",
+
+    "name":
+      product.title ||
+      "Creator Product",
+
+    "description":
+      cleanDescription(
+        product.description
+      ) ||
+      (
+        "Creator Marketplace product " +
+        "available through GiftedGift Empire."
+      ),
+
+    "url":
+      canonicalProductUrl
+
+  };
+
+
+  if (
+    product.product_code
   ) {
 
-    currentProduct =
-      product;
-
-
-    canonicalProductUrl =
-      buildCanonicalUrl(
-        product.public_slug
-      );
-
-
-    document
-      .getElementById(
-        "breadcrumb-title"
-      )
-      .textContent =
-        product.title;
-
-
-    document
-      .getElementById(
-        "product-title"
-      )
-      .textContent =
-        product.title;
-
-
-    document
-      .getElementById(
-        "product-description"
-      )
-      .textContent =
-        product.description ||
-        "";
-
-
-    document
-      .getElementById(
-        "about-product"
-      )
-      .textContent =
-        product.description ||
-        "No additional description is available.";
-
-
-    document
-      .getElementById(
-        "seller-code"
-      )
-      .textContent =
-        product.creator_seller_code;
-
-
-    document
-      .getElementById(
-        "product-price"
-      )
-      .textContent =
-        formatMoney(
-          product.price,
-          product.currency
-        );
-
-
-    const typeText =
+    productSchema.sku =
       String(
-        product.product_type ||
-        "Digital Product"
+        product.product_code
       );
-
-
-    document
-      .getElementById(
-        "product-type"
-      )
-      .textContent =
-        typeText
-          .charAt(
-            0
-          )
-          .toUpperCase() +
-        typeText.slice(
-          1
-        );
-
-
-    document
-      .getElementById(
-        "buy-button"
-      )
-      .onclick =
-        function() {
-
-          window.location.href =
-            buildCheckoutUrl(
-              product.public_slug
-            );
-
-        };
-
-
-    updateSeo(
-      product
-    );
-
-
-    await loadCover(
-      product.cover_image_path,
-      product.title
-    );
 
   }
 
 
-  /*
-  =====================================================
-  SHARE PRODUCT
-  =====================================================
-  */
+  if (
+    product.category
+  ) {
 
-  async function shareProduct() {
+    productSchema.category =
+      product.category;
 
-    if (
-      !currentProduct
-    ) {
-
-      return;
-
-    }
+  }
 
 
-    const shareData = {
+  if (
+    Number.isFinite(
+      price
+    ) &&
+    price >= 0
+  ) {
 
-      title:
-        currentProduct.title,
+    productSchema.offers = {
 
-      text:
-        "View " +
-        currentProduct.title +
-        " on GiftedGift Empire.",
+      "@type":
+        "Offer",
 
-      url:
-        canonicalProductUrl
+      "url":
+        canonicalProductUrl,
+
+      "priceCurrency":
+        product.currency ||
+        "EUR",
+
+      "price":
+        price.toFixed(
+          2
+        ),
+
+      "availability":
+        "https://schema.org/InStock"
 
     };
 
+  }
 
-    if (
-      navigator.share
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_ORIGIN +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Shop",
+
+        "item":
+          SITE_ORIGIN +
+          "/shop.html"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          3,
+
+        "name":
+          product.title ||
+          "Creator Product",
+
+        "item":
+          canonicalProductUrl
+
+      }
+
+    ]
+
+  };
+
+
+  schema.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@graph": [
+
+        productSchema,
+
+        breadcrumbSchema
+
+      ]
+
+    });
+
+}
+
+
+/* =========================
+   COVER IMAGE
+========================= */
+
+async function loadCover(
+  path,
+  title
+) {
+
+  const image =
+    document.getElementById(
+      "product-image"
+    );
+
+
+  const placeholder =
+    document.getElementById(
+      "image-placeholder"
+    );
+
+
+  if (
+    !path
+  ) {
+
+    placeholder.textContent =
+      "No product cover available.";
+
+
+    return;
+
+  }
+
+
+  /* TEMPORARY SIGNED URL */
+
+  const {
+    data: signedData,
+    error: signedError
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        "creator-product-covers"
+      )
+      .createSignedUrl(
+        path,
+        3600
+      );
+
+
+  if (
+    !signedError &&
+    signedData &&
+    signedData.signedUrl
+  ) {
+
+    image.src =
+      signedData.signedUrl;
+
+
+    image.alt =
+      title;
+
+
+    image.style.display =
+      "block";
+
+
+    placeholder.style.display =
+      "none";
+
+
+    return;
+
+  }
+
+
+  /* FALLBACK DOWNLOAD */
+
+  const {
+    data: fileData,
+    error: fileError
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        "creator-product-covers"
+      )
+      .download(
+        path
+      );
+
+
+  if (
+    fileError ||
+    !fileData
+  ) {
+
+    console.error(
+      "Creator cover error:",
+      signedError,
+      fileError
+    );
+
+
+    placeholder.textContent =
+      "Product cover could not be loaded.";
+
+
+    return;
+
+  }
+
+
+  const objectUrl =
+    URL.createObjectURL(
+      fileData
+    );
+
+
+  image.src =
+    objectUrl;
+
+
+  image.alt =
+    title;
+
+
+  image.style.display =
+    "block";
+
+
+  placeholder.style.display =
+    "none";
+
+}
+
+
+/* =========================
+   RENDER PRODUCT
+========================= */
+
+async function renderProduct(
+  product
+) {
+
+  currentProduct =
+    product;
+
+
+  canonicalProductUrl =
+    buildCanonicalUrl(
+      product.public_slug
+    );
+
+
+  document
+    .getElementById(
+      "breadcrumb-title"
+    )
+    .textContent =
+      product.title;
+
+
+  document
+    .getElementById(
+      "product-title"
+    )
+    .textContent =
+      product.title;
+
+
+  document
+    .getElementById(
+      "product-description"
+    )
+    .textContent =
+      product.description ||
+      "";
+
+
+  document
+    .getElementById(
+      "about-product"
+    )
+    .textContent =
+      product.description ||
+      "No additional description is available.";
+
+
+  document
+    .getElementById(
+      "seller-code"
+    )
+    .textContent =
+      product.creator_seller_code ||
+      "Verified Creator";
+
+
+  document
+    .getElementById(
+      "product-price"
+    )
+    .textContent =
+      formatMoney(
+        product.price,
+        product.currency
+      );
+
+
+  const typeText =
+    String(
+      product.product_type ||
+      "Digital Product"
+    );
+
+
+  document
+    .getElementById(
+      "product-type"
+    )
+    .textContent =
+      typeText
+        .charAt(
+          0
+        )
+        .toUpperCase() +
+      typeText.slice(
+        1
+      );
+
+
+  document
+    .getElementById(
+      "buy-button"
+    )
+    .onclick =
+      function () {
+
+        window.location.href =
+          buildCheckoutUrl(
+            product.public_slug
+          );
+
+      };
+
+
+  updateSeo(
+    product
+  );
+
+
+  await loadCover(
+    product.cover_image_path,
+    product.title
+  );
+
+}
+
+
+/* =========================
+   SHARE
+========================= */
+
+async function shareProduct() {
+
+  if (
+    !currentProduct
+  ) {
+
+    return;
+
+  }
+
+
+  const shareData = {
+
+    title:
+      currentProduct.title,
+
+    text:
+      "View " +
+      currentProduct.title +
+      " on GiftedGift Empire.",
+
+    url:
+      canonicalProductUrl
+
+  };
+
+
+  if (
+    navigator.share
+  ) {
+
+    try {
+
+      await navigator.share(
+        shareData
+      );
+
+
+      return;
+
+
+    } catch (
+      error
     ) {
 
-      try {
-
-        await navigator.share(
-          shareData
-        );
+      if (
+        error &&
+        error.name ===
+        "AbortError"
+      ) {
 
         return;
 
       }
 
-      catch (
-        error
-      ) {
-
-        if (
-          error.name ===
-          "AbortError"
-        ) {
-
-          return;
-
-        }
-
-      }
-
-    }
-
-
-    try {
-
-      await navigator
-        .clipboard
-        .writeText(
-          canonicalProductUrl
-        );
-
-
-      alert(
-        "Product link copied."
-      );
-
-    }
-
-    catch (
-      error
-    ) {
-
-      alert(
-        canonicalProductUrl
-      );
-
     }
 
   }
 
 
-  /*
-  =====================================================
-  LOAD PRODUCT
-  =====================================================
-  */
+  try {
 
-  async function loadProduct() {
-
-    const slug =
-      getProductSlug();
-
-
-    if (
-      !slug
-    ) {
-
-      document
-        .getElementById(
-          "loading"
-        )
-        .style.display =
-          "none";
-
-
-      document
-        .getElementById(
-          "error-box"
-        )
-        .style.display =
-          "block";
-
-
-      return;
-
-    }
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .rpc(
-          "get_public_creator_product_by_slug",
-          {
-            p_slug:
-              slug
-          }
-        );
-
-
-    if (
-      error
-    ) {
-
-      console.error(
-        "Product load error:",
-        error
+    await navigator
+      .clipboard
+      .writeText(
+        canonicalProductUrl
       );
 
-    }
 
-
-    const product =
-      Array.isArray(
-        data
-      )
-        ? data[0]
-        : null;
-
-
-    if (
-      error ||
-      !product
-    ) {
-
-      document
-        .getElementById(
-          "loading"
-        )
-        .style.display =
-          "none";
-
-
-      document
-        .getElementById(
-          "error-box"
-        )
-        .style.display =
-          "block";
-
-
-      return;
-
-    }
-
-
-    await renderProduct(
-      product
+    alert(
+      "Product link copied."
     );
+
+
+  } catch (
+    error
+  ) {
+
+    alert(
+      canonicalProductUrl
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LOAD PRODUCT
+========================= */
+
+async function loadProduct() {
+
+  const slug =
+    getProductSlug();
+
+
+  if (
+    !slug
+  ) {
+
+    markNoIndex();
 
 
     document
@@ -1743,31 +2369,120 @@
 
     document
       .getElementById(
-        "product-page"
+        "error-box"
       )
       .style.display =
         "block";
 
+
+    return;
+
   }
 
 
-  loadProduct();
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "get_public_creator_product_by_slug",
+        {
+          p_slug:
+            slug
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Creator product load error:",
+      error
+    );
+
+  }
+
+
+  const product =
+    Array.isArray(
+      data
+    )
+      ? data[0]
+      : null;
+
+
+  if (
+    error ||
+    !product
+  ) {
+
+    markNoIndex();
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "error-box"
+      )
+      .style.display =
+        "block";
+
+
+    return;
+
+  }
+
+
+  await renderProduct(
+    product
+  );
+
+
+  document
+    .getElementById(
+      "loading"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "product-page"
+    )
+    .style.display =
+      "block";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadProduct();
 
 </script>
 
 
-<!--
-Existing consent-controlled website tracking.
-These remain subject to your cookie-consent system.
--->
-
 <script
-  src="cookie-consent.js"
+  src="/cookie-consent.js"
   defer
 ></script>
 
+
 <script
-  src="tracking.js"
+  src="/tracking.js"
   defer
 ></script>
 
