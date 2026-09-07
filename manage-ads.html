@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -12,6 +13,7 @@
 <title>
   Advertising Manager | GiftedGift Empire
 </title>
+
 
 <style>
 
@@ -55,13 +57,26 @@ header h1 {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.08);
   margin-bottom: 25px;
 }
 
 .panel h2 {
   margin-top: 0;
   color: #123a8c;
+}
+
+.panel-heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.panel-heading-row button {
+  margin-top: 0;
 }
 
 label {
@@ -93,7 +108,8 @@ input[type="file"] {
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
   gap: 0 18px;
 }
 
@@ -154,10 +170,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.cancel-button {
-  background: #ddd;
-}
-
+.cancel-button,
 .delete-button {
   background: #ddd;
 }
@@ -168,12 +181,14 @@ button:disabled {
   line-height: 1.5;
 }
 
-.ad-item {
+.ad-item,
+.application-item {
   padding: 22px 0;
   border-bottom: 1px solid #ddd;
 }
 
-.ad-item:last-child {
+.ad-item:last-child,
+.application-item:last-child {
   border-bottom: none;
 }
 
@@ -188,7 +203,8 @@ button:disabled {
   background: #f7f7f7;
 }
 
-.ad-item h3 {
+.ad-item h3,
+.application-item h3 {
   margin: 0 0 8px;
   color: #123a8c;
 }
@@ -208,17 +224,20 @@ button:disabled {
   margin: 8px 5px 8px 0;
 }
 
-.status-live {
+.status-live,
+.status-approved {
   background: #e5f7e9;
   color: #176b31;
 }
 
-.status-inactive {
+.status-inactive,
+.status-rejected {
   background: #fdeaea;
   color: #9b1c1c;
 }
 
-.status-scheduled {
+.status-scheduled,
+.status-pending {
   background: #fff4d6;
   color: #8a6500;
 }
@@ -226,6 +245,11 @@ button:disabled {
 .status-expired {
   background: #eee;
   color: #666;
+}
+
+.status-contacted {
+  background: #e8f1ff;
+  color: #175cd3;
 }
 
 .stats {
@@ -242,11 +266,103 @@ button:disabled {
   font-size: 14px;
 }
 
+.application-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0,1fr));
+
+  gap: 10px;
+  margin: 16px 0 5px;
+}
+
+.application-summary .stat-box {
+  text-align: center;
+}
+
+.application-summary strong {
+  display: block;
+  color: #123a8c;
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.application-details {
+  margin-top: 12px;
+  padding: 14px;
+  background: #f8f9fc;
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+}
+
+.application-details p {
+  margin: 6px 0;
+}
+
+.application-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.application-actions button {
+  margin-top: 0;
+}
+
+.contact-button {
+  background: #e8f1ff;
+  color: #123a8c;
+}
+
+.approve-button {
+  background: #f2bd16;
+  color: #111;
+}
+
+.reject-button {
+  background: #fdeaea;
+  color: #9b1c1c;
+}
+
+.pending-button {
+  background: #eee;
+  color: #444;
+}
+
+.application-link {
+  color: #123a8c;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.source-note {
+  display: none;
+
+  margin:
+    0 0 18px;
+
+  padding:
+    12px 14px;
+
+  border-radius: 9px;
+
+  background: #eff8ff;
+
+  border:
+    1px solid #b2ddff;
+
+  color: #175cd3;
+
+  line-height: 1.5;
+}
+
 #status {
   text-align: center;
   padding: 50px 20px;
   font-weight: bold;
 }
+
 
 @media (max-width: 700px) {
 
@@ -261,13 +377,21 @@ button:disabled {
   .panel {
     padding: 20px 16px;
   }
+
+  .application-summary {
+    grid-template-columns:
+      repeat(2, minmax(0,1fr));
+  }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
+
 
 <div id="status">
   Checking admin login...
@@ -278,6 +402,7 @@ button:disabled {
   id="page"
   style="display:none;"
 >
+
 
 <header>
 
@@ -294,6 +419,7 @@ button:disabled {
 
 <main class="container">
 
+
 <a
   href="dashboard.html"
   class="top-link"
@@ -302,23 +428,92 @@ button:disabled {
 </a>
 
 
+<!-- =========================
+     APPLICATIONS
+========================= -->
+
 <section class="panel">
+
+  <div class="panel-heading-row">
+
+    <h2>
+      Advertising Applications
+    </h2>
+
+    <button
+      type="button"
+      onclick="loadAdvertisingApplications()"
+    >
+      Refresh Applications
+    </button>
+
+  </div>
+
+
+  <p class="help">
+
+    Applications submitted from the public
+    <strong>Advertise With Us</strong>
+    page appear here.
+
+    Review them before creating a live advertisement.
+
+  </p>
+
+
+  <div
+    id="application-summary"
+    class="application-summary"
+  ></div>
+
+
+  <div id="application-list">
+
+    Loading advertising applications...
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ADVERTISEMENT FORM
+========================= -->
+
+<section
+  class="panel"
+  id="ad-form-panel"
+>
 
 <h2 id="form-title">
   Add Advertisement
 </h2>
 
 
+<div
+  id="source-note"
+  class="source-note"
+></div>
+
+
 <form id="ad-form">
+
 
 <input
   type="hidden"
   id="ad-id"
 >
 
+
 <input
   type="hidden"
   id="current-image-url"
+>
+
+
+<input
+  type="hidden"
+  id="source-application-id"
 >
 
 
@@ -602,6 +797,7 @@ button:disabled {
 
 </div>
 
+
 </div>
 
 
@@ -619,7 +815,7 @@ button:disabled {
   class="cancel-button"
   style="display:none;"
 >
-  Cancel Edit
+  Cancel
 </button>
 
 
@@ -628,10 +824,15 @@ button:disabled {
   class="message"
 ></p>
 
+
 </form>
 
 </section>
 
+
+<!-- =========================
+     EXISTING ADS
+========================= -->
 
 <section class="panel">
 
@@ -645,12 +846,15 @@ button:disabled {
 
 </section>
 
+
 </main>
 
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
 
 
 <script>
@@ -678,6 +882,15 @@ const supabaseClient =
   );
 
 
+let advertisingApplications =
+  [];
+
+
+/*
+=====================================================
+ADMIN PROTECTION
+=====================================================
+*/
 
 async function protectPage() {
 
@@ -703,6 +916,7 @@ async function protectPage() {
     );
 
     return;
+
   }
 
 
@@ -722,10 +936,22 @@ async function protectPage() {
       "block";
 
 
-  await loadAdvertisements();
+  await Promise.all([
+
+    loadAdvertisingApplications(),
+
+    loadAdvertisements()
+
+  ]);
+
 }
 
 
+/*
+=====================================================
+IMAGE PREVIEW
+=====================================================
+*/
 
 document
   .getElementById(
@@ -755,10 +981,13 @@ document
           "Please choose an image file."
         );
 
+
         event.target.value =
           "";
 
+
         return;
+
       }
 
 
@@ -771,26 +1000,24 @@ document
           "Please choose an image smaller than 5 MB."
         );
 
+
         event.target.value =
           "";
 
+
         return;
+
       }
 
 
-      const url =
+      showImagePreview(
         URL.createObjectURL(
           file
-        );
-
-
-      showImagePreview(
-        url
+        )
       );
 
     }
   );
-
 
 
 function showImagePreview(
@@ -814,11 +1041,14 @@ function showImagePreview(
     box.style.display =
       "none";
 
+
     image.removeAttribute(
       "src"
     );
 
+
     return;
+
   }
 
 
@@ -828,9 +1058,15 @@ function showImagePreview(
 
   box.style.display =
     "block";
+
 }
 
 
+/*
+=====================================================
+UPLOAD AD IMAGE
+=====================================================
+*/
 
 async function uploadAdImage(
   file
@@ -862,12 +1098,8 @@ async function uploadAdImage(
       .replace(
         /[^a-z0-9]/g,
         ""
-      );
-
-
-  if (!extension) {
-    extension = "jpg";
-  }
+      ) ||
+    "jpg";
 
 
   let safeName =
@@ -881,19 +1113,17 @@ async function uploadAdImage(
       .replace(
         /^-+|-+$/g,
         ""
-      );
-
-
-  if (!safeName) {
-    safeName =
-      "advertisement";
-  }
+      ) ||
+    "advertisement";
 
 
   const randomPart =
     Math.random()
       .toString(36)
-      .slice(2, 10);
+      .slice(
+        2,
+        10
+      );
 
 
   const filePath =
@@ -920,6 +1150,7 @@ async function uploadAdImage(
         filePath,
         file,
         {
+
           cacheControl:
             "3600",
 
@@ -929,6 +1160,7 @@ async function uploadAdImage(
           contentType:
             file.type ||
             undefined
+
         }
       );
 
@@ -966,13 +1198,20 @@ async function uploadAdImage(
     throw new Error(
       "The advertisement image URL could not be created."
     );
+
   }
 
 
   return publicData.publicUrl;
+
 }
 
 
+/*
+=====================================================
+DATE / FORMAT HELPERS
+=====================================================
+*/
 
 function localDateTimeValue(
   value
@@ -996,6 +1235,7 @@ function localDateTimeValue(
   ) {
 
     return "";
+
   }
 
 
@@ -1013,8 +1253,8 @@ function localDateTimeValue(
       0,
       16
     );
-}
 
+}
 
 
 function toISODate(
@@ -1039,79 +1279,54 @@ function toISODate(
   ) {
 
     return null;
+
   }
 
 
   return date.toISOString();
+
 }
 
 
-
-function getAdStatus(
-  ad
+function preferredDateTime(
+  value,
+  isEnd
 ) {
 
-  if (
-    ad.active !== true
-  ) {
-
-    return {
-      text:
-        "Inactive",
-
-      className:
-        "status-inactive"
-    };
+  if (!value) {
+    return "";
   }
 
 
-  const now =
-    new Date();
+  const text =
+    String(value)
+      .slice(
+        0,
+        10
+      );
 
 
   if (
-    ad.start_at &&
-    new Date(
-      ad.start_at
-    ) > now
+    !/^\d{4}-\d{2}-\d{2}$/.test(
+      text
+    )
   ) {
 
-    return {
-      text:
-        "Scheduled",
+    return "";
 
-      className:
-        "status-scheduled"
-    };
   }
 
 
-  if (
-    ad.end_at &&
-    new Date(
-      ad.end_at
-    ) < now
-  ) {
+  return (
+    text +
+    (
+      isEnd
+        ? "T23:59"
+        : "T00:00"
+    )
+  );
 
-    return {
-      text:
-        "Expired",
-
-      className:
-        "status-expired"
-    };
-  }
-
-
-  return {
-    text:
-      "Live",
-
-    className:
-      "status-live"
-  };
 }
-
 
 
 function formatDate(
@@ -1136,13 +1351,52 @@ function formatDate(
   ) {
 
     return "Not set";
+
   }
 
 
   return date
     .toLocaleString();
+
 }
 
+
+function formatDateOnly(
+  value
+) {
+
+  if (!value) {
+    return "Not set";
+  }
+
+
+  const parts =
+    String(value)
+      .slice(
+        0,
+        10
+      )
+      .split("-");
+
+
+  if (
+    parts.length !== 3
+  ) {
+
+    return String(value);
+
+  }
+
+
+  return (
+    parts[2] +
+    "/" +
+    parts[1] +
+    "/" +
+    parts[0]
+  );
+
+}
 
 
 function formatMoney(
@@ -1157,6 +1411,7 @@ function formatMoney(
   ) {
 
     return "Not set";
+
   }
 
 
@@ -1173,6 +1428,7 @@ function formatMoney(
   ) {
 
     return "Not set";
+
   }
 
 
@@ -1182,29 +1438,1212 @@ function formatMoney(
       .NumberFormat(
         undefined,
         {
+
           style:
             "currency",
 
           currency:
             currency ||
             "EUR"
+
         }
       )
       .format(
         amount
       );
 
-  } catch (error) {
+  }
+
+  catch {
 
     return (
       (currency || "EUR") +
       " " +
       amount.toFixed(2)
     );
+
   }
+
 }
 
 
+/*
+=====================================================
+SAFE URL
+=====================================================
+*/
+
+function safeHttpUrl(
+  value
+) {
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value || ""
+        )
+          .trim()
+      );
+
+
+    if (
+      url.protocol ===
+        "http:" ||
+      url.protocol ===
+        "https:"
+    ) {
+
+      return url.href;
+
+    }
+
+
+    return "";
+
+  }
+
+  catch {
+
+    return "";
+
+  }
+
+}
+
+
+/*
+=====================================================
+STATUS HELPERS
+=====================================================
+*/
+
+function getAdStatus(
+  ad
+) {
+
+  if (
+    ad.active !== true
+  ) {
+
+    return {
+
+      text:
+        "Inactive",
+
+      className:
+        "status-inactive"
+
+    };
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  if (
+    ad.start_at &&
+    new Date(
+      ad.start_at
+    ) > now
+  ) {
+
+    return {
+
+      text:
+        "Scheduled",
+
+      className:
+        "status-scheduled"
+
+    };
+
+  }
+
+
+  if (
+    ad.end_at &&
+    new Date(
+      ad.end_at
+    ) < now
+  ) {
+
+    return {
+
+      text:
+        "Expired",
+
+      className:
+        "status-expired"
+
+    };
+
+  }
+
+
+  return {
+
+    text:
+      "Live",
+
+    className:
+      "status-live"
+
+  };
+
+}
+
+
+function applicationStatusClass(
+  status
+) {
+
+  const classes = {
+
+    pending:
+      "status-pending",
+
+    contacted:
+      "status-contacted",
+
+    approved:
+      "status-approved",
+
+    rejected:
+      "status-rejected"
+
+  };
+
+
+  return (
+    classes[status] ||
+    "status-expired"
+  );
+
+}
+
+
+function placementLabel(
+  value
+) {
+
+  const labels = {
+
+    homepage_banner:
+      "Homepage Banner",
+
+    homepage_middle:
+      "Homepage Middle",
+
+    shop_banner:
+      "Shop Banner",
+
+    category_banner:
+      "Category Banner",
+
+    sponsored_product:
+      "Sponsored Product",
+
+    blog_sponsor:
+      "Blog Sponsor",
+
+    footer_banner:
+      "Footer Banner",
+
+    other:
+      "Other / Discuss",
+
+    not_sure:
+      "Not Sure"
+
+  };
+
+
+  return (
+    labels[value] ||
+    value ||
+    "Not specified"
+  );
+
+}
+
+
+function mapApplicationPlacement(
+  value
+) {
+
+  const v =
+    String(
+      value || ""
+    )
+      .toLowerCase();
+
+
+  if (
+    v.includes(
+      "homepage"
+    ) &&
+    v.includes(
+      "middle"
+    )
+  ) {
+
+    return "homepage_middle";
+
+  }
+
+
+  if (
+    v.includes(
+      "shop"
+    )
+  ) {
+
+    return "shop_banner";
+
+  }
+
+
+  if (
+    v.includes(
+      "category"
+    )
+  ) {
+
+    return "category_banner";
+
+  }
+
+
+  if (
+    v.includes(
+      "sponsored"
+    )
+  ) {
+
+    return "sponsored_product";
+
+  }
+
+
+  if (
+    v.includes(
+      "blog"
+    )
+  ) {
+
+    return "blog_sponsor";
+
+  }
+
+
+  if (
+    v.includes(
+      "footer"
+    )
+  ) {
+
+    return "footer_banner";
+
+  }
+
+
+  return "homepage_banner";
+
+}
+
+
+/*
+=====================================================
+LOAD APPLICATIONS
+=====================================================
+*/
+
+async function loadAdvertisingApplications() {
+
+  const list =
+    document.getElementById(
+      "application-list"
+    );
+
+
+  const summary =
+    document.getElementById(
+      "application-summary"
+    );
+
+
+  list.textContent =
+    "Loading advertising applications...";
+
+
+  summary.innerHTML =
+    "";
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "advertising_applications"
+      )
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:
+            false
+        }
+      );
+
+
+  if (error) {
+
+    console.error(
+      "Advertising applications:",
+      error
+    );
+
+
+    list.textContent =
+      "Advertising applications could not be loaded. Make sure the Admin RLS SQL has been run.";
+
+
+    return;
+
+  }
+
+
+  advertisingApplications =
+    data || [];
+
+
+  const counts = {
+
+    total:
+      advertisingApplications.length,
+
+    pending:
+      0,
+
+    contacted:
+      0,
+
+    approved:
+      0,
+
+    rejected:
+      0
+
+  };
+
+
+  advertisingApplications
+    .forEach(
+      app => {
+
+        if (
+          Object.prototype
+            .hasOwnProperty
+            .call(
+              counts,
+              app.status
+            )
+        ) {
+
+          counts[
+            app.status
+          ]++;
+
+        }
+
+      }
+    );
+
+
+  summary.innerHTML = `
+
+    <div class="stat-box">
+
+      Total
+
+      <strong>
+        ${counts.total}
+      </strong>
+
+    </div>
+
+
+    <div class="stat-box">
+
+      Pending
+
+      <strong>
+        ${counts.pending}
+      </strong>
+
+    </div>
+
+
+    <div class="stat-box">
+
+      Contacted
+
+      <strong>
+        ${counts.contacted}
+      </strong>
+
+    </div>
+
+
+    <div class="stat-box">
+
+      Approved
+
+      <strong>
+        ${counts.approved}
+      </strong>
+
+    </div>
+
+
+    <div class="stat-box">
+
+      Rejected
+
+      <strong>
+        ${counts.rejected}
+      </strong>
+
+    </div>
+
+  `;
+
+
+  if (
+    !advertisingApplications.length
+  ) {
+
+    list.textContent =
+      "No advertising applications have been submitted yet.";
+
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    "";
+
+
+  advertisingApplications
+    .forEach(
+      app => {
+
+        const item =
+          document.createElement(
+            "article"
+          );
+
+
+        item.className =
+          "application-item";
+
+
+        const destination =
+          safeHttpUrl(
+            app.destination_url
+          );
+
+
+        const destinationHTML =
+          destination
+
+            ? `
+
+              <a
+                class="application-link"
+                href="${escapeAttribute(destination)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ${escapeHTML(
+                  app.destination_url
+                )}
+              </a>
+
+            `
+
+            : escapeHTML(
+                app.destination_url ||
+                "Not provided"
+              );
+
+
+        item.innerHTML = `
+
+          <h3>
+
+            ${escapeHTML(
+              app.ad_title ||
+              "Advertising Application"
+            )}
+
+          </h3>
+
+
+          <span
+            class="
+              status
+              ${applicationStatusClass(
+                app.status
+              )}
+            "
+          >
+
+            ${escapeHTML(
+              (
+                app.status ||
+                "pending"
+              )
+                .toUpperCase()
+            )}
+
+          </span>
+
+
+          <div class="application-details">
+
+
+            <p>
+
+              <strong>
+                Applicant:
+              </strong>
+
+              ${escapeHTML(
+                app.full_name ||
+                ""
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Email:
+              </strong>
+
+              <a
+                class="application-link"
+                href="mailto:${escapeAttribute(
+                  app.email ||
+                  ""
+                )}"
+              >
+
+                ${escapeHTML(
+                  app.email ||
+                  ""
+                )}
+
+              </a>
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                WhatsApp / Phone:
+              </strong>
+
+              ${escapeHTML(
+                app.whatsapp ||
+                "Not provided"
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Business / Brand:
+              </strong>
+
+              ${escapeHTML(
+                app.business_name ||
+                "Not provided"
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Description:
+              </strong>
+
+              ${escapeHTML(
+                app.ad_description ||
+                ""
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Destination:
+              </strong>
+
+              ${destinationHTML}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Preferred Placement:
+              </strong>
+
+              ${escapeHTML(
+                placementLabel(
+                  app.preferred_placement
+                )
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Preferred Dates:
+              </strong>
+
+              ${escapeHTML(
+                formatDateOnly(
+                  app.preferred_start_date
+                )
+              )}
+
+              →
+
+              ${escapeHTML(
+                formatDateOnly(
+                  app.preferred_end_date
+                )
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Budget:
+              </strong>
+
+              ${escapeHTML(
+                formatMoney(
+                  app.budget_eur,
+                  "EUR"
+                )
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Notes:
+              </strong>
+
+              ${escapeHTML(
+                app.notes ||
+                "None"
+              )}
+
+            </p>
+
+
+            <p>
+
+              <strong>
+                Submitted:
+              </strong>
+
+              ${escapeHTML(
+                formatDate(
+                  app.created_at
+                )
+              )}
+
+            </p>
+
+
+          </div>
+
+
+          <div class="application-actions">
+
+
+            <button
+              type="button"
+              class="contact-button"
+              onclick="
+                setApplicationStatus(
+                  '${app.id}',
+                  'contacted'
+                )
+              "
+            >
+              Mark Contacted
+            </button>
+
+
+            <button
+              type="button"
+              class="approve-button"
+              onclick="
+                prepareApplication(
+                  '${app.id}'
+                )
+              "
+            >
+              Approve & Prepare Ad
+            </button>
+
+
+            <button
+              type="button"
+              class="reject-button"
+              onclick="
+                setApplicationStatus(
+                  '${app.id}',
+                  'rejected'
+                )
+              "
+            >
+              Reject
+            </button>
+
+
+            <button
+              type="button"
+              class="pending-button"
+              onclick="
+                setApplicationStatus(
+                  '${app.id}',
+                  'pending'
+                )
+              "
+            >
+              Set Pending
+            </button>
+
+
+          </div>
+
+        `;
+
+
+        list.appendChild(
+          item
+        );
+
+      }
+    );
+
+}
+
+
+/*
+=====================================================
+CHANGE APPLICATION STATUS
+=====================================================
+*/
+
+async function setApplicationStatus(
+  id,
+  status
+) {
+
+  const allowed = [
+    "pending",
+    "contacted",
+    "approved",
+    "rejected"
+  ];
+
+
+  if (
+    !allowed.includes(
+      status
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "advertising_applications"
+      )
+      .update({
+        status:
+          status
+      })
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (error) {
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      "Application status could not be updated."
+    );
+
+
+    return;
+
+  }
+
+
+  await loadAdvertisingApplications();
+
+}
+
+
+/*
+=====================================================
+APPROVE + PREPARE AD
+=====================================================
+*/
+
+async function prepareApplication(
+  id
+) {
+
+  const app =
+    advertisingApplications
+      .find(
+        item =>
+          item.id === id
+      );
+
+
+  if (!app) {
+
+    alert(
+      "Application could not be found. Refresh the page and try again."
+    );
+
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "advertising_applications"
+      )
+      .update({
+        status:
+          "approved"
+      })
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (error) {
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      "Application could not be approved."
+    );
+
+
+    return;
+
+  }
+
+
+  resetForm();
+
+
+  document
+    .getElementById(
+      "source-application-id"
+    )
+    .value =
+      app.id;
+
+
+  document
+    .getElementById(
+      "advertiser-name"
+    )
+    .value =
+      app.business_name ||
+      app.full_name ||
+      "";
+
+
+  document
+    .getElementById(
+      "ad-title"
+    )
+    .value =
+      app.ad_title ||
+      "";
+
+
+  document
+    .getElementById(
+      "description"
+    )
+    .value =
+      app.ad_description ||
+      "";
+
+
+  const safeDestination =
+    safeHttpUrl(
+      app.destination_url
+    );
+
+
+  document
+    .getElementById(
+      "destination-url"
+    )
+    .value =
+      safeDestination ||
+      "";
+
+
+  document
+    .getElementById(
+      "placement"
+    )
+    .value =
+      mapApplicationPlacement(
+        app.preferred_placement
+      );
+
+
+  document
+    .getElementById(
+      "start-at"
+    )
+    .value =
+      preferredDateTime(
+        app.preferred_start_date,
+        false
+      );
+
+
+  document
+    .getElementById(
+      "end-at"
+    )
+    .value =
+      preferredDateTime(
+        app.preferred_end_date,
+        true
+      );
+
+
+  document
+    .getElementById(
+      "price"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "currency"
+    )
+    .value =
+      "EUR";
+
+
+  document
+    .getElementById(
+      "payment-status"
+    )
+    .value =
+      "pending";
+
+
+  /*
+    IMPORTANT:
+    APPROVED APPLICATION DOES NOT
+    MEAN LIVE AD YET.
+  */
+
+  document
+    .getElementById(
+      "active"
+    )
+    .checked =
+      false;
+
+
+  const notes = [
+
+    "Source advertising application: " +
+      app.id,
+
+    "Applicant: " +
+      (
+        app.full_name ||
+        ""
+      ),
+
+    "Email: " +
+      (
+        app.email ||
+        ""
+      ),
+
+    app.whatsapp
+      ? "WhatsApp / Phone: " +
+        app.whatsapp
+      : "",
+
+    "Preferred placement: " +
+      placementLabel(
+        app.preferred_placement
+      ),
+
+    app.budget_eur !== null &&
+    app.budget_eur !== undefined
+
+      ? "Applicant budget: " +
+        formatMoney(
+          app.budget_eur,
+          "EUR"
+        )
+
+      : "",
+
+    app.notes
+      ? "Applicant notes: " +
+        app.notes
+      : ""
+
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+
+  document
+    .getElementById(
+      "admin-notes"
+    )
+    .value =
+      notes;
+
+
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Create Advertisement from Application";
+
+
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "inline-block";
+
+
+  const note =
+    document.getElementById(
+      "source-note"
+    );
+
+
+  note.style.display =
+    "block";
+
+
+  note.textContent =
+    "Application approved. The advertiser details are loaded below. Add the banner, confirm the advertising fee, payment status, dates and placement. The advertisement is inactive by default until you are ready to publish it.";
+
+
+  document
+    .getElementById(
+      "form-message"
+    )
+    .textContent =
+      "";
+
+
+  await loadAdvertisingApplications();
+
+
+  document
+    .getElementById(
+      "ad-form-panel"
+    )
+    .scrollIntoView({
+      behavior:
+        "smooth",
+      block:
+        "start"
+    });
+
+}
+
+
+/*
+=====================================================
+LOAD EXISTING ADS
+=====================================================
+*/
 
 async function loadAdvertisements() {
 
@@ -1246,7 +2685,9 @@ async function loadAdvertisements() {
     list.textContent =
       "Advertisements could not be loaded.";
 
+
     return;
+
   }
 
 
@@ -1258,7 +2699,9 @@ async function loadAdvertisements() {
     list.textContent =
       "No advertisements have been added yet.";
 
+
     return;
+
   }
 
 
@@ -1287,12 +2730,41 @@ async function loadAdvertisements() {
 
       const imageHTML =
         ad.image_url
+
           ? `
+
             <img
-              src="${escapeAttribute(ad.image_url)}"
-              alt="${escapeAttribute(ad.ad_title || "Advertisement")}"
+              src="${escapeAttribute(
+                ad.image_url
+              )}"
+              alt="${escapeAttribute(
+                ad.ad_title ||
+                "Advertisement"
+              )}"
             >
+
           `
+
+          : "";
+
+
+      const sourceHTML =
+        ad.advertising_application_id
+
+          ? `
+
+            <br>
+
+            <strong>
+              Source Application:
+            </strong>
+
+            ${escapeHTML(
+              ad.advertising_application_id
+            )}
+
+          `
+
           : "";
 
 
@@ -1300,15 +2772,19 @@ async function loadAdvertisements() {
 
         ${imageHTML}
 
+
         <h3>
+
           ${escapeHTML(
             ad.ad_title ||
             "Advertisement"
           )}
+
         </h3>
 
 
         <p>
+
           <strong>
             Advertiser:
           </strong>
@@ -1317,15 +2793,18 @@ async function loadAdvertisements() {
             ad.advertiser_name ||
             ""
           )}
+
         </p>
 
 
         <span
           class="status ${status.className}"
         >
+
           ${escapeHTML(
             status.text
           )}
+
         </span>
 
 
@@ -1388,29 +2867,38 @@ async function loadAdvertisements() {
             "pending"
           )}
 
+          ${sourceHTML}
+
         </p>
 
 
         <div class="stats">
 
           <div class="stat-box">
+
             Impressions:
+
             <strong>
               ${Number(
                 ad.impressions ||
                 0
               )}
             </strong>
+
           </div>
 
+
           <div class="stat-box">
+
             Clicks:
+
             <strong>
               ${Number(
                 ad.clicks ||
                 0
               )}
             </strong>
+
           </div>
 
         </div>
@@ -1420,7 +2908,11 @@ async function loadAdvertisements() {
 
           <button
             type="button"
-            onclick="editAdvertisement(${Number(ad.id)})"
+            onclick="
+              editAdvertisement(
+                ${Number(ad.id)}
+              )
+            "
           >
             Edit
           </button>
@@ -1429,23 +2921,35 @@ async function loadAdvertisements() {
           <button
             type="button"
             class="delete-button"
-            onclick="deleteAdvertisement(${Number(ad.id)})"
+            onclick="
+              deleteAdvertisement(
+                ${Number(ad.id)}
+              )
+            "
           >
             Delete
           </button>
 
         </div>
+
       `;
 
 
       list.appendChild(
         item
       );
+
     }
   );
+
 }
 
 
+/*
+=====================================================
+SAVE ADVERTISEMENT
+=====================================================
+*/
 
 document
   .getElementById(
@@ -1480,6 +2984,7 @@ document
 
       try {
 
+
         const id =
           document
             .getElementById(
@@ -1507,7 +3012,9 @@ document
         const file =
           imageInput.files &&
           imageInput.files.length
+
             ? imageInput.files[0]
+
             : null;
 
 
@@ -1525,6 +3032,7 @@ document
 
           message.textContent =
             "Saving advertisement...";
+
         }
 
 
@@ -1558,6 +3066,29 @@ document
           throw new Error(
             "The advertisement end date must be after the start date."
           );
+
+        }
+
+
+        const destinationURL =
+          document
+            .getElementById(
+              "destination-url"
+            )
+            .value
+            .trim();
+
+
+        if (
+          !safeHttpUrl(
+            destinationURL
+          )
+        ) {
+
+          throw new Error(
+            "Please enter a valid http:// or https:// advertiser destination link."
+          );
+
         }
 
 
@@ -1569,7 +3100,17 @@ document
             .value;
 
 
+        const sourceApplicationId =
+          document
+            .getElementById(
+              "source-application-id"
+            )
+            .value ||
+          null;
+
+
         const adData = {
+
 
           advertiser_name:
             document
@@ -1579,6 +3120,7 @@ document
               .value
               .trim(),
 
+
           ad_title:
             document
               .getElementById(
@@ -1586,6 +3128,7 @@ document
               )
               .value
               .trim(),
+
 
           description:
             document
@@ -1595,16 +3138,14 @@ document
               .value
               .trim(),
 
+
           image_url:
             imageURL,
 
+
           destination_url:
-            document
-              .getElementById(
-                "destination-url"
-              )
-              .value
-              .trim(),
+            destinationURL,
+
 
           placement:
             document
@@ -1613,11 +3154,14 @@ document
               )
               .value,
 
+
           start_at:
             startAt,
 
+
           end_at:
             endAt,
+
 
           price:
             priceValue
@@ -1626,12 +3170,14 @@ document
                 )
               : null,
 
+
           currency:
             document
               .getElementById(
                 "currency"
               )
               .value,
+
 
           payment_status:
             document
@@ -1640,6 +3186,7 @@ document
               )
               .value,
 
+
           active:
             document
               .getElementById(
@@ -1647,13 +3194,19 @@ document
               )
               .checked,
 
+
           admin_notes:
             document
               .getElementById(
                 "admin-notes"
               )
               .value
-              .trim()
+              .trim(),
+
+
+          advertising_application_id:
+            sourceApplicationId
+
 
         };
 
@@ -1662,6 +3215,7 @@ document
 
 
         if (id) {
+
 
           adData.updated_at =
             new Date()
@@ -1685,7 +3239,11 @@ document
           error =
             result.error;
 
-        } else {
+
+        }
+
+        else {
+
 
           const result =
             await supabaseClient
@@ -1699,6 +3257,8 @@ document
 
           error =
             result.error;
+
+
         }
 
 
@@ -1709,16 +3269,30 @@ document
 
         message.textContent =
           id
+
             ? "Advertisement updated successfully."
+
             : "Advertisement added successfully.";
 
 
         resetForm();
 
 
-        await loadAdvertisements();
+        await Promise.all([
 
-      } catch (error) {
+          loadAdvertisements(),
+
+          loadAdvertisingApplications()
+
+        ]);
+
+
+      }
+
+      catch (
+        error
+      ) {
+
 
         console.error(
           error
@@ -1733,16 +3307,27 @@ document
 
             : "Advertisement could not be saved.";
 
-      } finally {
+
+      }
+
+      finally {
+
 
         button.disabled =
           false;
+
+
       }
 
     }
   );
 
 
+/*
+=====================================================
+EDIT ADVERTISEMENT
+=====================================================
+*/
 
 async function editAdvertisement(
   id
@@ -1773,114 +3358,155 @@ async function editAdvertisement(
       "Advertisement could not be opened."
     );
 
+
     return;
+
   }
 
 
-  document.getElementById(
-    "ad-id"
-  ).value =
-    data.id;
+  document
+    .getElementById(
+      "ad-id"
+    )
+    .value =
+      data.id;
 
 
-  document.getElementById(
-    "advertiser-name"
-  ).value =
-    data.advertiser_name ||
-    "";
+  document
+    .getElementById(
+      "advertiser-name"
+    )
+    .value =
+      data.advertiser_name ||
+      "";
 
 
-  document.getElementById(
-    "ad-title"
-  ).value =
-    data.ad_title ||
-    "";
+  document
+    .getElementById(
+      "ad-title"
+    )
+    .value =
+      data.ad_title ||
+      "";
 
 
-  document.getElementById(
-    "description"
-  ).value =
-    data.description ||
-    "";
+  document
+    .getElementById(
+      "description"
+    )
+    .value =
+      data.description ||
+      "";
 
 
-  document.getElementById(
-    "destination-url"
-  ).value =
-    data.destination_url ||
-    "";
+  document
+    .getElementById(
+      "destination-url"
+    )
+    .value =
+      data.destination_url ||
+      "";
 
 
-  document.getElementById(
-    "placement"
-  ).value =
-    data.placement ||
-    "homepage_banner";
+  document
+    .getElementById(
+      "placement"
+    )
+    .value =
+      data.placement ||
+      "homepage_banner";
 
 
-  document.getElementById(
-    "start-at"
-  ).value =
-    localDateTimeValue(
-      data.start_at
-    );
+  document
+    .getElementById(
+      "start-at"
+    )
+    .value =
+      localDateTimeValue(
+        data.start_at
+      );
 
 
-  document.getElementById(
-    "end-at"
-  ).value =
-    localDateTimeValue(
-      data.end_at
-    );
+  document
+    .getElementById(
+      "end-at"
+    )
+    .value =
+      localDateTimeValue(
+        data.end_at
+      );
 
 
-  document.getElementById(
-    "price"
-  ).value =
-    data.price ??
-    "";
+  document
+    .getElementById(
+      "price"
+    )
+    .value =
+      data.price ??
+      "";
 
 
-  document.getElementById(
-    "currency"
-  ).value =
-    data.currency ||
-    "EUR";
+  document
+    .getElementById(
+      "currency"
+    )
+    .value =
+      data.currency ||
+      "EUR";
 
 
-  document.getElementById(
-    "payment-status"
-  ).value =
-    data.payment_status ||
-    "pending";
+  document
+    .getElementById(
+      "payment-status"
+    )
+    .value =
+      data.payment_status ||
+      "pending";
 
 
-  document.getElementById(
-    "active"
-  ).checked =
-    Boolean(
-      data.active
-    );
+  document
+    .getElementById(
+      "active"
+    )
+    .checked =
+      Boolean(
+        data.active
+      );
 
 
-  document.getElementById(
-    "admin-notes"
-  ).value =
-    data.admin_notes ||
-    "";
+  document
+    .getElementById(
+      "admin-notes"
+    )
+    .value =
+      data.admin_notes ||
+      "";
 
 
-  document.getElementById(
-    "current-image-url"
-  ).value =
-    data.image_url ||
-    "";
+  document
+    .getElementById(
+      "current-image-url"
+    )
+    .value =
+      data.image_url ||
+      "";
 
 
-  document.getElementById(
-    "ad-image"
-  ).value =
-    "";
+  document
+    .getElementById(
+      "source-application-id"
+    )
+    .value =
+      data.advertising_application_id ||
+      "";
+
+
+  document
+    .getElementById(
+      "ad-image"
+    )
+    .value =
+      "";
 
 
   showImagePreview(
@@ -1889,31 +3515,82 @@ async function editAdvertisement(
   );
 
 
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Edit Advertisement";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Edit Advertisement";
 
 
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Update Advertisement";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Update Advertisement";
 
 
-  document.getElementById(
-    "cancel-edit"
-  ).style.display =
-    "inline-block";
+  document
+    .getElementById(
+      "cancel-edit"
+    )
+    .style.display =
+      "inline-block";
 
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  const note =
+    document.getElementById(
+      "source-note"
+    );
+
+
+  if (
+    data.advertising_application_id
+  ) {
+
+    note.style.display =
+      "block";
+
+
+    note.textContent =
+      "This advertisement came from advertising application " +
+      data.advertising_application_id +
+      ".";
+
+  }
+
+  else {
+
+    note.style.display =
+      "none";
+
+
+    note.textContent =
+      "";
+
+  }
+
+
+  document
+    .getElementById(
+      "ad-form-panel"
+    )
+    .scrollIntoView({
+      behavior:
+        "smooth",
+      block:
+        "start"
+    });
+
 }
 
 
+/*
+=====================================================
+DELETE ADVERTISEMENT
+=====================================================
+*/
 
 async function deleteAdvertisement(
   id
@@ -1955,14 +3632,22 @@ async function deleteAdvertisement(
       "Advertisement could not be deleted."
     );
 
+
     return;
+
   }
 
 
   await loadAdvertisements();
+
 }
 
 
+/*
+=====================================================
+RESET FORM
+=====================================================
+*/
 
 document
   .getElementById(
@@ -1972,7 +3657,6 @@ document
     "click",
     resetForm
   );
-
 
 
 function resetForm() {
@@ -1995,6 +3679,14 @@ function resetForm() {
   document
     .getElementById(
       "current-image-url"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "source-application-id"
     )
     .value =
       "";
@@ -2059,9 +3751,29 @@ function resetForm() {
     )
     .style.display =
       "none";
+
+
+  const note =
+    document.getElementById(
+      "source-note"
+    );
+
+
+  note.style.display =
+    "none";
+
+
+  note.textContent =
+    "";
+
 }
 
 
+/*
+=====================================================
+ESCAPE
+=====================================================
+*/
 
 function escapeHTML(
   value
@@ -2072,13 +3784,28 @@ function escapeHTML(
       ? ""
       : value
   )
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
+}
 
 
 function escapeAttribute(
@@ -2088,13 +3815,21 @@ function escapeAttribute(
   return escapeHTML(
     value
   );
+
 }
 
 
+/*
+=====================================================
+START
+=====================================================
+*/
 
 protectPage();
 
 </script>
 
+
 </body>
+
 </html>
