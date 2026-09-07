@@ -1054,7 +1054,490 @@ nav a.active {
 
   let allProducts =
     [];
+/*
+=====================================================
+SHOP SEO
+=====================================================
+*/
 
+const SITE_ORIGIN =
+  "https://giftedgiftempire.com";
+
+
+const SHOP_URL =
+  SITE_ORIGIN +
+  "/shop";
+
+
+function setShopMeta(
+  id,
+  content
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (
+    element
+  ) {
+
+    element.setAttribute(
+      "content",
+      content
+    );
+
+  }
+
+}
+
+
+function getShopProductUrl(
+  product
+) {
+
+  if (
+    !product
+  ) {
+
+    return "";
+
+  }
+
+
+  /*
+  PHYSICAL PRODUCT
+  */
+
+  if (
+    product.type ===
+    "physical"
+  ) {
+
+    if (
+      product.slug
+    ) {
+
+      return (
+        SITE_ORIGIN +
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
+    return (
+      SITE_ORIGIN +
+      "/product.html?id=" +
+      encodeURIComponent(
+        product.id
+      )
+    );
+
+  }
+
+
+  /*
+  GIFTEDGIFT DIGITAL PRODUCT
+  */
+
+  if (
+    product.type ===
+    "digital"
+  ) {
+
+    if (
+      product.slug
+    ) {
+
+      return (
+        SITE_ORIGIN +
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
+    return (
+      SITE_ORIGIN +
+      "/digital-product.html?id=" +
+      encodeURIComponent(
+        product.id
+      )
+    );
+
+  }
+
+
+  /*
+  AFFILIATE PRODUCT
+  */
+
+  if (
+    product.type ===
+    "affiliate"
+  ) {
+
+    if (
+      product.slug
+    ) {
+
+      return (
+        SITE_ORIGIN +
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
+    return (
+      SITE_ORIGIN +
+      "/affiliate-products.html?id=" +
+      encodeURIComponent(
+        product.id
+      )
+    );
+
+  }
+
+
+  /*
+  CREATOR MARKETPLACE PRODUCT
+  */
+
+  if (
+    product.type ===
+    "creator" &&
+    product.slug
+  ) {
+
+    return (
+      SITE_ORIGIN +
+      "/creator-product.html?slug=" +
+      encodeURIComponent(
+        product.slug
+      )
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+function updateShopSEO() {
+
+  let seoProducts =
+    allProducts;
+
+
+  /*
+  If this is a category URL,
+  use only products from that category.
+  */
+
+  if (
+    selectedCategory
+  ) {
+
+    const wantedCategory =
+      String(
+        selectedCategory
+      )
+        .trim()
+        .toLowerCase();
+
+
+    seoProducts =
+      allProducts.filter(
+        product =>
+
+          String(
+            product.category ||
+            ""
+          )
+            .trim()
+            .toLowerCase() ===
+          wantedCategory
+      );
+
+  }
+
+
+  let pageTitle =
+    "Shop Products & Affiliate Picks | GiftedGift Empire";
+
+
+  let description =
+    "Shop physical products, digital products, Creator Marketplace products and carefully selected affiliate recommendations from GiftedGift Empire.";
+
+
+  let canonicalURL =
+    SHOP_URL;
+
+
+  if (
+    selectedCategory
+  ) {
+
+    pageTitle =
+      selectedCategory +
+      " Products | GiftedGift Empire";
+
+
+    description =
+      "Browse " +
+      selectedCategory +
+      " products available through GiftedGift Empire, including eligible physical, digital, Creator Marketplace and selected affiliate products.";
+
+
+    canonicalURL =
+      SHOP_URL +
+      "?category=" +
+      encodeURIComponent(
+        selectedCategory
+      );
+
+  }
+
+
+  document.title =
+    pageTitle;
+
+
+  setShopMeta(
+    "shop-meta-description",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "shop-canonical"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.setAttribute(
+      "href",
+      canonicalURL
+    );
+
+  }
+
+
+  setShopMeta(
+    "shop-og-title",
+    pageTitle
+  );
+
+
+  setShopMeta(
+    "shop-og-description",
+    description
+  );
+
+
+  setShopMeta(
+    "shop-og-url",
+    canonicalURL
+  );
+
+
+  setShopMeta(
+    "shop-twitter-title",
+    pageTitle
+  );
+
+
+  setShopMeta(
+    "shop-twitter-description",
+    description
+  );
+
+
+  /*
+  Empty category URLs should not
+  become thin indexed pages.
+  */
+
+  const robots =
+    document.getElementById(
+      "shop-robots"
+    );
+
+
+  if (
+    robots
+  ) {
+
+    robots.setAttribute(
+      "content",
+
+      selectedCategory &&
+      seoProducts.length === 0
+
+        ? "noindex, follow"
+
+        : "index, follow, max-image-preview:large"
+    );
+
+  }
+
+
+  /*
+  COLLECTIONPAGE + ITEMLIST JSON-LD
+  */
+
+  let schema =
+    document.getElementById(
+      "shop-structured-data"
+    );
+
+
+  if (
+    !schema
+  ) {
+
+    schema =
+      document.createElement(
+        "script"
+      );
+
+
+    schema.type =
+      "application/ld+json";
+
+
+    schema.id =
+      "shop-structured-data";
+
+
+    document.head.appendChild(
+      schema
+    );
+
+  }
+
+
+  const itemList =
+    seoProducts
+      .map(
+        product => {
+
+          return {
+
+            product,
+
+            url:
+              getShopProductUrl(
+                product
+              )
+
+          };
+
+        }
+      )
+      .filter(
+        item =>
+          Boolean(
+            item.url
+          )
+      )
+      .slice(
+        0,
+        50
+      )
+      .map(
+        (
+          item,
+          index
+        ) => {
+
+          return {
+
+            "@type":
+              "ListItem",
+
+            "position":
+              index + 1,
+
+            "name":
+              item.product.name ||
+              "Product",
+
+            "url":
+              item.url
+
+          };
+
+        }
+      );
+
+
+  schema.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@type":
+        "CollectionPage",
+
+      "name":
+        pageTitle,
+
+      "description":
+        description,
+
+      "url":
+        canonicalURL,
+
+      "isPartOf": {
+
+        "@type":
+          "WebSite",
+
+        "name":
+          "GiftedGift Empire",
+
+        "url":
+          SITE_ORIGIN
+
+      },
+
+      "mainEntity": {
+
+        "@type":
+          "ItemList",
+
+        "numberOfItems":
+          itemList.length,
+
+        "itemListElement":
+          itemList
+
+      }
+
+    });
+
+}
 
   /*
   =====================================================
