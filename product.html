@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,646 +10,1389 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Product | GiftedGift Empire</title>
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
+  <title>
+    Product | GiftedGift Empire
+  </title>
 
   <meta
-  id="product-meta-description"
-  name="description"
-  content="View product details, price and availability at GiftedGift Empire."
->
+    id="product-meta-description"
+    name="description"
+    content="View product details, price and availability at GiftedGift Empire."
+  >
 
-<link
-  id="product-canonical"
-  rel="canonical"
-  href="https://giftedgiftempire.com/product.html"
->
+  <meta
+    id="robots-meta"
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+  <link
+    id="product-canonical"
+    rel="canonical"
+    href="https://giftedgiftempire.com/product.html"
+  >
+
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       OPEN GRAPH
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="product"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    id="og-title"
+    property="og:title"
+    content="Product | GiftedGift Empire"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="View product details, price and availability at GiftedGift Empire."
+  >
+
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/product.html"
+  >
+
+  <meta
+    id="og-image"
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    id="og-image-alt"
+    property="og:image:alt"
+    content="GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    id="twitter-title"
+    name="twitter:title"
+    content="Product | GiftedGift Empire"
+  >
+
+  <meta
+    id="twitter-description"
+    name="twitter:description"
+    content="View product details, price and availability at GiftedGift Empire."
+  >
+
+  <meta
+    id="twitter-image"
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f7f7f7;
+
       color: #222;
     }
 
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: #123a8c;
+
       color: white;
-      padding: 25px 20px;
+
+      padding: 16px 20px;
+
+      border-bottom:
+        4px solid #f2bd16;
     }
 
-    header h1 {
-      color: #f2bd16;
-      margin: 0 0 20px;
+
+    .header-inner {
+      max-width: 1200px;
+
+      margin: auto;
     }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 16px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 54px;
+
+      height: 54px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 27px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       display: flex;
+
       flex-wrap: wrap;
-      gap: 18px;
+
+      gap:
+        6px
+        18px;
     }
+
 
     nav a {
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
-    nav a:hover {
+
+    nav a:hover,
+    nav a.active {
       color: #f2bd16;
     }
 
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
+
     .page {
       max-width: 1100px;
+
       margin: auto;
-      padding: 35px 20px 60px;
+
+      padding:
+        35px
+        20px
+        60px;
     }
+
 
     .back-link {
       display: inline-block;
+
       margin-bottom: 25px;
+
       color: #123a8c;
+
       text-decoration: none;
+
       font-weight: bold;
     }
+
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
 
     .loading {
       text-align: center;
-      padding: 60px 20px;
+
+      padding:
+        60px
+        20px;
+
       color: #666;
+
+      background: white;
+
+      border-radius: 14px;
     }
+
+
+    /* =========================
+       PRODUCT
+    ========================= */
 
     .product-layout {
       display: none;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 45px;
+
       background: white;
+
       padding: 30px;
+
       border-radius: 16px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0
+        4px
+        18px
+        rgba(0,0,0,0.08);
     }
+
 
     .image-area {
       display: flex;
+
       align-items: flex-start;
+
       justify-content: center;
     }
+
 
     .product-image {
       width: 100%;
+
       max-height: 500px;
+
       object-fit: contain;
+
       border-radius: 12px;
+
       background: #f7f7f7;
     }
 
+
     .image-placeholder {
       display: none;
+
       width: 100%;
+
       min-height: 350px;
+
       align-items: center;
+
       justify-content: center;
+
       border-radius: 12px;
+
       background: #f1f1f1;
+
       color: #888;
+
       text-align: center;
+
       padding: 20px;
     }
 
+
     .category {
       color: #123a8c;
+
       font-size: 15px;
+
       font-weight: bold;
+
       margin-bottom: 10px;
     }
 
+
     .product-name {
+      color: #123a8c;
+
       font-size: 36px;
-      margin: 0 0 15px;
+
+      line-height: 1.2;
+
+      margin:
+        0
+        0
+        15px;
+
+      overflow-wrap: anywhere;
     }
 
+
     .rating {
-      margin: 12px 0 18px;
+      margin:
+        12px
+        0
+        18px;
+
       font-weight: bold;
+
       color: #555;
     }
+
 
     .rating-stars {
       color: #e7a900;
+
       letter-spacing: 2px;
+
       margin-right: 7px;
     }
 
+
     .description {
       line-height: 1.7;
+
       color: #555;
+
       white-space: pre-line;
+
+      overflow-wrap: anywhere;
     }
+
+
+    /* =========================
+       PRICE
+    ========================= */
 
     .price {
       font-size: 31px;
+
       font-weight: bold;
-      margin: 22px 0 10px;
+
+      margin:
+        22px
+        0
+        10px;
     }
+
 
     .normal-price {
       color: #888;
+
       text-decoration: line-through;
+
       font-size: 20px;
+
       margin-right: 10px;
     }
+
 
     .deal-price {
       color: #123a8c;
     }
 
+
     .deal-badge {
       display: inline-block;
+
       margin-top: 10px;
-      padding: 7px 11px;
+
+      padding:
+        7px
+        11px;
+
       border-radius: 7px;
+
       background: #f2bd16;
+
       color: #111;
+
       font-size: 14px;
+
       font-weight: bold;
     }
+
 
     .deal-saving {
       margin-top: 8px;
+
       color: #17803d;
+
       font-size: 14px;
+
       font-weight: bold;
     }
+
+
+    /* =========================
+       STOCK / QUANTITY
+    ========================= */
 
     .stock {
       display: inline-block;
-      margin: 12px 0 25px;
-      padding: 7px 12px;
+
+      margin:
+        12px
+        0
+        25px;
+
+      padding:
+        7px
+        12px;
+
       border-radius: 20px;
+
       font-size: 14px;
+
       font-weight: bold;
     }
 
+
     .in-stock {
       background: #e7f6eb;
+
       color: #21753a;
     }
 
+
     .out-of-stock {
       background: #ffe8e8;
+
       color: #a12626;
     }
+
 
     .quantity-section {
       margin-top: 10px;
     }
 
+
     .quantity-label {
       font-size: 17px;
+
       font-weight: bold;
+
       margin-bottom: 12px;
     }
 
+
     .quantity-control {
       display: flex;
+
       align-items: center;
+
       gap: 14px;
+
       margin-bottom: 22px;
     }
 
+
     .quantity-button {
       width: 46px;
+
       height: 46px;
+
       border: none;
+
       border-radius: 9px;
+
       background: #123a8c;
+
       color: white;
+
       font-size: 25px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
+
 
     .quantity-button:disabled {
       opacity: 0.4;
+
       cursor: not-allowed;
     }
+
 
     .quantity-value {
       min-width: 48px;
+
       text-align: center;
+
       font-size: 22px;
+
       font-weight: bold;
     }
+
 
     .total-box {
       background: #f2f5fb;
+
       padding: 16px;
+
       border-radius: 10px;
+
       margin-bottom: 20px;
     }
 
+
     .total-label {
       font-size: 14px;
+
       color: #666;
     }
+
 
     .selected-total {
       margin-top: 5px;
+
       font-size: 28px;
+
       color: #123a8c;
+
       font-weight: bold;
     }
+
+
+    /* =========================
+       CART
+    ========================= */
 
     .add-button {
       width: 100%;
-      padding: 15px 20px;
+
+      padding:
+        15px
+        20px;
+
       border: none;
+
       border-radius: 9px;
+
       background: #f2bd16;
+
       color: #111;
+
       font-size: 18px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
 
+
     .add-button:hover {
-      opacity: 0.92;
+      background: #d8a90e;
     }
+
 
     .add-button:disabled {
       background: #ccc;
+
       color: #666;
+
       cursor: not-allowed;
     }
 
-    .message {
-      display: none;
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 9px;
-      line-height: 1.5;
-    }
-
-    .message.success {
-      display: block;
-      background: #e9f8ed;
-      border: 1px solid #b7e1c1;
-      color: #17652d;
-    }
-
-    .message.error {
-      display: block;
-      background: #ffe8e8;
-      border: 1px solid #efb9b9;
-      color: #9c1d1d;
-    }
 
     .view-cart {
       display: inline-block;
+
       margin-top: 18px;
+
       color: #123a8c;
+
       text-decoration: none;
+
       font-weight: bold;
     }
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 14px;
+
+      border-radius: 9px;
+
+      line-height: 1.5;
+    }
+
+
+    .message.success {
+      display: block;
+
+      background: #e9f8ed;
+
+      border:
+        1px solid #b7e1c1;
+
+      color: #17652d;
+    }
+
+
+    .message.error {
+      display: block;
+
+      background: #ffe8e8;
+
+      border:
+        1px solid #efb9b9;
+
+      color: #9c1d1d;
+    }
+
+
+    /* =========================
+       WHATSAPP PURCHASE
+    ========================= */
+
     .purchase-or {
-  margin: 24px 0 18px;
-  text-align: center;
-  font-weight: bold;
-  color: #777;
-}
+      margin:
+        24px
+        0
+        18px;
 
-.whatsapp-purchase {
-  margin-top: 10px;
-  padding: 20px;
-  border-radius: 12px;
-  background: #f7f9fb;
-  border: 1px solid #e2e5e9;
-}
+      text-align: center;
 
-.whatsapp-purchase h3 {
-  margin: 0 0 8px;
-  color: #123a8c;
-  font-size: 21px;
-}
+      font-weight: bold;
 
-.whatsapp-help {
-  margin: 0 0 18px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.whatsapp-fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.whatsapp-field {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.whatsapp-field.full-width {
-  grid-column: 1 / -1;
-}
-
-.whatsapp-field label {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.whatsapp-field input,
-.whatsapp-field textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-}
-
-.whatsapp-field textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-.whatsapp-button {
-  width: 100%;
-  margin-top: 18px;
-  padding: 15px 18px;
-  border: none;
-  border-radius: 9px;
-  background: #25D366;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.whatsapp-button:hover {
-  opacity: 0.92;
-}
-
-@media (max-width: 600px) {
-  .whatsapp-fields {
-    grid-template-columns: 1fr;
-  }
-
-  .whatsapp-field.full-width {
-    grid-column: auto;
-  }
-}
+      color: #777;
+    }
 
 
-    /* REVIEWS */
+    .whatsapp-purchase {
+      margin-top: 10px;
+
+      padding: 20px;
+
+      border-radius: 12px;
+
+      background: #f7f9fb;
+
+      border:
+        1px solid #e2e5e9;
+    }
+
+
+    .whatsapp-purchase h3 {
+      margin:
+        0
+        0
+        8px;
+
+      color: #123a8c;
+
+      font-size: 21px;
+    }
+
+
+    .whatsapp-help {
+      margin:
+        0
+        0
+        18px;
+
+      color: #666;
+
+      line-height: 1.6;
+    }
+
+
+    .whatsapp-fields {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 14px;
+    }
+
+
+    .whatsapp-field {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+
+    .whatsapp-field.full-width {
+      grid-column:
+        1 / -1;
+    }
+
+
+    .whatsapp-field label {
+      font-weight: bold;
+
+      font-size: 14px;
+    }
+
+
+    .whatsapp-field input,
+    .whatsapp-field textarea {
+      width: 100%;
+
+      padding: 12px;
+
+      border:
+        1px solid #bbb;
+
+      border-radius: 8px;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      font-size: 16px;
+    }
+
+
+    .whatsapp-field textarea {
+      min-height: 90px;
+
+      resize: vertical;
+    }
+
+
+    .whatsapp-button {
+      width: 100%;
+
+      margin-top: 18px;
+
+      padding:
+        15px
+        18px;
+
+      border: none;
+
+      border-radius: 9px;
+
+      background: #25D366;
+
+      color: white;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+
+    .whatsapp-button:hover {
+      opacity: 0.92;
+    }
+
+
+    /* =========================
+       REVIEWS
+    ========================= */
 
     .reviews-section {
       display: none;
+
       margin-top: 35px;
     }
+
 
     .reviews-heading {
       margin-bottom: 20px;
     }
 
+
     .reviews-heading h2 {
-      margin: 0 0 8px;
+      margin:
+        0
+        0
+        8px;
+
       color: #123a8c;
+
       font-size: 29px;
     }
 
+
     .reviews-heading p {
       margin: 0;
+
       color: #666;
+
       line-height: 1.6;
     }
 
+
     .review-summary {
       background: white;
+
       padding: 24px;
+
       border-radius: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+
+      box-shadow:
+        0
+        3px
+        12px
+        rgba(0,0,0,0.07);
+
       margin-bottom: 22px;
     }
 
+
     .review-summary-score {
       font-size: 30px;
+
       font-weight: bold;
+
       color: #123a8c;
+
       margin-bottom: 6px;
     }
 
+
     .review-summary-stars {
       color: #e7a900;
+
       font-size: 23px;
+
       letter-spacing: 2px;
+
       margin-bottom: 7px;
     }
 
+
     .review-summary-count {
       color: #666;
+
       font-size: 14px;
     }
 
+
     .reviews-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 24px;
+
       align-items: start;
     }
+
 
     .approved-reviews,
     .review-form-card {
       background: white;
+
       padding: 24px;
+
       border-radius: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+
+      box-shadow:
+        0
+        3px
+        12px
+        rgba(0,0,0,0.07);
     }
+
 
     .approved-reviews h3,
     .review-form-card h3 {
-      margin: 0 0 18px;
+      margin:
+        0
+        0
+        18px;
+
       color: #123a8c;
+
       font-size: 22px;
     }
 
+
     .review-card {
-      padding: 18px 0;
-      border-bottom: 1px solid #eee;
+      padding:
+        18px
+        0;
+
+      border-bottom:
+        1px solid #eee;
     }
+
 
     .review-card:first-child {
       padding-top: 0;
     }
 
+
     .review-card:last-child {
       border-bottom: none;
+
       padding-bottom: 0;
     }
 
+
     .review-card-name {
       font-weight: bold;
+
       color: #123a8c;
+
       margin-bottom: 7px;
     }
 
+
     .review-card-stars {
       color: #e7a900;
+
       letter-spacing: 2px;
+
       margin-bottom: 10px;
     }
 
+
     .review-card-text {
       color: #444;
+
       line-height: 1.7;
+
       white-space: pre-line;
     }
 
+
     .review-card-date {
       color: #888;
+
       font-size: 12px;
+
       margin-top: 10px;
     }
 
+
     .no-reviews {
       color: #666;
+
       line-height: 1.6;
+
       background: #f8f9fb;
+
       padding: 16px;
+
       border-radius: 9px;
     }
 
+
     .review-form-card label {
       display: block;
+
       font-weight: bold;
+
       margin-bottom: 8px;
     }
+
 
     .review-form-card input[type="text"],
     .review-form-card textarea {
       width: 100%;
-      border: 1px solid #ccc;
+
+      border:
+        1px solid #ccc;
+
       border-radius: 8px;
+
       padding: 12px;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       font-size: 15px;
+
       margin-bottom: 18px;
     }
 
+
     .review-form-card textarea {
       min-height: 135px;
+
       resize: vertical;
+
       line-height: 1.6;
     }
 
+
     .star-picker {
       display: flex;
+
       gap: 5px;
-      margin: 2px 0 20px;
+
+      margin:
+        2px
+        0
+        20px;
     }
+
 
     .star-picker button {
       border: none;
+
       background: transparent;
+
       color: #bbb;
+
       font-size: 35px;
+
       line-height: 1;
+
       padding: 0;
+
       cursor: pointer;
     }
+
 
     .star-picker button.selected {
       color: #e7a900;
     }
 
+
     .review-submit {
       width: 100%;
+
       border: none;
+
       background: #123a8c;
+
       color: white;
+
       padding: 14px;
+
       border-radius: 8px;
+
       font-size: 16px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
 
+
     .review-submit:disabled {
       opacity: 0.6;
+
       cursor: not-allowed;
     }
 
+
     .review-form-message {
       display: none;
+
       margin-top: 15px;
+
       padding: 13px;
+
       border-radius: 8px;
+
       line-height: 1.5;
+
       font-size: 14px;
     }
 
+
     .review-form-message.success {
       display: block;
+
       background: #e9f8ed;
-      border: 1px solid #b7e1c1;
+
+      border:
+        1px solid #b7e1c1;
+
       color: #17652d;
     }
 
+
     .review-form-message.error {
       display: block;
+
       background: #ffe8e8;
-      border: 1px solid #efb9b9;
+
+      border:
+        1px solid #efb9b9;
+
       color: #9c1d1d;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       margin-top: 50px;
-      padding: 30px 20px;
+
+      padding:
+        35px
+        18px;
+
       text-align: center;
+
       background: #123a8c;
+
       color: white;
     }
 
-    @media (max-width: 760px) {
+
+    .footer-logo {
+      width: 48px;
+
+      height: 48px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 19px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        18px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 760px
+    ) {
 
       .product-layout {
         grid-template-columns: 1fr;
+
         gap: 25px;
+
         padding: 20px;
       }
+
 
       .product-name {
         font-size: 29px;
       }
 
-      nav {
-        gap: 12px;
-      }
 
       .page {
         padding-left: 14px;
+
         padding-right: 14px;
       }
+
 
       .image-placeholder {
         min-height: 260px;
       }
 
+
       .reviews-grid {
         grid-template-columns: 1fr;
       }
+
 
       .review-summary,
       .approved-reviews,
       .review-form-card {
         padding: 20px;
       }
+
     }
+
+
+    @media (
+      max-width: 600px
+    ) {
+
+      header {
+        padding:
+          14px
+          15px;
+      }
+
+
+      .brand img {
+        width: 48px;
+
+        height: 48px;
+      }
+
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          13px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
+
+      .whatsapp-fields {
+        grid-template-columns: 1fr;
+      }
+
+
+      .whatsapp-field.full-width {
+        grid-column: auto;
+      }
+
+    }
+
   </style>
 
 </head>
@@ -656,61 +1400,104 @@
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-  <h1>
-    GiftedGift Empire
-  </h1>
+  <div class="header-inner">
 
-  <nav>
 
-    <a href="index.html">
-      Home
+    <a
+      href="/index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
+
+      <img
+        src="/my-logo.png"
+        alt="GiftedGift Empire logo"
+      >
+
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
     </a>
 
-    <a href="shop.html">
-      Shop
-    </a>
 
-    <a href="categories.html">
-      Categories
-    </a>
+    <nav>
 
-    <a href="daily-inspiration.html">
-      Daily Inspiration
-    </a>
+      <a href="/index.html">
+        Home
+      </a>
 
-    <a href="blog.html">
-      Blog
-    </a>
+      <a
+        href="/shop.html"
+        class="active"
+      >
+        Shop
+      </a>
 
-    <a href="deals.html">
-      Deals
-    </a>
+      <a href="/categories.html">
+        Categories
+      </a>
 
-    <a href="about.html">
-      About
-    </a>
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
 
-    <a href="contact.html">
-      Contact
-    </a>
+      <a href="/blog.html">
+        Blog
+      </a>
 
-    <a href="cart.html">
-      🛒 Cart
-      (<span id="cart-count">0</span>)
-    </a>
+      <a href="/deals.html">
+        Deals
+      </a>
 
-  </nav>
+      <a href="/about.html">
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+
+        🛒 Cart
+        (<span id="cart-count">0</span>)
+
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
 
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="page">
+
 
   <a
     class="back-link"
-    href="shop.html"
+    href="/shop.html"
   >
     ← Back to Shop
   </a>
@@ -719,6 +1506,8 @@
   <div
     id="loading"
     class="loading"
+    role="status"
+    aria-live="polite"
   >
     Loading product...
   </div>
@@ -729,6 +1518,9 @@
     class="product-layout"
   >
 
+
+    <!-- IMAGE -->
+
     <div class="image-area">
 
       <img
@@ -736,6 +1528,7 @@
         class="product-image"
         alt="GiftedGift Empire product"
       >
+
 
       <div
         id="image-placeholder"
@@ -747,7 +1540,10 @@
     </div>
 
 
+    <!-- DETAILS -->
+
     <div>
+
 
       <div
         id="product-category"
@@ -787,6 +1583,8 @@
       ></div>
 
 
+      <!-- QUANTITY -->
+
       <div
         id="quantity-section"
         class="quantity-section"
@@ -803,6 +1601,7 @@
             id="minus-button"
             class="quantity-button"
             type="button"
+            aria-label="Reduce quantity"
           >
             −
           </button>
@@ -820,6 +1619,7 @@
             id="plus-button"
             class="quantity-button"
             type="button"
+            aria-label="Increase quantity"
           >
             +
           </button>
@@ -833,6 +1633,7 @@
             Total for selected quantity
           </div>
 
+
           <div
             id="selected-total"
             class="selected-total"
@@ -845,6 +1646,8 @@
       </div>
 
 
+      <!-- CART -->
+
       <button
         id="add-to-cart"
         class="add-button"
@@ -852,152 +1655,167 @@
       >
         Add to Cart
       </button>
-      
-<div class="purchase-or">
-  OR
-</div>
 
 
-<div class="whatsapp-purchase">
-
-  <h3>
-    Complete Purchase on WhatsApp
-  </h3>
-
-  <p class="whatsapp-help">
-    Enter your delivery details below.
-    Your shipping cost will be confirmed before payment.
-  </p>
+      <div class="purchase-or">
+        OR
+      </div>
 
 
-  <div class="whatsapp-fields">
+      <!-- =========================
+           WHATSAPP
+      ========================= -->
+
+      <div class="whatsapp-purchase">
 
 
-    <div class="whatsapp-field">
-
-      <label for="whatsapp-name">
-        Full Name
-      </label>
-
-      <input
-        id="whatsapp-name"
-        type="text"
-        placeholder="Your full name"
-      >
-
-    </div>
+        <h3>
+          Complete Purchase on WhatsApp
+        </h3>
 
 
-    <div class="whatsapp-field">
-
-      <label for="whatsapp-phone">
-        Phone Number
-      </label>
-
-      <input
-        id="whatsapp-phone"
-        type="tel"
-        placeholder="Your phone number"
-      >
-
-    </div>
+        <p class="whatsapp-help">
+          Enter your delivery details below.
+          Your shipping cost will be confirmed before payment.
+        </p>
 
 
-    <div class="whatsapp-field full-width">
-
-      <label for="whatsapp-address">
-        Delivery Address
-      </label>
-
-      <input
-        id="whatsapp-address"
-        type="text"
-        placeholder="Street address"
-      >
-
-    </div>
+        <div class="whatsapp-fields">
 
 
-    <div class="whatsapp-field">
+          <div class="whatsapp-field">
 
-      <label for="whatsapp-postal">
-        Postal Code
-      </label>
+            <label for="whatsapp-name">
+              Full Name
+            </label>
 
-      <input
-        id="whatsapp-postal"
-        type="text"
-        placeholder="Postal code"
-      >
+            <input
+              id="whatsapp-name"
+              type="text"
+              placeholder="Your full name"
+              autocomplete="name"
+            >
 
-    </div>
-
-
-    <div class="whatsapp-field">
-
-      <label for="whatsapp-city">
-        City
-      </label>
-
-      <input
-        id="whatsapp-city"
-        type="text"
-        placeholder="City"
-      >
-
-    </div>
+          </div>
 
 
-    <div class="whatsapp-field full-width">
+          <div class="whatsapp-field">
 
-      <label for="whatsapp-country">
-        Country
-      </label>
+            <label for="whatsapp-phone">
+              Phone Number
+            </label>
 
-      <input
-        id="whatsapp-country"
-        type="text"
-        placeholder="Country"
-        value="France"
-      >
+            <input
+              id="whatsapp-phone"
+              type="tel"
+              placeholder="Your phone number"
+              autocomplete="tel"
+            >
 
-    </div>
-
-
-    <div class="whatsapp-field full-width">
-
-      <label for="whatsapp-note">
-        Order Note (optional)
-      </label>
-
-      <textarea
-        id="whatsapp-note"
-        placeholder="Any extra information about your order"
-      ></textarea>
-
-    </div>
-
-  </div>
+          </div>
 
 
-  <button
-    id="whatsapp-purchase-button"
-    class="whatsapp-button"
-    type="button"
-  >
-    🟢 COMPLETE PURCHASE ON WHATSAPP
-  </button>
+          <div class="whatsapp-field full-width">
 
-</div>
+            <label for="whatsapp-address">
+              Delivery Address
+            </label>
+
+            <input
+              id="whatsapp-address"
+              type="text"
+              placeholder="Street address"
+              autocomplete="street-address"
+            >
+
+          </div>
+
+
+          <div class="whatsapp-field">
+
+            <label for="whatsapp-postal">
+              Postal Code
+            </label>
+
+            <input
+              id="whatsapp-postal"
+              type="text"
+              placeholder="Postal code"
+              autocomplete="postal-code"
+            >
+
+          </div>
+
+
+          <div class="whatsapp-field">
+
+            <label for="whatsapp-city">
+              City
+            </label>
+
+            <input
+              id="whatsapp-city"
+              type="text"
+              placeholder="City"
+              autocomplete="address-level2"
+            >
+
+          </div>
+
+
+          <div class="whatsapp-field full-width">
+
+            <label for="whatsapp-country">
+              Country
+            </label>
+
+            <input
+              id="whatsapp-country"
+              type="text"
+              placeholder="Country"
+              value="France"
+              autocomplete="country-name"
+            >
+
+          </div>
+
+
+          <div class="whatsapp-field full-width">
+
+            <label for="whatsapp-note">
+              Order Note (optional)
+            </label>
+
+            <textarea
+              id="whatsapp-note"
+              placeholder="Any extra information about your order"
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="whatsapp-purchase-button"
+          class="whatsapp-button"
+          type="button"
+        >
+          🟢 COMPLETE PURCHASE ON WHATSAPP
+        </button>
+
+      </div>
+
 
       <div
         id="message"
         class="message"
+        aria-live="polite"
       ></div>
 
 
       <a
-        href="cart.html"
+        href="/cart.html"
         class="view-cart"
       >
         View Cart →
@@ -1008,12 +1826,15 @@
   </section>
 
 
-  <!-- CUSTOMER REVIEWS -->
+  <!-- =========================
+       CUSTOMER REVIEWS
+  ========================= -->
 
   <section
     id="reviews-section"
     class="reviews-section"
   >
+
 
     <div class="reviews-heading">
 
@@ -1022,7 +1843,8 @@
       </h2>
 
       <p>
-        Read approved customer feedback or share your experience with this product.
+        Read approved customer feedback or share
+        your experience with this product.
       </p>
 
     </div>
@@ -1040,12 +1862,14 @@
         No ratings yet
       </div>
 
+
       <div
         id="review-summary-stars"
         class="review-summary-stars"
       >
         ☆☆☆☆☆
       </div>
+
 
       <div
         id="review-summary-count"
@@ -1093,12 +1917,14 @@
           type="text"
           maxlength="80"
           placeholder="Enter your name"
+          autocomplete="name"
         >
 
 
         <label>
           Your Rating
         </label>
+
 
         <div
           id="star-picker"
@@ -1172,6 +1998,7 @@
         <div
           id="review-form-message"
           class="review-form-message"
+          aria-live="polite"
         ></div>
 
       </div>
@@ -1183,18 +2010,68 @@
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+  >
 
-  <p>
-    © 2026 GiftedGift Empire.
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+    <a href="/privacy-policy.html">
+      Privacy Policy
+    </a>
+
+    <a href="/terms-conditions.html">
+      Terms & Conditions
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+
+  </div>
 
 </footer>
 
@@ -1206,194 +2083,924 @@
 
 <script>
 
-  const SUPABASE_URL =
-    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const SITE_ORIGIN =
+  "https://giftedgiftempire.com";
 
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_ORIGIN +
+  "/my-logo.png";
 
 
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
 
-  const CART_KEY =
-    "giftedgift_physical_cart";
-  
-const WHATSAPP_NUMBER =
-  "2349060340336";
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
-  const productId =
-  Number(
-    window.__PHYSICAL_PRODUCT_ID ||
-    params.get("id")
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
   );
 
 
-  const dealId =
-    Number(
-      params.get("deal_id")
-    );
+const CART_KEY =
+  "giftedgift_physical_cart";
 
 
-  let currentProduct =
-    null;
+const WHATSAPP_NUMBER =
+  "2349060340336";
 
 
-  let currentDeal =
-    null;
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
 
 
-  let currentUnitPrice =
-    null;
+/* =========================
+   URL PARAMETERS
+========================= */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
 
-  let selectedQuantity =
-    1;
-
-
-  let maxQuantity =
-    99;
-
-
-  let approvedReviews =
-    [];
-
-
-  let selectedReviewRating =
-    0;
-
-
-  function escapeHTML(
-    value
-  ) {
-
-    return String(
-      value == null
-        ? ""
-        : value
+const productId =
+  Number(
+    window.__PHYSICAL_PRODUCT_ID ||
+    params.get(
+      "id"
     )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-  }
+  );
 
 
-  function getCart() {
-
-    try {
-
-      const parsed =
-        JSON.parse(
-          localStorage.getItem(
-            CART_KEY
-          ) || "[]"
-        );
+const dealId =
+  Number(
+    params.get(
+      "deal_id"
+    )
+  );
 
 
-      return Array.isArray(parsed)
-        ? parsed
-        : [];
+/* =========================
+   STATE
+========================= */
 
-    } catch (error) {
-
-      console.error(
-        "Could not read cart:",
-        error
-      );
+let currentProduct =
+  null;
 
 
-      return [];
-    }
-  }
+let currentDeal =
+  null;
 
 
-  function saveCart(
-    cart
+let currentUnitPrice =
+  null;
+
+
+let selectedQuantity =
+  1;
+
+
+let maxQuantity =
+  99;
+
+
+let approvedReviews =
+  [];
+
+
+let selectedReviewRating =
+  0;
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function cleanDescription(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+
+}
+
+
+function descriptionPreview(
+  value,
+  productName
+) {
+
+  const text =
+    cleanDescription(
+      value
+    );
+
+
+  if (
+    !text
   ) {
 
-    localStorage.setItem(
-      CART_KEY,
-      JSON.stringify(
-        cart
-      )
+    return (
+      "View " +
+      (
+        productName ||
+        "this product"
+      ) +
+      ", price and availability at GiftedGift Empire."
     );
+
   }
 
 
-  function updateCartCount() {
+  if (
+    text.length <= 155
+  ) {
 
-    const cart =
-      getCart();
+    return text;
 
-
-    const count =
-      cart.reduce(
-        (
-          total,
-          item
-        ) => {
-
-          const quantity =
-            Number(
-              item.quantity
-            );
+  }
 
 
-          return total +
-            (
-              Number.isInteger(
-                quantity
-              ) &&
-              quantity > 0
+  return (
+    text.slice(
+      0,
+      152
+    ) +
+    "..."
+  );
 
-                ? quantity
-                : 0
-            );
+}
 
-        },
-        0
+
+function safeImageURL(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_ORIGIN
       );
 
 
+    if (
+      url.protocol !== "http:" &&
+      url.protocol !== "https:"
+    ) {
+
+      return null;
+
+    }
+
+
+    return url.href;
+
+
+  } catch (
+    error
+  ) {
+
+    return null;
+
+  }
+
+}
+
+
+function buildProductURL(
+  product
+) {
+
+  if (
+    product &&
+    product.slug
+  ) {
+
+    return (
+      SITE_ORIGIN +
+      "/" +
+      encodeURIComponent(
+        product.slug
+      )
+    );
+
+  }
+
+
+  return (
+    SITE_ORIGIN +
+    "/product.html?id=" +
+    encodeURIComponent(
+      product.id
+    )
+  );
+
+}
+
+
+/* =========================
+   MONEY
+========================= */
+
+function formatPrice(
+  value
+) {
+
+  const number =
+    Number(
+      value
+    );
+
+
+  if (
+    !Number.isFinite(
+      number
+    )
+  ) {
+
+    return "€0.00";
+
+  }
+
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style:
+        "currency",
+
+      currency:
+        "EUR",
+
+      minimumFractionDigits:
+        2,
+
+      maximumFractionDigits:
+        2
+    }
+  ).format(
+    number
+  );
+
+}
+
+
+/* =========================
+   SEO META
+========================= */
+
+function setMeta(
+  id,
+  content
+) {
+
+  const element =
     document.getElementById(
+      id
+    );
+
+
+  if (
+    element
+  ) {
+
+    element.setAttribute(
+      "content",
+      content
+    );
+
+  }
+
+}
+
+
+function markNoIndex() {
+
+  const robots =
+    document.getElementById(
+      "robots-meta"
+    );
+
+
+  if (
+    robots
+  ) {
+
+    robots.setAttribute(
+      "content",
+      "noindex, follow"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   PRODUCT SEO
+========================= */
+
+function updateProductSEO(
+  product
+) {
+
+  const name =
+    product.name ||
+    "Product";
+
+
+  const pageTitle =
+    name +
+    " | GiftedGift Empire";
+
+
+  const description =
+    descriptionPreview(
+      product.description,
+      name
+    );
+
+
+  const canonicalURL =
+    buildProductURL(
+      product
+    );
+
+
+  const image =
+    safeImageURL(
+      product.image_url
+    ) ||
+    DEFAULT_SOCIAL_IMAGE;
+
+
+  document.title =
+    pageTitle;
+
+
+  setMeta(
+    "product-meta-description",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "product-canonical"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.setAttribute(
+      "href",
+      canonicalURL
+    );
+
+  }
+
+
+  setMeta(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMeta(
+    "og-description",
+    description
+  );
+
+
+  setMeta(
+    "og-url",
+    canonicalURL
+  );
+
+
+  setMeta(
+    "og-image",
+    image
+  );
+
+
+  setMeta(
+    "og-image-alt",
+    name
+  );
+
+
+  setMeta(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMeta(
+    "twitter-description",
+    description
+  );
+
+
+  setMeta(
+    "twitter-image",
+    image
+  );
+
+
+  updateProductStructuredData(
+    product
+  );
+
+}
+
+
+/* =========================
+   STRUCTURED DATA
+========================= */
+
+function updateProductStructuredData(
+  product
+) {
+
+  let script =
+    document.getElementById(
+      "product-structured-data"
+    );
+
+
+  if (
+    !script
+  ) {
+
+    script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.id =
+      "product-structured-data";
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  const canonicalURL =
+    buildProductURL(
+      product
+    );
+
+
+  const image =
+    safeImageURL(
+      product.image_url
+    );
+
+
+  const normalPrice =
+    Number(
+      product.price
+    );
+
+
+  const productSchema = {
+
+    "@type":
+      "Product",
+
+    "name":
+      product.name ||
+      "Product",
+
+    "description":
+      cleanDescription(
+        product.description
+      ) ||
+      (
+        "Product available from GiftedGift Empire."
+      ),
+
+    "url":
+      canonicalURL,
+
+    "sku":
+      String(
+        product.id
+      ),
+
+    "brand": {
+
+      "@type":
+        "Brand",
+
+      "name":
+        "GiftedGift Empire"
+
+    }
+
+  };
+
+
+  if (
+    product.category
+  ) {
+
+    productSchema.category =
+      product.category;
+
+  }
+
+
+  if (
+    image
+  ) {
+
+    productSchema.image =
+      [
+        image
+      ];
+
+  }
+
+
+  if (
+    Number.isFinite(
+      normalPrice
+    ) &&
+    normalPrice > 0
+  ) {
+
+    productSchema.offers = {
+
+      "@type":
+        "Offer",
+
+      "url":
+        canonicalURL,
+
+      "priceCurrency":
+        "EUR",
+
+      "price":
+        normalPrice.toFixed(
+          2
+        ),
+
+      "availability":
+        product.in_stock === true
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+
+      "seller": {
+
+        "@type":
+          "Organization",
+
+        "name":
+          "GiftedGift Empire",
+
+        "url":
+          SITE_ORIGIN
+
+      }
+
+    };
+
+  }
+
+
+  /*
+    Only genuine approved customer reviews
+    are used for aggregateRating.
+  */
+
+  if (
+    approvedReviews.length > 0
+  ) {
+
+    const average =
+      getAverageRating();
+
+
+    if (
+      average > 0
+    ) {
+
+      productSchema.aggregateRating = {
+
+        "@type":
+          "AggregateRating",
+
+        "ratingValue":
+          average.toFixed(
+            1
+          ),
+
+        "reviewCount":
+          approvedReviews.length,
+
+        "bestRating":
+          "5",
+
+        "worstRating":
+          "1"
+
+      };
+
+    }
+
+  }
+
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_ORIGIN +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Shop",
+
+        "item":
+          SITE_ORIGIN +
+          "/shop.html"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          3,
+
+        "name":
+          product.name ||
+          "Product",
+
+        "item":
+          canonicalURL
+
+      }
+
+    ]
+
+  };
+
+
+  script.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@graph": [
+
+        productSchema,
+
+        breadcrumbSchema
+
+      ]
+
+    });
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function getCart() {
+
+  try {
+
+    const parsed =
+      JSON.parse(
+        localStorage.getItem(
+          CART_KEY
+        ) ||
+        "[]"
+      );
+
+
+    return Array.isArray(
+      parsed
+    )
+      ? parsed
+      : [];
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Could not read cart:",
+      error
+    );
+
+
+    return [];
+
+  }
+
+}
+
+
+function saveCart(
+  cart
+) {
+
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(
+      cart
+    )
+  );
+
+}
+
+
+function updateCartCount() {
+
+  const cart =
+    getCart();
+
+
+  const count =
+    cart.reduce(
+      (
+        total,
+        item
+      ) => {
+
+        const quantity =
+          Number(
+            item.quantity
+          );
+
+
+        return total +
+          (
+            Number.isInteger(
+              quantity
+            ) &&
+            quantity > 0
+
+              ? quantity
+              : 0
+          );
+
+      },
+      0
+    );
+
+
+  document
+    .getElementById(
       "cart-count"
-    ).textContent =
+    )
+    .textContent =
       String(
         count
       );
-  }
+
+}
 
 
-  function formatPrice(
-    value
+/* =========================
+   STOCK
+========================= */
+
+function getStockLimit(
+  product
+) {
+
+  const candidates = [
+
+    product.stock_quantity,
+
+    product.inventory_quantity,
+
+    product.quantity_in_stock,
+
+    product.available_quantity
+
+  ];
+
+
+  for (
+    const value
+    of candidates
   ) {
 
     const number =
@@ -1403,645 +3010,431 @@ const WHATSAPP_NUMBER =
 
 
     if (
-      !Number.isFinite(
+      Number.isInteger(
         number
-      )
+      ) &&
+      number >= 0
     ) {
 
-      return "€0.00";
+      return number;
+
     }
 
-
-    return (
-      "€" +
-      number.toFixed(2)
-    );
   }
 
 
-  function getStockLimit(
-    product
-  ) {
+  return product.in_stock === true
+    ? 99
+    : 0;
 
-    const candidates = [
+}
 
-      product.stock_quantity,
 
-      product.inventory_quantity,
+/* =========================
+   MESSAGES
+========================= */
 
-      product.quantity_in_stock,
+function showMessage(
+  text,
+  type = "success"
+) {
 
-      product.available_quantity
-
-    ];
-
-
-    for (
-      const value
-      of candidates
-    ) {
-
-      const number =
-        Number(
-          value
-        );
-
-
-      if (
-        Number.isInteger(
-          number
-        ) &&
-        number >= 0
-      ) {
-
-        return number;
-      }
-    }
-
-
-    return product.in_stock === true
-      ? 99
-      : 0;
-  }
-
-
-  function showMessage(
-    text,
-    type = "success"
-  ) {
-
-    const message =
-      document.getElementById(
-        "message"
-      );
-
-
-    message.className =
-      `message ${type}`;
-
-
-    message.textContent =
-      text;
-  }
-
-
-  function clearMessage() {
-
-    const message =
-      document.getElementById(
-        "message"
-      );
-
-
-    message.className =
-      "message";
-
-
-    message.textContent =
-      "";
-  }
-
-
-  function isDealLive(
-    deal
-  ) {
-
-    if (
-      !deal ||
-      deal.active !== true
-    ) {
-
-      return false;
-    }
-
-
-    if (
-      deal.item_type !==
-      "product"
-    ) {
-
-      return false;
-    }
-
-
-    if (
-      Number(
-        deal.item_id
-      ) !==
-      Number(
-        productId
-      )
-    ) {
-
-      return false;
-    }
-
-
-    const now =
-      new Date();
-
-
-    if (
-      deal.starts_at
-    ) {
-
-      const startsAt =
-        new Date(
-          deal.starts_at
-        );
-
-
-      if (
-        Number.isNaN(
-          startsAt.getTime()
-        ) ||
-        now < startsAt
-      ) {
-
-        return false;
-      }
-    }
-
-
-    if (
-      deal.ends_at
-    ) {
-
-      const endsAt =
-        new Date(
-          deal.ends_at
-        );
-
-
-      if (
-        Number.isNaN(
-          endsAt.getTime()
-        ) ||
-        now > endsAt
-      ) {
-
-        return false;
-      }
-    }
-
-
-    return true;
-  }
-
-
-  function getDealPrice(
-    deal,
-    product
-  ) {
-
-    if (
-      !deal ||
-      !product
-    ) {
-
-      return null;
-    }
-
-
-    const normalPrice =
-      Number(
-        product.price
-      );
-
-
-    const dealPrice =
-      Number(
-        deal.deal_price ??
-        deal.price
-      );
-
-
-    if (
-      !Number.isFinite(
-        normalPrice
-      ) ||
-      normalPrice <= 0
-    ) {
-
-      return null;
-    }
-
-
-    if (
-      !Number.isFinite(
-        dealPrice
-      ) ||
-      dealPrice <= 0 ||
-      dealPrice >= normalPrice
-    ) {
-
-      return null;
-    }
-
-
-    return dealPrice;
-  }
-
-
-  async function loadDeal(
-    product
-  ) {
-
-    currentDeal =
-      null;
-
-
-    currentUnitPrice =
-      Number(
-        product.price
-      );
-
-
-    if (
-      !Number.isInteger(
-        dealId
-      ) ||
-      dealId <= 0
-    ) {
-
-      return;
-    }
-
-
-    const {
-      data: deal,
-      error
-    } =
-      await supabaseClient
-        .from(
-          "deals"
-        )
-        .select("*")
-        .eq(
-          "id",
-          dealId
-        )
-        .maybeSingle();
-
-
-    if (
-      error
-    ) {
-
-      console.error(
-        "Deal loading error:",
-        error
-      );
-
-
-      return;
-    }
-
-
-    if (
-      !isDealLive(
-        deal
-      )
-    ) {
-
-      return;
-    }
-
-
-    const verifiedDealPrice =
-      getDealPrice(
-        deal,
-        product
-      );
-
-
-    if (
-      verifiedDealPrice ===
-      null
-    ) {
-
-      return;
-    }
-
-
-    currentDeal =
-      deal;
-
-
-    currentUnitPrice =
-      verifiedDealPrice;
-  }
-
-
-  function updateQuantityUI() {
-
-    if (
-      !currentProduct
-    ) {
-
-      return;
-    }
-
-
-    const price =
-      Number(
-        currentUnitPrice
-      );
-
-
-    const total =
-      price *
-      selectedQuantity;
-
-
+  const message =
     document.getElementById(
+      "message"
+    );
+
+
+  message.className =
+    "message " +
+    type;
+
+
+  message.textContent =
+    text;
+
+}
+
+
+function clearMessage() {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.className =
+    "message";
+
+
+  message.textContent =
+    "";
+
+}
+
+
+/* =========================
+   DEALS
+========================= */
+
+function isDealLive(
+  deal
+) {
+
+  if (
+    !deal ||
+    deal.active !== true
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    deal.item_type !==
+    "product"
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    Number(
+      deal.item_id
+    ) !==
+    Number(
+      productId
+    )
+  ) {
+
+    return false;
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  if (
+    deal.starts_at
+  ) {
+
+    const startsAt =
+      new Date(
+        deal.starts_at
+      );
+
+
+    if (
+      Number.isNaN(
+        startsAt.getTime()
+      ) ||
+      now < startsAt
+    ) {
+
+      return false;
+
+    }
+
+  }
+
+
+  if (
+    deal.ends_at
+  ) {
+
+    const endsAt =
+      new Date(
+        deal.ends_at
+      );
+
+
+    if (
+      Number.isNaN(
+        endsAt.getTime()
+      ) ||
+      now > endsAt
+    ) {
+
+      return false;
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+function getDealPrice(
+  deal,
+  product
+) {
+
+  if (
+    !deal ||
+    !product
+  ) {
+
+    return null;
+
+  }
+
+
+  const normalPrice =
+    Number(
+      product.price
+    );
+
+
+  const dealPrice =
+    Number(
+      deal.deal_price ??
+      deal.price
+    );
+
+
+  if (
+    !Number.isFinite(
+      normalPrice
+    ) ||
+    normalPrice <= 0
+  ) {
+
+    return null;
+
+  }
+
+
+  if (
+    !Number.isFinite(
+      dealPrice
+    ) ||
+    dealPrice <= 0 ||
+    dealPrice >= normalPrice
+  ) {
+
+    return null;
+
+  }
+
+
+  return dealPrice;
+
+}
+
+
+async function loadDeal(
+  product
+) {
+
+  currentDeal =
+    null;
+
+
+  currentUnitPrice =
+    Number(
+      product.price
+    );
+
+
+  if (
+    !Number.isInteger(
+      dealId
+    ) ||
+    dealId <= 0
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    data: deal,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "deals"
+      )
+      .select(
+        "*"
+      )
+      .eq(
+        "id",
+        dealId
+      )
+      .maybeSingle();
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Deal loading error:",
+      error
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !isDealLive(
+      deal
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const verifiedDealPrice =
+    getDealPrice(
+      deal,
+      product
+    );
+
+
+  if (
+    verifiedDealPrice ===
+    null
+  ) {
+
+    return;
+
+  }
+
+
+  currentDeal =
+    deal;
+
+
+  currentUnitPrice =
+    verifiedDealPrice;
+
+}
+
+
+/* =========================
+   QUANTITY
+========================= */
+
+function updateQuantityUI() {
+
+  if (
+    !currentProduct
+  ) {
+
+    return;
+
+  }
+
+
+  const price =
+    Number(
+      currentUnitPrice
+    );
+
+
+  const total =
+    price *
+    selectedQuantity;
+
+
+  document
+    .getElementById(
       "quantity-value"
-    ).textContent =
+    )
+    .textContent =
       String(
         selectedQuantity
       );
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "selected-total"
-    ).textContent =
+    )
+    .textContent =
       formatPrice(
         total
       );
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "minus-button"
-    ).disabled =
+    )
+    .disabled =
       selectedQuantity <= 1;
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "plus-button"
-    ).disabled =
+    )
+    .disabled =
       selectedQuantity >=
       maxQuantity;
-  }
 
+}
 
-  function changeQuantity(
-    change
-  ) {
 
-    clearMessage();
-
-
-    const next =
-      selectedQuantity +
-      change;
-
-
-    if (
-      next < 1 ||
-      next > maxQuantity
-    ) {
-
-      return;
-    }
-
-
-    selectedQuantity =
-      next;
-
-
-    updateQuantityUI();
-  }
-
-
-  function addToCart() {
-
-    clearMessage();
-
-
-    if (
-      !currentProduct ||
-      currentProduct.in_stock !== true
-    ) {
-
-      showMessage(
-        "This product is currently out of stock.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const price =
-      Number(
-        currentUnitPrice
-      );
-
-
-    if (
-      !Number.isFinite(
-        price
-      ) ||
-      price <= 0
-    ) {
-
-      showMessage(
-        "This product does not have a valid price.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const cart =
-      getCart();
-
-
-    const activeDealId =
-      currentDeal
-        ? Number(
-            currentDeal.id
-          )
-        : null;
-
-
-    const existingItem =
-      cart.find(
-        item => {
-
-          const sameProduct =
-            Number(
-              item.product_id
-            ) ===
-            Number(
-              currentProduct.id
-            );
-
-
-          const itemDealId =
-            item.deal_id
-              ? Number(
-                  item.deal_id
-                )
-              : null;
-
-
-          return (
-            sameProduct &&
-            itemDealId === activeDealId
-          );
-        }
-      );
-
-
-    const totalProductQuantity =
-      cart.reduce(
-        (
-          total,
-          item
-        ) => {
-
-          if (
-            Number(
-              item.product_id
-            ) !==
-            Number(
-              currentProduct.id
-            )
-          ) {
-
-            return total;
-          }
-
-
-          const quantity =
-            Number(
-              item.quantity
-            );
-
-
-          return total +
-            (
-              Number.isInteger(
-                quantity
-              ) &&
-              quantity > 0
-
-                ? quantity
-                : 0
-            );
-
-        },
-        0
-      );
-
-
-    const existingQuantity =
-      existingItem
-        ? Number(
-            existingItem.quantity
-          ) || 0
-        : 0;
-
-
-    const remaining =
-      maxQuantity -
-      totalProductQuantity;
-
-
-    if (
-      remaining <= 0
-    ) {
-
-      showMessage(
-        "The maximum available quantity is already in your cart.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const quantityToAdd =
-      Math.min(
-        selectedQuantity,
-        remaining
-      );
-
-
-    if (
-      existingItem
-    ) {
-
-      existingItem.quantity =
-        existingQuantity +
-        quantityToAdd;
-
-    } else {
-
-      const cartItem = {
-
-        product_id:
-          Number(
-            currentProduct.id
-          ),
-
-        quantity:
-          quantityToAdd
-
-      };
-
-
-      if (
-        activeDealId
-      ) {
-
-        cartItem.deal_id =
-          activeDealId;
-      }
-
-
-      cart.push(
-        cartItem
-      );
-    }
-
-
-    saveCart(
-      cart
-    );
-
-
-    updateCartCount();
-
-
-    showMessage(
-      `${quantityToAdd} ${
-        quantityToAdd === 1
-          ? "item"
-          : "items"
-      } added to your cart.`
-    );
-  }
-  
-  function completePurchaseOnWhatsApp() {
+function changeQuantity(
+  change
+) {
 
   clearMessage();
 
 
-  if (!currentProduct) {
-
-    showMessage(
-      "Please wait for the product to finish loading.",
-      "error"
-    );
-
-    return;
-  }
+  const next =
+    selectedQuantity +
+    change;
 
 
   if (
+    next < 1 ||
+    next > maxQuantity
+  ) {
+
+    return;
+
+  }
+
+
+  selectedQuantity =
+    next;
+
+
+  updateQuantityUI();
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart() {
+
+  clearMessage();
+
+
+  if (
+    !currentProduct ||
     currentProduct.in_stock !== true
   ) {
 
@@ -2050,7 +3443,259 @@ const WHATSAPP_NUMBER =
       "error"
     );
 
+
     return;
+
+  }
+
+
+  const price =
+    Number(
+      currentUnitPrice
+    );
+
+
+  if (
+    !Number.isFinite(
+      price
+    ) ||
+    price <= 0
+  ) {
+
+    showMessage(
+      "This product does not have a valid price.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  const cart =
+    getCart();
+
+
+  const activeDealId =
+    currentDeal
+      ? Number(
+          currentDeal.id
+        )
+      : null;
+
+
+  const existingItem =
+    cart.find(
+      item => {
+
+
+        const sameProduct =
+          Number(
+            item.product_id
+          ) ===
+          Number(
+            currentProduct.id
+          );
+
+
+        const itemDealId =
+          item.deal_id
+            ? Number(
+                item.deal_id
+              )
+            : null;
+
+
+        return (
+          sameProduct &&
+          itemDealId ===
+            activeDealId
+        );
+
+      }
+    );
+
+
+  const totalProductQuantity =
+    cart.reduce(
+      (
+        total,
+        item
+      ) => {
+
+
+        if (
+          Number(
+            item.product_id
+          ) !==
+          Number(
+            currentProduct.id
+          )
+        ) {
+
+          return total;
+
+        }
+
+
+        const quantity =
+          Number(
+            item.quantity
+          );
+
+
+        return total +
+          (
+            Number.isInteger(
+              quantity
+            ) &&
+            quantity > 0
+
+              ? quantity
+              : 0
+          );
+
+      },
+      0
+    );
+
+
+  const existingQuantity =
+    existingItem
+      ? Number(
+          existingItem.quantity
+        ) || 0
+      : 0;
+
+
+  const remaining =
+    maxQuantity -
+    totalProductQuantity;
+
+
+  if (
+    remaining <= 0
+  ) {
+
+    showMessage(
+      "The maximum available quantity is already in your cart.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  const quantityToAdd =
+    Math.min(
+      selectedQuantity,
+      remaining
+    );
+
+
+  if (
+    existingItem
+  ) {
+
+    existingItem.quantity =
+      existingQuantity +
+      quantityToAdd;
+
+
+  } else {
+
+    const cartItem = {
+
+      product_id:
+        Number(
+          currentProduct.id
+        ),
+
+      quantity:
+        quantityToAdd
+
+    };
+
+
+    if (
+      activeDealId
+    ) {
+
+      cartItem.deal_id =
+        activeDealId;
+
+    }
+
+
+    cart.push(
+      cartItem
+    );
+
+  }
+
+
+  saveCart(
+    cart
+  );
+
+
+  updateCartCount();
+
+
+  showMessage(
+    quantityToAdd +
+    " " +
+    (
+      quantityToAdd === 1
+        ? "item"
+        : "items"
+    ) +
+    " added to your cart."
+  );
+
+}
+
+
+/* =========================
+   WHATSAPP PURCHASE
+========================= */
+
+function completePurchaseOnWhatsApp() {
+
+  clearMessage();
+
+
+  if (
+    !currentProduct
+  ) {
+
+    showMessage(
+      "Please wait for the product to finish loading.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    currentProduct.in_stock !==
+    true
+  ) {
+
+    showMessage(
+      "This product is currently out of stock.",
+      "error"
+    );
+
+
+    return;
+
   }
 
 
@@ -2131,7 +3776,9 @@ const WHATSAPP_NUMBER =
       "error"
     );
 
+
     return;
+
   }
 
 
@@ -2153,7 +3800,9 @@ const WHATSAPP_NUMBER =
       "error"
     );
 
+
     return;
+
   }
 
 
@@ -2162,38 +3811,38 @@ const WHATSAPP_NUMBER =
     selectedQuantity;
 
 
-  let productURL;
+  let productURL =
+    buildProductURL(
+      currentProduct
+    );
 
+
+  /*
+    Fix:
+    slug URLs need ?deal_id=
+    fallback URLs already have ?id=,
+    so they need &deal_id=
+  */
 
   if (
-    currentProduct.slug
+    currentDeal
   ) {
 
-    productURL =
-      window.location.origin +
-      "/" +
-      encodeURIComponent(
-        currentProduct.slug
-      );
+    const separator =
+      productURL.includes(
+        "?"
+      )
+        ? "&"
+        : "?";
 
-  } else {
-
-    productURL =
-      window.location.origin +
-      "/product.html?id=" +
-      encodeURIComponent(
-        currentProduct.id
-      );
-  }
-
-
-  if (currentDeal) {
 
     productURL +=
-      "?deal_id=" +
+      separator +
+      "deal_id=" +
       encodeURIComponent(
         currentDeal.id
       );
+
   }
 
 
@@ -2224,12 +3873,15 @@ City: ${city}
 Country: ${country}`;
 
 
-  if (note) {
+  if (
+    note
+  ) {
 
     whatsappMessage += `
 
 Order Note:
 ${note}`;
+
   }
 
 
@@ -2249,1243 +3901,809 @@ Please confirm the shipping cost and final amount for my order. Thank you.`;
 
   window.location.href =
     whatsappURL;
+
 }
 
 
-  function renderProduct(
-    product
+/* =========================
+   RENDER PRODUCT
+========================= */
+
+function renderProduct(
+  product
+) {
+
+  const image =
+    document.getElementById(
+      "product-image"
+    );
+
+
+  const placeholder =
+    document.getElementById(
+      "image-placeholder"
+    );
+
+
+  const imageURL =
+    safeImageURL(
+      product.image_url
+    );
+
+
+  if (
+    imageURL
   ) {
 
-    const image =
-      document.getElementById(
-        "product-image"
-      );
+    image.src =
+      imageURL;
 
 
-    const placeholder =
-      document.getElementById(
-        "image-placeholder"
-      );
+    image.alt =
+      product.name ||
+      "GiftedGift Empire product";
 
 
-    if (
-      product.image_url
-    ) {
-
-      image.src =
-        product.image_url;
+    image.style.display =
+      "block";
 
 
-      image.alt =
-        product.name ||
-        "GiftedGift Empire product";
+    placeholder.style.display =
+      "none";
 
 
-      image.style.display =
-        "block";
+    image.onerror =
+      function () {
+
+        image.style.display =
+          "none";
 
 
-      placeholder.style.display =
-        "none";
+        placeholder.style.display =
+          "flex";
 
-    } else {
-
-      image.style.display =
-        "none";
+      };
 
 
-      placeholder.style.display =
-        "flex";
-    }
+  } else {
+
+    image.style.display =
+      "none";
 
 
-    document.getElementById(
+    placeholder.style.display =
+      "flex";
+
+  }
+
+
+  document
+    .getElementById(
       "product-category"
-    ).textContent =
+    )
+    .textContent =
       product.category ||
       "Physical Product";
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "product-name"
-    ).textContent =
+    )
+    .textContent =
       product.name ||
       "Product";
 
 
-    document.title =
-  `${product.name || "Product"} | GiftedGift Empire`;
-
-
-const metaDescription =
-  document.getElementById(
-    "product-meta-description"
-  );
-
-
-if (metaDescription) {
-
-  const descriptionText =
-    String(
-      product.description ||
-      `View ${product.name || "this product"}, price and availability at GiftedGift Empire.`
-    )
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 160);
-
-
-  metaDescription.setAttribute(
-    "content",
-    descriptionText
-  );
-}
-
-
-const canonical =
-  document.getElementById(
-    "product-canonical"
-  );
-
-
-if (canonical) {
-
-  const canonicalURL =
-    product.slug
-      ? `https://giftedgiftempire.com/${encodeURIComponent(product.slug)}`
-      : `https://giftedgiftempire.com/product.html?id=${encodeURIComponent(product.id)}`;
-
-
-  canonical.setAttribute(
-    "href",
-    canonicalURL
-  );
-}
-    /* PRODUCT SEO STRUCTURED DATA */
-
-let productSchema =
-  document.getElementById(
-    "product-structured-data"
-  );
-
-
-if (!productSchema) {
-
-  productSchema =
-    document.createElement(
-      "script"
-    );
-
-
-  productSchema.type =
-    "application/ld+json";
-
-
-  productSchema.id =
-    "product-structured-data";
-
-
-  document.head.appendChild(
-    productSchema
-  );
-}
-
-
-const productSchemaURL =
-  product.slug
-    ? `https://giftedgiftempire.com/${encodeURIComponent(product.slug)}`
-    : `https://giftedgiftempire.com/product.html?id=${encodeURIComponent(product.id)}`;
-
-
-const schemaPrice =
-  Number(
-    currentUnitPrice ??
-    product.price
-  );
-
-
-const schemaData = {
-
-  "@context":
-    "https://schema.org",
-
-  "@type":
-    "Product",
-
-  "name":
-    product.name ||
-    "Product",
-
-  "description":
-    product.description ||
-    "",
-
-  "sku":
-    String(
-      product.id
-    ),
-
-  "url":
-    productSchemaURL
-
-};
-
-
-if (product.image_url) {
-
-  schemaData.image =
-    [
-      product.image_url
-    ];
-}
-
-
-if (
-  Number.isFinite(schemaPrice) &&
-  schemaPrice > 0
-) {
-
-  schemaData.offers = {
-
-    "@type":
-      "Offer",
-
-    "url":
-      productSchemaURL,
-
-    "priceCurrency":
-      "EUR",
-
-    "price":
-      schemaPrice.toFixed(2),
-
-    "availability":
-      product.in_stock === true
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock"
-
-  };
-}
-
-
-productSchema.textContent =
-  JSON.stringify(
-    schemaData
-  );
-
-
-    document.getElementById(
+  document
+    .getElementById(
       "product-description"
-    ).textContent =
+    )
+    .textContent =
       product.description ||
       "";
 
 
-    const normalPrice =
-      Number(
-        product.price
-      );
+  /*
+    Dynamic SEO
+  */
+
+  updateProductSEO(
+    product
+  );
 
 
-    const displayedPrice =
-      Number(
-        currentUnitPrice
-      );
+  /*
+    PRICE
+  */
+
+  const normalPrice =
+    Number(
+      product.price
+    );
 
 
-    const priceBox =
-      document.getElementById(
-        "product-price"
-      );
+  const displayedPrice =
+    Number(
+      currentUnitPrice
+    );
 
 
-    if (
-      currentDeal &&
-      Number.isFinite(
-        displayedPrice
-      ) &&
-      displayedPrice > 0
-    ) {
-
-      const saving =
-        normalPrice -
-        displayedPrice;
+  const priceBox =
+    document.getElementById(
+      "product-price"
+    );
 
 
-      const badge =
-        currentDeal.badge ||
-        "Special Deal";
+  if (
+    currentDeal &&
+    Number.isFinite(
+      displayedPrice
+    ) &&
+    displayedPrice > 0
+  ) {
+
+    const saving =
+      normalPrice -
+      displayedPrice;
 
 
-      priceBox.innerHTML = `
-
-        <span class="normal-price">
-          ${formatPrice(
-            normalPrice
-          )}
-        </span>
-
-        <span class="deal-price">
-          ${formatPrice(
-            displayedPrice
-          )}
-        </span>
-
-        <div>
-          <span class="deal-badge">
-            ${escapeHTML(
-              badge
-            )}
-          </span>
-        </div>
-
-        <div class="deal-saving">
-          You save
-          ${formatPrice(
-            saving
-          )}
-        </div>
-
-      `;
+    const badge =
+      currentDeal.badge ||
+      "Special Deal";
 
 
-      const backLink =
-        document.querySelector(
-          ".back-link"
-        );
+    priceBox.innerHTML = `
 
-
-      if (
-        backLink
-      ) {
-
-        backLink.href =
-          "deals.html";
-
-
-        backLink.textContent =
-          "← Back to Deals";
-      }
-
-    } else {
-
-      priceBox.textContent =
-        Number.isFinite(
+      <span class="normal-price">
+        ${formatPrice(
           normalPrice
-        ) &&
-        normalPrice > 0
+        )}
+      </span>
 
-          ? formatPrice(
-              normalPrice
-            )
+      <span class="deal-price">
+        ${formatPrice(
+          displayedPrice
+        )}
+      </span>
 
-          : "Price unavailable";
-    }
+      <div>
+
+        <span class="deal-badge">
+          ${escapeHTML(
+            badge
+          )}
+        </span>
+
+      </div>
+
+      <div class="deal-saving">
+
+        You save
+        ${formatPrice(
+          saving
+        )}
+
+      </div>
+
+    `;
 
 
-    const stockStatus =
-      document.getElementById(
-        "stock-status"
-      );
-
-
-    const quantitySection =
-      document.getElementById(
-        "quantity-section"
-      );
-
-
-    const addButton =
-      document.getElementById(
-        "add-to-cart"
-      );
-
-
-    maxQuantity =
-      getStockLimit(
-        product
+    const backLink =
+      document.querySelector(
+        ".back-link"
       );
 
 
     if (
-      product.in_stock === true &&
-      maxQuantity > 0 &&
+      backLink
+    ) {
+
+      backLink.href =
+        "/deals.html";
+
+
+      backLink.textContent =
+        "← Back to Deals";
+
+    }
+
+
+  } else {
+
+    priceBox.textContent =
       Number.isFinite(
-        displayedPrice
+        normalPrice
       ) &&
-      displayedPrice > 0
-    ) {
+      normalPrice > 0
 
-      stockStatus.textContent =
-        maxQuantity === 99
-
-          ? "In stock"
-
-          : `${maxQuantity} available`;
-
-
-      stockStatus.className =
-        "stock in-stock";
-
-
-      quantitySection.style.display =
-        "block";
-
-
-      addButton.disabled =
-        false;
-
-
-      addButton.textContent =
-        currentDeal
-          ? "Add Deal to Cart"
-          : "Add to Cart";
-
-
-      selectedQuantity =
-        1;
-
-
-      updateQuantityUI();
-
-    } else {
-
-      stockStatus.textContent =
-        "Out of stock";
-
-
-      stockStatus.className =
-        "stock out-of-stock";
-
-
-      quantitySection.style.display =
-        "none";
-
-
-      addButton.disabled =
-        true;
-
-
-      addButton.textContent =
-        "Out of Stock";
-    }
-  }
-
-
-  /* REVIEWS */
-
-
-  function formatReviewDate(
-    value
-  ) {
-
-    if (
-      !value
-    ) {
-
-      return "";
-    }
-
-
-    const date =
-      new Date(
-        value
-      );
-
-
-    if (
-      Number.isNaN(
-        date.getTime()
-      )
-    ) {
-
-      return "";
-    }
-
-
-    return date.toLocaleDateString(
-      undefined,
-      {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      }
-    );
-  }
-
-
-  function starString(
-    rating
-  ) {
-
-    const safe =
-      Math.max(
-        0,
-        Math.min(
-          5,
-          Math.round(
-            Number(
-              rating
-            ) || 0
+        ? formatPrice(
+            normalPrice
           )
+
+        : "Price unavailable";
+
+  }
+
+
+  /*
+    STOCK
+  */
+
+  const stockStatus =
+    document.getElementById(
+      "stock-status"
+    );
+
+
+  const quantitySection =
+    document.getElementById(
+      "quantity-section"
+    );
+
+
+  const addButton =
+    document.getElementById(
+      "add-to-cart"
+    );
+
+
+  maxQuantity =
+    getStockLimit(
+      product
+    );
+
+
+  if (
+    product.in_stock === true &&
+    maxQuantity > 0 &&
+    Number.isFinite(
+      displayedPrice
+    ) &&
+    displayedPrice > 0
+  ) {
+
+    stockStatus.textContent =
+      maxQuantity === 99
+        ? "In stock"
+        : maxQuantity +
+          " available";
+
+
+    stockStatus.className =
+      "stock in-stock";
+
+
+    quantitySection.style.display =
+      "block";
+
+
+    addButton.disabled =
+      false;
+
+
+    addButton.textContent =
+      currentDeal
+        ? "Add Deal to Cart"
+        : "Add to Cart";
+
+
+    selectedQuantity =
+      1;
+
+
+    updateQuantityUI();
+
+
+  } else {
+
+    stockStatus.textContent =
+      "Out of stock";
+
+
+    stockStatus.className =
+      "stock out-of-stock";
+
+
+    quantitySection.style.display =
+      "none";
+
+
+    addButton.disabled =
+      true;
+
+
+    addButton.textContent =
+      "Out of Stock";
+
+  }
+
+}
+
+
+/* =========================
+   REVIEWS
+========================= */
+
+function formatReviewDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+
+  }
+
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      year:
+        "numeric",
+
+      month:
+        "short",
+
+      day:
+        "numeric"
+    }
+  );
+
+}
+
+
+function starString(
+  rating
+) {
+
+  const safe =
+    Math.max(
+      0,
+      Math.min(
+        5,
+        Math.round(
+          Number(
+            rating
+          ) || 0
         )
-      );
-
-
-    return (
-      "★".repeat(
-        safe
-      ) +
-      "☆".repeat(
-        5 - safe
       )
     );
+
+
+  return (
+    "★".repeat(
+      safe
+    ) +
+    "☆".repeat(
+      5 -
+      safe
+    )
+  );
+
+}
+
+
+function getAverageRating() {
+
+  if (
+    approvedReviews.length ===
+    0
+  ) {
+
+    return 0;
+
   }
 
 
-  function getAverageRating() {
-
-    if (
-      approvedReviews.length === 0
-    ) {
-
-      return 0;
-    }
-
-
-    const total =
-      approvedReviews.reduce(
-        (
-          sum,
-          review
-        ) =>
-          sum +
-          Number(
-            review.rating || 0
-          ),
-        0
-      );
-
-
-    return (
-      total /
-      approvedReviews.length
+  const total =
+    approvedReviews.reduce(
+      (
+        sum,
+        review
+      ) =>
+        sum +
+        Number(
+          review.rating ||
+          0
+        ),
+      0
     );
-  }
 
 
-  function renderReviewSummary() {
+  return (
+    total /
+    approvedReviews.length
+  );
 
-    const topRating =
-      document.getElementById(
-        "product-rating"
-      );
-
-
-    const score =
-      document.getElementById(
-        "review-summary-score"
-      );
+}
 
 
-    const stars =
-      document.getElementById(
-        "review-summary-stars"
-      );
+function renderReviewSummary() {
+
+  const topRating =
+    document.getElementById(
+      "product-rating"
+    );
 
 
-    const count =
-      document.getElementById(
-        "review-summary-count"
-      );
+  const score =
+    document.getElementById(
+      "review-summary-score"
+    );
 
 
-    if (
-      approvedReviews.length === 0
-    ) {
-
-      topRating.innerHTML =
-        '<span class="rating-stars">☆☆☆☆☆</span> No customer reviews yet';
+  const stars =
+    document.getElementById(
+      "review-summary-stars"
+    );
 
 
-      score.textContent =
-        "No ratings yet";
+  const count =
+    document.getElementById(
+      "review-summary-count"
+    );
 
 
-      stars.textContent =
-        "☆☆☆☆☆";
-
-
-      count.textContent =
-        "Be the first to leave a review.";
-
-
-      return;
-    }
-
-
-    const average =
-      getAverageRating();
-
-
-    const roundedStars =
-      starString(
-        average
-      );
-
-
-    const reviewWord =
-      approvedReviews.length === 1
-        ? "review"
-        : "reviews";
-
+  if (
+    approvedReviews.length ===
+    0
+  ) {
 
     topRating.innerHTML =
-      `<span class="rating-stars">${
-        escapeHTML(
-          roundedStars
-        )
-      }</span> ${
-        average.toFixed(1)
-      } / 5 · ${
-        approvedReviews.length
-      } ${reviewWord}`;
+      '<span class="rating-stars">☆☆☆☆☆</span> No customer reviews yet';
 
 
     score.textContent =
-      `${average.toFixed(1)} / 5`;
+      "No ratings yet";
 
 
     stars.textContent =
-      roundedStars;
+      "☆☆☆☆☆";
 
 
     count.textContent =
-      `${approvedReviews.length} approved customer ${reviewWord}`;
+      "Be the first to leave a review.";
+
+
+    return;
+
   }
 
 
-  function renderReviews() {
+  const average =
+    getAverageRating();
 
-    const container =
-      document.getElementById(
-        "reviews-list"
+
+  const roundedStars =
+    starString(
+      average
+    );
+
+
+  const reviewWord =
+    approvedReviews.length === 1
+      ? "review"
+      : "reviews";
+
+
+  topRating.innerHTML =
+    '<span class="rating-stars">' +
+    escapeHTML(
+      roundedStars
+    ) +
+    "</span> " +
+    average.toFixed(
+      1
+    ) +
+    " / 5 · " +
+    approvedReviews.length +
+    " " +
+    reviewWord;
+
+
+  score.textContent =
+    average.toFixed(
+      1
+    ) +
+    " / 5";
+
+
+  stars.textContent =
+    roundedStars;
+
+
+  count.textContent =
+    approvedReviews.length +
+    " approved customer " +
+    reviewWord;
+
+}
+
+
+function renderReviews() {
+
+  const container =
+    document.getElementById(
+      "reviews-list"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if (
+    approvedReviews.length ===
+    0
+  ) {
+
+    const empty =
+      document.createElement(
+        "div"
       );
 
 
-    container.innerHTML =
-      "";
+    empty.className =
+      "no-reviews";
 
 
-    if (
-      approvedReviews.length === 0
-    ) {
+    empty.textContent =
+      "No approved customer reviews yet. Be the first to share your experience.";
 
-      const empty =
+
+    container.appendChild(
+      empty
+    );
+
+
+    return;
+
+  }
+
+
+  approvedReviews.forEach(
+    review => {
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "review-card";
+
+
+      const name =
         document.createElement(
           "div"
         );
 
 
-      empty.className =
-        "no-reviews";
+      name.className =
+        "review-card-name";
 
 
-      empty.textContent =
-        "No approved customer reviews yet. Be the first to share your experience.";
+      name.textContent =
+        review.reviewer_name ||
+        "Customer";
+
+
+      const stars =
+        document.createElement(
+          "div"
+        );
+
+
+      stars.className =
+        "review-card-stars";
+
+
+      stars.textContent =
+        starString(
+          review.rating
+        );
+
+
+      const text =
+        document.createElement(
+          "div"
+        );
+
+
+      text.className =
+        "review-card-text";
+
+
+      text.textContent =
+        review.review_text ||
+        "";
+
+
+      card.appendChild(
+        name
+      );
+
+
+      card.appendChild(
+        stars
+      );
+
+
+      card.appendChild(
+        text
+      );
+
+
+      const formattedDate =
+        formatReviewDate(
+          review.created_at
+        );
+
+
+      if (
+        formattedDate
+      ) {
+
+        const date =
+          document.createElement(
+            "div"
+          );
+
+
+        date.className =
+          "review-card-date";
+
+
+        date.textContent =
+          formattedDate;
+
+
+        card.appendChild(
+          date
+        );
+
+      }
 
 
       container.appendChild(
-        empty
+        card
       );
 
-
-      return;
     }
+  );
 
+}
 
-    approvedReviews.forEach(
-      review => {
 
-        const card =
-          document.createElement(
-            "article"
-          );
+async function loadReviews() {
 
-
-        card.className =
-          "review-card";
-
-
-        const name =
-          document.createElement(
-            "div"
-          );
-
-
-        name.className =
-          "review-card-name";
-
-
-        name.textContent =
-          review.reviewer_name ||
-          "Customer";
-
-
-        const stars =
-          document.createElement(
-            "div"
-          );
-
-
-        stars.className =
-          "review-card-stars";
-
-
-        stars.textContent =
-          starString(
-            review.rating
-          );
-
-
-        const text =
-          document.createElement(
-            "div"
-          );
-
-
-        text.className =
-          "review-card-text";
-
-
-        text.textContent =
-          review.review_text ||
-          "";
-
-
-        card.appendChild(
-          name
-        );
-
-
-        card.appendChild(
-          stars
-        );
-
-
-        card.appendChild(
-          text
-        );
-
-
-        const formattedDate =
-          formatReviewDate(
-            review.created_at
-          );
-
-
-        if (
-          formattedDate
-        ) {
-
-          const date =
-            document.createElement(
-              "div"
-            );
-
-
-          date.className =
-            "review-card-date";
-
-
-          date.textContent =
-            formattedDate;
-
-
-          card.appendChild(
-            date
-          );
-        }
-
-
-        container.appendChild(
-          card
-        );
-      }
-    );
-  }
-
-
-  async function loadReviews() {
-
-    if (
-      !Number.isInteger(
-        productId
-      ) ||
-      productId <= 0
-    ) {
-
-      return;
-    }
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from(
-          "reviews"
-        )
-        .select(
-          "id,item_type,item_id,reviewer_name,rating,review_text,approved,created_at"
-        )
-        .eq(
-          "item_type",
-          "product"
-        )
-        .eq(
-          "item_id",
-          productId
-        )
-        .eq(
-          "approved",
-          true
-        )
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-    if (
-      error
-    ) {
-
-      console.error(
-        "Reviews loading error:",
-        error
-      );
-
-
-      approvedReviews =
-        [];
-
-
-    } else {
-
-      approvedReviews =
-        data || [];
-    }
-
-
-    renderReviewSummary();
-
-
-    renderReviews();
-
-
-    document.getElementById(
-      "reviews-section"
-    ).style.display =
-      "block";
-  }
-
-
-  function updateStarPicker() {
-
-    document
-      .querySelectorAll(
-        "#star-picker button"
-      )
-      .forEach(
-        button => {
-
-          const rating =
-            Number(
-              button.dataset.rating
-            );
-
-
-          button.classList.toggle(
-            "selected",
-            rating <=
-            selectedReviewRating
-          );
-        }
-      );
-  }
-
-
-  function showReviewFormMessage(
-    text,
-    type
+  if (
+    !Number.isInteger(
+      productId
+    ) ||
+    productId <= 0
   ) {
 
-    const box =
-      document.getElementById(
-        "review-form-message"
-      );
+    return;
 
-
-    box.className =
-      `review-form-message ${type}`;
-
-
-    box.textContent =
-      text;
   }
 
 
-  function clearReviewFormMessage() {
-
-    const box =
-      document.getElementById(
-        "review-form-message"
-      );
-
-
-    box.className =
-      "review-form-message";
-
-
-    box.textContent =
-      "";
-  }
-
-
-  async function submitReview() {
-
-    clearReviewFormMessage();
-
-
-    if (
-      !currentProduct
-    ) {
-
-      showReviewFormMessage(
-        "The product has not finished loading.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const reviewerName =
-      document.getElementById(
-        "reviewer-name"
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "reviews"
       )
-        .value
-        .trim();
-
-
-    const reviewText =
-      document.getElementById(
-        "review-text"
+      .select(
+        "id,item_type,item_id,reviewer_name,rating,review_text,approved,created_at"
       )
-        .value
-        .trim();
-
-
-    if (
-      !reviewerName
-    ) {
-
-      showReviewFormMessage(
-        "Please enter your name.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (
-      reviewerName.length > 80
-    ) {
-
-      showReviewFormMessage(
-        "Your name is too long.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (
-      !Number.isInteger(
-        selectedReviewRating
-      ) ||
-      selectedReviewRating < 1 ||
-      selectedReviewRating > 5
-    ) {
-
-      showReviewFormMessage(
-        "Please choose a star rating from 1 to 5.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (
-      !reviewText
-    ) {
-
-      showReviewFormMessage(
-        "Please write your review.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (
-      reviewText.length > 1500
-    ) {
-
-      showReviewFormMessage(
-        "Your review is too long.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const button =
-      document.getElementById(
-        "submit-review"
-      );
-
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "Submitting...";
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from(
-          "reviews"
-        )
-        .insert({
-
-          item_type:
-            "product",
-
-          item_id:
-            Number(
-              currentProduct.id
-            ),
-
-          reviewer_name:
-            reviewerName,
-
-          rating:
-            selectedReviewRating,
-
-          review_text:
-            reviewText,
-
-          approved:
-            false
-
-        });
-
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      "Submit Review";
-
-
-    if (
-      error
-    ) {
-
-      console.error(
-        "Review submission error:",
-        error
-      );
-
-
-      showReviewFormMessage(
-        "Your review could not be submitted. Please try again.",
-        "error"
-      );
-
-
-      return;
-    }
-
-
-    document.getElementById(
-      "reviewer-name"
-    ).value =
-      "";
-
-
-    document.getElementById(
-      "review-text"
-    ).value =
-      "";
-
-
-    selectedReviewRating =
-      0;
-
-
-    updateStarPicker();
-
-
-    showReviewFormMessage(
-      "Thank you! Your review has been submitted and is waiting for approval.",
-      "success"
-    );
-  }
-
-
-  async function loadProduct() {
-
-    const loading =
-      document.getElementById(
-        "loading"
-      );
-
-
-    const content =
-      document.getElementById(
-        "product-content"
-      );
-
-
-    if (
-      !Number.isInteger(
+      .eq(
+        "item_type",
+        "product"
+      )
+      .eq(
+        "item_id",
         productId
-      ) ||
-      productId <= 0
-    ) {
-
-      loading.textContent =
-        "This product link is invalid.";
-
-      return;
-    }
-
-
-    const {
-      data: product,
-      error
-    } =
-      await supabaseClient
-        .from(
-          "products"
-        )
-        .select("*")
-        .eq(
-          "id",
-          productId
-        )
-        .single();
-
-
-    if (
-      error ||
-      !product
-    ) {
-
-      console.error(
-        error
+      )
+      .eq(
+        "approved",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending:
+            false
+        }
       );
 
 
-      loading.textContent =
-        "This product could not be found.";
+  if (
+    error
+  ) {
 
-      return;
-    }
-
-
-    currentProduct =
-      product;
-
-
-    await loadDeal(
-      product
+    console.error(
+      "Reviews loading error:",
+      error
     );
 
 
-    renderProduct(
-      product
-    );
+    approvedReviews =
+      [];
 
 
-    loading.style.display =
-      "none";
+  } else {
 
+    approvedReviews =
+      data ||
+      [];
 
-    content.style.display =
-      "grid";
-
-
-    await loadReviews();
   }
 
 
-  document.getElementById(
-    "minus-button"
-  ).addEventListener(
-    "click",
-    () => {
-
-      changeQuantity(
-        -1
-      );
-    }
-  );
+  renderReviewSummary();
 
 
-  document.getElementById(
-    "plus-button"
-  ).addEventListener(
-    "click",
-    () => {
-
-      changeQuantity(
-        1
-      );
-    }
-  );
+  renderReviews();
 
 
-  document.getElementById(
-    "add-to-cart"
-  ).addEventListener(
-    "click",
-    addToCart
-  );
+  /*
+    Refresh structured data now that
+    approved ratings are available.
+  */
 
-document.getElementById(
-  "whatsapp-purchase-button"
-).addEventListener(
-  "click",
-  completePurchaseOnWhatsApp
-);
-  
+  if (
+    currentProduct
+  ) {
+
+    updateProductStructuredData(
+      currentProduct
+    );
+
+  }
+
+
+  document
+    .getElementById(
+      "reviews-section"
+    )
+    .style.display =
+      "block";
+
+}
+
+
+/* =========================
+   REVIEW STAR PICKER
+========================= */
+
+function updateStarPicker() {
+
   document
     .querySelectorAll(
       "#star-picker button"
@@ -3493,44 +4711,511 @@ document.getElementById(
     .forEach(
       button => {
 
-        button.addEventListener(
-          "click",
-          () => {
 
-            selectedReviewRating =
-              Number(
-                button.dataset.rating
-              );
+        const rating =
+          Number(
+            button.dataset.rating
+          );
 
 
-            updateStarPicker();
-
-
-            clearReviewFormMessage();
-          }
+        button.classList.toggle(
+          "selected",
+          rating <=
+          selectedReviewRating
         );
+
       }
     );
 
-
-  document.getElementById(
-    "submit-review"
-  ).addEventListener(
-    "click",
-    submitReview
-  );
+}
 
 
-  updateCartCount();
+function showReviewFormMessage(
+  text,
+  type
+) {
+
+  const box =
+    document.getElementById(
+      "review-form-message"
+    );
+
+
+  box.className =
+    "review-form-message " +
+    type;
+
+
+  box.textContent =
+    text;
+
+}
+
+
+function clearReviewFormMessage() {
+
+  const box =
+    document.getElementById(
+      "review-form-message"
+    );
+
+
+  box.className =
+    "review-form-message";
+
+
+  box.textContent =
+    "";
+
+}
+
+
+/* =========================
+   SUBMIT REVIEW
+========================= */
+
+async function submitReview() {
+
+  clearReviewFormMessage();
+
+
+  if (
+    !currentProduct
+  ) {
+
+    showReviewFormMessage(
+      "The product has not finished loading.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  const reviewerName =
+    document
+      .getElementById(
+        "reviewer-name"
+      )
+      .value
+      .trim();
+
+
+  const reviewText =
+    document
+      .getElementById(
+        "review-text"
+      )
+      .value
+      .trim();
+
+
+  if (
+    !reviewerName
+  ) {
+
+    showReviewFormMessage(
+      "Please enter your name.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    reviewerName.length >
+    80
+  ) {
+
+    showReviewFormMessage(
+      "Your name is too long.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !Number.isInteger(
+      selectedReviewRating
+    ) ||
+    selectedReviewRating < 1 ||
+    selectedReviewRating > 5
+  ) {
+
+    showReviewFormMessage(
+      "Please choose a star rating from 1 to 5.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !reviewText
+  ) {
+
+    showReviewFormMessage(
+      "Please write your review.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    reviewText.length >
+    1500
+  ) {
+
+    showReviewFormMessage(
+      "Your review is too long.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "submit-review"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Submitting...";
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "reviews"
+      )
+      .insert({
+
+        item_type:
+          "product",
+
+        item_id:
+          Number(
+            currentProduct.id
+          ),
+
+        reviewer_name:
+          reviewerName,
+
+        rating:
+          selectedReviewRating,
+
+        review_text:
+          reviewText,
+
+        approved:
+          false
+
+      });
+
+
+  button.disabled =
+    false;
+
+
+  button.textContent =
+    "Submit Review";
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Review submission error:",
+      error
+    );
+
+
+    showReviewFormMessage(
+      "Your review could not be submitted. Please try again.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      "reviewer-name"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "review-text"
+    )
+    .value =
+      "";
+
+
+  selectedReviewRating =
+    0;
 
 
   updateStarPicker();
 
 
-  loadProduct();
+  showReviewFormMessage(
+    "Thank you! Your review has been submitted and is waiting for approval.",
+    "success"
+  );
+
+}
+
+
+/* =========================
+   LOAD PRODUCT
+========================= */
+
+async function loadProduct() {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const content =
+    document.getElementById(
+      "product-content"
+    );
+
+
+  if (
+    !Number.isInteger(
+      productId
+    ) ||
+    productId <= 0
+  ) {
+
+    markNoIndex();
+
+
+    loading.textContent =
+      "This product link is invalid.";
+
+
+    return;
+
+  }
+
+
+  const {
+    data: product,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "products"
+      )
+      .select(
+        "*"
+      )
+      .eq(
+        "id",
+        productId
+      )
+      .single();
+
+
+  if (
+    error ||
+    !product
+  ) {
+
+    console.error(
+      "Product loading error:",
+      error
+    );
+
+
+    markNoIndex();
+
+
+    loading.textContent =
+      "This product could not be found.";
+
+
+    return;
+
+  }
+
+
+  currentProduct =
+    product;
+
+
+  await loadDeal(
+    product
+  );
+
+
+  renderProduct(
+    product
+  );
+
+
+  loading.style.display =
+    "none";
+
+
+  content.style.display =
+    "grid";
+
+
+  await loadReviews();
+
+}
+
+
+/* =========================
+   EVENT LISTENERS
+========================= */
+
+document
+  .getElementById(
+    "minus-button"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      changeQuantity(
+        -1
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "plus-button"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      changeQuantity(
+        1
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "add-to-cart"
+  )
+  .addEventListener(
+    "click",
+    addToCart
+  );
+
+
+document
+  .getElementById(
+    "whatsapp-purchase-button"
+  )
+  .addEventListener(
+    "click",
+    completePurchaseOnWhatsApp
+  );
+
+
+document
+  .querySelectorAll(
+    "#star-picker button"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          selectedReviewRating =
+            Number(
+              button.dataset.rating
+            );
+
+
+          updateStarPicker();
+
+
+          clearReviewFormMessage();
+
+        }
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "submit-review"
+  )
+  .addEventListener(
+    "click",
+    submitReview
+  );
+
+
+/* =========================
+   START
+========================= */
+
+updateCartCount();
+
+
+updateStarPicker();
+
+
+loadProduct();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+
+<script src="/cookie-consent.js"></script>
+
 
 </body>
 
