@@ -10,13 +10,18 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
   <title>
-    Deals | GiftedGift Empire
+    Deals & Special Offers | GiftedGift Empire
   </title>
 
   <meta
     name="description"
-    content="Shop current deals and special offers from GiftedGift Empire."
+    content="Discover current deals, discounts and special offers available across GiftedGift Empire."
   >
 
   <meta
@@ -30,20 +35,95 @@
   >
 
   <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/deals.html"
+  >
+
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
+  <link
     rel="icon"
     type="image/png"
-    href="my-logo.png"
+    href="/my-logo.png"
   >
 
   <link
     rel="shortcut icon"
     type="image/png"
-    href="my-logo.png"
+    href="/my-logo.png"
   >
 
   <link
     rel="apple-touch-icon"
-    href="my-logo.png"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    property="og:title"
+    content="Deals & Special Offers | GiftedGift Empire"
+  >
+
+  <meta
+    property="og:description"
+    content="Discover current deals, discounts and special offers available across GiftedGift Empire."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/deals.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="GiftedGift Empire deals and special offers"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Deals & Special Offers | GiftedGift Empire"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Discover current deals, discounts and special offers available across GiftedGift Empire."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
   >
 
 
@@ -53,81 +133,135 @@
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f5f7fb;
+
       color: #222;
     }
 
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: #123a8c;
+
       color: white;
-      padding: 16px 18px;
+
+      padding:
+        18px
+        20px;
     }
+
 
     .header-inner {
       max-width: 1200px;
+
       margin: auto;
     }
 
-    .brand-row {
+
+    .brand {
       display: flex;
+
       align-items: center;
-      gap: 10px;
-      margin-bottom: 15px;
-      text-decoration: none;
+
+      gap: 11px;
+
       width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
     }
 
-    .brand-logo {
-      width: 48px;
-      height: 48px;
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
       object-fit: contain;
-      border-radius: 50%;
+
       background: white;
-      padding: 2px;
+
+      border-radius: 50%;
+
+      padding: 3px;
     }
+
 
     .brand-name {
-      margin: 0;
-      color: #f2bd16;
-      font-size: 27px;
-      font-weight: bold;
+      font-size: 28px;
+
+      font-weight: 800;
     }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       display: flex;
+
       flex-wrap: wrap;
-      gap: 8px 18px;
+
+      gap:
+        6px
+        18px;
     }
+
 
     nav a {
-      position: relative;
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
-      padding: 8px 0;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
-    nav a:hover {
-      color: #f2bd16;
-    }
 
+    nav a:hover,
     nav a.active {
       color: #f2bd16;
     }
 
-    nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 2px;
-      height: 2px;
-      background: #f2bd16;
-      border-radius: 5px;
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
     }
+
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       background:
@@ -137,86 +271,168 @@
           #fff9e7
         );
 
-      padding: 55px 20px;
+      padding:
+        55px
+        20px;
+
       text-align: center;
     }
 
+
     .hero h1 {
-      margin: 0 0 12px;
+      margin:
+        0
+        0
+        12px;
+
       color: #123a8c;
+
       font-size: 38px;
     }
 
+
     .hero p {
       margin: auto;
+
       max-width: 680px;
+
       color: #555;
+
       font-size: 18px;
+
       line-height: 1.6;
     }
+
+
+    /* =========================
+       PAGE
+    ========================= */
 
     .container {
       max-width: 1200px;
+
       margin: auto;
-      padding: 35px 18px 60px;
+
+      padding:
+        35px
+        18px
+        60px;
     }
+
 
     .section-heading {
       text-align: center;
+
       margin-bottom: 30px;
     }
 
+
     .section-heading h2 {
       color: #123a8c;
+
       font-size: 30px;
-      margin: 0 0 8px;
+
+      margin:
+        0
+        0
+        8px;
     }
+
 
     .section-heading p {
       margin: 0;
+
       color: #666;
     }
+
 
     #loading {
       text-align: center;
-      padding: 50px 20px;
+
+      padding:
+        50px
+        20px;
+
       font-weight: bold;
+
       color: #555;
     }
 
+
+    /* =========================
+       EMPTY STATE
+    ========================= */
+
     .empty-state {
       background: white;
+
       max-width: 650px;
-      margin: 20px auto;
-      padding: 40px 25px;
+
+      margin:
+        20px
+        auto;
+
+      padding:
+        40px
+        25px;
+
       text-align: center;
+
       border-radius: 16px;
+
       box-shadow:
-        0 4px 18px
+        0
+        4px
+        18px
         rgba(0,0,0,0.07);
     }
 
+
     .empty-state h3 {
       color: #123a8c;
+
       margin-top: 0;
+
       font-size: 25px;
     }
 
+
     .empty-state p {
       color: #666;
+
       line-height: 1.6;
+
       margin-bottom: 22px;
     }
 
+
     .shop-button {
       display: inline-block;
+
       background: #f2bd16;
+
       color: #111;
+
       text-decoration: none;
+
       font-weight: bold;
-      padding: 13px 20px;
+
+      padding:
+        13px
+        20px;
+
       border-radius: 8px;
     }
+
+
+    .shop-button:hover {
+      background: #d8a90e;
+    }
+
+
+    /* =========================
+       DEALS
+    ========================= */
 
     .deals-grid {
       display: grid;
@@ -224,174 +440,368 @@
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(260px, 1fr)
+          minmax(
+            260px,
+            1fr
+          )
         );
 
       gap: 24px;
     }
 
+
     .deal-card {
       position: relative;
+
       background: white;
+
       border-radius: 16px;
+
       overflow: hidden;
 
       box-shadow:
-        0 4px 18px
+        0
+        4px
+        18px
         rgba(0,0,0,0.08);
 
       display: flex;
+
       flex-direction: column;
     }
+
 
     .deal-image-wrapper {
       position: relative;
+
       width: 100%;
+
       height: 250px;
+
       background: #f1f1f1;
     }
 
+
     .deal-image {
       width: 100%;
+
       height: 100%;
+
       object-fit: cover;
+
       display: block;
     }
+
 
     .deal-badge {
       position: absolute;
+
       top: 14px;
+
       right: 14px;
 
       background: #f2bd16;
+
       color: #111;
 
-      padding: 8px 11px;
+      padding:
+        8px
+        11px;
+
       border-radius: 7px;
 
       font-weight: bold;
+
       font-size: 15px;
     }
 
+
     .deal-content {
       padding: 20px;
+
       display: flex;
+
       flex-direction: column;
+
       flex: 1;
     }
 
+
     .deal-type {
       color: #666;
+
       font-size: 14px;
+
       margin-bottom: 7px;
     }
 
+
     .deal-title {
-      margin: 0 0 8px;
+      margin:
+        0
+        0
+        8px;
+
       color: #123a8c;
+
       font-size: 22px;
     }
 
+
     .product-name {
       font-weight: bold;
-      margin: 0 0 8px;
+
+      margin:
+        0
+        0
+        8px;
     }
+
 
     .description {
       color: #555;
+
       line-height: 1.55;
-      margin: 0 0 16px;
+
+      margin:
+        0
+        0
+        16px;
     }
+
 
     .price-row {
       display: flex;
+
       align-items: center;
+
       flex-wrap: wrap;
+
       gap: 10px;
+
       margin-bottom: 12px;
     }
 
+
     .old-price {
       color: #888;
+
       text-decoration: line-through;
+
       font-size: 17px;
     }
 
+
     .deal-price {
       color: #123a8c;
+
       font-size: 24px;
+
       font-weight: bold;
     }
+
 
     .saving {
       color: #17803d;
+
       font-weight: bold;
+
       font-size: 14px;
+
       margin-bottom: 14px;
     }
 
+
     .deal-end {
       color: #666;
+
       font-size: 13px;
-      margin: 0 0 18px;
+
+      margin:
+        0
+        0
+        18px;
     }
+
 
     .deal-button {
       margin-top: auto;
+
       display: block;
+
       width: 100%;
 
       background: #f2bd16;
+
       color: #111;
 
       text-align: center;
+
       text-decoration: none;
 
       font-weight: bold;
-      padding: 13px 16px;
+
+      padding:
+        13px
+        16px;
+
       border-radius: 8px;
     }
 
+
     .deal-button:hover {
-      opacity: 0.9;
+      background: #d8a90e;
     }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: #123a8c;
+
       color: white;
+
       text-align: center;
-      padding: 30px 18px;
+
+      padding:
+        32px
+        18px;
     }
 
-    footer p {
-      margin: 5px 0;
+
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
     }
 
-    @media (max-width: 700px) {
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-text {
+      max-width: 650px;
+
+      margin:
+        10px
+        auto
+        0;
+
+      color: #e0e7f5;
+
+      line-height: 1.6;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        18px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 700px
+    ) {
+
+      header {
+        padding:
+          15px
+          16px;
+      }
+
+
+      .brand img {
+        width: 50px;
+
+        height: 50px;
+      }
+
 
       .brand-name {
         font-size: 23px;
       }
 
+
       nav {
-        gap: 5px 13px;
+        gap:
+          4px
+          14px;
       }
+
 
       nav a {
         font-size: 14px;
       }
 
+
       .hero {
-        padding: 40px 18px;
+        padding:
+          40px
+          18px;
       }
+
 
       .hero h1 {
         font-size: 32px;
       }
 
+
       .hero p {
         font-size: 16px;
       }
+
 
       .deal-image-wrapper {
         height: 230px;
@@ -407,67 +817,80 @@
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
   <div class="header-inner">
 
+
     <a
-      href="index.html"
-      class="brand-row"
+      href="/index.html"
+      class="brand"
       aria-label="GiftedGift Empire home"
     >
 
       <img
-        src="my-logo.png"
+        src="/my-logo.png"
         alt="GiftedGift Empire logo"
-        class="brand-logo"
       >
 
-      <span class="brand-name">
-        GiftedGift Empire
-      </span>
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
 
     </a>
 
 
     <nav>
 
-      <a href="index.html">
+      <a href="/index.html">
         Home
       </a>
 
-      <a href="shop.html">
+      <a href="/shop.html">
         Shop
       </a>
 
-      <a href="categories.html">
+      <a href="/categories.html">
         Categories
       </a>
 
-      <a href="daily-inspiration.html">
+      <a href="/daily-inspiration.html">
         Daily Inspiration
       </a>
 
-      <a href="blog.html">
+      <a href="/blog.html">
         Blog
       </a>
 
       <a
-        href="deals.html"
+        href="/deals.html"
         class="active"
       >
         Deals
       </a>
 
-      <a href="about.html">
+      <a href="/about.html">
         About
       </a>
 
-      <a href="contact.html">
+      <a href="/contact.html">
         Contact
       </a>
 
-      <a href="cart.html">
+      <a href="/cart.html">
         🛒 Cart
       </a>
 
@@ -478,11 +901,16 @@
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
   <h1>
     Deals & Special Offers
   </h1>
+
 
   <p>
     Discover current discounts and special
@@ -492,7 +920,12 @@
 </section>
 
 
+<!-- =========================
+     DEALS
+========================= -->
+
 <main class="container">
+
 
   <div class="section-heading">
 
@@ -507,7 +940,11 @@
   </div>
 
 
-  <div id="loading">
+  <div
+    id="loading"
+    role="status"
+    aria-live="polite"
+  >
     Loading current deals...
   </div>
 
@@ -529,14 +966,16 @@
       No active deals right now
     </h3>
 
+
     <p>
       There are currently no live deals.
       Please check again later or explore
       our products.
     </p>
 
+
     <a
-      href="shop.html"
+      href="/shop.html"
       class="shop-button"
     >
       Shop Now
@@ -544,26 +983,80 @@
 
   </div>
 
+
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    loading="lazy"
+  >
 
-  <p>
-    Quality finds, digital products and
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <p class="footer-text">
+    Quality finds, digital products, Creator
+    Marketplace products and carefully selected
     recommendations in one place.
   </p>
 
-  <p>
-    © 2026 GiftedGift Empire.
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/daily-inspiration.html">
+      Daily Inspiration
+    </a>
+
+    <a href="/blog.html">
+      Blog
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+
+  </div>
 
 </footer>
 
@@ -574,6 +1067,20 @@
 
 
 <script>
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
+const DEALS_URL =
+  SITE_URL +
+  "/deals.html";
+
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -590,12 +1097,209 @@ const supabaseClient =
   );
 
 
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
+
+
+/* =========================
+   CACHE
+========================= */
+
 const itemCache = {
-  product: [],
-  digital_product: [],
-  affiliate_product: []
+
+  product:
+    [],
+
+  digital_product:
+    [],
+
+  affiliate_product:
+    []
+
 };
 
+
+/* =========================
+   DEAL SEO
+========================= */
+
+function updateDealsSEO(
+  items
+) {
+
+  let script =
+    document.getElementById(
+      "deals-structured-data"
+    );
+
+
+  if (
+    !script
+  ) {
+
+    script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.id =
+      "deals-structured-data";
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  const listItems =
+    items.map(
+      (
+        item,
+        index
+      ) => {
+
+        return {
+
+          "@type":
+            "ListItem",
+
+          "position":
+            index + 1,
+
+          "name":
+            item.name,
+
+          "url":
+            item.url
+
+        };
+
+      }
+    );
+
+
+  const collectionSchema = {
+
+    "@type":
+      "CollectionPage",
+
+    "name":
+      "Deals & Special Offers | GiftedGift Empire",
+
+    "description":
+      "Discover current deals, discounts and special offers available across GiftedGift Empire.",
+
+    "url":
+      DEALS_URL,
+
+    "isPartOf": {
+
+      "@type":
+        "WebSite",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL
+
+    },
+
+    "mainEntity": {
+
+      "@type":
+        "ItemList",
+
+      "numberOfItems":
+        listItems.length,
+
+      "itemListElement":
+        listItems
+
+    }
+
+  };
+
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_URL +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Deals",
+
+        "item":
+          DEALS_URL
+
+      }
+
+    ]
+
+  };
+
+
+  script.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@graph": [
+
+        collectionSchema,
+
+        breadcrumbSchema
+
+      ]
+
+    });
+
+}
+
+
+/* =========================
+   TABLE BY TYPE
+========================= */
 
 function tableForType(
   itemType
@@ -616,12 +1320,18 @@ function tableForType(
 
 
   return (
-    tables[itemType] ||
+    tables[
+      itemType
+    ] ||
     null
   );
 
 }
 
+
+/* =========================
+   FRIENDLY TYPE
+========================= */
 
 function friendlyType(
   itemType
@@ -642,19 +1352,29 @@ function friendlyType(
 
 
   return (
-    labels[itemType] ||
+    labels[
+      itemType
+    ] ||
     "Product"
   );
 
 }
 
 
+/* =========================
+   PRODUCT NAME
+========================= */
+
 function productName(
   product
 ) {
 
-  if (!product) {
+  if (
+    !product
+  ) {
+
     return "";
+
   }
 
 
@@ -669,12 +1389,20 @@ function productName(
 }
 
 
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
 function productImage(
   product
 ) {
 
-  if (!product) {
+  if (
+    !product
+  ) {
+
     return "";
+
   }
 
 
@@ -689,16 +1417,26 @@ function productImage(
 }
 
 
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
 async function loadProducts(
   itemType
 ) {
 
   if (
-    itemCache[itemType] &&
-    itemCache[itemType].length
+    itemCache[
+      itemType
+    ] &&
+    itemCache[
+      itemType
+    ].length
   ) {
 
-    return itemCache[itemType];
+    return itemCache[
+      itemType
+    ];
 
   }
 
@@ -709,8 +1447,12 @@ async function loadProducts(
     );
 
 
-  if (!tableName) {
+  if (
+    !tableName
+  ) {
+
     return [];
+
   }
 
 
@@ -722,10 +1464,14 @@ async function loadProducts(
       .from(
         tableName
       )
-      .select("*");
+      .select(
+        "*"
+      );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       "Product loading error:",
@@ -738,15 +1484,23 @@ async function loadProducts(
   }
 
 
-  itemCache[itemType] =
+  itemCache[
+    itemType
+  ] =
     data ||
     [];
 
 
-  return itemCache[itemType];
+  return itemCache[
+    itemType
+  ];
 
 }
 
+
+/* =========================
+   FIND PRODUCT
+========================= */
 
 async function findProduct(
   itemType,
@@ -762,6 +1516,7 @@ async function findProduct(
   return (
     products.find(
       product =>
+
         String(
           product.id
         ) ===
@@ -775,13 +1530,18 @@ async function findProduct(
 }
 
 
+/* =========================
+   LIVE DEAL
+========================= */
+
 function isDealLive(
   deal,
   now
 ) {
 
   if (
-    deal.active !== true
+    deal.active !==
+    true
   ) {
 
     return false;
@@ -842,12 +1602,20 @@ function isDealLive(
 }
 
 
+/* =========================
+   AFFILIATE LINK
+========================= */
+
 function getAffiliateLink(
   product
 ) {
 
-  if (!product) {
+  if (
+    !product
+  ) {
+
     return "";
+
   }
 
 
@@ -863,10 +1631,73 @@ function getAffiliateLink(
 }
 
 
+/* =========================
+   SAFE HTTP URL
+========================= */
+
+function safeHttpUrl(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  try {
+
+    const parsed =
+      new URL(
+        value,
+        window.location.origin
+      );
+
+
+    if (
+      parsed.protocol ===
+        "https:" ||
+      parsed.protocol ===
+        "http:"
+    ) {
+
+      return parsed.href;
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Invalid URL:",
+      error
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================
+   DESTINATION
+========================= */
+
 function getDestination(
   deal,
   product
 ) {
+
+  /*
+  PHYSICAL PRODUCT
+  */
 
   if (
     deal.item_type ===
@@ -895,7 +1726,7 @@ function getDestination(
 
 
     return (
-      "product.html?id=" +
+      "/product.html?id=" +
       encodeURIComponent(
         deal.item_id
       ) +
@@ -908,20 +1739,60 @@ function getDestination(
   }
 
 
+  /*
+  AFFILIATE PRODUCT
+  */
+
   if (
     deal.item_type ===
     "affiliate_product"
   ) {
 
+    const affiliateLink =
+      safeHttpUrl(
+        getAffiliateLink(
+          product
+        )
+      );
+
+
+    if (
+      affiliateLink
+    ) {
+
+      return affiliateLink;
+
+    }
+
+
+    if (
+      product &&
+      product.slug
+    ) {
+
+      return (
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
     return (
-      getAffiliateLink(
-        product
-      ) ||
-      "#"
+      "/affiliate-products.html?id=" +
+      encodeURIComponent(
+        deal.item_id
+      )
     );
 
   }
 
+
+  /*
+  DIGITAL PRODUCT
+  */
 
   if (
     deal.item_type ===
@@ -944,7 +1815,7 @@ function getDestination(
 
 
     return (
-      "checkout.html?product_id=" +
+      "/checkout.html?product_id=" +
       encodeURIComponent(
         deal.item_id
       )
@@ -953,10 +1824,51 @@ function getDestination(
   }
 
 
-  return "shop.html";
+  return "/shop.html";
 
 }
 
+
+/* =========================
+   ABSOLUTE SEO URL
+========================= */
+
+function absoluteDestination(
+  destination
+) {
+
+  if (
+    !destination ||
+    destination === "#"
+  ) {
+
+    return DEALS_URL;
+
+  }
+
+
+  try {
+
+    return new URL(
+      destination,
+      SITE_URL
+    ).href;
+
+
+  } catch (
+    error
+  ) {
+
+    return DEALS_URL;
+
+  }
+
+}
+
+
+/* =========================
+   SAVING
+========================= */
 
 function calculateSaving(
   originalPrice,
@@ -997,19 +1909,29 @@ function calculateSaving(
 
 
   return (
-    "You save €" +
-    saving.toFixed(2)
+    "You save " +
+    formatCurrency(
+      saving
+    )
   );
 
 }
 
 
+/* =========================
+   END DATE
+========================= */
+
 function formatEndDate(
   value
 ) {
 
-  if (!value) {
+  if (
+    !value
+  ) {
+
     return "";
+
   }
 
 
@@ -1037,6 +1959,107 @@ function formatEndDate(
 
 }
 
+
+/* =========================
+   MONEY
+========================= */
+
+function formatCurrency(
+  value
+) {
+
+  const number =
+    Number(
+      value
+    );
+
+
+  if (
+    !Number.isFinite(
+      number
+    )
+  ) {
+
+    return "€0.00";
+
+  }
+
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+
+      style:
+        "currency",
+
+      currency:
+        "EUR",
+
+      minimumFractionDigits:
+        2,
+
+      maximumFractionDigits:
+        2
+
+    }
+  ).format(
+    number
+  );
+
+}
+
+
+/* =========================
+   HTML SAFETY
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeAttribute(
+  value
+) {
+
+  return escapeHTML(
+    value
+  );
+
+}
+
+
+/* =========================
+   LOAD DEALS
+========================= */
 
 async function loadDeals() {
 
@@ -1078,7 +2101,9 @@ async function loadDeals() {
       .from(
         "deals"
       )
-      .select("*")
+      .select(
+        "*"
+      )
       .eq(
         "active",
         true
@@ -1086,12 +2111,15 @@ async function loadDeals() {
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       "Deals loading error:",
@@ -1113,18 +2141,21 @@ async function loadDeals() {
 
 
   const liveDeals =
-    (deals || [])
-      .filter(
-        deal =>
-          isDealLive(
-            deal,
-            now
-          )
-      );
+    (
+      deals ||
+      []
+    ).filter(
+      deal =>
+        isDealLive(
+          deal,
+          now
+        )
+    );
 
 
   if (
-    liveDeals.length === 0
+    liveDeals.length ===
+    0
   ) {
 
     loading.style.display =
@@ -1133,6 +2164,11 @@ async function loadDeals() {
 
     empty.style.display =
       "block";
+
+
+    updateDealsSEO(
+      []
+    );
 
 
     return;
@@ -1144,8 +2180,13 @@ async function loadDeals() {
     "";
 
 
+  const seoItems =
+    [];
+
+
   for (
-    const deal of liveDeals
+    const deal
+    of liveDeals
   ) {
 
     const product =
@@ -1155,7 +2196,9 @@ async function loadDeals() {
       );
 
 
-    if (!product) {
+    if (
+      !product
+    ) {
 
       continue;
 
@@ -1222,42 +2265,64 @@ async function loadDeals() {
 
     const imageHTML =
       image
+
         ? `
+
           <div class="deal-image-wrapper">
 
             <img
-              src="${escapeAttribute(image)}"
-              alt="${escapeAttribute(name)}"
+              src="${escapeAttribute(
+                image
+              )}"
+              alt="${escapeAttribute(
+                name
+              )}"
               class="deal-image"
               loading="lazy"
             >
 
             ${
               deal.badge
+
                 ? `
+
                   <div class="deal-badge">
-                    ${escapeHTML(deal.badge)}
+                    ${escapeHTML(
+                      deal.badge
+                    )}
                   </div>
+
                 `
+
                 : ""
             }
 
           </div>
+
         `
+
         : `
+
           <div class="deal-image-wrapper">
 
             ${
               deal.badge
+
                 ? `
+
                   <div class="deal-badge">
-                    ${escapeHTML(deal.badge)}
+                    ${escapeHTML(
+                      deal.badge
+                    )}
                   </div>
+
                 `
+
                 : ""
             }
 
           </div>
+
         `;
 
 
@@ -1265,99 +2330,164 @@ async function loadDeals() {
 
       ${imageHTML}
 
+
       <div class="deal-content">
 
+
         <div class="deal-type">
+
           ${escapeHTML(
             friendlyType(
               deal.item_type
             )
           )}
+
         </div>
 
 
         <h3 class="deal-title">
+
           ${escapeHTML(
             deal.title ||
             name
           )}
+
         </h3>
 
 
         <p class="product-name">
+
           ${escapeHTML(
             name
           )}
+
         </p>
 
 
         ${
           deal.description
+
             ? `
+
               <p class="description">
+
                 ${escapeHTML(
                   deal.description
                 )}
+
               </p>
+
             `
+
             : ""
         }
 
 
         <div class="price-row">
 
-          <span class="old-price">
-            €${formatMoney(
-              originalPrice
-            )}
-          </span>
 
-          <span class="deal-price">
-            €${formatMoney(
-              dealPrice
-            )}
-          </span>
+          ${
+            Number.isFinite(
+              Number(
+                originalPrice
+              )
+            )
+
+              ? `
+
+                <span class="old-price">
+
+                  ${formatCurrency(
+                    originalPrice
+                  )}
+
+                </span>
+
+              `
+
+              : ""
+          }
+
+
+          ${
+            Number.isFinite(
+              Number(
+                dealPrice
+              )
+            )
+
+              ? `
+
+                <span class="deal-price">
+
+                  ${formatCurrency(
+                    dealPrice
+                  )}
+
+                </span>
+
+              `
+
+              : ""
+          }
+
 
         </div>
 
 
         ${
           savingText
+
             ? `
+
               <div class="saving">
+
                 ${escapeHTML(
                   savingText
                 )}
+
               </div>
+
             `
+
             : ""
         }
 
 
         ${
           endText
+
             ? `
+
               <p class="deal-end">
+
                 ${escapeHTML(
                   endText
                 )}
+
               </p>
+
             `
+
             : ""
         }
 
 
         <a
-          href="${escapeAttribute(destination)}"
+          href="${escapeAttribute(
+            destination
+          )}"
           class="deal-button"
 
           ${
             deal.item_type ===
             "affiliate_product"
+
               ? `
                 target="_blank"
-                rel="noopener sponsored"
+                rel="noopener noreferrer sponsored"
               `
+
               : ""
           }
         >
@@ -1365,19 +2495,37 @@ async function loadDeals() {
           ${
             deal.item_type ===
             "affiliate_product"
+
               ? "View Deal"
+
               : "Shop Deal"
           }
 
         </a>
 
+
       </div>
+
     `;
 
 
     grid.appendChild(
       card
     );
+
+
+    seoItems.push({
+
+      name:
+        deal.title ||
+        name,
+
+      url:
+        absoluteDestination(
+          destination
+        )
+
+    });
 
   }
 
@@ -1387,11 +2535,17 @@ async function loadDeals() {
 
 
   if (
-    grid.children.length === 0
+    grid.children.length ===
+    0
   ) {
 
     empty.style.display =
       "block";
+
+
+    updateDealsSEO(
+      []
+    );
 
 
     return;
@@ -1402,10 +2556,1995 @@ async function loadDeals() {
   grid.style.display =
     "grid";
 
+
+  updateDealsSEO(
+    seoItems
+  );
+
 }
 
 
-function formatMoney(
+/* =========================
+   START
+========================= */
+
+loadDeals();
+
+</script>
+
+
+<script src="/cookie-consent.js"></script>
+
+
+</body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
+  <title>
+    Deals & Special Offers | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Discover current deals, discounts and special offers available across GiftedGift Empire."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+  <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/deals.html"
+  >
+
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    property="og:title"
+    content="Deals & Special Offers | GiftedGift Empire"
+  >
+
+  <meta
+    property="og:description"
+    content="Discover current deals, discounts and special offers available across GiftedGift Empire."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/deals.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="GiftedGift Empire deals and special offers"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Deals & Special Offers | GiftedGift Empire"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Discover current deals, discounts and special offers available across GiftedGift Empire."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background: #f5f7fb;
+
+      color: #222;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: #123a8c;
+
+      color: white;
+
+      padding:
+        18px
+        20px;
+    }
+
+
+    .header-inner {
+      max-width: 1200px;
+
+      margin: auto;
+    }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap:
+        6px
+        18px;
+    }
+
+
+    nav a {
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
+    }
+
+
+    nav a:hover,
+    nav a.active {
+      color: #f2bd16;
+    }
+
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #eef4ff,
+          #fff9e7
+        );
+
+      padding:
+        55px
+        20px;
+
+      text-align: center;
+    }
+
+
+    .hero h1 {
+      margin:
+        0
+        0
+        12px;
+
+      color: #123a8c;
+
+      font-size: 38px;
+    }
+
+
+    .hero p {
+      margin: auto;
+
+      max-width: 680px;
+
+      color: #555;
+
+      font-size: 18px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .container {
+      max-width: 1200px;
+
+      margin: auto;
+
+      padding:
+        35px
+        18px
+        60px;
+    }
+
+
+    .section-heading {
+      text-align: center;
+
+      margin-bottom: 30px;
+    }
+
+
+    .section-heading h2 {
+      color: #123a8c;
+
+      font-size: 30px;
+
+      margin:
+        0
+        0
+        8px;
+    }
+
+
+    .section-heading p {
+      margin: 0;
+
+      color: #666;
+    }
+
+
+    #loading {
+      text-align: center;
+
+      padding:
+        50px
+        20px;
+
+      font-weight: bold;
+
+      color: #555;
+    }
+
+
+    /* =========================
+       EMPTY STATE
+    ========================= */
+
+    .empty-state {
+      background: white;
+
+      max-width: 650px;
+
+      margin:
+        20px
+        auto;
+
+      padding:
+        40px
+        25px;
+
+      text-align: center;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0
+        4px
+        18px
+        rgba(0,0,0,0.07);
+    }
+
+
+    .empty-state h3 {
+      color: #123a8c;
+
+      margin-top: 0;
+
+      font-size: 25px;
+    }
+
+
+    .empty-state p {
+      color: #666;
+
+      line-height: 1.6;
+
+      margin-bottom: 22px;
+    }
+
+
+    .shop-button {
+      display: inline-block;
+
+      background: #f2bd16;
+
+      color: #111;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      padding:
+        13px
+        20px;
+
+      border-radius: 8px;
+    }
+
+
+    .shop-button:hover {
+      background: #d8a90e;
+    }
+
+
+    /* =========================
+       DEALS
+    ========================= */
+
+    .deals-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            260px,
+            1fr
+          )
+        );
+
+      gap: 24px;
+    }
+
+
+    .deal-card {
+      position: relative;
+
+      background: white;
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0
+        4px
+        18px
+        rgba(0,0,0,0.08);
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+    .deal-image-wrapper {
+      position: relative;
+
+      width: 100%;
+
+      height: 250px;
+
+      background: #f1f1f1;
+    }
+
+
+    .deal-image {
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+
+    .deal-badge {
+      position: absolute;
+
+      top: 14px;
+
+      right: 14px;
+
+      background: #f2bd16;
+
+      color: #111;
+
+      padding:
+        8px
+        11px;
+
+      border-radius: 7px;
+
+      font-weight: bold;
+
+      font-size: 15px;
+    }
+
+
+    .deal-content {
+      padding: 20px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+    }
+
+
+    .deal-type {
+      color: #666;
+
+      font-size: 14px;
+
+      margin-bottom: 7px;
+    }
+
+
+    .deal-title {
+      margin:
+        0
+        0
+        8px;
+
+      color: #123a8c;
+
+      font-size: 22px;
+    }
+
+
+    .product-name {
+      font-weight: bold;
+
+      margin:
+        0
+        0
+        8px;
+    }
+
+
+    .description {
+      color: #555;
+
+      line-height: 1.55;
+
+      margin:
+        0
+        0
+        16px;
+    }
+
+
+    .price-row {
+      display: flex;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .old-price {
+      color: #888;
+
+      text-decoration: line-through;
+
+      font-size: 17px;
+    }
+
+
+    .deal-price {
+      color: #123a8c;
+
+      font-size: 24px;
+
+      font-weight: bold;
+    }
+
+
+    .saving {
+      color: #17803d;
+
+      font-weight: bold;
+
+      font-size: 14px;
+
+      margin-bottom: 14px;
+    }
+
+
+    .deal-end {
+      color: #666;
+
+      font-size: 13px;
+
+      margin:
+        0
+        0
+        18px;
+    }
+
+
+    .deal-button {
+      margin-top: auto;
+
+      display: block;
+
+      width: 100%;
+
+      background: #f2bd16;
+
+      color: #111;
+
+      text-align: center;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      padding:
+        13px
+        16px;
+
+      border-radius: 8px;
+    }
+
+
+    .deal-button:hover {
+      background: #d8a90e;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #123a8c;
+
+      color: white;
+
+      text-align: center;
+
+      padding:
+        32px
+        18px;
+    }
+
+
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-text {
+      max-width: 650px;
+
+      margin:
+        10px
+        auto
+        0;
+
+      color: #e0e7f5;
+
+      line-height: 1.6;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        18px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 700px
+    ) {
+
+      header {
+        padding:
+          15px
+          16px;
+      }
+
+
+      .brand img {
+        width: 50px;
+
+        height: 50px;
+      }
+
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          14px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
+
+      .hero {
+        padding:
+          40px
+          18px;
+      }
+
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+
+      .hero p {
+        font-size: 16px;
+      }
+
+
+      .deal-image-wrapper {
+        height: 230px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <div class="header-inner">
+
+
+    <a
+      href="/index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
+
+      <img
+        src="/my-logo.png"
+        alt="GiftedGift Empire logo"
+      >
+
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <nav>
+
+      <a href="/index.html">
+        Home
+      </a>
+
+      <a href="/shop.html">
+        Shop
+      </a>
+
+      <a href="/categories.html">
+        Categories
+      </a>
+
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
+      <a href="/blog.html">
+        Blog
+      </a>
+
+      <a
+        href="/deals.html"
+        class="active"
+      >
+        Deals
+      </a>
+
+      <a href="/about.html">
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <h1>
+    Deals & Special Offers
+  </h1>
+
+
+  <p>
+    Discover current discounts and special
+    offers available across GiftedGift Empire.
+  </p>
+
+</section>
+
+
+<!-- =========================
+     DEALS
+========================= -->
+
+<main class="container">
+
+
+  <div class="section-heading">
+
+    <h2>
+      Current Deals
+    </h2>
+
+    <p>
+      Limited-time offers available right now.
+    </p>
+
+  </div>
+
+
+  <div
+    id="loading"
+    role="status"
+    aria-live="polite"
+  >
+    Loading current deals...
+  </div>
+
+
+  <div
+    id="deals-grid"
+    class="deals-grid"
+    style="display:none;"
+  ></div>
+
+
+  <div
+    id="empty-state"
+    class="empty-state"
+    style="display:none;"
+  >
+
+    <h3>
+      No active deals right now
+    </h3>
+
+
+    <p>
+      There are currently no live deals.
+      Please check again later or explore
+      our products.
+    </p>
+
+
+    <a
+      href="/shop.html"
+      class="shop-button"
+    >
+      Shop Now
+    </a>
+
+  </div>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    loading="lazy"
+  >
+
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <p class="footer-text">
+    Quality finds, digital products, Creator
+    Marketplace products and carefully selected
+    recommendations in one place.
+  </p>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/daily-inspiration.html">
+      Daily Inspiration
+    </a>
+
+    <a href="/blog.html">
+      Blog
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
+    All rights reserved.
+
+  </div>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
+<script>
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
+const DEALS_URL =
+  SITE_URL +
+  "/deals.html";
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
+
+
+/* =========================
+   CACHE
+========================= */
+
+const itemCache = {
+
+  product:
+    [],
+
+  digital_product:
+    [],
+
+  affiliate_product:
+    []
+
+};
+
+
+/* =========================
+   DEAL SEO
+========================= */
+
+function updateDealsSEO(
+  items
+) {
+
+  let script =
+    document.getElementById(
+      "deals-structured-data"
+    );
+
+
+  if (
+    !script
+  ) {
+
+    script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.id =
+      "deals-structured-data";
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  const listItems =
+    items.map(
+      (
+        item,
+        index
+      ) => {
+
+        return {
+
+          "@type":
+            "ListItem",
+
+          "position":
+            index + 1,
+
+          "name":
+            item.name,
+
+          "url":
+            item.url
+
+        };
+
+      }
+    );
+
+
+  const collectionSchema = {
+
+    "@type":
+      "CollectionPage",
+
+    "name":
+      "Deals & Special Offers | GiftedGift Empire",
+
+    "description":
+      "Discover current deals, discounts and special offers available across GiftedGift Empire.",
+
+    "url":
+      DEALS_URL,
+
+    "isPartOf": {
+
+      "@type":
+        "WebSite",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL
+
+    },
+
+    "mainEntity": {
+
+      "@type":
+        "ItemList",
+
+      "numberOfItems":
+        listItems.length,
+
+      "itemListElement":
+        listItems
+
+    }
+
+  };
+
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_URL +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Deals",
+
+        "item":
+          DEALS_URL
+
+      }
+
+    ]
+
+  };
+
+
+  script.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@graph": [
+
+        collectionSchema,
+
+        breadcrumbSchema
+
+      ]
+
+    });
+
+}
+
+
+/* =========================
+   TABLE BY TYPE
+========================= */
+
+function tableForType(
+  itemType
+) {
+
+  const tables = {
+
+    product:
+      "products",
+
+    digital_product:
+      "digital_products",
+
+    affiliate_product:
+      "affiliate_products"
+
+  };
+
+
+  return (
+    tables[
+      itemType
+    ] ||
+    null
+  );
+
+}
+
+
+/* =========================
+   FRIENDLY TYPE
+========================= */
+
+function friendlyType(
+  itemType
+) {
+
+  const labels = {
+
+    product:
+      "Physical Product",
+
+    digital_product:
+      "Digital Product",
+
+    affiliate_product:
+      "Affiliate Product"
+
+  };
+
+
+  return (
+    labels[
+      itemType
+    ] ||
+    "Product"
+  );
+
+}
+
+
+/* =========================
+   PRODUCT NAME
+========================= */
+
+function productName(
+  product
+) {
+
+  if (
+    !product
+  ) {
+
+    return "";
+
+  }
+
+
+  return (
+    product.name ||
+    product.title ||
+    product.product_name ||
+    product.product_title ||
+    ""
+  );
+
+}
+
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+function productImage(
+  product
+) {
+
+  if (
+    !product
+  ) {
+
+    return "";
+
+  }
+
+
+  return (
+    product.image_url ||
+    product.image ||
+    product.cover_image ||
+    product.cover_url ||
+    ""
+  );
+
+}
+
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+async function loadProducts(
+  itemType
+) {
+
+  if (
+    itemCache[
+      itemType
+    ] &&
+    itemCache[
+      itemType
+    ].length
+  ) {
+
+    return itemCache[
+      itemType
+    ];
+
+  }
+
+
+  const tableName =
+    tableForType(
+      itemType
+    );
+
+
+  if (
+    !tableName
+  ) {
+
+    return [];
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        tableName
+      )
+      .select(
+        "*"
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Product loading error:",
+      error
+    );
+
+
+    return [];
+
+  }
+
+
+  itemCache[
+    itemType
+  ] =
+    data ||
+    [];
+
+
+  return itemCache[
+    itemType
+  ];
+
+}
+
+
+/* =========================
+   FIND PRODUCT
+========================= */
+
+async function findProduct(
+  itemType,
+  itemId
+) {
+
+  const products =
+    await loadProducts(
+      itemType
+    );
+
+
+  return (
+    products.find(
+      product =>
+
+        String(
+          product.id
+        ) ===
+        String(
+          itemId
+        )
+    ) ||
+    null
+  );
+
+}
+
+
+/* =========================
+   LIVE DEAL
+========================= */
+
+function isDealLive(
+  deal,
+  now
+) {
+
+  if (
+    deal.active !==
+    true
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    deal.starts_at
+  ) {
+
+    const start =
+      new Date(
+        deal.starts_at
+      );
+
+
+    if (
+      !Number.isNaN(
+        start.getTime()
+      ) &&
+      now < start
+    ) {
+
+      return false;
+
+    }
+
+  }
+
+
+  if (
+    deal.ends_at
+  ) {
+
+    const end =
+      new Date(
+        deal.ends_at
+      );
+
+
+    if (
+      !Number.isNaN(
+        end.getTime()
+      ) &&
+      now > end
+    ) {
+
+      return false;
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================
+   AFFILIATE LINK
+========================= */
+
+function getAffiliateLink(
+  product
+) {
+
+  if (
+    !product
+  ) {
+
+    return "";
+
+  }
+
+
+  return (
+    product.affiliate_link ||
+    product.affiliate_url ||
+    product.product_url ||
+    product.buy_url ||
+    product.url ||
+    ""
+  );
+
+}
+
+
+/* =========================
+   SAFE HTTP URL
+========================= */
+
+function safeHttpUrl(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  try {
+
+    const parsed =
+      new URL(
+        value,
+        window.location.origin
+      );
+
+
+    if (
+      parsed.protocol ===
+        "https:" ||
+      parsed.protocol ===
+        "http:"
+    ) {
+
+      return parsed.href;
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Invalid URL:",
+      error
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================
+   DESTINATION
+========================= */
+
+function getDestination(
+  deal,
+  product
+) {
+
+  /*
+  PHYSICAL PRODUCT
+  */
+
+  if (
+    deal.item_type ===
+    "product"
+  ) {
+
+    if (
+      product &&
+      product.slug
+    ) {
+
+      return (
+        "/" +
+        encodeURIComponent(
+          product.slug
+        ) +
+        "?deal_id=" +
+        encodeURIComponent(
+          deal.id ||
+          deal.deal_id ||
+          ""
+        )
+      );
+
+    }
+
+
+    return (
+      "/product.html?id=" +
+      encodeURIComponent(
+        deal.item_id
+      ) +
+      "&deal_id=" +
+      encodeURIComponent(
+        deal.id
+      )
+    );
+
+  }
+
+
+  /*
+  AFFILIATE PRODUCT
+  */
+
+  if (
+    deal.item_type ===
+    "affiliate_product"
+  ) {
+
+    const affiliateLink =
+      safeHttpUrl(
+        getAffiliateLink(
+          product
+        )
+      );
+
+
+    if (
+      affiliateLink
+    ) {
+
+      return affiliateLink;
+
+    }
+
+
+    if (
+      product &&
+      product.slug
+    ) {
+
+      return (
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
+    return (
+      "/affiliate-products.html?id=" +
+      encodeURIComponent(
+        deal.item_id
+      )
+    );
+
+  }
+
+
+  /*
+  DIGITAL PRODUCT
+  */
+
+  if (
+    deal.item_type ===
+    "digital_product"
+  ) {
+
+    if (
+      product &&
+      product.slug
+    ) {
+
+      return (
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
+    return (
+      "/checkout.html?product_id=" +
+      encodeURIComponent(
+        deal.item_id
+      )
+    );
+
+  }
+
+
+  return "/shop.html";
+
+}
+
+
+/* =========================
+   ABSOLUTE SEO URL
+========================= */
+
+function absoluteDestination(
+  destination
+) {
+
+  if (
+    !destination ||
+    destination === "#"
+  ) {
+
+    return DEALS_URL;
+
+  }
+
+
+  try {
+
+    return new URL(
+      destination,
+      SITE_URL
+    ).href;
+
+
+  } catch (
+    error
+  ) {
+
+    return DEALS_URL;
+
+  }
+
+}
+
+
+/* =========================
+   SAVING
+========================= */
+
+function calculateSaving(
+  originalPrice,
+  dealPrice
+) {
+
+  const original =
+    Number(
+      originalPrice
+    );
+
+
+  const deal =
+    Number(
+      dealPrice
+    );
+
+
+  if (
+    !Number.isFinite(
+      original
+    ) ||
+    !Number.isFinite(
+      deal
+    ) ||
+    original <= 0 ||
+    deal >= original
+  ) {
+
+    return "";
+
+  }
+
+
+  const saving =
+    original -
+    deal;
+
+
+  return (
+    "You save " +
+    formatCurrency(
+      saving
+    )
+  );
+
+}
+
+
+/* =========================
+   END DATE
+========================= */
+
+function formatEndDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+
+  }
+
+
+  return (
+    "Offer ends " +
+    date.toLocaleString()
+  );
+
+}
+
+
+/* =========================
+   MONEY
+========================= */
+
+function formatCurrency(
   value
 ) {
 
@@ -1421,18 +4560,38 @@ function formatMoney(
     )
   ) {
 
-    return "0.00";
+    return "€0.00";
 
   }
 
 
-  return number
-    .toFixed(
-      2
-    );
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+
+      style:
+        "currency",
+
+      currency:
+        "EUR",
+
+      minimumFractionDigits:
+        2,
+
+      maximumFractionDigits:
+        2
+
+    }
+  ).format(
+    number
+  );
 
 }
 
+
+/* =========================
+   HTML SAFETY
+========================= */
 
 function escapeHTML(
   value
@@ -1478,12 +4637,523 @@ function escapeAttribute(
 }
 
 
+/* =========================
+   LOAD DEALS
+========================= */
+
+async function loadDeals() {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "deals-grid"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "empty-state"
+    );
+
+
+  loading.style.display =
+    "block";
+
+
+  grid.style.display =
+    "none";
+
+
+  empty.style.display =
+    "none";
+
+
+  const {
+    data: deals,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "deals"
+      )
+      .select(
+        "*"
+      )
+      .eq(
+        "active",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending:
+            false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Deals loading error:",
+      error
+    );
+
+
+    loading.textContent =
+      "Deals could not be loaded right now.";
+
+
+    return;
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  const liveDeals =
+    (
+      deals ||
+      []
+    ).filter(
+      deal =>
+        isDealLive(
+          deal,
+          now
+        )
+    );
+
+
+  if (
+    liveDeals.length ===
+    0
+  ) {
+
+    loading.style.display =
+      "none";
+
+
+    empty.style.display =
+      "block";
+
+
+    updateDealsSEO(
+      []
+    );
+
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    "";
+
+
+  const seoItems =
+    [];
+
+
+  for (
+    const deal
+    of liveDeals
+  ) {
+
+    const product =
+      await findProduct(
+        deal.item_type,
+        deal.item_id
+      );
+
+
+    if (
+      !product
+    ) {
+
+      continue;
+
+    }
+
+
+    const name =
+      productName(
+        product
+      ) ||
+      deal.title ||
+      "Product";
+
+
+    const image =
+      productImage(
+        product
+      ) ||
+      deal.image_url ||
+      "";
+
+
+    const originalPrice =
+      deal.original_price ??
+      deal.old_price ??
+      "";
+
+
+    const dealPrice =
+      deal.deal_price ??
+      deal.price ??
+      "";
+
+
+    const destination =
+      getDestination(
+        deal,
+        product
+      );
+
+
+    const savingText =
+      calculateSaving(
+        originalPrice,
+        dealPrice
+      );
+
+
+    const endText =
+      formatEndDate(
+        deal.ends_at
+      );
+
+
+    const card =
+      document.createElement(
+        "article"
+      );
+
+
+    card.className =
+      "deal-card";
+
+
+    const imageHTML =
+      image
+
+        ? `
+
+          <div class="deal-image-wrapper">
+
+            <img
+              src="${escapeAttribute(
+                image
+              )}"
+              alt="${escapeAttribute(
+                name
+              )}"
+              class="deal-image"
+              loading="lazy"
+            >
+
+            ${
+              deal.badge
+
+                ? `
+
+                  <div class="deal-badge">
+                    ${escapeHTML(
+                      deal.badge
+                    )}
+                  </div>
+
+                `
+
+                : ""
+            }
+
+          </div>
+
+        `
+
+        : `
+
+          <div class="deal-image-wrapper">
+
+            ${
+              deal.badge
+
+                ? `
+
+                  <div class="deal-badge">
+                    ${escapeHTML(
+                      deal.badge
+                    )}
+                  </div>
+
+                `
+
+                : ""
+            }
+
+          </div>
+
+        `;
+
+
+    card.innerHTML = `
+
+      ${imageHTML}
+
+
+      <div class="deal-content">
+
+
+        <div class="deal-type">
+
+          ${escapeHTML(
+            friendlyType(
+              deal.item_type
+            )
+          )}
+
+        </div>
+
+
+        <h3 class="deal-title">
+
+          ${escapeHTML(
+            deal.title ||
+            name
+          )}
+
+        </h3>
+
+
+        <p class="product-name">
+
+          ${escapeHTML(
+            name
+          )}
+
+        </p>
+
+
+        ${
+          deal.description
+
+            ? `
+
+              <p class="description">
+
+                ${escapeHTML(
+                  deal.description
+                )}
+
+              </p>
+
+            `
+
+            : ""
+        }
+
+
+        <div class="price-row">
+
+
+          ${
+            Number.isFinite(
+              Number(
+                originalPrice
+              )
+            )
+
+              ? `
+
+                <span class="old-price">
+
+                  ${formatCurrency(
+                    originalPrice
+                  )}
+
+                </span>
+
+              `
+
+              : ""
+          }
+
+
+          ${
+            Number.isFinite(
+              Number(
+                dealPrice
+              )
+            )
+
+              ? `
+
+                <span class="deal-price">
+
+                  ${formatCurrency(
+                    dealPrice
+                  )}
+
+                </span>
+
+              `
+
+              : ""
+          }
+
+
+        </div>
+
+
+        ${
+          savingText
+
+            ? `
+
+              <div class="saving">
+
+                ${escapeHTML(
+                  savingText
+                )}
+
+              </div>
+
+            `
+
+            : ""
+        }
+
+
+        ${
+          endText
+
+            ? `
+
+              <p class="deal-end">
+
+                ${escapeHTML(
+                  endText
+                )}
+
+              </p>
+
+            `
+
+            : ""
+        }
+
+
+        <a
+          href="${escapeAttribute(
+            destination
+          )}"
+          class="deal-button"
+
+          ${
+            deal.item_type ===
+            "affiliate_product"
+
+              ? `
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+              `
+
+              : ""
+          }
+        >
+
+          ${
+            deal.item_type ===
+            "affiliate_product"
+
+              ? "View Deal"
+
+              : "Shop Deal"
+          }
+
+        </a>
+
+
+      </div>
+
+    `;
+
+
+    grid.appendChild(
+      card
+    );
+
+
+    seoItems.push({
+
+      name:
+        deal.title ||
+        name,
+
+      url:
+        absoluteDestination(
+          destination
+        )
+
+    });
+
+  }
+
+
+  loading.style.display =
+    "none";
+
+
+  if (
+    grid.children.length ===
+    0
+  ) {
+
+    empty.style.display =
+      "block";
+
+
+    updateDealsSEO(
+      []
+    );
+
+
+    return;
+
+  }
+
+
+  grid.style.display =
+    "grid";
+
+
+  updateDealsSEO(
+    seoItems
+  );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
 loadDeals();
 
 </script>
 
 
-<script src="cookie-consent.js"></script>
+<script src="/cookie-consent.js"></script>
 
 
 </body>
