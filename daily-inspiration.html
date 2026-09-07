@@ -18,7 +18,32 @@
     name="description"
     content="Daily Bible verses, prayers and encouragement from GiftedGift Empire."
   >
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large"
+>
 
+<meta
+  name="theme-color"
+  content="#123a8c"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  href="my-logo.png"
+>
+
+<link
+  rel="shortcut icon"
+  type="image/png"
+  href="my-logo.png"
+>
+
+<link
+  rel="apple-touch-icon"
+  href="my-logo.png"
+>
   <style>
     * {
       box-sizing: border-box;
@@ -32,16 +57,45 @@
     }
 
     header {
-      background: #123a8c;
-      color: white;
-      padding: 25px 20px;
-    }
+  background: #123a8c;
+  color: white;
+  padding: 18px 20px;
+}
 
-    header h1 {
-      margin: 0 0 20px;
-      color: #f2bd16;
-    }
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+}
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 18px;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  background: white;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.brand-name .gifted {
+  color: white;
+}
+
+.brand-name .empire {
+  color: #f2bd16;
+}
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -417,52 +471,80 @@
 
 <header>
 
-  <h1>
-    GiftedGift Empire
-  </h1>
-
-  <nav>
-
-    <a href="index.html">
-      Home
-    </a>
-
-    <a href="shop.html">
-      Shop
-    </a>
-
-    <a href="categories.html">
-      Categories
-    </a>
+  <div class="header-inner">
 
     <a
-      href="daily-inspiration.html"
-      class="active"
+      href="index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
     >
-      Daily Inspiration
+
+      <img
+        src="my-logo.png"
+        alt="GiftedGift Empire logo"
+        width="58"
+        height="58"
+      >
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
     </a>
 
-    <a href="blog.html">
-      Blog
-    </a>
 
-    <a href="deals.html">
-      Deals
-    </a>
+    <nav>
 
-    <a href="about.html">
-      About
-    </a>
+      <a href="index.html">
+        Home
+      </a>
 
-    <a href="contact.html">
-      Contact
-    </a>
+      <a href="shop.html">
+        Shop
+      </a>
 
-    <a href="cart.html">
-      🛒 Cart
-    </a>
+      <a href="categories.html">
+        Categories
+      </a>
 
-  </nav>
+      <a
+        href="daily-inspiration.html"
+        class="active"
+      >
+        Daily Inspiration
+      </a>
+
+      <a href="blog.html">
+        Blog
+      </a>
+
+      <a href="deals.html">
+        Deals
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
