@@ -28,7 +28,27 @@
     rel="canonical"
     href="https://giftedgiftempire.com/shop"
   >
+<meta
+  name="theme-color"
+  content="#123a8c"
+>
 
+<link
+  rel="icon"
+  type="image/png"
+  href="my-logo.png"
+>
+
+<link
+  rel="shortcut icon"
+  type="image/png"
+  href="my-logo.png"
+>
+
+<link
+  rel="apple-touch-icon"
+  href="my-logo.png"
+>
 
   <style>
 
@@ -51,19 +71,45 @@
 
 
     header {
-      background: #123a8c;
+  background: #123a8c;
+  color: white;
+  padding: 18px 20px;
+}
 
-      color: white;
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+}
 
-      padding: 25px 20px;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 18px;
+  text-decoration: none;
+}
 
+.brand img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  background: white;
+  border-radius: 50%;
+  padding: 3px;
+}
 
-    header h1 {
-      color: #f2bd16;
+.brand-name {
+  font-size: 28px;
+  font-weight: 800;
+}
 
-      margin: 0 0 20px;
-    }
+.brand-name .gifted {
+  color: white;
+}
+
+.brand-name .empire {
+  color: #f2bd16;
+}
 
 
     nav {
@@ -84,9 +130,10 @@
     }
 
 
-    nav a:hover {
-      color: #f2bd16;
-    }
+    nav a:hover,
+nav a.active {
+  color: #f2bd16;
+}
 
 
     .hero {
@@ -606,50 +653,80 @@
 
 <header>
 
-  <h1>
-    GiftedGift Empire
-  </h1>
+  <div class="header-inner">
 
+    <a
+      href="index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
 
-  <nav>
+      <img
+        src="my-logo.png"
+        alt="GiftedGift Empire logo"
+        width="58"
+        height="58"
+      >
 
-    <a href="index.html">
-      Home
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
     </a>
 
-    <a href="shop.html">
-      Shop
-    </a>
 
-    <a href="categories.html">
-      Categories
-    </a>
+    <nav>
 
-    <a href="daily-inspiration.html">
-      Daily Inspiration
-    </a>
+      <a href="index.html">
+        Home
+      </a>
 
-    <a href="blog.html">
-      Blog
-    </a>
+      <a
+        href="shop.html"
+        class="active"
+      >
+        Shop
+      </a>
 
-    <a href="deals.html">
-      Deals
-    </a>
+      <a href="categories.html">
+        Categories
+      </a>
 
-    <a href="about.html">
-      About
-    </a>
+      <a href="daily-inspiration.html">
+        Daily Inspiration
+      </a>
 
-    <a href="contact.html">
-      Contact
-    </a>
+      <a href="blog.html">
+        Blog
+      </a>
 
-    <a href="cart.html">
-      🛒 Cart
-    </a>
+      <a href="deals.html">
+        Deals
+      </a>
 
-  </nav>
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
