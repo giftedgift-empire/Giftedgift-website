@@ -2914,7 +2914,90 @@ let newsletterImagePreviewUrl =
 
   }
 
+async function uploadNewsletterImage() {
 
+  if (
+    !selectedNewsletterImage
+  ) {
+    return "";
+  }
+
+
+  const token =
+    await getAccessToken();
+
+
+  const formData =
+    new FormData();
+
+
+  formData.append(
+    "action",
+    "upload_newsletter_image"
+  );
+
+
+  formData.append(
+    "image",
+    selectedNewsletterImage
+  );
+
+
+  const response =
+    await fetch(
+      NEWSLETTER_ADMIN_URL,
+      {
+        method:
+          "POST",
+
+        headers: {
+          "Authorization":
+            "Bearer " +
+            token
+        },
+
+        body:
+          formData
+      }
+    );
+
+
+  let result;
+
+
+  try {
+
+    result =
+      await response.json();
+
+  } catch {
+
+    throw new Error(
+      "The image upload returned an invalid response."
+    );
+
+  }
+
+
+  if (
+    !response.ok ||
+    result.success !== true
+  ) {
+
+    throw new Error(
+      result.error ||
+      "Could not upload the newsletter image."
+    );
+
+  }
+
+
+  return String(
+    result.image_url ||
+    ""
+  );
+
+}
   /* =========================
      SEND BROADCAST
   ========================= */
