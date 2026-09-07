@@ -10,8 +10,13 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
   <title>
-    Categories | GiftedGift Empire
+    Shop by Category | GiftedGift Empire
   </title>
 
   <meta
@@ -29,26 +34,96 @@
     content="#123a8c"
   >
 
+  <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/categories.html"
+  >
+
 
   <!-- =========================
-       FAVICON / BROWSER LOGO
+       FAVICON
   ========================= -->
 
   <link
     rel="icon"
     type="image/png"
-    href="my-logo.png"
+    href="/my-logo.png"
   >
 
   <link
     rel="shortcut icon"
     type="image/png"
-    href="my-logo.png"
+    href="/my-logo.png"
   >
 
   <link
     rel="apple-touch-icon"
-    href="my-logo.png"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    property="og:title"
+    content="Shop by Category | GiftedGift Empire"
+  >
+
+  <meta
+    property="og:description"
+    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/categories.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="GiftedGift Empire shopping categories"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Shop by Category | GiftedGift Empire"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
   >
 
 
@@ -58,10 +133,16 @@
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f7f7f7;
+
       color: #222;
     }
 
@@ -72,44 +153,61 @@
 
     header {
       background: #123a8c;
+
       color: white;
+
       padding: 18px 20px;
     }
 
+
     .header-inner {
       max-width: 1200px;
+
       margin: auto;
     }
 
+
     .brand {
       display: flex;
+
       align-items: center;
+
       gap: 11px;
 
       margin-bottom: 18px;
 
+      width: fit-content;
+
       text-decoration: none;
     }
 
+
     .brand img {
       width: 58px;
+
       height: 58px;
 
       object-fit: contain;
 
       background: white;
+
       border-radius: 50%;
+
       padding: 3px;
     }
 
+
     .brand-name {
       font-size: 28px;
+
       font-weight: 800;
     }
+
 
     .brand-name .gifted {
       color: white;
     }
+
 
     .brand-name .empire {
       color: #f2bd16;
@@ -122,9 +220,14 @@
 
     nav {
       display: flex;
+
       flex-wrap: wrap;
-      gap: 6px 18px;
+
+      gap:
+        6px
+        18px;
     }
+
 
     nav a {
       color: white;
@@ -133,19 +236,22 @@
 
       font-weight: bold;
 
-      padding: 7px 0;
+      padding:
+        7px
+        0;
 
       border-bottom:
         3px solid transparent;
     }
 
-    nav a:hover {
+
+    nav a:hover,
+    nav a.active {
       color: #f2bd16;
     }
 
-    nav a.active {
-      color: #f2bd16;
 
+    nav a.active {
       border-bottom-color:
         #f2bd16;
     }
@@ -161,22 +267,28 @@
       background: white;
 
       padding:
-        50px 20px 35px;
+        50px
+        20px
+        35px;
     }
+
 
     .hero h1 {
       font-size: 38px;
 
       margin:
-        0 0 15px;
+        0
+        0
+        15px;
 
       color: #123a8c;
     }
 
+
     .hero p {
       color: #555;
 
-      max-width: 650px;
+      max-width: 700px;
 
       margin: auto;
 
@@ -194,8 +306,10 @@
       margin: auto;
 
       padding:
-        45px 20px;
+        45px
+        20px;
     }
+
 
     .category-grid {
       display: grid;
@@ -203,11 +317,15 @@
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(240px, 1fr)
+          minmax(
+            240px,
+            1fr
+          )
         );
 
       gap: 25px;
     }
+
 
     .category-card {
       background: white;
@@ -217,12 +335,16 @@
       overflow: hidden;
 
       box-shadow:
-        0 3px 12px
+        0
+        3px
+        12px
         rgba(0,0,0,0.08);
     }
 
+
     .category-card img {
       width: 100%;
+
       height: 210px;
 
       object-fit: cover;
@@ -230,8 +352,10 @@
       display: block;
     }
 
+
     .category-image-placeholder {
       width: 100%;
+
       height: 210px;
 
       background:
@@ -242,19 +366,25 @@
         );
     }
 
+
     .category-content {
       padding:
-        28px 22px;
+        28px
+        22px;
     }
+
 
     .category-card h2 {
       font-size: 24px;
 
       margin:
-        0 0 12px;
+        0
+        0
+        12px;
 
       color: #123a8c;
     }
+
 
     .category-card p {
       color: #555;
@@ -264,12 +394,14 @@
       min-height: 52px;
     }
 
+
     .category-card a {
       display: inline-block;
 
       margin-top: 12px;
 
       background: #f2bd16;
+
       color: #111;
 
       text-decoration: none;
@@ -277,24 +409,30 @@
       font-weight: bold;
 
       padding:
-        11px 18px;
+        11px
+        18px;
 
       border-radius: 7px;
     }
+
 
     .category-card a:hover {
       background: #d8a90e;
     }
 
+
     .category-card.foodstuffs a {
       background: #25D366;
+
       color: white;
     }
+
 
     .loading-message {
       text-align: center;
 
-      grid-column: 1 / -1;
+      grid-column:
+        1 / -1;
 
       font-weight: bold;
 
@@ -312,16 +450,20 @@
       margin-top: 40px;
 
       background: #123a8c;
+
       color: white;
 
       text-align: center;
 
       padding:
-        30px 20px;
+        32px
+        20px;
     }
+
 
     .footer-logo {
       width: 46px;
+
       height: 46px;
 
       object-fit: contain;
@@ -330,7 +472,52 @@
 
       border-radius: 50%;
 
+      padding: 2px;
+
       margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        17px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
     }
 
 
@@ -338,39 +525,52 @@
        MOBILE
     ========================= */
 
-    @media (max-width: 600px) {
+    @media (
+      max-width: 600px
+    ) {
 
       header {
         padding:
-          15px 16px;
+          15px
+          16px;
       }
+
 
       .brand img {
         width: 50px;
+
         height: 50px;
       }
+
 
       .brand-name {
         font-size: 23px;
       }
 
+
       nav {
         gap:
-          4px 14px;
+          4px
+          14px;
       }
+
 
       nav a {
         font-size: 14px;
       }
 
+
       .hero h1 {
         font-size: 32px;
       }
 
+
       .categories {
         padding:
-          35px 16px;
+          35px
+          16px;
       }
+
 
       .category-card img,
       .category-image-placeholder {
@@ -397,17 +597,18 @@
 
 
     <a
-      href="index.html"
+      href="/index.html"
       class="brand"
       aria-label="GiftedGift Empire home"
     >
 
       <img
-        src="my-logo.png"
+        src="/my-logo.png"
         alt="GiftedGift Empire logo"
         width="58"
         height="58"
       >
+
 
       <div class="brand-name">
 
@@ -426,42 +627,42 @@
 
     <nav>
 
-      <a href="index.html">
+      <a href="/index.html">
         Home
       </a>
 
-      <a href="shop.html">
+      <a href="/shop.html">
         Shop
       </a>
 
       <a
-        href="categories.html"
+        href="/categories.html"
         class="active"
       >
         Categories
       </a>
 
-      <a href="daily-inspiration.html">
+      <a href="/daily-inspiration.html">
         Daily Inspiration
       </a>
 
-      <a href="blog.html">
+      <a href="/blog.html">
         Blog
       </a>
 
-      <a href="deals.html">
+      <a href="/deals.html">
         Deals
       </a>
 
-      <a href="about.html">
+      <a href="/about.html">
         About
       </a>
 
-      <a href="contact.html">
+      <a href="/contact.html">
         Contact
       </a>
 
-      <a href="cart.html">
+      <a href="/cart.html">
         🛒 Cart
       </a>
 
@@ -482,13 +683,12 @@
     Shop by Category
   </h1>
 
+
   <p>
-
-    Browse products by category and discover
-    useful items, digital products, lifestyle
-    finds, African foodstuffs and carefully
-    selected recommendations.
-
+    Browse products by category and discover useful
+    items, digital products, lifestyle finds,
+    African foodstuffs and carefully selected
+    recommendations from GiftedGift Empire.
   </p>
 
 </section>
@@ -521,7 +721,7 @@
 <footer>
 
   <img
-    src="my-logo.png"
+    src="/my-logo.png"
     alt="GiftedGift Empire logo"
     class="footer-logo"
     width="46"
@@ -529,16 +729,48 @@
     loading="lazy"
   >
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
 
-  <p>
-    © 2026 GiftedGift Empire.
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+
+  </div>
 
 </footer>
 
@@ -549,6 +781,20 @@
 
 
 <script>
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const SITE_ORIGIN =
+  "https://giftedgiftempire.com";
+
+
+const CATEGORIES_URL =
+  SITE_ORIGIN +
+  "/categories.html";
+
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -564,6 +810,48 @@ const supabaseClient =
     SUPABASE_PUBLISHABLE_KEY
   );
 
+
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
+
+
+/* =========================
+   HTML SAFETY
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.textContent =
+    value == null
+
+      ? ""
+
+      : String(
+          value
+        );
+
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================
+   CATEGORY DESCRIPTION
+========================= */
 
 function categoryDescription(
   category
@@ -585,7 +873,8 @@ function categoryDescription(
 
   const name =
     String(
-      category.name || ""
+      category.name ||
+      ""
     )
       .toLowerCase()
       .trim();
@@ -597,16 +886,16 @@ function categoryDescription(
       "Beautiful and practical products for a comfortable home.",
 
     "beauty & lifestyle":
-      "Beauty, self-care and lifestyle finds for everyday living.",
+      "Beauty, self-care and lifestyle finds selected for everyday living.",
 
     "fashion & accessories":
-      "Stylish fashion and accessories selected for your wardrobe.",
+      "Stylish fashion, accessories and useful finds for your wardrobe.",
 
     "tech & gadgets":
-      "Useful technology and smart gadgets for everyday life.",
+      "Useful technology and smart gadgets for work, home and everyday life.",
 
     "digital products":
-      "eBooks, guides, templates and useful digital resources.",
+      "eBooks, guides, templates and digital resources you can access online.",
 
     "african foodstuffs":
       "Quality African foodstuffs and pantry essentials for your kitchen.",
@@ -618,12 +907,249 @@ function categoryDescription(
 
 
   return (
-    descriptions[name] ||
+    descriptions[
+      name
+    ] ||
     "Discover carefully selected products in this category."
   );
 
 }
 
+
+/* =========================
+   CATEGORY DESTINATION
+========================= */
+
+function getCategoryURL(
+  category
+) {
+
+  const name =
+    category.name ||
+    "Category";
+
+
+  const slug =
+    String(
+      category.slug ||
+      ""
+    )
+      .toLowerCase()
+      .trim();
+
+
+  const isFoodstuffs =
+    slug ===
+      "african-foodstuffs" ||
+
+    name
+      .toLowerCase()
+      .trim() ===
+      "african foodstuffs";
+
+
+  if (
+    isFoodstuffs
+  ) {
+
+    return (
+      SITE_ORIGIN +
+      "/foodstuffs.html"
+    );
+
+  }
+
+
+  return (
+    SITE_ORIGIN +
+    "/shop.html?category=" +
+    encodeURIComponent(
+      name
+    )
+  );
+
+}
+
+
+/* =========================
+   STRUCTURED DATA
+========================= */
+
+function updateCategoriesSEO(
+  categories
+) {
+
+  let structuredData =
+    document.getElementById(
+      "categories-structured-data"
+    );
+
+
+  if (
+    !structuredData
+  ) {
+
+    structuredData =
+      document.createElement(
+        "script"
+      );
+
+
+    structuredData.type =
+      "application/ld+json";
+
+
+    structuredData.id =
+      "categories-structured-data";
+
+
+    document.head.appendChild(
+      structuredData
+    );
+
+  }
+
+
+  const categoryItems =
+    categories.map(
+      (
+        category,
+        index
+      ) => {
+
+        return {
+
+          "@type":
+            "ListItem",
+
+          "position":
+            index + 1,
+
+          "name":
+            category.name ||
+            "Category",
+
+          "url":
+            getCategoryURL(
+              category
+            )
+
+        };
+
+      }
+    );
+
+
+  const collectionSchema = {
+
+    "@type":
+      "CollectionPage",
+
+    "name":
+      "Shop by Category | GiftedGift Empire",
+
+    "description":
+      "Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs.",
+
+    "url":
+      CATEGORIES_URL,
+
+    "isPartOf": {
+
+      "@type":
+        "WebSite",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_ORIGIN
+
+    },
+
+    "mainEntity": {
+
+      "@type":
+        "ItemList",
+
+      "numberOfItems":
+        categoryItems.length,
+
+      "itemListElement":
+        categoryItems
+
+    }
+
+  };
+
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_ORIGIN +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Categories",
+
+        "item":
+          CATEGORIES_URL
+
+      }
+
+    ]
+
+  };
+
+
+  structuredData.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@graph": [
+
+        collectionSchema,
+
+        breadcrumbSchema
+
+      ]
+
+    });
+
+}
+
+
+/* =========================
+   LOAD CATEGORIES
+========================= */
 
 async function loadCategories() {
 
@@ -638,17 +1164,24 @@ async function loadCategories() {
     error
   } =
     await supabaseClient
-      .from("categories")
-      .select("*")
+      .from(
+        "categories"
+      )
+      .select(
+        "*"
+      )
       .order(
         "created_at",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       "Error loading categories:",
@@ -672,7 +1205,8 @@ async function loadCategories() {
 
   if (
     !categories ||
-    categories.length === 0
+    categories.length ===
+      0
   ) {
 
     grid.innerHTML = `
@@ -682,6 +1216,11 @@ async function loadCategories() {
       </div>
 
     `;
+
+
+    updateCategoriesSEO(
+      []
+    );
 
 
     return;
@@ -710,9 +1249,11 @@ async function loadCategories() {
 
       const categorySlug =
         String(
-          category.slug || ""
+          category.slug ||
+          ""
         )
-          .toLowerCase();
+          .toLowerCase()
+          .trim();
 
 
       const isFoodstuffs =
@@ -742,9 +1283,9 @@ async function loadCategories() {
       const shopLink =
         isFoodstuffs
 
-          ? "foodstuffs.html"
+          ? "/foodstuffs.html"
 
-          : "shop.html?category=" +
+          : "/shop.html?category=" +
             encodeURIComponent(
               categoryName
             );
@@ -799,7 +1340,11 @@ async function loadCategories() {
           </p>
 
 
-          <a href="${escapeHTML(shopLink)}">
+          <a
+            href="${escapeHTML(
+              shopLink
+            )}"
+          >
             Shop Now →
           </a>
 
@@ -816,40 +1361,30 @@ async function loadCategories() {
     }
   );
 
-}
 
+  /*
+  Add CollectionPage + ItemList +
+  Breadcrumb structured data after
+  the real categories have loaded.
+  */
 
-function escapeHTML(
-  value
-) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.textContent =
-    value == null
-
-      ? ""
-
-      : String(
-          value
-        );
-
-
-  return div.innerHTML;
+  updateCategoriesSEO(
+    categories
+  );
 
 }
 
+
+/* =========================
+   START
+========================= */
 
 loadCategories();
 
 </script>
 
 
-<script src="cookie-consent.js"></script>
+<script src="/cookie-consent.js"></script>
 
 <script src="/affiliate-tracking.js"></script>
 
