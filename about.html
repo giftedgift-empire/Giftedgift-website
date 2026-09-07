@@ -10,12 +10,135 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>About | GiftedGift Empire</title>
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
+  <title>
+    About GiftedGift Empire | Our Mission
+  </title>
 
   <meta
+    id="page-description-meta"
     name="description"
-    content="Learn more about GiftedGift Empire, our mission and how we help people discover useful products, digital resources and recommendations."
+    content="Learn about GiftedGift Empire, our mission and how we help people discover useful products, digital resources, African foodstuffs and carefully selected recommendations."
   >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+  <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/about.html"
+  >
+
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    id="og-title"
+    property="og:title"
+    content="About GiftedGift Empire | Our Mission"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Learn about GiftedGift Empire, our mission and how we help people discover useful products, digital resources, African foodstuffs and carefully selected recommendations."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/about.html"
+  >
+
+  <meta
+    id="og-image"
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    id="og-image-alt"
+    property="og:image:alt"
+    content="GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    id="twitter-title"
+    name="twitter:title"
+    content="About GiftedGift Empire | Our Mission"
+  >
+
+  <meta
+    id="twitter-description"
+    name="twitter:description"
+    content="Learn about GiftedGift Empire, our mission and how we help people discover useful products, digital resources, African foodstuffs and carefully selected recommendations."
+  >
+
+  <meta
+    id="twitter-image"
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    name="twitter:image:alt"
+    content="GiftedGift Empire"
+  >
+
 
   <style>
 
@@ -23,162 +146,463 @@
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f7f7f7;
+
       color: #222;
     }
 
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: #123a8c;
+
       color: white;
-      padding: 25px 20px;
+
+      padding:
+        18px
+        20px;
     }
 
-    header h1 {
-      margin: 0 0 20px;
+
+    .header-inner {
+      max-width: 1200px;
+
+      margin: auto;
+    }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
       color: #f2bd16;
     }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       display: flex;
+
       flex-wrap: wrap;
-      gap: 18px;
+
+      gap:
+        6px
+        18px;
     }
+
 
     nav a {
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
-    nav a:hover {
+
+    nav a:hover,
+    nav a.active {
       color: #f2bd16;
     }
 
-    .hero {
-      background: white;
-      text-align: center;
-      padding: 55px 20px 35px;
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
     }
 
-    .hero h2 {
-      font-size: 38px;
-      margin: 0 0 15px;
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #eef4ff,
+          #fff8dc
+        );
+
+      text-align: center;
+
+      padding:
+        58px
+        20px
+        40px;
     }
+
+
+    .hero h1 {
+      font-size: 40px;
+
+      color: #123a8c;
+
+      margin:
+        0
+        0
+        15px;
+    }
+
 
     .hero p {
-      max-width: 700px;
+      max-width: 720px;
+
       margin: auto;
+
       color: #555;
-      line-height: 1.7;
+
+      line-height: 1.75;
+
+      font-size: 17px;
     }
 
+
+    /* =========================
+       ABOUT PAGE
+    ========================= */
+
     .about {
-      max-width: 900px;
+      max-width: 950px;
+
       margin: auto;
-      padding: 45px 22px;
+
+      padding:
+        48px
+        22px
+        70px;
     }
+
 
     .loading {
       text-align: center;
-      padding: 50px 20px;
+
+      padding:
+        50px
+        20px;
+
       color: #666;
+
       font-weight: bold;
     }
 
+
     .about-card {
       display: none;
+
       background: white;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+      padding: 34px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0
+        4px
+        18px
+        rgba(0,0,0,0.08);
     }
+
 
     .about-image {
       display: none;
+
       width: 100%;
-      max-height: 430px;
+
+      max-height: 470px;
+
       object-fit: contain;
+
       border-radius: 12px;
-      margin-bottom: 28px;
+
+      margin-bottom: 30px;
+
       background: #f7f7f7;
     }
 
-    .about-card h3 {
+
+    .about-card h2 {
       color: #123a8c;
-      font-size: 27px;
-      margin-top: 0;
+
+      font-size: 29px;
+
+      margin:
+        0
+        0
+        20px;
     }
+
 
     .about-content p {
       color: #555;
-      line-height: 1.8;
+
+      line-height: 1.85;
+
       font-size: 17px;
-      margin: 0 0 20px;
+
+      margin:
+        0
+        0
+        20px;
     }
+
 
     .about-content p:last-child {
       margin-bottom: 0;
     }
 
+
     .about-button {
       display: none;
-      margin-top: 25px;
+
+      margin-top: 28px;
+
       background: #f2bd16;
+
       color: #111;
+
       text-decoration: none;
+
       font-weight: bold;
-      padding: 13px 22px;
+
+      padding:
+        13px
+        22px;
+
       border-radius: 8px;
     }
 
+
+    .about-button:hover {
+      background: #d8a90e;
+    }
+
+
     .message {
       display: none;
+
       background: #fff4d6;
+
       color: #805b00;
-      border: 1px solid #ead18a;
+
+      border:
+        1px solid #ead18a;
+
       padding: 14px;
+
       border-radius: 9px;
+
       margin-bottom: 20px;
+
       line-height: 1.6;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       margin-top: 40px;
+
       background: #123a8c;
+
       color: white;
+
       text-align: center;
-      padding: 30px 20px;
+
+      padding:
+        32px
+        20px;
     }
 
-    @media (max-width: 650px) {
+
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        17px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 650px
+    ) {
+
+      header {
+        padding:
+          15px
+          16px;
+      }
+
+
+      .brand img {
+        width: 50px;
+
+        height: 50px;
+      }
+
+
+      .brand-name {
+        font-size: 23px;
+      }
+
 
       nav {
-        gap: 12px;
+        gap:
+          4px
+          14px;
       }
 
-      .hero h2 {
-        font-size: 31px;
+
+      nav a {
+        font-size: 14px;
       }
+
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
 
       .about {
         padding-left: 14px;
+
         padding-right: 14px;
       }
 
+
       .about-card {
-        padding: 22px;
+        padding: 24px;
       }
 
-      .about-card h3 {
-        font-size: 24px;
+
+      .about-card h2 {
+        font-size: 25px;
       }
+
 
       .about-content p {
         font-size: 16px;
       }
+
     }
 
   </style>
@@ -189,75 +613,130 @@
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-  <h1>
-    GiftedGift Empire
-  </h1>
+  <div class="header-inner">
 
-  <nav>
 
-    <a href="index.html">
-      Home
+    <a
+      href="/index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
+
+      <img
+        src="/my-logo.png"
+        alt="GiftedGift Empire logo"
+        width="58"
+        height="58"
+      >
+
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
     </a>
 
-    <a href="shop.html">
-      Shop
-    </a>
 
-    <a href="categories.html">
-      Categories
-    </a>
+    <nav>
 
-    <a href="blog.html">
-      Blog
-    </a>
+      <a href="/index.html">
+        Home
+      </a>
 
-    <a href="deals.html">
-      Deals
-    </a>
+      <a href="/shop.html">
+        Shop
+      </a>
 
-    <a href="about.html">
-      About
-    </a>
+      <a href="/categories.html">
+        Categories
+      </a>
 
-    <a href="contact.html">
-      Contact
-    </a>
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
 
-    <a href="cart.html">
-      🛒 Cart
-    </a>
+      <a href="/blog.html">
+        Blog
+      </a>
 
-  </nav>
+      <a href="/deals.html">
+        Deals
+      </a>
+
+      <a
+        href="/about.html"
+        class="active"
+      >
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
-  <h2 id="page-title">
+  <h1 id="page-title">
     About GiftedGift Empire
-  </h2>
+  </h1>
+
 
   <p id="hero-subtitle">
-    Learn more about who we are and what GiftedGift Empire is created to do.
+    Learn more about who we are, our mission
+    and what GiftedGift Empire is created to do.
   </p>
 
 </section>
 
 
+<!-- =========================
+     ABOUT
+========================= -->
+
 <main class="about">
+
 
   <div
     id="message"
     class="message"
+    aria-live="polite"
   ></div>
 
 
   <div
     id="loading"
     class="loading"
+    role="status"
+    aria-live="polite"
   >
     Loading About page...
   </div>
@@ -268,6 +747,7 @@
     class="about-card"
   >
 
+
     <img
       id="about-image"
       class="about-image"
@@ -275,9 +755,9 @@
     >
 
 
-    <h3 id="about-heading">
+    <h2 id="about-heading">
       Helping You Discover Better Finds
-    </h3>
+    </h2>
 
 
     <div
@@ -292,23 +772,78 @@
       href="#"
     ></a>
 
+
   </section>
+
 
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    width="46"
+    height="46"
+    loading="lazy"
+  >
 
-  <p>
-    © 2026 GiftedGift Empire.
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/daily-inspiration.html">
+      Daily Inspiration
+    </a>
+
+    <a href="/blog.html">
+      Blog
+    </a>
+
+    <a href="/deals.html">
+      Deals
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+
+  </div>
 
 </footer>
 
@@ -320,273 +855,824 @@
 
 <script>
 
-  const SUPABASE_URL =
-    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const SITE_URL =
+  "https://giftedgiftempire.com";
 
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+const ABOUT_URL =
+  SITE_URL +
+  "/about.html";
 
 
-  const db =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_URL +
+  "/my-logo.png";
 
 
-  const DEFAULT_CONTENT = {
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
-    title:
-      "About GiftedGift Empire",
 
-    subtitle:
-      "Helping You Discover Better Finds",
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
-    content:
-`GiftedGift Empire is a shopping and recommendation platform created to help people discover useful products, digital resources, lifestyle finds and carefully selected recommendations.
 
-We feature our own products as well as products from trusted brands and partners. Some links on this website may be affiliate links, which means we may earn a commission when a purchase is made through certain links, at no additional cost to you.
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
+
+
+/* =========================
+   DEFAULT CONTENT
+========================= */
+
+const DEFAULT_CONTENT = {
+
+  title:
+    "About GiftedGift Empire",
+
+  subtitle:
+    "Helping You Discover Better Finds",
+
+  content:
+`GiftedGift Empire is a shopping and recommendation platform created to help people discover useful products, digital resources, lifestyle finds, African foodstuffs and carefully selected recommendations.
+
+We feature products available directly through GiftedGift Empire, approved Creator Marketplace products and selected products from brands and partners. Some links on this website may be affiliate links, which means we may earn a commission when a purchase is made through certain links, at no additional cost to you.
 
 Our goal is simple: to make product discovery easier, clearer and more helpful.`,
 
-    image_url:
-      null,
+  image_url:
+    null,
 
-    button_text:
-      null,
+  button_text:
+    null,
 
-    button_url:
-      null
+  button_url:
+    null
 
-  };
+};
 
 
-  function renderParagraphs(
-    text
+/* =========================
+   HELPERS
+========================= */
+
+function cleanText(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+
+}
+
+
+function descriptionPreview(
+  value
+) {
+
+  const text =
+    cleanText(
+      value
+    );
+
+
+  if (
+    !text
   ) {
 
-    const container =
-      document.getElementById(
-        "about-content"
-      );
-
-
-    container.innerHTML =
-      "";
-
-
-    const paragraphs =
-      String(
-        text || ""
-      )
-        .split(
-          /\n\s*\n/
-        )
-        .map(
-          paragraph =>
-            paragraph.trim()
-        )
-        .filter(Boolean);
-
-
-    paragraphs.forEach(
-      paragraph => {
-
-        const p =
-          document.createElement(
-            "p"
-          );
-
-
-        p.textContent =
-          paragraph;
-
-
-        container.appendChild(
-          p
-        );
-      }
+    return (
+      "Learn about GiftedGift Empire, our mission " +
+      "and how we help people discover useful products and resources."
     );
+
   }
 
 
-  function renderAbout(
-    data
+  if (
+    text.length <= 155
   ) {
 
-    const content =
-      {
-        ...DEFAULT_CONTENT,
-        ...(data || {})
-      };
+    return text;
+
+  }
 
 
+  return (
+    text.slice(
+      0,
+      152
+    ) +
+    "..."
+  );
+
+}
+
+
+function safeImageUrl(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_URL
+      );
+
+
+    if (
+      url.protocol === "https:" ||
+      url.protocol === "http:"
+    ) {
+
+      return url.href;
+
+    }
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Invalid About image URL:",
+      error
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+function safeLinkUrl(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_URL
+      );
+
+
+    if (
+      url.protocol === "https:" ||
+      url.protocol === "http:"
+    ) {
+
+      return url.href;
+
+    }
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Invalid About button URL:",
+      error
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+function setMetaContent(
+  id,
+  value
+) {
+
+  const element =
     document.getElementById(
-      "page-title"
-    ).textContent =
-      content.title ||
-      DEFAULT_CONTENT.title;
+      id
+    );
 
 
-    document.getElementById(
-      "hero-subtitle"
-    ).textContent =
-      content.subtitle ||
-      DEFAULT_CONTENT.subtitle;
+  if (
+    element
+  ) {
+
+    element.setAttribute(
+      "content",
+      value
+    );
+
+  }
+
+}
 
 
-    document.getElementById(
-      "about-heading"
-    ).textContent =
-      content.subtitle ||
-      DEFAULT_CONTENT.subtitle;
+/* =========================
+   ABOUT SEO
+========================= */
+
+function updateAboutSEO(
+  content
+) {
+
+  const pageTitle =
+    "About GiftedGift Empire | Our Mission";
 
 
-    renderParagraphs(
+  const description =
+    descriptionPreview(
       content.content ||
       DEFAULT_CONTENT.content
     );
 
 
-    const image =
-      document.getElementById(
-        "about-image"
-      );
-
-
-    if (
+  const image =
+    safeImageUrl(
       content.image_url
-    ) {
-
-      image.src =
-        content.image_url;
+    ) ||
+    DEFAULT_SOCIAL_IMAGE;
 
 
-      image.style.display =
-        "block";
-
-    } else {
-
-      image.removeAttribute(
-        "src"
-      );
+  document.title =
+    pageTitle;
 
 
-      image.style.display =
-        "none";
-    }
+  setMetaContent(
+    "page-description-meta",
+    description
+  );
 
 
-    const button =
-      document.getElementById(
-        "about-button"
-      );
+  setMetaContent(
+    "og-title",
+    pageTitle
+  );
 
 
-    if (
-      content.button_text &&
-      content.button_url
-    ) {
-
-      button.textContent =
-        content.button_text;
+  setMetaContent(
+    "og-description",
+    description
+  );
 
 
-      button.href =
-        content.button_url;
+  setMetaContent(
+    "og-image",
+    image
+  );
 
 
-      button.style.display =
-        "inline-block";
-
-    } else {
-
-      button.style.display =
-        "none";
-    }
+  setMetaContent(
+    "og-image-alt",
+    content.title ||
+    "GiftedGift Empire"
+  );
 
 
+  setMetaContent(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "twitter-description",
+    description
+  );
+
+
+  setMetaContent(
+    "twitter-image",
+    image
+  );
+
+
+  let structuredData =
     document.getElementById(
+      "about-structured-data"
+    );
+
+
+  if (
+    !structuredData
+  ) {
+
+    structuredData =
+      document.createElement(
+        "script"
+      );
+
+
+    structuredData.type =
+      "application/ld+json";
+
+
+    structuredData.id =
+      "about-structured-data";
+
+
+    document.head.appendChild(
+      structuredData
+    );
+
+  }
+
+
+  structuredData.textContent =
+    JSON.stringify({
+
+      "@context":
+        "https://schema.org",
+
+      "@graph": [
+
+        {
+
+          "@type":
+            "Organization",
+
+          "@id":
+            SITE_URL +
+            "/#organization",
+
+          "name":
+            "GiftedGift Empire",
+
+          "url":
+            SITE_URL +
+            "/",
+
+          "logo": {
+
+            "@type":
+              "ImageObject",
+
+            "url":
+              DEFAULT_SOCIAL_IMAGE
+
+          },
+
+          "email":
+            "gift@giftedgiftempire.com"
+
+        },
+
+
+        {
+
+          "@type":
+            "AboutPage",
+
+          "@id":
+            ABOUT_URL +
+            "#webpage",
+
+          "url":
+            ABOUT_URL,
+
+          "name":
+            pageTitle,
+
+          "description":
+            description,
+
+          "about": {
+
+            "@id":
+              SITE_URL +
+              "/#organization"
+
+          },
+
+          "isPartOf": {
+
+            "@type":
+              "WebSite",
+
+            "name":
+              "GiftedGift Empire",
+
+            "url":
+              SITE_URL +
+              "/"
+
+          }
+
+        },
+
+
+        {
+
+          "@type":
+            "BreadcrumbList",
+
+          "itemListElement": [
+
+            {
+
+              "@type":
+                "ListItem",
+
+              "position":
+                1,
+
+              "name":
+                "Home",
+
+              "item":
+                SITE_URL +
+                "/"
+
+            },
+
+            {
+
+              "@type":
+                "ListItem",
+
+              "position":
+                2,
+
+              "name":
+                "About",
+
+              "item":
+                ABOUT_URL
+
+            }
+
+          ]
+
+        }
+
+      ]
+
+    });
+
+}
+
+
+/* =========================
+   PARAGRAPHS
+========================= */
+
+function renderParagraphs(
+  text
+) {
+
+  const container =
+    document.getElementById(
+      "about-content"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  const paragraphs =
+    String(
+      text ||
+      ""
+    )
+      .split(
+        /\n\s*\n/
+      )
+      .map(
+        paragraph =>
+          paragraph.trim()
+      )
+      .filter(
+        Boolean
+      );
+
+
+  paragraphs.forEach(
+    paragraph => {
+
+
+      const p =
+        document.createElement(
+          "p"
+        );
+
+
+      p.textContent =
+        paragraph;
+
+
+      container.appendChild(
+        p
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   RENDER ABOUT
+========================= */
+
+function renderAbout(
+  data
+) {
+
+  const content = {
+
+    ...DEFAULT_CONTENT,
+
+    ...(
+      data ||
+      {}
+    )
+
+  };
+
+
+  document
+    .getElementById(
+      "page-title"
+    )
+    .textContent =
+      content.title ||
+      DEFAULT_CONTENT.title;
+
+
+  document
+    .getElementById(
+      "hero-subtitle"
+    )
+    .textContent =
+      content.subtitle ||
+      DEFAULT_CONTENT.subtitle;
+
+
+  document
+    .getElementById(
+      "about-heading"
+    )
+    .textContent =
+      content.subtitle ||
+      DEFAULT_CONTENT.subtitle;
+
+
+  renderParagraphs(
+    content.content ||
+    DEFAULT_CONTENT.content
+  );
+
+
+  /* =========================
+     IMAGE
+  ========================= */
+
+  const image =
+    document.getElementById(
+      "about-image"
+    );
+
+
+  const safeImage =
+    safeImageUrl(
+      content.image_url
+    );
+
+
+  if (
+    safeImage
+  ) {
+
+    image.src =
+      safeImage;
+
+
+    image.alt =
+      content.title ||
+      "GiftedGift Empire";
+
+
+    image.style.display =
+      "block";
+
+
+  } else {
+
+    image.removeAttribute(
+      "src"
+    );
+
+
+    image.style.display =
+      "none";
+
+  }
+
+
+  /* =========================
+     OPTIONAL BUTTON
+  ========================= */
+
+  const button =
+    document.getElementById(
+      "about-button"
+    );
+
+
+  const safeButtonUrl =
+    safeLinkUrl(
+      content.button_url
+    );
+
+
+  if (
+    content.button_text &&
+    safeButtonUrl
+  ) {
+
+    button.textContent =
+      content.button_text;
+
+
+    button.href =
+      safeButtonUrl;
+
+
+    button.style.display =
+      "inline-block";
+
+
+  } else {
+
+    button.removeAttribute(
+      "href"
+    );
+
+
+    button.style.display =
+      "none";
+
+  }
+
+
+  /* =========================
+     SEO
+  ========================= */
+
+  updateAboutSEO(
+    content
+  );
+
+
+  document
+    .getElementById(
       "loading"
-    ).style.display =
+    )
+    .style.display =
       "none";
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "about-card"
-    ).style.display =
+    )
+    .style.display =
       "block";
-  }
+
+}
 
 
-  async function loadAbout() {
+/* =========================
+   LOAD ABOUT
+========================= */
 
-    const {
-      data,
+async function loadAbout() {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "site_content"
+      )
+      .select(
+        "id,section,title,subtitle,content,button_text,button_url,image_url,updated_at"
+      )
+      .eq(
+        "section",
+        "about"
+      )
+      .maybeSingle();
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "About page error:",
       error
-    } =
-      await db
-        .from(
-          "site_content"
-        )
-        .select(
-          "id,section,title,subtitle,content,button_text,button_url,image_url,updated_at"
-        )
-        .eq(
-          "section",
-          "about"
-        )
-        .maybeSingle();
+    );
 
 
-    if (
-      error
-    ) {
-
-      console.error(
-        "About page error:",
-        error
-      );
-
-
-      /*
-        Keep the public About page usable
-        even if Supabase temporarily fails.
-      */
-
-      renderAbout(
-        DEFAULT_CONTENT
-      );
-
-
-      return;
-    }
-
-
-    if (
-      !data
-    ) {
-
-      renderAbout(
-        DEFAULT_CONTENT
-      );
-
-
-      return;
-    }
-
+    /*
+      Keep the public page usable
+      even if Supabase temporarily
+      cannot be reached.
+    */
 
     renderAbout(
-      data
+      DEFAULT_CONTENT
     );
+
+
+    return;
+
   }
 
 
-  loadAbout();
+  if (
+    !data
+  ) {
+
+    renderAbout(
+      DEFAULT_CONTENT
+    );
+
+
+    return;
+
+  }
+
+
+  renderAbout(
+    data
+  );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadAbout();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+
+<script src="/cookie-consent.js"></script>
 
 
 </body>
