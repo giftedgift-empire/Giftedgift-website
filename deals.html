@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -17,7 +19,36 @@
     content="Shop current deals and special offers from GiftedGift Empire."
   >
 
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="my-logo.png"
+  >
+
+
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -45,6 +76,8 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 15px;
+      text-decoration: none;
+      width: fit-content;
     }
 
     .brand-logo {
@@ -52,6 +85,8 @@
       height: 48px;
       object-fit: contain;
       border-radius: 50%;
+      background: white;
+      padding: 2px;
     }
 
     .brand-name {
@@ -185,6 +220,7 @@
 
     .deals-grid {
       display: grid;
+
       grid-template-columns:
         repeat(
           auto-fit,
@@ -199,6 +235,7 @@
       background: white;
       border-radius: 16px;
       overflow: hidden;
+
       box-shadow:
         0 4px 18px
         rgba(0,0,0,0.08);
@@ -301,7 +338,6 @@
 
     .deal-button {
       margin-top: auto;
-
       display: block;
       width: 100%;
 
@@ -332,6 +368,7 @@
     }
 
     @media (max-width: 700px) {
+
       .brand-name {
         font-size: 23px;
       }
@@ -359,28 +396,39 @@
       .deal-image-wrapper {
         height: 230px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
   <div class="header-inner">
 
-    <div class="brand-row">
+    <a
+      href="index.html"
+      class="brand-row"
+      aria-label="GiftedGift Empire home"
+    >
 
       <img
         src="my-logo.png"
-        alt="GiftedGift Empire"
+        alt="GiftedGift Empire logo"
         class="brand-logo"
       >
 
-      <h1 class="brand-name">
+      <span class="brand-name">
         GiftedGift Empire
-      </h1>
+      </span>
 
-    </div>
+    </a>
+
 
     <nav>
 
@@ -419,9 +467,14 @@
         Contact
       </a>
 
+      <a href="cart.html">
+        🛒 Cart
+      </a>
+
     </nav>
 
   </div>
+
 </header>
 
 
@@ -507,6 +560,11 @@
     recommendations in one place.
   </p>
 
+  <p>
+    © 2026 GiftedGift Empire.
+    All rights reserved.
+  </p>
+
 </footer>
 
 
@@ -539,9 +597,12 @@ const itemCache = {
 };
 
 
-function tableForType(itemType) {
+function tableForType(
+  itemType
+) {
 
   const tables = {
+
     product:
       "products",
 
@@ -550,6 +611,7 @@ function tableForType(itemType) {
 
     affiliate_product:
       "affiliate_products"
+
   };
 
 
@@ -557,12 +619,16 @@ function tableForType(itemType) {
     tables[itemType] ||
     null
   );
+
 }
 
 
-function friendlyType(itemType) {
+function friendlyType(
+  itemType
+) {
 
   const labels = {
+
     product:
       "Physical Product",
 
@@ -571,6 +637,7 @@ function friendlyType(itemType) {
 
     affiliate_product:
       "Affiliate Product"
+
   };
 
 
@@ -578,10 +645,13 @@ function friendlyType(itemType) {
     labels[itemType] ||
     "Product"
   );
+
 }
 
 
-function productName(product) {
+function productName(
+  product
+) {
 
   if (!product) {
     return "";
@@ -595,10 +665,13 @@ function productName(product) {
     product.product_title ||
     ""
   );
+
 }
 
 
-function productImage(product) {
+function productImage(
+  product
+) {
 
   if (!product) {
     return "";
@@ -612,6 +685,7 @@ function productImage(product) {
     product.cover_url ||
     ""
   );
+
 }
 
 
@@ -625,6 +699,7 @@ async function loadProducts(
   ) {
 
     return itemCache[itemType];
+
   }
 
 
@@ -659,6 +734,7 @@ async function loadProducts(
 
 
     return [];
+
   }
 
 
@@ -668,6 +744,7 @@ async function loadProducts(
 
 
   return itemCache[itemType];
+
 }
 
 
@@ -694,6 +771,7 @@ async function findProduct(
     ) ||
     null
   );
+
 }
 
 
@@ -707,6 +785,7 @@ function isDealLive(
   ) {
 
     return false;
+
   }
 
 
@@ -724,12 +803,13 @@ function isDealLive(
       !Number.isNaN(
         start.getTime()
       ) &&
-      now <
-      start
+      now < start
     ) {
 
       return false;
+
     }
+
   }
 
 
@@ -747,16 +827,18 @@ function isDealLive(
       !Number.isNaN(
         end.getTime()
       ) &&
-      now >
-      end
+      now > end
     ) {
 
       return false;
+
     }
+
   }
 
 
   return true;
+
 }
 
 
@@ -777,6 +859,7 @@ function getAffiliateLink(
     product.url ||
     ""
   );
+
 }
 
 
@@ -785,56 +868,45 @@ function getDestination(
   product
 ) {
 
-  /*
-    DIGITAL PRODUCTS:
-    Uses the secure digital checkout
-    already created for the website.
-  */
-
   if (
-  deal.item_type ===
-  "product"
-) {
-
-  if (
-    product &&
-    product.slug
+    deal.item_type ===
+    "product"
   ) {
 
+    if (
+      product &&
+      product.slug
+    ) {
+
+      return (
+        "/" +
+        encodeURIComponent(
+          product.slug
+        ) +
+        "?deal_id=" +
+        encodeURIComponent(
+          deal.id ||
+          deal.deal_id ||
+          ""
+        )
+      );
+
+    }
+
+
     return (
-      "/" +
+      "product.html?id=" +
       encodeURIComponent(
-        product.slug
+        deal.item_id
       ) +
-      "?deal_id=" +
-encodeURIComponent(
-  deal.id ||
-  deal.deal_id ||
-  ""
-)
+      "&deal_id=" +
+      encodeURIComponent(
+        deal.id
+      )
     );
+
   }
 
-
-  return (
-    "product.html?id=" +
-    encodeURIComponent(
-      deal.item_id
-    ) +
-    "&deal_id=" +
-    encodeURIComponent(
-      deal.id
-    )
-  );
-}
-    
-
-
-  /*
-    AFFILIATE PRODUCTS:
-    Uses the affiliate link already
-    saved with that product.
-  */
 
   if (
     deal.item_type ===
@@ -847,33 +919,42 @@ encodeURIComponent(
       ) ||
       "#"
     );
+
   }
 
 
-  /*
-    PHYSICAL PRODUCTS:
-    This points to the exact product.
-
-    We will connect/build the physical
-    product detail page as part of the
-    storefront product-page phase.
-  */
-
   if (
     deal.item_type ===
-    "product"
+    "digital_product"
   ) {
 
+    if (
+      product &&
+      product.slug
+    ) {
+
+      return (
+        "/" +
+        encodeURIComponent(
+          product.slug
+        )
+      );
+
+    }
+
+
     return (
-      "product.html?id=" +
+      "checkout.html?product_id=" +
       encodeURIComponent(
         deal.item_id
       )
     );
+
   }
 
 
   return "shop.html";
+
 }
 
 
@@ -906,6 +987,7 @@ function calculateSaving(
   ) {
 
     return "";
+
   }
 
 
@@ -918,6 +1000,7 @@ function calculateSaving(
     "You save €" +
     saving.toFixed(2)
   );
+
 }
 
 
@@ -943,6 +1026,7 @@ function formatEndDate(
   ) {
 
     return "";
+
   }
 
 
@@ -950,6 +1034,7 @@ function formatEndDate(
     "Offer ends " +
     date.toLocaleString()
   );
+
 }
 
 
@@ -1019,6 +1104,7 @@ async function loadDeals() {
 
 
     return;
+
   }
 
 
@@ -1050,6 +1136,7 @@ async function loadDeals() {
 
 
     return;
+
   }
 
 
@@ -1058,8 +1145,7 @@ async function loadDeals() {
 
 
   for (
-    const deal of
-    liveDeals
+    const deal of liveDeals
   ) {
 
     const product =
@@ -1071,12 +1157,8 @@ async function loadDeals() {
 
     if (!product) {
 
-      /*
-        If the linked product no longer
-        exists, do not show a broken deal.
-      */
-
       continue;
+
     }
 
 
@@ -1147,6 +1229,7 @@ async function loadDeals() {
               src="${escapeAttribute(image)}"
               alt="${escapeAttribute(name)}"
               class="deal-image"
+              loading="lazy"
             >
 
             ${
@@ -1194,21 +1277,17 @@ async function loadDeals() {
 
 
         <h3 class="deal-title">
-
           ${escapeHTML(
             deal.title ||
             name
           )}
-
         </h3>
 
 
         <p class="product-name">
-
           ${escapeHTML(
             name
           )}
-
         </p>
 
 
@@ -1299,6 +1378,7 @@ async function loadDeals() {
     grid.appendChild(
       card
     );
+
   }
 
 
@@ -1315,11 +1395,13 @@ async function loadDeals() {
 
 
     return;
+
   }
 
 
   grid.style.display =
     "grid";
+
 }
 
 
@@ -1340,6 +1422,7 @@ function formatMoney(
   ) {
 
     return "0.00";
+
   }
 
 
@@ -1347,6 +1430,7 @@ function formatMoney(
     .toFixed(
       2
     );
+
 }
 
 
@@ -1379,6 +1463,7 @@ function escapeHTML(
       /'/g,
       "&#039;"
     );
+
 }
 
 
@@ -1389,13 +1474,18 @@ function escapeAttribute(
   return escapeHTML(
     value
   );
+
 }
 
 
 loadDeals();
 
 </script>
-  <script src="cookie-consent.js"></script>
+
+
+<script src="cookie-consent.js"></script>
+
 
 </body>
+
 </html>
