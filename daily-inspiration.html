@@ -2,12 +2,18 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
+
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
 
   <title>
     Daily Inspiration | GiftedGift Empire
@@ -18,473 +24,971 @@
     name="description"
     content="Daily Bible verses, prayers and encouragement from GiftedGift Empire."
   >
-<meta
-  name="robots"
-  content="index, follow, max-image-preview:large"
->
 
-<meta
-  name="theme-color"
-  content="#123a8c"
->
+  <meta
+    id="robots-meta"
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
 
-<link
-  rel="icon"
-  type="image/png"
-  href="my-logo.png"
->
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
 
-<link
-  rel="shortcut icon"
-  type="image/png"
-  href="my-logo.png"
->
+  <link
+    id="canonical-link"
+    rel="canonical"
+    href="https://giftedgiftempire.com/daily-inspiration.html"
+  >
 
-<link
-  rel="apple-touch-icon"
-  href="my-logo.png"
->
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    id="og-type"
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    id="og-title"
+    property="og:title"
+    content="Daily Inspiration | GiftedGift Empire"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Daily Bible verses, prayers and encouragement from GiftedGift Empire."
+  >
+
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/daily-inspiration.html"
+  >
+
+  <meta
+    id="og-image"
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    id="og-image-alt"
+    property="og:image:alt"
+    content="Daily Inspiration from GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    id="twitter-title"
+    name="twitter:title"
+    content="Daily Inspiration | GiftedGift Empire"
+  >
+
+  <meta
+    id="twitter-description"
+    name="twitter:description"
+    content="Daily Bible verses, prayers and encouragement from GiftedGift Empire."
+  >
+
+  <meta
+    id="twitter-image"
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f7f7f7;
+
       color: #222;
     }
 
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-  background: #123a8c;
-  color: white;
-  padding: 18px 20px;
-}
+      background: #123a8c;
 
-.header-inner {
-  max-width: 1200px;
-  margin: auto;
-}
+      color: white;
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-bottom: 18px;
-  text-decoration: none;
-}
+      padding: 18px 20px;
+    }
 
-.brand img {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  background: white;
-  border-radius: 50%;
-  padding: 3px;
-}
 
-.brand-name {
-  font-size: 28px;
-  font-weight: 800;
-}
+    .header-inner {
+      max-width: 1200px;
 
-.brand-name .gifted {
-  color: white;
-}
+      margin: auto;
+    }
 
-.brand-name .empire {
-  color: #f2bd16;
-}
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
     nav {
       display: flex;
+
       flex-wrap: wrap;
-      gap: 18px;
+
+      gap:
+        6px
+        18px;
     }
+
 
     nav a {
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
+
 
     nav a:hover,
     nav a.active {
       color: #f2bd16;
     }
 
-    .hero {
-      background: white;
-      text-align: center;
-      padding: 60px 20px 42px;
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
     }
 
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background: white;
+
+      text-align: center;
+
+      padding:
+        60px
+        20px
+        42px;
+    }
+
+
     .hero h2 {
-      margin: 0 0 15px;
+      margin:
+        0
+        0
+        15px;
+
       font-size: 40px;
+
       color: #123a8c;
     }
+
 
     .hero p {
       max-width: 700px;
+
       margin: auto;
+
       color: #666;
+
       font-size: 17px;
+
       line-height: 1.7;
     }
+
+
+    /* =========================
+       PAGE
+    ========================= */
 
     .page {
       max-width: 900px;
+
       margin: auto;
-      padding: 45px 20px 70px;
+
+      padding:
+        45px
+        20px
+        70px;
     }
+
 
     .all-inspiration-link {
       display: none;
+
       margin-bottom: 25px;
+
       color: #123a8c;
+
       text-decoration: none;
+
       font-weight: bold;
     }
+
+
+    .all-inspiration-link:hover {
+      text-decoration: underline;
+    }
+
 
     .loading {
       text-align: center;
-      padding: 50px 20px;
+
+      padding:
+        50px
+        20px;
+
       color: #666;
+
       font-weight: bold;
     }
+
+
+    /* =========================
+       INSPIRATION CARD
+    ========================= */
 
     .inspiration-card {
       background: white;
+
       border-radius: 16px;
+
       padding: 34px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0
+        4px
+        16px
+        rgba(0,0,0,0.08);
+
       margin-bottom: 28px;
     }
 
+
     .inspiration-image {
       width: 100%;
+
       max-height: 500px;
+
       object-fit: contain;
+
       border-radius: 12px;
+
       margin-bottom: 25px;
+
       background: #f7f7f7;
     }
 
+
     .label {
       display: inline-block;
+
       background: #f2bd16;
+
       color: #111;
+
       font-size: 13px;
+
       font-weight: bold;
-      padding: 7px 12px;
+
+      padding:
+        7px
+        12px;
+
       border-radius: 20px;
+
       margin-bottom: 18px;
     }
 
+
     .inspiration-card h3 {
-      margin: 0 0 18px;
+      margin:
+        0
+        0
+        18px;
+
       color: #123a8c;
+
       font-size: 28px;
     }
 
+
     .verse {
       font-size: 21px;
+
       line-height: 1.7;
+
       font-weight: bold;
+
       color: #333;
+
       margin-bottom: 15px;
+
       white-space: pre-line;
     }
+
 
     .reference {
       color: #123a8c;
+
       font-weight: bold;
+
       margin-bottom: 25px;
     }
 
+
     .message {
       color: #555;
+
       font-size: 17px;
+
       line-height: 1.8;
+
       white-space: pre-line;
     }
+
 
     .prayer {
       background: #eef3ff;
-      border-left: 5px solid #123a8c;
+
+      border-left:
+        5px solid #123a8c;
+
       padding: 22px;
+
       border-radius: 10px;
+
       margin-top: 25px;
+
       color: #444;
+
       line-height: 1.8;
+
       white-space: pre-line;
     }
 
+
     .date {
       color: #888;
+
       font-size: 13px;
+
       margin-top: 20px;
     }
 
+
     .open-link {
       display: inline-block;
+
       margin-top: 22px;
-      padding: 11px 17px;
+
+      padding:
+        11px
+        17px;
+
       border-radius: 8px;
+
       background: #f2bd16;
+
       color: #111;
+
       text-decoration: none;
+
       font-weight: bold;
     }
 
+
     .open-link:hover {
-      opacity: 0.9;
+      background: #d8a90e;
     }
+
+
+    /* =========================
+       ENGAGEMENT
+    ========================= */
 
     .engagement {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 12px;
+
       margin-top: 28px;
+
       padding-top: 22px;
-      border-top: 1px solid #eee;
+
+      border-top:
+        1px solid #eee;
     }
 
+
     .engagement button {
-      border: 1px solid #ddd;
+      border:
+        1px solid #ddd;
+
       background: white;
+
       color: #333;
-      padding: 11px 16px;
+
+      padding:
+        11px
+        16px;
+
       border-radius: 25px;
+
       cursor: pointer;
+
       font-weight: bold;
+
       font-size: 15px;
     }
+
 
     .engagement button:hover {
       background: #f7f7f7;
     }
 
+
     .engagement button.liked {
       background: #fff0f3;
+
       border-color: #f1b5c2;
+
       color: #b42345;
     }
 
+
     .engagement button:disabled {
       cursor: default;
+
       opacity: 1;
     }
 
+
+    /* =========================
+       COMMENTS
+    ========================= */
+
     .comments-section {
       display: none;
+
       margin-top: 25px;
+
       padding-top: 24px;
-      border-top: 1px solid #eee;
+
+      border-top:
+        1px solid #eee;
     }
+
 
     .comments-section.open {
       display: block;
     }
 
+
     .comments-section h4 {
-      margin: 0 0 18px;
+      margin:
+        0
+        0
+        18px;
+
       color: #123a8c;
+
       font-size: 20px;
     }
+
 
     .comment-list {
       margin-bottom: 25px;
     }
 
+
     .comment-item {
       background: #f8f9fb;
+
       padding: 15px;
+
       border-radius: 10px;
+
       margin-bottom: 12px;
     }
 
+
     .comment-name {
       font-weight: bold;
+
       color: #123a8c;
+
       margin-bottom: 6px;
     }
 
+
     .comment-text {
       color: #444;
+
       line-height: 1.6;
+
       white-space: pre-line;
     }
 
+
     .comment-date {
       color: #888;
+
       font-size: 12px;
+
       margin-top: 8px;
     }
 
+
     .no-comments {
       color: #777;
+
       font-size: 14px;
+
       margin-bottom: 20px;
     }
 
+
     .comment-form {
       background: #f8f9fb;
+
       padding: 18px;
+
       border-radius: 12px;
     }
 
+
     .comment-form label {
       display: block;
+
       font-weight: bold;
+
       margin-bottom: 7px;
     }
+
 
     .comment-form input,
     .comment-form textarea {
       width: 100%;
-      border: 1px solid #ccc;
+
+      border:
+        1px solid #ccc;
+
       border-radius: 8px;
+
       padding: 12px;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       font-size: 15px;
+
       margin-bottom: 15px;
     }
 
+
     .comment-form textarea {
       min-height: 110px;
+
       resize: vertical;
+
       line-height: 1.5;
     }
+
 
     .comment-submit {
       width: 100%;
+
       border: none;
+
       background: #123a8c;
+
       color: white;
+
       padding: 13px;
+
       border-radius: 8px;
+
       font-weight: bold;
+
       cursor: pointer;
+
       font-size: 15px;
     }
 
+
     .comment-submit:disabled {
       opacity: 0.6;
+
       cursor: not-allowed;
     }
 
+
     .comment-status {
       display: none;
+
       margin-top: 14px;
+
       padding: 12px;
+
       border-radius: 8px;
+
       line-height: 1.5;
+
       font-size: 14px;
     }
 
+
     .comment-status.success {
       display: block;
+
       background: #e8f7ec;
-      border: 1px solid #b8dfc0;
+
+      border:
+        1px solid #b8dfc0;
+
       color: #17652d;
     }
 
+
     .comment-status.error {
       display: block;
+
       background: #ffe8e8;
-      border: 1px solid #efbbbb;
+
+      border:
+        1px solid #efbbbb;
+
       color: #951d1d;
     }
 
+
     .empty {
       background: white;
+
       padding: 30px;
+
       border-radius: 14px;
+
       text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+
+      box-shadow:
+        0
+        3px
+        12px
+        rgba(0,0,0,0.06);
+
       color: #666;
+
       line-height: 1.7;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       background: #123a8c;
+
       color: white;
+
       text-align: center;
-      padding: 32px 20px;
+
+      padding:
+        32px
+        20px;
     }
 
-    footer a {
+
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 14px;
+
+      margin:
+        17px
+        0;
+    }
+
+
+    .footer-links a {
       color: white;
+
       text-decoration: none;
-      margin: 0 8px;
+
+      font-size: 14px;
     }
 
-    footer a:hover {
+
+    .footer-links a:hover {
       color: #f2bd16;
     }
 
-    @media (max-width: 650px) {
-      nav {
-        gap: 12px;
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 650px
+    ) {
+
+      header {
+        padding:
+          15px
+          16px;
       }
+
+
+      .brand img {
+        width: 50px;
+
+        height: 50px;
+      }
+
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          14px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
 
       .hero {
         padding-top: 45px;
       }
 
+
       .hero h2 {
         font-size: 32px;
       }
 
+
       .page {
         padding-left: 14px;
+
         padding-right: 14px;
       }
+
 
       .inspiration-card {
         padding: 24px;
       }
 
+
       .inspiration-card h3 {
         font-size: 24px;
       }
+
 
       .verse {
         font-size: 19px;
       }
 
+
       .message {
         font-size: 16px;
       }
 
+
       .engagement button {
         flex: 1;
       }
+
     }
+
   </style>
+
 </head>
 
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
   <div class="header-inner">
 
+
     <a
-      href="index.html"
+      href="/index.html"
       class="brand"
       aria-label="GiftedGift Empire home"
     >
 
       <img
-        src="my-logo.png"
+        src="/my-logo.png"
         alt="GiftedGift Empire logo"
         width="58"
         height="58"
       >
+
 
       <div class="brand-name">
 
@@ -503,42 +1007,42 @@
 
     <nav>
 
-      <a href="index.html">
+      <a href="/index.html">
         Home
       </a>
 
-      <a href="shop.html">
+      <a href="/shop.html">
         Shop
       </a>
 
-      <a href="categories.html">
+      <a href="/categories.html">
         Categories
       </a>
 
       <a
-        href="daily-inspiration.html"
+        href="/daily-inspiration.html"
         class="active"
       >
         Daily Inspiration
       </a>
 
-      <a href="blog.html">
+      <a href="/blog.html">
         Blog
       </a>
 
-      <a href="deals.html">
+      <a href="/deals.html">
         Deals
       </a>
 
-      <a href="about.html">
+      <a href="/about.html">
         About
       </a>
 
-      <a href="contact.html">
+      <a href="/contact.html">
         Contact
       </a>
 
-      <a href="cart.html">
+      <a href="/cart.html">
         🛒 Cart
       </a>
 
@@ -549,6 +1053,10 @@
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section
   id="inspiration-hero"
   class="hero"
@@ -558,6 +1066,7 @@
     Daily Inspiration
   </h2>
 
+
   <p id="hero-description">
     A place for God’s Word, short prayers and encouragement
     to strengthen your faith and brighten your day.
@@ -566,11 +1075,16 @@
 </section>
 
 
+<!-- =========================
+     PAGE
+========================= -->
+
 <main class="page">
+
 
   <a
     id="all-inspiration-link"
-    href="daily-inspiration.html"
+    href="/daily-inspiration.html"
     class="all-inspiration-link"
   >
     ← Back to Daily Inspiration
@@ -580,6 +1094,8 @@
   <div
     id="loading"
     class="loading"
+    role="status"
+    aria-live="polite"
   >
     Loading inspiration...
   </div>
@@ -590,36 +1106,67 @@
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    width="46"
+    height="46"
+    loading="lazy"
+  >
 
-  <p>
-    <a href="about.html">
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/about.html">
       About
     </a>
 
-    <a href="contact.html">
+    <a href="/contact.html">
       Contact
     </a>
 
-    <a href="blog.html">
+    <a href="/blog.html">
       Blog
     </a>
 
-    <a href="daily-inspiration.html">
+    <a href="/daily-inspiration.html">
       Daily Inspiration
     </a>
-  </p>
 
-  <p>
-    © 2026 GiftedGift Empire.
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+
+  </div>
 
 </footer>
 
@@ -630,6 +1177,11 @@
 
 
 <script>
+
+
+/* =========================
+   CONFIGURATION
+========================= */
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -643,6 +1195,16 @@ const SITE_URL =
   "https://giftedgiftempire.com";
 
 
+const DAILY_INSPIRATION_URL =
+  SITE_URL +
+  "/daily-inspiration.html";
+
+
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_URL +
+  "/my-logo.png";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -650,10 +1212,36 @@ const db =
   );
 
 
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
+
+
+/* =========================
+   PAGE ID
+========================= */
+
+const urlParameters =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const rawInspirationId =
+  window.__DAILY_INSPIRATION_ID ||
+  urlParameters.get(
+    "id"
+  ) ||
+  0;
+
+
 const cleanInspirationId =
   Number(
-    window.__DAILY_INSPIRATION_ID ||
-    0
+    rawInspirationId
   );
 
 
@@ -664,6 +1252,10 @@ const isSingleInspiration =
   cleanInspirationId > 0;
 
 
+/* =========================
+   ENGAGEMENT STATE
+========================= */
+
 let likesByPost =
   {};
 
@@ -671,6 +1263,797 @@ let likesByPost =
 let commentsByPost =
   {};
 
+
+/* =========================
+   SEO HELPERS
+========================= */
+
+function setMetaContent(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (
+    element
+  ) {
+
+    element.setAttribute(
+      "content",
+      value
+    );
+
+  }
+
+}
+
+
+function cleanText(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+
+}
+
+
+function descriptionPreview(
+  value
+) {
+
+  const text =
+    cleanText(
+      value
+    );
+
+
+  if (
+    !text
+  ) {
+
+    return (
+      "Daily Bible verses, prayers and encouragement " +
+      "from GiftedGift Empire."
+    );
+
+  }
+
+
+  if (
+    text.length <= 155
+  ) {
+
+    return text;
+
+  }
+
+
+  return (
+    text.slice(
+      0,
+      152
+    ) +
+    "..."
+  );
+
+}
+
+
+function safeImageURL(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_URL
+      );
+
+
+    if (
+      url.protocol !== "https:" &&
+      url.protocol !== "http:"
+    ) {
+
+      return null;
+
+    }
+
+
+    return url.href;
+
+
+  } catch (
+    error
+  ) {
+
+    return null;
+
+  }
+
+}
+
+
+function markNoIndex() {
+
+  const robots =
+    document.getElementById(
+      "robots-meta"
+    );
+
+
+  if (
+    robots
+  ) {
+
+    robots.setAttribute(
+      "content",
+      "noindex, follow"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   INSPIRATION URL
+========================= */
+
+function getInspirationUrl(
+  post
+) {
+
+  if (
+    post &&
+    post.slug
+  ) {
+
+    return (
+      SITE_URL +
+      "/" +
+      encodeURIComponent(
+        post.slug
+      )
+    );
+
+  }
+
+
+  if (
+    post &&
+    post.id
+  ) {
+
+    return (
+      DAILY_INSPIRATION_URL +
+      "?id=" +
+      encodeURIComponent(
+        post.id
+      )
+    );
+
+  }
+
+
+  return DAILY_INSPIRATION_URL;
+
+}
+
+
+/* =========================
+   STRUCTURED DATA
+========================= */
+
+function setStructuredData(
+  value
+) {
+
+  let script =
+    document.getElementById(
+      "daily-inspiration-structured-data"
+    );
+
+
+  if (
+    !script
+  ) {
+
+    script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.id =
+      "daily-inspiration-structured-data";
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  script.textContent =
+    JSON.stringify(
+      value
+    );
+
+}
+
+
+/* =========================
+   MAIN PAGE SEO
+========================= */
+
+function updateCollectionSEO(
+  posts
+) {
+
+  const pageTitle =
+    "Daily Inspiration | GiftedGift Empire";
+
+
+  const description =
+    "Daily Bible verses, prayers and encouragement from GiftedGift Empire.";
+
+
+  document.title =
+    pageTitle;
+
+
+  setMetaContent(
+    "page-description-meta",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "canonical-link"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.setAttribute(
+      "href",
+      DAILY_INSPIRATION_URL
+    );
+
+  }
+
+
+  setMetaContent(
+    "og-type",
+    "website"
+  );
+
+
+  setMetaContent(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "og-description",
+    description
+  );
+
+
+  setMetaContent(
+    "og-url",
+    DAILY_INSPIRATION_URL
+  );
+
+
+  setMetaContent(
+    "og-image",
+    DEFAULT_SOCIAL_IMAGE
+  );
+
+
+  setMetaContent(
+    "og-image-alt",
+    "Daily Inspiration from GiftedGift Empire"
+  );
+
+
+  setMetaContent(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "twitter-description",
+    description
+  );
+
+
+  setMetaContent(
+    "twitter-image",
+    DEFAULT_SOCIAL_IMAGE
+  );
+
+
+  const items =
+    posts.map(
+      (
+        post,
+        index
+      ) => {
+
+        return {
+
+          "@type":
+            "ListItem",
+
+          "position":
+            index + 1,
+
+          "name":
+            post.title ||
+            "Daily Inspiration",
+
+          "url":
+            getInspirationUrl(
+              post
+            )
+
+        };
+
+      }
+    );
+
+
+  setStructuredData({
+
+    "@context":
+      "https://schema.org",
+
+    "@graph": [
+
+      {
+
+        "@type":
+          "CollectionPage",
+
+        "name":
+          pageTitle,
+
+        "description":
+          description,
+
+        "url":
+          DAILY_INSPIRATION_URL,
+
+        "isPartOf": {
+
+          "@type":
+            "WebSite",
+
+          "name":
+            "GiftedGift Empire",
+
+          "url":
+            SITE_URL
+
+        },
+
+        "mainEntity": {
+
+          "@type":
+            "ItemList",
+
+          "numberOfItems":
+            items.length,
+
+          "itemListElement":
+            items
+
+        }
+
+      },
+
+      {
+
+        "@type":
+          "BreadcrumbList",
+
+        "itemListElement": [
+
+          {
+
+            "@type":
+              "ListItem",
+
+            "position":
+              1,
+
+            "name":
+              "Home",
+
+            "item":
+              SITE_URL +
+              "/"
+
+          },
+
+          {
+
+            "@type":
+              "ListItem",
+
+            "position":
+              2,
+
+            "name":
+              "Daily Inspiration",
+
+            "item":
+              DAILY_INSPIRATION_URL
+
+          }
+
+        ]
+
+      }
+
+    ]
+
+  });
+
+}
+
+
+/* =========================
+   SINGLE PAGE SEO
+========================= */
+
+function updateSingleSEO(
+  post
+) {
+
+  const title =
+    post.title ||
+    "Daily Inspiration";
+
+
+  const pageTitle =
+    title +
+    " | GiftedGift Empire";
+
+
+  const descriptionSource =
+    post.verse_text ||
+    post.message ||
+    post.prayer ||
+    (
+      "Daily Bible verse, prayer and encouragement " +
+      "from GiftedGift Empire."
+    );
+
+
+  const description =
+    descriptionPreview(
+      descriptionSource
+    );
+
+
+  const canonicalURL =
+    getInspirationUrl(
+      post
+    );
+
+
+  const image =
+    safeImageURL(
+      post.image_url
+    ) ||
+    DEFAULT_SOCIAL_IMAGE;
+
+
+  document.title =
+    pageTitle;
+
+
+  setMetaContent(
+    "page-description-meta",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "canonical-link"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.setAttribute(
+      "href",
+      canonicalURL
+    );
+
+  }
+
+
+  setMetaContent(
+    "og-type",
+    "article"
+  );
+
+
+  setMetaContent(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "og-description",
+    description
+  );
+
+
+  setMetaContent(
+    "og-url",
+    canonicalURL
+  );
+
+
+  setMetaContent(
+    "og-image",
+    image
+  );
+
+
+  setMetaContent(
+    "og-image-alt",
+    title
+  );
+
+
+  setMetaContent(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "twitter-description",
+    description
+  );
+
+
+  setMetaContent(
+    "twitter-image",
+    image
+  );
+
+
+  const articleSchema = {
+
+    "@type":
+      "Article",
+
+    "headline":
+      title,
+
+    "description":
+      description,
+
+    "mainEntityOfPage": {
+
+      "@type":
+        "WebPage",
+
+      "@id":
+        canonicalURL
+
+    },
+
+    "url":
+      canonicalURL,
+
+    "author": {
+
+      "@type":
+        "Organization",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL
+
+    },
+
+    "publisher": {
+
+      "@type":
+        "Organization",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL,
+
+      "logo": {
+
+        "@type":
+          "ImageObject",
+
+        "url":
+          DEFAULT_SOCIAL_IMAGE
+
+      }
+
+    }
+
+  };
+
+
+  if (
+    post.created_at
+  ) {
+
+    articleSchema.datePublished =
+      post.created_at;
+
+  }
+
+
+  const articleImage =
+    safeImageURL(
+      post.image_url
+    );
+
+
+  if (
+    articleImage
+  ) {
+
+    articleSchema.image =
+      [
+        articleImage
+      ];
+
+  }
+
+
+  if (
+    post.category
+  ) {
+
+    articleSchema.articleSection =
+      post.category;
+
+  }
+
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_URL +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Daily Inspiration",
+
+        "item":
+          DAILY_INSPIRATION_URL
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          3,
+
+        "name":
+          title,
+
+        "item":
+          canonicalURL
+
+      }
+
+    ]
+
+  };
+
+
+  setStructuredData({
+
+    "@context":
+      "https://schema.org",
+
+    "@graph": [
+
+      articleSchema,
+
+      breadcrumbSchema
+
+    ]
+
+  });
+
+}
+
+
+/* =========================
+   VISITOR ID
+========================= */
 
 function getVisitorId() {
 
@@ -689,6 +2072,7 @@ function getVisitorId() {
   ) {
 
     return visitorId;
+
   }
 
 
@@ -701,6 +2085,7 @@ function getVisitorId() {
     visitorId =
       crypto.randomUUID();
 
+
   } else {
 
     visitorId =
@@ -708,8 +2093,13 @@ function getVisitorId() {
       Date.now() +
       "-" +
       Math.random()
-        .toString(36)
-        .slice(2);
+        .toString(
+          36
+        )
+        .slice(
+          2
+        );
+
   }
 
 
@@ -720,12 +2110,17 @@ function getVisitorId() {
 
 
   return visitorId;
+
 }
 
 
 const visitorId =
   getVisitorId();
 
+
+/* =========================
+   DATE
+========================= */
 
 function formatDate(
   value
@@ -736,6 +2131,7 @@ function formatDate(
   ) {
 
     return "";
+
   }
 
 
@@ -752,12 +2148,14 @@ function formatDate(
   ) {
 
     return "";
+
   }
 
 
   return date.toLocaleDateString(
     undefined,
     {
+
       year:
         "numeric",
 
@@ -766,10 +2164,16 @@ function formatDate(
 
       day:
         "numeric"
+
     }
   );
+
 }
 
+
+/* =========================
+   SAFE ELEMENT ID
+========================= */
 
 function escapeForId(
   value
@@ -781,34 +2185,13 @@ function escapeForId(
     /[^a-zA-Z0-9_-]/g,
     "-"
   );
+
 }
 
 
-function getInspirationUrl(
-  post
-) {
-
-  if (
-    post &&
-    post.slug
-  ) {
-
-    return (
-      SITE_URL +
-      "/" +
-      encodeURIComponent(
-        post.slug
-      )
-    );
-  }
-
-
-  return (
-    SITE_URL +
-    "/daily-inspiration.html"
-  );
-}
-
+/* =========================
+   LIKE INFO
+========================= */
 
 function getLikeInfo(
   inspirationId
@@ -817,7 +2200,8 @@ function getLikeInfo(
   const rows =
     likesByPost[
       inspirationId
-    ] || [];
+    ] ||
+    [];
 
 
   return {
@@ -833,8 +2217,13 @@ function getLikeInfo(
       )
 
   };
+
 }
 
+
+/* =========================
+   COMMENTS
+========================= */
 
 function getComments(
   inspirationId
@@ -843,10 +2232,16 @@ function getComments(
   return (
     commentsByPost[
       inspirationId
-    ] || []
+    ] ||
+    []
   );
+
 }
 
+
+/* =========================
+   ADD LIKE
+========================= */
 
 async function addLike(
   inspirationId,
@@ -864,6 +2259,7 @@ async function addLike(
   ) {
 
     return;
+
   }
 
 
@@ -880,11 +2276,13 @@ async function addLike(
         "daily_inspiration_likes"
       )
       .insert({
+
         inspiration_id:
           inspirationId,
 
         visitor_id:
           visitorId
+
       })
       .select(
         "inspiration_id,visitor_id"
@@ -910,8 +2308,11 @@ async function addLike(
       button.disabled =
         false;
 
+
       return;
+
     }
+
 
   } else {
 
@@ -925,6 +2326,7 @@ async function addLike(
         inspirationId
       ] =
         [];
+
     }
 
 
@@ -933,6 +2335,7 @@ async function addLike(
     ].push(
       data
     );
+
   }
 
 
@@ -953,8 +2356,13 @@ async function addLike(
 
   button.disabled =
     true;
+
 }
 
+
+/* =========================
+   CREATE COMMENTS SECTION
+========================= */
 
 function createCommentsSection(
   post
@@ -1035,10 +2443,12 @@ function createCommentsSection(
       empty
     );
 
+
   } else {
 
     comments.forEach(
       comment => {
+
 
         const item =
           document.createElement(
@@ -1115,14 +2525,17 @@ function createCommentsSection(
           item.appendChild(
             date
           );
+
         }
 
 
         commentList.appendChild(
           item
         );
+
       }
     );
+
   }
 
 
@@ -1171,6 +2584,10 @@ function createCommentsSection(
 
   nameInput.placeholder =
     "Enter your name";
+
+
+  nameInput.autocomplete =
+    "name";
 
 
   const commentLabel =
@@ -1229,6 +2646,12 @@ function createCommentsSection(
     "comment-status";
 
 
+  status.setAttribute(
+    "aria-live",
+    "polite"
+  );
+
+
   form.appendChild(
     nameLabel
   );
@@ -1263,6 +2686,7 @@ function createCommentsSection(
     "submit",
     async event => {
 
+
       event.preventDefault();
 
 
@@ -1292,7 +2716,9 @@ function createCommentsSection(
           "error"
         );
 
+
         return;
+
       }
 
 
@@ -1308,7 +2734,9 @@ function createCommentsSection(
           "error"
         );
 
+
         return;
+
       }
 
 
@@ -1328,10 +2756,13 @@ function createCommentsSection(
             "daily_inspiration_comments"
           )
           .insert({
+
             inspiration_id:
               post.id,
 
-            name,
+            name:
+
+              name,
 
             comment_text:
               commentText,
@@ -1341,6 +2772,7 @@ function createCommentsSection(
 
             approved_at:
               null
+
           });
 
 
@@ -1372,6 +2804,7 @@ function createCommentsSection(
 
 
         return;
+
       }
 
 
@@ -1390,6 +2823,7 @@ function createCommentsSection(
       status.classList.add(
         "success"
       );
+
     }
   );
 
@@ -1400,8 +2834,13 @@ function createCommentsSection(
 
 
   return section;
+
 }
 
+
+/* =========================
+   CREATE INSPIRATION CARD
+========================= */
 
 function createInspirationCard(
   post
@@ -1440,9 +2879,14 @@ function createInspirationCard(
       "Daily Inspiration";
 
 
+    image.loading =
+      "lazy";
+
+
     article.appendChild(
       image
     );
+
   }
 
 
@@ -1467,6 +2911,7 @@ function createInspirationCard(
     article.appendChild(
       label
     );
+
   }
 
 
@@ -1501,12 +2946,15 @@ function createInspirationCard(
 
 
     verse.textContent =
-      `“${post.verse_text}”`;
+      "“" +
+      post.verse_text +
+      "”";
 
 
     article.appendChild(
       verse
     );
+
   }
 
 
@@ -1531,6 +2979,7 @@ function createInspirationCard(
     article.appendChild(
       reference
     );
+
   }
 
 
@@ -1555,6 +3004,7 @@ function createInspirationCard(
     article.appendChild(
       message
     );
+
   }
 
 
@@ -1611,6 +3061,7 @@ function createInspirationCard(
     article.appendChild(
       prayer
     );
+
   }
 
 
@@ -1641,6 +3092,7 @@ function createInspirationCard(
     article.appendChild(
       date
     );
+
   }
 
 
@@ -1673,6 +3125,7 @@ function createInspirationCard(
     article.appendChild(
       openLink
     );
+
   }
 
 
@@ -1710,8 +3163,16 @@ function createInspirationCard(
 
   likeButton.textContent =
     likeInfo.liked
-      ? `❤️ Liked · ${likeInfo.count}`
-      : `❤️ Like · ${likeInfo.count}`;
+
+      ? (
+          "❤️ Liked · " +
+          likeInfo.count
+        )
+
+      : (
+          "❤️ Like · " +
+          likeInfo.count
+        );
 
 
   if (
@@ -1725,17 +3186,19 @@ function createInspirationCard(
 
     likeButton.disabled =
       true;
+
   }
 
 
   likeButton.addEventListener(
     "click",
-    () => {
+    function () {
 
       addLike(
         post.id,
         likeButton
       );
+
     }
   );
 
@@ -1751,7 +3214,8 @@ function createInspirationCard(
 
 
   commentButton.textContent =
-    `💬 Comments · ${comments.length}`;
+    "💬 Comments · " +
+    comments.length;
 
 
   engagement.appendChild(
@@ -1777,13 +3241,14 @@ function createInspirationCard(
 
   commentButton.addEventListener(
     "click",
-    () => {
+    function () {
 
       commentsSection
         .classList
         .toggle(
           "open"
         );
+
     }
   );
 
@@ -1794,8 +3259,13 @@ function createInspirationCard(
 
 
   return article;
+
 }
 
+
+/* =========================
+   LOAD ENGAGEMENT
+========================= */
 
 async function loadEngagement(
   posts
@@ -1814,6 +3284,7 @@ async function loadEngagement(
   ) {
 
     return;
+
   }
 
 
@@ -1879,6 +3350,7 @@ async function loadEngagement(
       .forEach(
         row => {
 
+
           if (
             !likesByPost[
               row.inspiration_id
@@ -1889,6 +3361,7 @@ async function loadEngagement(
               row.inspiration_id
             ] =
               [];
+
           }
 
 
@@ -1897,8 +3370,10 @@ async function loadEngagement(
           ].push(
             row
           );
+
         }
       );
+
   }
 
 
@@ -1912,6 +3387,7 @@ async function loadEngagement(
       .forEach(
         row => {
 
+
           if (
             !commentsByPost[
               row.inspiration_id
@@ -1922,6 +3398,7 @@ async function loadEngagement(
               row.inspiration_id
             ] =
               [];
+
           }
 
 
@@ -1930,11 +3407,18 @@ async function loadEngagement(
           ].push(
             row
           );
+
         }
       );
+
   }
+
 }
 
+
+/* =========================
+   SINGLE PAGE
+========================= */
 
 function prepareSinglePage(
   post
@@ -1957,55 +3441,26 @@ function prepareSinglePage(
       "Daily Inspiration";
 
 
-  const heroDescription =
-    document.getElementById(
+  document
+    .getElementById(
       "hero-description"
-    );
+    )
+    .textContent =
+      post.verse_reference ||
+      post.category ||
+      "Daily Inspiration from GiftedGift Empire.";
 
 
-  heroDescription.textContent =
-    post.verse_reference ||
-    post.category ||
-    "Daily Inspiration from GiftedGift Empire.";
+  updateSingleSEO(
+    post
+  );
 
-
-  document.title =
-    (
-      post.title ||
-      "Daily Inspiration"
-    ) +
-    " | GiftedGift Empire";
-
-
-  const meta =
-    document.getElementById(
-      "page-description-meta"
-    );
-
-
-  const description =
-    post.verse_text ||
-    post.message ||
-    post.prayer ||
-    "Daily Bible verse, prayer and encouragement from GiftedGift Empire.";
-
-
-  if (
-    meta
-  ) {
-
-    meta.setAttribute(
-      "content",
-      String(
-        description
-      ).slice(
-        0,
-        160
-      )
-    );
-  }
 }
 
+
+/* =========================
+   RENDER
+========================= */
 
 function renderInspirations(
   posts
@@ -2029,6 +3484,7 @@ function renderInspirations(
           post
         )
       );
+
     }
   );
 
@@ -2039,8 +3495,13 @@ function renderInspirations(
     )
     .style.display =
       "none";
+
 }
 
+
+/* =========================
+   LOAD INSPIRATIONS
+========================= */
 
 async function loadInspirations() {
 
@@ -2067,6 +3528,7 @@ async function loadInspirations() {
         "id",
         cleanInspirationId
       );
+
   }
 
 
@@ -2111,13 +3573,14 @@ async function loadInspirations() {
 
 
     return;
+
   }
 
 
   if (
     !data ||
     data.length ===
-    0
+      0
   ) {
 
     document
@@ -2134,7 +3597,9 @@ async function loadInspirations() {
       )
       .innerHTML =
         isSingleInspiration
+
           ? '<div class="empty">This inspiration could not be found or is not currently published.</div>'
+
           : '<div class="empty">More inspiration is coming soon.</div>';
 
 
@@ -2142,16 +3607,31 @@ async function loadInspirations() {
       isSingleInspiration
     ) {
 
+      markNoIndex();
+
+
       document
         .getElementById(
           "all-inspiration-link"
         )
         .style.display =
           "inline-block";
+
+
+      document.title =
+        "Inspiration Not Available | GiftedGift Empire";
+
+    } else {
+
+      updateCollectionSEO(
+        []
+      );
+
     }
 
 
     return;
+
   }
 
 
@@ -2162,6 +3642,14 @@ async function loadInspirations() {
     prepareSinglePage(
       data[0]
     );
+
+
+  } else {
+
+    updateCollectionSEO(
+      data
+    );
+
   }
 
 
@@ -2173,14 +3661,21 @@ async function loadInspirations() {
   renderInspirations(
     data
   );
+
 }
 
+
+/* =========================
+   START
+========================= */
 
 loadInspirations();
 
 </script>
 
-<script src="cookie-consent.js"></script>
+
+<script src="/cookie-consent.js"></script>
+
 
 </body>
 
