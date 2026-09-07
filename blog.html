@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,449 +10,988 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Blog | GiftedGift Empire</title>
+
+  <!-- ==================================================
+       BASIC SEO
+  ================================================== -->
+
+  <title>
+    Blog | GiftedGift Empire
+  </title>
 
   <meta
     id="page-description-meta"
     name="description"
     content="Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire."
   >
-<meta
-  name="robots"
-  content="index, follow, max-image-preview:large"
->
 
-<meta
-  name="theme-color"
-  content="#123a8c"
->
+  <meta
+    id="robots-meta"
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
 
-<link
-  rel="icon"
-  type="image/png"
-  href="my-logo.png"
->
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
 
-<link
-  rel="shortcut icon"
-  type="image/png"
-  href="my-logo.png"
->
+  <link
+    id="canonical-link"
+    rel="canonical"
+    href="https://giftedgiftempire.com/blog.html"
+  >
 
-<link
-  rel="apple-touch-icon"
-  href="my-logo.png"
->
+
+  <!-- ==================================================
+       FAVICON
+  ================================================== -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
+
+
+  <!-- ==================================================
+       FACEBOOK / WHATSAPP / OPEN GRAPH
+  ================================================== -->
+
+  <meta
+    id="og-type"
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    id="og-title"
+    property="og:title"
+    content="Blog | GiftedGift Empire"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire."
+  >
+
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/blog.html"
+  >
+
+  <meta
+    id="og-image"
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    id="og-image-alt"
+    property="og:image:alt"
+    content="GiftedGift Empire Blog"
+  >
+
+
+  <!-- ==================================================
+       TWITTER / X
+  ================================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    id="twitter-title"
+    name="twitter:title"
+    content="Blog | GiftedGift Empire"
+  >
+
+  <meta
+    id="twitter-description"
+    name="twitter:description"
+    content="Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire."
+  >
+
+  <meta
+    id="twitter-image"
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+
   <style>
 
     * {
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #f7f7f7;
+
       color: #222;
     }
 
+
+    /* ==================================================
+       HEADER
+    ================================================== */
+
     header {
-  background: #123a8c;
-  color: white;
-  padding: 18px 20px;
-}
+      background: #123a8c;
 
-.header-inner {
-  max-width: 1200px;
-  margin: auto;
-}
+      color: white;
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-bottom: 18px;
-  text-decoration: none;
-}
+      padding:
+        18px
+        20px;
+    }
 
-.brand img {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  background: white;
-  border-radius: 50%;
-  padding: 3px;
-}
 
-.brand-name {
-  font-size: 28px;
-  font-weight: 800;
-}
+    .header-inner {
+      max-width: 1200px;
 
-.brand-name .gifted {
-  color: white;
-}
+      margin: auto;
+    }
 
-.brand-name .empire {
-  color: #f2bd16;
-}
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: #f2bd16;
+    }
+
+
+    /* ==================================================
+       NAVIGATION
+    ================================================== */
 
     nav {
       display: flex;
+
       flex-wrap: wrap;
-      gap: 18px;
+
+      gap:
+        6px
+        18px;
     }
+
 
     nav a {
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
+
     nav a:hover,
-nav a.active {
-  color: #f2bd16;
-}
+    nav a.active {
+      color: #f2bd16;
+    }
+
+
+    nav a.active {
+      border-bottom-color:
+        #f2bd16;
+    }
+
+
+    /* ==================================================
+       HERO
+    ================================================== */
 
     .hero {
       background: white;
+
       text-align: center;
-      padding: 55px 20px 40px;
+
+      padding:
+        55px
+        20px
+        40px;
     }
 
-    .hero h2 {
+
+    .hero h1 {
+      color: #123a8c;
+
       font-size: 38px;
-      margin: 0 0 15px;
+
+      margin:
+        0
+        0
+        15px;
     }
+
 
     .hero p {
-      max-width: 650px;
+      max-width: 680px;
+
       margin: auto;
+
       color: #555;
+
       line-height: 1.7;
     }
+
+
+    /* ==================================================
+       BLOG PAGE
+    ================================================== */
 
     .blog {
       max-width: 1100px;
+
       margin: auto;
-      padding: 45px 20px;
+
+      padding:
+        45px
+        20px;
     }
 
-    .blog > h2 {
+
+    .blog-list-heading {
       text-align: center;
+
       font-size: 30px;
-      margin-bottom: 35px;
+
+      color: #123a8c;
+
+      margin:
+        0
+        0
+        35px;
     }
+
 
     .loading {
       text-align: center;
-      padding: 45px 20px;
+
+      padding:
+        45px
+        20px;
+
       color: #666;
+
       font-weight: bold;
     }
+
 
     .message {
       display: none;
+
       max-width: 700px;
-      margin: 0 auto 30px;
+
+      margin:
+        0
+        auto
+        30px;
+
       padding: 14px;
+
       border-radius: 9px;
+
       text-align: center;
+
       line-height: 1.6;
     }
 
+
     .message.error {
       display: block;
+
       background: #ffe8e8;
-      border: 1px solid #efbbbb;
+
+      border:
+        1px solid #efbbbb;
+
       color: #951d1d;
     }
 
+
+    /* ==================================================
+       EMPTY STATE
+    ================================================== */
+
     .empty {
       display: none;
+
       background: white;
+
       max-width: 700px;
+
       margin: auto;
-      padding: 35px 25px;
+
+      padding:
+        35px
+        25px;
+
       border-radius: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0
+        3px
+        12px
+        rgba(0,0,0,0.08);
+
       text-align: center;
     }
 
+
+    .empty h2,
     .empty h3 {
       color: #123a8c;
+
       margin-top: 0;
-      font-size: 26px;
     }
+
 
     .empty p {
       color: #555;
+
       line-height: 1.7;
     }
+
+
+    .empty a {
+      color: #123a8c;
+
+      font-weight: bold;
+    }
+
+
+    /* ==================================================
+       BLOG POST GRID
+    ================================================== */
 
     .posts {
       display: none;
+
       grid-template-columns:
-        repeat(auto-fit, minmax(280px, 1fr));
+        repeat(
+          auto-fit,
+          minmax(
+            280px,
+            1fr
+          )
+        );
+
       gap: 25px;
     }
 
+
     .post {
       background: white;
+
       border-radius: 14px;
+
       overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0
+        3px
+        12px
+        rgba(0,0,0,0.08);
+
       display: flex;
+
       flex-direction: column;
     }
+
 
     .post-image-box {
       width: 100%;
+
       height: 230px;
+
       background: #f1f1f1;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       overflow: hidden;
     }
+
 
     .post-image {
       width: 100%;
+
       height: 100%;
+
       object-fit: cover;
     }
+
 
     .post-no-image {
       color: #888;
+
       text-align: center;
+
       padding: 20px;
+
       font-size: 14px;
     }
 
+
     .post-body {
       padding: 25px;
+
       display: flex;
+
       flex-direction: column;
+
       flex: 1;
     }
 
+
     .post-date {
       color: #777;
+
       font-size: 13px;
+
       margin-bottom: 10px;
     }
 
-    .post h3 {
+
+    .post h2 {
       color: #123a8c;
+
       font-size: 23px;
-      margin: 0 0 12px;
+
+      line-height: 1.3;
+
+      margin:
+        0
+        0
+        12px;
     }
 
-    .post p {
+
+    .post-description {
       color: #555;
+
       line-height: 1.7;
+
       margin: 0;
+
+      flex-grow: 1;
     }
+
 
     .read-more {
       display: inline-block;
+
       margin-top: 18px;
+
       background: #f2bd16;
+
       color: #111;
+
       text-decoration: none;
+
       font-weight: bold;
-      padding: 11px 18px;
+
+      padding:
+        11px
+        18px;
+
       border-radius: 7px;
+
       align-self: flex-start;
+
       font-size: 15px;
     }
 
+
     .read-more:hover {
-      opacity: 0.9;
+      background: #d8a90e;
     }
+
+
+    /* ==================================================
+       SINGLE ARTICLE
+    ================================================== */
 
     .single-article {
       display: none;
+
       max-width: 900px;
-      margin: 0 auto;
+
+      margin:
+        0
+        auto;
     }
+
+
+    .article-back {
+      display: inline-block;
+
+      margin-bottom: 24px;
+
+      color: #123a8c;
+
+      text-decoration: none;
+
+      font-weight: bold;
+    }
+
+
+    .article-back:hover {
+      text-decoration: underline;
+    }
+
 
     .article-card {
       background: white;
+
       border-radius: 16px;
+
       overflow: hidden;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0
+        4px
+        18px
+        rgba(0,0,0,0.08);
     }
+
 
     .article-cover {
       display: none;
+
       width: 100%;
+
       max-height: 520px;
+
       object-fit: cover;
+
       background: #f3f3f3;
     }
+
 
     .article-body {
       padding: 34px;
     }
 
-    .article-back {
-      display: inline-block;
-      margin-bottom: 24px;
-      color: #123a8c;
-      text-decoration: none;
-      font-weight: bold;
-    }
 
     .article-title {
       color: #123a8c;
+
       font-size: 36px;
-      line-height: 1.2;
-      margin: 0 0 12px;
-    }
 
-    .article-date {
-      color: #777;
-      font-size: 14px;
-      margin-bottom: 26px;
-    }
+      line-height: 1.25;
 
-    .article-content {
-      color: #444;
-      font-size: 17px;
-      line-height: 1.85;
-      white-space: pre-line;
+      margin:
+        0
+        0
+        12px;
+
       overflow-wrap: anywhere;
     }
 
+
+    .article-date {
+      color: #777;
+
+      font-size: 14px;
+
+      margin-bottom: 26px;
+    }
+
+
+    .article-content {
+      color: #444;
+
+      font-size: 17px;
+
+      line-height: 1.85;
+
+      white-space: pre-line;
+
+      overflow-wrap: anywhere;
+    }
+
+
+    /* ==================================================
+       PROMOTION BOX
+    ================================================== */
+
     .promotion-box {
       display: none;
+
       margin-top: 36px;
+
       padding: 24px;
-      border: 1px solid #e3e3e3;
+
+      border:
+        1px solid #e3e3e3;
+
       border-radius: 14px;
+
       background: #fafafa;
     }
 
+
     .promotion-label {
       display: inline-block;
+
       background: #f2bd16;
+
       color: #111;
-      padding: 6px 11px;
+
+      padding:
+        6px
+        11px;
+
       border-radius: 20px;
+
       font-size: 12px;
+
       font-weight: bold;
+
       margin-bottom: 16px;
     }
 
+
     .promotion-image {
       display: none;
+
       width: 100%;
+
       max-height: 430px;
+
       object-fit: contain;
+
       border-radius: 11px;
+
       background: white;
+
       margin-bottom: 20px;
     }
 
+
     .promotion-name {
+      display: none;
+
       color: #123a8c;
+
       font-size: 24px;
+
       font-weight: bold;
+
       margin-bottom: 12px;
     }
 
+
     .promotion-disclosure {
       color: #666;
+
       font-size: 13px;
+
       line-height: 1.6;
-      margin: 12px 0 18px;
+
+      margin:
+        12px
+        0
+        18px;
     }
+
 
     .promotion-button {
       display: inline-block;
+
       background: #f2bd16;
+
       color: #111;
+
       text-decoration: none;
-      padding: 13px 20px;
+
+      padding:
+        13px
+        20px;
+
       border-radius: 8px;
+
       font-weight: bold;
     }
 
+
     .promotion-button:hover {
-      opacity: 0.9;
+      background: #d8a90e;
     }
+
+
+    /* ==================================================
+       FOOTER
+    ================================================== */
 
     footer {
       margin-top: 40px;
+
       background: #123a8c;
+
       color: white;
+
       text-align: center;
-      padding: 30px 20px;
+
+      padding:
+        32px
+        20px;
     }
 
-    @media (max-width: 650px) {
 
-      .hero h2 {
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        17px
+        0;
+    }
+
+
+    .footer-links a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links a:hover {
+      color: #f2bd16;
+    }
+
+
+    .copyright {
+      color: #dbe3f5;
+
+      font-size: 13px;
+    }
+
+
+    /* ==================================================
+       MOBILE
+    ================================================== */
+
+    @media (
+      max-width: 650px
+    ) {
+
+      header {
+        padding:
+          15px
+          16px;
+      }
+
+
+      .brand img {
+        width: 50px;
+
+        height: 50px;
+      }
+
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          14px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
+
+      .hero h1 {
         font-size: 31px;
       }
 
-      nav {
-        gap: 12px;
-      }
 
       .blog {
         padding-left: 14px;
+
         padding-right: 14px;
       }
+
 
       .posts {
         grid-template-columns: 1fr;
       }
 
+
       .post-image-box {
         height: 220px;
       }
 
+
       .article-body {
-        padding: 24px 19px;
+        padding:
+          24px
+          19px;
       }
+
 
       .article-title {
         font-size: 29px;
       }
 
+
       .article-content {
         font-size: 16px;
       }
 
+
       .promotion-box {
         padding: 18px;
       }
+
     }
 
   </style>
+
 </head>
 
 
 <body>
 
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
 <header>
 
   <div class="header-inner">
 
+
     <a
-      href="index.html"
+      href="/index.html"
       class="brand"
       aria-label="GiftedGift Empire home"
     >
 
       <img
-        src="my-logo.png"
+        src="/my-logo.png"
         alt="GiftedGift Empire logo"
         width="58"
         height="58"
       >
+
 
       <div class="brand-name">
 
@@ -470,42 +1010,42 @@ nav a.active {
 
     <nav>
 
-      <a href="index.html">
+      <a href="/index.html">
         Home
       </a>
 
-      <a href="shop.html">
+      <a href="/shop.html">
         Shop
       </a>
 
-      <a href="categories.html">
+      <a href="/categories.html">
         Categories
       </a>
 
-      <a href="daily-inspiration.html">
+      <a href="/daily-inspiration.html">
         Daily Inspiration
       </a>
 
       <a
-        href="blog.html"
+        href="/blog.html"
         class="active"
       >
         Blog
       </a>
 
-      <a href="deals.html">
+      <a href="/deals.html">
         Deals
       </a>
 
-      <a href="about.html">
+      <a href="/about.html">
         About
       </a>
 
-      <a href="contact.html">
+      <a href="/contact.html">
         Contact
       </a>
 
-      <a href="cart.html">
+      <a href="/cart.html">
         🛒 Cart
       </a>
 
@@ -516,31 +1056,42 @@ nav a.active {
 </header>
 
 
+<!-- ==================================================
+     HERO
+================================================== -->
+
 <section
   id="blog-hero"
   class="hero"
 >
 
-  <h2>
+  <h1>
     GiftedGift Empire Blog
-  </h2>
+  </h1>
+
 
   <p>
     Helpful shopping guides, product recommendations,
-    lifestyle ideas and useful tips to help you
-    discover better finds.
+    lifestyle ideas and useful tips to help you discover
+    better finds and make informed choices.
   </p>
 
 </section>
 
 
+<!-- ==================================================
+     BLOG
+================================================== -->
+
 <main class="blog">
 
-  <div
-    id="blog-list-area"
-  >
 
-    <h2>
+  <!-- MAIN BLOG LIST -->
+
+  <div id="blog-list-area">
+
+
+    <h2 class="blog-list-heading">
       Latest From the Blog
     </h2>
 
@@ -548,12 +1099,15 @@ nav a.active {
     <div
       id="message"
       class="message"
+      aria-live="polite"
     ></div>
 
 
     <div
       id="loading"
       class="loading"
+      role="status"
+      aria-live="polite"
     >
       Loading articles...
     </div>
@@ -564,9 +1118,10 @@ nav a.active {
       class="empty"
     >
 
-      <h3>
+      <h2>
         Articles Coming Soon
-      </h3>
+      </h2>
+
 
       <p>
         New shopping guides, recommendations,
@@ -580,18 +1135,25 @@ nav a.active {
     <section
       id="posts"
       class="posts"
+      aria-label="GiftedGift Empire blog articles"
     ></section>
+
 
   </div>
 
+
+  <!-- ==================================================
+       SINGLE ARTICLE
+  ================================================== -->
 
   <section
     id="single-article"
     class="single-article"
   >
 
+
     <a
-      href="blog.html"
+      href="/blog.html"
       class="article-back"
     >
       ← Back to Blog
@@ -599,6 +1161,7 @@ nav a.active {
 
 
     <article class="article-card">
+
 
       <img
         id="article-cover"
@@ -608,6 +1171,7 @@ nav a.active {
 
 
       <div class="article-body">
+
 
         <h1
           id="article-title"
@@ -627,10 +1191,13 @@ nav a.active {
         ></div>
 
 
+        <!-- PROMOTIONAL CONTENT -->
+
         <section
           id="promotion-box"
           class="promotion-box"
         >
+
 
           <div
             id="promotion-label"
@@ -665,29 +1232,92 @@ nav a.active {
             View Product
           </a>
 
+
         </section>
+
 
       </div>
 
     </article>
 
+
   </section>
+
 
 </main>
 
 
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
 <footer>
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
 
-  <p>
-    © 2026 GiftedGift Empire.
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    width="46"
+    height="46"
+    loading="lazy"
+  >
+
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/daily-inspiration.html">
+      Daily Inspiration
+    </a>
+
+    <a href="/blog.html">
+      Blog
+    </a>
+
+    <a href="/deals.html">
+      Deals
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+
+  </div>
+
 
 </footer>
 
@@ -698,6 +1328,11 @@ nav a.active {
 
 
 <script>
+
+
+/* ==================================================
+   CONFIGURATION
+================================================== */
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -711,6 +1346,16 @@ const SITE_URL =
   "https://giftedgiftempire.com";
 
 
+const BLOG_URL =
+  SITE_URL +
+  "/blog.html";
+
+
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_URL +
+  "/my-logo.png";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -718,10 +1363,36 @@ const db =
   );
 
 
+document
+  .getElementById(
+    "year"
+  )
+  .textContent =
+    new Date()
+      .getFullYear();
+
+
+/* ==================================================
+   ARTICLE ID / ROUTING
+================================================== */
+
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const rawBlogPostId =
+  window.__BLOG_POST_ID ||
+  urlParams.get(
+    "id"
+  ) ||
+  0;
+
+
 const cleanBlogPostId =
   Number(
-    window.__BLOG_POST_ID ||
-    0
+    rawBlogPostId
   );
 
 
@@ -736,26 +1407,70 @@ let publishedPosts =
   [];
 
 
-function showError(
-  text
+/* ==================================================
+   GENERAL HELPERS
+================================================== */
+
+function cleanText(
+  value
 ) {
 
-  const box =
-    document.getElementById(
-      "message"
-    );
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
 
-
-  box.className =
-    "message error";
-
-
-  box.textContent =
-    text;
 }
 
 
-function formatDate(
+function descriptionPreview(
+  value
+) {
+
+  const text =
+    cleanText(
+      value
+    );
+
+
+  if (
+    !text
+  ) {
+
+    return (
+      "Explore shopping guides, product recommendations, " +
+      "lifestyle ideas and useful tips from GiftedGift Empire."
+    );
+
+  }
+
+
+  if (
+    text.length <= 155
+  ) {
+
+    return text;
+
+  }
+
+
+  return (
+    text.slice(
+      0,
+      152
+    ) +
+    "..."
+  );
+
+}
+
+
+function safeImageURL(
   value
 ) {
 
@@ -763,41 +1478,107 @@ function formatDate(
     !value
   ) {
 
-    return "";
+    return null;
+
   }
 
 
-  const date =
-    new Date(
-      value
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_URL
+      );
+
+
+    if (
+      url.protocol === "https:" ||
+      url.protocol === "http:"
+    ) {
+
+      return url.href;
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Invalid image URL:",
+      error
+    );
+
+  }
+
+
+  return null;
+
+}
+
+
+/* ==================================================
+   META HELPER
+================================================== */
+
+function setMetaContent(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(
+      id
     );
 
 
   if (
-    Number.isNaN(
-      date.getTime()
-    )
+    element
   ) {
 
-    return "";
+    element.setAttribute(
+      "content",
+      value
+    );
+
   }
 
-
-  return date.toLocaleDateString(
-    undefined,
-    {
-      year:
-        "numeric",
-
-      month:
-        "long",
-
-      day:
-        "numeric"
-    }
-  );
 }
 
+
+/* ==================================================
+   ROBOTS
+================================================== */
+
+function markNoIndex() {
+
+  const robots =
+    document.getElementById(
+      "robots-meta"
+    );
+
+
+  if (
+    robots
+  ) {
+
+    robots.setAttribute(
+      "content",
+      "noindex, follow"
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   POST URL
+================================================== */
 
 function getPostUrl(
   post
@@ -815,22 +1596,770 @@ function getPostUrl(
         post.slug
       )
     );
+
   }
 
 
-  return (
-    SITE_URL +
-    "/blog.html"
-  );
+  if (
+    post &&
+    post.id
+  ) {
+
+    return (
+      BLOG_URL +
+      "?id=" +
+      encodeURIComponent(
+        post.id
+      )
+    );
+
+  }
+
+
+  return BLOG_URL;
+
 }
 
 
-function validHttpUrl(
+/* ==================================================
+   STRUCTURED DATA HELPER
+================================================== */
+
+function setStructuredData(
+  data
+) {
+
+  let script =
+    document.getElementById(
+      "blog-structured-data"
+    );
+
+
+  if (
+    !script
+  ) {
+
+    script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.type =
+      "application/ld+json";
+
+
+    script.id =
+      "blog-structured-data";
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  script.textContent =
+    JSON.stringify(
+      data
+    );
+
+}
+
+
+/* ==================================================
+   MAIN BLOG SEO
+================================================== */
+
+function updateBlogCollectionSEO(
+  posts
+) {
+
+  const pageTitle =
+    "Blog | GiftedGift Empire";
+
+
+  const description =
+    "Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire.";
+
+
+  document.title =
+    pageTitle;
+
+
+  setMetaContent(
+    "page-description-meta",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "canonical-link"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.setAttribute(
+      "href",
+      BLOG_URL
+    );
+
+  }
+
+
+  setMetaContent(
+    "og-type",
+    "website"
+  );
+
+
+  setMetaContent(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "og-description",
+    description
+  );
+
+
+  setMetaContent(
+    "og-url",
+    BLOG_URL
+  );
+
+
+  setMetaContent(
+    "og-image",
+    DEFAULT_SOCIAL_IMAGE
+  );
+
+
+  setMetaContent(
+    "og-image-alt",
+    "GiftedGift Empire Blog"
+  );
+
+
+  setMetaContent(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "twitter-description",
+    description
+  );
+
+
+  setMetaContent(
+    "twitter-image",
+    DEFAULT_SOCIAL_IMAGE
+  );
+
+
+  const listItems =
+    posts.map(
+      (
+        post,
+        index
+      ) => {
+
+        return {
+
+          "@type":
+            "ListItem",
+
+          "position":
+            index + 1,
+
+          "name":
+            post.title ||
+            "Article",
+
+          "url":
+            getPostUrl(
+              post
+            )
+
+        };
+
+      }
+    );
+
+
+  const blogPosts =
+    posts.map(
+      post => {
+
+        const entry = {
+
+          "@type":
+            "BlogPosting",
+
+          "headline":
+            post.title ||
+            "Article",
+
+          "url":
+            getPostUrl(
+              post
+            )
+
+        };
+
+
+        if (
+          post.excerpt
+        ) {
+
+          entry.description =
+            descriptionPreview(
+              post.excerpt
+            );
+
+        }
+
+
+        if (
+          post.created_at
+        ) {
+
+          entry.datePublished =
+            post.created_at;
+
+        }
+
+
+        const image =
+          safeImageURL(
+            post.image_url
+          );
+
+
+        if (
+          image
+        ) {
+
+          entry.image =
+            image;
+
+        }
+
+
+        return entry;
+
+      }
+    );
+
+
+  setStructuredData({
+
+    "@context":
+      "https://schema.org",
+
+    "@graph": [
+
+      {
+
+        "@type":
+          "Blog",
+
+        "name":
+          "GiftedGift Empire Blog",
+
+        "description":
+          description,
+
+        "url":
+          BLOG_URL,
+
+        "publisher": {
+
+          "@type":
+            "Organization",
+
+          "name":
+            "GiftedGift Empire",
+
+          "url":
+            SITE_URL,
+
+          "logo": {
+
+            "@type":
+              "ImageObject",
+
+            "url":
+              DEFAULT_SOCIAL_IMAGE
+
+          }
+
+        },
+
+        "blogPost":
+          blogPosts
+
+      },
+
+
+      {
+
+        "@type":
+          "ItemList",
+
+        "name":
+          "GiftedGift Empire Blog Articles",
+
+        "numberOfItems":
+          listItems.length,
+
+        "itemListElement":
+          listItems
+
+      },
+
+
+      {
+
+        "@type":
+          "BreadcrumbList",
+
+        "itemListElement": [
+
+          {
+
+            "@type":
+              "ListItem",
+
+            "position":
+              1,
+
+            "name":
+              "Home",
+
+            "item":
+              SITE_URL +
+              "/"
+
+          },
+
+          {
+
+            "@type":
+              "ListItem",
+
+            "position":
+              2,
+
+            "name":
+              "Blog",
+
+            "item":
+              BLOG_URL
+
+          }
+
+        ]
+
+      }
+
+    ]
+
+  });
+
+}
+
+
+/* ==================================================
+   INDIVIDUAL ARTICLE SEO
+================================================== */
+
+function updateArticleSEO(
+  post
+) {
+
+  const title =
+    post.title ||
+    "Article";
+
+
+  const pageTitle =
+    title +
+    " | GiftedGift Empire";
+
+
+  const description =
+    descriptionPreview(
+      post.excerpt ||
+      post.content
+    );
+
+
+  const canonicalURL =
+    getPostUrl(
+      post
+    );
+
+
+  const image =
+    safeImageURL(
+      post.image_url
+    ) ||
+    DEFAULT_SOCIAL_IMAGE;
+
+
+  document.title =
+    pageTitle;
+
+
+  setMetaContent(
+    "page-description-meta",
+    description
+  );
+
+
+  const canonical =
+    document.getElementById(
+      "canonical-link"
+    );
+
+
+  if (
+    canonical
+  ) {
+
+    canonical.setAttribute(
+      "href",
+      canonicalURL
+    );
+
+  }
+
+
+  setMetaContent(
+    "og-type",
+    "article"
+  );
+
+
+  setMetaContent(
+    "og-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "og-description",
+    description
+  );
+
+
+  setMetaContent(
+    "og-url",
+    canonicalURL
+  );
+
+
+  setMetaContent(
+    "og-image",
+    image
+  );
+
+
+  setMetaContent(
+    "og-image-alt",
+    title
+  );
+
+
+  setMetaContent(
+    "twitter-title",
+    pageTitle
+  );
+
+
+  setMetaContent(
+    "twitter-description",
+    description
+  );
+
+
+  setMetaContent(
+    "twitter-image",
+    image
+  );
+
+
+  const articleSchema = {
+
+    "@type":
+      "BlogPosting",
+
+    "headline":
+      title,
+
+    "description":
+      description,
+
+    "url":
+      canonicalURL,
+
+    "mainEntityOfPage": {
+
+      "@type":
+        "WebPage",
+
+      "@id":
+        canonicalURL
+
+    },
+
+    "author": {
+
+      "@type":
+        "Organization",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL
+
+    },
+
+    "publisher": {
+
+      "@type":
+        "Organization",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL,
+
+      "logo": {
+
+        "@type":
+          "ImageObject",
+
+        "url":
+          DEFAULT_SOCIAL_IMAGE
+
+      }
+
+    }
+
+  };
+
+
+  if (
+    post.created_at
+  ) {
+
+    articleSchema.datePublished =
+      post.created_at;
+
+  }
+
+
+  const articleImage =
+    safeImageURL(
+      post.image_url
+    );
+
+
+  if (
+    articleImage
+  ) {
+
+    articleSchema.image =
+      [
+        articleImage
+      ];
+
+  }
+
+
+  const breadcrumbSchema = {
+
+    "@type":
+      "BreadcrumbList",
+
+    "itemListElement": [
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          1,
+
+        "name":
+          "Home",
+
+        "item":
+          SITE_URL +
+          "/"
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          2,
+
+        "name":
+          "Blog",
+
+        "item":
+          BLOG_URL
+
+      },
+
+      {
+
+        "@type":
+          "ListItem",
+
+        "position":
+          3,
+
+        "name":
+          title,
+
+        "item":
+          canonicalURL
+
+      }
+
+    ]
+
+  };
+
+
+  setStructuredData({
+
+    "@context":
+      "https://schema.org",
+
+    "@graph": [
+
+      articleSchema,
+
+      breadcrumbSchema
+
+    ]
+
+  });
+
+}
+
+
+/* ==================================================
+   ERROR MESSAGE
+================================================== */
+
+function showError(
+  text
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.className =
+    "message error";
+
+
+  box.textContent =
+    text;
+
+}
+
+
+/* ==================================================
+   DATE
+================================================== */
+
+function formatDate(
   value
 ) {
 
-  if (!value) {
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+
+  }
+
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+
+      year:
+        "numeric",
+
+      month:
+        "long",
+
+      day:
+        "numeric"
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   PROMOTION URL VALIDATION
+================================================== */
+
+function validPromotionUrl(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
     return false;
+
   }
 
 
@@ -838,23 +2367,33 @@ function validHttpUrl(
 
     const url =
       new URL(
-        value
+        String(
+          value
+        ).trim(),
+        window.location.origin
       );
 
 
     return (
-      url.protocol ===
-        "https:" ||
-      url.protocol ===
-        "http:"
+      url.protocol === "https:" ||
+      url.protocol === "http:"
     );
 
-  } catch {
+
+  } catch (
+    error
+  ) {
 
     return false;
+
   }
+
 }
 
+
+/* ==================================================
+   CREATE BLOG CARD
+================================================== */
 
 function createPostCard(
   post
@@ -869,6 +2408,8 @@ function createPostCard(
   article.className =
     "post";
 
+
+  /* IMAGE */
 
   const imageBox =
     document.createElement(
@@ -911,6 +2452,7 @@ function createPostCard(
       image
     );
 
+
   } else {
 
     const placeholder =
@@ -930,8 +2472,11 @@ function createPostCard(
     imageBox.appendChild(
       placeholder
     );
+
   }
 
+
+  /* BODY */
 
   const body =
     document.createElement(
@@ -943,25 +2488,40 @@ function createPostCard(
     "post-body";
 
 
-  const date =
-    document.createElement(
-      "div"
-    );
-
-
-  date.className =
-    "post-date";
-
-
-  date.textContent =
+  const formattedDate =
     formatDate(
       post.created_at
     );
 
 
+  if (
+    formattedDate
+  ) {
+
+    const date =
+      document.createElement(
+        "div"
+      );
+
+
+    date.className =
+      "post-date";
+
+
+    date.textContent =
+      formattedDate;
+
+
+    body.appendChild(
+      date
+    );
+
+  }
+
+
   const title =
     document.createElement(
-      "h3"
+      "h2"
     );
 
 
@@ -970,15 +2530,29 @@ function createPostCard(
     "Article";
 
 
+  body.appendChild(
+    title
+  );
+
+
   const excerpt =
     document.createElement(
       "p"
     );
 
 
+  excerpt.className =
+    "post-description";
+
+
   excerpt.textContent =
     post.excerpt ||
     "";
+
+
+  body.appendChild(
+    excerpt
+  );
 
 
   const link =
@@ -997,31 +2571,20 @@ function createPostCard(
 
   link.href =
     post.slug
-      ? "/" +
-        encodeURIComponent(
-          post.slug
+
+      ? (
+          "/" +
+          encodeURIComponent(
+            post.slug
+          )
         )
-      : "blog.html";
 
-
-  if (
-    date.textContent
-  ) {
-
-    body.appendChild(
-      date
-    );
-  }
-
-
-  body.appendChild(
-    title
-  );
-
-
-  body.appendChild(
-    excerpt
-  );
+      : (
+          "/blog.html?id=" +
+          encodeURIComponent(
+            post.id
+          )
+        );
 
 
   body.appendChild(
@@ -1040,8 +2603,13 @@ function createPostCard(
 
 
   return article;
+
 }
 
+
+/* ==================================================
+   PROMOTION BOX
+================================================== */
 
 function renderPromotion(
   post
@@ -1063,15 +2631,15 @@ function renderPromotion(
 
 
   if (
-    type ===
-    "none" ||
+    type === "none" ||
     !post.promotion_url ||
-    !validHttpUrl(
+    !validPromotionUrl(
       post.promotion_url
     )
   ) {
 
     return;
+
   }
 
 
@@ -1117,6 +2685,7 @@ function renderPromotion(
     disclosure.textContent =
       "Affiliate Disclosure: GiftedGift Empire may earn a commission if you purchase through this link, at no extra cost to you.";
 
+
   } else if (
     type ===
     "sponsored"
@@ -1129,6 +2698,7 @@ function renderPromotion(
     disclosure.textContent =
       "Sponsored Disclosure: This article contains a paid promotional placement.";
 
+
   } else {
 
     label.textContent =
@@ -1137,6 +2707,7 @@ function renderPromotion(
 
     disclosure.textContent =
       "Featured product available through GiftedGift Empire.";
+
   }
 
 
@@ -1156,6 +2727,7 @@ function renderPromotion(
     image.style.display =
       "block";
 
+
   } else {
 
     image.removeAttribute(
@@ -1165,6 +2737,7 @@ function renderPromotion(
 
     image.style.display =
       "none";
+
   }
 
 
@@ -1175,7 +2748,9 @@ function renderPromotion(
 
   name.style.display =
     post.promotion_name
+
       ? "block"
+
       : "none";
 
 
@@ -1184,10 +2759,14 @@ function renderPromotion(
     (
       type ===
       "sponsored"
+
         ? "Visit Advertiser"
+
         : type ===
-            "affiliate"
+          "affiliate"
+
           ? "Shop This Product"
+
           : "View Product"
     );
 
@@ -1197,10 +2776,8 @@ function renderPromotion(
 
 
   if (
-    type ===
-      "affiliate" ||
-    type ===
-      "sponsored"
+    type === "affiliate" ||
+    type === "sponsored"
   ) {
 
     button.target =
@@ -1209,6 +2786,7 @@ function renderPromotion(
 
     button.rel =
       "noopener noreferrer sponsored";
+
 
   } else {
 
@@ -1220,13 +2798,19 @@ function renderPromotion(
     button.removeAttribute(
       "rel"
     );
+
   }
 
 
   box.style.display =
     "block";
+
 }
 
+
+/* ==================================================
+   RENDER SINGLE ARTICLE
+================================================== */
 
 function renderSingleArticle(
   post
@@ -1304,6 +2888,7 @@ function renderSingleArticle(
     cover.style.display =
       "block";
 
+
   } else {
 
     cover.removeAttribute(
@@ -1313,33 +2898,13 @@ function renderSingleArticle(
 
     cover.style.display =
       "none";
+
   }
 
 
-  document.title =
-    (
-      post.title ||
-      "Blog"
-    ) +
-    " | GiftedGift Empire";
-
-
-  const metaDescription =
-    document.getElementById(
-      "page-description-meta"
-    );
-
-
-  if (
-    metaDescription &&
-    post.excerpt
-  ) {
-
-    metaDescription.setAttribute(
-      "content",
-      post.excerpt
-    );
-  }
+  updateArticleSEO(
+    post
+  );
 
 
   renderPromotion(
@@ -1349,8 +2914,13 @@ function renderSingleArticle(
 
   single.style.display =
     "block";
+
 }
 
+
+/* ==================================================
+   LOAD INDIVIDUAL ARTICLE
+================================================== */
 
 async function loadSinglePost() {
 
@@ -1386,6 +2956,7 @@ async function loadSinglePost() {
       throw new Error(
         "This article could not be found."
       );
+
     }
 
 
@@ -1399,8 +2970,16 @@ async function loadSinglePost() {
   ) {
 
     console.error(
+      "Blog article error:",
       error
     );
+
+
+    markNoIndex();
+
+
+    document.title =
+      "Article Not Available | GiftedGift Empire";
 
 
     document
@@ -1422,27 +3001,37 @@ async function loadSinglePost() {
           style="display:block;"
         >
 
-          <h3>
+          <h2>
             Article Not Available
-          </h3>
+          </h2>
+
 
           <p>
             This article could not be found
             or is not currently published.
           </p>
 
+
           <p>
-            <a href="blog.html">
+
+            <a href="/blog.html">
               Return to the Blog
             </a>
+
           </p>
 
         </section>
 
       `;
+
   }
+
 }
 
+
+/* ==================================================
+   LOAD BLOG LIST
+================================================== */
 
 async function loadPosts() {
 
@@ -1497,6 +3086,7 @@ async function loadPosts() {
   ) {
 
     console.error(
+      "Blog loading error:",
       error
     );
 
@@ -1507,6 +3097,7 @@ async function loadPosts() {
 
 
     return;
+
   }
 
 
@@ -1516,6 +3107,16 @@ async function loadPosts() {
     )
       ? data
       : [];
+
+
+  /*
+    Update Blog SEO using the
+    real published articles.
+  */
+
+  updateBlogCollectionSEO(
+    publishedPosts
+  );
 
 
   if (
@@ -1528,6 +3129,7 @@ async function loadPosts() {
 
 
     return;
+
   }
 
 
@@ -1543,14 +3145,20 @@ async function loadPosts() {
           post
         )
       );
+
     }
   );
 
 
   postsBox.style.display =
     "grid";
+
 }
 
+
+/* ==================================================
+   START
+================================================== */
 
 if (
   isSingleBlogPost
@@ -1558,14 +3166,18 @@ if (
 
   loadSinglePost();
 
+
 } else {
 
   loadPosts();
+
 }
 
 </script>
 
-<script src="cookie-consent.js"></script>
+
+<script src="/cookie-consent.js"></script>
+
 
 </body>
 
