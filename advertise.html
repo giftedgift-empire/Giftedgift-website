@@ -10,18 +10,23 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
   <title>
     Advertise With Us | GiftedGift Empire
   </title>
 
   <meta
     name="description"
-    content="Apply to advertise your business, product, service or campaign through GiftedGift Empire."
+    content="Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire."
   >
 
   <meta
     name="robots"
-    content="index, follow"
+    content="index, follow, max-image-preview:large"
   >
 
   <meta
@@ -34,16 +39,170 @@
     href="https://giftedgiftempire.com/advertise.html"
   >
 
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
   <link
     rel="icon"
     type="image/png"
-    href="my-logo.png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
   >
 
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+  <!-- =========================
+       OPEN GRAPH
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    property="og:title"
+    content="Advertise With Us | GiftedGift Empire"
+  >
+
+  <meta
+    property="og:description"
+    content="Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/advertise.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Advertise With GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Advertise With Us | GiftedGift Empire"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    name="twitter:image:alt"
+    content="Advertise With GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       STRUCTURED DATA
+  ========================= -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://giftedgiftempire.com/#organization",
+        "name": "GiftedGift Empire",
+        "url": "https://giftedgiftempire.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://giftedgiftempire.com/my-logo.png"
+        },
+        "email": "gift@giftedgiftempire.com"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://giftedgiftempire.com/advertise.html#webpage",
+        "url": "https://giftedgiftempire.com/advertise.html",
+        "name": "Advertise With Us | GiftedGift Empire",
+        "description": "Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "GiftedGift Empire",
+          "url": "https://giftedgiftempire.com/"
+        },
+        "about": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://giftedgiftempire.com/advertise.html#advertising-service",
+        "name": "GiftedGift Empire Advertising Opportunities",
+        "description": "Advertising opportunities for approved businesses, products, services, events and campaigns on GiftedGift Empire.",
+        "provider": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        },
+        "url": "https://giftedgiftempire.com/advertise.html",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://giftedgiftempire.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Advertise With Us",
+            "item": "https://giftedgiftempire.com/advertise.html"
+          }
+        ]
+      }
+    ]
+  }
   </script>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
 
 
   <style>
@@ -58,17 +217,18 @@
       --text: #20242a;
       --muted: #68707a;
       --border: #dfe4ec;
-      --green: #18864b;
-      --red: #b42318;
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       margin: 0;
@@ -78,19 +238,16 @@
         Helvetica,
         sans-serif;
 
-      background:
-        var(--light);
+      background: var(--light);
 
-      color:
-        var(--text);
+      color: var(--text);
 
-      line-height:
-        1.6;
+      line-height: 1.6;
     }
 
+
     a {
-      color:
-        inherit;
+      color: inherit;
     }
 
 
@@ -99,109 +256,109 @@
     ========================= */
 
     .site-header {
-      background:
-        var(--blue);
+      background: var(--blue);
 
-      color:
-        white;
+      color: white;
+
+      padding:
+        18px
+        20px;
 
       box-shadow:
-        0 3px 14px
+        0
+        3px
+        14px
         rgba(0,0,0,0.13);
     }
 
+
     .header-inner {
-      max-width:
-        1200px;
+      max-width: 1200px;
 
-      margin:
-        auto;
+      margin: auto;
+    }
 
-      padding:
-        14px 20px;
 
-      display:
-        flex;
+    .brand {
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: var(--gold);
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      display: flex;
+
+      flex-wrap: wrap;
 
       gap:
+        6px
         18px;
     }
 
-    .brand {
-      display:
-        flex;
 
-      align-items:
-        center;
+    nav a {
+      color: white;
 
-      gap:
-        10px;
+      text-decoration: none;
 
-      text-decoration:
-        none;
-
-      font-size:
-        24px;
-
-      font-weight:
-        800;
-    }
-
-    .brand img {
-      width:
-        52px;
-
-      height:
-        52px;
-
-      object-fit:
-        contain;
-
-      background:
-        white;
-
-      border-radius:
-        50%;
+      font-weight: bold;
 
       padding:
-        3px;
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
     }
 
-    .brand-gifted {
-      color:
-        white;
-    }
 
-    .brand-empire {
-      color:
-        var(--gold);
-    }
-
-    .home-link {
-      color:
-        white;
-
-      text-decoration:
-        none;
-
-      font-weight:
-        700;
-
-      padding:
-        10px 14px;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.35);
-
-      border-radius:
-        9px;
+    nav a:hover {
+      color: var(--gold);
     }
 
 
@@ -219,55 +376,47 @@
         );
 
       padding:
-        70px 20px;
+        70px
+        20px;
     }
+
 
     .hero-inner {
-      max-width:
-        950px;
+      max-width: 950px;
 
-      margin:
-        auto;
+      margin: auto;
 
-      text-align:
-        center;
+      text-align: center;
     }
+
 
     .hero-badge {
-      display:
-        inline-block;
+      display: inline-block;
 
-      margin-bottom:
-        16px;
+      margin-bottom: 16px;
 
       padding:
-        8px 14px;
+        8px
+        14px;
 
-      border-radius:
-        30px;
+      border-radius: 30px;
 
-      background:
-        #e8efff;
+      background: #e8efff;
 
-      color:
-        var(--blue);
+      color: var(--blue);
 
-      font-size:
-        13px;
+      font-size: 13px;
 
-      font-weight:
-        800;
+      font-weight: 800;
 
-      letter-spacing:
-        1px;
+      letter-spacing: 1px;
     }
 
-    .hero h1 {
-      margin:
-        0;
 
-      color:
-        var(--blue);
+    .hero h1 {
+      margin: 0;
+
+      color: var(--blue);
 
       font-size:
         clamp(
@@ -276,56 +425,54 @@
           62px
         );
 
-      line-height:
-        1.08;
+      line-height: 1.08;
     }
+
 
     .hero h1 span {
-      color:
-        var(--gold-dark);
+      color: var(--gold-dark);
     }
+
 
     .hero p {
-      max-width:
-        750px;
+      max-width: 750px;
 
       margin:
-        20px auto 0;
+        20px
+        auto
+        0;
 
-      color:
-        #505a67;
+      color: #505a67;
 
-      font-size:
-        18px;
+      font-size: 18px;
 
-      line-height:
-        1.75;
+      line-height: 1.75;
     }
 
-    .hero-button {
-      display:
-        inline-block;
 
-      margin-top:
-        27px;
+    .hero-button {
+      display: inline-block;
+
+      margin-top: 27px;
 
       padding:
-        14px 24px;
+        14px
+        24px;
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
-      background:
-        var(--gold);
+      background: var(--gold);
 
-      color:
-        #111;
+      color: #111;
 
-      text-decoration:
-        none;
+      text-decoration: none;
 
-      font-weight:
-        800;
+      font-weight: 800;
+    }
+
+
+    .hero-button:hover {
+      background: var(--gold-dark);
     }
 
 
@@ -334,50 +481,48 @@
     ========================= */
 
     .section {
-      max-width:
-        1150px;
+      max-width: 1150px;
 
-      margin:
-        auto;
+      margin: auto;
 
       padding:
-        65px 20px;
+        65px
+        20px;
     }
+
 
     .section-heading {
-      max-width:
-        760px;
+      max-width: 760px;
 
       margin:
-        0 auto 35px;
+        0
+        auto
+        35px;
 
-      text-align:
-        center;
+      text-align: center;
     }
+
 
     .section-heading h2 {
       margin:
-        0 0 10px;
+        0
+        0
+        10px;
 
-      color:
-        var(--blue);
+      color: var(--blue);
 
-      font-size:
-        34px;
+      font-size: 34px;
     }
 
+
     .section-heading p {
-      margin:
-        0;
+      margin: 0;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        17px;
+      font-size: 17px;
 
-      line-height:
-        1.7;
+      line-height: 1.7;
     }
 
 
@@ -386,66 +531,64 @@
     ========================= */
 
     .feature-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
           3,
-          minmax(0, 1fr)
+          minmax(
+            0,
+            1fr
+          )
         );
 
-      gap:
-        20px;
+      gap: 20px;
     }
 
+
     .feature-card {
-      background:
-        white;
+      background: white;
 
       border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
-      border-radius:
-        16px;
+      border-radius: 16px;
 
-      padding:
-        25px;
+      padding: 25px;
 
       box-shadow:
-        0 6px 20px
+        0
+        6px
+        20px
         rgba(0,0,0,0.05);
     }
 
-    .feature-icon {
-      font-size:
-        34px;
 
-      margin-bottom:
-        12px;
+    .feature-icon {
+      font-size: 34px;
+
+      margin-bottom: 12px;
     }
+
 
     .feature-card h3 {
       margin:
-        0 0 8px;
+        0
+        0
+        8px;
 
-      color:
-        var(--blue);
+      color: var(--blue);
 
-      font-size:
-        21px;
+      font-size: 21px;
     }
 
+
     .feature-card p {
-      margin:
-        0;
+      margin: 0;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      line-height:
-        1.65;
+      line-height: 1.65;
     }
 
 
@@ -454,42 +597,44 @@
     ========================= */
 
     .process-section {
-      background:
-        var(--dark-blue);
+      background: var(--dark-blue);
 
-      color:
-        white;
+      color: white;
     }
+
 
     .process-section
     .section-heading h2 {
-      color:
-        white;
+      color: white;
     }
+
 
     .process-section
     .section-heading p {
-      color:
-        #d5def1;
+      color: #d5def1;
     }
 
+
     .process-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
           4,
-          minmax(0,1fr)
+          minmax(
+            0,
+            1fr
+          )
         );
 
-      gap:
-        18px;
+      gap: 18px;
     }
+
 
     .process-card {
       padding:
-        25px 20px;
+        25px
+        20px;
 
       background:
         rgba(
@@ -508,56 +653,47 @@
           0.14
         );
 
-      border-radius:
-        14px;
+      border-radius: 14px;
     }
+
 
     .process-number {
-      width:
-        38px;
+      width: 38px;
 
-      height:
-        38px;
+      height: 38px;
 
-      margin-bottom:
-        13px;
+      margin-bottom: 13px;
 
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        center;
+      align-items: center;
 
-      justify-content:
-        center;
+      justify-content: center;
 
-      border-radius:
-        50%;
+      border-radius: 50%;
 
-      background:
-        var(--gold);
+      background: var(--gold);
 
-      color:
-        #111;
+      color: #111;
 
-      font-weight:
-        800;
+      font-weight: 800;
     }
+
 
     .process-card h3 {
       margin:
-        0 0 8px;
+        0
+        0
+        8px;
 
-      color:
-        var(--gold);
+      color: var(--gold);
     }
 
-    .process-card p {
-      margin:
-        0;
 
-      color:
-        #e1e7f4;
+    .process-card p {
+      margin: 0;
+
+      color: #e1e7f4;
     }
 
 
@@ -566,42 +702,40 @@
     ========================= */
 
     .rules-box {
-      background:
-        #fffdf4;
+      background: #fffdf4;
 
       border:
-        1px solid
-        #ebd68a;
+        1px solid #ebd68a;
 
-      border-radius:
-        16px;
+      border-radius: 16px;
 
-      padding:
-        25px;
+      padding: 25px;
     }
+
 
     .rules-box h3 {
       margin:
-        0 0 14px;
+        0
+        0
+        14px;
 
-      color:
-        #745900;
+      color: #745900;
     }
+
 
     .rules-box ul {
-      margin:
-        0;
+      margin: 0;
 
-      padding-left:
-        22px;
+      padding-left: 22px;
     }
+
 
     .rules-box li {
       margin:
-        9px 0;
+        9px
+        0;
 
-      color:
-        #555;
+      color: #555;
     }
 
 
@@ -610,294 +744,245 @@
     ========================= */
 
     .application-section {
-      background:
-        #eef3ff;
+      background: #eef3ff;
     }
+
 
     .form-card {
-      max-width:
-        900px;
+      max-width: 900px;
 
-      margin:
-        auto;
+      margin: auto;
 
-      padding:
-        30px;
+      padding: 30px;
 
-      background:
-        white;
+      background: white;
 
       border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
       box-shadow:
-        0 8px 26px
-        rgba(
-          18,
-          58,
-          140,
-          0.08
-        );
+        0
+        8px
+        26px
+        rgba(18,58,140,0.08);
     }
 
+
     .form-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
           2,
-          minmax(0,1fr)
+          minmax(
+            0,
+            1fr
+          )
         );
 
-      gap:
-        17px;
+      gap: 17px;
     }
 
+
     .field {
-      margin-bottom:
-        4px;
+      margin-bottom: 4px;
     }
+
 
     .field.full {
       grid-column:
         1 / -1;
     }
 
+
     label {
-      display:
-        block;
+      display: block;
 
-      margin-bottom:
-        7px;
+      margin-bottom: 7px;
 
-      color:
-        #30343b;
+      color: #30343b;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
+
 
     .optional {
-      color:
-        #777;
+      color: #777;
 
-      font-size:
-        12px;
+      font-size: 12px;
 
-      font-weight:
-        400;
+      font-weight: 400;
     }
+
 
     input,
     select,
     textarea {
-      width:
-        100%;
+      width: 100%;
 
       padding:
-        13px 14px;
+        13px
+        14px;
 
       border:
-        1px solid
-        #ccd4e0;
+        1px solid #ccd4e0;
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
-      background:
-        white;
+      background: white;
 
-      color:
-        #222;
+      color: #222;
 
-      font:
-        inherit;
+      font: inherit;
 
-      outline:
-        none;
+      outline: none;
     }
+
 
     textarea {
-      min-height:
-        130px;
+      min-height: 130px;
 
-      resize:
-        vertical;
+      resize: vertical;
 
-      line-height:
-        1.6;
+      line-height: 1.6;
     }
+
 
     input:focus,
     select:focus,
     textarea:focus {
-      border-color:
-        var(--blue);
+      border-color: var(--blue);
 
       box-shadow:
-        0 0 0 3px
-        rgba(
-          18,
-          58,
-          140,
-          0.08
-        );
+        0
+        0
+        0
+        3px
+        rgba(18,58,140,0.08);
     }
+
 
     .consent-row {
-      display:
-        flex;
+      display: flex;
 
-      align-items:
-        flex-start;
+      align-items: flex-start;
 
-      gap:
-        10px;
+      gap: 10px;
 
       margin:
-        22px 0;
+        22px
+        0;
 
-      color:
-        #555;
+      color: #555;
 
-      font-size:
-        14px;
+      font-size: 14px;
 
-      line-height:
-        1.55;
+      line-height: 1.55;
     }
+
 
     .consent-row input {
-      width:
-        18px;
+      width: 18px;
 
-      height:
-        18px;
+      height: 18px;
 
-      margin-top:
-        3px;
+      margin-top: 3px;
 
-      flex-shrink:
-        0;
+      flex-shrink: 0;
     }
+
 
     .submit-button {
-      width:
-        100%;
+      width: 100%;
 
-      border:
-        none;
+      border: none;
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
       padding:
-        15px 20px;
+        15px
+        20px;
 
-      background:
-        var(--blue);
+      background: var(--blue);
 
-      color:
-        white;
+      color: white;
 
-      font-size:
-        17px;
+      font-size: 17px;
 
-      font-weight:
-        800;
+      font-weight: 800;
 
-      cursor:
-        pointer;
+      cursor: pointer;
     }
+
 
     .submit-button:hover {
-      background:
-        var(--dark-blue);
+      background: var(--dark-blue);
     }
+
 
     .submit-button:disabled {
-      opacity:
-        0.6;
+      opacity: 0.6;
 
-      cursor:
-        not-allowed;
+      cursor: not-allowed;
     }
+
 
     .form-message {
-      display:
-        none;
+      display: none;
 
-      margin-top:
-        18px;
+      margin-top: 18px;
 
-      padding:
-        14px;
+      padding: 14px;
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
-      text-align:
-        center;
+      text-align: center;
     }
+
 
     .form-message.success {
-      display:
-        block;
+      display: block;
 
-      background:
-        #e8f8ed;
+      background: #e8f8ed;
 
-      color:
-        #17652d;
+      color: #17652d;
 
       border:
-        1px solid
-        #b7dfc1;
+        1px solid #b7dfc1;
     }
+
 
     .form-message.error {
-      display:
-        block;
+      display: block;
 
-      background:
-        #ffeded;
+      background: #ffeded;
 
-      color:
-        #941c1c;
+      color: #941c1c;
 
       border:
-        1px solid
-        #efb4b4;
+        1px solid #efb4b4;
     }
+
 
     .form-note {
-      margin-top:
-        16px;
+      margin-top: 16px;
 
-      color:
-        #777;
+      color: #777;
 
-      font-size:
-        13px;
+      font-size: 13px;
 
-      text-align:
-        center;
+      text-align: center;
 
-      line-height:
-        1.6;
+      line-height: 1.6;
     }
 
-    .form-note a {
-      color:
-        var(--blue);
 
-      font-weight:
-        700;
+    .form-note a {
+      color: var(--blue);
+
+      font-weight: 700;
     }
 
 
@@ -906,69 +991,58 @@
     ========================= */
 
     .contact-box {
-      max-width:
-        800px;
+      max-width: 800px;
 
-      margin:
-        auto;
+      margin: auto;
 
-      padding:
-        30px;
+      padding: 30px;
 
-      text-align:
-        center;
+      text-align: center;
 
-      background:
-        white;
+      background: white;
 
       border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
-      border-radius:
-        17px;
+      border-radius: 17px;
     }
+
 
     .contact-box h2 {
       margin:
-        0 0 10px;
+        0
+        0
+        10px;
 
-      color:
-        var(--blue);
+      color: var(--blue);
     }
+
 
     .contact-box p {
-      margin:
-        0;
+      margin: 0;
 
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
+
     .contact-box a {
-      display:
-        inline-block;
+      display: inline-block;
 
-      margin-top:
-        18px;
+      margin-top: 18px;
 
-      color:
-        white;
+      color: white;
 
-      background:
-        var(--blue);
+      background: var(--blue);
 
       padding:
-        11px 18px;
+        11px
+        18px;
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
-      text-decoration:
-        none;
+      text-decoration: none;
 
-      font-weight:
-        800;
+      font-weight: 800;
     }
 
 
@@ -977,33 +1051,91 @@
     ========================= */
 
     footer {
-      background:
-        var(--dark-blue);
+      background: var(--dark-blue);
 
-      color:
-        white;
+      color: white;
 
-      text-align:
-        center;
+      text-align: center;
 
       padding:
-        32px 20px;
+        32px
+        20px;
     }
 
-    footer p {
+
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-text {
+      color: #d2dbec;
+
       margin:
-        5px 0;
+        8px
+        auto
+        0;
 
-      color:
-        #d2dbec;
+      max-width: 650px;
+
+      font-size: 14px;
     }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        17px
+        0;
+    }
+
 
     footer a {
-      color:
-        var(--gold);
+      color: white;
 
-      text-decoration:
-        none;
+      text-decoration: none;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+
+    footer a:hover {
+      color: var(--gold);
+    }
+
+
+    .copyright {
+      color: #c7d2e8;
+
+      font-size: 13px;
     }
 
 
@@ -1018,17 +1150,18 @@
       .feature-grid,
       .process-grid {
         grid-template-columns:
-          1fr 1fr;
-      }
-
-      .form-grid {
-        grid-template-columns:
+          1fr
           1fr;
       }
 
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+
       .field.full {
-        grid-column:
-          auto;
+        grid-column: auto;
       }
 
     }
@@ -1038,51 +1171,61 @@
       max-width: 560px
     ) {
 
-      .header-inner {
+      .site-header {
         padding:
-          11px 14px;
+          15px
+          16px;
       }
 
-      .brand {
-        font-size:
-          19px;
-      }
 
       .brand img {
-        width:
-          43px;
+        width: 50px;
 
-        height:
-          43px;
+        height: 50px;
       }
 
-      .home-link {
-        padding:
-          8px 10px;
 
-        font-size:
-          13px;
+      .brand-name {
+        font-size: 23px;
       }
+
+
+      nav {
+        gap:
+          4px
+          14px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
 
       .hero {
         padding:
-          52px 16px;
+          52px
+          16px;
       }
+
 
       .feature-grid,
       .process-grid {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
+
 
       .section {
         padding:
-          50px 15px;
+          50px
+          15px;
       }
+
 
       .form-card {
         padding:
-          22px 17px;
+          22px
+          17px;
       }
 
     }
@@ -1103,37 +1246,75 @@
 
   <div class="header-inner">
 
+
     <a
-      href="index.html"
+      href="/index.html"
       class="brand"
+      aria-label="GiftedGift Empire home"
     >
 
       <img
-        src="my-logo.png"
+        src="/my-logo.png"
         alt="GiftedGift Empire logo"
+        width="58"
+        height="58"
       >
 
-      <span>
 
-        <span class="brand-gifted">
+      <div class="brand-name">
+
+        <span class="gifted">
           GiftedGift
         </span>
 
-        <span class="brand-empire">
+        <span class="empire">
           Empire
         </span>
 
-      </span>
+      </div>
 
     </a>
 
 
-    <a
-      href="index.html"
-      class="home-link"
-    >
-      ← Home
-    </a>
+    <nav>
+
+      <a href="/index.html">
+        Home
+      </a>
+
+      <a href="/shop.html">
+        Shop
+      </a>
+
+      <a href="/categories.html">
+        Categories
+      </a>
+
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
+      <a href="/blog.html">
+        Blog
+      </a>
+
+      <a href="/deals.html">
+        Deals
+      </a>
+
+      <a href="/about.html">
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
 
   </div>
 
@@ -1165,14 +1346,11 @@
 
 
     <p>
-
       Do you have a business, product, service,
-      event or offer you would like to promote?
-
+      event or campaign you would like to promote?
       GiftedGift Empire offers advertising
-      opportunities for approved businesses
+      opportunities for approved advertisers
       and campaigns.
-
     </p>
 
 
@@ -1204,7 +1382,7 @@
       We provide selected advertisers with
       promotional space designed to help visitors
       discover relevant businesses, products,
-      services and offers.
+      services, events and offers.
     </p>
 
   </div>
@@ -1213,7 +1391,7 @@
   <div class="feature-grid">
 
 
-    <div class="feature-card">
+    <article class="feature-card">
 
       <div class="feature-icon">
         📢
@@ -1229,10 +1407,10 @@
         GiftedGift Empire.
       </p>
 
-    </div>
+    </article>
 
 
-    <div class="feature-card">
+    <article class="feature-card">
 
       <div class="feature-icon">
         🖼️
@@ -1248,10 +1426,10 @@
         availability and approval.
       </p>
 
-    </div>
+    </article>
 
 
-    <div class="feature-card">
+    <article class="feature-card">
 
       <div class="feature-icon">
         📊
@@ -1267,7 +1445,7 @@
         to help monitor campaign activity.
       </p>
 
-    </div>
+    </article>
 
 
   </div>
@@ -1302,7 +1480,7 @@
   <div class="feature-grid">
 
 
-    <div class="feature-card">
+    <article class="feature-card">
 
       <div class="feature-icon">
         🛍️
@@ -1317,10 +1495,10 @@
         online stores, brands and selected offers.
       </p>
 
-    </div>
+    </article>
 
 
-    <div class="feature-card">
+    <article class="feature-card">
 
       <div class="feature-icon">
         💻
@@ -1336,10 +1514,10 @@
         websites and online businesses.
       </p>
 
-    </div>
+    </article>
 
 
-    <div class="feature-card">
+    <article class="feature-card">
 
       <div class="feature-icon">
         📅
@@ -1355,7 +1533,7 @@
         may also be considered.
       </p>
 
-    </div>
+    </article>
 
 
   </div>
@@ -1435,9 +1613,9 @@
         </h3>
 
         <p>
-          If approved, placement,
-          duration and applicable price
-          are agreed before publishing.
+          If approved, placement, duration
+          and applicable price are agreed
+          before publishing.
         </p>
 
       </div>
@@ -1454,9 +1632,8 @@
         </h3>
 
         <p>
-          The approved advertisement
-          is published for the agreed
-          campaign period.
+          The approved advertisement is
+          published for the agreed campaign period.
         </p>
 
       </div>
@@ -1582,7 +1759,7 @@
           <div class="field">
 
             <label for="full-name">
-              Your Name
+              Your Name *
             </label>
 
             <input
@@ -1599,7 +1776,7 @@
           <div class="field">
 
             <label for="email">
-              Email Address
+              Email Address *
             </label>
 
             <input
@@ -1654,7 +1831,7 @@
           <div class="field full">
 
             <label for="ad-title">
-              What do you want to advertise?
+              What do you want to advertise? *
             </label>
 
             <input
@@ -1671,7 +1848,7 @@
           <div class="field full">
 
             <label for="ad-description">
-              Tell Us About It
+              Tell Us About It *
             </label>
 
             <textarea
@@ -1706,7 +1883,7 @@
           <div class="field">
 
             <label for="placement">
-              Preferred Placement
+              Preferred Placement *
             </label>
 
             <select
@@ -1810,7 +1987,9 @@
         </div>
 
 
-        <!-- SPAM HONEYPOT -->
+        <!-- =========================
+             SPAM HONEYPOT
+        ========================= -->
 
         <div
           style="
@@ -1846,15 +2025,12 @@
           >
 
           <span>
-
             I confirm that the information I provided
             is accurate and that I have the right to
             promote the submitted business, product,
-            service or campaign.
-
-            I understand that GiftedGift Empire may
-            approve or reject this application.
-
+            service, event or campaign. I understand
+            that GiftedGift Empire may approve or reject
+            this application.
           </span>
 
         </label>
@@ -1877,16 +2053,11 @@
 
 
         <p class="form-note">
-
           Your information will be used to review
-          your advertising request.
-
-          Please see our
-
-          <a href="privacy-policy.html">
+          your advertising request. Please see our
+          <a href="/privacy-policy.html">
             Privacy Policy
           </a>.
-
         </p>
 
 
@@ -1933,41 +2104,69 @@
 
 <footer>
 
-  <p>
-    <strong>
-      GiftedGift Empire
-    </strong>
-  </p>
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    width="46"
+    height="46"
+    loading="lazy"
+  >
 
-  <p>
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <p class="footer-text">
     Advertising opportunities are subject
-    to review and availability.
+    to review, suitability and availability.
   </p>
 
-  <p>
 
-    <a href="index.html">
+  <div class="footer-links">
+
+    <a href="/index.html">
       Home
     </a>
 
-    &nbsp; • &nbsp;
+    <a href="/shop.html">
+      Shop
+    </a>
 
-    <a href="privacy-policy.html">
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+    <a href="/privacy-policy.html">
       Privacy
     </a>
 
-    &nbsp; • &nbsp;
-
-    <a href="terms-conditions.html">
+    <a href="/terms-conditions.html">
       Terms
     </a>
 
-  </p>
+  </div>
 
-  <p>
-    © 2026 GiftedGift Empire.
+
+  <div class="copyright">
+    © <span id="year"></span>
+    GiftedGift Empire.
     All rights reserved.
-  </p>
+  </div>
 
 </footer>
 
@@ -1979,6 +2178,7 @@
 <script>
 
 (function () {
+
 
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -1993,6 +2193,15 @@
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
+
+
+  document
+    .getElementById(
+      "year"
+    )
+    .textContent =
+      new Date()
+        .getFullYear();
 
 
   const form =
@@ -2013,6 +2222,10 @@
     );
 
 
+  /* =========================
+     MESSAGE
+  ========================= */
+
   function showMessage(
     text,
     type
@@ -2028,6 +2241,59 @@
 
   }
 
+
+  /* =========================
+     URL VALIDATION
+  ========================= */
+
+  function isValidDestinationUrl(
+    value
+  ) {
+
+    const text =
+      String(
+        value ||
+        ""
+      ).trim();
+
+
+    if (
+      !text
+    ) {
+
+      return true;
+
+    }
+
+
+    try {
+
+      const url =
+        new URL(
+          text
+        );
+
+
+      return (
+        url.protocol === "https:" ||
+        url.protocol === "http:"
+      );
+
+
+    } catch (
+      error
+    ) {
+
+      return false;
+
+    }
+
+  }
+
+
+  /* =========================
+     FORM SUBMISSION
+  ========================= */
 
   form.addEventListener(
     "submit",
@@ -2159,19 +2425,31 @@
           .trim();
 
 
-      if (honeypot) {
+      /* =========================
+         HONEYPOT
+      ========================= */
+
+      if (
+        honeypot
+      ) {
 
         form.reset();
+
 
         showMessage(
           "Thank you. Your application has been received.",
           "success"
         );
 
+
         return;
 
       }
 
+
+      /* =========================
+         REQUIRED FIELDS
+      ========================= */
 
       if (
         !fullName ||
@@ -2186,17 +2464,6 @@
           "error"
         );
 
-        return;
-
-      }
-
-
-      if (!consent) {
-
-        showMessage(
-          "Please confirm the advertising declaration before submitting.",
-          "error"
-        );
 
         return;
 
@@ -2204,10 +2471,54 @@
 
 
       if (
+        !consent
+      ) {
+
+        showMessage(
+          "Please confirm the advertising declaration before submitting.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         DESTINATION URL
+      ========================= */
+
+      if (
+        !isValidDestinationUrl(
+          destinationUrl
+        )
+      ) {
+
+        showMessage(
+          "Please enter a valid website or campaign link beginning with http:// or https://.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         DATES
+      ========================= */
+
+      if (
         startDate &&
         endDate &&
-        new Date(endDate) <
-          new Date(startDate)
+        new Date(
+          endDate
+        ) <
+        new Date(
+          startDate
+        )
       ) {
 
         showMessage(
@@ -2215,16 +2526,23 @@
           "error"
         );
 
+
         return;
 
       }
 
 
+      /* =========================
+         BUDGET
+      ========================= */
+
       const budget =
         budgetValue
+
           ? Number(
               budgetValue
             )
+
           : null;
 
 
@@ -2242,6 +2560,7 @@
           "Please enter a valid advertising budget.",
           "error"
         );
+
 
         return;
 
@@ -2326,7 +2645,9 @@
             );
 
 
-        if (error) {
+        if (
+          error
+        ) {
 
           console.error(
             "Advertising application:",
@@ -2353,11 +2674,13 @@
         messageBox
           .scrollIntoView(
             {
+
               behavior:
                 "smooth",
 
               block:
                 "center"
+
             }
           );
 
@@ -2368,14 +2691,18 @@
 
 
         console.error(
+          "Advertising application error:",
           error
         );
 
 
         showMessage(
           error instanceof Error
+
             ? error.message
+
             : "We could not submit your application. Please try again.",
+
           "error"
         );
 
@@ -2400,10 +2727,2747 @@
 </script>
 
 
-<script src="cookie-consent.js"></script>
+<script src="/cookie-consent.js"></script>
+
 <script src="/affiliate-tracking.js"></script>
 
 
 </body>
 
-</html>
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+
+  <!-- =========================
+       BASIC SEO
+  ========================= -->
+
+  <title>
+    Advertise With Us | GiftedGift Empire
+  </title>
+
+  <meta
+    name="description"
+    content="Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="theme-color"
+    content="#123a8c"
+  >
+
+  <link
+    rel="canonical"
+    href="https://giftedgiftempire.com/advertise.html"
+  >
+
+
+  <!-- =========================
+       FAVICON
+  ========================= -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="/my-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/my-logo.png"
+  >
+
+
+  <!-- =========================
+       OPEN GRAPH
+       FACEBOOK / WHATSAPP
+  ========================= -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="GiftedGift Empire"
+  >
+
+  <meta
+    property="og:title"
+    content="Advertise With Us | GiftedGift Empire"
+  >
+
+  <meta
+    property="og:description"
+    content="Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire."
+  >
+
+  <meta
+    property="og:url"
+    content="https://giftedgiftempire.com/advertise.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Advertise With GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       TWITTER / X
+  ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Advertise With Us | GiftedGift Empire"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    name="twitter:image:alt"
+    content="Advertise With GiftedGift Empire"
+  >
+
+
+  <!-- =========================
+       STRUCTURED DATA
+  ========================= -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://giftedgiftempire.com/#organization",
+        "name": "GiftedGift Empire",
+        "url": "https://giftedgiftempire.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://giftedgiftempire.com/my-logo.png"
+        },
+        "email": "gift@giftedgiftempire.com"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://giftedgiftempire.com/advertise.html#webpage",
+        "url": "https://giftedgiftempire.com/advertise.html",
+        "name": "Advertise With Us | GiftedGift Empire",
+        "description": "Apply to advertise your business, product, service, event or campaign through approved advertising opportunities on GiftedGift Empire.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "GiftedGift Empire",
+          "url": "https://giftedgiftempire.com/"
+        },
+        "about": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://giftedgiftempire.com/advertise.html#advertising-service",
+        "name": "GiftedGift Empire Advertising Opportunities",
+        "description": "Advertising opportunities for approved businesses, products, services, events and campaigns on GiftedGift Empire.",
+        "provider": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        },
+        "url": "https://giftedgiftempire.com/advertise.html",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://giftedgiftempire.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Advertise With Us",
+            "item": "https://giftedgiftempire.com/advertise.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+
+  <style>
+
+    :root {
+      --blue: #123a8c;
+      --dark-blue: #071e52;
+      --gold: #f2bd16;
+      --gold-dark: #d8a90e;
+      --white: #ffffff;
+      --light: #f6f8fc;
+      --text: #20242a;
+      --muted: #68707a;
+      --border: #dfe4ec;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      margin: 0;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background: var(--light);
+
+      color: var(--text);
+
+      line-height: 1.6;
+    }
+
+
+    a {
+      color: inherit;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .site-header {
+      background: var(--blue);
+
+      color: white;
+
+      padding:
+        18px
+        20px;
+
+      box-shadow:
+        0
+        3px
+        14px
+        rgba(0,0,0,0.13);
+    }
+
+
+    .header-inner {
+      max-width: 1200px;
+
+      margin: auto;
+    }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      width: fit-content;
+
+      margin-bottom: 18px;
+
+      text-decoration: none;
+    }
+
+
+    .brand img {
+      width: 58px;
+
+      height: 58px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 3px;
+    }
+
+
+    .brand-name {
+      font-size: 28px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-name .gifted {
+      color: white;
+    }
+
+
+    .brand-name .empire {
+      color: var(--gold);
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap:
+        6px
+        18px;
+    }
+
+
+    nav a {
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      padding:
+        7px
+        0;
+
+      border-bottom:
+        3px solid transparent;
+    }
+
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #eef4ff 60%,
+          #fff7d5 100%
+        );
+
+      padding:
+        70px
+        20px;
+    }
+
+
+    .hero-inner {
+      max-width: 950px;
+
+      margin: auto;
+
+      text-align: center;
+    }
+
+
+    .hero-badge {
+      display: inline-block;
+
+      margin-bottom: 16px;
+
+      padding:
+        8px
+        14px;
+
+      border-radius: 30px;
+
+      background: #e8efff;
+
+      color: var(--blue);
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+    }
+
+
+    .hero h1 {
+      margin: 0;
+
+      color: var(--blue);
+
+      font-size:
+        clamp(
+          38px,
+          7vw,
+          62px
+        );
+
+      line-height: 1.08;
+    }
+
+
+    .hero h1 span {
+      color: var(--gold-dark);
+    }
+
+
+    .hero p {
+      max-width: 750px;
+
+      margin:
+        20px
+        auto
+        0;
+
+      color: #505a67;
+
+      font-size: 18px;
+
+      line-height: 1.75;
+    }
+
+
+    .hero-button {
+      display: inline-block;
+
+      margin-top: 27px;
+
+      padding:
+        14px
+        24px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
+
+      color: #111;
+
+      text-decoration: none;
+
+      font-weight: 800;
+    }
+
+
+    .hero-button:hover {
+      background: var(--gold-dark);
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    .section {
+      max-width: 1150px;
+
+      margin: auto;
+
+      padding:
+        65px
+        20px;
+    }
+
+
+    .section-heading {
+      max-width: 760px;
+
+      margin:
+        0
+        auto
+        35px;
+
+      text-align: center;
+    }
+
+
+    .section-heading h2 {
+      margin:
+        0
+        0
+        10px;
+
+      color: var(--blue);
+
+      font-size: 34px;
+    }
+
+
+    .section-heading p {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       FEATURE CARDS
+    ========================= */
+
+    .feature-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap: 20px;
+    }
+
+
+    .feature-card {
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 25px;
+
+      box-shadow:
+        0
+        6px
+        20px
+        rgba(0,0,0,0.05);
+    }
+
+
+    .feature-icon {
+      font-size: 34px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .feature-card h3 {
+      margin:
+        0
+        0
+        8px;
+
+      color: var(--blue);
+
+      font-size: 21px;
+    }
+
+
+    .feature-card p {
+      margin: 0;
+
+      color: var(--muted);
+
+      line-height: 1.65;
+    }
+
+
+    /* =========================
+       PROCESS
+    ========================= */
+
+    .process-section {
+      background: var(--dark-blue);
+
+      color: white;
+    }
+
+
+    .process-section
+    .section-heading h2 {
+      color: white;
+    }
+
+
+    .process-section
+    .section-heading p {
+      color: #d5def1;
+    }
+
+
+    .process-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap: 18px;
+    }
+
+
+    .process-card {
+      padding:
+        25px
+        20px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.08
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.14
+        );
+
+      border-radius: 14px;
+    }
+
+
+    .process-number {
+      width: 38px;
+
+      height: 38px;
+
+      margin-bottom: 13px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      color: #111;
+
+      font-weight: 800;
+    }
+
+
+    .process-card h3 {
+      margin:
+        0
+        0
+        8px;
+
+      color: var(--gold);
+    }
+
+
+    .process-card p {
+      margin: 0;
+
+      color: #e1e7f4;
+    }
+
+
+    /* =========================
+       RULES
+    ========================= */
+
+    .rules-box {
+      background: #fffdf4;
+
+      border:
+        1px solid #ebd68a;
+
+      border-radius: 16px;
+
+      padding: 25px;
+    }
+
+
+    .rules-box h3 {
+      margin:
+        0
+        0
+        14px;
+
+      color: #745900;
+    }
+
+
+    .rules-box ul {
+      margin: 0;
+
+      padding-left: 22px;
+    }
+
+
+    .rules-box li {
+      margin:
+        9px
+        0;
+
+      color: #555;
+    }
+
+
+    /* =========================
+       APPLICATION
+    ========================= */
+
+    .application-section {
+      background: #eef3ff;
+    }
+
+
+    .form-card {
+      max-width: 900px;
+
+      margin: auto;
+
+      padding: 30px;
+
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 18px;
+
+      box-shadow:
+        0
+        8px
+        26px
+        rgba(18,58,140,0.08);
+    }
+
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap: 17px;
+    }
+
+
+    .field {
+      margin-bottom: 4px;
+    }
+
+
+    .field.full {
+      grid-column:
+        1 / -1;
+    }
+
+
+    label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #30343b;
+
+      font-weight: 700;
+    }
+
+
+    .optional {
+      color: #777;
+
+      font-size: 12px;
+
+      font-weight: 400;
+    }
+
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+
+      padding:
+        13px
+        14px;
+
+      border:
+        1px solid #ccd4e0;
+
+      border-radius: 9px;
+
+      background: white;
+
+      color: #222;
+
+      font: inherit;
+
+      outline: none;
+    }
+
+
+    textarea {
+      min-height: 130px;
+
+      resize: vertical;
+
+      line-height: 1.6;
+    }
+
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(18,58,140,0.08);
+    }
+
+
+    .consent-row {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 10px;
+
+      margin:
+        22px
+        0;
+
+      color: #555;
+
+      font-size: 14px;
+
+      line-height: 1.55;
+    }
+
+
+    .consent-row input {
+      width: 18px;
+
+      height: 18px;
+
+      margin-top: 3px;
+
+      flex-shrink: 0;
+    }
+
+
+    .submit-button {
+      width: 100%;
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding:
+        15px
+        20px;
+
+      background: var(--blue);
+
+      color: white;
+
+      font-size: 17px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .submit-button:hover {
+      background: var(--dark-blue);
+    }
+
+
+    .submit-button:disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
+    }
+
+
+    .form-message {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 14px;
+
+      border-radius: 10px;
+
+      text-align: center;
+    }
+
+
+    .form-message.success {
+      display: block;
+
+      background: #e8f8ed;
+
+      color: #17652d;
+
+      border:
+        1px solid #b7dfc1;
+    }
+
+
+    .form-message.error {
+      display: block;
+
+      background: #ffeded;
+
+      color: #941c1c;
+
+      border:
+        1px solid #efb4b4;
+    }
+
+
+    .form-note {
+      margin-top: 16px;
+
+      color: #777;
+
+      font-size: 13px;
+
+      text-align: center;
+
+      line-height: 1.6;
+    }
+
+
+    .form-note a {
+      color: var(--blue);
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact-box {
+      max-width: 800px;
+
+      margin: auto;
+
+      padding: 30px;
+
+      text-align: center;
+
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 17px;
+    }
+
+
+    .contact-box h2 {
+      margin:
+        0
+        0
+        10px;
+
+      color: var(--blue);
+    }
+
+
+    .contact-box p {
+      margin: 0;
+
+      color: var(--muted);
+    }
+
+
+    .contact-box a {
+      display: inline-block;
+
+      margin-top: 18px;
+
+      color: white;
+
+      background: var(--blue);
+
+      padding:
+        11px
+        18px;
+
+      border-radius: 9px;
+
+      text-decoration: none;
+
+      font-weight: 800;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: var(--dark-blue);
+
+      color: white;
+
+      text-align: center;
+
+      padding:
+        32px
+        20px;
+    }
+
+
+    .footer-logo {
+      width: 46px;
+
+      height: 46px;
+
+      object-fit: contain;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .footer-brand {
+      font-size: 18px;
+
+      font-weight: 800;
+    }
+
+
+    .footer-text {
+      color: #d2dbec;
+
+      margin:
+        8px
+        auto
+        0;
+
+      max-width: 650px;
+
+      font-size: 14px;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin:
+        17px
+        0;
+    }
+
+
+    footer a {
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+
+    footer a:hover {
+      color: var(--gold);
+    }
+
+
+    .copyright {
+      color: #c7d2e8;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (
+      max-width: 800px
+    ) {
+
+      .feature-grid,
+      .process-grid {
+        grid-template-columns:
+          1fr
+          1fr;
+      }
+
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .field.full {
+        grid-column: auto;
+      }
+
+    }
+
+
+    @media (
+      max-width: 560px
+    ) {
+
+      .site-header {
+        padding:
+          15px
+          16px;
+      }
+
+
+      .brand img {
+        width: 50px;
+
+        height: 50px;
+      }
+
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+
+      nav {
+        gap:
+          4px
+          14px;
+      }
+
+
+      nav a {
+        font-size: 14px;
+      }
+
+
+      .hero {
+        padding:
+          52px
+          16px;
+      }
+
+
+      .feature-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .section {
+        padding:
+          50px
+          15px;
+      }
+
+
+      .form-card {
+        padding:
+          22px
+          17px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="site-header">
+
+  <div class="header-inner">
+
+
+    <a
+      href="/index.html"
+      class="brand"
+      aria-label="GiftedGift Empire home"
+    >
+
+      <img
+        src="/my-logo.png"
+        alt="GiftedGift Empire logo"
+        width="58"
+        height="58"
+      >
+
+
+      <div class="brand-name">
+
+        <span class="gifted">
+          GiftedGift
+        </span>
+
+        <span class="empire">
+          Empire
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <nav>
+
+      <a href="/index.html">
+        Home
+      </a>
+
+      <a href="/shop.html">
+        Shop
+      </a>
+
+      <a href="/categories.html">
+        Categories
+      </a>
+
+      <a href="/daily-inspiration.html">
+        Daily Inspiration
+      </a>
+
+      <a href="/blog.html">
+        Blog
+      </a>
+
+      <a href="/deals.html">
+        Deals
+      </a>
+
+      <a href="/about.html">
+        About
+      </a>
+
+      <a href="/contact.html">
+        Contact
+      </a>
+
+      <a href="/cart.html">
+        🛒 Cart
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div class="hero-badge">
+      ADVERTISE WITH GIFTEDGIFT EMPIRE
+    </div>
+
+
+    <h1>
+
+      Put Your Business
+
+      <span>
+        In Front of More People
+      </span>
+
+    </h1>
+
+
+    <p>
+      Do you have a business, product, service,
+      event or campaign you would like to promote?
+      GiftedGift Empire offers advertising
+      opportunities for approved advertisers
+      and campaigns.
+    </p>
+
+
+    <a
+      href="#advertising-application"
+      class="hero-button"
+    >
+      Apply to Advertise →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     BENEFITS
+========================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>
+      Advertising With GiftedGift Empire
+    </h2>
+
+    <p>
+      We provide selected advertisers with
+      promotional space designed to help visitors
+      discover relevant businesses, products,
+      services, events and offers.
+    </p>
+
+  </div>
+
+
+  <div class="feature-grid">
+
+
+    <article class="feature-card">
+
+      <div class="feature-icon">
+        📢
+      </div>
+
+      <h3>
+        Sponsored Promotion
+      </h3>
+
+      <p>
+        Approved campaigns can appear as clearly
+        labelled sponsored advertisements on
+        GiftedGift Empire.
+      </p>
+
+    </article>
+
+
+    <article class="feature-card">
+
+      <div class="feature-icon">
+        🖼️
+      </div>
+
+      <h3>
+        Homepage Advertising
+      </h3>
+
+      <p>
+        Homepage banner advertising may be
+        available depending on campaign suitability,
+        availability and approval.
+      </p>
+
+    </article>
+
+
+    <article class="feature-card">
+
+      <div class="feature-icon">
+        📊
+      </div>
+
+      <h3>
+        Campaign Tracking
+      </h3>
+
+      <p>
+        Where supported, GiftedGift Empire can
+        record advertisement impressions and clicks
+        to help monitor campaign activity.
+      </p>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     WHAT CAN BE ADVERTISED
+========================= -->
+
+<section
+  class="section"
+  style="padding-top:0;"
+>
+
+  <div class="section-heading">
+
+    <h2>
+      What Can You Advertise?
+    </h2>
+
+    <p>
+      Applications are welcome from legitimate
+      businesses and creators with suitable
+      products, services and campaigns.
+    </p>
+
+  </div>
+
+
+  <div class="feature-grid">
+
+
+    <article class="feature-card">
+
+      <div class="feature-icon">
+        🛍️
+      </div>
+
+      <h3>
+        Products & Brands
+      </h3>
+
+      <p>
+        Promote legitimate physical products,
+        online stores, brands and selected offers.
+      </p>
+
+    </article>
+
+
+    <article class="feature-card">
+
+      <div class="feature-icon">
+        💻
+      </div>
+
+      <h3>
+        Digital Products & Services
+      </h3>
+
+      <p>
+        Promote suitable digital resources,
+        professional services, courses,
+        websites and online businesses.
+      </p>
+
+    </article>
+
+
+    <article class="feature-card">
+
+      <div class="feature-icon">
+        📅
+      </div>
+
+      <h3>
+        Events & Campaigns
+      </h3>
+
+      <p>
+        Suitable events, launches,
+        promotions and special campaigns
+        may also be considered.
+      </p>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PROCESS
+========================= -->
+
+<section class="process-section">
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <h2>
+        How It Works
+      </h2>
+
+      <p>
+        Advertising is reviewed before anything
+        is published on GiftedGift Empire.
+      </p>
+
+    </div>
+
+
+    <div class="process-grid">
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          1
+        </div>
+
+        <h3>
+          Apply
+        </h3>
+
+        <p>
+          Tell us about your business,
+          advertisement and campaign.
+        </p>
+
+      </div>
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          2
+        </div>
+
+        <h3>
+          Review
+        </h3>
+
+        <p>
+          GiftedGift Empire reviews the
+          application and destination.
+        </p>
+
+      </div>
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          3
+        </div>
+
+        <h3>
+          Agree Campaign
+        </h3>
+
+        <p>
+          If approved, placement, duration
+          and applicable price are agreed
+          before publishing.
+        </p>
+
+      </div>
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          4
+        </div>
+
+        <h3>
+          Go Live
+        </h3>
+
+        <p>
+          The approved advertisement is
+          published for the agreed campaign period.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     RULES
+========================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>
+      Advertising Standards
+    </h2>
+
+    <p>
+      Protecting visitors and the reputation
+      of GiftedGift Empire comes first.
+    </p>
+
+  </div>
+
+
+  <div class="rules-box">
+
+    <h3>
+      Important
+    </h3>
+
+    <ul>
+
+      <li>
+        Every advertisement is subject
+        to review and approval.
+      </li>
+
+      <li>
+        The advertiser must have the right
+        to promote the submitted product,
+        service, brand, image and content.
+      </li>
+
+      <li>
+        Advertising claims must be truthful
+        and must not deliberately mislead visitors.
+      </li>
+
+      <li>
+        Illegal, fraudulent, harmful,
+        deceptive or prohibited content
+        will not be accepted.
+      </li>
+
+      <li>
+        GiftedGift Empire may reject or remove
+        advertising that violates its policies
+        or presents a risk to visitors.
+      </li>
+
+      <li>
+        Advertising does not guarantee
+        clicks, customers, sales or revenue.
+      </li>
+
+      <li>
+        Pricing depends on the campaign,
+        placement and duration and will be
+        confirmed before an approved campaign
+        goes live.
+      </li>
+
+    </ul>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<section
+  id="advertising-application"
+  class="application-section"
+>
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <h2>
+        Advertising Application
+      </h2>
+
+      <p>
+        Complete the form below.
+        Submitting an application does not
+        guarantee approval.
+      </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+
+      <form id="advertising-form">
+
+
+        <div class="form-grid">
+
+
+          <div class="field">
+
+            <label for="full-name">
+              Your Name *
+            </label>
+
+            <input
+              type="text"
+              id="full-name"
+              maxlength="120"
+              autocomplete="name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="email">
+              Email Address *
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              maxlength="254"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="whatsapp">
+              WhatsApp / Phone
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <input
+              type="tel"
+              id="whatsapp"
+              maxlength="50"
+              autocomplete="tel"
+              placeholder="+33..."
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="business-name">
+              Business / Brand Name
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <input
+              type="text"
+              id="business-name"
+              maxlength="150"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="ad-title">
+              What do you want to advertise? *
+            </label>
+
+            <input
+              type="text"
+              id="ad-title"
+              maxlength="180"
+              placeholder="Example: My online fashion store"
+              required
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="ad-description">
+              Tell Us About It *
+            </label>
+
+            <textarea
+              id="ad-description"
+              maxlength="3000"
+              placeholder="Describe the product, service, business, event or campaign you want us to advertise."
+              required
+            ></textarea>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="destination-url">
+              Website / Product / Campaign Link
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <input
+              type="url"
+              id="destination-url"
+              maxlength="1200"
+              placeholder="https://..."
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="placement">
+              Preferred Placement *
+            </label>
+
+            <select
+              id="placement"
+              required
+            >
+
+              <option value="">
+                Select an option
+              </option>
+
+              <option value="homepage_banner">
+                Homepage Sponsored Banner
+              </option>
+
+              <option value="discuss">
+                Other / Discuss With Us
+              </option>
+
+              <option value="not_sure">
+                Not Sure — Recommend One
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="budget">
+              Approximate Budget (€)
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <input
+              type="number"
+              id="budget"
+              min="0"
+              step="0.01"
+              placeholder="Example: 50"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="start-date">
+              Preferred Start Date
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <input
+              type="date"
+              id="start-date"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="end-date">
+              Preferred End Date
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <input
+              type="date"
+              id="end-date"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="notes">
+              Additional Information
+              <span class="optional">
+                (optional)
+              </span>
+            </label>
+
+            <textarea
+              id="notes"
+              maxlength="3000"
+              placeholder="Anything else you would like GiftedGift Empire to know?"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             SPAM HONEYPOT
+        ========================= -->
+
+        <div
+          style="
+            position:absolute;
+            left:-9999px;
+            width:1px;
+            height:1px;
+            overflow:hidden;
+          "
+          aria-hidden="true"
+        >
+
+          <label for="company-website">
+            Company Website
+          </label>
+
+          <input
+            type="text"
+            id="company-website"
+            tabindex="-1"
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <label class="consent-row">
+
+          <input
+            type="checkbox"
+            id="consent"
+            required
+          >
+
+          <span>
+            I confirm that the information I provided
+            is accurate and that I have the right to
+            promote the submitted business, product,
+            service, event or campaign. I understand
+            that GiftedGift Empire may approve or reject
+            this application.
+          </span>
+
+        </label>
+
+
+        <button
+          type="submit"
+          id="submit-button"
+          class="submit-button"
+        >
+          Submit Advertising Application
+        </button>
+
+
+        <div
+          id="form-message"
+          class="form-message"
+          aria-live="polite"
+        ></div>
+
+
+        <p class="form-note">
+          Your information will be used to review
+          your advertising request. Please see our
+          <a href="/privacy-policy.html">
+            Privacy Policy
+          </a>.
+        </p>
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="section">
+
+  <div class="contact-box">
+
+    <h2>
+      Have a Question Before Applying?
+    </h2>
+
+    <p>
+      Contact GiftedGift Empire and tell us
+      that your enquiry is about advertising.
+    </p>
+
+    <a
+      href="mailto:gift@giftedgiftempire.com?subject=GiftedGift%20Empire%20Advertising%20Enquiry"
+    >
+      📧 Contact Us About Advertising
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <img
+    src="/my-logo.png"
+    alt="GiftedGift Empire logo"
+    class="footer-logo"
+    width="46"
+    height="46"
+    loading="lazy"
+  >
+
+
+  <div class="footer-brand">
+    GiftedGift Empire
+  </div>
+
+
+  <p class="footer-text">
+    Advertising opportunities are subject
+    to review, suitability and availability.
+  </p>
+
+
+  <div class="footer-links">
+
+    <a href="/index.html">
+      Home
+    </a>
+
+    <a href="/shop.html">
+      Shop
+    </a>
+
+    <a href="/categories.html">
+      Categories
+    </a>
+
+    <a href="/about.html">
+      About
+    </a>
+
+    <a href="/contact.html">
+      Contact
+    </a>
+
+    <a href="/customer-service.html">
+      Customer Support
+    </a>
+
+    <a href="/privacy-policy.html">
+      Privacy
+    </a>
+
+    <a href="/terms-conditions.html">
+      Terms
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+    © <span id="year"></span>
+    GiftedGift Empire.
+    All rights reserved.
+  </div>
+
+</footer>
+
+
+<!-- =========================
+     APPLICATION SCRIPT
+========================= -->
+
+<script>
+
+(function () {
+
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  document
+    .getElementById(
+      "year"
+    )
+    .textContent =
+      new Date()
+        .getFullYear();
+
+
+  const form =
+    document.getElementById(
+      "advertising-form"
+    );
+
+
+  const submitButton =
+    document.getElementById(
+      "submit-button"
+    );
+
+
+  const messageBox =
+    document.getElementById(
+      "form-message"
+    );
+
+
+  /* =========================
+     MESSAGE
+  ========================= */
+
+  function showMessage(
+    text,
+    type
+  ) {
+
+    messageBox.className =
+      "form-message " +
+      type;
+
+
+    messageBox.textContent =
+      text;
+
+  }
+
+
+  /* =========================
+     URL VALIDATION
+  ========================= */
+
+  function isValidDestinationUrl(
+    value
+  ) {
+
+    const text =
+      String(
+        value ||
+        ""
+      ).trim();
+
+
+    if (
+      !text
+    ) {
+
+      return true;
+
+    }
+
+
+    try {
+
+      const url =
+        new URL(
+          text
+        );
+
+
+      return (
+        url.protocol === "https:" ||
+        url.protocol === "http:"
+      );
+
+
+    } catch (
+      error
+    ) {
+
+      return false;
+
+    }
+
+  }
+
+
+  /* =========================
+     FORM SUBMISSION
+  ========================= */
+
+  form.addEventListener(
+    "submit",
+    async function (
+      event
+    ) {
+
+      event.preventDefault();
+
+
+      const fullName =
+        document
+          .getElementById(
+            "full-name"
+          )
+          .value
+          .trim();
+
+
+      const email =
+        document
+          .getElementById(
+            "email"
+          )
+          .value
+          .trim();
+
+
+      const whatsapp =
+        document
+          .getElementById(
+            "whatsapp"
+          )
+          .value
+          .trim();
+
+
+      const businessName =
+        document
+          .getElementById(
+            "business-name"
+          )
+          .value
+          .trim();
+
+
+      const adTitle =
+        document
+          .getElementById(
+            "ad-title"
+          )
+          .value
+          .trim();
+
+
+      const adDescription =
+        document
+          .getElementById(
+            "ad-description"
+          )
+          .value
+          .trim();
+
+
+      const destinationUrl =
+        document
+          .getElementById(
+            "destination-url"
+          )
+          .value
+          .trim();
+
+
+      const placement =
+        document
+          .getElementById(
+            "placement"
+          )
+          .value;
+
+
+      const budgetValue =
+        document
+          .getElementById(
+            "budget"
+          )
+          .value;
+
+
+      const startDate =
+        document
+          .getElementById(
+            "start-date"
+          )
+          .value;
+
+
+      const endDate =
+        document
+          .getElementById(
+            "end-date"
+          )
+          .value;
+
+
+      const notes =
+        document
+          .getElementById(
+            "notes"
+          )
+          .value
+          .trim();
+
+
+      const consent =
+        document
+          .getElementById(
+            "consent"
+          )
+          .checked;
+
+
+      const honeypot =
+        document
+          .getElementById(
+            "company-website"
+          )
+          .value
+          .trim();
+
+
+      /* =========================
+         HONEYPOT
+      ========================= */
+
+      if (
+        honeypot
+      ) {
+
+        form.reset();
+
+
+        showMessage(
+          "Thank you. Your application has been received.",
+          "success"
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         REQUIRED FIELDS
+      ========================= */
+
+      if (
+        !fullName ||
+        !email ||
+        !adTitle ||
+        !adDescription ||
+        !placement
+      ) {
+
+        showMessage(
+          "Please complete all required fields.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        !consent
+      ) {
+
+        showMessage(
+          "Please confirm the advertising declaration before submitting.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         DESTINATION URL
+      ========================= */
+
+      if (
+        !isValidDestinationUrl(
+          destinationUrl
+        )
+      ) {
+
+        showMessage(
+          "Please enter a valid website or campaign link beginning with http:// or https://.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         DATES
+      ========================= */
+
+      if (
+        startDate &&
+        endDate &&
+        new Date(
+          endDate
+        ) <
+        new Date(
+          startDate
+        )
+      ) {
+
+        showMessage(
+          "The preferred end date cannot be earlier than the start date.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         BUDGET
+      ========================= */
+
+      const budget =
+        budgetValue
+
+          ? Number(
+              budgetValue
+            )
+
+          : null;
+
+
+      if (
+        budget !== null &&
+        (
+          !Number.isFinite(
+            budget
+          ) ||
+          budget < 0
+        )
+      ) {
+
+        showMessage(
+          "Please enter a valid advertising budget.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      submitButton.disabled =
+        true;
+
+
+      submitButton.textContent =
+        "Submitting...";
+
+
+      messageBox.className =
+        "form-message";
+
+
+      messageBox.textContent =
+        "";
+
+
+      try {
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(
+              "advertising_applications"
+            )
+            .insert(
+              {
+
+                full_name:
+                  fullName,
+
+                email:
+                  email,
+
+                whatsapp:
+                  whatsapp ||
+                  null,
+
+                business_name:
+                  businessName ||
+                  null,
+
+                ad_title:
+                  adTitle,
+
+                ad_description:
+                  adDescription,
+
+                destination_url:
+                  destinationUrl ||
+                  null,
+
+                preferred_placement:
+                  placement,
+
+                preferred_start_date:
+                  startDate ||
+                  null,
+
+                preferred_end_date:
+                  endDate ||
+                  null,
+
+                budget_eur:
+                  budget,
+
+                notes:
+                  notes ||
+                  null,
+
+                consent:
+                  true
+
+              }
+            );
+
+
+        if (
+          error
+        ) {
+
+          console.error(
+            "Advertising application:",
+            error
+          );
+
+
+          throw new Error(
+            "We could not submit your application. Please try again."
+          );
+
+        }
+
+
+        form.reset();
+
+
+        showMessage(
+          "Thank you. Your advertising application has been submitted successfully. GiftedGift Empire will review it before contacting you.",
+          "success"
+        );
+
+
+        messageBox
+          .scrollIntoView(
+            {
+
+              behavior:
+                "smooth",
+
+              block:
+                "center"
+
+            }
+          );
+
+
+      } catch (
+        error
+      ) {
+
+
+        console.error(
+          "Advertising application error:",
+          error
+        );
+
+
+        showMessage(
+          error instanceof Error
+
+            ? error.message
+
+            : "We could not submit your application. Please try again.",
+
+          "error"
+        );
+
+
+      } finally {
+
+
+        submitButton.disabled =
+          false;
+
+
+        submitButton.textContent =
+          "Submit Advertising Application";
+
+      }
+
+    }
+  );
+
+})();
+
+</script>
+
+
+<script src="/cookie-consent.js"></script>
+
+<script src="/affiliate-tracking.js"></script>
+
+
+</body>
+
+  </html>
