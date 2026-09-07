@@ -467,6 +467,20 @@
         12px;
     }
 
+    .image-help {
+      margin-top:
+        7px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+    }
+
 
     /* =========================
        BUTTONS
@@ -651,7 +665,57 @@
 
 
     /* =========================
-       PREVIEW
+       IMAGE PREVIEW
+    ========================= */
+
+    .selected-image-box {
+      display:
+        none;
+
+      margin-top:
+        12px;
+
+      padding:
+        12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        12px;
+
+      background:
+        #fafbfc;
+    }
+
+    .selected-image {
+      width:
+        100%;
+
+      max-width:
+        650px;
+
+      height:
+        auto;
+
+      display:
+        block;
+
+      margin:
+        0 auto;
+
+      border-radius:
+        10px;
+
+      border:
+        1px solid
+        var(--border);
+    }
+
+
+    /* =========================
+       EMAIL PREVIEW
     ========================= */
 
     .preview-box {
@@ -758,6 +822,25 @@
     .preview-email-body p {
       margin:
         0 0 18px;
+    }
+
+    .preview-newsletter-image {
+      display:
+        block;
+
+      width:
+        calc(100% + 46px);
+
+      max-width:
+        none;
+
+      height:
+        auto;
+
+      margin:
+        -27px -23px 25px;
+
+      border: 0;
     }
 
     .preview-cta {
@@ -1312,54 +1395,51 @@
 
         </div>
 
-<div class="field full">
 
-  <label for="newsletter-image">
-    Newsletter Image
-    <span class="optional">
-      (optional)
-    </span>
-  </label>
+        <div class="field full">
 
-  <input
-    type="file"
-    id="newsletter-image"
-    accept="image/jpeg,image/png,image/webp,image/gif"
-  >
+          <label for="newsletter-image">
+            Newsletter Image
+            <span class="optional">
+              (optional)
+            </span>
+          </label>
 
-  <div
-    id="newsletter-image-preview-box"
-    style="
-      display:none;
-      margin-top:12px;
-    "
-  >
+          <input
+            type="file"
+            id="newsletter-image"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+          >
 
-    <img
-      id="newsletter-image-preview"
-      alt="Newsletter image preview"
-      style="
-        width:100%;
-        max-width:650px;
-        height:auto;
-        display:block;
-        border-radius:10px;
-        border:1px solid #dfe4ec;
-      "
-    >
+          <div class="image-help">
+            Choose JPG, PNG, WebP or GIF. Maximum size: 5 MB.
+          </div>
 
-    <button
-      type="button"
-      id="remove-newsletter-image"
-      class="button button-danger small-button"
-      style="margin-top:10px;"
-    >
-      Remove Image
-    </button>
+          <div
+            id="newsletter-image-preview-box"
+            class="selected-image-box"
+          >
 
-  </div>
+            <img
+              id="newsletter-image-preview"
+              class="selected-image"
+              alt="Newsletter image preview"
+            >
 
-</div>
+            <button
+              type="button"
+              id="remove-newsletter-image"
+              class="button button-danger small-button"
+              style="margin-top:10px;"
+            >
+              Remove Image
+            </button>
+
+          </div>
+
+        </div>
+
+
         <div class="field full">
 
           <label for="message">
@@ -1520,9 +1600,7 @@
           Subscribers
         </h2>
 
-        <p
-          id="segment-name"
-        >
+        <p id="segment-name">
           GiftedGift Empire Newsletter
         </p>
 
@@ -1713,12 +1791,13 @@
   let currentSession =
     null;
 
-let selectedNewsletterImage =
-  null;
+
+  let selectedNewsletterImage =
+    null;
 
 
-let newsletterImagePreviewUrl =
-  "";
+  let newsletterImagePreviewUrl =
+    "";
 
 
   /* =========================
@@ -2043,6 +2122,7 @@ let newsletterImagePreviewUrl =
 
       await loadNewsletter();
 
+
     } catch (
       error
     ) {
@@ -2344,7 +2424,6 @@ let newsletterImagePreviewUrl =
     tbody.innerHTML =
       contacts.map(
         contact => {
-
 
           const email =
             String(
@@ -2673,12 +2752,6 @@ let newsletterImagePreviewUrl =
       broadcasts.map(
         item => {
 
-          const date =
-            item.sent_at ||
-            item.scheduled_at ||
-            item.created_at;
-
-
           return `
 
             <div class="broadcast-item">
@@ -2845,6 +2918,20 @@ let newsletterImagePreviewUrl =
         .join("");
 
 
+    const imagePreviewHTML =
+      newsletterImagePreviewUrl
+        ? `
+
+          <img
+            src="${escapeHTML(newsletterImagePreviewUrl)}"
+            alt="GiftedGift Empire Newsletter"
+            class="preview-newsletter-image"
+          >
+
+        `
+        : "";
+
+
     const cta =
       ctaLabel &&
       ctaUrl
@@ -2871,6 +2958,8 @@ let newsletterImagePreviewUrl =
         "preview-body"
       )
       .innerHTML = `
+
+        ${imagePreviewHTML}
 
         <p>
           Hello there,
@@ -2914,90 +3003,117 @@ let newsletterImagePreviewUrl =
 
   }
 
-async function uploadNewsletterImage() {
 
-  if (
-    !selectedNewsletterImage
-  ) {
-    return "";
-  }
+  /* =========================
+     UPLOAD NEWSLETTER IMAGE
+  ========================= */
 
+  async function uploadNewsletterImage() {
 
-  const token =
-    await getAccessToken();
+    if (
+      !selectedNewsletterImage
+    ) {
 
+      return "";
 
-  const formData =
-    new FormData();
-
-
-  formData.append(
-    "action",
-    "upload_newsletter_image"
-  );
+    }
 
 
-  formData.append(
-    "image",
-    selectedNewsletterImage
-  );
+    const token =
+      await getAccessToken();
 
 
-  const response =
-    await fetch(
-      NEWSLETTER_ADMIN_URL,
-      {
-        method:
-          "POST",
+    const formData =
+      new FormData();
 
-        headers: {
-          "Authorization":
-            "Bearer " +
-            token
-        },
 
-        body:
-          formData
-      }
+    formData.append(
+      "action",
+      "upload_newsletter_image"
     );
 
 
-  let result;
-
-
-  try {
-
-    result =
-      await response.json();
-
-  } catch {
-
-    throw new Error(
-      "The image upload returned an invalid response."
+    formData.append(
+      "image",
+      selectedNewsletterImage
     );
+
+
+    const response =
+      await fetch(
+        NEWSLETTER_ADMIN_URL,
+        {
+          method:
+            "POST",
+
+          headers: {
+
+            "Authorization":
+              "Bearer " +
+              token
+
+          },
+
+          body:
+            formData
+        }
+      );
+
+
+    let result;
+
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch {
+
+      throw new Error(
+        "The image upload returned an invalid response."
+      );
+
+    }
+
+
+    if (
+      !response.ok ||
+      result.success !==
+        true
+    ) {
+
+      throw new Error(
+        result.error ||
+        "Could not upload the newsletter image."
+      );
+
+    }
+
+
+    const imageUrl =
+      String(
+        result.image_url ||
+        ""
+      );
+
+
+    if (
+      !imageUrl
+    ) {
+
+      throw new Error(
+        "Newsletter image uploaded but no image URL was returned."
+      );
+
+    }
+
+
+    return imageUrl;
 
   }
 
 
-  if (
-    !response.ok ||
-    result.success !== true
-  ) {
-
-    throw new Error(
-      result.error ||
-      "Could not upload the newsletter image."
-    );
-
-  }
-
-
-  return String(
-    result.image_url ||
-    ""
-  );
-
-}
   /* =========================
      SEND BROADCAST
   ========================= */
@@ -3101,8 +3217,7 @@ async function uploadNewsletterImage() {
 
 
     if (
-      recipients <
-      1
+      recipients < 1
     ) {
 
       showMessage(
@@ -3143,12 +3258,21 @@ async function uploadNewsletterImage() {
 
 
     sendButton.textContent =
-      "Sending...";
+      selectedNewsletterImage
+        ? "Uploading image..."
+        : "Sending...";
 
 
     try {
-const imageUrl =
-  await uploadNewsletterImage();
+
+      const imageUrl =
+        await uploadNewsletterImage();
+
+
+      sendButton.textContent =
+        "Sending...";
+
+
       const result =
         await adminRequest(
           "POST",
@@ -3168,9 +3292,10 @@ const imageUrl =
               ctaLabel,
 
             cta_url:
-              ctaUrl
-  image_url:
-  imageUrl,      
+              ctaUrl,
+
+            image_url:
+              imageUrl
 
           }
         );
@@ -3197,6 +3322,41 @@ const imageUrl =
         )
         .textContent =
           "0 / 20,000";
+
+
+      if (
+        newsletterImagePreviewUrl
+      ) {
+
+        URL.revokeObjectURL(
+          newsletterImagePreviewUrl
+        );
+
+      }
+
+
+      selectedNewsletterImage =
+        null;
+
+
+      newsletterImagePreviewUrl =
+        "";
+
+
+      document
+        .getElementById(
+          "newsletter-image-preview"
+        )
+        .src =
+          "";
+
+
+      document
+        .getElementById(
+          "newsletter-image-preview-box"
+        )
+        .style.display =
+          "none";
 
 
       document
@@ -3246,159 +3406,204 @@ const imageUrl =
 
 
   /* =========================
+     IMAGE SELECTION
+  ========================= */
+
+  document
+    .getElementById(
+      "newsletter-image"
+    )
+    .addEventListener(
+      "change",
+      function () {
+
+        const file =
+          this.files?.[0] ||
+          null;
+
+
+        if (!file) {
+          return;
+        }
+
+
+        const allowedTypes = [
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+          "image/gif"
+        ];
+
+
+        if (
+          !allowedTypes.includes(
+            file.type
+          )
+        ) {
+
+          alert(
+            "Please choose a JPG, PNG, WebP or GIF image."
+          );
+
+
+          this.value =
+            "";
+
+
+          selectedNewsletterImage =
+            null;
+
+
+          return;
+
+        }
+
+
+        if (
+          file.size >
+          5 * 1024 * 1024
+        ) {
+
+          alert(
+            "Newsletter image must be 5 MB or smaller."
+          );
+
+
+          this.value =
+            "";
+
+
+          selectedNewsletterImage =
+            null;
+
+
+          return;
+
+        }
+
+
+        if (
+          newsletterImagePreviewUrl
+        ) {
+
+          URL.revokeObjectURL(
+            newsletterImagePreviewUrl
+          );
+
+        }
+
+
+        selectedNewsletterImage =
+          file;
+
+
+        newsletterImagePreviewUrl =
+          URL.createObjectURL(
+            file
+          );
+
+
+        document
+          .getElementById(
+            "newsletter-image-preview"
+          )
+          .src =
+            newsletterImagePreviewUrl;
+
+
+        document
+          .getElementById(
+            "newsletter-image-preview-box"
+          )
+          .style.display =
+            "block";
+
+
+        document
+          .getElementById(
+            "preview-box"
+          )
+          .classList
+          .remove(
+            "show"
+          );
+
+      }
+    );
+
+
+  /* =========================
+     REMOVE IMAGE
+  ========================= */
+
+  document
+    .getElementById(
+      "remove-newsletter-image"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        if (
+          newsletterImagePreviewUrl
+        ) {
+
+          URL.revokeObjectURL(
+            newsletterImagePreviewUrl
+          );
+
+        }
+
+
+        selectedNewsletterImage =
+          null;
+
+
+        newsletterImagePreviewUrl =
+          "";
+
+
+        document
+          .getElementById(
+            "newsletter-image"
+          )
+          .value =
+            "";
+
+
+        document
+          .getElementById(
+            "newsletter-image-preview"
+          )
+          .src =
+            "";
+
+
+        document
+          .getElementById(
+            "newsletter-image-preview-box"
+          )
+          .style.display =
+            "none";
+
+
+        document
+          .getElementById(
+            "preview-box"
+          )
+          .classList
+          .remove(
+            "show"
+          );
+
+      }
+    );
+
+
+  /* =========================
      EVENTS
   ========================= */
-document
-  .getElementById(
-    "newsletter-image"
-  )
-  .addEventListener(
-    "change",
-    function () {
 
-      const file =
-        this.files?.[0] ||
-        null;
-
-
-      if (!file) {
-        return;
-      }
-
-
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-        "image/gif"
-      ];
-
-
-      if (
-        !allowedTypes.includes(
-          file.type
-        )
-      ) {
-
-        alert(
-          "Please choose a JPG, PNG, WebP or GIF image."
-        );
-
-        this.value =
-          "";
-
-        return;
-
-      }
-
-
-      if (
-        file.size >
-        5 * 1024 * 1024
-      ) {
-
-        alert(
-          "Newsletter image must be 5 MB or smaller."
-        );
-
-        this.value =
-          "";
-
-        return;
-
-      }
-
-
-      if (
-        newsletterImagePreviewUrl
-      ) {
-
-        URL.revokeObjectURL(
-          newsletterImagePreviewUrl
-        );
-
-      }
-
-
-      selectedNewsletterImage =
-        file;
-
-
-      newsletterImagePreviewUrl =
-        URL.createObjectURL(
-          file
-        );
-
-
-      document
-        .getElementById(
-          "newsletter-image-preview"
-        )
-        .src =
-          newsletterImagePreviewUrl;
-
-
-      document
-        .getElementById(
-          "newsletter-image-preview-box"
-        )
-        .style.display =
-          "block";
-
-    }
-  );
-  document
-  .getElementById(
-    "remove-newsletter-image"
-  )
-  .addEventListener(
-    "click",
-    function () {
-
-      if (
-        newsletterImagePreviewUrl
-      ) {
-
-        URL.revokeObjectURL(
-          newsletterImagePreviewUrl
-        );
-
-      }
-
-
-      selectedNewsletterImage =
-        null;
-
-
-      newsletterImagePreviewUrl =
-        "";
-
-
-      document
-        .getElementById(
-          "newsletter-image"
-        )
-        .value =
-          "";
-
-
-      document
-        .getElementById(
-          "newsletter-image-preview"
-        )
-        .src =
-          "";
-
-
-      document
-        .getElementById(
-          "newsletter-image-preview-box"
-        )
-        .style.display =
-          "none";
-
-    }
-  );
   document
     .getElementById(
       "newsletter-form"
