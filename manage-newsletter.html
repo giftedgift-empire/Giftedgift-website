@@ -3262,6 +3262,58 @@ document
     }
   );
   document
+  .getElementById(
+    "remove-newsletter-image"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      if (
+        newsletterImagePreviewUrl
+      ) {
+
+        URL.revokeObjectURL(
+          newsletterImagePreviewUrl
+        );
+
+      }
+
+
+      selectedNewsletterImage =
+        null;
+
+
+      newsletterImagePreviewUrl =
+        "";
+
+
+      document
+        .getElementById(
+          "newsletter-image"
+        )
+        .value =
+          "";
+
+
+      document
+        .getElementById(
+          "newsletter-image-preview"
+        )
+        .src =
+          "";
+
+
+      document
+        .getElementById(
+          "newsletter-image-preview-box"
+        )
+        .style.display =
+          "none";
+
+    }
+  );
+  document
     .getElementById(
       "newsletter-form"
     )
