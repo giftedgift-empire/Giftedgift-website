@@ -488,6 +488,135 @@
 
 
     /* =========================
+       PUBLIC CREATOR INFO
+    ========================= */
+
+    .public-info {
+      margin-bottom: 25px;
+
+      padding: 20px;
+
+      background: #f8faff;
+
+      border:
+        1px solid #dce5f4;
+
+      border-radius: 14px;
+    }
+
+
+    .public-info h2 {
+      margin-bottom: 10px;
+    }
+
+
+    .public-info p {
+      margin:
+        8px
+        0;
+
+      color: #555;
+
+      line-height: 1.65;
+    }
+
+
+    .public-points {
+      margin:
+        16px
+        0
+        0;
+
+      padding-left: 22px;
+
+      color: #444;
+
+      line-height: 1.65;
+    }
+
+
+    .public-points li {
+      margin-bottom: 8px;
+    }
+
+
+    /* =========================
+       LOGIN REQUIRED
+    ========================= */
+
+    .login-required-panel {
+      display: none;
+
+      text-align: center;
+
+      margin-top: 22px;
+
+      padding: 24px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #eef4ff,
+          #fff9df
+        );
+
+      border:
+        1px solid #d7e2f4;
+
+      border-radius: 14px;
+    }
+
+
+    .login-required-panel h2 {
+      color: var(--blue);
+
+      margin:
+        0
+        0
+        10px;
+    }
+
+
+    .login-required-panel p {
+      max-width: 570px;
+
+      margin:
+        8px
+        auto;
+
+      color: #555;
+
+      line-height: 1.65;
+    }
+
+
+    .creator-login-button {
+      display: inline-block;
+
+      margin-top: 18px;
+
+      padding:
+        14px
+        20px;
+
+      background: var(--blue);
+
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 700;
+
+      border-radius: 10px;
+    }
+
+
+    .creator-login-button:hover {
+      background: var(--dark-blue);
+    }
+
+
+    /* =========================
        INFORMATION BOXES
     ========================= */
 
@@ -1178,13 +1307,64 @@
 
 
 <!-- =========================
-     APPLICATION
+     PAGE
 ========================= -->
 
 <main class="page">
 
   <div class="card">
 
+
+    <!-- =========================
+         PUBLIC INFORMATION
+    ========================= -->
+
+    <section class="public-info">
+
+      <h2>
+        Sell Your Digital Products With Us
+      </h2>
+
+      <p>
+        GiftedGift Empire gives approved Creators
+        a place to list and sell eligible digital
+        products through our Creator Marketplace.
+      </p>
+
+      <ul class="public-points">
+
+        <li>
+          Sell eligible original digital products.
+        </li>
+
+        <li>
+          Products are reviewed before publication.
+        </li>
+
+        <li>
+          The standard sale split is 70% to the
+          Creator and 30% to GiftedGift Empire,
+          unless another rate has been agreed.
+        </li>
+
+        <li>
+          Creator withdrawals have a minimum
+          threshold of €20.
+        </li>
+
+        <li>
+          Creators receive access to their own
+          private Creator account and product tools.
+        </li>
+
+      </ul>
+
+    </section>
+
+
+    <!-- =========================
+         LOADING
+    ========================= -->
 
     <div
       id="loading"
@@ -1193,6 +1373,40 @@
       aria-live="polite"
     >
       Checking your Creator account...
+    </div>
+
+
+    <!-- =========================
+         LOGIN REQUIRED
+    ========================= -->
+
+    <div
+      id="login-required-panel"
+      class="login-required-panel"
+    >
+
+      <h2>
+        Ready to Apply?
+      </h2>
+
+      <p>
+        To submit a Creator application,
+        you need to sign in to your Creator
+        account first.
+      </p>
+
+      <p>
+        If you do not yet have a Creator account,
+        continue to the Creator portal to get started.
+      </p>
+
+      <a
+        href="/creator-login.html"
+        class="creator-login-button"
+      >
+        Login / Continue to Creator Portal
+      </a>
+
     </div>
 
 
@@ -1235,9 +1449,7 @@
       <form id="creator-application-form">
 
 
-        <!-- =========================
-             PERSONAL INFORMATION
-        ========================= -->
+        <!-- PERSONAL INFORMATION -->
 
         <h3 class="section-title">
           Your Information
@@ -1308,9 +1520,7 @@
         </p>
 
 
-        <!-- =========================
-             ADDRESS
-        ========================= -->
+        <!-- ADDRESS -->
 
         <h3 class="section-title">
           Address
@@ -1404,9 +1614,7 @@
         </div>
 
 
-        <!-- =========================
-             ONLINE PRESENCE
-        ========================= -->
+        <!-- ONLINE PRESENCE -->
 
         <h3 class="section-title">
           Online Presence *
@@ -1480,9 +1688,7 @@
         >
 
 
-        <!-- =========================
-             PRODUCTS
-        ========================= -->
+        <!-- PRODUCTS -->
 
         <h3 class="section-title">
           About Your Digital Products
@@ -1510,9 +1716,7 @@
         </p>
 
 
-        <!-- =========================
-             AGREEMENT
-        ========================= -->
+        <!-- AGREEMENT -->
 
         <div class="agreement-box">
 
@@ -1814,6 +2018,12 @@ const successPanel =
   );
 
 
+const loginRequiredPanel =
+  document.getElementById(
+    "login-required-panel"
+  );
+
+
 const formMessage =
   document.getElementById(
     "form-message"
@@ -1929,6 +2139,10 @@ async function initializeApplication() {
     "none";
 
 
+  loginRequiredPanel.style.display =
+    "none";
+
+
   const {
     data,
     error
@@ -1939,8 +2153,15 @@ async function initializeApplication() {
 
 
   /*
-    Creator applicants must first use
-    the Creator account/login flow.
+    IMPORTANT:
+    Do not redirect a logged-out visitor away
+    from this public page.
+
+    Google and normal visitors can now read
+    the Creator information.
+
+    Authentication is still required before
+    the actual application form is shown.
   */
 
   if (
@@ -1949,9 +2170,20 @@ async function initializeApplication() {
     !data.session.user
   ) {
 
-    window.location.replace(
-      "creator-login.html"
-    );
+    loading.style.display =
+      "none";
+
+
+    applicationArea.style.display =
+      "none";
+
+
+    successPanel.style.display =
+      "none";
+
+
+    loginRequiredPanel.style.display =
+      "block";
 
 
     return;
@@ -1964,8 +2196,8 @@ async function initializeApplication() {
 
 
   /*
-    CHECK WHETHER THE USER HAS
-    ALREADY SUBMITTED AN APPLICATION
+    CHECK WHETHER USER ALREADY
+    HAS A CREATOR ACCOUNT
   */
 
   const {
@@ -2019,7 +2251,8 @@ async function initializeApplication() {
 
 
   /*
-    USER ALREADY HAS A CREATOR ACCOUNT
+    USER ALREADY HAS
+    A CREATOR ACCOUNT
   */
 
   if (
@@ -2050,6 +2283,10 @@ async function initializeApplication() {
 
 
   loading.style.display =
+    "none";
+
+
+  loginRequiredPanel.style.display =
     "none";
 
 
@@ -2661,6 +2898,10 @@ document
       */
 
       applicationArea.style.display =
+        "none";
+
+
+      loginRequiredPanel.style.display =
         "none";
 
 
