@@ -16,13 +16,13 @@
   ========================= -->
 
   <title>
-    About GiftedGift Empire | Our Mission
+    About GiftedGift Empire | Shopping & Digital Commerce
   </title>
 
   <meta
     id="page-description-meta"
     name="description"
-    content="Learn about GiftedGift Empire, our mission and how we help people discover useful products, digital resources, African foodstuffs and carefully selected recommendations."
+    content="Learn about GiftedGift Empire, an online shopping and digital commerce platform for fashion, digital products, African foodstuffs, deals and opportunities."
   >
 
   <meta
@@ -80,13 +80,13 @@
   <meta
     id="og-title"
     property="og:title"
-    content="About GiftedGift Empire | Our Mission"
+    content="About GiftedGift Empire | Shopping & Digital Commerce"
   >
 
   <meta
     id="og-description"
     property="og:description"
-    content="Learn about GiftedGift Empire, our mission and how we help people discover useful products, digital resources, African foodstuffs and carefully selected recommendations."
+    content="Learn about GiftedGift Empire, an online shopping and digital commerce platform for fashion, digital products, African foodstuffs, deals and opportunities."
   >
 
   <meta
@@ -119,13 +119,13 @@
   <meta
     id="twitter-title"
     name="twitter:title"
-    content="About GiftedGift Empire | Our Mission"
+    content="About GiftedGift Empire | Shopping & Digital Commerce"
   >
 
   <meta
     id="twitter-description"
     name="twitter:description"
-    content="Learn about GiftedGift Empire, our mission and how we help people discover useful products, digital resources, African foodstuffs and carefully selected recommendations."
+    content="Learn about GiftedGift Empire, an online shopping and digital commerce platform for fashion, digital products, African foodstuffs, deals and opportunities."
   >
 
   <meta
@@ -135,15 +135,92 @@
   >
 
   <meta
+    id="twitter-image-alt"
     name="twitter:image:alt"
     content="GiftedGift Empire"
   >
+
+
+  <!-- =========================
+       STRUCTURED DATA
+       PRESENT BEFORE JAVASCRIPT
+  ========================= -->
+
+  <script
+    id="about-structured-data"
+    type="application/ld+json"
+  >
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://giftedgiftempire.com/#organization",
+        "name": "GiftedGift Empire",
+        "url": "https://giftedgiftempire.com/",
+        "description": "GiftedGift Empire is an online shopping and digital commerce platform offering fashion and accessories, lifestyle and wellness finds, digital products and resources, African foodstuffs, deals, affiliate recommendations, creator selling opportunities, affiliate opportunities and advertising opportunities.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://giftedgiftempire.com/my-logo.png"
+        },
+        "email": "gift@giftedgiftempire.com",
+        "sameAs": [
+          "https://www.instagram.com/giftedgiftempire/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://giftedgiftempire.com/#website",
+        "url": "https://giftedgiftempire.com/",
+        "name": "GiftedGift Empire",
+        "publisher": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        }
+      },
+      {
+        "@type": "AboutPage",
+        "@id": "https://giftedgiftempire.com/about#webpage",
+        "url": "https://giftedgiftempire.com/about",
+        "name": "About GiftedGift Empire | Shopping & Digital Commerce",
+        "description": "Learn about GiftedGift Empire, an online shopping and digital commerce platform for fashion, digital products, African foodstuffs, deals and opportunities.",
+        "about": {
+          "@id": "https://giftedgiftempire.com/#organization"
+        },
+        "isPartOf": {
+          "@id": "https://giftedgiftempire.com/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://giftedgiftempire.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About GiftedGift Empire",
+            "item": "https://giftedgiftempire.com/about"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
 
   <style>
 
     * {
       box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
     }
 
 
@@ -294,6 +371,29 @@
     }
 
 
+    .hero-label {
+      display: inline-block;
+
+      margin-bottom: 14px;
+
+      padding:
+        7px
+        14px;
+
+      border-radius: 30px;
+
+      background: #e8efff;
+
+      color: #123a8c;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.8px;
+    }
+
+
     .hero h1 {
       font-size: 40px;
 
@@ -307,7 +407,7 @@
 
 
     .hero p {
-      max-width: 720px;
+      max-width: 760px;
 
       margin: auto;
 
@@ -324,7 +424,7 @@
     ========================= */
 
     .about {
-      max-width: 950px;
+      max-width: 1000px;
 
       margin: auto;
 
@@ -335,21 +435,221 @@
     }
 
 
+    /* =========================
+       CORE BRAND IDENTITY
+    ========================= */
+
+    .identity-section {
+      background: white;
+
+      padding: 34px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0
+        4px
+        18px
+        rgba(0,0,0,0.08);
+
+      margin-bottom: 30px;
+    }
+
+
+    .identity-section h2 {
+      color: #123a8c;
+
+      font-size: 30px;
+
+      margin:
+        0
+        0
+        18px;
+    }
+
+
+    .identity-section p {
+      color: #4f4f4f;
+
+      line-height: 1.85;
+
+      font-size: 17px;
+
+      margin:
+        0
+        0
+        18px;
+    }
+
+
+    .identity-section p:last-of-type {
+      margin-bottom: 0;
+    }
+
+
+    .offer-title {
+      color: #123a8c;
+
+      margin:
+        32px
+        0
+        18px;
+
+      font-size: 24px;
+    }
+
+
+    .offer-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            220px,
+            1fr
+          )
+        );
+
+      gap: 16px;
+
+      margin-top: 18px;
+    }
+
+
+    .offer-card {
+      background: #f8faff;
+
+      border:
+        1px solid #dfe7f4;
+
+      border-radius: 12px;
+
+      padding: 20px;
+    }
+
+
+    .offer-card h3 {
+      color: #123a8c;
+
+      margin:
+        0
+        0
+        9px;
+
+      font-size: 18px;
+    }
+
+
+    .offer-card p {
+      margin: 0;
+
+      font-size: 15px;
+
+      line-height: 1.65;
+
+      color: #555;
+    }
+
+
+    /* =========================
+       OPPORTUNITIES
+    ========================= */
+
+    .opportunity-section {
+      background:
+        linear-gradient(
+          135deg,
+          #eef4ff,
+          #fff9df
+        );
+
+      border:
+        1px solid #dce5f4;
+
+      padding: 30px;
+
+      border-radius: 16px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .opportunity-section h2 {
+      color: #123a8c;
+
+      margin:
+        0
+        0
+        15px;
+    }
+
+
+    .opportunity-section p {
+      color: #555;
+
+      line-height: 1.75;
+
+      font-size: 16px;
+    }
+
+
+    .opportunity-links {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 20px;
+    }
+
+
+    .opportunity-links a {
+      display: inline-block;
+
+      background: #123a8c;
+
+      color: white;
+
+      text-decoration: none;
+
+      padding:
+        11px
+        16px;
+
+      border-radius: 8px;
+
+      font-weight: bold;
+
+      font-size: 14px;
+    }
+
+
+    .opportunity-links a:hover {
+      background: #0a2463;
+    }
+
+
+    /* =========================
+       DYNAMIC ABOUT CONTENT
+    ========================= */
+
     .loading {
       text-align: center;
 
       padding:
-        50px
+        15px
         20px;
 
       color: #666;
 
-      font-weight: bold;
+      font-size: 14px;
     }
 
 
     .about-card {
-      display: none;
+      display: block;
 
       background: white;
 
@@ -577,6 +877,14 @@
       }
 
 
+      .hero {
+        padding:
+          45px
+          16px
+          34px;
+      }
+
+
       .hero h1 {
         font-size: 32px;
       }
@@ -589,16 +897,20 @@
       }
 
 
-      .about-card {
+      .identity-section,
+      .about-card,
+      .opportunity-section {
         padding: 24px;
       }
 
 
+      .identity-section h2,
       .about-card h2 {
         font-size: 25px;
       }
 
 
+      .identity-section p,
       .about-content p {
         font-size: 16px;
       }
@@ -623,7 +935,7 @@
 
 
     <a
-      href="/index.html"
+      href="/"
       class="brand"
       aria-label="GiftedGift Empire home"
     >
@@ -653,27 +965,27 @@
 
     <nav>
 
-      <a href="/index.html">
+      <a href="/">
         Home
       </a>
 
-      <a href="/shop.html">
+      <a href="/shop">
         Shop
       </a>
 
-      <a href="/categories.html">
+      <a href="/categories">
         Categories
       </a>
 
-      <a href="/daily-inspiration.html">
+      <a href="/daily-inspiration">
         Daily Inspiration
       </a>
 
-      <a href="/blog.html">
+      <a href="/blog">
         Blog
       </a>
 
-      <a href="/deals.html">
+      <a href="/deals">
         Deals
       </a>
 
@@ -684,11 +996,11 @@
         About
       </a>
 
-      <a href="/contact.html">
+      <a href="/contact">
         Contact
       </a>
 
-      <a href="/cart.html">
+      <a href="/cart">
         🛒 Cart
       </a>
 
@@ -705,14 +1017,21 @@
 
 <section class="hero">
 
+  <div class="hero-label">
+    ABOUT OUR PLATFORM
+  </div>
+
+
   <h1 id="page-title">
     About GiftedGift Empire
   </h1>
 
 
   <p id="hero-subtitle">
-    Learn more about who we are, our mission
-    and what GiftedGift Empire is created to do.
+    An online shopping and digital commerce platform
+    created to help people discover useful products,
+    resources, opportunities and carefully selected
+    recommendations.
   </p>
 
 </section>
@@ -724,6 +1043,206 @@
 
 <main class="about">
 
+
+  <!-- =========================
+       CORE BUSINESS DESCRIPTION
+       STATIC HTML FOR GOOGLE
+  ========================= -->
+
+  <section
+    class="identity-section"
+    aria-labelledby="what-is-gge"
+  >
+
+    <h2 id="what-is-gge">
+      What Is GiftedGift Empire?
+    </h2>
+
+
+    <p>
+      GiftedGift Empire is an online shopping and
+      digital commerce platform that brings together
+      fashion and accessories, useful lifestyle
+      products, health and wellness finds, digital
+      products and resources, African foodstuffs,
+      deals and carefully selected affiliate
+      recommendations.
+    </p>
+
+
+    <p>
+      Our platform is designed to make it easier for
+      customers to discover useful products and
+      resources in one place. Some products are
+      offered directly through GiftedGift Empire,
+      some are sold by approved Creators through our
+      Creator Marketplace, and some are recommendations
+      from selected brands, merchants and affiliate
+      partners.
+    </p>
+
+
+    <p>
+      GiftedGift Empire is also growing beyond
+      shopping. We provide opportunities for approved
+      Creators to sell eligible digital products,
+      affiliates to promote qualifying products and
+      earn commissions, and businesses to advertise
+      their products, services, brands and events
+      through our platform.
+    </p>
+
+
+    <h2 class="offer-title">
+      What You Can Discover
+    </h2>
+
+
+    <div class="offer-grid">
+
+
+      <article class="offer-card">
+
+        <h3>
+          Fashion & Accessories
+        </h3>
+
+        <p>
+          Fashion, accessories, styling finds
+          and carefully selected products for
+          everyday living.
+        </p>
+
+      </article>
+
+
+      <article class="offer-card">
+
+        <h3>
+          Lifestyle Products
+        </h3>
+
+        <p>
+          Useful products for the home,
+          personal life, everyday needs
+          and practical living.
+        </p>
+
+      </article>
+
+
+      <article class="offer-card">
+
+        <h3>
+          Health & Wellness
+        </h3>
+
+        <p>
+          Wellness finds, fitness essentials,
+          personal care products and selected
+          health-related items.
+        </p>
+
+      </article>
+
+
+      <article class="offer-card">
+
+        <h3>
+          Digital Products
+        </h3>
+
+        <p>
+          eBooks, guides, templates, resources
+          and other approved digital products.
+        </p>
+
+      </article>
+
+
+      <article class="offer-card">
+
+        <h3>
+          African Foodstuffs
+        </h3>
+
+        <p>
+          Selected African foodstuffs and
+          pantry essentials for customers
+          looking for familiar ingredients.
+        </p>
+
+      </article>
+
+
+      <article class="offer-card">
+
+        <h3>
+          Deals & Recommendations
+        </h3>
+
+        <p>
+          Selected deals, useful finds and
+          affiliate recommendations from
+          brands and merchants.
+        </p>
+
+      </article>
+
+
+    </div>
+
+
+  </section>
+
+
+  <!-- =========================
+       BUSINESS OPPORTUNITIES
+  ========================= -->
+
+  <section
+    class="opportunity-section"
+    aria-labelledby="opportunities-heading"
+  >
+
+    <h2 id="opportunities-heading">
+      Opportunities With GiftedGift Empire
+    </h2>
+
+
+    <p>
+      GiftedGift Empire is also building opportunities
+      for people and businesses to participate in our
+      growing platform. Approved Creators can apply to
+      sell digital products, affiliates can join our
+      affiliate program and earn commissions from
+      qualifying sales, and businesses can apply to
+      advertise with us.
+    </p>
+
+
+    <div class="opportunity-links">
+
+      <a href="/creator-apply">
+        Sell With Us
+      </a>
+
+      <a href="/affiliate-register">
+        Affiliate Program
+      </a>
+
+      <a href="/advertise">
+        Advertise With Us
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ADMIN-MANAGED ABOUT AREA
+  ========================= -->
 
   <div
     id="message"
@@ -738,7 +1257,7 @@
     role="status"
     aria-live="polite"
   >
-    Loading About page...
+    Loading our latest About information...
   </div>
 
 
@@ -756,14 +1275,50 @@
 
 
     <h2 id="about-heading">
-      Helping You Discover Better Finds
+      Our Mission
     </h2>
 
+
+    <!--
+      IMPORTANT:
+      This text is physically present in the
+      HTML so search engines and visitors have
+      meaningful content even before Supabase
+      or JavaScript loads.
+    -->
 
     <div
       id="about-content"
       class="about-content"
-    ></div>
+    >
+
+      <p>
+        Our mission is to make online discovery
+        simpler by bringing useful products,
+        digital resources, African foodstuffs,
+        fashion, lifestyle finds and selected
+        recommendations together in one growing
+        platform.
+      </p>
+
+      <p>
+        We aim to build a trusted environment where
+        customers can explore products and resources,
+        Creators can grow through digital selling,
+        affiliates can earn from genuine referrals,
+        and businesses can reach new audiences
+        through advertising opportunities.
+      </p>
+
+      <p>
+        Some links on GiftedGift Empire may be
+        affiliate links. When a qualifying purchase
+        is made through certain links, GiftedGift
+        Empire may earn a commission at no additional
+        cost to the customer.
+      </p>
+
+    </div>
 
 
     <a
@@ -802,36 +1357,44 @@
 
   <div class="footer-links">
 
-    <a href="/index.html">
+    <a href="/">
       Home
     </a>
 
-    <a href="/shop.html">
+    <a href="/shop">
       Shop
     </a>
 
-    <a href="/categories.html">
+    <a href="/categories">
       Categories
     </a>
 
-    <a href="/daily-inspiration.html">
+    <a href="/daily-inspiration">
       Daily Inspiration
     </a>
 
-    <a href="/blog.html">
+    <a href="/blog">
       Blog
     </a>
 
-    <a href="/deals.html">
+    <a href="/deals">
       Deals
     </a>
 
-    <a href="/contact.html">
+    <a href="/contact">
       Contact
     </a>
 
-    <a href="/customer-service.html">
+    <a href="/customer-service">
       Customer Support
+    </a>
+
+    <a href="/privacy-policy">
+      Privacy
+    </a>
+
+    <a href="/terms-conditions">
+      Terms
     </a>
 
   </div>
@@ -874,6 +1437,18 @@ const DEFAULT_SOCIAL_IMAGE =
   "/my-logo.png";
 
 
+const SEO_TITLE =
+  "About GiftedGift Empire | Shopping & Digital Commerce";
+
+
+const SEO_DESCRIPTION =
+  "Learn about GiftedGift Empire, an online shopping and digital commerce platform for fashion, digital products, African foodstuffs, deals and opportunities.";
+
+
+const ORGANIZATION_DESCRIPTION =
+  "GiftedGift Empire is an online shopping and digital commerce platform offering fashion and accessories, lifestyle and wellness finds, digital products and resources, African foodstuffs, deals, affiliate recommendations, creator selling opportunities, affiliate opportunities and advertising opportunities.";
+
+
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
@@ -899,7 +1474,7 @@ document
 
 
 /* =========================
-   DEFAULT CONTENT
+   DEFAULT DYNAMIC CONTENT
 ========================= */
 
 const DEFAULT_CONTENT = {
@@ -908,14 +1483,14 @@ const DEFAULT_CONTENT = {
     "About GiftedGift Empire",
 
   subtitle:
-    "Helping You Discover Better Finds",
+    "Our Mission",
 
   content:
-`GiftedGift Empire is a shopping and recommendation platform created to help people discover useful products, digital resources, lifestyle finds, African foodstuffs and carefully selected recommendations.
+`Our mission is to make online discovery simpler by bringing useful products, digital resources, African foodstuffs, fashion, lifestyle finds and selected recommendations together in one growing platform.
 
-We feature products available directly through GiftedGift Empire, approved Creator Marketplace products and selected products from brands and partners. Some links on this website may be affiliate links, which means we may earn a commission when a purchase is made through certain links, at no additional cost to you.
+We aim to build a trusted environment where customers can explore products and resources, Creators can grow through digital selling, affiliates can earn from genuine referrals, and businesses can reach new audiences through advertising opportunities.
 
-Our goal is simple: to make product discovery easier, clearer and more helpful.`,
+Some links on GiftedGift Empire may be affiliate links. When a qualifying purchase is made through certain links, GiftedGift Empire may earn a commission at no additional cost to the customer.`,
 
   image_url:
     null,
@@ -932,65 +1507,6 @@ Our goal is simple: to make product discovery easier, clearer and more helpful.`
 /* =========================
    HELPERS
 ========================= */
-
-function cleanText(
-  value
-) {
-
-  return String(
-    value ||
-    ""
-  )
-    .replace(
-      /\s+/g,
-      " "
-    )
-    .trim();
-
-}
-
-
-function descriptionPreview(
-  value
-) {
-
-  const text =
-    cleanText(
-      value
-    );
-
-
-  if (
-    !text
-  ) {
-
-    return (
-      "Learn about GiftedGift Empire, our mission " +
-      "and how we help people discover useful products and resources."
-    );
-
-  }
-
-
-  if (
-    text.length <= 155
-  ) {
-
-    return text;
-
-  }
-
-
-  return (
-    text.slice(
-      0,
-      152
-    ) +
-    "..."
-  );
-
-}
-
 
 function safeImageUrl(
   value
@@ -1040,6 +1556,7 @@ function safeImageUrl(
   return "";
 
 }
+
 
 
 function safeLinkUrl(
@@ -1092,6 +1609,7 @@ function safeLinkUrl(
 }
 
 
+
 function setMetaContent(
   id,
   value
@@ -1118,23 +1636,12 @@ function setMetaContent(
 
 
 /* =========================
-   ABOUT SEO
+   SEO
 ========================= */
 
 function updateAboutSEO(
   content
 ) {
-
-  const pageTitle =
-    "About GiftedGift Empire | Our Mission";
-
-
-  const description =
-    descriptionPreview(
-      content.content ||
-      DEFAULT_CONTENT.content
-    );
-
 
   const image =
     safeImageUrl(
@@ -1143,25 +1650,34 @@ function updateAboutSEO(
     DEFAULT_SOCIAL_IMAGE;
 
 
+  /*
+    Keep the main SEO identity fixed.
+
+    Admin-managed About text is allowed to
+    change without accidentally replacing
+    the official business description that
+    search engines should understand.
+  */
+
   document.title =
-    pageTitle;
+    SEO_TITLE;
 
 
   setMetaContent(
     "page-description-meta",
-    description
+    SEO_DESCRIPTION
   );
 
 
   setMetaContent(
     "og-title",
-    pageTitle
+    SEO_TITLE
   );
 
 
   setMetaContent(
     "og-description",
-    description
+    SEO_DESCRIPTION
   );
 
 
@@ -1173,20 +1689,19 @@ function updateAboutSEO(
 
   setMetaContent(
     "og-image-alt",
-    content.title ||
     "GiftedGift Empire"
   );
 
 
   setMetaContent(
     "twitter-title",
-    pageTitle
+    SEO_TITLE
   );
 
 
   setMetaContent(
     "twitter-description",
-    description
+    SEO_DESCRIPTION
   );
 
 
@@ -1196,173 +1711,190 @@ function updateAboutSEO(
   );
 
 
-  let structuredData =
+  setMetaContent(
+    "twitter-image-alt",
+    "GiftedGift Empire"
+  );
+
+
+  const structuredData =
     document.getElementById(
       "about-structured-data"
     );
 
 
   if (
-    !structuredData
+    structuredData
   ) {
 
-    structuredData =
-      document.createElement(
-        "script"
-      );
+    structuredData.textContent =
+      JSON.stringify({
 
+        "@context":
+          "https://schema.org",
 
-    structuredData.type =
-      "application/ld+json";
+        "@graph": [
 
-
-    structuredData.id =
-      "about-structured-data";
-
-
-    document.head.appendChild(
-      structuredData
-    );
-
-  }
-
-
-  structuredData.textContent =
-    JSON.stringify({
-
-      "@context":
-        "https://schema.org",
-
-      "@graph": [
-
-        {
-
-          "@type":
-            "Organization",
-
-          "@id":
-            SITE_URL +
-            "/#organization",
-
-          "name":
-            "GiftedGift Empire",
-
-          "url":
-            SITE_URL +
-            "/",
-
-          "logo": {
+          {
 
             "@type":
-              "ImageObject",
-
-            "url":
-              DEFAULT_SOCIAL_IMAGE
-
-          },
-
-          "email":
-            "gift@giftedgiftempire.com"
-
-        },
-
-
-        {
-
-          "@type":
-            "AboutPage",
-
-          "@id":
-            ABOUT_URL +
-            "#webpage",
-
-          "url":
-            ABOUT_URL,
-
-          "name":
-            pageTitle,
-
-          "description":
-            description,
-
-          "about": {
+              "Organization",
 
             "@id":
               SITE_URL +
-              "/#organization"
-
-          },
-
-          "isPartOf": {
-
-            "@type":
-              "WebSite",
+              "/#organization",
 
             "name":
               "GiftedGift Empire",
 
             "url":
               SITE_URL +
-              "/"
+              "/",
 
-          }
+            "description":
+              ORGANIZATION_DESCRIPTION,
 
-        },
-
-
-        {
-
-          "@type":
-            "BreadcrumbList",
-
-          "itemListElement": [
-
-            {
+            "logo": {
 
               "@type":
-                "ListItem",
+                "ImageObject",
 
-              "position":
-                1,
-
-              "name":
-                "Home",
-
-              "item":
-                SITE_URL +
-                "/"
+              "url":
+                DEFAULT_SOCIAL_IMAGE
 
             },
 
-            {
+            "email":
+              "gift@giftedgiftempire.com",
 
-              "@type":
-                "ListItem",
+            "sameAs": [
 
-              "position":
-                2,
+              "https://www.instagram.com/giftedgiftempire/"
 
-              "name":
-                "About",
+            ]
 
-              "item":
-                ABOUT_URL
+          },
+
+
+          {
+
+            "@type":
+              "WebSite",
+
+            "@id":
+              SITE_URL +
+              "/#website",
+
+            "url":
+              SITE_URL +
+              "/",
+
+            "name":
+              "GiftedGift Empire",
+
+            "publisher": {
+
+              "@id":
+                SITE_URL +
+                "/#organization"
 
             }
 
-          ]
+          },
 
-        }
 
-      ]
+          {
 
-    });
+            "@type":
+              "AboutPage",
+
+            "@id":
+              ABOUT_URL +
+              "#webpage",
+
+            "url":
+              ABOUT_URL,
+
+            "name":
+              SEO_TITLE,
+
+            "description":
+              SEO_DESCRIPTION,
+
+            "about": {
+
+              "@id":
+                SITE_URL +
+                "/#organization"
+
+            },
+
+            "isPartOf": {
+
+              "@id":
+                SITE_URL +
+                "/#website"
+
+            }
+
+          },
+
+
+          {
+
+            "@type":
+              "BreadcrumbList",
+
+            "itemListElement": [
+
+              {
+
+                "@type":
+                  "ListItem",
+
+                "position":
+                  1,
+
+                "name":
+                  "Home",
+
+                "item":
+                  SITE_URL +
+                  "/"
+
+              },
+
+              {
+
+                "@type":
+                  "ListItem",
+
+                "position":
+                  2,
+
+                "name":
+                  "About GiftedGift Empire",
+
+                "item":
+                  ABOUT_URL
+
+              }
+
+            ]
+
+          }
+
+        ]
+
+      });
+
+  }
 
 }
 
 
 /* =========================
-   PARAGRAPHS
+   RENDER PARAGRAPHS
 ========================= */
 
 function renderParagraphs(
@@ -1373,10 +1905,6 @@ function renderParagraphs(
     document.getElementById(
       "about-content"
     );
-
-
-  container.innerHTML =
-    "";
 
 
   const paragraphs =
@@ -1394,6 +1922,20 @@ function renderParagraphs(
       .filter(
         Boolean
       );
+
+
+  if (
+    paragraphs.length ===
+    0
+  ) {
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    "";
 
 
   paragraphs.forEach(
@@ -1440,23 +1982,23 @@ function renderAbout(
   };
 
 
+  /*
+    Keep primary H1 stable for brand clarity.
+  */
+
   document
     .getElementById(
       "page-title"
     )
     .textContent =
-      content.title ||
-      DEFAULT_CONTENT.title;
+      "About GiftedGift Empire";
 
 
-  document
-    .getElementById(
-      "hero-subtitle"
-    )
-    .textContent =
-      content.subtitle ||
-      DEFAULT_CONTENT.subtitle;
-
+  /*
+    The dynamic subtitle is used in the
+    secondary About card rather than changing
+    the core business identity above.
+  */
 
   document
     .getElementById(
@@ -1498,15 +2040,15 @@ function renderAbout(
 
 
     image.alt =
-      content.title ||
       "GiftedGift Empire";
 
 
     image.style.display =
       "block";
 
+  }
 
-  } else {
+  else {
 
     image.removeAttribute(
       "src"
@@ -1551,8 +2093,9 @@ function renderAbout(
     button.style.display =
       "inline-block";
 
+  }
 
-  } else {
+  else {
 
     button.removeAttribute(
       "href"
@@ -1564,10 +2107,6 @@ function renderAbout(
 
   }
 
-
-  /* =========================
-     SEO
-  ========================= */
 
   updateAboutSEO(
     content
@@ -1581,19 +2120,11 @@ function renderAbout(
     .style.display =
       "none";
 
-
-  document
-    .getElementById(
-      "about-card"
-    )
-    .style.display =
-      "block";
-
 }
 
 
 /* =========================
-   LOAD ABOUT
+   LOAD ABOUT FROM SUPABASE
 ========================= */
 
 async function loadAbout() {
@@ -1627,9 +2158,9 @@ async function loadAbout() {
 
 
     /*
-      Keep the public page usable
-      even if Supabase temporarily
-      cannot be reached.
+      The important About information
+      remains visible even if Supabase
+      temporarily fails.
     */
 
     renderAbout(
@@ -1668,6 +2199,7 @@ async function loadAbout() {
 ========================= */
 
 loadAbout();
+
 
 </script>
 
