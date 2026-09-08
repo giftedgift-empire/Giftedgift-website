@@ -2,10 +2,23 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manage Categories | GiftedGift Empire</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="robots"
+  content="noindex, nofollow"
+>
+
+<title>
+  Manage Categories | GiftedGift Empire
+</title>
+
 
 <style>
 
@@ -13,209 +26,362 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+
+  font-family:
+    Arial,
+    sans-serif;
+
   background: #f4f6f8;
+
   color: #222;
 }
 
+
 header {
   background: #123a8c;
+
   color: white;
-  padding: 22px 20px;
+
+  padding:
+    22px
+    20px;
 }
 
+
 header h1 {
-  margin: 0 0 5px;
+  margin:
+    0
+    0
+    5px;
+
   color: #f2bd16;
 }
 
+
 .container {
   max-width: 900px;
+
   margin: auto;
-  padding: 25px 18px;
+
+  padding:
+    25px
+    18px;
 }
+
 
 .back-link {
   display: inline-block;
+
   margin-bottom: 20px;
+
   color: #123a8c;
+
   text-decoration: none;
+
   font-weight: bold;
 }
+
 
 .panel {
   background: white;
+
   padding: 25px;
+
   border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0
+    3px
+    12px
+    rgba(0,0,0,0.08);
+
   margin-bottom: 25px;
 }
 
+
 .panel h2 {
   margin-top: 0;
+
   color: #123a8c;
 }
 
+
 label {
   display: block;
+
   margin-top: 15px;
+
   margin-bottom: 7px;
+
   font-weight: bold;
 }
+
 
 input,
 textarea {
   width: 100%;
+
   padding: 12px;
-  border: 1px solid #ccc;
+
+  border:
+    1px solid #ccc;
+
   border-radius: 7px;
+
   font-size: 16px;
 }
+
 
 input[type="file"] {
   background: #f7f7f7;
 }
 
+
 textarea {
   min-height: 100px;
+
   resize: vertical;
 }
 
+
 .image-help {
   font-size: 14px;
+
   color: #666;
+
   margin-top: 7px;
 }
 
+
 .image-preview {
   display: none;
+
   margin-top: 15px;
 }
 
+
 .image-preview img {
   width: 100%;
+
   max-width: 320px;
+
   height: 220px;
+
   object-fit: cover;
+
   border-radius: 10px;
-  border: 1px solid #ddd;
+
+  border:
+    1px solid #ddd;
 }
+
 
 button {
   margin-top: 18px;
+
   background: #f2bd16;
+
   color: #111;
+
   border: none;
-  padding: 12px 18px;
+
+  padding:
+    12px
+    18px;
+
   border-radius: 7px;
+
   font-weight: bold;
+
   cursor: pointer;
 }
+
 
 button:hover {
   opacity: 0.9;
 }
 
+
 button:disabled {
   opacity: 0.6;
+
   cursor: not-allowed;
 }
 
+
 .cancel-button {
   background: #ddd;
+
   display: none;
 }
 
+
 .delete-button {
   background: #ddd;
+
   margin-left: 8px;
 }
 
+
 .category-item {
-  padding: 18px 0;
-  border-bottom: 1px solid #ddd;
+  padding:
+    18px
+    0;
+
+  border-bottom:
+    1px solid #ddd;
 }
+
 
 .category-item:last-child {
   border-bottom: none;
 }
 
+
 .category-item img {
   width: 120px;
+
   height: 90px;
+
   object-fit: cover;
+
   border-radius: 8px;
+
   margin-bottom: 10px;
-  border: 1px solid #ddd;
+
+  border:
+    1px solid #ddd;
 }
 
+
 .category-item h3 {
-  margin: 0 0 8px;
+  margin:
+    0
+    0
+    8px;
+
   color: #123a8c;
 }
 
+
 .category-item p {
-  margin: 5px 0;
+  margin:
+    5px
+    0;
+
   color: #555;
+
   line-height: 1.5;
 }
 
+
 .slug {
   font-size: 13px;
+
   color: #777;
 }
 
+
 .message {
   margin-top: 15px;
+
   font-weight: bold;
+
+  line-height: 1.5;
 }
+
+
+.message.success {
+  color: #067647;
+}
+
+
+.message.error {
+  color: #b42318;
+}
+
+
+.message.warning {
+  color: #8a5500;
+}
+
 
 #status {
   text-align: center;
-  padding: 50px 20px;
+
+  padding:
+    50px
+    20px;
+
   font-weight: bold;
 }
 
 </style>
+
 </head>
 
 
 <body>
+
 
 <div id="status">
   Checking admin login...
 </div>
 
 
-<div id="page" style="display:none;">
+<div
+  id="page"
+  style="display:none;"
+>
+
 
 <header>
-  <h1>GiftedGift Empire</h1>
-  <p>Manage Categories</p>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
+
+  <p>
+    Manage Categories
+  </p>
+
 </header>
 
 
 <main class="container">
 
-<a href="dashboard.html" class="back-link">
+
+<a
+  href="dashboard.html"
+  class="back-link"
+>
   ← Back to Dashboard
 </a>
 
 
+<!-- =========================
+     ADD / EDIT CATEGORY
+========================= -->
+
 <div class="panel">
+
 
 <h2 id="form-title">
   Add Category
 </h2>
 
+
 <form id="category-form">
+
 
 <input
   type="hidden"
   id="category-id"
 >
+
 
 <input
   type="hidden"
@@ -255,8 +421,10 @@ button:disabled {
   accept="image/*"
 >
 
+
 <p class="image-help">
   Tap Choose File to select an image from your phone.
+  Maximum image size: 5 MB.
 </p>
 
 
@@ -264,10 +432,12 @@ button:disabled {
   id="image-preview"
   class="image-preview"
 >
+
   <img
     id="preview-img"
     alt="Category image preview"
   >
+
 </div>
 
 
@@ -281,8 +451,16 @@ button:disabled {
   placeholder="Example: home-living"
 >
 
-<p style="font-size:14px;color:#666;">
-  If you leave the slug empty, it will be created automatically from the category name.
+
+<p
+  style="
+    font-size:14px;
+    color:#666;
+  "
+>
+  If you leave the slug empty,
+  it will be created automatically
+  from the category name.
 </p>
 
 
@@ -306,13 +484,20 @@ button:disabled {
 <p
   id="form-message"
   class="message"
+  aria-live="polite"
 ></p>
 
+
 </form>
+
 
 </div>
 
 
+
+<!-- =========================
+     EXISTING CATEGORIES
+========================= -->
 
 <div class="panel">
 
@@ -326,24 +511,39 @@ button:disabled {
 
 </div>
 
+
 </main>
+
 
 </div>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
 
 <script>
+
+
+/*
+=====================================================
+CONFIGURATION
+=====================================================
+*/
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
+
 const STORAGE_BUCKET =
   "product-images";
+
 
 const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
@@ -357,17 +557,29 @@ const supabaseClient =
 
 
 
+/*
+=====================================================
+ADMIN PROTECTION
+=====================================================
+*/
+
 async function protectPage() {
 
-  const { data, error } =
-    await supabaseClient.auth.getSession();
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
 
 
   if (
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     window.location.replace(
@@ -379,24 +591,129 @@ async function protectPage() {
 
 
   document
-    .getElementById("status")
+    .getElementById(
+      "status"
+    )
     .style.display =
       "none";
 
 
   document
-    .getElementById("page")
+    .getElementById(
+      "page"
+    )
     .style.display =
       "block";
 
 
-  loadCategories();
+  await loadCategories();
+
 }
 
 
 
+/*
+=====================================================
+FORM MESSAGE
+=====================================================
+*/
+
+function setMessage(
+  text,
+  type = ""
+) {
+
+  const message =
+    document.getElementById(
+      "form-message"
+    );
+
+
+  message.textContent =
+    text || "";
+
+
+  message.className =
+    type
+
+      ? "message " + type
+
+      : "message";
+
+}
+
+
+
+/*
+=====================================================
+IMAGE VALIDATION
+=====================================================
+*/
+
+function validateImageFile(
+  file
+) {
+
+  if (!file) {
+
+    return {
+      valid: false,
+      message:
+        "Please choose an image."
+    };
+
+  }
+
+
+  if (
+    !file.type ||
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    return {
+      valid: false,
+      message:
+        "Please choose a valid image file."
+    };
+
+  }
+
+
+  if (
+    file.size >
+    5 * 1024 * 1024
+  ) {
+
+    return {
+      valid: false,
+      message:
+        "Please choose an image smaller than 5 MB."
+    };
+
+  }
+
+
+  return {
+    valid: true,
+    message: ""
+  };
+
+}
+
+
+
+/*
+=====================================================
+IMAGE PREVIEW
+=====================================================
+*/
+
 document
-  .getElementById("category-image")
+  .getElementById(
+    "category-image"
+  )
   .addEventListener(
     "change",
     function(event) {
@@ -406,42 +723,39 @@ document
 
 
       if (!file) {
+
         return;
+
       }
 
 
-      if (
-        !file.type ||
-        !file.type.startsWith("image/")
-      ) {
-
-        alert(
-          "Please choose an image file."
+      const validation =
+        validateImageFile(
+          file
         );
-
-        event.target.value = "";
-
-        return;
-      }
 
 
       if (
-        file.size >
-        5 * 1024 * 1024
+        !validation.valid
       ) {
 
         alert(
-          "Please choose an image smaller than 5 MB."
+          validation.message
         );
 
-        event.target.value = "";
+
+        event.target.value =
+          "";
+
 
         return;
       }
 
 
       const temporaryURL =
-        URL.createObjectURL(file);
+        URL.createObjectURL(
+          file
+        );
 
 
       showImagePreview(
@@ -453,12 +767,15 @@ document
 
 
 
-function showImagePreview(url) {
+function showImagePreview(
+  url
+) {
 
   const preview =
     document.getElementById(
       "image-preview"
     );
+
 
   const image =
     document.getElementById(
@@ -471,26 +788,58 @@ function showImagePreview(url) {
     preview.style.display =
       "none";
 
-    image.removeAttribute("src");
+
+    image.removeAttribute(
+      "src"
+    );
+
 
     return;
   }
 
 
-  image.src = url;
+  image.src =
+    url;
+
 
   preview.style.display =
     "block";
+
 }
 
 
 
-async function uploadCategoryImage(file) {
+/*
+=====================================================
+UPLOAD CATEGORY IMAGE
+=====================================================
+*/
 
-  if (!file) {
-    return null;
+async function uploadCategoryImage(
+  file
+) {
+
+  const validation =
+    validateImageFile(
+      file
+    );
+
+
+  if (
+    !validation.valid
+  ) {
+
+    throw new Error(
+      validation.message
+    );
+
   }
 
+
+  /*
+    Re-check authenticated admin
+    immediately before Storage write.
+  */
 
   const {
     data: userData,
@@ -504,26 +853,33 @@ async function uploadCategoryImage(file) {
   if (
     userError ||
     !userData.user ||
-    userData.user.id !== ADMIN_USER_ID
+    userData.user.id !==
+      ADMIN_USER_ID
   ) {
 
     throw new Error(
       "Admin login could not be verified."
     );
+
   }
 
 
   const originalName =
-    file.name || "image.jpg";
+    file.name ||
+    "image.jpg";
 
 
   const parts =
-    originalName.split(".");
+    originalName.split(
+      "."
+    );
 
 
   let extension =
     parts.length > 1
+
       ? parts.pop()
+
       : "jpg";
 
 
@@ -537,7 +893,10 @@ async function uploadCategoryImage(file) {
 
 
   if (!extension) {
-    extension = "jpg";
+
+    extension =
+      "jpg";
+
   }
 
 
@@ -556,14 +915,20 @@ async function uploadCategoryImage(file) {
 
 
   if (!safeName) {
-    safeName = "category";
+
+    safeName =
+      "category";
+
   }
 
 
   const randomPart =
     Math.random()
       .toString(36)
-      .slice(2, 10);
+      .slice(
+        2,
+        10
+      );
 
 
   const filePath =
@@ -583,34 +948,47 @@ async function uploadCategoryImage(file) {
   } =
     await supabaseClient
       .storage
-      .from(STORAGE_BUCKET)
+      .from(
+        STORAGE_BUCKET
+      )
       .upload(
         filePath,
         file,
         {
-          cacheControl: "3600",
-          upsert: false,
+          cacheControl:
+            "3600",
+
+          upsert:
+            false,
+
           contentType:
-            file.type || undefined
+            file.type ||
+            undefined
         }
       );
 
 
-  if (uploadError) {
+  if (
+    uploadError
+  ) {
 
     console.error(
       "Image upload error:",
       uploadError
     );
 
+
     throw uploadError;
+
   }
 
 
   const uploadedPath =
     uploadData &&
     uploadData.path
+
       ? uploadData.path
+
       : filePath;
 
 
@@ -619,7 +997,9 @@ async function uploadCategoryImage(file) {
   } =
     supabaseClient
       .storage
-      .from(STORAGE_BUCKET)
+      .from(
+        STORAGE_BUCKET
+      )
       .getPublicUrl(
         uploadedPath
       );
@@ -630,16 +1010,179 @@ async function uploadCategoryImage(file) {
     !publicURLData.publicUrl
   ) {
 
+    /*
+      Upload succeeded but URL creation
+      failed. Remove the new object so
+      it does not become an orphan.
+    */
+
+    await removeStorageFile(
+      uploadedPath
+    );
+
+
     throw new Error(
       "The image uploaded, but its public URL could not be created."
     );
+
   }
 
 
-  return publicURLData.publicUrl;
+  return {
+
+    path:
+      uploadedPath,
+
+    publicUrl:
+      publicURLData.publicUrl
+
+  };
+
 }
 
 
+
+/*
+=====================================================
+GET STORAGE PATH FROM PUBLIC URL
+=====================================================
+*/
+
+function getStoragePathFromPublicURL(
+  publicURL
+) {
+
+  if (!publicURL) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    const parsed =
+      new URL(
+        publicURL
+      );
+
+
+    const marker =
+      "/storage/v1/object/public/" +
+      STORAGE_BUCKET +
+      "/";
+
+
+    const index =
+      parsed.pathname.indexOf(
+        marker
+      );
+
+
+    if (
+      index === -1
+    ) {
+
+      return null;
+
+    }
+
+
+    const path =
+      parsed.pathname.slice(
+        index +
+        marker.length
+      );
+
+
+    if (!path) {
+
+      return null;
+
+    }
+
+
+    return decodeURIComponent(
+      path
+    );
+
+
+  } catch (
+    error
+  ) {
+
+    console.warn(
+      "Could not read Storage path:",
+      error
+    );
+
+
+    return null;
+
+  }
+
+}
+
+
+
+/*
+=====================================================
+REMOVE STORAGE FILE
+=====================================================
+*/
+
+async function removeStorageFile(
+  filePath
+) {
+
+  if (!filePath) {
+
+    return true;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        STORAGE_BUCKET
+      )
+      .remove(
+        [
+          filePath
+        ]
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Storage cleanup error:",
+      error
+    );
+
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+
+/*
+=====================================================
+LOAD CATEGORIES
+=====================================================
+*/
 
 async function loadCategories() {
 
@@ -658,40 +1201,56 @@ async function loadCategories() {
     error
   } =
     await supabaseClient
-      .from("categories")
-      .select("*")
+      .from(
+        "categories"
+      )
+      .select(
+        "*"
+      )
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     list.textContent =
       "Categories could not be loaded.";
 
+
     return;
+
   }
 
 
   if (
     !categories ||
-    categories.length === 0
+    categories.length ===
+      0
   ) {
 
     list.textContent =
       "No categories have been added yet.";
 
+
     return;
+
   }
 
 
-  list.innerHTML = "";
+  list.innerHTML =
+    "";
 
 
   categories.forEach(
@@ -707,23 +1266,35 @@ async function loadCategories() {
         "category-item";
 
 
-      let imageHTML = "";
+      let imageHTML =
+        "";
 
 
-      if (category.image_url) {
+      if (
+        category.image_url
+      ) {
 
         imageHTML = `
+
           <img
-            src="${escapeAttribute(category.image_url)}"
-            alt="${escapeAttribute(category.name || "Category")}"
+            src="${escapeAttribute(
+              category.image_url
+            )}"
+            alt="${escapeAttribute(
+              category.name ||
+              "Category"
+            )}"
           >
+
         `;
+
       }
 
 
       item.innerHTML = `
 
         ${imageHTML}
+
 
         <h3>
           ${escapeHTML(
@@ -775,9 +1346,16 @@ async function loadCategories() {
 
     }
   );
+
 }
 
 
+
+/*
+=====================================================
+SAVE CATEGORY
+=====================================================
+*/
 
 document
   .getElementById(
@@ -790,44 +1368,63 @@ document
       event.preventDefault();
 
 
-      const message =
-        document.getElementById(
-          "form-message"
-        );
-
-
       const saveButton =
         document.getElementById(
           "save-button"
         );
 
 
-      message.textContent =
-        "Saving...";
-
-
       saveButton.disabled =
         true;
+
+
+      setMessage(
+        "Saving...",
+        ""
+      );
+
+
+      let newlyUploadedImage =
+        null;
 
 
       try {
 
         const id =
-          document.getElementById(
-            "category-id"
-          ).value;
+          document
+            .getElementById(
+              "category-id"
+            )
+            .value;
 
 
         const name =
-          document.getElementById(
-            "name"
-          ).value.trim();
+          document
+            .getElementById(
+              "name"
+            )
+            .value
+            .trim();
+
+
+        if (
+          !name
+        ) {
+
+          throw new Error(
+            "Please enter a category name."
+          );
+
+        }
 
 
         let slug =
-          document.getElementById(
-            "slug"
-          ).value.trim();
+          document
+            .getElementById(
+              "slug"
+            )
+            .value
+            .trim();
 
 
         if (!slug) {
@@ -840,10 +1437,18 @@ document
         }
 
 
+        const previousImageURL =
+          document
+            .getElementById(
+              "current-image-url"
+            )
+            .value
+            .trim();
+
+
         let imageURL =
-          document.getElementById(
-            "current-image-url"
-          ).value || null;
+          previousImageURL ||
+          null;
 
 
         const imageInput =
@@ -855,30 +1460,50 @@ document
         const selectedFile =
           imageInput.files &&
           imageInput.files.length > 0
+
             ? imageInput.files[0]
+
             : null;
 
 
-        if (selectedFile) {
+        /*
+        =============================================
+        UPLOAD NEW IMAGE FIRST
+        =============================================
+        */
 
-          message.textContent =
-            "Uploading image...";
+        if (
+          selectedFile
+        ) {
+
+          setMessage(
+            "Uploading new image...",
+            ""
+          );
 
 
-          imageURL =
+          newlyUploadedImage =
             await uploadCategoryImage(
               selectedFile
             );
 
 
-          message.textContent =
-            "Saving category...";
+          imageURL =
+            newlyUploadedImage.publicUrl;
+
+
+          setMessage(
+            "Saving category...",
+            ""
+          );
+
         }
 
 
         const categoryData = {
 
-          name: name,
+          name:
+            name,
 
           description:
             document
@@ -897,14 +1522,27 @@ document
         };
 
 
-        let error;
+        let databaseError =
+          null;
 
 
-        if (id) {
+        /*
+        =============================================
+        UPDATE EXISTING CATEGORY
+        =============================================
+        */
 
-          const result =
+        if (
+          id
+        ) {
+
+          const {
+            error
+          } =
             await supabaseClient
-              .from("categories")
+              .from(
+                "categories"
+              )
               .update(
                 categoryData
               )
@@ -914,48 +1552,181 @@ document
               );
 
 
-          error =
-            result.error;
+          databaseError =
+            error;
 
-        } else {
+        }
 
-          const result =
+
+        /*
+        =============================================
+        CREATE NEW CATEGORY
+        =============================================
+        */
+
+        else {
+
+          const {
+            error
+          } =
             await supabaseClient
-              .from("categories")
+              .from(
+                "categories"
+              )
               .insert(
                 categoryData
               );
 
 
-          error =
-            result.error;
+          databaseError =
+            error;
+
         }
 
 
-        if (error) {
+        /*
+        =============================================
+        DATABASE SAVE FAILED
+        =============================================
 
-          console.error(error);
+        If we uploaded a new image but the
+        database save failed, remove that new
+        image so Storage does not collect an
+        unused orphan file.
+        */
 
-          throw error;
+        if (
+          databaseError
+        ) {
+
+          console.error(
+            databaseError
+          );
+
+
+          if (
+            newlyUploadedImage &&
+            newlyUploadedImage.path
+          ) {
+
+            await removeStorageFile(
+              newlyUploadedImage.path
+            );
+
+          }
+
+
+          throw databaseError;
+
         }
 
 
-        message.textContent =
-          id
-            ? "Category updated successfully."
-            : "Category added successfully.";
+        /*
+        =============================================
+        DELETE PREVIOUS IMAGE AFTER SUCCESS
+        =============================================
+
+        Important:
+        We only remove the previous image AFTER
+        the database successfully points to the
+        new image.
+
+        This prevents a failed update from
+        leaving the category without an image.
+        */
+
+        let oldImageCleanupSucceeded =
+          true;
 
 
-        resetForm();
+        if (
+          id &&
+          newlyUploadedImage &&
+          previousImageURL
+        ) {
+
+          const previousPath =
+            getStoragePathFromPublicURL(
+              previousImageURL
+            );
+
+
+          if (
+            previousPath &&
+            previousPath !==
+              newlyUploadedImage.path
+          ) {
+
+            oldImageCleanupSucceeded =
+              await removeStorageFile(
+                previousPath
+              );
+
+          }
+
+        }
+
+
+        /*
+        =============================================
+        SUCCESS MESSAGE
+        =============================================
+        */
+
+        if (
+          !oldImageCleanupSucceeded
+        ) {
+
+          setMessage(
+            "Category saved successfully, but the previous image could not be removed from Storage. We can check the Storage delete permission.",
+            "warning"
+          );
+
+        }
+
+        else {
+
+          setMessage(
+            id
+
+              ? "Category updated successfully."
+
+              : "Category added successfully.",
+
+            "success"
+          );
+
+        }
+
+
+        resetForm(
+          false
+        );
+
 
         await loadCategories();
 
-      } catch (error) {
 
-        console.error(error);
+      } catch (
+        error
+      ) {
 
-        message.textContent =
-          "Category could not be saved. Please check your login and image, then try again.";
+        console.error(
+          error
+        );
+
+
+        setMessage(
+          error &&
+          error.message
+
+            ? error.message
+
+            : "Category could not be saved. Please check your login and image, then try again.",
+
+          "error"
+        );
+
 
       } finally {
 
@@ -969,15 +1740,27 @@ document
 
 
 
-async function editCategory(id) {
+/*
+=====================================================
+EDIT CATEGORY
+=====================================================
+*/
+
+async function editCategory(
+  id
+) {
 
   const {
     data,
     error
   } =
     await supabaseClient
-      .from("categories")
-      .select("*")
+      .from(
+        "categories"
+      )
+      .select(
+        "*"
+      )
       .eq(
         "id",
         id
@@ -994,7 +1777,9 @@ async function editCategory(id) {
       "Category could not be opened."
     );
 
+
     return;
+
   }
 
 
@@ -1011,7 +1796,8 @@ async function editCategory(id) {
       "name"
     )
     .value =
-      data.name || "";
+      data.name ||
+      "";
 
 
   document
@@ -1019,7 +1805,8 @@ async function editCategory(id) {
       "description"
     )
     .value =
-      data.description || "";
+      data.description ||
+      "";
 
 
   document
@@ -1027,7 +1814,8 @@ async function editCategory(id) {
       "slug"
     )
     .value =
-      data.slug || "";
+      data.slug ||
+      "";
 
 
   document
@@ -1035,18 +1823,21 @@ async function editCategory(id) {
       "current-image-url"
     )
     .value =
-      data.image_url || "";
+      data.image_url ||
+      "";
 
 
   document
     .getElementById(
       "category-image"
     )
-    .value = "";
+    .value =
+      "";
 
 
   showImagePreview(
-    data.image_url || ""
+    data.image_url ||
+    ""
   );
 
 
@@ -1074,15 +1865,35 @@ async function editCategory(id) {
       "inline-block";
 
 
+  setMessage(
+    "",
+    ""
+  );
+
+
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
+
 }
 
 
 
-async function deleteCategory(id) {
+/*
+=====================================================
+DELETE CATEGORY
+=====================================================
+*/
+
+async function deleteCategory(
+  id
+) {
 
   const confirmed =
     confirm(
@@ -1090,14 +1901,73 @@ async function deleteCategory(id) {
     );
 
 
-  if (!confirmed) {
+  if (
+    !confirmed
+  ) {
+
     return;
+
   }
 
 
-  const { error } =
+  /*
+    Read the category first so we know which
+    Storage image belongs to it.
+  */
+
+  const {
+    data: category,
+    error: lookupError
+  } =
     await supabaseClient
-      .from("categories")
+      .from(
+        "categories"
+      )
+      .select(
+        "id,image_url"
+      )
+      .eq(
+        "id",
+        id
+      )
+      .single();
+
+
+  if (
+    lookupError ||
+    !category
+  ) {
+
+    console.error(
+      lookupError
+    );
+
+
+    alert(
+      "Category could not be opened for deletion."
+    );
+
+
+    return;
+
+  }
+
+
+  /*
+    Delete database record first.
+
+    We do this before deleting the image so
+    a database failure cannot leave the
+    category pointing at a missing image.
+  */
+
+  const {
+    error: deleteError
+  } =
+    await supabaseClient
+      .from(
+        "categories"
+      )
       .delete()
       .eq(
         "id",
@@ -1105,22 +1975,88 @@ async function deleteCategory(id) {
       );
 
 
-  if (error) {
+  if (
+    deleteError
+  ) {
 
-    console.error(error);
+    console.error(
+      deleteError
+    );
+
 
     alert(
       "Category could not be deleted."
     );
 
+
     return;
+
   }
 
 
-  loadCategories();
+  /*
+    Clean up Storage image after the category
+    record has successfully been deleted.
+  */
+
+  let imageRemoved =
+    true;
+
+
+  if (
+    category.image_url
+  ) {
+
+    const imagePath =
+      getStoragePathFromPublicURL(
+        category.image_url
+      );
+
+
+    if (
+      imagePath
+    ) {
+
+      imageRemoved =
+        await removeStorageFile(
+          imagePath
+        );
+
+    }
+
+  }
+
+
+  await loadCategories();
+
+
+  if (
+    imageRemoved
+  ) {
+
+    alert(
+      "Category deleted successfully."
+    );
+
+  }
+
+  else {
+
+    alert(
+      "Category was deleted, but its old image could not be removed from Storage. We need to check the Storage delete permission."
+    );
+
+  }
+
 }
 
 
+
+/*
+=====================================================
+CANCEL EDIT
+=====================================================
+*/
 
 document
   .getElementById(
@@ -1128,12 +2064,26 @@ document
   )
   .addEventListener(
     "click",
-    resetForm
+    function() {
+
+      resetForm(
+        true
+      );
+
+    }
   );
 
 
 
-function resetForm() {
+/*
+=====================================================
+RESET FORM
+=====================================================
+*/
+
+function resetForm(
+  clearMessage = true
+) {
 
   document
     .getElementById(
@@ -1146,17 +2096,21 @@ function resetForm() {
     .getElementById(
       "category-id"
     )
-    .value = "";
+    .value =
+      "";
 
 
   document
     .getElementById(
       "current-image-url"
     )
-    .value = "";
+    .value =
+      "";
 
 
-  showImagePreview("");
+  showImagePreview(
+    ""
+  );
 
 
   document
@@ -1181,13 +2135,37 @@ function resetForm() {
     )
     .style.display =
       "none";
+
+
+  if (
+    clearMessage
+  ) {
+
+    setMessage(
+      "",
+      ""
+    );
+
+  }
+
 }
 
 
 
-function createSlug(value) {
+/*
+=====================================================
+CREATE SLUG
+=====================================================
+*/
 
-  return value
+function createSlug(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
     .toLowerCase()
     .trim()
     .replace(
@@ -1202,27 +2180,56 @@ function createSlug(value) {
       /^-+|-+$/g,
       ""
     );
+
 }
 
 
 
-function escapeHTML(value) {
+/*
+=====================================================
+HTML SAFETY
+=====================================================
+*/
+
+function escapeHTML(
+  value
+) {
 
   return String(
     value == null
+
       ? ""
+
       : value
   )
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
 }
 
 
 
-function escapeAttribute(value) {
+function escapeAttribute(
+  value
+) {
 
   return escapeHTML(
     value
@@ -1232,9 +2239,18 @@ function escapeAttribute(value) {
 
 
 
+/*
+=====================================================
+START
+=====================================================
+*/
+
 protectPage();
+
 
 </script>
 
+
 </body>
+
 </html>
