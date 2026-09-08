@@ -1,12 +1,61 @@
 User-agent: *
 Allow: /
 
+# ==============================
+# ADMIN / MANAGEMENT
+# ==============================
+
 Disallow: /admin.html
+Disallow: /admin-reset-password.html
 Disallow: /dashboard.html
 Disallow: /manage-
 Disallow: /shop-settings.html
-Disallow: /orders.html
+Disallow: /homepage-settings.html
+Disallow: /website-settings.html
+
+
+# ==============================
+# CART / CHECKOUT
+# ==============================
+
 Disallow: /cart.html
 Disallow: /checkout.html
+Disallow: /physical-checkout.html
+Disallow: /flutterwave-checkout.html
+Disallow: /creator-checkout.html
+
+
+# ==============================
+# CUSTOMER PRIVATE PAGES
+# ==============================
+
+Disallow: /customer-account.html
+Disallow: /customer-download.html
+Disallow: /customer-login.html
+Disallow: /customer-signup.html
+Disallow: /customer-forgot-password.html
+Disallow: /customer-reset-password.html
+
+
+# ==============================
+# CREATOR PRIVATE PAGES
+# ==============================
+
+Disallow: /creator-login.html
+Disallow: /creator-dashboard.html
+Disallow: /creator-products.html
+
+
+# ==============================
+# AFFILIATE PRIVATE PAGES
+# ==============================
+
+Disallow: /affiliate-login.html
+Disallow: /affiliate-dashboard.html
+
+
+# ==============================
+# SITEMAP
+# ==============================
 
 Sitemap: https://giftedgiftempire.com/sitemap.xml
