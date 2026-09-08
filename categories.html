@@ -21,7 +21,7 @@
 
   <meta
     name="description"
-    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs."
+    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, health and wellness, technology, digital products and African foodstuffs."
   >
 
   <meta
@@ -83,7 +83,7 @@
 
   <meta
     property="og:description"
-    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs."
+    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, health and wellness, technology, digital products and African foodstuffs."
   >
 
   <meta
@@ -118,12 +118,17 @@
 
   <meta
     name="twitter:description"
-    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs."
+    content="Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, health and wellness, technology, digital products and African foodstuffs."
   >
 
   <meta
     name="twitter:image"
     content="https://giftedgiftempire.com/my-logo.png"
+  >
+
+  <meta
+    name="twitter:image:alt"
+    content="GiftedGift Empire shopping categories"
   >
 
 
@@ -597,7 +602,7 @@
 
 
     <a
-      href="/index.html"
+      href="/"
       class="brand"
       aria-label="GiftedGift Empire home"
     >
@@ -627,11 +632,11 @@
 
     <nav>
 
-      <a href="/index.html">
+      <a href="/">
         Home
       </a>
 
-      <a href="/shop.html">
+      <a href="/shop">
         Shop
       </a>
 
@@ -642,27 +647,27 @@
         Categories
       </a>
 
-      <a href="/daily-inspiration.html">
+      <a href="/daily-inspiration">
         Daily Inspiration
       </a>
 
-      <a href="/blog.html">
+      <a href="/blog">
         Blog
       </a>
 
-      <a href="/deals.html">
+      <a href="/deals">
         Deals
       </a>
 
-      <a href="/about.html">
+      <a href="/about">
         About
       </a>
 
-      <a href="/contact.html">
+      <a href="/contact">
         Contact
       </a>
 
-      <a href="/cart.html">
+      <a href="/cart">
         🛒 Cart
       </a>
 
@@ -686,9 +691,10 @@
 
   <p>
     Browse products by category and discover useful
-    items, digital products, lifestyle finds,
-    African foodstuffs and carefully selected
-    recommendations from GiftedGift Empire.
+    items, digital products, health and wellness
+    finds, lifestyle products, African foodstuffs
+    and carefully selected recommendations from
+    GiftedGift Empire.
   </p>
 
 </section>
@@ -737,11 +743,11 @@
 
   <div class="footer-links">
 
-    <a href="/index.html">
+    <a href="/">
       Home
     </a>
 
-    <a href="/shop.html">
+    <a href="/shop">
       Shop
     </a>
 
@@ -749,15 +755,15 @@
       Categories
     </a>
 
-    <a href="/about.html">
+    <a href="/about">
       About
     </a>
 
-    <a href="/contact.html">
+    <a href="/contact">
       Contact
     </a>
 
-    <a href="/customer-service.html">
+    <a href="/customer-service">
       Customer Support
     </a>
 
@@ -793,7 +799,7 @@ const SITE_ORIGIN =
 
 const CATEGORIES_URL =
   SITE_ORIGIN +
-  "/categories.html";
+  "/categories";
 
 
 const SUPABASE_URL =
@@ -900,6 +906,9 @@ function categoryDescription(
     "african foodstuffs":
       "Quality African foodstuffs and pantry essentials for your kitchen.",
 
+    "health & wellness":
+      "Wellness products, fitness essentials, personal care items and useful health-related finds for everyday living.",
+
     "useful finds":
       "Practical products carefully selected for everyday life."
 
@@ -954,7 +963,7 @@ function getCategoryURL(
 
     return (
       SITE_ORIGIN +
-      "/foodstuffs.html"
+      "/foodstuffs"
     );
 
   }
@@ -962,7 +971,7 @@ function getCategoryURL(
 
   return (
     SITE_ORIGIN +
-    "/shop.html?category=" +
+    "/shop?category=" +
     encodeURIComponent(
       name
     )
@@ -1040,30 +1049,94 @@ function updateCategoriesSEO(
     );
 
 
+  const organizationSchema = {
+
+    "@type":
+      "Organization",
+
+    "@id":
+      SITE_ORIGIN +
+      "/#organization",
+
+    "name":
+      "GiftedGift Empire",
+
+    "url":
+      SITE_ORIGIN +
+      "/",
+
+    "logo": {
+
+      "@type":
+        "ImageObject",
+
+      "url":
+        SITE_ORIGIN +
+        "/my-logo.png"
+
+    }
+
+  };
+
+
+  const websiteSchema = {
+
+    "@type":
+      "WebSite",
+
+    "@id":
+      SITE_ORIGIN +
+      "/#website",
+
+    "name":
+      "GiftedGift Empire",
+
+    "url":
+      SITE_ORIGIN +
+      "/",
+
+    "publisher": {
+
+      "@id":
+        SITE_ORIGIN +
+        "/#organization"
+
+    }
+
+  };
+
+
   const collectionSchema = {
 
     "@type":
       "CollectionPage",
 
+    "@id":
+      CATEGORIES_URL +
+      "#webpage",
+
     "name":
       "Shop by Category | GiftedGift Empire",
 
     "description":
-      "Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, technology, digital products and African foodstuffs.",
+      "Browse GiftedGift Empire shopping categories including home and living, fashion, beauty, health and wellness, technology, digital products and African foodstuffs.",
 
     "url":
       CATEGORIES_URL,
 
     "isPartOf": {
 
-      "@type":
-        "WebSite",
+      "@id":
+        SITE_ORIGIN +
+        "/#website"
 
-      "name":
-        "GiftedGift Empire",
+    },
 
-      "url":
-        SITE_ORIGIN
+    "about": {
+
+      "@id":
+        SITE_ORIGIN +
+        "/#organization"
 
     },
 
@@ -1135,6 +1208,10 @@ function updateCategoriesSEO(
         "https://schema.org",
 
       "@graph": [
+
+        organizationSchema,
+
+        websiteSchema,
 
         collectionSchema,
 
@@ -1283,9 +1360,9 @@ async function loadCategories() {
       const shopLink =
         isFoodstuffs
 
-          ? "/foodstuffs.html"
+          ? "/foodstuffs"
 
-          : "/shop.html?category=" +
+          : "/shop?category=" +
             encodeURIComponent(
               categoryName
             );
@@ -1363,9 +1440,10 @@ async function loadCategories() {
 
 
   /*
-  Add CollectionPage + ItemList +
-  Breadcrumb structured data after
-  the real categories have loaded.
+    Add Organization, WebSite,
+    CollectionPage, ItemList and
+    Breadcrumb structured data after
+    the real categories have loaded.
   */
 
   updateCategoriesSEO(
