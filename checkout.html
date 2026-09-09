@@ -1034,6 +1034,20 @@ let paymentInProgress =
   false;
 
 
+/*
+  These two flags protect a successfully approved/completed
+  PayPal payment from being overwritten by a late PayPal
+  cancel/error callback.
+*/
+
+let paypalApprovalStarted =
+  false;
+
+
+let paypalPaymentCompleted =
+  false;
+
+
 let downloadToken =
   null;
 
@@ -1063,10 +1077,10 @@ function showSuccess(
   message
 ) {
 
-    const box =
-      document.getElementById(
-        "message"
-      );
+  const box =
+    document.getElementById(
+      "message"
+    );
 
 
   box.className =
@@ -1805,18 +1819,20 @@ async function createPayPalOrder() {
 
   };
 
+
   if (
-  referralCode
-) {
+    referralCode
+  ) {
 
-  requestBody.ref =
-    String(
-      referralCode
-    )
-      .trim()
-      .toUpperCase();
+    requestBody.ref =
+      String(
+        referralCode
+      )
+        .trim()
+        .toUpperCase();
 
-}
+  }
+
 
   if (
     currentDeal
@@ -2169,6 +2185,17 @@ async function maybeConfigurePayPal() {
             ) => {
 
 
+              /*
+                PayPal has now approved the order.
+                From this point onward, a late cancel/error
+                callback must not overwrite the real result.
+              */
+
+
+              paypalApprovalStarted =
+                true;
+
+
               try {
 
 
@@ -2189,6 +2216,16 @@ async function maybeConfigurePayPal() {
 
                 downloadToken =
                   capture.download_token;
+
+
+                /*
+                  The server has confirmed the payment as COMPLETED.
+                  Protect this success from any late PayPal callback.
+                */
+
+
+                paypalPaymentCompleted =
+                  true;
 
 
                 /*
@@ -2294,6 +2331,22 @@ async function maybeConfigurePayPal() {
                 false;
 
 
+              /*
+                Ignore a late cancel callback if PayPal approval
+                has already started or payment is already complete.
+              */
+
+
+              if (
+                paypalApprovalStarted ||
+                paypalPaymentCompleted
+              ) {
+
+                return;
+
+              }
+
+
               showError(
                 "Payment was cancelled."
               );
@@ -2315,6 +2368,22 @@ async function maybeConfigurePayPal() {
 
               paymentInProgress =
                 false;
+
+
+              /*
+                Do not overwrite a real approval/completed
+                payment with a late PayPal SDK error.
+              */
+
+
+              if (
+                paypalApprovalStarted ||
+                paypalPaymentCompleted
+              ) {
+
+                return;
+
+              }
 
 
               showError(
@@ -2345,6 +2414,20 @@ async function maybeConfigurePayPal() {
             return;
 
           }
+
+
+          /*
+            This is a fresh PayPal attempt.
+            Reset only the approval-started flag.
+
+            paypalPaymentCompleted is deliberately NOT reset.
+            Once the server has confirmed payment, that success
+            must remain protected.
+          */
+
+
+          paypalApprovalStarted =
+            false;
 
 
           clearMessage();
@@ -2414,13 +2497,30 @@ async function maybeConfigurePayPal() {
             );
 
 
-            showError(
+            /*
+              session.start() can sometimes reject after
+              PayPal has already moved into approval.
 
-              error instanceof Error
-                ? error.message
-                : "Unable to start PayPal checkout."
+              Do not replace the genuine approval/completion
+              result with a misleading error message.
+            */
 
-            );
+
+            if (
+              !paypalApprovalStarted &&
+              !paypalPaymentCompleted
+            ) {
+
+
+              showError(
+
+                error instanceof Error
+                  ? error.message
+                  : "Unable to start PayPal checkout."
+
+              );
+
+            }
 
 
           } finally {
@@ -2621,7 +2721,8 @@ loadProduct();
   onload="onPayPalWebSdkLoaded()"
 ></script>
 
-  <script src="/affiliate-tracking.js"></script>
+
+<script src="/affiliate-tracking.js"></script>
 
 <script src="cookie-consent.js"></script>
 
