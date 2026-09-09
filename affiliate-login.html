@@ -34,9 +34,7 @@
 
     body {
       margin: 0;
-
       min-height: 100vh;
-
       font-family: Arial, sans-serif;
 
       background:
@@ -53,18 +51,14 @@
 
     .top-bar {
       background: #123a8c;
-
       padding: 18px 20px;
-
       text-align: center;
     }
 
 
     .brand {
       margin: 0;
-
       color: #f2bd16;
-
       font-size: 27px;
       font-weight: 800;
     }
@@ -72,27 +66,21 @@
 
     .page {
       width: 100%;
-
       max-width: 520px;
-
       margin: 0 auto;
-
       padding: 55px 16px 50px;
     }
 
 
     .intro {
       text-align: center;
-
       margin-bottom: 24px;
     }
 
 
     .intro-badge {
       display: inline-block;
-
       margin-bottom: 13px;
-
       padding: 7px 13px;
 
       background: #fff4bd;
@@ -108,9 +96,7 @@
 
     .intro h1 {
       margin: 0 0 10px;
-
       color: #123a8c;
-
       font-size: 32px;
       line-height: 1.2;
     }
@@ -118,9 +104,7 @@
 
     .intro p {
       margin: 0;
-
       color: #666;
-
       font-size: 15px;
       line-height: 1.6;
     }
@@ -141,30 +125,29 @@
 
     .login-card h2 {
       margin: 0 0 6px;
-
       color: #123a8c;
-
       font-size: 23px;
     }
 
 
     .subtitle {
       margin: 0 0 23px;
-
       color: #666;
-
       font-size: 14px;
       line-height: 1.55;
     }
 
 
+    .panel[hidden] {
+      display: none;
+    }
+
+
     .field-label {
       display: block;
-
       margin: 16px 0 7px;
 
       color: #333;
-
       font-weight: 700;
     }
 
@@ -200,7 +183,6 @@
 
     .password-field {
       position: relative;
-
       width: 100%;
     }
 
@@ -222,7 +204,6 @@
       height: 42px;
 
       display: flex;
-
       align-items: center;
       justify-content: center;
 
@@ -244,7 +225,7 @@
     }
 
 
-    .login-button {
+    .main-button {
       width: 100%;
 
       margin-top: 24px;
@@ -264,15 +245,38 @@
     }
 
 
-    .login-button:hover {
+    .main-button:hover {
       opacity: 0.95;
     }
 
 
-    .login-button:disabled {
+    .main-button:disabled {
       opacity: 0.6;
-
       cursor: not-allowed;
+    }
+
+
+    .text-button {
+      display: block;
+
+      margin: 15px auto 0;
+
+      padding: 4px;
+
+      border: none;
+      background: transparent;
+
+      color: #123a8c;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .text-button:hover {
+      text-decoration: underline;
     }
 
 
@@ -310,9 +314,18 @@
     }
 
 
+    .message.success {
+      display: block;
+
+      background: #e9f8ed;
+      color: #17662d;
+
+      border: 1px solid #b8e3c2;
+    }
+
+
     .account-links {
       margin-top: 22px;
-
       padding-top: 19px;
 
       border-top: 1px solid #ececec;
@@ -333,15 +346,23 @@
 
     .account-links a {
       color: #123a8c;
-
       font-weight: 700;
-
       text-decoration: none;
     }
 
 
     .account-links a:hover {
       text-decoration: underline;
+    }
+
+
+    .help-note {
+      margin-top: 9px;
+
+      color: #777;
+
+      font-size: 12px;
+      line-height: 1.55;
     }
 
 
@@ -402,7 +423,6 @@
 
       .login-card {
         padding: 22px 17px;
-
         border-radius: 14px;
       }
 
@@ -440,13 +460,11 @@
       Affiliate Centre
     </div>
 
-
-    <h1>
+    <h1 id="page-heading">
       Welcome Back
     </h1>
 
-
-    <p>
+    <p id="page-intro">
       Log in to access your GiftedGift Empire
       affiliate account and dashboard.
     </p>
@@ -458,112 +476,304 @@
   <section class="login-card">
 
 
-    <h2>
-      Affiliate Login
-    </h2>
+    <!-- LOGIN -->
+
+    <div
+      id="login-panel"
+      class="panel"
+    >
+
+      <h2>
+        Affiliate Login
+      </h2>
+
+      <p class="subtitle">
+        Use the email address and password you created
+        when applying to the affiliate program.
+      </p>
 
 
-    <p class="subtitle">
-      Use the email address and password you created
-      when applying to the affiliate program.
-    </p>
+      <form id="login-form">
 
-
-
-    <form id="login-form">
-
-
-      <label
-        for="email"
-        class="field-label"
-      >
-        Email Address
-      </label>
-
-
-      <input
-        type="email"
-        id="email"
-        autocomplete="email"
-        maxlength="254"
-        placeholder="Enter your email address"
-        required
-      >
-
-
-
-      <label
-        for="password"
-        class="field-label"
-      >
-        Password
-      </label>
-
-
-      <div class="password-field">
+        <label
+          for="email"
+          class="field-label"
+        >
+          Email Address
+        </label>
 
         <input
-          type="password"
-          id="password"
-          autocomplete="current-password"
-          maxlength="72"
-          placeholder="Enter your password"
+          type="email"
+          id="email"
+          autocomplete="email"
+          maxlength="254"
+          placeholder="Enter your email address"
+          required
+        >
+
+
+        <label
+          for="password"
+          class="field-label"
+        >
+          Password
+        </label>
+
+
+        <div class="password-field">
+
+          <input
+            type="password"
+            id="password"
+            autocomplete="current-password"
+            maxlength="72"
+            placeholder="Enter your password"
+            required
+          >
+
+          <button
+            type="button"
+            class="password-toggle"
+            data-target="password"
+            aria-label="Show password"
+            title="Show password"
+          >
+            👁
+          </button>
+
+        </div>
+
+
+        <button
+          type="submit"
+          id="login-button"
+          class="main-button"
+        >
+          Log In to Affiliate Account
+        </button>
+
+
+        <button
+          type="button"
+          id="forgot-password-button"
+          class="text-button"
+        >
+          Forgot Password?
+        </button>
+
+
+        <div
+          id="login-message"
+          class="message"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+      </form>
+
+
+      <div class="account-links">
+
+        <p>
+          Not an affiliate yet?
+          <a href="/affiliate-register">
+            Apply to join
+          </a>
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- FORGOT PASSWORD -->
+
+    <div
+      id="forgot-panel"
+      class="panel"
+      hidden
+    >
+
+      <h2>
+        Reset Your Password
+      </h2>
+
+      <p class="subtitle">
+        Enter the email address connected to your
+        affiliate account. We will send you a secure
+        password reset link.
+      </p>
+
+
+      <form id="forgot-form">
+
+        <label
+          for="forgot-email"
+          class="field-label"
+        >
+          Affiliate Email Address
+        </label>
+
+        <input
+          type="email"
+          id="forgot-email"
+          autocomplete="email"
+          maxlength="254"
+          placeholder="Enter your email address"
           required
         >
 
 
         <button
-          type="button"
-          id="password-toggle"
-          class="password-toggle"
-          aria-label="Show password"
-          title="Show password"
+          type="submit"
+          id="forgot-submit-button"
+          class="main-button"
         >
-          👁
+          Send Password Reset Email
         </button>
 
-      </div>
+
+        <button
+          type="button"
+          id="back-to-login-button"
+          class="text-button"
+        >
+          ← Back to Affiliate Login
+        </button>
+
+
+        <div
+          id="forgot-message"
+          class="message"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+      </form>
+
+    </div>
 
 
 
-      <button
-        type="submit"
-        id="login-button"
-        class="login-button"
-      >
-        Log In to Affiliate Account
-      </button>
+    <!-- NEW PASSWORD -->
 
+    <div
+      id="reset-panel"
+      class="panel"
+      hidden
+    >
 
+      <h2>
+        Create New Password
+      </h2>
 
-      <div
-        id="message"
-        class="message"
-        role="status"
-        aria-live="polite"
-      ></div>
-
-
-    </form>
-
-
-
-    <div class="account-links">
-
-      <p>
-        Not an affiliate yet?
-        <a href="/affiliate-register.html">
-          Apply to join
-        </a>
+      <p class="subtitle">
+        Enter a new password for your GiftedGift Empire
+        affiliate account.
       </p>
+
+
+      <form id="reset-form">
+
+
+        <label
+          for="new-password"
+          class="field-label"
+        >
+          New Password
+        </label>
+
+
+        <div class="password-field">
+
+          <input
+            type="password"
+            id="new-password"
+            autocomplete="new-password"
+            minlength="8"
+            maxlength="72"
+            placeholder="Enter new password"
+            required
+          >
+
+          <button
+            type="button"
+            class="password-toggle"
+            data-target="new-password"
+            aria-label="Show password"
+            title="Show password"
+          >
+            👁
+          </button>
+
+        </div>
+
+
+        <div class="help-note">
+          Use at least 8 characters.
+        </div>
+
+
+        <label
+          for="confirm-password"
+          class="field-label"
+        >
+          Confirm New Password
+        </label>
+
+
+        <div class="password-field">
+
+          <input
+            type="password"
+            id="confirm-password"
+            autocomplete="new-password"
+            minlength="8"
+            maxlength="72"
+            placeholder="Enter the new password again"
+            required
+          >
+
+          <button
+            type="button"
+            class="password-toggle"
+            data-target="confirm-password"
+            aria-label="Show password"
+            title="Show password"
+          >
+            👁
+          </button>
+
+        </div>
+
+
+        <button
+          type="submit"
+          id="reset-submit-button"
+          class="main-button"
+        >
+          Save New Password
+        </button>
+
+
+        <div
+          id="reset-message"
+          class="message"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+
+      </form>
 
     </div>
 
 
 
     <div class="security-note">
-      🔒 Your login is securely handled through
-      GiftedGift Empire's authentication system.
+      🔒 Your login and password recovery are securely
+      handled through GiftedGift Empire's authentication system.
     </div>
 
 
@@ -614,120 +824,35 @@ const supabaseClient =
 
 
 
-/*
-  =====================================================
-  MESSAGE HELPERS
-  =====================================================
-*/
-
-
-function showMessage(
-  text,
-  type = "error"
-) {
-
-  const box =
-    document.getElementById(
-      "message"
-    );
-
-
-  box.className =
-    "message " +
-    type;
-
-
-  box.textContent =
-    text;
-
-}
-
-
-
-function clearMessage() {
-
-  const box =
-    document.getElementById(
-      "message"
-    );
-
-
-  box.className =
-    "message";
-
-
-  box.textContent =
-    "";
-
-}
-
-
-
-/*
-  =====================================================
-  PASSWORD SHOW / HIDE
-  =====================================================
-*/
-
-
-document
-  .getElementById(
-    "password-toggle"
-  )
-  .addEventListener(
-    "click",
-    function() {
-
-
-      const input =
-        document.getElementById(
-          "password"
-        );
-
-
-      const hidden =
-        input.type ===
-        "password";
-
-
-      input.type =
-        hidden
-          ? "text"
-          : "password";
-
-
-      this.textContent =
-        hidden
-          ? "🙈"
-          : "👁";
-
-
-      this.setAttribute(
-        "aria-label",
-        hidden
-          ? "Hide password"
-          : "Show password"
-      );
-
-
-      this.setAttribute(
-        "title",
-        hidden
-          ? "Hide password"
-          : "Show password"
-      );
-
-
-    }
+const loginPanel =
+  document.getElementById(
+    "login-panel"
   );
 
 
+const forgotPanel =
+  document.getElementById(
+    "forgot-panel"
+  );
 
-/*
-  =====================================================
-  NORMALIZE EMAIL
-  =====================================================
-*/
+
+const resetPanel =
+  document.getElementById(
+    "reset-panel"
+  );
+
+
+const pageHeading =
+  document.getElementById(
+    "page-heading"
+  );
+
+
+const pageIntro =
+  document.getElementById(
+    "page-intro"
+  );
+
 
 
 function normalizeEmail(
@@ -744,53 +869,202 @@ function normalizeEmail(
 
 
 
+function setMessage(
+  elementId,
+  text,
+  type = "error"
+) {
+
+  const box =
+    document.getElementById(
+      elementId
+    );
+
+
+  box.className =
+    "message " +
+    type;
+
+
+  box.textContent =
+    text;
+
+}
+
+
+
+function clearMessage(
+  elementId
+) {
+
+  const box =
+    document.getElementById(
+      elementId
+    );
+
+
+  box.className =
+    "message";
+
+
+  box.textContent =
+    "";
+
+}
+
+
+
+function showLoginPanel() {
+
+  loginPanel.hidden =
+    false;
+
+  forgotPanel.hidden =
+    true;
+
+  resetPanel.hidden =
+    true;
+
+
+  pageHeading.textContent =
+    "Welcome Back";
+
+
+  pageIntro.textContent =
+    "Log in to access your GiftedGift Empire affiliate account and dashboard.";
+
+}
+
+
+
+function showForgotPanel() {
+
+  loginPanel.hidden =
+    true;
+
+  forgotPanel.hidden =
+    false;
+
+  resetPanel.hidden =
+    true;
+
+
+  pageHeading.textContent =
+    "Forgot Your Password?";
+
+
+  pageIntro.textContent =
+    "Request a secure password reset link for your affiliate account.";
+
+}
+
+
+
+function showResetPanel() {
+
+  loginPanel.hidden =
+    true;
+
+  forgotPanel.hidden =
+    true;
+
+  resetPanel.hidden =
+    false;
+
+
+  pageHeading.textContent =
+    "Set a New Password";
+
+
+  pageIntro.textContent =
+    "Create a new secure password for your affiliate account.";
+
+}
+
+
+
 /*
   =====================================================
-  CHECK EXISTING SESSION
+  PASSWORD SHOW / HIDE
   =====================================================
 */
 
 
-async function checkExistingSession() {
-
-
-  try {
-
-
-    const {
-      data
-    } =
-      await supabaseClient
-        .auth
-        .getSession();
-
-
-    if (
-      data &&
-      data.session &&
-      data.session.user
+document
+  .querySelectorAll(
+    ".password-toggle"
+  )
+  .forEach(
+    function(
+      button
     ) {
 
-      await checkAffiliateAccess(
-        data.session.user
+
+      button.addEventListener(
+        "click",
+        function() {
+
+
+          const targetId =
+            this.getAttribute(
+              "data-target"
+            );
+
+
+          const input =
+            document.getElementById(
+              targetId
+            );
+
+
+          if (
+            !input
+          ) {
+
+            return;
+
+          }
+
+
+          const hidden =
+            input.type ===
+            "password";
+
+
+          input.type =
+            hidden
+              ? "text"
+              : "password";
+
+
+          this.textContent =
+            hidden
+              ? "🙈"
+              : "👁";
+
+
+          this.setAttribute(
+            "aria-label",
+            hidden
+              ? "Hide password"
+              : "Show password"
+          );
+
+
+          this.setAttribute(
+            "title",
+            hidden
+              ? "Hide password"
+              : "Show password"
+          );
+
+
+        }
       );
 
+
     }
-
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      "Session check error:",
-      error
-    );
-
-  }
-
-
-}
+  );
 
 
 
@@ -816,7 +1090,8 @@ async function checkAffiliateAccess(
       .signOut();
 
 
-    showMessage(
+    setMessage(
+      "login-message",
       "We could not verify this affiliate account."
     );
 
@@ -869,7 +1144,8 @@ async function checkAffiliateAccess(
       .signOut();
 
 
-    showMessage(
+    setMessage(
+      "login-message",
       "We could not verify your affiliate account. Please try again."
     );
 
@@ -890,7 +1166,8 @@ async function checkAffiliateAccess(
       .signOut();
 
 
-    showMessage(
+    setMessage(
+      "login-message",
       "No affiliate application was found for this account."
     );
 
@@ -910,29 +1187,19 @@ async function checkAffiliateAccess(
 
 
 
-  /*
-    APPROVED
-  */
-
   if (
     status ===
     "approved"
   ) {
 
-
     window.location.href =
-      "/affiliate-dashboard.html";
-
+      "/affiliate-dashboard";
 
     return;
 
   }
 
 
-
-  /*
-    PENDING
-  */
 
   if (
     status ===
@@ -945,7 +1212,8 @@ async function checkAffiliateAccess(
       .signOut();
 
 
-    showMessage(
+    setMessage(
+      "login-message",
       "Your affiliate application is still pending approval.",
       "info"
     );
@@ -956,10 +1224,6 @@ async function checkAffiliateAccess(
   }
 
 
-
-  /*
-    SUSPENDED
-  */
 
   if (
     status ===
@@ -972,7 +1236,8 @@ async function checkAffiliateAccess(
       .signOut();
 
 
-    showMessage(
+    setMessage(
+      "login-message",
       "Your affiliate account is currently suspended. Please contact GiftedGift Empire for assistance."
     );
 
@@ -982,10 +1247,6 @@ async function checkAffiliateAccess(
   }
 
 
-
-  /*
-    REJECTED
-  */
 
   if (
     status ===
@@ -998,7 +1259,8 @@ async function checkAffiliateAccess(
       .signOut();
 
 
-    showMessage(
+    setMessage(
+      "login-message",
       "This affiliate application was not approved."
     );
 
@@ -1009,19 +1271,15 @@ async function checkAffiliateAccess(
 
 
 
-  /*
-    UNKNOWN STATUS
-  */
-
   await supabaseClient
     .auth
     .signOut();
 
 
-  showMessage(
+  setMessage(
+    "login-message",
     "Your affiliate account is not currently available for dashboard access."
   );
-
 
 }
 
@@ -1048,8 +1306,9 @@ document
       event.preventDefault();
 
 
-      clearMessage();
-
+      clearMessage(
+        "login-message"
+      );
 
 
       const email =
@@ -1062,7 +1321,6 @@ document
         );
 
 
-
       const password =
         document
           .getElementById(
@@ -1071,12 +1329,10 @@ document
           .value;
 
 
-
       const button =
         document.getElementById(
           "login-button"
         );
-
 
 
       if (
@@ -1084,15 +1340,14 @@ document
         !password
       ) {
 
-        showMessage(
+        setMessage(
+          "login-message",
           "Please enter your email address and password."
         );
-
 
         return;
 
       }
-
 
 
       button.disabled =
@@ -1101,7 +1356,6 @@ document
 
       button.textContent =
         "Logging In...";
-
 
 
       try {
@@ -1116,11 +1370,9 @@ document
             .signInWithPassword({
 
               email,
-
               password
 
             });
-
 
 
         if (
@@ -1130,7 +1382,6 @@ document
           throw error;
 
         }
-
 
 
         if (
@@ -1145,10 +1396,8 @@ document
         }
 
 
-
         button.textContent =
           "Checking Affiliate Account...";
-
 
 
         await checkAffiliateAccess(
@@ -1198,20 +1447,14 @@ document
         }
 
 
-        showMessage(
+        setMessage(
+          "login-message",
           message
         );
 
 
       } finally {
 
-
-        /*
-          If login succeeded and redirect starts,
-          this does not matter.
-
-          If access was refused, restore the button.
-        */
 
         button.disabled =
           false;
@@ -1220,6 +1463,472 @@ document
         button.textContent =
           "Log In to Affiliate Account";
 
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  FORGOT PASSWORD
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "forgot-password-button"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+
+      const loginEmail =
+        normalizeEmail(
+          document
+            .getElementById(
+              "email"
+            )
+            .value
+        );
+
+
+      if (
+        loginEmail
+      ) {
+
+        document
+          .getElementById(
+            "forgot-email"
+          )
+          .value =
+            loginEmail;
+
+      }
+
+
+      clearMessage(
+        "forgot-message"
+      );
+
+
+      showForgotPanel();
+
+    }
+  );
+
+
+
+document
+  .getElementById(
+    "back-to-login-button"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+
+      clearMessage(
+        "forgot-message"
+      );
+
+
+      showLoginPanel();
+
+    }
+  );
+
+
+
+document
+  .getElementById(
+    "forgot-form"
+  )
+  .addEventListener(
+    "submit",
+    async function(
+      event
+    ) {
+
+
+      event.preventDefault();
+
+
+      clearMessage(
+        "forgot-message"
+      );
+
+
+      const email =
+        normalizeEmail(
+          document
+            .getElementById(
+              "forgot-email"
+            )
+            .value
+        );
+
+
+      const button =
+        document.getElementById(
+          "forgot-submit-button"
+        );
+
+
+      if (
+        !email
+      ) {
+
+        setMessage(
+          "forgot-message",
+          "Please enter your affiliate email address."
+        );
+
+        return;
+
+      }
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "Sending Reset Email...";
+
+
+      try {
+
+
+        const redirectUrl =
+          window.location.origin +
+          "/affiliate-login?mode=recovery";
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .auth
+            .resetPasswordForEmail(
+              email,
+              {
+                redirectTo:
+                  redirectUrl
+              }
+            );
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+        setMessage(
+          "forgot-message",
+          "If this email belongs to an account, a password reset link has been sent. Please check the inbox and spam folder.",
+          "success"
+        );
+
+
+      } catch (
+        error
+      ) {
+
+
+        console.error(
+          "Affiliate password reset email error:",
+          error
+        );
+
+
+        setMessage(
+          "forgot-message",
+          "The password reset email could not be sent right now. Please try again."
+        );
+
+
+      } finally {
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "Send Password Reset Email";
+
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  SAVE NEW PASSWORD
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "reset-form"
+  )
+  .addEventListener(
+    "submit",
+    async function(
+      event
+    ) {
+
+
+      event.preventDefault();
+
+
+      clearMessage(
+        "reset-message"
+      );
+
+
+      const newPassword =
+        document
+          .getElementById(
+            "new-password"
+          )
+          .value;
+
+
+      const confirmPassword =
+        document
+          .getElementById(
+            "confirm-password"
+          )
+          .value;
+
+
+      const button =
+        document.getElementById(
+          "reset-submit-button"
+        );
+
+
+      if (
+        newPassword.length < 8
+      ) {
+
+        setMessage(
+          "reset-message",
+          "Your new password must contain at least 8 characters."
+        );
+
+        return;
+
+      }
+
+
+      if (
+        newPassword.length > 72
+      ) {
+
+        setMessage(
+          "reset-message",
+          "Your password is too long."
+        );
+
+        return;
+
+      }
+
+
+      if (
+        newPassword !==
+        confirmPassword
+      ) {
+
+        setMessage(
+          "reset-message",
+          "The two passwords do not match."
+        );
+
+        return;
+
+      }
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "Saving New Password...";
+
+
+      try {
+
+
+        const {
+          data: sessionData,
+          error: sessionError
+        } =
+          await supabaseClient
+            .auth
+            .getSession();
+
+
+        if (
+          sessionError
+        ) {
+
+          throw sessionError;
+
+        }
+
+
+        if (
+          !sessionData ||
+          !sessionData.session ||
+          !sessionData.session.user
+        ) {
+
+          throw new Error(
+            "This password reset link is invalid or has expired."
+          );
+
+        }
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .auth
+            .updateUser({
+
+              password:
+                newPassword
+
+            });
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+        await supabaseClient
+          .auth
+          .signOut();
+
+
+        history.replaceState(
+          {},
+          document.title,
+          "/affiliate-login"
+        );
+
+
+        document
+          .getElementById(
+            "new-password"
+          )
+          .value =
+            "";
+
+
+        document
+          .getElementById(
+            "confirm-password"
+          )
+          .value =
+            "";
+
+
+        showLoginPanel();
+
+
+        setMessage(
+          "login-message",
+          "Your password has been changed successfully. You can now log in with your new password.",
+          "success"
+        );
+
+
+      } catch (
+        error
+      ) {
+
+
+        console.error(
+          "Affiliate new password error:",
+          error
+        );
+
+
+        setMessage(
+          "reset-message",
+
+          error &&
+          error.message
+            ? error.message
+            : "Your password could not be changed. Please request a new reset link."
+
+        );
+
+
+      } finally {
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "Save New Password";
+
+      }
+
+
+    }
+  );
+
+
+
+/*
+  =====================================================
+  PASSWORD RECOVERY EVENT
+  =====================================================
+*/
+
+
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    function(
+      event,
+      session
+    ) {
+
+
+      if (
+        event ===
+        "PASSWORD_RECOVERY"
+      ) {
+
+        showResetPanel();
 
       }
 
@@ -1236,7 +1945,118 @@ document
 */
 
 
-checkExistingSession();
+async function startPage() {
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const recoveryMode =
+    params.get(
+      "mode"
+    ) ===
+    "recovery";
+
+
+  try {
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      error
+    ) {
+
+      throw error;
+
+    }
+
+
+    const session =
+      data
+        ? data.session
+        : null;
+
+
+    if (
+      recoveryMode
+    ) {
+
+
+      if (
+        session &&
+        session.user
+      ) {
+
+        showResetPanel();
+
+      } else {
+
+        showForgotPanel();
+
+
+        setMessage(
+          "forgot-message",
+          "This password reset link is invalid or has expired. Please request a new one.",
+          "error"
+        );
+
+      }
+
+
+      return;
+
+    }
+
+
+    if (
+      session &&
+      session.user
+    ) {
+
+      await checkAffiliateAccess(
+        session.user
+      );
+
+      return;
+
+    }
+
+
+    showLoginPanel();
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Affiliate login startup error:",
+      error
+    );
+
+
+    showLoginPanel();
+
+  }
+
+
+}
+
+
+
+startPage();
 
 
 </script>
