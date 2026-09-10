@@ -157,6 +157,12 @@
         0 5px 18px rgba(0,0,0,0.04);
     }
 
+    .stat-card.highlight {
+      border:
+        1px solid #f2bd16;
+      background: #fffdf5;
+    }
+
     .stat-label {
       color: #777;
       font-size: 13px;
@@ -193,7 +199,8 @@
       line-height: 1.5;
     }
 
-    .account-grid {
+    .account-grid,
+    .finance-grid {
       display: grid;
       grid-template-columns:
         repeat(2, minmax(0,1fr));
@@ -220,6 +227,13 @@
       font-size: 14px;
       line-height: 1.5;
       overflow-wrap: anywhere;
+      font-weight: 700;
+    }
+
+    .finance-value {
+      color: #123a8c;
+      font-size: 19px;
+      font-weight: 800;
     }
 
     .marketplace-box {
@@ -228,7 +242,7 @@
         1px solid #e1e6ee;
       border-radius: 12px;
       padding: 16px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .marketplace-box strong {
@@ -265,7 +279,32 @@
       font-size: 14px;
     }
 
-    .coming-soon {
+    .action-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #123a8c;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .active-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #ecfdf3;
+      border:
+        1px solid #abefc6;
+      color: #067647;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .next-badge {
       display: inline-block;
       margin-top: 12px;
       padding: 6px 9px;
@@ -276,6 +315,45 @@
       color: #b54708;
       font-size: 12px;
       font-weight: 800;
+    }
+
+    .balance-box {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #eef4ff;
+      border:
+        1px solid #cbd9f4;
+    }
+
+    .balance-label {
+      color: #555;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .balance-amount {
+      margin-top: 5px;
+      color: #123a8c;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .balance-note {
+      margin-top: 8px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .finance-message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #f8f9fc;
+      color: #666;
+      line-height: 1.5;
+      font-size: 14px;
     }
 
     .website-link {
@@ -302,7 +380,8 @@
       max-width: 650px
     ) {
 
-      .account-grid {
+      .account-grid,
+      .finance-grid {
         grid-template-columns: 1fr;
       }
 
@@ -326,91 +405,174 @@
 <body>
 
 
-  <header class="top-bar">
+<header class="top-bar">
 
-    <div class="top-inner">
+  <div class="top-inner">
 
-      <div class="brand">
+    <div class="brand">
 
-        <h1>
-          GiftedGift Empire
-        </h1>
+      <h1>
+        GiftedGift Empire
+      </h1>
 
-        <p>
-          Creator Dashboard
-        </p>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="logout-button"
-        onclick="logoutCreator()"
-      >
-        Logout
-      </button>
+      <p>
+        Creator Dashboard
+      </p>
 
     </div>
 
-  </header>
 
-
-  <main class="page">
-
-
-    <div
-      id="loading"
-      class="loading"
+    <button
+      type="button"
+      class="logout-button"
+      onclick="logoutCreator()"
     >
-      Checking your Creator account...
+      Logout
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Checking your Creator account...
+  </div>
+
+
+  <div
+    id="error-box"
+    class="error-box"
+  ></div>
+
+
+  <div id="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome-card">
+
+      <h2 id="welcome-name">
+        Welcome
+      </h2>
+
+      <p>
+        Your GiftedGift Empire Creator account
+        has been approved. This is your private
+        Creator workspace.
+      </p>
+
+      <span class="approved-badge">
+        ✓ Approved Creator
+      </span>
+
+    </section>
+
+
+    <!-- ACCOUNT SUMMARY -->
+
+    <div class="stats-grid">
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Seller Code
+        </div>
+
+        <div
+          id="seller-code"
+          class="stat-value"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Creator Share
+        </div>
+
+        <div
+          id="creator-share"
+          class="stat-value"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Total Sales
+        </div>
+
+        <div
+          id="total-sales"
+          class="stat-value"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="stat-card highlight">
+
+        <div class="stat-label">
+          Available Balance
+        </div>
+
+        <div
+          id="available-balance"
+          class="stat-value"
+        >
+          —
+        </div>
+
+      </div>
+
+
     </div>
 
 
-    <div
-      id="error-box"
-      class="error-box"
-    ></div>
+    <!-- ACCOUNT INFORMATION -->
+
+    <section class="section">
+
+      <h3>
+        Creator Account
+      </h3>
+
+      <p class="section-intro">
+        Your approved Creator account information.
+      </p>
 
 
-    <div id="dashboard">
+      <div class="account-grid">
 
 
-      <!-- WELCOME -->
+        <div class="detail">
 
-      <section class="welcome-card">
-
-        <h2 id="welcome-name">
-          Welcome
-        </h2>
-
-        <p>
-          Your GiftedGift Empire Creator account
-          has been approved. This is your private
-          Creator workspace.
-        </p>
-
-        <span class="approved-badge">
-          ✓ Approved Creator
-        </span>
-
-      </section>
-
-
-      <!-- ACCOUNT SUMMARY -->
-
-      <div class="stats-grid">
-
-
-        <div class="stat-card">
-
-          <div class="stat-label">
-            Seller Code
+          <div class="detail-label">
+            Full Name
           </div>
 
           <div
-            id="seller-code"
-            class="stat-value"
+            id="full-name"
+            class="detail-value"
           >
             —
           </div>
@@ -418,15 +580,15 @@
         </div>
 
 
-        <div class="stat-card">
+        <div class="detail">
 
-          <div class="stat-label">
-            Creator Share
+          <div class="detail-label">
+            Business / Brand
           </div>
 
           <div
-            id="creator-share"
-            class="stat-value"
+            id="business-name"
+            class="detail-value"
           >
             —
           </div>
@@ -434,15 +596,15 @@
         </div>
 
 
-        <div class="stat-card">
+        <div class="detail">
 
-          <div class="stat-label">
-            Platform Share
+          <div class="detail-label">
+            Account Email
           </div>
 
           <div
-            id="platform-share"
-            class="stat-value"
+            id="contact-email"
+            class="detail-value"
           >
             —
           </div>
@@ -450,15 +612,101 @@
         </div>
 
 
-        <div class="stat-card">
+        <div class="detail">
 
-          <div class="stat-label">
-            Settlement Currency
+          <div class="detail-label">
+            Approved On
           </div>
 
           <div
-            id="settlement-currency"
-            class="stat-value"
+            id="approved-at"
+            class="detail-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- SALES & EARNINGS -->
+
+    <section class="section">
+
+      <h3>
+        Sales & Earnings
+      </h3>
+
+      <p class="section-intro">
+        Track your approved Creator sales,
+        earnings and payout balance.
+      </p>
+
+
+      <div class="finance-grid">
+
+
+        <div class="detail">
+
+          <div class="detail-label">
+            Completed Sales
+          </div>
+
+          <div
+            id="finance-total-sales"
+            class="finance-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-label">
+            Gross Sales
+          </div>
+
+          <div
+            id="gross-sales"
+            class="finance-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-label">
+            Lifetime Creator Earnings
+          </div>
+
+          <div
+            id="lifetime-earnings"
+            class="finance-value"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-label">
+            Paid Out
+          </div>
+
+          <div
+            id="paid-out"
+            class="finance-value"
           >
             —
           </div>
@@ -469,686 +717,894 @@
       </div>
 
 
-      <!-- ACCOUNT INFORMATION -->
+      <div class="balance-box">
 
-      <section class="section">
-
-        <h3>
-          Creator Account
-        </h3>
-
-        <p class="section-intro">
-          Your approved Creator account information.
-        </p>
-
-
-        <div class="account-grid">
-
-
-          <div class="detail">
-
-            <div class="detail-label">
-              Full Name
-            </div>
-
-            <div
-              id="full-name"
-              class="detail-value"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail">
-
-            <div class="detail-label">
-              Business / Brand
-            </div>
-
-            <div
-              id="business-name"
-              class="detail-value"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail">
-
-            <div class="detail-label">
-              Account Email
-            </div>
-
-            <div
-              id="contact-email"
-              class="detail-value"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail">
-
-            <div class="detail-label">
-              Approved On
-            </div>
-
-            <div
-              id="approved-at"
-              class="detail-value"
-            >
-              —
-            </div>
-
-          </div>
-
-
+        <div class="balance-label">
+          Available for Withdrawal
         </div>
 
-      </section>
-
-
-      <!-- MARKETPLACE TERMS -->
-
-      <section class="section">
-
-        <h3>
-          Your Marketplace Agreement
-        </h3>
-
-        <p class="section-intro">
-          These are the current commercial terms
-          attached to your Creator account.
-        </p>
-
-
-        <div class="marketplace-box">
-
-          Creator earnings share:
-          <strong id="split-creator">
-            —
-          </strong>
-
-          <br>
-
-          GiftedGift Empire platform share:
-          <strong id="split-platform">
-            —
-          </strong>
-
-          <br>
-
-          Minimum Creator withdrawal:
-          <strong>
-            €20
-          </strong>
-
-          <br>
-
-          Settlement currency:
-          <strong id="split-currency">
-            —
-          </strong>
-
-        </div>
-
-      </section>
-
-
-      <!-- WORKSPACE -->
-
-      <section class="section">
-
-        <h3>
-          Creator Workspace
-        </h3>
-
-        <p class="section-intro">
-          More Creator tools will appear here
-          as your marketplace features are activated.
-        </p>
-
-
-        <div class="feature-grid">
-
-
-                    <div class="feature-card">
-
-            <h4>
-              My Digital Products
-            </h4>
-
-            <p>
-              Add digital products, save drafts,
-              upload your product files and submit
-              completed products for GiftedGift Empire
-              review.
-            </p>
-
-            <a
-              href="creator-products.html"
-              style="
-                display:inline-block;
-                margin-top:12px;
-                padding:10px 14px;
-                background:#123a8c;
-                color:white;
-                text-decoration:none;
-                border-radius:8px;
-                font-size:13px;
-                font-weight:700;
-              "
-            >
-              Manage My Products
-            </a>
-
-          </div>
-
-
-          <div class="feature-card">
-
-            <h4>
-              Sales & Earnings
-            </h4>
-
-            <p>
-              View completed sales and your
-              Creator earnings once the sales
-              ledger is activated.
-            </p>
-
-            <span class="coming-soon">
-              Coming Next
-            </span>
-
-          </div>
-
-
-          <div class="feature-card">
-
-            <h4>
-              Withdrawals
-            </h4>
-
-            <p>
-              Request Creator payouts once
-              your available balance reaches
-              the minimum withdrawal amount.
-            </p>
-
-            <span class="coming-soon">
-              Coming Later
-            </span>
-
-          </div>
-
-
-        </div>
-
-      </section>
-
-
-      <section class="section">
-
-        <h3>
-          GiftedGift Empire
-        </h3>
-
-        <p class="section-intro">
-          Return to the public website at any time.
-        </p>
-
-        <a
-          href="index.html"
-          class="website-link"
+        <div
+          id="finance-available-balance"
+          class="balance-amount"
         >
-          ← Visit GiftedGift Empire
-        </a>
+          —
+        </div>
 
-      </section>
+        <div class="balance-note">
+          Minimum withdrawal amount is €20.
+          Pending and processing withdrawals
+          are already deducted from this balance.
+        </div>
 
-
-    </div>
-
-  </main>
-
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
-  ></script>
+      </div>
 
 
-  <script>
+      <div
+        id="finance-message"
+        class="finance-message"
+      >
+        Loading your Creator financial summary...
+      </div>
 
-    /*
-    =====================================================
-    SUPABASE
-    =====================================================
-    */
-
-    const SUPABASE_URL =
-      "https://mvoxizdzjmtcvokowhpd.supabase.co";
+    </section>
 
 
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+    <!-- WITHDRAWAL SUMMARY -->
+
+    <section class="section">
+
+      <h3>
+        Withdrawals
+      </h3>
+
+      <p class="section-intro">
+        Your payout activity and current
+        withdrawal status.
+      </p>
 
 
-    const supabaseClient =
-      supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-      );
+      <div class="finance-grid">
 
 
-    /*
-    =====================================================
-    PAGE REFERENCES
-    =====================================================
-    */
+        <div class="detail">
 
-    const loading =
-      document.getElementById(
-        "loading"
-      );
+          <div class="detail-label">
+            Pending
+          </div>
 
+          <div
+            id="pending-withdrawals"
+            class="finance-value"
+          >
+            —
+          </div>
 
-    const dashboard =
-      document.getElementById(
-        "dashboard"
-      );
+        </div>
 
 
-    const errorBox =
-      document.getElementById(
-        "error-box"
-      );
+        <div class="detail">
+
+          <div class="detail-label">
+            Processing
+          </div>
+
+          <div
+            id="processing-withdrawals"
+            class="finance-value"
+          >
+            —
+          </div>
+
+        </div>
 
 
-    /*
-    =====================================================
-    FORMAT RATE
-    =====================================================
-    */
+      </div>
 
-    function formatRate(
+
+      <span class="next-badge">
+        Withdrawal Request Form Coming Next
+      </span>
+
+    </section>
+
+
+    <!-- MARKETPLACE TERMS -->
+
+    <section class="section">
+
+      <h3>
+        Your Marketplace Agreement
+      </h3>
+
+      <p class="section-intro">
+        These are the current commercial terms
+        attached to your Creator account.
+      </p>
+
+
+      <div class="marketplace-box">
+
+        Creator earnings share:
+        <strong id="split-creator">
+          —
+        </strong>
+
+        <br>
+
+        GiftedGift Empire platform share:
+        <strong id="split-platform">
+          —
+        </strong>
+
+        <br>
+
+        Minimum Creator withdrawal:
+        <strong>
+          €20
+        </strong>
+
+        <br>
+
+        Settlement currency:
+        <strong id="split-currency">
+          —
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- WORKSPACE -->
+
+    <section class="section">
+
+      <h3>
+        Creator Workspace
+      </h3>
+
+      <p class="section-intro">
+        Manage your products and Creator account.
+      </p>
+
+
+      <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+          <h4>
+            My Digital Products
+          </h4>
+
+          <p>
+            Add digital products, save drafts,
+            upload files and submit products
+            for GiftedGift Empire review.
+          </p>
+
+          <a
+            href="creator-products.html"
+            class="action-link"
+          >
+            Manage My Products
+          </a>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <h4>
+            Sales & Earnings
+          </h4>
+
+          <p>
+            Your Creator sales, earnings and
+            available balance are now active
+            on this dashboard.
+          </p>
+
+          <span class="active-badge">
+            ✓ Active
+          </span>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <h4>
+            Withdrawals
+          </h4>
+
+          <p>
+            Request Creator payouts when your
+            available balance reaches the
+            minimum withdrawal amount.
+          </p>
+
+          <span class="next-badge">
+            Next Step
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <h3>
+        GiftedGift Empire
+      </h3>
+
+      <p class="section-intro">
+        Return to the public website at any time.
+      </p>
+
+      <a
+        href="index.html"
+        class="website-link"
+      >
+        ← Visit GiftedGift Empire
+      </a>
+
+    </section>
+
+
+  </div>
+
+</main>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+const loading =
+  document.getElementById(
+    "loading"
+  );
+
+
+const dashboard =
+  document.getElementById(
+    "dashboard"
+  );
+
+
+const errorBox =
+  document.getElementById(
+    "error-box"
+  );
+
+
+let currentCurrency =
+  "EUR";
+
+
+
+function formatRate(
+  value
+) {
+
+  const number =
+    Number(
       value
-    ) {
-
-      const number =
-        Number(
-          value
-        );
+    );
 
 
-      if (
-        !Number.isFinite(
-          number
-        )
-      ) {
+  if (
+    !Number.isFinite(
+      number
+    )
+  ) {
 
-        return "0%";
+    return "0%";
 
-      }
-
-
-      return (
-        number
-          .toFixed(2)
-          .replace(
-            /\.00$/,
-            ""
-          ) +
-        "%"
-      );
-
-    }
+  }
 
 
-    /*
-    =====================================================
-    FORMAT DATE
-    =====================================================
-    */
+  return (
+    number
+      .toFixed(2)
+      .replace(
+        /\.00$/,
+        ""
+      ) +
+    "%"
+  );
 
-    function formatDate(
+}
+
+
+
+function formatDate(
+  value
+) {
+
+  if (!value) {
+
+    return "Not available";
+
+  }
+
+
+  const date =
+    new Date(
       value
-    ) {
+    );
 
-      if (!value) {
 
-        return "Not available";
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
 
-      }
+    return "Not available";
 
+  }
 
-      const date =
-        new Date(
-          value
-        );
 
+  return date
+    .toLocaleString();
 
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
+}
 
-        return "Not available";
 
-      }
 
+function formatMoney(
+  value
+) {
 
-      return date
-        .toLocaleString();
+  const amount =
+    Number(
+      value
+    );
 
-    }
 
+  const safeAmount =
+    Number.isFinite(
+      amount
+    )
+      ? amount
+      : 0;
 
-    /*
-    =====================================================
-    LOAD CREATOR
-    =====================================================
-    */
 
-    async function initializeDashboard() {
+  try {
 
-      loading.style.display =
-        "block";
+    return new Intl
+      .NumberFormat(
+        "en-US",
+        {
+          style:
+            "currency",
 
+          currency:
+            currentCurrency,
 
-      dashboard.style.display =
-        "none";
-
-
-      errorBox.style.display =
-        "none";
-
-
-      /*
-        REQUIRE LOGIN
-      */
-
-      const {
-        data: sessionData,
-        error: sessionError
-      } =
-        await supabaseClient
-          .auth
-          .getSession();
-
-
-      if (
-        sessionError ||
-        !sessionData.session ||
-        !sessionData.session.user
-      ) {
-
-        window.location.replace(
-          "creator-login.html"
-        );
-
-        return;
-
-      }
-
-
-      const user =
-        sessionData.session.user;
-
-
-      /*
-        LOAD ONLY THIS CREATOR'S ACCOUNT.
-        RLS ALSO PROTECTS THIS DATABASE ROW.
-      */
-
-      const {
-        data: creator,
-        error: creatorError
-      } =
-        await supabaseClient
-          .from(
-            "creator_accounts"
-          )
-          .select(`
-            creator_id,
-            seller_code,
-            full_name,
-            business_name,
-            contact_email,
-            status,
-            creator_share_rate,
-            platform_fee_rate,
-            settlement_currency,
-            approved_at
-          `)
-          .eq(
-            "creator_id",
-            user.id
-          )
-          .maybeSingle();
-
-
-      loading.style.display =
-        "none";
-
-
-      if (creatorError) {
-
-        console.error(
-          "Creator dashboard error:",
-          creatorError
-        );
-
-
-        errorBox.textContent =
-          "We could not load your Creator account. Please try again.";
-
-
-        errorBox.style.display =
-          "block";
-
-        return;
-
-      }
-
-
-      /*
-        NO CREATOR APPLICATION
-      */
-
-      if (!creator) {
-
-        window.location.replace(
-          "creator-apply.html"
-        );
-
-        return;
-
-      }
-
-
-      /*
-        ONLY APPROVED CREATORS
-        MAY ENTER THIS DASHBOARD
-      */
-
-      if (
-        creator.status !==
-        "approved"
-      ) {
-
-        window.location.replace(
-          "creator-login.html"
-        );
-
-        return;
-
-      }
-
-
-      /*
-        SHOW APPROVED DASHBOARD
-      */
-
-      document
-        .getElementById(
-          "welcome-name"
-        )
-        .textContent =
-          "Welcome, " +
-          (
-            creator.full_name ||
-            "Creator"
-          );
-
-
-      document
-        .getElementById(
-          "seller-code"
-        )
-        .textContent =
-          creator.seller_code ||
-          "Not available";
-
-
-      document
-        .getElementById(
-          "creator-share"
-        )
-        .textContent =
-          formatRate(
-            creator.creator_share_rate
-          );
-
-
-      document
-        .getElementById(
-          "platform-share"
-        )
-        .textContent =
-          formatRate(
-            creator.platform_fee_rate
-          );
-
-
-      document
-        .getElementById(
-          "settlement-currency"
-        )
-        .textContent =
-          creator.settlement_currency ||
-          "EUR";
-
-
-      document
-        .getElementById(
-          "full-name"
-        )
-        .textContent =
-          creator.full_name ||
-          "Not provided";
-
-
-      document
-        .getElementById(
-          "business-name"
-        )
-        .textContent =
-          creator.business_name ||
-          "Not provided";
-
-
-      document
-        .getElementById(
-          "contact-email"
-        )
-        .textContent =
-          creator.contact_email ||
-          user.email ||
-          "Not available";
-
-
-      document
-        .getElementById(
-          "approved-at"
-        )
-        .textContent =
-          formatDate(
-            creator.approved_at
-          );
-
-
-      document
-        .getElementById(
-          "split-creator"
-        )
-        .textContent =
-          formatRate(
-            creator.creator_share_rate
-          );
-
-
-      document
-        .getElementById(
-          "split-platform"
-        )
-        .textContent =
-          formatRate(
-            creator.platform_fee_rate
-          );
-
-
-      document
-        .getElementById(
-          "split-currency"
-        )
-        .textContent =
-          creator.settlement_currency ||
-          "EUR";
-
-
-      dashboard.style.display =
-        "block";
-
-    }
-
-
-    /*
-    =====================================================
-    LOGOUT
-    =====================================================
-    */
-
-    async function logoutCreator() {
-
-      await supabaseClient
-        .auth
-        .signOut();
-
-
-      window.location.replace(
-        "creator-login.html"
+          minimumFractionDigits:
+            2
+        }
+      )
+      .format(
+        safeAmount
       );
 
-    }
+  } catch (
+    error
+  ) {
+
+    return (
+      currentCurrency +
+      " " +
+      safeAmount.toFixed(2)
+    );
+
+  }
+
+}
 
 
-    /*
-    =====================================================
-    START
-    =====================================================
-    */
 
-    initializeDashboard();
+async function loadFinancialSummary() {
 
-  </script>
+  const financeMessage =
+    document.getElementById(
+      "finance-message"
+    );
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "get_my_creator_financial_summary"
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Creator finance summary:",
+      error
+    );
+
+
+    financeMessage.textContent =
+      "Your financial summary could not be loaded right now. Please refresh the page.";
+
+
+    return;
+
+  }
+
+
+  const summary =
+    Array.isArray(
+      data
+    )
+      ? data[0]
+      : data;
+
+
+  if (
+    !summary
+  ) {
+
+    financeMessage.textContent =
+      "No financial information is available yet.";
+
+
+    return;
+
+  }
+
+
+  const totalSales =
+    Number(
+      summary.total_sales ||
+      0
+    );
+
+
+  const grossSales =
+    Number(
+      summary.gross_sales ||
+      0
+    );
+
+
+  const lifetimeEarnings =
+    Number(
+      summary.lifetime_earnings ||
+      0
+    );
+
+
+  const pendingWithdrawals =
+    Number(
+      summary.pending_withdrawals ||
+      0
+    );
+
+
+  const processingWithdrawals =
+    Number(
+      summary.processing_withdrawals ||
+      0
+    );
+
+
+  const paidOut =
+    Number(
+      summary.paid_out ||
+      0
+    );
+
+
+  const availableBalance =
+    Number(
+      summary.available_balance ||
+      0
+    );
+
+
+  document
+    .getElementById(
+      "total-sales"
+    )
+    .textContent =
+      String(
+        totalSales
+      );
+
+
+  document
+    .getElementById(
+      "finance-total-sales"
+    )
+    .textContent =
+      String(
+        totalSales
+      );
+
+
+  document
+    .getElementById(
+      "gross-sales"
+    )
+    .textContent =
+      formatMoney(
+        grossSales
+      );
+
+
+  document
+    .getElementById(
+      "lifetime-earnings"
+    )
+    .textContent =
+      formatMoney(
+        lifetimeEarnings
+      );
+
+
+  document
+    .getElementById(
+      "available-balance"
+    )
+    .textContent =
+      formatMoney(
+        availableBalance
+      );
+
+
+  document
+    .getElementById(
+      "finance-available-balance"
+    )
+    .textContent =
+      formatMoney(
+        availableBalance
+      );
+
+
+  document
+    .getElementById(
+      "pending-withdrawals"
+    )
+    .textContent =
+      formatMoney(
+        pendingWithdrawals
+      );
+
+
+  document
+    .getElementById(
+      "processing-withdrawals"
+    )
+    .textContent =
+      formatMoney(
+        processingWithdrawals
+      );
+
+
+  document
+    .getElementById(
+      "paid-out"
+    )
+    .textContent =
+      formatMoney(
+        paidOut
+      );
+
+
+  if (
+    totalSales === 0
+  ) {
+
+    financeMessage.textContent =
+      "No approved Creator sales have been recorded yet.";
+
+  } else {
+
+    financeMessage.textContent =
+      "Your Creator sales and earnings are up to date.";
+
+  }
+
+}
+
+
+
+async function initializeDashboard() {
+
+  loading.style.display =
+    "block";
+
+
+  dashboard.style.display =
+    "none";
+
+
+  errorBox.style.display =
+    "none";
+
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if (
+    sessionError ||
+    !sessionData.session ||
+    !sessionData.session.user
+  ) {
+
+    window.location.replace(
+      "creator-login.html"
+    );
+
+    return;
+
+  }
+
+
+  const user =
+    sessionData.session.user;
+
+
+  const {
+    data: creator,
+    error: creatorError
+  } =
+    await supabaseClient
+      .from(
+        "creator_accounts"
+      )
+      .select(`
+        creator_id,
+        seller_code,
+        full_name,
+        business_name,
+        contact_email,
+        status,
+        creator_share_rate,
+        platform_fee_rate,
+        settlement_currency,
+        approved_at
+      `)
+      .eq(
+        "creator_id",
+        user.id
+      )
+      .maybeSingle();
+
+
+  loading.style.display =
+    "none";
+
+
+  if (
+    creatorError
+  ) {
+
+    console.error(
+      "Creator dashboard error:",
+      creatorError
+    );
+
+
+    errorBox.textContent =
+      "We could not load your Creator account. Please try again.";
+
+
+    errorBox.style.display =
+      "block";
+
+
+    return;
+
+  }
+
+
+  if (
+    !creator
+  ) {
+
+    window.location.replace(
+      "creator-apply.html"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    creator.status !==
+    "approved"
+  ) {
+
+    window.location.replace(
+      "creator-login.html"
+    );
+
+    return;
+
+  }
+
+
+  currentCurrency =
+    String(
+      creator.settlement_currency ||
+      "EUR"
+    )
+      .trim()
+      .toUpperCase();
+
+
+  document
+    .getElementById(
+      "welcome-name"
+    )
+    .textContent =
+      "Welcome, " +
+      (
+        creator.full_name ||
+        "Creator"
+      );
+
+
+  document
+    .getElementById(
+      "seller-code"
+    )
+    .textContent =
+      creator.seller_code ||
+      "Not available";
+
+
+  document
+    .getElementById(
+      "creator-share"
+    )
+    .textContent =
+      formatRate(
+        creator.creator_share_rate
+      );
+
+
+  document
+    .getElementById(
+      "full-name"
+    )
+    .textContent =
+      creator.full_name ||
+      "Not provided";
+
+
+  document
+    .getElementById(
+      "business-name"
+    )
+    .textContent =
+      creator.business_name ||
+      "Not provided";
+
+
+  document
+    .getElementById(
+      "contact-email"
+    )
+    .textContent =
+      creator.contact_email ||
+      user.email ||
+      "Not available";
+
+
+  document
+    .getElementById(
+      "approved-at"
+    )
+    .textContent =
+      formatDate(
+        creator.approved_at
+      );
+
+
+  document
+    .getElementById(
+      "split-creator"
+    )
+    .textContent =
+      formatRate(
+        creator.creator_share_rate
+      );
+
+
+  document
+    .getElementById(
+      "split-platform"
+    )
+    .textContent =
+      formatRate(
+        creator.platform_fee_rate
+      );
+
+
+  document
+    .getElementById(
+      "split-currency"
+    )
+    .textContent =
+      currentCurrency;
+
+
+  dashboard.style.display =
+    "block";
+
+
+  await loadFinancialSummary();
+
+}
+
+
+
+async function logoutCreator() {
+
+  await supabaseClient
+    .auth
+    .signOut();
+
+
+  window.location.replace(
+    "creator-login.html"
+  );
+
+}
+
+
+
+initializeDashboard();
+
+
+</script>
+
 
 </body>
 
