@@ -24,7 +24,6 @@
     content="noindex, nofollow"
   >
 
-
   <style>
 
     * {
@@ -73,8 +72,7 @@
     }
 
     .logout-button {
-      border:
-        1px solid rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.7);
       background: transparent;
       color: white;
       padding: 9px 14px;
@@ -101,26 +99,30 @@
       display: none;
     }
 
-    .welcome-card {
+    .welcome-card,
+    .section {
       background: white;
-      border-radius: 17px;
-      padding: 24px 20px;
-      border:
-        1px solid rgba(18,58,140,0.08);
-      box-shadow:
-        0 8px 25px rgba(0,0,0,0.06);
+      border-radius: 16px;
+      padding: 21px;
+      border: 1px solid #e0e5ed;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.04);
       margin-bottom: 20px;
     }
 
-    .welcome-card h2 {
+    .welcome-card h2,
+    .section h3 {
       margin: 0 0 7px;
       color: #123a8c;
     }
 
-    .welcome-card p {
+    .welcome-card p,
+    .section-intro {
       color: #666;
       line-height: 1.55;
-      margin-bottom: 0;
+    }
+
+    .section-intro {
+      margin: 0 0 18px;
     }
 
     .approved-badge {
@@ -128,15 +130,15 @@
       margin-top: 14px;
       background: #ecfdf3;
       color: #067647;
-      border:
-        1px solid #abefc6;
+      border: 1px solid #abefc6;
       border-radius: 999px;
       padding: 7px 11px;
       font-size: 13px;
       font-weight: 800;
     }
 
-    .stats-grid {
+    .stats-grid,
+    .finance-grid {
       display: grid;
       grid-template-columns:
         repeat(
@@ -147,99 +149,81 @@
       margin-bottom: 20px;
     }
 
-    .stat-card {
+    .stat-card,
+    .detail {
       background: white;
-      border-radius: 14px;
-      padding: 18px;
-      border:
-        1px solid #e0e5ed;
-      box-shadow:
-        0 5px 18px rgba(0,0,0,0.04);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e0e5ed;
     }
 
     .stat-card.highlight {
-      border:
-        1px solid #f2bd16;
+      border: 1px solid #f2bd16;
       background: #fffdf5;
     }
 
-    .stat-label {
+    .stat-label,
+    .detail-label {
       color: #777;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
     }
 
-    .stat-value {
+    .stat-value,
+    .finance-value {
       color: #123a8c;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       overflow-wrap: anywhere;
     }
 
-    .section {
-      background: white;
-      border-radius: 16px;
-      padding: 21px;
-      border:
-        1px solid #e0e5ed;
-      box-shadow:
-        0 5px 18px rgba(0,0,0,0.04);
-      margin-bottom: 20px;
-    }
-
-    .section h3 {
-      margin: 0 0 6px;
-      color: #123a8c;
-    }
-
-    .section-intro {
-      margin: 0 0 18px;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    .account-grid,
-    .finance-grid {
+    .account-grid {
       display: grid;
       grid-template-columns:
         repeat(2, minmax(0,1fr));
       gap: 13px;
     }
 
-    .detail {
-      border:
-        1px solid #e1e6ee;
-      border-radius: 10px;
-      padding: 12px;
-      min-width: 0;
-    }
-
-    .detail-label {
-      color: #777;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
     .detail-value {
       font-size: 14px;
       line-height: 1.5;
+      font-weight: 700;
       overflow-wrap: anywhere;
+    }
+
+    .balance-box {
+      margin-top: 15px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #eef4ff;
+      border: 1px solid #cbd9f4;
+    }
+
+    .balance-label {
+      color: #555;
+      font-size: 13px;
       font-weight: 700;
     }
 
-    .finance-value {
+    .balance-amount {
+      margin-top: 5px;
       color: #123a8c;
-      font-size: 19px;
-      font-weight: 800;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .balance-note {
+      margin-top: 8px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .marketplace-box {
       background: #f8f9fc;
-      border:
-        1px solid #e1e6ee;
+      border: 1px solid #e1e6ee;
       border-radius: 12px;
       padding: 16px;
       line-height: 1.7;
@@ -260,8 +244,7 @@
     }
 
     .feature-card {
-      border:
-        1px solid #dde3ec;
+      border: 1px solid #dde3ec;
       border-radius: 12px;
       padding: 17px;
       background: #fafbfc;
@@ -297,53 +280,171 @@
       padding: 6px 9px;
       border-radius: 999px;
       background: #ecfdf3;
-      border:
-        1px solid #abefc6;
+      border: 1px solid #abefc6;
       color: #067647;
       font-size: 12px;
       font-weight: 800;
     }
 
-    .next-badge {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 6px 9px;
-      border-radius: 999px;
-      background: #fffaeb;
-      border:
-        1px solid #fedf89;
-      color: #b54708;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .balance-box {
-      margin-top: 16px;
+    .withdrawal-form {
+      margin-top: 18px;
       padding: 18px;
+      background: #fafbfc;
+      border: 1px solid #e0e5ed;
       border-radius: 12px;
-      background: #eef4ff;
-      border:
-        1px solid #cbd9f4;
     }
 
-    .balance-label {
-      color: #555;
+    .withdrawal-form label {
+      display: block;
+      margin: 14px 0 6px;
+      color: #333;
       font-size: 13px;
       font-weight: 700;
     }
 
-    .balance-amount {
-      margin-top: 5px;
-      color: #123a8c;
-      font-size: 30px;
-      font-weight: 900;
+    .withdrawal-form input,
+    .withdrawal-form select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd3dd;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
     }
 
-    .balance-note {
+    .withdrawal-form input:focus,
+    .withdrawal-form select:focus {
+      outline: 2px solid rgba(18,58,140,0.15);
+      border-color: #123a8c;
+    }
+
+    .form-note {
       margin-top: 8px;
       color: #666;
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.5;
+    }
+
+    .payout-fields {
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .withdraw-button {
+      width: 100%;
+      margin-top: 18px;
+      border: 0;
+      background: #123a8c;
+      color: white;
+      padding: 13px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .withdraw-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .form-message {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .form-message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .form-message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .withdrawal-history {
+      margin-top: 20px;
+    }
+
+    .history-item {
+      border: 1px solid #e1e6ee;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 9px;
+    }
+
+    .history-reference {
+      color: #123a8c;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .history-amount {
+      font-size: 18px;
+      font-weight: 800;
+      color: #123a8c;
+    }
+
+    .history-meta {
+      color: #666;
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-pending {
+      background: #fffaeb;
+      color: #b54708;
+      border: 1px solid #fedf89;
+    }
+
+    .status-processing {
+      background: #eff8ff;
+      color: #175cd3;
+      border: 1px solid #b2ddff;
+    }
+
+    .status-paid {
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .status-rejected,
+    .status-cancelled {
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
     }
 
     .finance-message {
@@ -368,17 +469,14 @@
       display: none;
       background: #fef3f2;
       color: #b42318;
-      border:
-        1px solid #fecdca;
+      border: 1px solid #fecdca;
       border-radius: 11px;
       padding: 14px;
       margin-bottom: 20px;
       line-height: 1.5;
     }
 
-    @media (
-      max-width: 650px
-    ) {
+    @media (max-width: 650px) {
 
       .account-grid,
       .finance-grid {
@@ -386,8 +484,7 @@
       }
 
       .page {
-        padding:
-          20px 13px 45px;
+        padding: 20px 13px 45px;
       }
 
       .welcome-card,
@@ -420,7 +517,6 @@
       </p>
 
     </div>
-
 
     <button
       type="button"
@@ -455,8 +551,6 @@
   <div id="dashboard">
 
 
-    <!-- WELCOME -->
-
     <section class="welcome-card">
 
       <h2 id="welcome-name">
@@ -475,8 +569,6 @@
 
     </section>
 
-
-    <!-- ACCOUNT SUMMARY -->
 
     <div class="stats-grid">
 
@@ -547,8 +639,6 @@
 
     </div>
 
-
-    <!-- ACCOUNT INFORMATION -->
 
     <section class="section">
 
@@ -632,8 +722,6 @@
 
     </section>
 
-
-    <!-- SALES & EARNINGS -->
 
     <section class="section">
 
@@ -733,7 +821,7 @@
         <div class="balance-note">
           Minimum withdrawal amount is €20.
           Pending and processing withdrawals
-          are already deducted from this balance.
+          are already reserved from your balance.
         </div>
 
       </div>
@@ -749,8 +837,6 @@
     </section>
 
 
-    <!-- WITHDRAWAL SUMMARY -->
-
     <section class="section">
 
       <h3>
@@ -758,8 +844,8 @@
       </h3>
 
       <p class="section-intro">
-        Your payout activity and current
-        withdrawal status.
+        Request a Creator payout and track
+        your withdrawal history.
       </p>
 
 
@@ -801,14 +887,183 @@
       </div>
 
 
-      <span class="next-badge">
-        Withdrawal Request Form Coming Next
-      </span>
+      <div class="withdrawal-form">
+
+        <h3>
+          Request Withdrawal
+        </h3>
+
+
+        <label for="withdrawal-amount">
+          Amount
+        </label>
+
+        <input
+          type="number"
+          id="withdrawal-amount"
+          min="20"
+          step="0.01"
+          placeholder="20.00"
+        >
+
+        <div class="form-note">
+          Minimum withdrawal: €20.
+          You cannot request more than your
+          available Creator balance.
+        </div>
+
+
+        <label for="payout-method">
+          Payout Method
+        </label>
+
+        <select id="payout-method">
+
+          <option value="">
+            Choose payout method
+          </option>
+
+          <option value="paypal">
+            PayPal
+          </option>
+
+          <option value="bank_transfer">
+            Bank Transfer
+          </option>
+
+        </select>
+
+
+        <label for="payout-currency">
+          Payout Currency
+        </label>
+
+        <input
+          type="text"
+          id="payout-currency"
+          maxlength="3"
+          placeholder="EUR"
+        >
+
+        <div class="form-note">
+          Enter a 3-letter currency code,
+          for example EUR, USD, GBP or NGN.
+          Your Creator balance itself remains
+          in your settlement currency.
+        </div>
+
+
+        <div
+          id="paypal-fields"
+          class="payout-fields hidden"
+        >
+
+          <label for="paypal-email">
+            PayPal Email
+          </label>
+
+          <input
+            type="email"
+            id="paypal-email"
+            placeholder="your@email.com"
+          >
+
+        </div>
+
+
+        <div
+          id="bank-fields"
+          class="payout-fields hidden"
+        >
+
+          <label for="bank-account-name">
+            Account Name
+          </label>
+
+          <input
+            type="text"
+            id="bank-account-name"
+            placeholder="Account holder name"
+          >
+
+
+          <label for="bank-name">
+            Bank Name
+          </label>
+
+          <input
+            type="text"
+            id="bank-name"
+            placeholder="Bank name"
+          >
+
+
+          <label for="bank-account-number">
+            Account Number / IBAN
+          </label>
+
+          <input
+            type="text"
+            id="bank-account-number"
+            placeholder="Account number or IBAN"
+          >
+
+
+          <label for="bank-swift">
+            SWIFT / BIC
+          </label>
+
+          <input
+            type="text"
+            id="bank-swift"
+            placeholder="Optional"
+          >
+
+
+          <label for="bank-country">
+            Bank Country
+          </label>
+
+          <input
+            type="text"
+            id="bank-country"
+            placeholder="Optional"
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          id="withdraw-button"
+          class="withdraw-button"
+        >
+          Request Withdrawal
+        </button>
+
+
+        <div
+          id="withdraw-message"
+          class="form-message"
+        ></div>
+
+      </div>
+
+
+      <div class="withdrawal-history">
+
+        <h3>
+          Withdrawal History
+        </h3>
+
+        <div id="withdrawal-history-list">
+          Loading withdrawal history...
+        </div>
+
+      </div>
 
     </section>
 
-
-    <!-- MARKETPLACE TERMS -->
 
     <section class="section">
 
@@ -855,17 +1110,11 @@
     </section>
 
 
-    <!-- WORKSPACE -->
-
     <section class="section">
 
       <h3>
         Creator Workspace
       </h3>
-
-      <p class="section-intro">
-        Manage your products and Creator account.
-      </p>
 
 
       <div class="feature-grid">
@@ -880,7 +1129,7 @@
           <p>
             Add digital products, save drafts,
             upload files and submit products
-            for GiftedGift Empire review.
+            for review.
           </p>
 
           <a
@@ -900,9 +1149,8 @@
           </h4>
 
           <p>
-            Your Creator sales, earnings and
-            available balance are now active
-            on this dashboard.
+            Track Creator sales, earnings
+            and available balance.
           </p>
 
           <span class="active-badge">
@@ -919,13 +1167,12 @@
           </h4>
 
           <p>
-            Request Creator payouts when your
-            available balance reaches the
-            minimum withdrawal amount.
+            Request payouts and track your
+            withdrawal status.
           </p>
 
-          <span class="next-badge">
-            Next Step
+          <span class="active-badge">
+            ✓ Active
           </span>
 
         </div>
@@ -941,10 +1188,6 @@
       <h3>
         GiftedGift Empire
       </h3>
-
-      <p class="section-intro">
-        Return to the public website at any time.
-      </p>
 
       <a
         href="index.html"
@@ -1004,6 +1247,42 @@ const errorBox =
 
 let currentCurrency =
   "EUR";
+
+
+let currentAvailableBalance =
+  0;
+
+
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
 
 
 
@@ -1078,7 +1357,9 @@ function formatDate(
 
 
 function formatMoney(
-  value
+  value,
+  currency =
+    currentCurrency
 ) {
 
   const amount =
@@ -1105,7 +1386,7 @@ function formatMoney(
             "currency",
 
           currency:
-            currentCurrency,
+            currency,
 
           minimumFractionDigits:
             2
@@ -1120,10 +1401,132 @@ function formatMoney(
   ) {
 
     return (
-      currentCurrency +
+      currency +
       " " +
       safeAmount.toFixed(2)
     );
+
+  }
+
+}
+
+
+
+function showWithdrawMessage(
+  message,
+  type
+) {
+
+  const box =
+    document.getElementById(
+      "withdraw-message"
+    );
+
+
+  box.textContent =
+    message;
+
+
+  box.className =
+    "form-message " +
+    type;
+
+}
+
+
+
+function clearWithdrawMessage() {
+
+  const box =
+    document.getElementById(
+      "withdraw-message"
+    );
+
+
+  box.textContent =
+    "";
+
+
+  box.className =
+    "form-message";
+
+}
+
+
+
+function updatePayoutFields() {
+
+  const method =
+    document.getElementById(
+      "payout-method"
+    ).value;
+
+
+  document
+    .getElementById(
+      "paypal-fields"
+    )
+    .classList
+    .toggle(
+      "hidden",
+      method !==
+        "paypal"
+    );
+
+
+  document
+    .getElementById(
+      "bank-fields"
+    )
+    .classList
+    .toggle(
+      "hidden",
+      method !==
+        "bank_transfer"
+    );
+
+}
+
+
+
+function updateWithdrawalAvailability() {
+
+  const button =
+    document.getElementById(
+      "withdraw-button"
+    );
+
+
+  const amountInput =
+    document.getElementById(
+      "withdrawal-amount"
+    );
+
+
+  amountInput.max =
+    currentAvailableBalance
+      .toFixed(
+        2
+      );
+
+
+  button.disabled =
+    currentAvailableBalance <
+      20;
+
+
+  if (
+    currentAvailableBalance <
+      20
+  ) {
+
+    button.textContent =
+      "Minimum €20 Balance Required";
+
+  } else {
+
+    button.textContent =
+      "Request Withdrawal";
 
   }
 
@@ -1160,7 +1563,7 @@ async function loadFinancialSummary() {
 
 
     financeMessage.textContent =
-      "Your financial summary could not be loaded right now. Please refresh the page.";
+      "Your financial summary could not be loaded right now.";
 
 
     return;
@@ -1231,7 +1634,7 @@ async function loadFinancialSummary() {
     );
 
 
-  const availableBalance =
+  currentAvailableBalance =
     Number(
       summary.available_balance ||
       0
@@ -1284,7 +1687,7 @@ async function loadFinancialSummary() {
     )
     .textContent =
       formatMoney(
-        availableBalance
+        currentAvailableBalance
       );
 
 
@@ -1294,7 +1697,7 @@ async function loadFinancialSummary() {
     )
     .textContent =
       formatMoney(
-        availableBalance
+        currentAvailableBalance
       );
 
 
@@ -1341,6 +1744,639 @@ async function loadFinancialSummary() {
       "Your Creator sales and earnings are up to date.";
 
   }
+
+
+  updateWithdrawalAvailability();
+
+}
+
+
+
+function payoutMethodLabel(
+  method
+) {
+
+  if (
+    method ===
+      "paypal"
+  ) {
+
+    return "PayPal";
+
+  }
+
+
+  if (
+    method ===
+      "bank_transfer"
+  ) {
+
+    return "Bank Transfer";
+
+  }
+
+
+  return method ||
+    "Not available";
+
+}
+
+
+
+async function loadWithdrawalHistory() {
+
+  const list =
+    document.getElementById(
+      "withdrawal-history-list"
+    );
+
+
+  list.textContent =
+    "Loading withdrawal history...";
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "creator_withdrawals"
+      )
+      .select(`
+        id,
+        withdrawal_reference,
+        requested_amount,
+        settlement_currency,
+        payout_method,
+        payout_currency,
+        status,
+        payment_reference,
+        paid_amount,
+        exchange_rate,
+        requested_at,
+        paid_at
+      `)
+      .order(
+        "requested_at",
+        {
+          ascending:
+            false
+        }
+      )
+      .limit(
+        25
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Withdrawal history:",
+      error
+    );
+
+
+    list.textContent =
+      "Withdrawal history could not be loaded.";
+
+
+    return;
+
+  }
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    list.innerHTML =
+      "<p>No withdrawal requests yet.</p>";
+
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    "";
+
+
+  data.forEach(
+    withdrawal => {
+
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "history-item";
+
+
+      const status =
+        String(
+          withdrawal.status ||
+          ""
+        )
+          .trim()
+          .toLowerCase();
+
+
+      const reference =
+        withdrawal
+          .withdrawal_reference ||
+        (
+          "Withdrawal #" +
+          withdrawal.id
+        );
+
+
+      let paidInfo =
+        "";
+
+
+      if (
+        status ===
+          "paid" &&
+        withdrawal.paid_amount
+      ) {
+
+        paidInfo = `
+
+          <br>
+
+          Paid amount:
+          <strong>
+            ${escapeHTML(
+              formatMoney(
+                withdrawal.paid_amount,
+                withdrawal
+                  .payout_currency ||
+                currentCurrency
+              )
+            )}
+          </strong>
+
+        `;
+
+      }
+
+
+      const paymentReference =
+        withdrawal
+          .payment_reference
+          ? `
+
+              <br>
+
+              Payment reference:
+              <strong>
+                ${escapeHTML(
+                  withdrawal
+                    .payment_reference
+                )}
+              </strong>
+
+            `
+          : "";
+
+
+      item.innerHTML = `
+
+        <div class="history-top">
+
+          <div class="history-reference">
+            ${escapeHTML(reference)}
+          </div>
+
+          <span
+            class="status-badge status-${escapeHTML(status)}"
+          >
+            ${escapeHTML(
+              status ||
+              "unknown"
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="history-amount">
+
+          ${escapeHTML(
+            formatMoney(
+              withdrawal
+                .requested_amount,
+              withdrawal
+                .settlement_currency ||
+              currentCurrency
+            )
+          )}
+
+        </div>
+
+
+        <div class="history-meta">
+
+          Method:
+          <strong>
+            ${escapeHTML(
+              payoutMethodLabel(
+                withdrawal
+                  .payout_method
+              )
+            )}
+          </strong>
+
+          <br>
+
+          Requested payout currency:
+          <strong>
+            ${escapeHTML(
+              withdrawal
+                .payout_currency ||
+              "—"
+            )}
+          </strong>
+
+          <br>
+
+          Requested:
+          ${escapeHTML(
+            formatDate(
+              withdrawal
+                .requested_at
+            )
+          )}
+
+          ${paidInfo}
+
+          ${paymentReference}
+
+        </div>
+
+      `;
+
+
+      list.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+
+async function requestWithdrawal() {
+
+  clearWithdrawMessage();
+
+
+  const button =
+    document.getElementById(
+      "withdraw-button"
+    );
+
+
+  const amount =
+    Number(
+      document.getElementById(
+        "withdrawal-amount"
+      ).value
+    );
+
+
+  const method =
+    document.getElementById(
+      "payout-method"
+    ).value;
+
+
+  const payoutCurrency =
+    document.getElementById(
+      "payout-currency"
+    )
+      .value
+      .trim()
+      .toUpperCase();
+
+
+  if (
+    !Number.isFinite(
+      amount
+    ) ||
+    amount < 20
+  ) {
+
+    showWithdrawMessage(
+      "Minimum Creator withdrawal is €20.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    amount >
+      currentAvailableBalance
+  ) {
+
+    showWithdrawMessage(
+      "This amount is higher than your available Creator balance.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !method
+  ) {
+
+    showWithdrawMessage(
+      "Please choose a payout method.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !/^[A-Z]{3}$/
+      .test(
+        payoutCurrency
+      )
+  ) {
+
+    showWithdrawMessage(
+      "Please enter a valid 3-letter payout currency.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  let payoutDetails =
+    {};
+
+
+  if (
+    method ===
+      "paypal"
+  ) {
+
+    const paypalEmail =
+      document.getElementById(
+        "paypal-email"
+      )
+        .value
+        .trim();
+
+
+    if (
+      !paypalEmail
+    ) {
+
+      showWithdrawMessage(
+        "Please enter your PayPal email.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    payoutDetails = {
+
+      paypal_email:
+        paypalEmail
+
+    };
+
+  }
+
+
+  if (
+    method ===
+      "bank_transfer"
+  ) {
+
+    const accountName =
+      document.getElementById(
+        "bank-account-name"
+      )
+        .value
+        .trim();
+
+
+    const bankName =
+      document.getElementById(
+        "bank-name"
+      )
+        .value
+        .trim();
+
+
+    const accountNumber =
+      document.getElementById(
+        "bank-account-number"
+      )
+        .value
+        .trim();
+
+
+    const swift =
+      document.getElementById(
+        "bank-swift"
+      )
+        .value
+        .trim();
+
+
+    const country =
+      document.getElementById(
+        "bank-country"
+      )
+        .value
+        .trim();
+
+
+    if (
+      !accountName ||
+      !bankName ||
+      !accountNumber
+    ) {
+
+      showWithdrawMessage(
+        "Please complete the required bank payout details.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    payoutDetails = {
+
+      account_name:
+        accountName,
+
+      bank_name:
+        bankName,
+
+      account_number:
+        accountNumber,
+
+      swift_bic:
+        swift || null,
+
+      bank_country:
+        country || null
+
+    };
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "Request " +
+      formatMoney(
+        amount
+      ) +
+      " withdrawal using " +
+      payoutMethodLabel(
+        method
+      ) +
+      "?"
+    );
+
+
+  if (
+    !confirmed
+  ) {
+
+    return;
+
+  }
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Submitting...";
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "request_creator_withdrawal",
+        {
+
+          p_requested_amount:
+            amount,
+
+          p_payout_method:
+            method,
+
+          p_payout_currency:
+            payoutCurrency,
+
+          p_payout_details:
+            payoutDetails
+
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Creator withdrawal request:",
+      error
+    );
+
+
+    showWithdrawMessage(
+      error.message ||
+      "The withdrawal request could not be submitted.",
+      "error"
+    );
+
+
+    await loadFinancialSummary();
+
+
+    return;
+
+  }
+
+
+  const result =
+    Array.isArray(
+      data
+    )
+      ? data[0]
+      : data;
+
+
+  const reference =
+    result
+      ?.withdrawal_reference ||
+    "your withdrawal";
+
+
+  showWithdrawMessage(
+    "Withdrawal request submitted successfully. Reference: " +
+    reference,
+    "success"
+  );
+
+
+  document
+    .getElementById(
+      "withdrawal-amount"
+    )
+    .value =
+      "";
+
+
+  await Promise.all([
+    loadFinancialSummary(),
+    loadWithdrawalHistory()
+  ]);
 
 }
 
@@ -1424,13 +2460,13 @@ async function initializeDashboard() {
   ) {
 
     console.error(
-      "Creator dashboard error:",
+      "Creator dashboard:",
       creatorError
     );
 
 
     errorBox.textContent =
-      "We could not load your Creator account. Please try again.";
+      "We could not load your Creator account.";
 
 
     errorBox.style.display =
@@ -1457,7 +2493,7 @@ async function initializeDashboard() {
 
   if (
     creator.status !==
-    "approved"
+      "approved"
   ) {
 
     window.location.replace(
@@ -1471,11 +2507,20 @@ async function initializeDashboard() {
 
   currentCurrency =
     String(
-      creator.settlement_currency ||
+      creator
+        .settlement_currency ||
       "EUR"
     )
       .trim()
       .toUpperCase();
+
+
+  document
+    .getElementById(
+      "payout-currency"
+    )
+    .value =
+      currentCurrency;
 
 
   document
@@ -1505,7 +2550,8 @@ async function initializeDashboard() {
     )
     .textContent =
       formatRate(
-        creator.creator_share_rate
+        creator
+          .creator_share_rate
       );
 
 
@@ -1553,7 +2599,8 @@ async function initializeDashboard() {
     )
     .textContent =
       formatRate(
-        creator.creator_share_rate
+        creator
+          .creator_share_rate
       );
 
 
@@ -1563,7 +2610,8 @@ async function initializeDashboard() {
     )
     .textContent =
       formatRate(
-        creator.platform_fee_rate
+        creator
+          .platform_fee_rate
       );
 
 
@@ -1579,7 +2627,10 @@ async function initializeDashboard() {
     "block";
 
 
-  await loadFinancialSummary();
+  await Promise.all([
+    loadFinancialSummary(),
+    loadWithdrawalHistory()
+  ]);
 
 }
 
@@ -1598,6 +2649,50 @@ async function logoutCreator() {
 
 }
 
+
+
+document
+  .getElementById(
+    "payout-method"
+  )
+  .addEventListener(
+    "change",
+    updatePayoutFields
+  );
+
+
+document
+  .getElementById(
+    "payout-currency"
+  )
+  .addEventListener(
+    "input",
+    function () {
+
+      this.value =
+        this.value
+          .toUpperCase()
+          .replace(
+            /[^A-Z]/g,
+            ""
+          )
+          .slice(
+            0,
+            3
+          );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "withdraw-button"
+  )
+  .addEventListener(
+    "click",
+    requestWithdrawal
+  );
 
 
 initializeDashboard();
