@@ -1184,7 +1184,7 @@
         </h2>
 
         <p>
-          Draft, scheduled, queued and sent newsletter campaigns.
+          Manage Draft, scheduled, queued and sent newsletter campaigns.
         </p>
 
       </div>
@@ -2168,6 +2168,10 @@
           let actions =
             "";
 
+          /*
+            DRAFT CONTROLS
+          */
+
           if (
             status ===
             "draft"
@@ -2188,6 +2192,17 @@
                     )"
                   >
                     📧 Send Draft Now
+                  </button>
+
+                  <button
+                    type="button"
+                    class="button button-danger small-button"
+                    onclick="deleteDraftBroadcast(
+                      '${escapeForJS(id)}',
+                      '${escapeForJS(item.subject || "Newsletter")}'
+                    )"
+                  >
+                    🗑 Delete Draft
                   </button>
 
                 </div>
@@ -2218,6 +2233,11 @@
             `;
 
           }
+
+          /*
+            SCHEDULED / QUEUED:
+            CANCEL CONTROL
+          */
 
           if (
             status ===
@@ -2590,6 +2610,81 @@
         error instanceof Error
           ? error.message
           : "Could not cancel this newsletter.",
+        "error"
+      );
+
+    }
+
+  }
+
+  /* =========================
+     DELETE DRAFT
+  ========================= */
+
+  async function deleteDraftBroadcast(
+    broadcastId,
+    subject
+  ) {
+
+    const confirmed =
+      confirm(
+        "PERMANENTLY DELETE THIS DRAFT?\n\n" +
+        "Subject: " +
+        subject +
+        "\n\nThis Draft will be removed permanently."
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    const secondConfirmation =
+      confirm(
+        "Are you sure you want to permanently delete this newsletter Draft?\n\nThis action cannot be undone."
+      );
+
+    if (
+      !secondConfirmation
+    ) {
+      return;
+    }
+
+    clearMessage(
+      "broadcast-message"
+    );
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+            action:
+              "delete_broadcast",
+
+            broadcast_id:
+              broadcastId
+          }
+        );
+
+      showMessage(
+        "broadcast-message",
+        result.message ||
+        "Draft newsletter permanently deleted.",
+        "success"
+      );
+
+      await loadNewsletter();
+
+    } catch (
+      error
+    ) {
+
+      showMessage(
+        "broadcast-message",
+        error instanceof Error
+          ? error.message
+          : "Could not delete this Draft.",
         "error"
       );
 
@@ -3160,6 +3255,10 @@
     let scheduledISO =
       "";
 
+    /*
+      SAVE DRAFT
+    */
+
     if (
       action ===
       "draft"
@@ -3172,6 +3271,10 @@
         "draft";
 
     }
+
+    /*
+      SCHEDULE
+    */
 
     if (
       action ===
@@ -3255,6 +3358,10 @@
 
     }
 
+    /*
+      SEND NOW
+    */
+
     if (
       action ===
       "send"
@@ -3293,6 +3400,18 @@
 
       buttonMode =
         "send";
+
+    }
+
+    if (!apiAction) {
+
+      showMessage(
+        "send-message",
+        "Unknown newsletter action.",
+        "error"
+      );
+
+      return;
 
     }
 
