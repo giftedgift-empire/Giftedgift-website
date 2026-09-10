@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -22,7 +21,6 @@
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
   </script>
-
 
   <style>
 
@@ -47,1191 +45,681 @@
 
     body {
       margin: 0;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background:
-        var(--light);
-
-      color:
-        var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
     }
-
 
     /* =========================
        HEADER
     ========================= */
 
     .admin-header {
-      background:
-        var(--blue);
-
-      color:
-        white;
-
-      padding:
-        18px 20px;
-
-      box-shadow:
-        0 3px 14px
-        rgba(0, 0, 0, 0.14);
+      background: var(--blue);
+      color: white;
+      padding: 18px 20px;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.14);
     }
 
     .header-inner {
-      max-width:
-        1250px;
-
-      margin:
-        auto;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        16px;
+      max-width: 1250px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
 
     .brand {
-      font-size:
-        23px;
-
-      font-weight:
-        800;
+      font-size: 23px;
+      font-weight: 800;
     }
 
     .brand span {
-      color:
-        var(--gold);
+      color: var(--gold);
     }
 
     .back-link {
-      color:
-        white;
-
-      text-decoration:
-        none;
-
-      font-weight:
-        700;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.35);
-
-      padding:
-        9px 13px;
-
-      border-radius:
-        8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 9px 13px;
+      border-radius: 8px;
     }
-
 
     /* =========================
        PAGE
     ========================= */
 
     .page {
-      display:
-        none;
-
-      max-width:
-        1250px;
-
-      margin:
-        auto;
-
-      padding:
-        30px 18px 60px;
+      display: none;
+      max-width: 1250px;
+      margin: auto;
+      padding: 30px 18px 60px;
     }
 
     .loading {
-      max-width:
-        700px;
-
-      margin:
-        80px auto;
-
-      background:
-        white;
-
-      padding:
-        30px;
-
-      border-radius:
-        15px;
-
-      text-align:
-        center;
-
-      border:
-        1px solid
-        var(--border);
-
-      color:
-        var(--muted);
+      max-width: 700px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid var(--border);
+      color: var(--muted);
     }
 
     .page-heading {
-      margin-bottom:
-        25px;
+      margin-bottom: 25px;
     }
 
     .page-heading h1 {
-      margin:
-        0 0 8px;
-
-      color:
-        var(--blue);
-
-      font-size:
-        32px;
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 32px;
     }
 
     .page-heading p {
-      margin:
-        0;
-
-      color:
-        var(--muted);
-
-      line-height:
-        1.6;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
     }
-
 
     /* =========================
        STAT CARDS
     ========================= */
 
     .stats {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          minmax(0, 1fr)
-        );
-
-      gap:
-        15px;
-
-      margin-bottom:
-        25px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
     }
 
     .stat-card {
-      background:
-        white;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        14px;
-
-      padding:
-        20px;
-
-      box-shadow:
-        0 5px 18px
-        rgba(0,0,0,0.05);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     }
 
     .stat-label {
-      color:
-        var(--muted);
-
-      font-size:
-        13px;
-
-      font-weight:
-        800;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        0.7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
     }
 
     .stat-number {
-      margin-top:
-        7px;
-
-      font-size:
-        30px;
-
-      font-weight:
-        800;
-
-      color:
-        var(--blue);
+      margin-top: 7px;
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--blue);
     }
-
 
     /* =========================
        GENERAL CARD
     ========================= */
 
     .card {
-      background:
-        white;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        15px;
-
-      padding:
-        24px;
-
-      margin-bottom:
-        24px;
-
-      box-shadow:
-        0 5px 18px
-        rgba(0,0,0,0.05);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     }
 
     .card-heading {
-      display:
-        flex;
-
-      align-items:
-        flex-start;
-
-      justify-content:
-        space-between;
-
-      gap:
-        15px;
-
-      margin-bottom:
-        20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .card-heading h2 {
-      margin:
-        0 0 5px;
-
-      color:
-        var(--blue);
-
-      font-size:
-        23px;
+      margin: 0 0 5px;
+      color: var(--blue);
+      font-size: 23px;
     }
 
     .card-heading p {
-      margin:
-        0;
-
-      color:
-        var(--muted);
-
-      font-size:
-        14px;
-
-      line-height:
-        1.5;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
     }
-
 
     /* =========================
        FORM
     ========================= */
 
     .form-grid {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          2,
-          minmax(0, 1fr)
-        );
-
-      gap:
-        16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .field {
-      margin-bottom:
-        16px;
+      margin-bottom: 16px;
     }
 
     .field.full {
-      grid-column:
-        1 / -1;
+      grid-column: 1 / -1;
     }
 
     label {
-      display:
-        block;
-
-      margin-bottom:
-        7px;
-
-      font-weight:
-        700;
-
-      color:
-        #30343b;
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+      color: #30343b;
     }
 
     .optional {
-      color:
-        var(--muted);
-
-      font-weight:
-        400;
-
-      font-size:
-        12px;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 12px;
     }
 
     input,
     textarea,
     select {
-      width:
-        100%;
-
-      padding:
-        13px 14px;
-
-      border:
-        1px solid
-        #ccd3df;
-
-      border-radius:
-        9px;
-
-      font:
-        inherit;
-
-      background:
-        white;
-
-      color:
-        #222;
-
-      outline:
-        none;
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #ccd3df;
+      border-radius: 9px;
+      font: inherit;
+      background: white;
+      color: #222;
+      outline: none;
     }
 
     textarea {
-      min-height:
-        230px;
-
-      resize:
-        vertical;
-
-      line-height:
-        1.6;
+      min-height: 230px;
+      resize: vertical;
+      line-height: 1.6;
     }
 
     input:focus,
     textarea:focus,
     select:focus {
-      border-color:
-        var(--blue);
-
-      box-shadow:
-        0 0 0 3px
-        rgba(18,58,140,0.08);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(18,58,140,0.08);
     }
 
     .character-count {
-      text-align:
-        right;
-
-      margin-top:
-        5px;
-
-      color:
-        var(--muted);
-
-      font-size:
-        12px;
+      text-align: right;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
-    .image-help {
-      margin-top:
-        7px;
-
-      color:
-        var(--muted);
-
-      font-size:
-        12px;
-
-      line-height:
-        1.5;
+    .image-help,
+    .schedule-help {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
     }
 
+    .schedule-panel {
+      padding: 16px;
+      background: #fffaf0;
+      border: 1px solid #ecd99d;
+      border-radius: 11px;
+    }
 
     /* =========================
        BUTTONS
     ========================= */
 
     button {
-      font:
-        inherit;
+      font: inherit;
     }
 
     .button-row {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        10px;
-
-      flex-wrap:
-        wrap;
-
-      margin-top:
-        8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
     .button {
-      border:
-        none;
-
-      border-radius:
-        9px;
-
-      padding:
-        12px 18px;
-
-      font-weight:
-        800;
-
-      cursor:
-        pointer;
-
-      text-decoration:
-        none;
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      gap:
-        6px;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .button:disabled {
-      opacity:
-        0.55;
-
-      cursor:
-        not-allowed;
+      opacity: 0.55;
+      cursor: not-allowed;
     }
 
     .button-primary {
-      background:
-        var(--blue);
-
-      color:
-        white;
+      background: var(--blue);
+      color: white;
     }
 
     .button-gold {
-      background:
-        var(--gold);
-
-      color:
-        #111;
+      background: var(--gold);
+      color: #111;
     }
 
     .button-light {
-      background:
-        #edf2ff;
+      background: #edf2ff;
+      color: var(--blue);
+      border: 1px solid #cbd7f2;
+    }
 
-      color:
-        var(--blue);
-
-      border:
-        1px solid
-        #cbd7f2;
+    .button-success {
+      background: #e8f7ee;
+      color: #17652d;
+      border: 1px solid #b7dfc1;
     }
 
     .button-danger {
-      background:
-        #fff0ee;
-
-      color:
-        var(--red);
-
-      border:
-        1px solid
-        #f0bbb5;
+      background: #fff0ee;
+      color: var(--red);
+      border: 1px solid #f0bbb5;
     }
 
     .button-warning {
-      background:
-        #fff7e8;
-
-      color:
-        #8a4b00;
-
-      border:
-        1px solid
-        #ead09e;
+      background: #fff7e8;
+      color: #8a4b00;
+      border: 1px solid #ead09e;
     }
 
     .small-button {
-      padding:
-        7px 10px;
-
-      font-size:
-        12px;
-
-      border-radius:
-        7px;
+      padding: 7px 10px;
+      font-size: 12px;
+      border-radius: 7px;
     }
-
 
     /* =========================
        MESSAGE
     ========================= */
 
     .message {
-      display:
-        none;
-
-      margin-top:
-        15px;
-
-      padding:
-        13px 15px;
-
-      border-radius:
-        9px;
-
-      line-height:
-        1.5;
+      display: none;
+      margin-top: 15px;
+      padding: 13px 15px;
+      border-radius: 9px;
+      line-height: 1.5;
     }
 
     .message.success {
-      display:
-        block;
-
-      background:
-        #eaf8ef;
-
-      color:
-        #17652d;
-
-      border:
-        1px solid
-        #b7dfc1;
+      display: block;
+      background: #eaf8ef;
+      color: #17652d;
+      border: 1px solid #b7dfc1;
     }
 
     .message.error {
-      display:
-        block;
-
-      background:
-        #ffeded;
-
-      color:
-        #941c1c;
-
-      border:
-        1px solid
-        #efb4b4;
+      display: block;
+      background: #ffeded;
+      color: #941c1c;
+      border: 1px solid #efb4b4;
     }
-
 
     /* =========================
        IMAGE PREVIEW
     ========================= */
 
     .selected-image-box {
-      display:
-        none;
-
-      margin-top:
-        12px;
-
-      padding:
-        12px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        12px;
-
-      background:
-        #fafbfc;
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fafbfc;
     }
 
     .selected-image {
-      width:
-        100%;
-
-      max-width:
-        650px;
-
-      height:
-        auto;
-
-      display:
-        block;
-
-      margin:
-        0 auto;
-
-      border-radius:
-        10px;
-
-      border:
-        1px solid
-        var(--border);
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
     }
-
 
     /* =========================
        EMAIL PREVIEW
     ========================= */
 
     .preview-box {
-      display:
-        none;
-
-      margin-top:
-        22px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        12px;
-
-      overflow:
-        hidden;
-
-      background:
-        #f4f6fa;
+      display: none;
+      margin-top: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f4f6fa;
     }
 
     .preview-box.show {
-      display:
-        block;
+      display: block;
     }
 
     .preview-heading {
-      padding:
-        11px 15px;
-
-      background:
-        #eef1f5;
-
-      border-bottom:
-        1px solid
-        var(--border);
-
-      font-weight:
-        800;
-
-      color:
-        var(--blue);
+      padding: 11px 15px;
+      background: #eef1f5;
+      border-bottom: 1px solid var(--border);
+      font-weight: 800;
+      color: var(--blue);
     }
 
     .preview-email {
-      max-width:
-        650px;
-
-      margin:
-        22px auto;
-
-      background:
-        white;
-
-      border:
-        1px solid
-        #e0e5ed;
-
-      border-radius:
-        12px;
-
-      overflow:
-        hidden;
+      max-width: 650px;
+      margin: 22px auto;
+      background: white;
+      border: 1px solid #e0e5ed;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     .preview-email-header {
-      background:
-        var(--blue);
-
-      color:
-        white;
-
-      text-align:
-        center;
-
-      padding:
-        21px;
-
-      font-size:
-        22px;
-
-      font-weight:
-        800;
+      background: var(--blue);
+      color: white;
+      text-align: center;
+      padding: 21px;
+      font-size: 22px;
+      font-weight: 800;
     }
 
     .preview-email-header span {
-      color:
-        var(--gold);
+      color: var(--gold);
     }
 
     .preview-email-body {
-      padding:
-        27px 23px;
-
-      line-height:
-        1.75;
-
-      color:
-        #333;
+      padding: 27px 23px;
+      line-height: 1.75;
+      color: #333;
     }
 
     .preview-email-body p {
-      margin:
-        0 0 18px;
+      margin: 0 0 18px;
     }
 
     .preview-newsletter-image {
-      display:
-        block;
-
-      width:
-        calc(100% + 46px);
-
-      max-width:
-        none;
-
-      height:
-        auto;
-
-      margin:
-        -27px -23px 25px;
-
+      display: block;
+      width: calc(100% + 46px);
+      max-width: none;
+      height: auto;
+      margin: -27px -23px 25px;
       border: 0;
     }
 
     .preview-cta {
-      text-align:
-        center;
-
-      margin:
-        25px 0;
+      text-align: center;
+      margin: 25px 0;
     }
 
     .preview-cta a {
-      display:
-        inline-block;
-
-      background:
-        var(--gold);
-
-      color:
-        #111;
-
-      text-decoration:
-        none;
-
-      padding:
-        13px 21px;
-
-      border-radius:
-        8px;
-
-      font-weight:
-        800;
+      display: inline-block;
+      background: var(--gold);
+      color: #111;
+      text-decoration: none;
+      padding: 13px 21px;
+      border-radius: 8px;
+      font-weight: 800;
     }
 
     .preview-footer {
-      background:
-        #f7f8fb;
-
-      padding:
-        20px;
-
-      text-align:
-        center;
-
-      color:
-        #777;
-
-      font-size:
-        12px;
-
-      border-top:
-        1px solid
-        #e5e7eb;
+      background: #f7f8fb;
+      padding: 20px;
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+      border-top: 1px solid #e5e7eb;
     }
 
     .preview-footer a {
-      color:
-        var(--blue);
-
-      font-weight:
-        700;
+      color: var(--blue);
+      font-weight: 700;
     }
-
 
     /* =========================
        SUBSCRIBERS
     ========================= */
 
     .toolbar {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        10px;
-
-      flex-wrap:
-        wrap;
-
-      margin-bottom:
-        18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
     }
 
     .toolbar input {
-      flex:
-        1;
-
-      min-width:
-        220px;
+      flex: 1;
+      min-width: 220px;
     }
 
     .toolbar select {
-      width:
-        auto;
-
-      min-width:
-        150px;
+      width: auto;
+      min-width: 150px;
     }
 
     .table-wrapper {
-      overflow-x:
-        auto;
+      overflow-x: auto;
     }
 
     table {
-      width:
-        100%;
-
-      border-collapse:
-        collapse;
-
-      min-width:
-        800px;
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
     }
 
     th {
-      padding:
-        12px 11px;
-
-      text-align:
-        left;
-
-      color:
-        var(--blue);
-
-      background:
-        #f5f7fb;
-
-      font-size:
-        13px;
-
-      border-bottom:
-        1px solid
-        var(--border);
+      padding: 12px 11px;
+      text-align: left;
+      color: var(--blue);
+      background: #f5f7fb;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
     }
 
     td {
-      padding:
-        13px 11px;
-
-      border-bottom:
-        1px solid
-        #edf0f4;
-
-      vertical-align:
-        top;
-
-      font-size:
-        14px;
+      padding: 13px 11px;
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+      font-size: 14px;
     }
 
     .subscriber-name {
-      font-weight:
-        800;
-
-      margin-bottom:
-        3px;
+      font-weight: 800;
+      margin-bottom: 3px;
     }
 
     .subscriber-email {
-      color:
-        var(--muted);
-
-      word-break:
-        break-word;
+      color: var(--muted);
+      word-break: break-word;
     }
 
     .badge {
-      display:
-        inline-block;
-
-      padding:
-        5px 9px;
-
-      border-radius:
-        20px;
-
-      font-size:
-        11px;
-
-      font-weight:
-        800;
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .badge-subscribed {
-      background:
-        #e8f7ee;
-
-      color:
-        var(--green);
+      background: #e8f7ee;
+      color: var(--green);
     }
 
     .badge-unsubscribed {
-      background:
-        #fff0ee;
-
-      color:
-        var(--red);
+      background: #fff0ee;
+      color: var(--red);
     }
 
     .empty {
-      padding:
-        25px;
-
-      text-align:
-        center;
-
-      color:
-        var(--muted);
-
-      background:
-        #fafbfc;
-
-      border-radius:
-        10px;
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      background: #fafbfc;
+      border-radius: 10px;
     }
-
 
     /* =========================
        BROADCASTS
     ========================= */
 
     .broadcast-list {
-      display:
-        grid;
-
-      gap:
-        11px;
+      display: grid;
+      gap: 11px;
     }
 
     .broadcast-item {
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+    }
 
-      border-radius:
-        10px;
-
-      padding:
-        14px;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        15px;
+    .broadcast-main {
+      flex: 1;
+      min-width: 0;
     }
 
     .broadcast-subject {
-      font-weight:
-        800;
-
-      color:
-        #2d333c;
-
-      margin-bottom:
-        5px;
+      font-weight: 800;
+      color: #2d333c;
+      margin-bottom: 5px;
+      word-break: break-word;
     }
 
     .broadcast-meta {
-      color:
-        var(--muted);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
 
-      font-size:
-        12px;
+    .broadcast-actions {
+      margin-top: 12px;
+    }
 
-      line-height:
-        1.5;
+    .draft-schedule {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .draft-schedule input {
+      width: auto;
+      min-width: 210px;
+      padding: 8px 10px;
+      font-size: 12px;
     }
 
     .status-badge {
-      padding:
-        6px 10px;
-
-      border-radius:
-        20px;
-
-      font-size:
-        11px;
-
-      font-weight:
-        800;
-
-      background:
-        #edf2ff;
-
-      color:
-        var(--blue);
-
-      text-transform:
-        capitalize;
-
-      white-space:
-        nowrap;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      background: #edf2ff;
+      color: var(--blue);
+      text-transform: capitalize;
+      white-space: nowrap;
     }
-
 
     /* =========================
        MOBILE
     ========================= */
 
-    @media (
-      max-width: 760px
-    ) {
+    @media (max-width: 760px) {
 
       .header-inner {
-        align-items:
-          flex-start;
+        align-items: flex-start;
       }
 
       .brand {
-        font-size:
-          19px;
+        font-size: 19px;
       }
 
       .page-heading h1 {
-        font-size:
-          27px;
+        font-size: 27px;
       }
 
       .stats {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
       .form-grid {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
       .field.full {
-        grid-column:
-          auto;
+        grid-column: auto;
       }
 
       .card {
-        padding:
-          18px;
+        padding: 18px;
       }
 
       .card-heading {
-        flex-direction:
-          column;
+        flex-direction: column;
       }
 
       .toolbar {
-        align-items:
-          stretch;
+        align-items: stretch;
       }
 
       .toolbar input,
       .toolbar select,
       .toolbar .button {
-        width:
-          100%;
+        width: 100%;
       }
 
       .broadcast-item {
-        align-items:
-          flex-start;
+        flex-direction: column;
+      }
 
-        flex-direction:
-          column;
+      .draft-schedule {
+        align-items: stretch;
+      }
+
+      .draft-schedule input,
+      .draft-schedule .button {
+        width: 100%;
+      }
+
+      .button-row .button {
+        flex: 1 1 145px;
       }
 
     }
 
   </style>
-
 </head>
-
 
 <body>
 
-
 <header class="admin-header">
-
   <div class="header-inner">
 
     <div class="brand">
       GiftedGift
-      <span>
-        Empire
-      </span>
+      <span>Empire</span>
       Admin
     </div>
 
@@ -1243,9 +731,7 @@
     </a>
 
   </div>
-
 </header>
-
 
 <div
   id="loading"
@@ -1254,12 +740,10 @@
   Checking Admin access...
 </div>
 
-
 <main
   id="page"
   class="page"
 >
-
 
   <div class="page-heading">
 
@@ -1268,21 +752,17 @@
     </h1>
 
     <p>
-      Manage subscribers and send GiftedGift Empire
-      newsletter campaigns securely from your Admin dashboard.
+      Manage subscribers, prepare drafts, schedule campaigns
+      and send GiftedGift Empire newsletters securely.
     </p>
 
   </div>
 
-
-  <!-- =========================
-       STATS
-  ========================= -->
+  <!-- STATS -->
 
   <section class="stats">
 
     <div class="stat-card">
-
       <div class="stat-label">
         Total Contacts
       </div>
@@ -1293,12 +773,9 @@
       >
         0
       </div>
-
     </div>
 
-
     <div class="stat-card">
-
       <div class="stat-label">
         Subscribed
       </div>
@@ -1309,12 +786,9 @@
       >
         0
       </div>
-
     </div>
 
-
     <div class="stat-card">
-
       <div class="stat-label">
         Unsubscribed
       </div>
@@ -1325,40 +799,35 @@
       >
         0
       </div>
-
     </div>
 
   </section>
 
-
-  <!-- =========================
-       SEND NEWSLETTER
-  ========================= -->
+  <!-- NEWSLETTER COMPOSER -->
 
   <section class="card">
 
     <div class="card-heading">
-
       <div>
 
         <h2>
-          Send Newsletter
+          Create Newsletter
         </h2>
 
         <p>
-          This will send to currently subscribed contacts
-          in the GiftedGift Empire Newsletter segment.
+          Preview it, save it as a Draft, schedule it
+          for later or send it immediately.
         </p>
 
       </div>
-
     </div>
 
-
-    <form id="newsletter-form">
+    <form
+      id="newsletter-form"
+      onsubmit="return false;"
+    >
 
       <div class="form-grid">
-
 
         <div class="field full">
 
@@ -1375,7 +844,6 @@
           >
 
         </div>
-
 
         <div class="field full">
 
@@ -1395,7 +863,6 @@
 
         </div>
 
-
         <div class="field full">
 
           <label for="newsletter-image">
@@ -1412,7 +879,8 @@
           >
 
           <div class="image-help">
-            Choose JPG, PNG, WebP or GIF. Maximum size: 5 MB.
+            Choose JPG, PNG, WebP or GIF.
+            Maximum size: 5 MB.
           </div>
 
           <div
@@ -1439,7 +907,6 @@
 
         </div>
 
-
         <div class="field full">
 
           <label for="message">
@@ -1462,7 +929,6 @@
 
         </div>
 
-
         <div class="field">
 
           <label for="cta-label">
@@ -1481,7 +947,6 @@
 
         </div>
 
-
         <div class="field">
 
           <label for="cta-url">
@@ -1495,13 +960,37 @@
             type="url"
             id="cta-url"
             maxlength="1000"
-            placeholder="https://giftedgiftempire.com/deals.html"
+            placeholder="https://giftedgiftempire.com/deals"
           >
 
         </div>
 
-      </div>
+        <div class="field full">
 
+          <div class="schedule-panel">
+
+            <label for="schedule-at">
+              Schedule Date & Time
+              <span class="optional">
+                (only needed when scheduling)
+              </span>
+            </label>
+
+            <input
+              type="datetime-local"
+              id="schedule-at"
+            >
+
+            <div class="schedule-help">
+              The time you choose here is interpreted
+              using your device's local time.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
 
       <div class="button-row">
 
@@ -1513,23 +1002,36 @@
           👁 Preview Email
         </button>
 
+        <button
+          type="button"
+          id="draft-button"
+          class="button button-success"
+        >
+          💾 Save Draft
+        </button>
 
         <button
-          type="submit"
+          type="button"
+          id="schedule-button"
+          class="button button-gold"
+        >
+          🗓 Schedule
+        </button>
+
+        <button
+          type="button"
           id="send-button"
           class="button button-primary"
         >
-          📧 Send Newsletter
+          📧 Send Now
         </button>
 
       </div>
-
 
       <div
         id="send-message"
         class="message"
       ></div>
-
 
       <div
         id="preview-box"
@@ -1540,25 +1042,17 @@
           Email Preview
         </div>
 
-
         <div class="preview-email">
 
           <div class="preview-email-header">
-
             GiftedGift
-
-            <span>
-              Empire
-            </span>
-
+            <span>Empire</span>
           </div>
-
 
           <div
             id="preview-body"
             class="preview-email-body"
           ></div>
-
 
           <div class="preview-footer">
 
@@ -1585,10 +1079,7 @@
 
   </section>
 
-
-  <!-- =========================
-       SUBSCRIBERS
-  ========================= -->
+  <!-- SUBSCRIBERS -->
 
   <section class="card">
 
@@ -1606,7 +1097,6 @@
 
       </div>
 
-
       <button
         id="refresh-button"
         type="button"
@@ -1617,7 +1107,6 @@
 
     </div>
 
-
     <div class="toolbar">
 
       <input
@@ -1625,7 +1114,6 @@
         id="subscriber-search"
         placeholder="Search name or email..."
       >
-
 
       <select id="subscriber-filter">
 
@@ -1645,12 +1133,10 @@
 
     </div>
 
-
     <div
       id="subscriber-message"
       class="message"
     ></div>
-
 
     <div
       id="subscriber-table-wrapper"
@@ -1660,40 +1146,20 @@
       <table>
 
         <thead>
-
           <tr>
-
-            <th>
-              Subscriber
-            </th>
-
-            <th>
-              Status
-            </th>
-
-            <th>
-              Source
-            </th>
-
-            <th>
-              Joined
-            </th>
-
-            <th>
-              Actions
-            </th>
-
+            <th>Subscriber</th>
+            <th>Status</th>
+            <th>Source</th>
+            <th>Joined</th>
+            <th>Actions</th>
           </tr>
-
         </thead>
-
 
         <tbody id="subscriber-list"></tbody>
 
       </table>
 
     </div>
-
 
     <div
       id="subscriber-empty"
@@ -1705,10 +1171,7 @@
 
   </section>
 
-
-  <!-- =========================
-       RECENT CAMPAIGNS
-  ========================= -->
+  <!-- RECENT CAMPAIGNS -->
 
   <section class="card">
 
@@ -1721,14 +1184,17 @@
         </h2>
 
         <p>
-          Recent Broadcasts sent or created for the
-          newsletter segment.
+          Draft, scheduled, queued and sent newsletter campaigns.
         </p>
 
       </div>
 
     </div>
 
+    <div
+      id="broadcast-message"
+      class="message"
+    ></div>
 
     <div
       id="broadcast-list"
@@ -1743,9 +1209,7 @@
 
   </section>
 
-
 </main>
-
 
 <script>
 
@@ -1756,22 +1220,18 @@
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
-
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
-
 
   const NEWSLETTER_ADMIN_URL =
     SUPABASE_URL +
     "/functions/v1/newsletter-admin";
-
 
   const supabaseClient =
     supabase.createClient(
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
-
 
   let newsletterData = {
 
@@ -1787,21 +1247,20 @@
 
   };
 
-
   let currentSession =
     null;
-
 
   let selectedNewsletterImage =
     null;
 
-
   let newsletterImagePreviewUrl =
     "";
 
+  let newsletterActionRunning =
+    false;
 
   /* =========================
-     ESCAPE HTML
+     HELPERS
   ========================= */
 
   function escapeHTML(
@@ -1813,23 +1272,40 @@
         "div"
       );
 
-
     div.textContent =
       value == null
         ? ""
-        : String(
-            value
-          );
-
+        : String(value);
 
     return div.innerHTML;
 
   }
 
+  function escapeForJS(
+    value
+  ) {
 
-  /* =========================
-     DATE
-  ========================= */
+    return String(
+      value || ""
+    )
+      .replaceAll(
+        "\\",
+        "\\\\"
+      )
+      .replaceAll(
+        "'",
+        "\\'"
+      )
+      .replaceAll(
+        "\n",
+        "\\n"
+      )
+      .replaceAll(
+        "\r",
+        "\\r"
+      );
+
+  }
 
   function formatDate(
     value
@@ -1839,37 +1315,80 @@
       return "—";
     }
 
-
     const date =
-      new Date(
-        value
-      );
-
+      new Date(value);
 
     if (
       Number.isNaN(
         date.getTime()
       )
     ) {
-
       return "—";
-
     }
-
 
     return date.toLocaleString(
       undefined,
       {
-        dateStyle:
-          "medium",
-
-        timeStyle:
-          "short"
+        dateStyle: "medium",
+        timeStyle: "short"
       }
     );
 
   }
 
+  function toLocalDateTimeValue(
+    date
+  ) {
+
+    const pad =
+      value =>
+        String(value)
+          .padStart(
+            2,
+            "0"
+          );
+
+    return (
+      date.getFullYear() +
+      "-" +
+      pad(
+        date.getMonth() + 1
+      ) +
+      "-" +
+      pad(
+        date.getDate()
+      ) +
+      "T" +
+      pad(
+        date.getHours()
+      ) +
+      ":" +
+      pad(
+        date.getMinutes()
+      )
+    );
+
+  }
+
+  function updateScheduleMinimum() {
+
+    const input =
+      document.getElementById(
+        "schedule-at"
+      );
+
+    const minimum =
+      new Date(
+        Date.now() +
+        60 * 1000
+      );
+
+    input.min =
+      toLocalDateTimeValue(
+        minimum
+      );
+
+  }
 
   /* =========================
      MESSAGES
@@ -1886,17 +1405,14 @@
         elementId
       );
 
-
     box.className =
       "message " +
       type;
-
 
     box.textContent =
       text;
 
   }
-
 
   function clearMessage(
     elementId
@@ -1907,19 +1423,16 @@
         elementId
       );
 
-
     box.className =
       "message";
-
 
     box.textContent =
       "";
 
   }
 
-
   /* =========================
-     AUTH HEADER
+     AUTH
   ========================= */
 
   async function getAccessToken() {
@@ -1932,7 +1445,6 @@
         .auth
         .getSession();
 
-
     if (
       error ||
       !data?.session
@@ -1944,18 +1456,15 @@
 
     }
 
-
     currentSession =
       data.session;
-
 
     return data.session.access_token;
 
   }
 
-
   /* =========================
-     EDGE FUNCTION
+     API REQUEST
   ========================= */
 
   async function adminRequest(
@@ -1965,7 +1474,6 @@
 
     const token =
       await getAccessToken();
-
 
     const options = {
 
@@ -1984,7 +1492,6 @@
 
     };
 
-
     if (
       body !==
       null
@@ -1997,16 +1504,13 @@
 
     }
 
-
     const response =
       await fetch(
         NEWSLETTER_ADMIN_URL,
         options
       );
 
-
     let result;
-
 
     try {
 
@@ -2016,15 +1520,12 @@
     } catch {
 
       result = {
-        success:
-          false,
-
+        success: false,
         error:
           "The server returned an invalid response."
       };
 
     }
-
 
     if (
       !response.ok ||
@@ -2039,11 +1540,9 @@
 
     }
 
-
     return result;
 
   }
-
 
   /* =========================
      ADMIN AUTH CHECK
@@ -2056,7 +1555,6 @@
         "loading"
       );
 
-
     try {
 
       const {
@@ -2066,7 +1564,6 @@
         await supabaseClient
           .auth
           .getSession();
-
 
       if (
         sessionError ||
@@ -2080,10 +1577,8 @@
 
       }
 
-
       currentSession =
         sessionData.session;
-
 
       const {
         data: isAdmin,
@@ -2093,7 +1588,6 @@
           .rpc(
             "is_site_admin"
           );
-
 
       if (
         adminError ||
@@ -2107,10 +1601,8 @@
 
       }
 
-
       loading.style.display =
         "none";
-
 
       document
         .getElementById(
@@ -2119,9 +1611,9 @@
         .style.display =
           "block";
 
+      updateScheduleMinimum();
 
       await loadNewsletter();
-
 
     } catch (
       error
@@ -2131,7 +1623,6 @@
         error
       );
 
-
       loading.textContent =
         error instanceof Error
           ? error.message
@@ -2140,7 +1631,6 @@
     }
 
   }
-
 
   /* =========================
      LOAD NEWSLETTER
@@ -2153,19 +1643,15 @@
         "refresh-button"
       );
 
-
     refreshButton.disabled =
       true;
-
 
     refreshButton.textContent =
       "Loading...";
 
-
     clearMessage(
       "subscriber-message"
     );
-
 
     try {
 
@@ -2173,7 +1659,6 @@
         await adminRequest(
           "GET"
         );
-
 
       newsletterData = {
 
@@ -2201,7 +1686,6 @@
 
       };
 
-
       document
         .getElementById(
           "stat-total"
@@ -2210,7 +1694,6 @@
           newsletterData
             .stats
             .total || 0;
-
 
       document
         .getElementById(
@@ -2221,7 +1704,6 @@
             .stats
             .subscribed || 0;
 
-
       document
         .getElementById(
           "stat-unsubscribed"
@@ -2230,7 +1712,6 @@
           newsletterData
             .stats
             .unsubscribed || 0;
-
 
       if (
         result.segment?.name
@@ -2245,11 +1726,9 @@
 
       }
 
-
       renderSubscribers();
 
       renderBroadcasts();
-
 
     } catch (
       error
@@ -2260,7 +1739,6 @@
         error
       );
 
-
       showMessage(
         "subscriber-message",
         error instanceof Error
@@ -2269,12 +1747,10 @@
         "error"
       );
 
-
     } finally {
 
       refreshButton.disabled =
         false;
-
 
       refreshButton.textContent =
         "↻ Refresh";
@@ -2282,7 +1758,6 @@
     }
 
   }
-
 
   /* =========================
      SUBSCRIBERS
@@ -2301,14 +1776,12 @@
         .trim()
         .toLowerCase();
 
-
     const filter =
       document
         .getElementById(
           "subscriber-filter"
         )
         .value;
-
 
     const contacts =
       newsletterData
@@ -2335,10 +1808,8 @@
                   search
                 );
 
-
             let matchesFilter =
               true;
-
 
             if (
               filter ===
@@ -2351,7 +1822,6 @@
 
             }
 
-
             if (
               filter ===
               "unsubscribed"
@@ -2363,7 +1833,6 @@
 
             }
 
-
             return (
               matchesSearch &&
               matchesFilter
@@ -2372,24 +1841,20 @@
           }
         );
 
-
     const tbody =
       document.getElementById(
         "subscriber-list"
       );
-
 
     const empty =
       document.getElementById(
         "subscriber-empty"
       );
 
-
     const table =
       document.getElementById(
         "subscriber-table-wrapper"
       );
-
 
     if (
       contacts.length ===
@@ -2399,27 +1864,21 @@
       tbody.innerHTML =
         "";
 
-
       table.style.display =
         "none";
 
-
       empty.style.display =
         "block";
-
 
       return;
 
     }
 
-
     table.style.display =
       "block";
 
-
     empty.style.display =
       "none";
-
 
     tbody.innerHTML =
       contacts.map(
@@ -2431,32 +1890,25 @@
               ""
             );
 
-
           const name =
             String(
               contact.name ||
               ""
             );
 
-
           const statusHTML =
             contact.unsubscribed ===
             true
               ? `
-                <span
-                  class="badge badge-unsubscribed"
-                >
+                <span class="badge badge-unsubscribed">
                   Unsubscribed
                 </span>
               `
               : `
-                <span
-                  class="badge badge-subscribed"
-                >
+                <span class="badge badge-subscribed">
                   Subscribed
                 </span>
               `;
-
 
           const unsubscribeButton =
             contact.unsubscribed ===
@@ -2471,7 +1923,6 @@
                   Unsubscribe
                 </button>
               `;
-
 
           return `
 
@@ -2489,16 +1940,13 @@
 
               </td>
 
-
               <td>
                 ${statusHTML}
               </td>
 
-
               <td>
                 ${escapeHTML(contact.source || "Website")}
               </td>
-
 
               <td>
                 ${escapeHTML(
@@ -2508,7 +1956,6 @@
                   )
                 )}
               </td>
-
 
               <td>
 
@@ -2538,34 +1985,6 @@
 
   }
 
-
-  function escapeForJS(
-    value
-  ) {
-
-    return String(
-      value || ""
-    )
-      .replaceAll(
-        "\\",
-        "\\\\"
-      )
-      .replaceAll(
-        "'",
-        "\\'"
-      )
-      .replaceAll(
-        "\n",
-        "\\n"
-      )
-      .replaceAll(
-        "\r",
-        "\\r"
-      );
-
-  }
-
-
   /* =========================
      UNSUBSCRIBE
   ========================= */
@@ -2580,16 +1999,13 @@
         email
       );
 
-
     if (!confirmed) {
       return;
     }
 
-
     clearMessage(
       "subscriber-message"
     );
-
 
     try {
 
@@ -2604,7 +2020,6 @@
           }
         );
 
-
       showMessage(
         "subscriber-message",
         result.message ||
@@ -2612,9 +2027,7 @@
         "success"
       );
 
-
       await loadNewsletter();
-
 
     } catch (
       error
@@ -2632,9 +2045,8 @@
 
   }
 
-
   /* =========================
-     DELETE
+     DELETE SUBSCRIBER
   ========================= */
 
   async function deleteSubscriber(
@@ -2648,17 +2060,14 @@
         "\n\nThis action cannot be undone."
       );
 
-
     if (!confirmed) {
       return;
     }
-
 
     const secondConfirmation =
       confirm(
         "Are you sure you want to permanently delete this subscriber?"
       );
-
 
     if (
       !secondConfirmation
@@ -2666,11 +2075,9 @@
       return;
     }
 
-
     clearMessage(
       "subscriber-message"
     );
-
 
     try {
 
@@ -2685,7 +2092,6 @@
           }
         );
 
-
       showMessage(
         "subscriber-message",
         result.message ||
@@ -2693,9 +2099,7 @@
         "success"
       );
 
-
       await loadNewsletter();
-
 
     } catch (
       error
@@ -2713,7 +2117,6 @@
 
   }
 
-
   /* =========================
      BROADCASTS
   ========================= */
@@ -2725,11 +2128,9 @@
         "broadcast-list"
       );
 
-
     const broadcasts =
       newsletterData
         .broadcasts || [];
-
 
     if (
       broadcasts.length ===
@@ -2737,7 +2138,6 @@
     ) {
 
       box.innerHTML = `
-
         <div class="empty">
           No newsletter campaigns yet.
         </div>
@@ -2747,26 +2147,119 @@
 
     }
 
-
     box.innerHTML =
       broadcasts.map(
         item => {
+
+          const id =
+            String(
+              item.id ||
+              ""
+            );
+
+          const status =
+            String(
+              item.status ||
+              "unknown"
+            )
+              .trim()
+              .toLowerCase();
+
+          let actions =
+            "";
+
+          if (
+            status ===
+            "draft"
+          ) {
+
+            actions = `
+
+              <div class="broadcast-actions">
+
+                <div class="button-row">
+
+                  <button
+                    type="button"
+                    class="button button-primary small-button"
+                    onclick="sendExistingBroadcast(
+                      '${escapeForJS(id)}',
+                      '${escapeForJS(item.subject || "Newsletter")}'
+                    )"
+                  >
+                    📧 Send Draft Now
+                  </button>
+
+                </div>
+
+                <div class="draft-schedule">
+
+                  <input
+                    type="datetime-local"
+                    id="draft-schedule-${escapeHTML(id)}"
+                    aria-label="Schedule draft newsletter"
+                  >
+
+                  <button
+                    type="button"
+                    class="button button-gold small-button"
+                    onclick="scheduleExistingBroadcast(
+                      '${escapeForJS(id)}',
+                      '${escapeForJS(item.subject || "Newsletter")}'
+                    )"
+                  >
+                    🗓 Schedule Draft
+                  </button>
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+
+          if (
+            status ===
+              "scheduled" ||
+            status ===
+              "queued"
+          ) {
+
+            actions = `
+
+              <div class="broadcast-actions">
+
+                <button
+                  type="button"
+                  class="button button-danger small-button"
+                  onclick="cancelBroadcast(
+                    '${escapeForJS(id)}',
+                    '${escapeForJS(item.subject || "Newsletter")}',
+                    '${escapeForJS(status)}'
+                  )"
+                >
+                  ✕ Cancel
+                </button>
+
+              </div>
+
+            `;
+
+          }
 
           return `
 
             <div class="broadcast-item">
 
-              <div>
+              <div class="broadcast-main">
 
                 <div class="broadcast-subject">
-
                   ${escapeHTML(
                     item.subject ||
                     "Newsletter Broadcast"
                   )}
-
                 </div>
-
 
                 <div class="broadcast-meta">
 
@@ -2792,7 +2285,6 @@
                   }
 
                   ${
-                    !item.sent_at &&
                     item.scheduled_at
                       ? `
                         <br>
@@ -2808,16 +2300,12 @@
 
                 </div>
 
+                ${actions}
+
               </div>
 
-
               <span class="status-badge">
-
-                ${escapeHTML(
-                  item.status ||
-                  "unknown"
-                )}
-
+                ${escapeHTML(status)}
               </span>
 
             </div>
@@ -2828,11 +2316,289 @@
       )
       .join("");
 
+    updateDraftScheduleMinimums();
+
   }
 
+  function updateDraftScheduleMinimums() {
+
+    const minimum =
+      toLocalDateTimeValue(
+        new Date(
+          Date.now() +
+          60 * 1000
+        )
+      );
+
+    document
+      .querySelectorAll(
+        '.draft-schedule input[type="datetime-local"]'
+      )
+      .forEach(
+        input => {
+
+          input.min =
+            minimum;
+
+        }
+      );
+
+  }
 
   /* =========================
-     PREVIEW
+     EXISTING DRAFT:
+     SEND NOW
+  ========================= */
+
+  async function sendExistingBroadcast(
+    broadcastId,
+    subject
+  ) {
+
+    const confirmed =
+      confirm(
+        "Send this saved Draft now?\n\n" +
+        "Subject: " +
+        subject +
+        "\n\nOnce sending begins, recipients may receive it immediately."
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    clearMessage(
+      "broadcast-message"
+    );
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+            action:
+              "send_existing_broadcast",
+
+            broadcast_id:
+              broadcastId
+          }
+        );
+
+      showMessage(
+        "broadcast-message",
+        result.message ||
+        "Draft queued for sending.",
+        "success"
+      );
+
+      await loadNewsletter();
+
+    } catch (
+      error
+    ) {
+
+      showMessage(
+        "broadcast-message",
+        error instanceof Error
+          ? error.message
+          : "Could not send this Draft.",
+        "error"
+      );
+
+    }
+
+  }
+
+  /* =========================
+     EXISTING DRAFT:
+     SCHEDULE
+  ========================= */
+
+  async function scheduleExistingBroadcast(
+    broadcastId,
+    subject
+  ) {
+
+    const input =
+      document.getElementById(
+        "draft-schedule-" +
+        broadcastId
+      );
+
+    const value =
+      String(
+        input?.value ||
+        ""
+      ).trim();
+
+    if (!value) {
+
+      showMessage(
+        "broadcast-message",
+        "Choose a future date and time for this Draft first.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    const date =
+      new Date(
+        value
+      );
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      ) ||
+      date.getTime() <=
+        Date.now()
+    ) {
+
+      showMessage(
+        "broadcast-message",
+        "Please choose a valid future date and time.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    const confirmed =
+      confirm(
+        "Schedule this Draft?\n\n" +
+        "Subject: " +
+        subject +
+        "\n\nSend at: " +
+        date.toLocaleString()
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    clearMessage(
+      "broadcast-message"
+    );
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+            action:
+              "schedule_existing_broadcast",
+
+            broadcast_id:
+              broadcastId,
+
+            scheduled_at:
+              date.toISOString()
+          }
+        );
+
+      showMessage(
+        "broadcast-message",
+        result.message ||
+        "Draft scheduled.",
+        "success"
+      );
+
+      await loadNewsletter();
+
+    } catch (
+      error
+    ) {
+
+      showMessage(
+        "broadcast-message",
+        error instanceof Error
+          ? error.message
+          : "Could not schedule this Draft.",
+        "error"
+      );
+
+    }
+
+  }
+
+  /* =========================
+     CANCEL BROADCAST
+  ========================= */
+
+  async function cancelBroadcast(
+    broadcastId,
+    subject,
+    status
+  ) {
+
+    const extraWarning =
+      status ===
+      "queued"
+        ? "\n\nImportant: emails already sent cannot be recalled. Cancellation stops only emails still waiting in the queue."
+        : "\n\nNo emails will be sent from this scheduled campaign.";
+
+    const confirmed =
+      confirm(
+        "Cancel this newsletter?\n\n" +
+        "Subject: " +
+        subject +
+        extraWarning
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    clearMessage(
+      "broadcast-message"
+    );
+
+    try {
+
+      const result =
+        await adminRequest(
+          "POST",
+          {
+            action:
+              "cancel_broadcast",
+
+            broadcast_id:
+              broadcastId
+          }
+        );
+
+      showMessage(
+        "broadcast-message",
+        result.message ||
+        "Newsletter cancelled.",
+        "success"
+      );
+
+      await loadNewsletter();
+
+    } catch (
+      error
+    ) {
+
+      showMessage(
+        "broadcast-message",
+        error instanceof Error
+          ? error.message
+          : "Could not cancel this newsletter.",
+        "error"
+      );
+
+    }
+
+  }
+
+  /* =========================
+     EMAIL PREVIEW
   ========================= */
 
   function buildPreview() {
@@ -2845,7 +2611,6 @@
         .value
         .trim();
 
-
     const ctaLabel =
       document
         .getElementById(
@@ -2854,7 +2619,6 @@
         .value
         .trim();
 
-
     const ctaUrl =
       document
         .getElementById(
@@ -2862,7 +2626,6 @@
         )
         .value
         .trim();
-
 
     if (!message) {
 
@@ -2873,7 +2636,6 @@
       return;
 
     }
-
 
     if (
       (ctaLabel && !ctaUrl) ||
@@ -2888,7 +2650,6 @@
 
     }
 
-
     const paragraphs =
       message
         .split(
@@ -2896,8 +2657,7 @@
         )
         .map(
           paragraph =>
-            paragraph
-              .trim()
+            paragraph.trim()
         )
         .filter(
           Boolean
@@ -2917,7 +2677,6 @@
         )
         .join("");
 
-
     const imagePreviewHTML =
       newsletterImagePreviewUrl
         ? `
@@ -2930,7 +2689,6 @@
 
         `
         : "";
-
 
     const cta =
       ctaLabel &&
@@ -2951,7 +2709,6 @@
 
         `
         : "";
-
 
     document
       .getElementById(
@@ -2976,7 +2733,6 @@
 
       `;
 
-
     document
       .getElementById(
         "preview-box"
@@ -2985,7 +2741,6 @@
       .add(
         "show"
       );
-
 
     document
       .getElementById(
@@ -3003,7 +2758,6 @@
 
   }
 
-
   /* =========================
      UPLOAD NEWSLETTER IMAGE
   ========================= */
@@ -3018,26 +2772,21 @@
 
     }
 
-
     const token =
       await getAccessToken();
 
-
     const formData =
       new FormData();
-
 
     formData.append(
       "action",
       "upload_newsletter_image"
     );
 
-
     formData.append(
       "image",
       selectedNewsletterImage
     );
-
 
     const response =
       await fetch(
@@ -3047,11 +2796,9 @@
             "POST",
 
           headers: {
-
             "Authorization":
               "Bearer " +
               token
-
           },
 
           body:
@@ -3059,9 +2806,7 @@
         }
       );
 
-
     let result;
-
 
     try {
 
@@ -3076,7 +2821,6 @@
 
     }
 
-
     if (
       !response.ok ||
       result.success !==
@@ -3090,13 +2834,11 @@
 
     }
 
-
     const imageUrl =
       String(
         result.image_url ||
         ""
       );
-
 
     if (
       !imageUrl
@@ -3108,76 +2850,77 @@
 
     }
 
-
     return imageUrl;
 
   }
 
-
   /* =========================
-     SEND BROADCAST
+     FORM DATA
   ========================= */
 
-  async function sendNewsletter(
-    event
+  function getNewsletterFormData() {
+
+    return {
+
+      subject:
+        document
+          .getElementById(
+            "subject"
+          )
+          .value
+          .trim(),
+
+      previewText:
+        document
+          .getElementById(
+            "preview-text"
+          )
+          .value
+          .trim(),
+
+      message:
+        document
+          .getElementById(
+            "message"
+          )
+          .value
+          .trim(),
+
+      ctaLabel:
+        document
+          .getElementById(
+            "cta-label"
+          )
+          .value
+          .trim(),
+
+      ctaUrl:
+        document
+          .getElementById(
+            "cta-url"
+          )
+          .value
+          .trim(),
+
+      scheduleAt:
+        document
+          .getElementById(
+            "schedule-at"
+          )
+          .value
+          .trim()
+
+    };
+
+  }
+
+  function validateNewsletterForm(
+    values
   ) {
 
-    event.preventDefault();
-
-
-    clearMessage(
-      "send-message"
-    );
-
-
-    const subject =
-      document
-        .getElementById(
-          "subject"
-        )
-        .value
-        .trim();
-
-
-    const previewText =
-      document
-        .getElementById(
-          "preview-text"
-        )
-        .value
-        .trim();
-
-
-    const message =
-      document
-        .getElementById(
-          "message"
-        )
-        .value
-        .trim();
-
-
-    const ctaLabel =
-      document
-        .getElementById(
-          "cta-label"
-        )
-        .value
-        .trim();
-
-
-    const ctaUrl =
-      document
-        .getElementById(
-          "cta-url"
-        )
-        .value
-        .trim();
-
-
     if (
-      !subject ||
-      !message
+      !values.subject ||
+      !values.message
     ) {
 
       showMessage(
@@ -3186,14 +2929,19 @@
         "error"
       );
 
-      return;
+      return false;
 
     }
 
-
     if (
-      (ctaLabel && !ctaUrl) ||
-      (!ctaLabel && ctaUrl)
+      (
+        values.ctaLabel &&
+        !values.ctaUrl
+      ) ||
+      (
+        !values.ctaLabel &&
+        values.ctaUrl
+      )
     ) {
 
       showMessage(
@@ -3202,10 +2950,198 @@
         "error"
       );
 
+      return false;
+
+    }
+
+    return true;
+
+  }
+
+  /* =========================
+     BUTTON STATE
+  ========================= */
+
+  function setNewsletterButtonsDisabled(
+    disabled,
+    activeButton = ""
+  ) {
+
+    const previewButton =
+      document.getElementById(
+        "preview-button"
+      );
+
+    const draftButton =
+      document.getElementById(
+        "draft-button"
+      );
+
+    const scheduleButton =
+      document.getElementById(
+        "schedule-button"
+      );
+
+    const sendButton =
+      document.getElementById(
+        "send-button"
+      );
+
+    previewButton.disabled =
+      disabled;
+
+    draftButton.disabled =
+      disabled;
+
+    scheduleButton.disabled =
+      disabled;
+
+    sendButton.disabled =
+      disabled;
+
+    if (!disabled) {
+
+      draftButton.textContent =
+        "💾 Save Draft";
+
+      scheduleButton.textContent =
+        "🗓 Schedule";
+
+      sendButton.textContent =
+        "📧 Send Now";
+
       return;
 
     }
 
+    if (
+      activeButton ===
+      "draft"
+    ) {
+
+      draftButton.textContent =
+        selectedNewsletterImage
+          ? "Uploading image..."
+          : "Saving Draft...";
+
+    }
+
+    if (
+      activeButton ===
+      "schedule"
+    ) {
+
+      scheduleButton.textContent =
+        selectedNewsletterImage
+          ? "Uploading image..."
+          : "Scheduling...";
+
+    }
+
+    if (
+      activeButton ===
+      "send"
+    ) {
+
+      sendButton.textContent =
+        selectedNewsletterImage
+          ? "Uploading image..."
+          : "Sending...";
+
+    }
+
+  }
+
+  /* =========================
+     RESET COMPOSER
+  ========================= */
+
+  function resetNewsletterComposer() {
+
+    document
+      .getElementById(
+        "newsletter-form"
+      )
+      .reset();
+
+    document
+      .getElementById(
+        "message-count"
+      )
+      .textContent =
+        "0 / 20,000";
+
+    if (
+      newsletterImagePreviewUrl
+    ) {
+
+      URL.revokeObjectURL(
+        newsletterImagePreviewUrl
+      );
+
+    }
+
+    selectedNewsletterImage =
+      null;
+
+    newsletterImagePreviewUrl =
+      "";
+
+    document
+      .getElementById(
+        "newsletter-image-preview"
+      )
+      .src =
+        "";
+
+    document
+      .getElementById(
+        "newsletter-image-preview-box"
+      )
+      .style.display =
+        "none";
+
+    document
+      .getElementById(
+        "preview-box"
+      )
+      .classList
+      .remove(
+        "show"
+      );
+
+    updateScheduleMinimum();
+
+  }
+
+  /* =========================
+     CREATE NEWSLETTER ACTION
+  ========================= */
+
+  async function performNewsletterAction(
+    action
+  ) {
+
+    if (
+      newsletterActionRunning
+    ) {
+      return;
+    }
+
+    clearMessage(
+      "send-message"
+    );
+
+    const values =
+      getNewsletterFormData();
+
+    if (
+      !validateNewsletterForm(
+        values
+      )
+    ) {
+      return;
+    }
 
     const recipients =
       Number(
@@ -3215,195 +3151,287 @@
         0
       );
 
+    let apiAction =
+      "";
+
+    let buttonMode =
+      "";
+
+    let scheduledISO =
+      "";
 
     if (
-      recipients < 1
+      action ===
+      "draft"
     ) {
 
-      showMessage(
-        "send-message",
-        "There are currently no subscribed contacts to send this newsletter to.",
-        "error"
-      );
+      apiAction =
+        "save_draft";
 
-      return;
+      buttonMode =
+        "draft";
 
     }
 
+    if (
+      action ===
+      "schedule"
+    ) {
 
-    const confirmed =
-      confirm(
-        "Send this newsletter now?\n\n" +
-        "Subject: " +
-        subject +
-        "\n\nSubscribed recipients: " +
-        recipients +
-        "\n\nOnce sending begins, recipients may receive the email immediately."
-      );
+      if (
+        recipients < 1
+      ) {
 
+        showMessage(
+          "send-message",
+          "There are currently no subscribed contacts to schedule this newsletter for.",
+          "error"
+        );
 
-    if (!confirmed) {
-      return;
+        return;
+
+      }
+
+      if (
+        !values.scheduleAt
+      ) {
+
+        showMessage(
+          "send-message",
+          "Please choose a future date and time before scheduling.",
+          "error"
+        );
+
+        return;
+
+      }
+
+      const scheduleDate =
+        new Date(
+          values.scheduleAt
+        );
+
+      if (
+        Number.isNaN(
+          scheduleDate.getTime()
+        ) ||
+        scheduleDate.getTime() <=
+          Date.now()
+      ) {
+
+        showMessage(
+          "send-message",
+          "Please choose a valid future date and time.",
+          "error"
+        );
+
+        return;
+
+      }
+
+      scheduledISO =
+        scheduleDate.toISOString();
+
+      const confirmed =
+        confirm(
+          "Schedule this newsletter?\n\n" +
+          "Subject: " +
+          values.subject +
+          "\n\nSubscribed recipients: " +
+          recipients +
+          "\n\nScheduled for: " +
+          scheduleDate.toLocaleString()
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      apiAction =
+        "schedule_broadcast";
+
+      buttonMode =
+        "schedule";
+
     }
 
+    if (
+      action ===
+      "send"
+    ) {
 
-    const sendButton =
-      document.getElementById(
-        "send-button"
-      );
+      if (
+        recipients < 1
+      ) {
 
+        showMessage(
+          "send-message",
+          "There are currently no subscribed contacts to send this newsletter to.",
+          "error"
+        );
 
-    sendButton.disabled =
+        return;
+
+      }
+
+      const confirmed =
+        confirm(
+          "SEND THIS NEWSLETTER NOW?\n\n" +
+          "Subject: " +
+          values.subject +
+          "\n\nSubscribed recipients: " +
+          recipients +
+          "\n\nThis will begin sending immediately."
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      apiAction =
+        "send_broadcast";
+
+      buttonMode =
+        "send";
+
+    }
+
+    newsletterActionRunning =
       true;
 
-
-    sendButton.textContent =
-      selectedNewsletterImage
-        ? "Uploading image..."
-        : "Sending...";
-
+    setNewsletterButtonsDisabled(
+      true,
+      buttonMode
+    );
 
     try {
 
       const imageUrl =
         await uploadNewsletterImage();
 
+      if (
+        buttonMode ===
+        "draft"
+      ) {
 
-      sendButton.textContent =
-        "Sending...";
+        document
+          .getElementById(
+            "draft-button"
+          )
+          .textContent =
+            "Saving Draft...";
 
+      }
+
+      if (
+        buttonMode ===
+        "schedule"
+      ) {
+
+        document
+          .getElementById(
+            "schedule-button"
+          )
+          .textContent =
+            "Scheduling...";
+
+      }
+
+      if (
+        buttonMode ===
+        "send"
+      ) {
+
+        document
+          .getElementById(
+            "send-button"
+          )
+          .textContent =
+            "Sending...";
+
+      }
+
+      const payload = {
+
+        action:
+          apiAction,
+
+        subject:
+          values.subject,
+
+        preview_text:
+          values.previewText,
+
+        message:
+          values.message,
+
+        cta_label:
+          values.ctaLabel,
+
+        cta_url:
+          values.ctaUrl,
+
+        image_url:
+          imageUrl
+
+      };
+
+      if (
+        apiAction ===
+        "schedule_broadcast"
+      ) {
+
+        payload.scheduled_at =
+          scheduledISO;
+
+      }
 
       const result =
         await adminRequest(
           "POST",
-          {
-
-            action:
-              "send_broadcast",
-
-            subject,
-
-            preview_text:
-              previewText,
-
-            message,
-
-            cta_label:
-              ctaLabel,
-
-            cta_url:
-              ctaUrl,
-
-            image_url:
-              imageUrl
-
-          }
+          payload
         );
-
 
       showMessage(
         "send-message",
         result.message ||
-        "Newsletter has been queued for sending.",
+        "Newsletter action completed successfully.",
         "success"
       );
 
-
-      document
-        .getElementById(
-          "newsletter-form"
-        )
-        .reset();
-
-
-      document
-        .getElementById(
-          "message-count"
-        )
-        .textContent =
-          "0 / 20,000";
-
-
-      if (
-        newsletterImagePreviewUrl
-      ) {
-
-        URL.revokeObjectURL(
-          newsletterImagePreviewUrl
-        );
-
-      }
-
-
-      selectedNewsletterImage =
-        null;
-
-
-      newsletterImagePreviewUrl =
-        "";
-
-
-      document
-        .getElementById(
-          "newsletter-image-preview"
-        )
-        .src =
-          "";
-
-
-      document
-        .getElementById(
-          "newsletter-image-preview-box"
-        )
-        .style.display =
-          "none";
-
-
-      document
-        .getElementById(
-          "preview-box"
-        )
-        .classList
-        .remove(
-          "show"
-        );
-
+      resetNewsletterComposer();
 
       await loadNewsletter();
-
 
     } catch (
       error
     ) {
 
       console.error(
-        "Newsletter send:",
+        "Newsletter action:",
         error
       );
-
 
       showMessage(
         "send-message",
         error instanceof Error
           ? error.message
-          : "Could not send the newsletter.",
+          : "Could not complete this newsletter action.",
         "error"
       );
 
-
     } finally {
 
-      sendButton.disabled =
+      newsletterActionRunning =
         false;
 
-
-      sendButton.textContent =
-        "📧 Send Newsletter";
+      setNewsletterButtonsDisabled(
+        false
+      );
 
     }
 
   }
-
 
   /* =========================
      IMAGE SELECTION
@@ -3421,11 +3449,9 @@
           this.files?.[0] ||
           null;
 
-
         if (!file) {
           return;
         }
-
 
         const allowedTypes = [
           "image/jpeg",
@@ -3433,7 +3459,6 @@
           "image/webp",
           "image/gif"
         ];
-
 
         if (
           !allowedTypes.includes(
@@ -3445,19 +3470,15 @@
             "Please choose a JPG, PNG, WebP or GIF image."
           );
 
-
           this.value =
             "";
-
 
           selectedNewsletterImage =
             null;
 
-
           return;
 
         }
-
 
         if (
           file.size >
@@ -3468,19 +3489,15 @@
             "Newsletter image must be 5 MB or smaller."
           );
 
-
           this.value =
             "";
-
 
           selectedNewsletterImage =
             null;
 
-
           return;
 
         }
-
 
         if (
           newsletterImagePreviewUrl
@@ -3492,16 +3509,13 @@
 
         }
 
-
         selectedNewsletterImage =
           file;
-
 
         newsletterImagePreviewUrl =
           URL.createObjectURL(
             file
           );
-
 
         document
           .getElementById(
@@ -3510,14 +3524,12 @@
           .src =
             newsletterImagePreviewUrl;
 
-
         document
           .getElementById(
             "newsletter-image-preview-box"
           )
           .style.display =
             "block";
-
 
         document
           .getElementById(
@@ -3530,7 +3542,6 @@
 
       }
     );
-
 
   /* =========================
      REMOVE IMAGE
@@ -3554,14 +3565,11 @@
 
         }
 
-
         selectedNewsletterImage =
           null;
 
-
         newsletterImagePreviewUrl =
           "";
-
 
         document
           .getElementById(
@@ -3570,7 +3578,6 @@
           .value =
             "";
 
-
         document
           .getElementById(
             "newsletter-image-preview"
@@ -3578,14 +3585,12 @@
           .src =
             "";
 
-
         document
           .getElementById(
             "newsletter-image-preview-box"
           )
           .style.display =
             "none";
-
 
         document
           .getElementById(
@@ -3599,20 +3604,9 @@
       }
     );
 
-
   /* =========================
      EVENTS
   ========================= */
-
-  document
-    .getElementById(
-      "newsletter-form"
-    )
-    .addEventListener(
-      "submit",
-      sendNewsletter
-    );
-
 
   document
     .getElementById(
@@ -3623,6 +3617,50 @@
       buildPreview
     );
 
+  document
+    .getElementById(
+      "draft-button"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        performNewsletterAction(
+          "draft"
+        );
+
+      }
+    );
+
+  document
+    .getElementById(
+      "schedule-button"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        performNewsletterAction(
+          "schedule"
+        );
+
+      }
+    );
+
+  document
+    .getElementById(
+      "send-button"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        performNewsletterAction(
+          "send"
+        );
+
+      }
+    );
 
   document
     .getElementById(
@@ -3633,7 +3671,6 @@
       loadNewsletter
     );
 
-
   document
     .getElementById(
       "subscriber-search"
@@ -3643,7 +3680,6 @@
       renderSubscribers
     );
 
-
   document
     .getElementById(
       "subscriber-filter"
@@ -3652,7 +3688,6 @@
       "change",
       renderSubscribers
     );
-
 
   document
     .getElementById(
@@ -3673,7 +3708,6 @@
       }
     );
 
-
   /* =========================
      START
   ========================= */
@@ -3681,7 +3715,6 @@
   checkAdmin();
 
 </script>
-
 
 </body>
 
