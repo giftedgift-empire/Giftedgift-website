@@ -1004,10 +1004,133 @@ const dealId =
   );
 
 
+function getCheckoutReferralCode() {
+
+  /*
+    First choice:
+    referral code currently in the URL.
+  */
+
+  const urlReferral =
+    String(
+      params.get("ref") || ""
+    )
+      .trim()
+      .toUpperCase();
+
+
+  if (
+    urlReferral
+  ) {
+
+    return urlReferral;
+
+  }
+
+
+  /*
+    Second choice:
+    referral previously saved by
+    affiliate-tracking.js.
+
+    Stored format:
+    {
+      referral_code: "...",
+      expires_at: ...
+    }
+
+    Valid for 30 days.
+  */
+
+  try {
+
+    const rawStoredReferral =
+      localStorage.getItem(
+        "gge_affiliate_referral"
+      );
+
+
+    if (
+      !rawStoredReferral
+    ) {
+
+      return "";
+
+    }
+
+
+    const storedReferral =
+      JSON.parse(
+        rawStoredReferral
+      );
+
+
+    const storedCode =
+      String(
+        storedReferral?.referral_code ||
+        ""
+      )
+        .trim()
+        .toUpperCase();
+
+
+    const expiresAt =
+      Number(
+        storedReferral?.expires_at
+      );
+
+
+    /*
+      Remove broken or expired
+      affiliate information.
+    */
+
+    if (
+      !storedCode ||
+      !Number.isFinite(
+        expiresAt
+      ) ||
+      Date.now() >
+        expiresAt
+    ) {
+
+      localStorage.removeItem(
+        "gge_affiliate_referral"
+      );
+
+
+      return "";
+
+    }
+
+
+    return storedCode;
+
+
+  } catch (
+    error
+  ) {
+
+    console.warn(
+      "Stored affiliate referral could not be read:",
+      error
+    );
+
+
+    localStorage.removeItem(
+      "gge_affiliate_referral"
+    );
+
+
+    return "";
+
+  }
+
+}
+
+
 const referralCode =
-  params.get(
-    "ref"
-  );
+  getCheckoutReferralCode();
 
 
 let currentProduct =
