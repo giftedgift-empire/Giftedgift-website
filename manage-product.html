@@ -3,9 +3,14 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Manage Products | GiftedGift Empire</title>
+
 
 <style>
 
@@ -49,7 +54,9 @@ header h1 {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  box-shadow:
+    0 3px 12px
+    rgba(0,0,0,0.08);
   margin-bottom: 25px;
 }
 
@@ -73,6 +80,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 7px;
   font-size: 16px;
+  font-family: Arial, sans-serif;
 }
 
 input[type="file"] {
@@ -88,6 +96,7 @@ textarea {
   color: #666;
   font-size: 14px;
   margin-top: 7px;
+  line-height: 1.5;
 }
 
 .image-preview {
@@ -99,9 +108,10 @@ textarea {
   width: 100%;
   max-width: 320px;
   height: 240px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
   border: 1px solid #ddd;
+  background: #f8f8f8;
 }
 
 .checkbox-row {
@@ -139,6 +149,17 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.secondary-button {
+  background: #123a8c;
+  color: white;
+}
+
+.remove-button {
+  background: #ddd;
+  color: #222;
+  margin-top: 10px;
+}
+
 .product-item {
   border-bottom: 1px solid #ddd;
   padding: 18px 0;
@@ -165,6 +186,7 @@ button:disabled {
 .small {
   color: #666;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 .actions button {
@@ -188,33 +210,196 @@ button:disabled {
   font-weight: bold;
 }
 
+
+/*
+=====================================================
+FASHION SECTION
+=====================================================
+*/
+
+.fashion-section {
+  display: none;
+  margin-top: 25px;
+  padding: 22px;
+  border: 2px solid #dbe4f5;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+.fashion-section.active {
+  display: block;
+}
+
+.fashion-section h3 {
+  color: #123a8c;
+  margin-top: 0;
+  margin-bottom: 7px;
+  font-size: 23px;
+}
+
+.fashion-section h4 {
+  color: #123a8c;
+  margin:
+    28px 0
+    8px;
+  font-size: 19px;
+}
+
+.fashion-intro {
+  color: #555;
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  gap: 14px;
+}
+
+.field-grid label {
+  margin-top: 0;
+}
+
+.subsection {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #dbe0e8;
+}
+
+.measurement-row,
+.variant-row {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #d6dce6;
+  border-radius: 10px;
+  background: white;
+}
+
+.measurement-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  gap: 10px;
+}
+
+.measurement-grid label,
+.variant-grid label {
+  margin-top: 0;
+  font-size: 13px;
+}
+
+.variant-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  gap: 10px;
+}
+
+.add-row-button {
+  background: #123a8c;
+  color: white;
+  margin-top: 14px;
+}
+
+.fashion-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 5px 9px;
+  background: #f2bd16;
+  color: #111;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.note-box {
+  background: #fff8dc;
+  border: 1px solid #f0d87a;
+  border-radius: 9px;
+  padding: 12px;
+  margin-top: 15px;
+  color: #665300;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+
+@media (
+  max-width: 650px
+) {
+
+  .field-grid,
+  .measurement-grid,
+  .variant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .fashion-section {
+    padding: 16px;
+  }
+
+}
+
 </style>
+
 </head>
 
 
 <body>
+
 
 <div id="status">
   Checking admin login...
 </div>
 
 
-<div id="page" style="display:none;">
+<div
+  id="page"
+  style="display:none;"
+>
+
 
 <header>
-  <h1>GiftedGift Empire</h1>
-  <p>Manage Products</p>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
+
+  <p>
+    Manage Products
+  </p>
+
 </header>
 
 
 <main class="container">
 
-<a href="dashboard.html" class="top-link">
+
+<a
+  href="dashboard.html"
+  class="top-link"
+>
   ← Back to Dashboard
 </a>
 
 
 <div class="panel">
+
 
 <h2 id="form-title">
   Add Product
@@ -223,14 +408,22 @@ button:disabled {
 
 <form id="product-form">
 
+
 <input
   type="hidden"
   id="product-id"
 >
 
+
 <input
   type="hidden"
   id="current-image-url"
+>
+
+
+<input
+  type="hidden"
+  id="current-size-chart-image-url"
 >
 
 
@@ -255,6 +448,7 @@ button:disabled {
   placeholder="wireless-bluetooth-speaker"
   required
 >
+
 
 <p class="image-help">
   Public product link:
@@ -292,10 +486,333 @@ button:disabled {
   id="category"
   required
 >
+
   <option value="">
     Loading categories...
   </option>
+
 </select>
+
+
+
+<!--
+=====================================================
+FASHION DETAILS
+=====================================================
+-->
+
+<section
+  id="fashion-section"
+  class="fashion-section"
+>
+
+  <h3>
+    👗 Fashion Details
+  </h3>
+
+  <p class="fashion-intro">
+    These details are specifically for clothing and
+    fashion products. They help customers choose the
+    correct size, colour and fit.
+  </p>
+
+
+  <div class="field-grid">
+
+
+    <div>
+
+      <label for="fashion-fabric">
+        Fabric / Material
+      </label>
+
+      <input
+        type="text"
+        id="fashion-fabric"
+        placeholder="Example: Cotton, linen, satin"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="fashion-fit">
+        Fit
+      </label>
+
+      <select id="fashion-fit">
+
+        <option value="">
+          Select fit
+        </option>
+
+        <option value="Fitted">
+          Fitted
+        </option>
+
+        <option value="Slim Fit">
+          Slim Fit
+        </option>
+
+        <option value="Regular Fit">
+          Regular Fit
+        </option>
+
+        <option value="Relaxed Fit">
+          Relaxed Fit
+        </option>
+
+        <option value="Loose Fit">
+          Loose Fit
+        </option>
+
+        <option value="Oversized">
+          Oversized
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label for="fashion-stretch">
+        Fabric Stretch
+      </label>
+
+      <select id="fashion-stretch">
+
+        <option value="">
+          Select stretch
+        </option>
+
+        <option value="No Stretch">
+          No Stretch
+        </option>
+
+        <option value="Slight Stretch">
+          Slight Stretch
+        </option>
+
+        <option value="Moderate Stretch">
+          Moderate Stretch
+        </option>
+
+        <option value="High Stretch">
+          High Stretch
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label for="fashion-length">
+        Garment Length / Length Type
+      </label>
+
+      <input
+        type="text"
+        id="fashion-length"
+        placeholder="Example: Maxi, Midi, 145 cm"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="fashion-measurement-unit">
+        Measurement Unit
+      </label>
+
+      <select id="fashion-measurement-unit">
+
+        <option value="cm">
+          Centimetres (cm)
+        </option>
+
+        <option value="in">
+          Inches (in)
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <label for="fashion-care">
+    Care Instructions
+  </label>
+
+  <textarea
+    id="fashion-care"
+    placeholder="Example: Wash at 30°C. Do not bleach. Iron on low heat."
+  ></textarea>
+
+
+  <label for="fashion-model-info">
+    Model Information
+  </label>
+
+  <textarea
+    id="fashion-model-info"
+    placeholder="Example: Model is 175 cm tall and wears size M."
+  ></textarea>
+
+
+  <label for="fashion-size-guide-notes">
+    Size Guide Notes
+  </label>
+
+  <textarea
+    id="fashion-size-guide-notes"
+    placeholder="Example: If you are between sizes, choose the larger size."
+  ></textarea>
+
+
+
+  <!-- SIZE CHART IMAGE -->
+
+  <div class="subsection">
+
+    <h4>
+      Size Chart Image
+    </h4>
+
+    <p class="image-help">
+      Optional. Upload a designed size or measurement
+      chart image for customers.
+    </p>
+
+
+    <input
+      type="file"
+      id="size-chart-image"
+      accept="image/*"
+    >
+
+
+    <div
+      id="size-chart-preview"
+      class="image-preview"
+    >
+
+      <img
+        id="size-chart-preview-img"
+        alt="Size chart preview"
+      >
+
+    </div>
+
+  </div>
+
+
+
+  <!-- BODY SIZE CHART -->
+
+  <div class="subsection">
+
+    <h4>
+      Body Size Guide
+    </h4>
+
+    <p class="image-help">
+      These are the customer's BODY measurements.
+      Leave measurements that do not apply blank.
+    </p>
+
+
+    <div id="body-size-rows"></div>
+
+
+    <button
+      type="button"
+      class="add-row-button"
+      onclick="addMeasurementRow('body-size-rows')"
+    >
+      + Add Body Size
+    </button>
+
+  </div>
+
+
+
+  <!-- GARMENT MEASUREMENTS -->
+
+  <div class="subsection">
+
+    <h4>
+      Garment Measurements
+    </h4>
+
+    <p class="image-help">
+      These are the measurements of the finished
+      clothing itself. This can differ from body
+      measurements.
+    </p>
+
+
+    <div id="garment-measurement-rows"></div>
+
+
+    <button
+      type="button"
+      class="add-row-button"
+      onclick="addMeasurementRow('garment-measurement-rows')"
+    >
+      + Add Garment Size
+    </button>
+
+  </div>
+
+
+
+  <!-- VARIANTS -->
+
+  <div class="subsection">
+
+    <h4>
+      Sizes, Colours & Stock
+    </h4>
+
+    <p class="image-help">
+      Create the combinations customers can buy.
+      For example: Black / M / 4 in stock.
+    </p>
+
+
+    <div
+      id="variant-rows"
+    ></div>
+
+
+    <button
+      type="button"
+      class="add-row-button"
+      onclick="addVariantRow()"
+    >
+      + Add Size / Colour Variant
+    </button>
+
+
+    <div class="note-box">
+      Stock can be controlled separately for each
+      size and colour. Example: Black–M can have
+      4 pieces while Black–L has 2 pieces.
+    </div>
+
+  </div>
+
+
+</section>
+
 
 
 <label for="product-image">
@@ -308,6 +825,7 @@ button:disabled {
   accept="image/*"
 >
 
+
 <p class="image-help">
   Tap Choose File to select a product image from your phone.
 </p>
@@ -317,10 +835,12 @@ button:disabled {
   id="image-preview"
   class="image-preview"
 >
+
   <img
     id="preview-img"
     alt="Product image preview"
   >
+
 </div>
 
 
@@ -400,9 +920,11 @@ button:disabled {
   class="message"
 ></p>
 
+
 </form>
 
 </div>
+
 
 
 <div class="panel">
@@ -417,14 +939,27 @@ button:disabled {
 
 </div>
 
+
 </main>
 
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
 
 <script>
+
+
+/*
+=====================================================
+SUPABASE
+=====================================================
+*/
+
 
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
@@ -449,6 +984,20 @@ const supabaseClient =
   );
 
 
+let slugWasEdited =
+  false;
+
+
+let editingVariantIds =
+  [];
+
+
+/*
+=====================================================
+ADMIN PROTECTION
+=====================================================
+*/
+
 
 async function protectPage() {
 
@@ -465,7 +1014,8 @@ async function protectPage() {
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     window.location.replace(
@@ -473,27 +1023,40 @@ async function protectPage() {
     );
 
     return;
+
   }
 
 
   document
-    .getElementById("status")
+    .getElementById(
+      "status"
+    )
     .style.display =
       "none";
 
 
   document
-    .getElementById("page")
+    .getElementById(
+      "page"
+    )
     .style.display =
       "block";
 
 
   await loadCategoryOptions();
 
+  resetFashionRows();
+
   await loadProducts();
 
 }
 
+
+/*
+=====================================================
+CATEGORIES
+=====================================================
+*/
 
 
 async function loadCategoryOptions() {
@@ -513,8 +1076,12 @@ async function loadCategoryOptions() {
     error
   } =
     await supabaseClient
-      .from("categories")
-      .select("name")
+      .from(
+        "categories"
+      )
+      .select(
+        "name"
+      )
       .order(
         "name",
         {
@@ -535,6 +1102,7 @@ async function loadCategoryOptions() {
       `<option value="">Categories could not be loaded</option>`;
 
     return;
+
   }
 
 
@@ -547,14 +1115,19 @@ async function loadCategoryOptions() {
       `<option value="">No categories available</option>`;
 
     return;
+
   }
 
 
   categories.forEach(
     category => {
 
-      if (!category.name) {
+      if (
+        !category.name
+      ) {
+
         return;
+
       }
 
 
@@ -582,44 +1155,151 @@ async function loadCategoryOptions() {
 }
 
 
+/*
+=====================================================
+FASHION CATEGORY DETECTION
+=====================================================
+*/
 
-let slugWasEdited =
-  false;
+
+function isFashionCategory(
+  categoryName
+) {
+
+  return String(
+    categoryName ||
+    ""
+  )
+    .trim()
+    .toLowerCase()
+    .includes(
+      "fashion"
+    );
+
+}
 
 
+function toggleFashionSection(
+  forceShow = false
+) {
 
-function cleanSlug(value) {
+  const category =
+    document
+      .getElementById(
+        "category"
+      )
+      .value;
 
-  return String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/×/g, "x")
-    .replace(/&/g, " and ")
+
+  const show =
+    forceShow ||
+    isFashionCategory(
+      category
+    );
+
+
+  document
+    .getElementById(
+      "fashion-section"
+    )
+    .classList.toggle(
+      "active",
+      show
+    );
+
+}
+
+
+document
+  .getElementById(
+    "category"
+  )
+  .addEventListener(
+    "change",
+    function() {
+
+      toggleFashionSection();
+
+    }
+  );
+
+
+/*
+=====================================================
+SLUG
+=====================================================
+*/
+
+
+function cleanSlug(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
 
 }
 
 
-
-function suggestShortSlug(value) {
+function suggestShortSlug(
+  value
+) {
 
   const fullSlug =
-    cleanSlug(value);
+    cleanSlug(
+      value
+    );
 
-  if (!fullSlug) {
+
+  if (
+    !fullSlug
+  ) {
+
     return "";
+
   }
 
+
   return fullSlug
-    .split("-")
-    .slice(0, 4)
-    .join("-");
+    .split(
+      "-"
+    )
+    .slice(
+      0,
+      4
+    )
+    .join(
+      "-"
+    );
 
 }
-
 
 
 function updateSlugPreview() {
@@ -645,7 +1325,6 @@ function updateSlugPreview() {
 }
 
 
-
 document
   .getElementById(
     "name"
@@ -654,8 +1333,12 @@ document
     "input",
     function() {
 
-      if (slugWasEdited) {
+      if (
+        slugWasEdited
+      ) {
+
         return;
+
       }
 
 
@@ -673,7 +1356,6 @@ document
 
     }
   );
-
 
 
 document
@@ -700,11 +1382,10 @@ document
   );
 
 
-
 /*
-  =====================================================
-  GLOBAL CLEAN-URL COLLISION PROTECTION
-  =====================================================
+=====================================================
+GLOBAL SLUG COLLISION PROTECTION
+=====================================================
 */
 
 
@@ -827,11 +1508,14 @@ async function checkGlobalSlugAvailability(
     );
 
 
-  if (!cleanValue) {
+  if (
+    !cleanValue
+  ) {
 
     throw new Error(
       "Please enter a valid Share Link Name."
     );
+
   }
 
 
@@ -844,6 +1528,7 @@ async function checkGlobalSlugAvailability(
     throw new Error(
       `The Share Link Name "${cleanValue}" is reserved by the website. Please choose another one.`
     );
+
   }
 
 
@@ -866,11 +1551,6 @@ async function checkGlobalSlugAvailability(
         );
 
 
-    /*
-      When editing this product,
-      allow it to keep its own slug.
-    */
-
     if (
       source.table ===
         "products" &&
@@ -882,6 +1562,7 @@ async function checkGlobalSlugAvailability(
           "id",
           currentProductId
         );
+
     }
 
 
@@ -889,13 +1570,14 @@ async function checkGlobalSlugAvailability(
       data,
       error
     } =
-      await query
-        .limit(
-          1
-        );
+      await query.limit(
+        1
+      );
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       console.error(
         "Global slug check failed:",
@@ -907,6 +1589,7 @@ async function checkGlobalSlugAvailability(
       throw new Error(
         "The Share Link Name could not be checked safely. Please try again."
       );
+
     }
 
 
@@ -920,13 +1603,77 @@ async function checkGlobalSlugAvailability(
       throw new Error(
         `The Share Link Name "${cleanValue}" is already being used by ${source.label}. Please choose another one.`
       );
+
     }
+
   }
 
 
   return true;
+
 }
 
+
+/*
+=====================================================
+IMAGE VALIDATION
+=====================================================
+*/
+
+
+function validateImageFile(
+  file
+) {
+
+  if (
+    !file
+  ) {
+
+    return true;
+
+  }
+
+
+  if (
+    !file.type ||
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    alert(
+      "Please choose an image file."
+    );
+
+    return false;
+
+  }
+
+
+  if (
+    file.size >
+    5 * 1024 * 1024
+  ) {
+
+    alert(
+      "Please choose an image smaller than 5 MB."
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/*
+=====================================================
+MAIN PRODUCT IMAGE
+=====================================================
+*/
 
 
 document
@@ -935,46 +1682,36 @@ document
   )
   .addEventListener(
     "change",
-    function(event) {
+    function(
+      event
+    ) {
 
       const file =
-        event.target.files[0];
+        event
+          .target
+          .files[0];
 
 
-      if (!file) {
+      if (
+        !file
+      ) {
+
         return;
+
       }
 
 
       if (
-        !file.type ||
-        !file.type.startsWith("image/")
+        !validateImageFile(
+          file
+        )
       ) {
-
-        alert(
-          "Please choose an image file."
-        );
 
         event.target.value =
           "";
 
         return;
-      }
 
-
-      if (
-        file.size >
-        5 * 1024 * 1024
-      ) {
-
-        alert(
-          "Please choose an image smaller than 5 MB."
-        );
-
-        event.target.value =
-          "";
-
-        return;
       }
 
 
@@ -992,8 +1729,9 @@ document
   );
 
 
-
-function showImagePreview(url) {
+function showImagePreview(
+  url
+) {
 
   const preview =
     document.getElementById(
@@ -1007,16 +1745,21 @@ function showImagePreview(url) {
     );
 
 
-  if (!url) {
+  if (
+    !url
+  ) {
 
     preview.style.display =
       "none";
+
 
     image.removeAttribute(
       "src"
     );
 
+
     return;
+
   }
 
 
@@ -1030,11 +1773,129 @@ function showImagePreview(url) {
 }
 
 
+/*
+=====================================================
+SIZE CHART IMAGE
+=====================================================
+*/
 
-async function uploadProductImage(file) {
 
-  if (!file) {
+document
+  .getElementById(
+    "size-chart-image"
+  )
+  .addEventListener(
+    "change",
+    function(
+      event
+    ) {
+
+      const file =
+        event
+          .target
+          .files[0];
+
+
+      if (
+        !file
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        !validateImageFile(
+          file
+        )
+      ) {
+
+        event.target.value =
+          "";
+
+        return;
+
+      }
+
+
+      const temporaryURL =
+        URL.createObjectURL(
+          file
+        );
+
+
+      showSizeChartPreview(
+        temporaryURL
+      );
+
+    }
+  );
+
+
+function showSizeChartPreview(
+  url
+) {
+
+  const preview =
+    document.getElementById(
+      "size-chart-preview"
+    );
+
+
+  const image =
+    document.getElementById(
+      "size-chart-preview-img"
+    );
+
+
+  if (
+    !url
+  ) {
+
+    preview.style.display =
+      "none";
+
+
+    image.removeAttribute(
+      "src"
+    );
+
+
+    return;
+
+  }
+
+
+  image.src =
+    url;
+
+
+  preview.style.display =
+    "block";
+
+}
+
+
+/*
+=====================================================
+UPLOAD IMAGE
+=====================================================
+*/
+
+
+async function uploadProductImage(
+  file,
+  folder =
+    "products"
+) {
+
+  if (
+    !file
+  ) {
+
     return null;
+
   }
 
 
@@ -1051,7 +1912,8 @@ async function uploadProductImage(file) {
     error ||
     !data.session ||
     !data.session.user ||
-    data.session.user.id !== ADMIN_USER_ID
+    data.session.user.id !==
+      ADMIN_USER_ID
   ) {
 
     throw new Error(
@@ -1067,7 +1929,9 @@ async function uploadProductImage(file) {
 
 
   const parts =
-    originalName.split(".");
+    originalName.split(
+      "."
+    );
 
 
   let extension =
@@ -1085,14 +1949,21 @@ async function uploadProductImage(file) {
       );
 
 
-  if (!extension) {
-    extension = "jpg";
+  if (
+    !extension
+  ) {
+
+    extension =
+      "jpg";
+
   }
 
 
   let safeName =
     parts
-      .join("-")
+      .join(
+        "-"
+      )
       .toLowerCase()
       .replace(
         /[^a-z0-9_-]+/g,
@@ -1104,19 +1975,41 @@ async function uploadProductImage(file) {
       );
 
 
-  if (!safeName) {
-    safeName = "product";
+  if (
+    !safeName
+  ) {
+
+    safeName =
+      "product";
+
   }
 
 
   const randomPart =
     Math.random()
-      .toString(36)
-      .slice(2, 10);
+      .toString(
+        36
+      )
+      .slice(
+        2,
+        10
+      );
+
+
+  const safeFolder =
+    String(
+      folder ||
+      "products"
+    )
+      .replace(
+        /[^a-z0-9_-]/gi,
+        ""
+      );
 
 
   const filePath =
-    "products/" +
+    safeFolder +
+    "/" +
     Date.now() +
     "-" +
     randomPart +
@@ -1139,6 +2032,7 @@ async function uploadProductImage(file) {
         filePath,
         file,
         {
+
           cacheControl:
             "3600",
 
@@ -1148,18 +2042,23 @@ async function uploadProductImage(file) {
           contentType:
             file.type ||
             undefined
+
         }
       );
 
 
-  if (uploadError) {
+  if (
+    uploadError
+  ) {
 
     console.error(
       "Image upload error:",
       uploadError
     );
 
+
     throw uploadError;
+
   }
 
 
@@ -1200,6 +2099,881 @@ async function uploadProductImage(file) {
 }
 
 
+/*
+=====================================================
+MEASUREMENT ROWS
+=====================================================
+*/
+
+
+function addMeasurementRow(
+  containerId,
+  values = {}
+) {
+
+  const container =
+    document.getElementById(
+      containerId
+    );
+
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "measurement-row";
+
+
+  const fields = [
+
+    [
+      "size",
+      "Size",
+      "Example: S, M, 12"
+    ],
+
+    [
+      "bust",
+      "Bust / Chest",
+      "Example: 92"
+    ],
+
+    [
+      "waist",
+      "Waist",
+      "Example: 74"
+    ],
+
+    [
+      "hips",
+      "Hips",
+      "Example: 100"
+    ],
+
+    [
+      "shoulder",
+      "Shoulder",
+      "Example: 39"
+    ],
+
+    [
+      "sleeve",
+      "Sleeve",
+      "Example: 61"
+    ],
+
+    [
+      "inseam",
+      "Inseam",
+      "Example: 78"
+    ],
+
+    [
+      "length",
+      "Length",
+      "Example: 140"
+    ]
+
+  ];
+
+
+  row.innerHTML = `
+
+    <div class="measurement-grid">
+
+      ${
+        fields.map(
+          field => {
+
+            const [
+              key,
+              label,
+              placeholder
+            ] =
+              field;
+
+
+            return `
+
+              <div>
+
+                <label>
+                  ${escapeHTML(label)}
+                </label>
+
+                <input
+                  type="text"
+                  data-measurement="${escapeAttribute(key)}"
+                  value="${escapeAttribute(values[key] || "")}"
+                  placeholder="${escapeAttribute(placeholder)}"
+                >
+
+              </div>
+
+            `;
+
+          }
+        ).join("")
+      }
+
+    </div>
+
+
+    <button
+      type="button"
+      class="remove-button"
+    >
+      Remove Row
+    </button>
+
+  `;
+
+
+  row
+    .querySelector(
+      ".remove-button"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        row.remove();
+
+      }
+    );
+
+
+  container.appendChild(
+    row
+  );
+
+}
+
+
+function collectMeasurementRows(
+  containerId
+) {
+
+  const rows =
+    [];
+
+
+  document
+    .querySelectorAll(
+      "#" +
+      containerId +
+      " .measurement-row"
+    )
+    .forEach(
+      row => {
+
+        const result =
+          {};
+
+
+        row
+          .querySelectorAll(
+            "[data-measurement]"
+          )
+          .forEach(
+            input => {
+
+              const key =
+                input.dataset
+                  .measurement;
+
+
+              const value =
+                input.value
+                  .trim();
+
+
+              if (
+                value
+              ) {
+
+                result[key] =
+                  value;
+
+              }
+
+            }
+          );
+
+
+        if (
+          Object.keys(
+            result
+          ).length > 0
+        ) {
+
+          rows.push(
+            result
+          );
+
+        }
+
+      }
+    );
+
+
+  return rows;
+
+}
+
+
+/*
+=====================================================
+VARIANT ROWS
+=====================================================
+*/
+
+
+function addVariantRow(
+  values = {}
+) {
+
+  const container =
+    document.getElementById(
+      "variant-rows"
+    );
+
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "variant-row";
+
+
+  row.dataset.variantId =
+    values.id ||
+    "";
+
+
+  row.innerHTML = `
+
+    <div class="variant-grid">
+
+
+      <div>
+
+        <label>
+          Size
+        </label>
+
+        <input
+          type="text"
+          class="variant-size"
+          value="${escapeAttribute(values.size || "")}"
+          placeholder="Example: M"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Colour
+        </label>
+
+        <input
+          type="text"
+          class="variant-color"
+          value="${escapeAttribute(values.color || "")}"
+          placeholder="Example: Black"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Stock Quantity
+        </label>
+
+        <input
+          type="number"
+          class="variant-stock"
+          min="0"
+          step="1"
+          value="${
+            values.stock_quantity !==
+              undefined &&
+            values.stock_quantity !==
+              null
+              ? escapeAttribute(
+                  values.stock_quantity
+                )
+              : "0"
+          }"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Optional Variant Price (€)
+        </label>
+
+        <input
+          type="number"
+          class="variant-price"
+          min="0"
+          step="0.01"
+          value="${
+            values.price_override !==
+              undefined &&
+            values.price_override !==
+              null
+              ? escapeAttribute(
+                  values.price_override
+                )
+              : ""
+          }"
+          placeholder="Leave blank to use main price"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Optional SKU
+        </label>
+
+        <input
+          type="text"
+          class="variant-sku"
+          value="${escapeAttribute(values.sku || "")}"
+          placeholder="Example: DRESS-BLK-M"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <button
+      type="button"
+      class="remove-button"
+    >
+      Remove Variant
+    </button>
+
+  `;
+
+
+  row
+    .querySelector(
+      ".remove-button"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        row.remove();
+
+      }
+    );
+
+
+  container.appendChild(
+    row
+  );
+
+}
+
+
+function collectVariants() {
+
+  const variants =
+    [];
+
+
+  const seen =
+    new Set();
+
+
+  document
+    .querySelectorAll(
+      "#variant-rows .variant-row"
+    )
+    .forEach(
+      row => {
+
+        const size =
+          row
+            .querySelector(
+              ".variant-size"
+            )
+            .value
+            .trim();
+
+
+        const color =
+          row
+            .querySelector(
+              ".variant-color"
+            )
+            .value
+            .trim();
+
+
+        const stockText =
+          row
+            .querySelector(
+              ".variant-stock"
+            )
+            .value;
+
+
+        const priceText =
+          row
+            .querySelector(
+              ".variant-price"
+            )
+            .value;
+
+
+        const sku =
+          row
+            .querySelector(
+              ".variant-sku"
+            )
+            .value
+            .trim();
+
+
+        /*
+          Empty rows are ignored.
+        */
+
+        if (
+          !size &&
+          !color &&
+          !sku &&
+          !priceText &&
+          (
+            stockText ===
+              "" ||
+            Number(
+              stockText
+            ) === 0
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          !size &&
+          !color
+        ) {
+
+          throw new Error(
+            "Each fashion variant must have at least a Size or a Colour."
+          );
+
+        }
+
+
+        const stock =
+          Number(
+            stockText ||
+            0
+          );
+
+
+        if (
+          !Number.isInteger(
+            stock
+          ) ||
+          stock < 0
+        ) {
+
+          throw new Error(
+            "Fashion variant stock must be a whole number of 0 or more."
+          );
+
+        }
+
+
+        let priceOverride =
+          null;
+
+
+        if (
+          priceText !==
+          ""
+        ) {
+
+          priceOverride =
+            Number(
+              priceText
+            );
+
+
+          if (
+            !Number.isFinite(
+              priceOverride
+            ) ||
+            priceOverride < 0
+          ) {
+
+            throw new Error(
+              "Fashion variant price must be 0 or more."
+            );
+
+          }
+
+        }
+
+
+        const duplicateKey =
+          (
+            size.toLowerCase() +
+            "|" +
+            color.toLowerCase()
+          );
+
+
+        if (
+          seen.has(
+            duplicateKey
+          )
+        ) {
+
+          throw new Error(
+            `Duplicate fashion variant: ${size || "No size"} / ${color || "No colour"}.`
+          );
+
+        }
+
+
+        seen.add(
+          duplicateKey
+        );
+
+
+        variants.push({
+
+          id:
+            row.dataset
+              .variantId
+              ? Number(
+                  row.dataset
+                    .variantId
+                )
+              : null,
+
+          size:
+            size ||
+            null,
+
+          color:
+            color ||
+            null,
+
+          sku:
+            sku ||
+            null,
+
+          stock_quantity:
+            stock,
+
+          price_override:
+            priceOverride
+
+        });
+
+      }
+    );
+
+
+  return variants;
+
+}
+
+
+/*
+=====================================================
+SAVE VARIANTS
+=====================================================
+*/
+
+
+async function saveProductVariants(
+  productId
+) {
+
+  const variants =
+    collectVariants();
+
+
+  const keptIds =
+    variants
+      .filter(
+        variant =>
+          variant.id
+      )
+      .map(
+        variant =>
+          Number(
+            variant.id
+          )
+      );
+
+
+  const deletedIds =
+    editingVariantIds
+      .filter(
+        existingId =>
+          !keptIds.includes(
+            Number(
+              existingId
+            )
+          )
+      );
+
+
+  if (
+    deletedIds.length > 0
+  ) {
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from(
+          "product_variants"
+        )
+        .delete()
+        .eq(
+          "product_id",
+          productId
+        )
+        .in(
+          "id",
+          deletedIds
+        );
+
+
+    if (
+      error
+    ) {
+
+      console.error(
+        "Variant deletion error:",
+        error
+      );
+
+
+      throw new Error(
+        "Product was saved, but an old fashion variant could not be removed."
+      );
+
+    }
+
+  }
+
+
+  for (
+    const variant of
+    variants
+  ) {
+
+    const variantData = {
+
+      product_id:
+        Number(
+          productId
+        ),
+
+      size:
+        variant.size,
+
+      color:
+        variant.color,
+
+      sku:
+        variant.sku,
+
+      stock_quantity:
+        variant.stock_quantity,
+
+      price_override:
+        variant.price_override,
+
+      active:
+        true
+
+    };
+
+
+    if (
+      variant.id
+    ) {
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from(
+            "product_variants"
+          )
+          .update(
+            variantData
+          )
+          .eq(
+            "id",
+            variant.id
+          )
+          .eq(
+            "product_id",
+            productId
+          );
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Variant update error:",
+          error
+        );
+
+
+        throw new Error(
+          "Product was saved, but one fashion variant could not be updated."
+        );
+
+      }
+
+    }
+
+    else {
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from(
+            "product_variants"
+          )
+          .insert(
+            variantData
+          );
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Variant insert error:",
+          error
+        );
+
+
+        if (
+          error.code ===
+          "23505"
+        ) {
+
+          throw new Error(
+            "Product was saved, but a duplicate Size / Colour variant was found."
+          );
+
+        }
+
+
+        throw new Error(
+          "Product was saved, but one fashion variant could not be added."
+        );
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/*
+=====================================================
+RESET FASHION ROWS
+=====================================================
+*/
+
+
+function resetFashionRows() {
+
+  document
+    .getElementById(
+      "body-size-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  document
+    .getElementById(
+      "garment-measurement-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  document
+    .getElementById(
+      "variant-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  addMeasurementRow(
+    "body-size-rows"
+  );
+
+
+  addMeasurementRow(
+    "garment-measurement-rows"
+  );
+
+
+  addVariantRow();
+
+
+  editingVariantIds =
+    [];
+
+}
+
+
+/*
+=====================================================
+LOAD PRODUCTS
+=====================================================
+*/
+
 
 async function loadProducts() {
 
@@ -1218,8 +2992,12 @@ async function loadProducts() {
     error
   } =
     await supabaseClient
-      .from("products")
-      .select("*")
+      .from(
+        "products"
+      )
+      .select(
+        "*"
+      )
       .order(
         "created_at",
         {
@@ -1228,7 +3006,9 @@ async function loadProducts() {
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       error
@@ -1238,19 +3018,24 @@ async function loadProducts() {
     list.textContent =
       "Products could not be loaded.";
 
+
     return;
+
   }
 
 
   if (
     !products ||
-    products.length === 0
+    products.length ===
+      0
   ) {
 
     list.textContent =
       "No products have been added yet.";
 
+
     return;
+
   }
 
 
@@ -1280,39 +3065,68 @@ async function loadProducts() {
       ) {
 
         imageHTML = `
+
           <img
             src="${escapeAttribute(product.image_url)}"
             alt="${escapeAttribute(product.name || "Product")}"
           >
+
         `;
 
       }
 
 
       const priceHTML =
-        product.price !== null &&
-        product.price !== undefined
+        product.price !==
+          null &&
+        product.price !==
+          undefined
+
           ? "€" +
             Number(
               product.price
-            ).toFixed(2)
+            ).toFixed(
+              2
+            )
+
           : "No price";
 
 
       const ratingHTML =
-        product.rating !== null &&
-        product.rating !== undefined
+        product.rating !==
+          null &&
+        product.rating !==
+          undefined
+
           ? "Rating: " +
             Number(
               product.rating
-            ).toFixed(1) +
+            ).toFixed(
+              1
+            ) +
             " / 5"
+
           : "No rating";
+
+
+      const fashionHTML =
+        product
+          .fashion_enabled ===
+          true
+
+          ? `
+            <span class="fashion-badge">
+              👗 Fashion Setup
+            </span>
+          `
+
+          : "";
 
 
       item.innerHTML = `
 
         ${imageHTML}
+
 
         <h3>
           ${escapeHTML(
@@ -1320,6 +3134,9 @@ async function loadProducts() {
             "Product"
           )}
         </h3>
+
+
+        ${fashionHTML}
 
 
         <p class="small">
@@ -1346,14 +3163,16 @@ async function loadProducts() {
 
         ${
           product.slug
+
             ? `
+
               <p class="small">
                 Public Link:
-                https://giftedgiftempire.com/${escapeHTML(
-                  product.slug
-                )}
+                https://giftedgiftempire.com/${escapeHTML(product.slug)}
               </p>
+
             `
+
             : ""
         }
 
@@ -1391,6 +3210,12 @@ async function loadProducts() {
 }
 
 
+/*
+=====================================================
+SAVE PRODUCT
+=====================================================
+*/
+
 
 document
   .getElementById(
@@ -1398,7 +3223,9 @@ document
   )
   .addEventListener(
     "submit",
-    async function(event) {
+    async function(
+      event
+    ) {
 
       event.preventDefault();
 
@@ -1450,10 +3277,19 @@ document
           .value;
 
 
-      if (!name) {
+      const fashionEnabled =
+        isFashionCategory(
+          category
+        );
+
+
+      if (
+        !name
+      ) {
 
         message.textContent =
           "Please enter a Product Name.";
+
 
         document
           .getElementById(
@@ -1461,14 +3297,19 @@ document
           )
           .focus();
 
+
         return;
+
       }
 
 
-      if (!slug) {
+      if (
+        !slug
+      ) {
 
         message.textContent =
           "Please enter a Share Link Name.";
+
 
         document
           .getElementById(
@@ -1476,14 +3317,19 @@ document
           )
           .focus();
 
+
         return;
+
       }
 
 
-      if (!category) {
+      if (
+        !category
+      ) {
 
         message.textContent =
           "Please select a Category.";
+
 
         document
           .getElementById(
@@ -1491,7 +3337,39 @@ document
           )
           .focus();
 
+
         return;
+
+      }
+
+
+      /*
+        Validate fashion variants BEFORE
+        uploading or saving anything.
+      */
+
+      if (
+        fashionEnabled
+      ) {
+
+        try {
+
+          collectVariants();
+
+        }
+
+        catch (
+          validationError
+        ) {
+
+          message.textContent =
+            validationError.message;
+
+
+          return;
+
+        }
+
       }
 
 
@@ -1505,15 +3383,18 @@ document
 
       try {
 
-        /*
-          Check the global clean URL
-          BEFORE uploading an image.
-        */
-
         await checkGlobalSlugAvailability(
           slug,
-          id || null
+          id ||
+          null
         );
+
+
+        /*
+        ---------------------------------------------
+        MAIN PRODUCT IMAGE
+        ---------------------------------------------
+        */
 
 
         let imageURL =
@@ -1533,12 +3414,17 @@ document
 
         const selectedFile =
           imageInput.files &&
-          imageInput.files.length > 0
+          imageInput.files.length >
+            0
+
             ? imageInput.files[0]
+
             : null;
 
 
-        if (selectedFile) {
+        if (
+          selectedFile
+        ) {
 
           message.textContent =
             "Uploading product image...";
@@ -1546,14 +3432,77 @@ document
 
           imageURL =
             await uploadProductImage(
-              selectedFile
+              selectedFile,
+              "products"
             );
+
+        }
+
+
+        /*
+        ---------------------------------------------
+        SIZE CHART IMAGE
+        ---------------------------------------------
+        */
+
+
+        let sizeChartImageURL =
+          document
+            .getElementById(
+              "current-size-chart-image-url"
+            )
+            .value ||
+          null;
+
+
+        if (
+          fashionEnabled
+        ) {
+
+          const sizeChartInput =
+            document.getElementById(
+              "size-chart-image"
+            );
+
+
+          const sizeChartFile =
+            sizeChartInput.files &&
+            sizeChartInput.files.length >
+              0
+
+              ? sizeChartInput.files[0]
+
+              : null;
+
+
+          if (
+            sizeChartFile
+          ) {
+
+            message.textContent =
+              "Uploading size chart image...";
+
+
+            sizeChartImageURL =
+              await uploadProductImage(
+                sizeChartFile,
+                "size-charts"
+              );
+
+          }
 
         }
 
 
         message.textContent =
           "Saving product...";
+
+
+        /*
+        ---------------------------------------------
+        BASE PRODUCT DATA
+        ---------------------------------------------
+        */
 
 
         const productData = {
@@ -1576,6 +3525,7 @@ document
                 "price"
               )
               .value
+
               ? Number(
                   document
                     .getElementById(
@@ -1583,6 +3533,7 @@ document
                     )
                     .value
                 )
+
               : null,
 
           category,
@@ -1596,8 +3547,8 @@ document
                 "product_url"
               )
               .value
-              .trim()
-            || null,
+              .trim() ||
+            null,
 
           rating:
             document
@@ -1605,6 +3556,7 @@ document
                 "rating"
               )
               .value
+
               ? Number(
                   document
                     .getElementById(
@@ -1612,6 +3564,7 @@ document
                     )
                     .value
                 )
+
               : null,
 
           featured:
@@ -1626,19 +3579,141 @@ document
               .getElementById(
                 "in_stock"
               )
-              .checked
+              .checked,
+
+          fashion_enabled:
+            fashionEnabled
 
         };
 
 
-        let productError;
+        /*
+        ---------------------------------------------
+        FASHION DATA
+        ---------------------------------------------
+        */
 
 
-        if (id) {
+        if (
+          fashionEnabled
+        ) {
+
+          productData
+            .fashion_details = {
+
+              fabric:
+                document
+                  .getElementById(
+                    "fashion-fabric"
+                  )
+                  .value
+                  .trim(),
+
+              fit:
+                document
+                  .getElementById(
+                    "fashion-fit"
+                  )
+                  .value,
+
+              stretch:
+                document
+                  .getElementById(
+                    "fashion-stretch"
+                  )
+                  .value,
+
+              length:
+                document
+                  .getElementById(
+                    "fashion-length"
+                  )
+                  .value
+                  .trim(),
+
+              measurement_unit:
+                document
+                  .getElementById(
+                    "fashion-measurement-unit"
+                  )
+                  .value,
+
+              care_instructions:
+                document
+                  .getElementById(
+                    "fashion-care"
+                  )
+                  .value
+                  .trim(),
+
+              model_info:
+                document
+                  .getElementById(
+                    "fashion-model-info"
+                  )
+                  .value
+                  .trim(),
+
+              size_guide_notes:
+                document
+                  .getElementById(
+                    "fashion-size-guide-notes"
+                  )
+                  .value
+                  .trim()
+
+            };
+
+
+          productData
+            .body_size_chart =
+              collectMeasurementRows(
+                "body-size-rows"
+              );
+
+
+          productData
+            .garment_measurements =
+              collectMeasurementRows(
+                "garment-measurement-rows"
+              );
+
+
+          productData
+            .size_chart_image_url =
+              sizeChartImageURL;
+
+        }
+
+
+        /*
+        ---------------------------------------------
+        SAVE / UPDATE PRODUCT
+        ---------------------------------------------
+        */
+
+
+        let productError =
+          null;
+
+
+        let savedProductId =
+          id
+            ? Number(
+                id
+              )
+            : null;
+
+
+        if (
+          id
+        ) {
 
           const result =
             await supabaseClient
-              .from("products")
+              .from(
+                "products"
+              )
               .update(
                 productData
               )
@@ -1651,23 +3726,58 @@ document
           productError =
             result.error;
 
-        } else {
+        }
+
+        else {
 
           const result =
             await supabaseClient
-              .from("products")
+              .from(
+                "products"
+              )
               .insert(
                 productData
-              );
+              )
+              .select(
+                "id"
+              )
+              .single();
 
 
           productError =
             result.error;
 
+
+          if (
+            !productError &&
+            result.data
+          ) {
+
+            savedProductId =
+              result.data.id;
+
+
+            /*
+              If a later fashion save fails,
+              retrying will UPDATE instead
+              of creating a duplicate product.
+            */
+
+            document
+              .getElementById(
+                "product-id"
+              )
+              .value =
+                savedProductId;
+
+          }
+
         }
 
 
-        if (productError) {
+        if (
+          productError
+        ) {
 
           console.error(
             productError
@@ -1682,6 +3792,7 @@ document
             throw new Error(
               "That Share Link Name is already being used. Please choose another one."
             );
+
           }
 
 
@@ -1689,12 +3800,38 @@ document
             productError.message ||
             "The product could not be saved."
           );
+
+        }
+
+
+        /*
+        ---------------------------------------------
+        SAVE FASHION VARIANTS
+        ---------------------------------------------
+        */
+
+
+        if (
+          fashionEnabled &&
+          savedProductId
+        ) {
+
+          message.textContent =
+            "Saving fashion sizes, colours and stock...";
+
+
+          await saveProductVariants(
+            savedProductId
+          );
+
         }
 
 
         message.textContent =
           id
+
             ? "Product updated successfully."
+
             : "Product added successfully.";
 
 
@@ -1703,7 +3840,11 @@ document
 
         await loadProducts();
 
-      } catch (error) {
+      }
+
+      catch (
+        error
+      ) {
 
         console.error(
           error
@@ -1711,8 +3852,11 @@ document
 
 
         const errorMessage =
-          error instanceof Error
+          error instanceof
+            Error
+
             ? error.message
+
             : "Product could not be saved.";
 
 
@@ -1733,10 +3877,12 @@ document
               "slug"
             )
             .focus();
+
         }
 
+      }
 
-      } finally {
+      finally {
 
         saveButton.disabled =
           false;
@@ -1748,7 +3894,9 @@ document
               "product-id"
             )
             .value
+
             ? "Update Product"
+
             : "Save Product";
 
       }
@@ -1757,16 +3905,28 @@ document
   );
 
 
+/*
+=====================================================
+EDIT PRODUCT
+=====================================================
+*/
 
-async function editProduct(id) {
+
+async function editProduct(
+  id
+) {
 
   const {
     data,
     error
   } =
     await supabaseClient
-      .from("products")
-      .select("*")
+      .from(
+        "products"
+      )
+      .select(
+        "*"
+      )
       .eq(
         "id",
         id
@@ -1783,7 +3943,9 @@ async function editProduct(id) {
       "Product could not be opened."
     );
 
+
     return;
+
   }
 
 
@@ -1916,6 +4078,339 @@ async function editProduct(id) {
       );
 
 
+  /*
+  ---------------------------------------------------
+  FASHION
+  ---------------------------------------------------
+  */
+
+
+  const fashionEnabled =
+    data.fashion_enabled ===
+      true ||
+    isFashionCategory(
+      data.category
+    );
+
+
+  toggleFashionSection(
+    fashionEnabled
+  );
+
+
+  const fashionDetails =
+    data.fashion_details &&
+    typeof data.fashion_details ===
+      "object" &&
+    !Array.isArray(
+      data.fashion_details
+    )
+
+      ? data.fashion_details
+
+      : {};
+
+
+  document
+    .getElementById(
+      "fashion-fabric"
+    )
+    .value =
+      fashionDetails.fabric ||
+      "";
+
+
+  ensureSelectValue(
+    "fashion-fit",
+    fashionDetails.fit ||
+    ""
+  );
+
+
+  ensureSelectValue(
+    "fashion-stretch",
+    fashionDetails.stretch ||
+    ""
+  );
+
+
+  document
+    .getElementById(
+      "fashion-length"
+    )
+    .value =
+      fashionDetails.length ||
+      "";
+
+
+  document
+    .getElementById(
+      "fashion-measurement-unit"
+    )
+    .value =
+      fashionDetails
+        .measurement_unit ===
+        "in"
+
+        ? "in"
+
+        : "cm";
+
+
+  document
+    .getElementById(
+      "fashion-care"
+    )
+    .value =
+      fashionDetails
+        .care_instructions ||
+      "";
+
+
+  document
+    .getElementById(
+      "fashion-model-info"
+    )
+    .value =
+      fashionDetails
+        .model_info ||
+      "";
+
+
+  document
+    .getElementById(
+      "fashion-size-guide-notes"
+    )
+    .value =
+      fashionDetails
+        .size_guide_notes ||
+      "";
+
+
+  document
+    .getElementById(
+      "current-size-chart-image-url"
+    )
+    .value =
+      data.size_chart_image_url ||
+      "";
+
+
+  document
+    .getElementById(
+      "size-chart-image"
+    )
+    .value =
+      "";
+
+
+  showSizeChartPreview(
+    data.size_chart_image_url ||
+    ""
+  );
+
+
+  /*
+  BODY SIZE CHART
+  */
+
+
+  document
+    .getElementById(
+      "body-size-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  const bodyRows =
+    Array.isArray(
+      data.body_size_chart
+    )
+
+      ? data.body_size_chart
+
+      : [];
+
+
+  if (
+    bodyRows.length >
+    0
+  ) {
+
+    bodyRows.forEach(
+      row => {
+
+        addMeasurementRow(
+          "body-size-rows",
+          row
+        );
+
+      }
+    );
+
+  }
+
+  else {
+
+    addMeasurementRow(
+      "body-size-rows"
+    );
+
+  }
+
+
+  /*
+  GARMENT MEASUREMENTS
+  */
+
+
+  document
+    .getElementById(
+      "garment-measurement-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  const garmentRows =
+    Array.isArray(
+      data.garment_measurements
+    )
+
+      ? data.garment_measurements
+
+      : [];
+
+
+  if (
+    garmentRows.length >
+    0
+  ) {
+
+    garmentRows.forEach(
+      row => {
+
+        addMeasurementRow(
+          "garment-measurement-rows",
+          row
+        );
+
+      }
+    );
+
+  }
+
+  else {
+
+    addMeasurementRow(
+      "garment-measurement-rows"
+    );
+
+  }
+
+
+  /*
+  PRODUCT VARIANTS
+  */
+
+
+  document
+    .getElementById(
+      "variant-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  const {
+    data: variants,
+    error: variantError
+  } =
+    await supabaseClient
+      .from(
+        "product_variants"
+      )
+      .select(
+        "id,size,color,sku,stock_quantity,price_override,active"
+      )
+      .eq(
+        "product_id",
+        id
+      )
+      .order(
+        "id",
+        {
+          ascending: true
+        }
+      );
+
+
+  if (
+    variantError
+  ) {
+
+    console.error(
+      "Could not load product variants:",
+      variantError
+    );
+
+
+    editingVariantIds =
+      [];
+
+
+    addVariantRow();
+
+  }
+
+  else {
+
+    const safeVariants =
+      Array.isArray(
+        variants
+      )
+
+        ? variants
+
+        : [];
+
+
+    editingVariantIds =
+      safeVariants.map(
+        variant =>
+          Number(
+            variant.id
+          )
+      );
+
+
+    if (
+      safeVariants.length >
+      0
+    ) {
+
+      safeVariants.forEach(
+        variant => {
+
+          addVariantRow(
+            variant
+          );
+
+        }
+      );
+
+    }
+
+    else {
+
+      addVariantRow();
+
+    }
+
+  }
+
+
   document
     .getElementById(
       "form-title"
@@ -1941,20 +4436,100 @@ async function editProduct(id) {
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
 
 }
 
+
+/*
+=====================================================
+SELECT HELPERS
+=====================================================
+*/
+
+
+function ensureSelectValue(
+  elementId,
+  value
+) {
+
+  const select =
+    document.getElementById(
+      elementId
+    );
+
+
+  if (
+    !value
+  ) {
+
+    select.value =
+      "";
+
+    return;
+
+  }
+
+
+  const exists =
+    Array.from(
+      select.options
+    )
+      .some(
+        option =>
+          option.value ===
+          value
+      );
+
+
+  if (
+    !exists
+  ) {
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value =
+      value;
+
+
+    option.textContent =
+      value;
+
+
+    select.appendChild(
+      option
+    );
+
+  }
+
+
+  select.value =
+    value;
+
+}
 
 
 function ensureCategoryOption(
   categoryName
 ) {
 
-  if (!categoryName) {
+  if (
+    !categoryName
+  ) {
+
     return;
+
   }
 
 
@@ -1965,10 +4540,9 @@ function ensureCategoryOption(
 
 
   const exists =
-    Array
-      .from(
-        select.options
-      )
+    Array.from(
+      select.options
+    )
       .some(
         option =>
           option.value ===
@@ -1976,7 +4550,9 @@ function ensureCategoryOption(
       );
 
 
-  if (!exists) {
+  if (
+    !exists
+  ) {
 
     const option =
       document.createElement(
@@ -2002,8 +4578,16 @@ function ensureCategoryOption(
 }
 
 
+/*
+=====================================================
+DELETE PRODUCT
+=====================================================
+*/
 
-async function deleteProduct(id) {
+
+async function deleteProduct(
+  id
+) {
 
   const confirmed =
     confirm(
@@ -2011,16 +4595,29 @@ async function deleteProduct(id) {
     );
 
 
-  if (!confirmed) {
+  if (
+    !confirmed
+  ) {
+
     return;
+
   }
+
+
+  /*
+    product_variants are automatically
+    deleted because the database foreign key
+    uses ON DELETE CASCADE.
+  */
 
 
   const {
     error
   } =
     await supabaseClient
-      .from("products")
+      .from(
+        "products"
+      )
       .delete()
       .eq(
         "id",
@@ -2028,7 +4625,9 @@ async function deleteProduct(id) {
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       error
@@ -2039,14 +4638,22 @@ async function deleteProduct(id) {
       "Product could not be deleted."
     );
 
+
     return;
+
   }
 
 
-  loadProducts();
+  await loadProducts();
 
 }
 
+
+/*
+=====================================================
+CANCEL EDIT
+=====================================================
+*/
 
 
 document
@@ -2058,6 +4665,12 @@ document
     resetForm
   );
 
+
+/*
+=====================================================
+RESET FORM
+=====================================================
+*/
 
 
 function resetForm() {
@@ -2094,14 +4707,43 @@ function resetForm() {
 
   document
     .getElementById(
+      "current-size-chart-image-url"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
       "in_stock"
     )
     .checked =
       true;
 
 
+  document
+    .getElementById(
+      "fashion-measurement-unit"
+    )
+    .value =
+      "cm";
+
+
   showImagePreview(
     ""
+  );
+
+
+  showSizeChartPreview(
+    ""
+  );
+
+
+  resetFashionRows();
+
+
+  toggleFashionSection(
+    false
   );
 
 
@@ -2127,27 +4769,53 @@ function resetForm() {
     )
     .style.display =
       "none";
+
 }
 
 
+/*
+=====================================================
+ESCAPE
+=====================================================
+*/
 
-function escapeHTML(value) {
+
+function escapeHTML(
+  value
+) {
 
   return String(
     value == null
       ? ""
       : value
   )
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
 }
 
 
-
-function escapeAttribute(value) {
+function escapeAttribute(
+  value
+) {
 
   return escapeHTML(
     value
@@ -2156,10 +4824,19 @@ function escapeAttribute(value) {
 }
 
 
+/*
+=====================================================
+START
+=====================================================
+*/
+
 
 protectPage();
 
+
 </script>
 
+
 </body>
+
 </html>
