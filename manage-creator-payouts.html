@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Creator Payouts | GiftedGift Empire
+  </title>
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      color: #f2bd16;
+      font-size: 25px;
+    }
+
+    .top-bar p {
+      margin: 6px 0 0;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1250px;
+      margin: auto;
+      padding: 24px 16px 60px;
+    }
+
+    .back-row {
+      margin-bottom: 18px;
+    }
+
+    .back-row a {
+      color: #123a8c;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.06);
+      border:
+        1px solid rgba(18,58,140,0.08);
+      margin-bottom: 20px;
+    }
+
+    .panel h2 {
+      color: #123a8c;
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .intro {
+      margin: 0;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(5, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: #f8f9fc;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .stat-value {
+      color: #123a8c;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns:
+        minmax(220px, 1fr)
+        190px
+        auto;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #ccd3de;
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      background: white;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    button {
+      font-family: Arial, sans-serif;
+    }
+
+    .refresh-button {
+      border: none;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      padding: 11px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 13px 14px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .message.success {
+      display: block;
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      background: #eff8ff;
+      color: #175cd3;
+      border: 1px solid #b2ddff;
+    }
+
+    .private-note {
+      margin-top: 18px;
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+      color: #7a2e0e;
+      padding: 12px 14px;
+      border-radius: 10px;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .withdrawal-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .withdrawal-card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.05);
+    }
+
+    .card-header {
+      padding: 17px 18px;
+      background: #f8f9fc;
+      border-bottom: 1px solid #e3e7ee;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .reference {
+      margin: 0;
+      color: #123a8c;
+      font-size: 18px;
+      word-break: break-word;
+    }
+
+    .creator-name {
+      margin-top: 6px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .seller-code {
+      display: inline-block;
+      margin-top: 7px;
+      border: 1px solid #d9e0ea;
+      background: white;
+      padding: 6px 9px;
+      border-radius: 7px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-pending {
+      background: #fffaeb;
+      color: #b54708;
+      border: 1px solid #fedf89;
+    }
+
+    .status-processing {
+      background: #eff8ff;
+      color: #175cd3;
+      border: 1px solid #b2ddff;
+    }
+
+    .status-paid {
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #abefc6;
+    }
+
+    .status-rejected,
+    .status-cancelled {
+      background: #fef3f2;
+      color: #b42318;
+      border: 1px solid #fecdca;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .detail-box {
+      border: 1px solid #e1e6ee;
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    .detail-label {
+      color: #777;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .detail-value {
+      color: #222;
+      font-size: 14px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .money {
+      font-size: 20px;
+      font-weight: 800;
+      color: #123a8c;
+    }
+
+    .payout-details {
+      background: #f8fafc;
+      border: 1px solid #e1e6ee;
+      border-radius: 9px;
+      padding: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .action-section {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e3e7ee;
+    }
+
+    .action-section h3 {
+      color: #123a8c;
+      margin-top: 0;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .action-button {
+      border: none;
+      border-radius: 9px;
+      min-height: 42px;
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .process-button {
+      background: #123a8c;
+      color: white;
+    }
+
+    .paid-button {
+      background: #067647;
+      color: white;
+    }
+
+    .reject-button {
+      background: #b42318;
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 15px;
+      color: #666;
+      background: white;
+      border-radius: 14px;
+      border: 1px solid #e1e6ee;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 35px;
+      color: #666;
+    }
+
+    .small-note {
+      margin: 7px 0 0;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 800px) {
+
+      .stats-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .controls,
+      .details-grid,
+      .action-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+  <div class="top-bar-inner">
+
+    <h1>
+      GiftedGift Empire
+    </h1>
+
+    <p>
+      Admin — Creator Payouts
+    </p>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+
+  <div class="back-row">
+
+    <a href="dashboard.html">
+      ← Back to Admin Dashboard
+    </a>
+
+  </div>
+
+
+  <div
+    id="page-message"
+    class="message"
+    aria-live="polite"
+  ></div>
+
+
+  <section class="panel">
+
+    <h2>
+      Creator Withdrawals
+    </h2>
+
+    <p class="intro">
+      Review Creator withdrawal requests,
+      move approved requests into processing,
+      record completed payments,
+      or reject invalid requests.
+    </p>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Total
+        </div>
+
+        <div
+          id="stat-total"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Pending
+        </div>
+
+        <div
+          id="stat-pending"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Processing
+        </div>
+
+        <div
+          id="stat-processing"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Paid
+        </div>
+
+        <div
+          id="stat-paid"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Rejected
+        </div>
+
+        <div
+          id="stat-rejected"
+          class="stat-value"
+        >
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="controls">
+
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Search reference, Creator, seller code, email..."
+      >
+
+
+      <select id="status-filter">
+
+        <option value="all">
+          All statuses
+        </option>
+
+        <option value="pending">
+          Pending
+        </option>
+
+        <option value="processing">
+          Processing
+        </option>
+
+        <option value="paid">
+          Paid
+        </option>
+
+        <option value="rejected">
+          Rejected
+        </option>
+
+        <option value="cancelled">
+          Cancelled
+        </option>
+
+      </select>
+
+
+      <button
+        type="button"
+        id="refresh-button"
+        class="refresh-button"
+        onclick="loadWithdrawals()"
+      >
+        Refresh
+      </button>
+
+    </div>
+
+
+    <div class="private-note">
+      ⚠️ Payout details on this page are private
+      financial information. Do not expose them on
+      public Creator pages or product pages.
+    </div>
+
+  </section>
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Checking Admin access...
+  </div>
+
+
+  <div
+    id="withdrawal-list"
+    class="withdrawal-list"
+    style="display:none;"
+  ></div>
+
+
+</main>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  =====================================================
+  SUPABASE
+  =====================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+  =====================================================
+  STATE
+  =====================================================
+  */
+
+  let allWithdrawals = [];
+
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const withdrawalList =
+    document.getElementById(
+      "withdrawal-list"
+    );
+
+
+  const pageMessage =
+    document.getElementById(
+      "page-message"
+    );
+
+
+  /*
+  =====================================================
+  MESSAGE
+  =====================================================
+  */
+
+  function showMessage(
+    text,
+    type = "info"
+  ) {
+
+    pageMessage.className =
+      "message " + type;
+
+
+    pageMessage.textContent =
+      text;
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function clearMessage() {
+
+    pageMessage.className =
+      "message";
+
+
+    pageMessage.textContent =
+      "";
+
+  }
+
+
+  /*
+  =====================================================
+  ESCAPE
+  =====================================================
+  */
+
+  function escapeHTML(
+    value
+  ) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  /*
+  =====================================================
+  DATE
+  =====================================================
+  */
+
+  function formatDate(
+    value
+  ) {
+
+    if (!value) {
+
+      return "Not available";
+
+    }
+
+
+    const date =
+      new Date(
+        value
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "Not available";
+
+    }
+
+
+    return date.toLocaleString();
+
+  }
+
+
+  /*
+  =====================================================
+  MONEY
+  =====================================================
+  */
+
+  function formatMoney(
+    value,
+    currency
+  ) {
+
+    try {
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          style:
+            "currency",
+
+          currency:
+            currency || "EUR",
+
+          minimumFractionDigits:
+            2,
+
+          maximumFractionDigits:
+            2
+        }
+      ).format(
+        Number(
+          value || 0
+        )
+      );
+
+    }
+
+    catch (error) {
+
+      return (
+        String(
+          currency || "EUR"
+        ) +
+        " " +
+        Number(
+          value || 0
+        ).toFixed(2)
+      );
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  STATUS
+  =====================================================
+  */
+
+  function statusBadge(
+    status
+  ) {
+
+    const safeStatus =
+      String(
+        status || "unknown"
+      )
+        .toLowerCase();
+
+
+    return `
+      <span
+        class="
+          status-badge
+          status-${escapeHTML(
+            safeStatus
+          )}
+        "
+      >
+        ${escapeHTML(
+          safeStatus
+        )}
+      </span>
+    `;
+
+  }
+
+
+  /*
+  =====================================================
+  PAYOUT DETAILS
+  =====================================================
+  */
+
+  function formatPayoutDetails(
+    details
+  ) {
+
+    if (
+      !details ||
+      typeof details !==
+        "object"
+    ) {
+
+      return "Not provided";
+
+    }
+
+
+    try {
+
+      return escapeHTML(
+        JSON.stringify(
+          details,
+          null,
+          2
+        )
+      );
+
+    }
+
+    catch (error) {
+
+      return "Could not display payout details.";
+
+    }
+
+  }
+
+
+  /*
+  =====================================================
+  ADMIN ACCESS
+  =====================================================
+  */
+
+  async function checkAdminAccess() {
+
+    loading.style.display =
+      "block";
+
+
+    withdrawalList.style.display =
+      "none";
+
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError ||
+      !sessionData.session ||
+      !sessionData.session.user
+    ) {
+
+      window.location.replace(
+        "admin.html"
+      );
+
+      return false;
+
+    }
+
+
+    const {
+      data: isAdmin,
+      error: adminError
+    } =
+      await supabaseClient
+        .rpc(
+          "is_site_admin"
+        );
+
+
+    if (
+      adminError ||
+      isAdmin !== true
+    ) {
+
+      console.error(
+        "Admin authorization:",
+        adminError
+      );
+
+
+      window.location.replace(
+        "admin.html"
+      );
+
+      return false;
+
+    }
+
+
+    return true;
+
+  }
+
+
+  /*
+  =====================================================
+  LOAD WITHDRAWALS
+  =====================================================
+  */
+
+  async function loadWithdrawals() {
+
+    clearMessage();
+
+
+    const refreshButton =
+      document.getElementById(
+        "refresh-button"
+      );
+
+
+    refreshButton.disabled =
+      true;
+
+
+    refreshButton.textContent =
+      "Loading...";
+
+
+    loading.style.display =
+      "block";
+
+
+    loading.textContent =
+      "Loading Creator withdrawals...";
+
+
+    withdrawalList.style.display =
+      "none";
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_get_creator_withdrawals"
+        );
+
+
+    refreshButton.disabled =
+      false;
+
+
+    refreshButton.textContent =
+      "Refresh";
+
+
+    loading.style.display =
+      "none";
+
+
+    withdrawalList.style.display =
+      "grid";
+
+
+    if (error) {
+
+      console.error(
+        "Withdrawal load:",
+        error
+      );
+
+
+      withdrawalList.innerHTML =
+        "";
+
+
+      showMessage(
+        error.message ||
+        "Creator withdrawals could not be loaded.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    allWithdrawals =
+      Array.isArray(
+        data
+      )
+        ? data
+        : [];
+
+
+    updateStats();
+
+
+    renderWithdrawals();
+
+  }
+
+
+  /*
+  =====================================================
+  STATS
+  =====================================================
+  */
+
+  function updateStats() {
+
+    const count =
+      status =>
+        allWithdrawals
+          .filter(
+            item =>
+              item.status ===
+              status
+          )
+          .length;
+
+
+    document.getElementById(
+      "stat-total"
+    ).textContent =
+      allWithdrawals.length;
+
+
+    document.getElementById(
+      "stat-pending"
+    ).textContent =
+      count(
+        "pending"
+      );
+
+
+    document.getElementById(
+      "stat-processing"
+    ).textContent =
+      count(
+        "processing"
+      );
+
+
+    document.getElementById(
+      "stat-paid"
+    ).textContent =
+      count(
+        "paid"
+      );
+
+
+    document.getElementById(
+      "stat-rejected"
+    ).textContent =
+      count(
+        "rejected"
+      );
+
+  }
+
+
+  /*
+  =====================================================
+  FILTER
+  =====================================================
+  */
+
+  function getFilteredWithdrawals() {
+
+    const search =
+      document
+        .getElementById(
+          "search-input"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const status =
+      document
+        .getElementById(
+          "status-filter"
+        )
+        .value;
+
+
+    return allWithdrawals.filter(
+      item => {
+
+        if (
+          status !== "all" &&
+          item.status !==
+            status
+        ) {
+
+          return false;
+
+        }
+
+
+        if (!search) {
+
+          return true;
+
+        }
+
+
+        const searchable =
+          [
+            item.withdrawal_reference,
+            item.creator_name,
+            item.seller_code,
+            item.contact_email,
+            item.payout_method,
+            item.payout_currency,
+            item.payment_reference
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+
+        return searchable.includes(
+          search
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  RENDER
+  =====================================================
+  */
+
+  function renderWithdrawals() {
+
+    const withdrawals =
+      getFilteredWithdrawals();
+
+
+    if (
+      withdrawals.length === 0
+    ) {
+
+      withdrawalList.innerHTML = `
+        <div class="empty-state">
+          No Creator withdrawals match
+          your current search or filter.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    withdrawalList.innerHTML =
+      withdrawals
+        .map(
+          withdrawal =>
+            withdrawalCard(
+              withdrawal
+            )
+        )
+        .join("");
+
+  }
+
+
+  /*
+  =====================================================
+  CARD
+  =====================================================
+  */
+
+  function withdrawalCard(
+    item
+  ) {
+
+    const id =
+      Number(
+        item.withdrawal_id
+      );
+
+
+    const settlementCurrency =
+      String(
+        item.settlement_currency ||
+        "EUR"
+      ).toUpperCase();
+
+
+    const payoutCurrency =
+      String(
+        item.payout_currency ||
+        settlementCurrency
+      ).toUpperCase();
+
+
+    const requestedAmount =
+      Number(
+        item.requested_amount ||
+        0
+      );
+
+
+    let actionHTML =
+      "";
+
+
+    /*
+    PENDING
+    */
+
+    if (
+      item.status ===
+      "pending"
+    ) {
+
+      actionHTML = `
+
+        <div class="action-section">
+
+          <h3>
+            Admin Action
+          </h3>
+
+
+          <label
+            class="field-label"
+            for="note-${id}"
+          >
+            Admin Note / Rejection Reason
+          </label>
+
+          <textarea
+            id="note-${id}"
+            placeholder="Optional for Processing. Required when rejecting."
+          ></textarea>
+
+
+          <div class="action-row">
+
+            <button
+              type="button"
+              class="
+                action-button
+                process-button
+              "
+              onclick="
+                processWithdrawal(
+                  ${id}
+                )
+              "
+            >
+              Move to Processing
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                action-button
+                reject-button
+              "
+              onclick="
+                rejectWithdrawal(
+                  ${id}
+                )
+              "
+            >
+              Reject Withdrawal
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }
+
+
+    /*
+    PROCESSING
+    */
+
+    else if (
+      item.status ===
+      "processing"
+    ) {
+
+      const defaultPaidAmount =
+        settlementCurrency ===
+        payoutCurrency
+          ? requestedAmount
+          : "";
+
+
+      const defaultRate =
+        settlementCurrency ===
+        payoutCurrency
+          ? "1.00"
+          : "";
+
+
+      actionHTML = `
+
+        <div class="action-section">
+
+          <h3>
+            Complete Creator Payout
+          </h3>
+
+
+          <div class="action-grid">
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="reference-${id}"
+              >
+                Payment / Transaction Reference *
+              </label>
+
+              <input
+                type="text"
+                id="reference-${id}"
+                maxlength="200"
+                placeholder="Example: PayPal transaction ID"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="paid-amount-${id}"
+              >
+                Actual Amount Paid (${escapeHTML(
+                  payoutCurrency
+                )}) *
+              </label>
+
+              <input
+                type="number"
+                id="paid-amount-${id}"
+                min="0.01"
+                step="0.01"
+                value="${escapeHTML(
+                  defaultPaidAmount
+                )}"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="rate-${id}"
+              >
+                Exchange Rate *
+              </label>
+
+              <input
+                type="number"
+                id="rate-${id}"
+                min="0.000001"
+                step="0.000001"
+                value="${escapeHTML(
+                  defaultRate
+                )}"
+              >
+
+              <p class="small-note">
+                Use 1.00 when settlement and
+                payout currencies are the same.
+              </p>
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="note-${id}"
+              >
+                Admin Note
+              </label>
+
+              <textarea
+                id="note-${id}"
+                placeholder="Optional payout note. Required if rejecting."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="action-row">
+
+            <button
+              type="button"
+              class="
+                action-button
+                paid-button
+              "
+              onclick="
+                markWithdrawalPaid(
+                  ${id}
+                )
+              "
+            >
+              Mark Paid
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                action-button
+                reject-button
+              "
+              onclick="
+                rejectWithdrawal(
+                  ${id}
+                )
+              "
+            >
+              Reject Withdrawal
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }
+
+
+    return `
+
+      <article
+        class="withdrawal-card"
+        id="withdrawal-${id}"
+      >
+
+
+        <div class="card-header">
+
+          <div>
+
+            <h3 class="reference">
+              ${escapeHTML(
+                item.withdrawal_reference ||
+                "No withdrawal reference"
+              )}
+            </h3>
+
+
+            <div class="creator-name">
+              ${escapeHTML(
+                item.creator_name ||
+                "Unknown Creator"
+              )}
+            </div>
+
+
+            <div class="seller-code">
+              ${escapeHTML(
+                item.seller_code ||
+                "No seller code"
+              )}
+            </div>
+
+          </div>
+
+
+          <div>
+
+            ${statusBadge(
+              item.status
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+
+          <div class="details-grid">
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Requested Amount
+              </div>
+
+              <div
+                class="
+                  detail-value
+                  money
+                "
+              >
+                ${escapeHTML(
+                  formatMoney(
+                    requestedAmount,
+                    settlementCurrency
+                  )
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Payout Currency
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  payoutCurrency
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Payout Method
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  item.payout_method ||
+                  "Not provided"
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Creator Email
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  item.contact_email ||
+                  "Not available"
+                )}
+              </div>
+
+            </div>
+
+
+            <div
+              class="
+                detail-box
+                full-width
+              "
+            >
+
+              <div class="detail-label">
+                Private Payout Details
+              </div>
+
+              <div class="payout-details">${formatPayoutDetails(
+                item.payout_details
+              )}</div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Requested
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  formatDate(
+                    item.requested_at
+                  )
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Processing Date
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  formatDate(
+                    item.processing_at
+                  )
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Paid Date
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  formatDate(
+                    item.paid_at
+                  )
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <div class="detail-label">
+                Rejected Date
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  formatDate(
+                    item.rejected_at
+                  )
+                )}
+              </div>
+
+            </div>
+
+
+            ${
+              item.payment_reference
+                ? `
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Payment Reference
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        item.payment_reference
+                      )}
+                    </div>
+
+                  </div>
+
+                `
+                : ""
+            }
+
+
+            ${
+              item.paid_amount !== null &&
+              item.paid_amount !== undefined
+                ? `
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Actual Paid Amount
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        formatMoney(
+                          item.paid_amount,
+                          payoutCurrency
+                        )
+                      )}
+                    </div>
+
+                  </div>
+
+                `
+                : ""
+            }
+
+
+            ${
+              item.exchange_rate
+                ? `
+
+                  <div class="detail-box">
+
+                    <div class="detail-label">
+                      Exchange Rate
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        item.exchange_rate
+                      )}
+                    </div>
+
+                  </div>
+
+                `
+                : ""
+            }
+
+
+            ${
+              item.admin_note
+                ? `
+
+                  <div
+                    class="
+                      detail-box
+                      full-width
+                    "
+                  >
+
+                    <div class="detail-label">
+                      Admin Note
+                    </div>
+
+                    <div class="detail-value">
+                      ${escapeHTML(
+                        item.admin_note
+                      )}
+                    </div>
+
+                  </div>
+
+                `
+                : ""
+            }
+
+
+          </div>
+
+
+          ${actionHTML}
+
+
+        </div>
+
+
+      </article>
+
+    `;
+
+  }
+
+
+  /*
+  =====================================================
+  CALL ADMIN RPC
+  =====================================================
+  */
+
+  async function reviewWithdrawal(
+    withdrawalId,
+    action,
+    options = {}
+  ) {
+
+    clearMessage();
+
+
+    const confirmed =
+      window.confirm(
+        options.confirmText ||
+        "Are you sure?"
+      );
+
+
+    if (!confirmed) {
+
+      return false;
+
+    }
+
+
+    const card =
+      document.getElementById(
+        "withdrawal-" +
+        withdrawalId
+      );
+
+
+    const buttons =
+      card
+        ? card.querySelectorAll(
+            ".action-button"
+          )
+        : [];
+
+
+    buttons.forEach(
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+    );
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "admin_review_creator_withdrawal",
+          {
+
+            p_withdrawal_id:
+              withdrawalId,
+
+            p_action:
+              action,
+
+            p_payment_reference:
+              options.paymentReference ||
+              null,
+
+            p_paid_amount:
+              options.paidAmount ??
+              null,
+
+            p_exchange_rate:
+              options.exchangeRate ??
+              null,
+
+            p_admin_note:
+              options.adminNote ||
+              null
+
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Creator withdrawal action:",
+        error
+      );
+
+
+      buttons.forEach(
+        button => {
+
+          button.disabled =
+            false;
+
+      });
+
+
+      showMessage(
+        error.message ||
+        "The Creator withdrawal could not be updated.",
+        "error"
+      );
+
+
+      return false;
+
+    }
+
+
+    await loadWithdrawals();
+
+
+    showMessage(
+      options.successText ||
+      "Creator withdrawal updated successfully.",
+      "success"
+    );
+
+
+    return true;
+
+  }
+
+
+  /*
+  =====================================================
+  PROCESS
+  =====================================================
+  */
+
+  async function processWithdrawal(
+    withdrawalId
+  ) {
+
+    const note =
+      document
+        .getElementById(
+          "note-" +
+          withdrawalId
+        )
+        ?.value
+        .trim() ||
+      "";
+
+
+    await reviewWithdrawal(
+      withdrawalId,
+      "process",
+      {
+
+        adminNote:
+          note,
+
+        confirmText:
+          "Move this Creator withdrawal to Processing?",
+
+        successText:
+          "Creator withdrawal moved to Processing."
+
+      }
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  REJECT
+  =====================================================
+  */
+
+  async function rejectWithdrawal(
+    withdrawalId
+  ) {
+
+    const note =
+      document
+        .getElementById(
+          "note-" +
+          withdrawalId
+        )
+        ?.value
+        .trim() ||
+      "";
+
+
+    if (
+      note.length < 3
+    ) {
+
+      showMessage(
+        "Please enter a rejection reason before rejecting this withdrawal.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    await reviewWithdrawal(
+      withdrawalId,
+      "reject",
+      {
+
+        adminNote:
+          note,
+
+        confirmText:
+          "Reject this Creator withdrawal? The reserved amount will become available to the Creator again.",
+
+        successText:
+          "Creator withdrawal rejected."
+
+      }
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  PAID
+  =====================================================
+  */
+
+  async function markWithdrawalPaid(
+    withdrawalId
+  ) {
+
+    const paymentReference =
+      document
+        .getElementById(
+          "reference-" +
+          withdrawalId
+        )
+        ?.value
+        .trim() ||
+      "";
+
+
+    const paidAmount =
+      Number(
+        document
+          .getElementById(
+            "paid-amount-" +
+            withdrawalId
+          )
+          ?.value
+      );
+
+
+    const exchangeRate =
+      Number(
+        document
+          .getElementById(
+            "rate-" +
+            withdrawalId
+          )
+          ?.value
+      );
+
+
+    const adminNote =
+      document
+        .getElementById(
+          "note-" +
+          withdrawalId
+        )
+        ?.value
+        .trim() ||
+      "";
+
+
+    if (!paymentReference) {
+
+      showMessage(
+        "Please enter the payment or transaction reference.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !Number.isFinite(
+        paidAmount
+      ) ||
+      paidAmount <= 0
+    ) {
+
+      showMessage(
+        "Please enter the actual amount paid.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !Number.isFinite(
+        exchangeRate
+      ) ||
+      exchangeRate <= 0
+    ) {
+
+      showMessage(
+        "Please enter a valid exchange rate. Use 1.00 when the currencies are the same.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    await reviewWithdrawal(
+      withdrawalId,
+      "paid",
+      {
+
+        paymentReference,
+
+        paidAmount,
+
+        exchangeRate,
+
+        adminNote,
+
+        confirmText:
+          "Have you actually sent this Creator payout? Marking it Paid records the withdrawal as completed.",
+
+        successText:
+          "Creator payout marked Paid successfully."
+
+      }
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  EVENTS
+  =====================================================
+  */
+
+  document
+    .getElementById(
+      "search-input"
+    )
+    .addEventListener(
+      "input",
+      renderWithdrawals
+    );
+
+
+  document
+    .getElementById(
+      "status-filter"
+    )
+    .addEventListener(
+      "change",
+      renderWithdrawals
+    );
+
+
+  /*
+  =====================================================
+  START
+  =====================================================
+  */
+
+  async function initializePage() {
+
+    const allowed =
+      await checkAdminAccess();
+
+
+    if (!allowed) {
+
+      return;
+
+    }
+
+
+    await loadWithdrawals();
+
+  }
+
+
+  initializePage();
+
+</script>
+
+
+</body>
+
+</html>
