@@ -1,367 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manage Products | GiftedGift Empire</title>
 
-
 <style>
-
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #222;
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#222;
 }
 
-header {
-  background: #123a8c;
-  color: white;
-  padding: 22px 20px;
+header{
+  background:#123a8c;
+  color:#fff;
+  padding:22px 20px;
 }
 
-header h1 {
-  margin: 0 0 5px;
-  color: #f2bd16;
+header h1{
+  margin:0 0 5px;
+  color:#f2bd16;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 25px 18px;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:25px 18px;
 }
 
-.top-link {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #123a8c;
-  text-decoration: none;
-  font-weight: bold;
+.top-link{
+  display:inline-block;
+  margin-bottom:20px;
+  color:#123a8c;
+  text-decoration:none;
+  font-weight:bold;
 }
 
-.panel {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow:
-    0 3px 12px
-    rgba(0,0,0,0.08);
-  margin-bottom: 25px;
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  margin-bottom:25px;
 }
 
-.panel h2 {
-  color: #123a8c;
-  margin-top: 0;
+.panel h2{
+  color:#123a8c;
+  margin-top:0;
 }
 
-label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 7px;
-  font-weight: bold;
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:7px;
+  font-weight:bold;
 }
 
 input,
 textarea,
-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:16px;
+  font-family:Arial,sans-serif;
 }
 
-input[type="file"] {
-  background: #f7f7f7;
+input[type="file"]{
+  background:#f7f7f7;
 }
 
-textarea {
-  min-height: 110px;
-  resize: vertical;
+textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
-.image-help {
-  color: #666;
-  font-size: 14px;
-  margin-top: 7px;
-  line-height: 1.5;
+.image-help{
+  color:#666;
+  font-size:14px;
+  margin-top:7px;
+  line-height:1.5;
 }
 
-.image-preview {
-  display: none;
-  margin-top: 15px;
+.image-preview{
+  display:none;
+  margin-top:15px;
 }
 
-.image-preview img {
-  width: 100%;
-  max-width: 320px;
-  height: 240px;
-  object-fit: contain;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  background: #f8f8f8;
+.image-preview img{
+  width:100%;
+  max-width:320px;
+  height:240px;
+  object-fit:contain;
+  border-radius:10px;
+  border:1px solid #ddd;
+  background:#f8f8f8;
 }
 
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 18px;
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:18px;
 }
 
-.checkbox-row input {
-  width: auto;
+.checkbox-row input{
+  width:auto;
 }
 
-.checkbox-row label {
-  margin: 0;
+.checkbox-row label{
+  margin:0;
 }
 
-button {
-  margin-top: 20px;
-  background: #f2bd16;
-  color: #111;
-  border: none;
-  padding: 13px 18px;
-  border-radius: 7px;
-  font-weight: bold;
-  cursor: pointer;
+button{
+  margin-top:20px;
+  background:#f2bd16;
+  color:#111;
+  border:none;
+  padding:13px 18px;
+  border-radius:7px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-button:hover {
-  opacity: 0.9;
+button:hover{
+  opacity:.9;
 }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
-.secondary-button {
-  background: #123a8c;
-  color: white;
+.secondary-button{
+  background:#123a8c;
+  color:#fff;
 }
 
-.remove-button {
-  background: #ddd;
-  color: #222;
-  margin-top: 10px;
+.remove-button{
+  background:#ddd;
+  color:#222;
+  margin-top:10px;
 }
 
-.product-item {
-  border-bottom: 1px solid #ddd;
-  padding: 18px 0;
+.product-item{
+  border-bottom:1px solid #ddd;
+  padding:18px 0;
 }
 
-.product-item:last-child {
-  border-bottom: none;
+.product-item:last-child{
+  border-bottom:none;
 }
 
-.product-item img {
-  width: 140px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 9px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
+.product-item img{
+  width:140px;
+  height:110px;
+  object-fit:cover;
+  border-radius:9px;
+  border:1px solid #ddd;
+  margin-bottom:12px;
 }
 
-.product-item h3 {
-  margin: 0 0 8px;
-  color: #123a8c;
+.product-item h3{
+  margin:0 0 8px;
+  color:#123a8c;
 }
 
-.small {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.5;
+.small{
+  color:#666;
+  font-size:14px;
+  line-height:1.5;
 }
 
-.actions button {
-  margin-right: 8px;
-  margin-top: 10px;
+.actions button{
+  margin-right:8px;
+  margin-top:10px;
 }
 
-.delete-btn {
-  background: #ddd;
+.delete-btn{
+  background:#ddd;
 }
 
-.message {
-  margin-top: 15px;
-  font-weight: bold;
-  line-height: 1.5;
+.message{
+  margin-top:15px;
+  font-weight:bold;
+  line-height:1.5;
 }
 
-#status {
-  text-align: center;
-  padding: 50px 20px;
-  font-weight: bold;
+#status{
+  text-align:center;
+  padding:50px 20px;
+  font-weight:bold;
 }
 
 
 /*
 =====================================================
-FASHION SECTION
+FASHION
 =====================================================
 */
 
-.fashion-section {
-  display: none;
-  margin-top: 25px;
-  padding: 22px;
-  border: 2px solid #dbe4f5;
-  border-radius: 14px;
-  background: #f8faff;
+.fashion-section{
+  display:none;
+  margin-top:25px;
+  padding:22px;
+  border:2px solid #dbe4f5;
+  border-radius:14px;
+  background:#f8faff;
 }
 
-.fashion-section.active {
-  display: block;
+.fashion-section.active{
+  display:block;
 }
 
-.fashion-section h3 {
-  color: #123a8c;
-  margin-top: 0;
-  margin-bottom: 7px;
-  font-size: 23px;
+.fashion-section h3{
+  color:#123a8c;
+  margin-top:0;
+  margin-bottom:7px;
+  font-size:23px;
 }
 
-.fashion-section h4 {
-  color: #123a8c;
-  margin:
-    28px 0
-    8px;
-  font-size: 19px;
+.fashion-section h4{
+  color:#123a8c;
+  margin:28px 0 8px;
+  font-size:19px;
 }
 
-.fashion-intro {
-  color: #555;
-  line-height: 1.6;
-  margin-top: 0;
+.fashion-intro{
+  color:#555;
+  line-height:1.6;
+  margin-top:0;
 }
 
-.field-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0, 1fr)
-    );
-  gap: 14px;
+.field-grid,
+.measurement-grid,
+.variant-grid,
+.sew-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
 }
 
-.field-grid label {
-  margin-top: 0;
+.field-grid label,
+.measurement-grid label,
+.variant-grid label,
+.sew-grid label{
+  margin-top:0;
 }
 
-.subsection {
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #dbe0e8;
+.subsection{
+  margin-top:25px;
+  padding-top:20px;
+  border-top:1px solid #dbe0e8;
 }
 
 .measurement-row,
-.variant-row {
-  margin-top: 15px;
-  padding: 15px;
-  border: 1px solid #d6dce6;
-  border-radius: 10px;
-  background: white;
-}
-
-.measurement-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0, 1fr)
-    );
-  gap: 10px;
+.variant-row,
+.custom-measurement-row{
+  margin-top:15px;
+  padding:15px;
+  border:1px solid #d6dce6;
+  border-radius:10px;
+  background:#fff;
 }
 
 .measurement-grid label,
-.variant-grid label {
-  margin-top: 0;
-  font-size: 13px;
+.variant-grid label{
+  font-size:13px;
 }
 
-.variant-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0, 1fr)
-    );
-  gap: 10px;
+.add-row-button{
+  background:#123a8c;
+  color:#fff;
+  margin-top:14px;
 }
 
-.add-row-button {
-  background: #123a8c;
-  color: white;
-  margin-top: 14px;
+.fashion-badge{
+  display:inline-block;
+  margin-top:5px;
+  margin-right:6px;
+  padding:5px 9px;
+  background:#f2bd16;
+  color:#111;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
 }
 
-.fashion-badge {
-  display: inline-block;
-  margin-top: 5px;
-  padding: 5px 9px;
-  background: #f2bd16;
-  color: #111;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
+.sew-badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:5px 9px;
+  background:#123a8c;
+  color:#fff;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
 }
 
-.note-box {
-  background: #fff8dc;
-  border: 1px solid #f0d87a;
-  border-radius: 9px;
-  padding: 12px;
-  margin-top: 15px;
-  color: #665300;
-  line-height: 1.5;
-  font-size: 14px;
+.note-box{
+  background:#fff8dc;
+  border:1px solid #f0d87a;
+  border-radius:9px;
+  padding:12px;
+  margin-top:15px;
+  color:#665300;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.info-box{
+  background:#eef4ff;
+  border:1px solid #cbd9f2;
+  border-radius:9px;
+  padding:12px;
+  margin-top:12px;
+  color:#27406f;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.sew-box{
+  margin-top:15px;
+  padding:18px;
+  border:1px solid #d2dbea;
+  border-radius:12px;
+  background:#fff;
+}
+
+.measurement-checklist{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px 12px;
+  margin-top:12px;
+}
+
+.measurement-check{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 10px;
+  border:1px solid #e0e4eb;
+  border-radius:8px;
+  background:#fafbfd;
+}
+
+.measurement-check input{
+  width:auto;
+  margin:0;
+}
+
+.measurement-check label{
+  margin:0;
+  font-weight:normal;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.custom-measurement-row .sew-grid{
+  align-items:end;
 }
 
 
-@media (
-  max-width: 650px
-) {
+@media(max-width:650px){
 
   .field-grid,
   .measurement-grid,
-  .variant-grid {
-    grid-template-columns: 1fr;
+  .variant-grid,
+  .sew-grid,
+  .measurement-checklist{
+    grid-template-columns:1fr;
   }
 
-  .panel {
-    padding: 18px;
+  .panel{
+    padding:18px;
   }
 
-  .fashion-section {
-    padding: 16px;
+  .fashion-section{
+    padding:16px;
   }
 
 }
-
 </style>
-
 </head>
 
 
 <body>
-
 
 <div id="status">
   Checking admin login...
@@ -372,7 +405,6 @@ FASHION SECTION
   id="page"
   style="display:none;"
 >
-
 
 <header>
 
@@ -389,7 +421,6 @@ FASHION SECTION
 
 <main class="container">
 
-
 <a
   href="dashboard.html"
   class="top-link"
@@ -399,7 +430,6 @@ FASHION SECTION
 
 
 <div class="panel">
-
 
 <h2 id="form-title">
   Add Product
@@ -486,13 +516,10 @@ FASHION SECTION
   id="category"
   required
 >
-
   <option value="">
     Loading categories...
   </option>
-
 </select>
-
 
 
 <!--
@@ -506,309 +533,545 @@ FASHION DETAILS
   class="fashion-section"
 >
 
-  <h3>
-    👗 Fashion Details
-  </h3>
+<h3>
+  👗 Fashion Details
+</h3>
 
-  <p class="fashion-intro">
-    These details are specifically for clothing and
-    fashion products. They help customers choose the
-    correct size, colour and fit.
-  </p>
-
-
-  <div class="field-grid">
+<p class="fashion-intro">
+  These details are specifically for clothing and
+  fashion products. They help customers choose the
+  correct size, colour and fit, and they also support
+  Sew on Demand / Made to Measure.
+</p>
 
 
-    <div>
+<label for="fashion-garment-type">
+  Garment Type
+</label>
 
-      <label for="fashion-fabric">
-        Fabric / Material
-      </label>
+<select id="fashion-garment-type">
 
-      <input
-        type="text"
-        id="fashion-fabric"
-        placeholder="Example: Cotton, linen, satin"
-      >
+  <option value="">
+    Select garment type
+  </option>
 
-    </div>
+  <option value="blouse_top">
+    Blouse / Top
+  </option>
 
+  <option value="skirt">
+    Skirt
+  </option>
 
-    <div>
+  <option value="trousers">
+    Trousers
+  </option>
 
-      <label for="fashion-fit">
-        Fit
-      </label>
+  <option value="gown_dress">
+    Gown / Dress
+  </option>
 
-      <select id="fashion-fit">
+  <option value="jumpsuit">
+    Jumpsuit
+  </option>
 
-        <option value="">
-          Select fit
-        </option>
+  <option value="top_skirt_set">
+    Top + Skirt Set
+  </option>
 
-        <option value="Fitted">
-          Fitted
-        </option>
+  <option value="top_trouser_set">
+    Top + Trouser Set
+  </option>
 
-        <option value="Slim Fit">
-          Slim Fit
-        </option>
+  <option value="other">
+    Other Garment / Accessory
+  </option>
 
-        <option value="Regular Fit">
-          Regular Fit
-        </option>
-
-        <option value="Relaxed Fit">
-          Relaxed Fit
-        </option>
-
-        <option value="Loose Fit">
-          Loose Fit
-        </option>
-
-        <option value="Oversized">
-          Oversized
-        </option>
-
-      </select>
-
-    </div>
+</select>
 
 
-    <div>
-
-      <label for="fashion-stretch">
-        Fabric Stretch
-      </label>
-
-      <select id="fashion-stretch">
-
-        <option value="">
-          Select stretch
-        </option>
-
-        <option value="No Stretch">
-          No Stretch
-        </option>
-
-        <option value="Slight Stretch">
-          Slight Stretch
-        </option>
-
-        <option value="Moderate Stretch">
-          Moderate Stretch
-        </option>
-
-        <option value="High Stretch">
-          High Stretch
-        </option>
-
-      </select>
-
-    </div>
+<div
+  id="garment-type-info"
+  class="info-box"
+>
+  Choose the garment type so the correct
+  measurement fields can appear automatically.
+</div>
 
 
-    <div>
-
-      <label for="fashion-length">
-        Garment Length / Length Type
-      </label>
-
-      <input
-        type="text"
-        id="fashion-length"
-        placeholder="Example: Maxi, Midi, 145 cm"
-      >
-
-    </div>
+<div
+  class="field-grid"
+  style="margin-top:18px;"
+>
 
 
-    <div>
+<div>
 
-      <label for="fashion-measurement-unit">
-        Measurement Unit
-      </label>
-
-      <select id="fashion-measurement-unit">
-
-        <option value="cm">
-          Centimetres (cm)
-        </option>
-
-        <option value="in">
-          Inches (in)
-        </option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <label for="fashion-care">
-    Care Instructions
+  <label for="fashion-fabric">
+    Fabric / Material
   </label>
 
-  <textarea
-    id="fashion-care"
-    placeholder="Example: Wash at 30°C. Do not bleach. Iron on low heat."
-  ></textarea>
+  <input
+    type="text"
+    id="fashion-fabric"
+    placeholder="Example: Cotton, linen, satin"
+  >
+
+</div>
 
 
-  <label for="fashion-model-info">
-    Model Information
+<div>
+
+  <label for="fashion-fit">
+    Fit
   </label>
 
-  <textarea
-    id="fashion-model-info"
-    placeholder="Example: Model is 175 cm tall and wears size M."
-  ></textarea>
+  <select id="fashion-fit">
+
+    <option value="">
+      Select fit
+    </option>
+
+    <option value="Fitted">
+      Fitted
+    </option>
+
+    <option value="Slim Fit">
+      Slim Fit
+    </option>
+
+    <option value="Regular Fit">
+      Regular Fit
+    </option>
+
+    <option value="Relaxed Fit">
+      Relaxed Fit
+    </option>
+
+    <option value="Loose Fit">
+      Loose Fit
+    </option>
+
+    <option value="Oversized">
+      Oversized
+    </option>
+
+  </select>
+
+</div>
 
 
-  <label for="fashion-size-guide-notes">
-    Size Guide Notes
+<div>
+
+  <label for="fashion-stretch">
+    Fabric Stretch
   </label>
 
-  <textarea
-    id="fashion-size-guide-notes"
-    placeholder="Example: If you are between sizes, choose the larger size."
-  ></textarea>
+  <select id="fashion-stretch">
+
+    <option value="">
+      Select stretch
+    </option>
+
+    <option value="No Stretch">
+      No Stretch
+    </option>
+
+    <option value="Slight Stretch">
+      Slight Stretch
+    </option>
+
+    <option value="Moderate Stretch">
+      Moderate Stretch
+    </option>
+
+    <option value="High Stretch">
+      High Stretch
+    </option>
+
+  </select>
+
+</div>
+
+
+<div>
+
+  <label for="fashion-length">
+    Garment Length / Length Type
+  </label>
+
+  <input
+    type="text"
+    id="fashion-length"
+    placeholder="Example: Maxi, Midi, 145 cm"
+  >
+
+</div>
+
+
+<div>
+
+  <label for="fashion-measurement-unit">
+    Measurement Unit
+  </label>
+
+  <select id="fashion-measurement-unit">
+
+    <option value="cm">
+      Centimetres (cm)
+    </option>
+
+    <option value="in">
+      Inches (in)
+    </option>
+
+  </select>
+
+</div>
+
+</div>
+
+
+<label for="fashion-care">
+  Care Instructions
+</label>
+
+<textarea
+  id="fashion-care"
+  placeholder="Example: Wash at 30°C. Do not bleach. Iron on low heat."
+></textarea>
+
+
+<label for="fashion-model-info">
+  Model Information
+</label>
+
+<textarea
+  id="fashion-model-info"
+  placeholder="Example: Model is 175 cm tall and wears size M."
+></textarea>
+
+
+<label for="fashion-size-guide-notes">
+  Size Guide Notes
+</label>
+
+<textarea
+  id="fashion-size-guide-notes"
+  placeholder="Example: If you are between sizes, choose the larger size."
+></textarea>
 
 
 
-  <!-- SIZE CHART IMAGE -->
+<!--
+=====================================================
+SIZE CHART IMAGE
+=====================================================
+-->
 
-  <div class="subsection">
+<div class="subsection">
 
-    <h4>
-      Size Chart Image
-    </h4>
+<h4>
+  Size Chart Image
+</h4>
 
-    <p class="image-help">
-      Optional. Upload a designed size or measurement
-      chart image for customers.
-    </p>
+<p class="image-help">
+  Optional. Upload a designed size or measurement
+  chart image for customers.
+</p>
 
+<input
+  type="file"
+  id="size-chart-image"
+  accept="image/*"
+>
 
-    <input
-      type="file"
-      id="size-chart-image"
-      accept="image/*"
-    >
+<div
+  id="size-chart-preview"
+  class="image-preview"
+>
 
+  <img
+    id="size-chart-preview-img"
+    alt="Size chart preview"
+  >
 
-    <div
-      id="size-chart-preview"
-      class="image-preview"
-    >
+</div>
 
-      <img
-        id="size-chart-preview-img"
-        alt="Size chart preview"
-      >
-
-    </div>
-
-  </div>
-
-
-
-  <!-- BODY SIZE CHART -->
-
-  <div class="subsection">
-
-    <h4>
-      Body Size Guide
-    </h4>
-
-    <p class="image-help">
-      These are the customer's BODY measurements.
-      Leave measurements that do not apply blank.
-    </p>
-
-
-    <div id="body-size-rows"></div>
-
-
-    <button
-      type="button"
-      class="add-row-button"
-      onclick="addMeasurementRow('body-size-rows')"
-    >
-      + Add Body Size
-    </button>
-
-  </div>
+</div>
 
 
 
-  <!-- GARMENT MEASUREMENTS -->
+<!--
+=====================================================
+BODY SIZE GUIDE
+=====================================================
+-->
 
-  <div class="subsection">
+<div class="subsection">
 
-    <h4>
-      Garment Measurements
-    </h4>
+<h4>
+  Body Size Guide
+</h4>
 
-    <p class="image-help">
-      These are the measurements of the finished
-      clothing itself. This can differ from body
-      measurements.
-    </p>
+<p class="image-help">
+  These are the customer's BODY measurements for
+  normal ready-to-wear sizing. The fields change
+  according to the Garment Type above. Leave
+  measurements that do not apply blank.
+</p>
 
+<div id="body-size-rows"></div>
 
-    <div id="garment-measurement-rows"></div>
+<button
+  type="button"
+  class="add-row-button"
+  onclick="addMeasurementRow('body-size-rows')"
+>
+  + Add Body Size
+</button>
 
-
-    <button
-      type="button"
-      class="add-row-button"
-      onclick="addMeasurementRow('garment-measurement-rows')"
-    >
-      + Add Garment Size
-    </button>
-
-  </div>
-
-
-
-  <!-- VARIANTS -->
-
-  <div class="subsection">
-
-    <h4>
-      Sizes, Colours & Stock
-    </h4>
-
-    <p class="image-help">
-      Create the combinations customers can buy.
-      For example: Black / M / 4 in stock.
-    </p>
+</div>
 
 
-    <div
-      id="variant-rows"
-    ></div>
+
+<!--
+=====================================================
+GARMENT MEASUREMENTS
+=====================================================
+-->
+
+<div class="subsection">
+
+<h4>
+  Garment Measurements
+</h4>
+
+<p class="image-help">
+  These are the measurements of the finished
+  clothing itself. The fields change according
+  to the Garment Type above and can differ from
+  body measurements.
+</p>
+
+<div id="garment-measurement-rows"></div>
+
+<button
+  type="button"
+  class="add-row-button"
+  onclick="addMeasurementRow('garment-measurement-rows')"
+>
+  + Add Garment Size
+</button>
+
+</div>
 
 
-    <button
-      type="button"
-      class="add-row-button"
-      onclick="addVariantRow()"
-    >
-      + Add Size / Colour Variant
-    </button>
+
+<!--
+=====================================================
+VARIANTS
+=====================================================
+-->
+
+<div class="subsection">
+
+<h4>
+  Sizes, Colours & Stock
+</h4>
+
+<p class="image-help">
+  Create the ready-to-wear combinations customers
+  can buy. For example: Black / M / 4 in stock.
+</p>
+
+<div id="variant-rows"></div>
+
+<button
+  type="button"
+  class="add-row-button"
+  onclick="addVariantRow()"
+>
+  + Add Size / Colour Variant
+</button>
+
+<div class="note-box">
+  Stock can be controlled separately for each
+  size and colour. Example: Black–M can have
+  4 pieces while Black–L has 2 pieces.
+</div>
+
+</div>
 
 
-    <div class="note-box">
-      Stock can be controlled separately for each
-      size and colour. Example: Black–M can have
-      4 pieces while Black–L has 2 pieces.
-    </div>
 
-  </div>
+<!--
+=====================================================
+SEW ON DEMAND
+=====================================================
+-->
+
+<div class="subsection">
+
+<h4>
+  ✂️ Sew on Demand / Made to Measure
+</h4>
+
+<p class="image-help">
+  Turn this on when customers can order this design
+  sewn specially to their own measurements.
+  Customer measurements will later be collected
+  privately with the order, not displayed publicly.
+</p>
+
+
+<div class="checkbox-row">
+
+  <input
+    type="checkbox"
+    id="sew-on-demand-enabled"
+  >
+
+  <label for="sew-on-demand-enabled">
+    Offer Sew on Demand / Made to Measure for this product
+  </label>
+
+</div>
+
+
+<div
+  id="sew-on-demand-fields"
+  class="sew-box hidden"
+>
+
+
+<div class="sew-grid">
+
+
+<div>
+
+  <label for="sew-production-time">
+    Estimated Production Time
+  </label>
+
+  <input
+    type="text"
+    id="sew-production-time"
+    placeholder="Example: 7–14 working days"
+  >
+
+</div>
+
+
+<div>
+
+  <label for="sew-price-mode">
+    Sew on Demand Pricing
+  </label>
+
+  <select id="sew-price-mode">
+
+    <option value="same_price">
+      Same as normal product price
+    </option>
+
+    <option value="surcharge">
+      Add a surcharge
+    </option>
+
+    <option value="custom_price">
+      Use a separate total price
+    </option>
+
+  </select>
+
+</div>
+
+</div>
+
+
+<div
+  id="sew-price-value-wrap"
+  class="hidden"
+>
+
+  <label
+    id="sew-price-value-label"
+    for="sew-price-value"
+  >
+    Sew on Demand Price (€)
+  </label>
+
+  <input
+    type="number"
+    id="sew-price-value"
+    min="0"
+    step="0.01"
+    placeholder="0.00"
+  >
+
+</div>
+
+
+<label for="sew-instructions">
+  Sewing / Measurement Instructions for Customer
+</label>
+
+<textarea
+  id="sew-instructions"
+  placeholder="Example: Please measure over light clothing, keep the tape comfortably fitted, and double-check every measurement before submitting."
+></textarea>
+
+
+<h4 style="margin-top:24px;">
+  Measurements Customer Will Be Asked For
+</h4>
+
+<p class="image-help">
+  These are selected automatically from the
+  Garment Type. You can untick any measurement
+  that is not needed for this particular design,
+  for example Sleeve Length on a sleeveless gown.
+</p>
+
+<div
+  id="sew-measurement-checklist"
+  class="measurement-checklist"
+></div>
+
+
+<h4 style="margin-top:24px;">
+  Custom Measurements
+</h4>
+
+<p class="image-help">
+  If this design needs a special measurement not
+  in the normal list, add it here. Example:
+  Cape Length, Shoulder-to-Floor, Peplum Length.
+</p>
+
+<div id="custom-measurement-rows"></div>
+
+<button
+  type="button"
+  class="add-row-button"
+  onclick="addCustomMeasurementRow()"
+>
+  + Add Custom Measurement
+</button>
+
+
+<div class="note-box">
+  Half Length and Under Bust are separate measurements.
+  Garment-specific measurements remain different for
+  Blouses/Tops, Skirts, Trousers, Gowns/Dresses,
+  Jumpsuits and Sets.
+</div>
+
+
+</div>
+
+</div>
 
 
 </section>
@@ -825,11 +1088,9 @@ FASHION DETAILS
   accept="image/*"
 >
 
-
 <p class="image-help">
   Tap Choose File to select a product image from your phone.
 </p>
-
 
 <div
   id="image-preview"
@@ -909,7 +1170,7 @@ FASHION DETAILS
 <button
   type="button"
   id="cancel-edit"
-  style="display:none; background:#ddd;"
+  style="display:none;background:#ddd;"
 >
   Cancel Edit
 </button>
@@ -992,6 +1253,366 @@ let editingVariantIds =
   [];
 
 
+let editingFashionDetails =
+  {};
+
+
+/*
+=====================================================
+MEASUREMENT DEFINITIONS
+=====================================================
+*/
+
+
+const MEASUREMENT_DEFINITIONS = {
+
+  size: {
+    label: "Size",
+    placeholder: "Example: S, M, 12"
+  },
+
+  bust: {
+    label: "Bust / Chest",
+    placeholder: "Example: 92"
+  },
+
+  under_bust: {
+    label: "Under Bust",
+    placeholder: "Example: 78"
+  },
+
+  waist: {
+    label: "Waist",
+    placeholder: "Example: 74"
+  },
+
+  hips: {
+    label: "Hips",
+    placeholder: "Example: 100"
+  },
+
+  shoulder: {
+    label: "Shoulder",
+    placeholder: "Example: 39"
+  },
+
+  armhole: {
+    label: "Armhole",
+    placeholder: "Example: 44"
+  },
+
+  sleeve_length: {
+    label: "Sleeve Length",
+    placeholder: "Example: 61"
+  },
+
+  bicep: {
+    label: "Round Sleeve / Bicep",
+    placeholder: "Example: 32"
+  },
+
+  wrist_cuff: {
+    label: "Wrist / Cuff",
+    placeholder: "Example: 18"
+  },
+
+  half_length: {
+    label: "Half Length",
+    placeholder: "Example: 42"
+  },
+
+  top_length: {
+    label: "Top / Blouse Length",
+    placeholder: "Example: 64"
+  },
+
+  neck: {
+    label: "Neck",
+    placeholder: "Example: 38"
+  },
+
+  front_neck_depth: {
+    label: "Front Neck Depth",
+    placeholder: "Example: 15"
+  },
+
+  back_neck_depth: {
+    label: "Back Neck Depth",
+    placeholder: "Example: 5"
+  },
+
+  waist_to_hip: {
+    label: "Waist to Hip",
+    placeholder: "Example: 22"
+  },
+
+  skirt_length: {
+    label: "Skirt Length",
+    placeholder: "Example: 70"
+  },
+
+  thigh: {
+    label: "Thigh",
+    placeholder: "Example: 58"
+  },
+
+  crotch_rise: {
+    label: "Crotch / Rise",
+    placeholder: "Example: 30"
+  },
+
+  trouser_length: {
+    label: "Trouser Length",
+    placeholder: "Example: 105"
+  },
+
+  inseam: {
+    label: "Inseam",
+    placeholder: "Example: 78"
+  },
+
+  knee: {
+    label: "Knee",
+    placeholder: "Example: 42"
+  },
+
+  ankle_hem: {
+    label: "Ankle / Hem",
+    placeholder: "Example: 34"
+  },
+
+  gown_length: {
+    label: "Gown / Dress Length",
+    placeholder: "Example: 145"
+  },
+
+  full_length: {
+    label: "Full Length",
+    placeholder: "Example: 150"
+  },
+
+  length: {
+    label: "Length",
+    placeholder: "Example: 100"
+  },
+
+  width: {
+    label: "Width",
+    placeholder: "Example: 40"
+  }
+
+};
+
+
+/*
+=====================================================
+GARMENT-SPECIFIC MEASUREMENTS
+=====================================================
+*/
+
+
+const GARMENT_TEMPLATES = {
+
+
+  blouse_top: [
+
+    "size",
+    "bust",
+    "under_bust",
+    "waist",
+    "shoulder",
+    "armhole",
+    "sleeve_length",
+    "bicep",
+    "wrist_cuff",
+    "half_length",
+    "top_length",
+    "neck",
+    "front_neck_depth",
+    "back_neck_depth"
+
+  ],
+
+
+  skirt: [
+
+    "size",
+    "waist",
+    "hips",
+    "waist_to_hip",
+    "skirt_length"
+
+  ],
+
+
+  trousers: [
+
+    "size",
+    "waist",
+    "hips",
+    "thigh",
+    "crotch_rise",
+    "trouser_length",
+    "inseam",
+    "knee",
+    "ankle_hem"
+
+  ],
+
+
+  gown_dress: [
+
+    "size",
+    "bust",
+    "under_bust",
+    "waist",
+    "hips",
+    "shoulder",
+    "armhole",
+    "sleeve_length",
+    "bicep",
+    "wrist_cuff",
+    "half_length",
+    "waist_to_hip",
+    "gown_length",
+    "neck",
+    "front_neck_depth",
+    "back_neck_depth"
+
+  ],
+
+
+  jumpsuit: [
+
+    "size",
+    "bust",
+    "under_bust",
+    "waist",
+    "hips",
+    "shoulder",
+    "armhole",
+    "sleeve_length",
+    "bicep",
+    "wrist_cuff",
+    "half_length",
+    "waist_to_hip",
+    "full_length",
+    "thigh",
+    "crotch_rise",
+    "inseam",
+    "knee",
+    "ankle_hem",
+    "neck",
+    "front_neck_depth",
+    "back_neck_depth"
+
+  ],
+
+
+  top_skirt_set: [
+
+    "size",
+    "bust",
+    "under_bust",
+    "waist",
+    "hips",
+    "shoulder",
+    "armhole",
+    "sleeve_length",
+    "bicep",
+    "wrist_cuff",
+    "half_length",
+    "top_length",
+    "waist_to_hip",
+    "skirt_length",
+    "neck",
+    "front_neck_depth",
+    "back_neck_depth"
+
+  ],
+
+
+  top_trouser_set: [
+
+    "size",
+    "bust",
+    "under_bust",
+    "waist",
+    "hips",
+    "shoulder",
+    "armhole",
+    "sleeve_length",
+    "bicep",
+    "wrist_cuff",
+    "half_length",
+    "top_length",
+    "thigh",
+    "crotch_rise",
+    "trouser_length",
+    "inseam",
+    "knee",
+    "ankle_hem",
+    "neck",
+    "front_neck_depth",
+    "back_neck_depth"
+
+  ],
+
+
+  other: [
+
+    "size",
+    "length",
+    "width"
+
+  ],
+
+
+  generic: [
+
+    "size",
+    "bust",
+    "waist",
+    "hips",
+    "shoulder",
+    "sleeve_length",
+    "inseam",
+    "length"
+
+  ]
+
+};
+
+
+const GARMENT_LABELS = {
+
+  blouse_top:
+    "Blouse / Top",
+
+  skirt:
+    "Skirt",
+
+  trousers:
+    "Trousers",
+
+  gown_dress:
+    "Gown / Dress",
+
+  jumpsuit:
+    "Jumpsuit",
+
+  top_skirt_set:
+    "Top + Skirt Set",
+
+  top_trouser_set:
+    "Top + Trouser Set",
+
+  other:
+    "Other Garment / Accessory"
+
+};
+
+
 /*
 =====================================================
 ADMIN PROTECTION
@@ -1045,7 +1666,12 @@ async function protectPage() {
 
   await loadCategoryOptions();
 
+
   resetFashionRows();
+
+
+  resetSewOnDemand();
+
 
   await loadProducts();
 
@@ -1068,7 +1694,7 @@ async function loadCategoryOptions() {
 
 
   select.innerHTML =
-    `<option value="">Select category</option>`;
+    '<option value="">Select category</option>';
 
 
   const {
@@ -1085,12 +1711,15 @@ async function loadCategoryOptions() {
       .order(
         "name",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       "Category loading error:",
@@ -1099,7 +1728,7 @@ async function loadCategoryOptions() {
 
 
     select.innerHTML =
-      `<option value="">Categories could not be loaded</option>`;
+      '<option value="">Categories could not be loaded</option>';
 
     return;
 
@@ -1108,11 +1737,12 @@ async function loadCategoryOptions() {
 
   if (
     !categories ||
-    categories.length === 0
+    categories.length ===
+      0
   ) {
 
     select.innerHTML =
-      `<option value="">No categories available</option>`;
+      '<option value="">No categories available</option>';
 
     return;
 
@@ -1157,7 +1787,7 @@ async function loadCategoryOptions() {
 
 /*
 =====================================================
-FASHION CATEGORY DETECTION
+FASHION CATEGORY
 =====================================================
 */
 
@@ -1180,7 +1810,8 @@ function isFashionCategory(
 
 
 function toggleFashionSection(
-  forceShow = false
+  forceShow =
+    false
 ) {
 
   const category =
@@ -1202,7 +1833,8 @@ function toggleFashionSection(
     .getElementById(
       "fashion-section"
     )
-    .classList.toggle(
+    .classList
+    .toggle(
       "active",
       show
     );
@@ -1216,11 +1848,8 @@ document
   )
   .addEventListener(
     "change",
-    function() {
-
-      toggleFashionSection();
-
-    }
+    () =>
+      toggleFashionSection()
   );
 
 
@@ -1278,26 +1907,19 @@ function suggestShortSlug(
     );
 
 
-  if (
-    !fullSlug
-  ) {
-
-    return "";
-
-  }
-
-
   return fullSlug
-    .split(
-      "-"
-    )
-    .slice(
-      0,
-      4
-    )
-    .join(
-      "-"
-    );
+    ? fullSlug
+        .split(
+          "-"
+        )
+        .slice(
+          0,
+          4
+        )
+        .join(
+          "-"
+        )
+    : "";
 
 }
 
@@ -1384,7 +2006,7 @@ document
 
 /*
 =====================================================
-GLOBAL SLUG COLLISION PROTECTION
+GLOBAL SLUG PROTECTION
 =====================================================
 */
 
@@ -1499,7 +2121,8 @@ const GLOBAL_SLUG_TABLES = [
 
 async function checkGlobalSlugAvailability(
   slug,
-  currentProductId = null
+  currentProductId =
+    null
 ) {
 
   const cleanValue =
@@ -1597,7 +2220,8 @@ async function checkGlobalSlugAvailability(
       Array.isArray(
         data
       ) &&
-      data.length > 0
+      data.length >
+        0
     ) {
 
       throw new Error(
@@ -1671,7 +2295,7 @@ function validateImageFile(
 
 /*
 =====================================================
-MAIN PRODUCT IMAGE
+PRODUCT IMAGE
 =====================================================
 */
 
@@ -1715,14 +2339,10 @@ document
       }
 
 
-      const temporaryURL =
+      showImagePreview(
         URL.createObjectURL(
           file
-        );
-
-
-      showImagePreview(
-        temporaryURL
+        )
       );
 
     }
@@ -1819,14 +2439,10 @@ document
       }
 
 
-      const temporaryURL =
+      showSizeChartPreview(
         URL.createObjectURL(
           file
-        );
-
-
-      showSizeChartPreview(
-        temporaryURL
+        )
       );
 
     }
@@ -1935,7 +2551,8 @@ async function uploadProductImage(
 
 
   let extension =
-    parts.length > 1
+    parts.length >
+    1
       ? parts.pop()
       : "jpg";
 
@@ -1946,17 +2563,8 @@ async function uploadProductImage(
       .replace(
         /[^a-z0-9]/g,
         ""
-      );
-
-
-  if (
-    !extension
-  ) {
-
-    extension =
-      "jpg";
-
-  }
+      ) ||
+    "jpg";
 
 
   let safeName =
@@ -1972,17 +2580,8 @@ async function uploadProductImage(
       .replace(
         /^-+|-+$/g,
         ""
-      );
-
-
-  if (
-    !safeName
-  ) {
-
-    safeName =
-      "product";
-
-  }
+      ) ||
+    "product";
 
 
   const randomPart =
@@ -2101,7 +2700,153 @@ async function uploadProductImage(
 
 /*
 =====================================================
-MEASUREMENT ROWS
+GARMENT MEASUREMENT HELPERS
+=====================================================
+*/
+
+
+function currentGarmentType() {
+
+  return document
+    .getElementById(
+      "fashion-garment-type"
+    )
+    .value ||
+    "generic";
+
+}
+
+
+function getMeasurementKeys(
+  type =
+    currentGarmentType(),
+  includeSize =
+    true
+) {
+
+  const keys =
+    GARMENT_TEMPLATES[
+      type
+    ] ||
+    GARMENT_TEMPLATES
+      .generic;
+
+
+  return includeSize
+    ? keys
+    : [
+        ...keys
+      ].filter(
+        key =>
+          key !==
+          "size"
+      );
+
+}
+
+
+function normalizeMeasurementValues(
+  values,
+  type
+) {
+
+  const v = {
+    ...(
+      values ||
+      {}
+    )
+  };
+
+
+  if (
+    v.sleeve_length ==
+      null &&
+    v.sleeve !=
+      null
+  ) {
+
+    v.sleeve_length =
+      v.sleeve;
+
+  }
+
+
+  if (
+    v.length !=
+    null
+  ) {
+
+    if (
+      type ===
+        "blouse_top" &&
+      v.top_length ==
+        null
+    ) {
+
+      v.top_length =
+        v.length;
+
+    }
+
+    else if (
+      type ===
+        "skirt" &&
+      v.skirt_length ==
+        null
+    ) {
+
+      v.skirt_length =
+        v.length;
+
+    }
+
+    else if (
+      type ===
+        "trousers" &&
+      v.trouser_length ==
+        null
+    ) {
+
+      v.trouser_length =
+        v.length;
+
+    }
+
+    else if (
+      type ===
+        "gown_dress" &&
+      v.gown_length ==
+        null
+    ) {
+
+      v.gown_length =
+        v.length;
+
+    }
+
+    else if (
+      type ===
+        "jumpsuit" &&
+      v.full_length ==
+        null
+    ) {
+
+      v.full_length =
+        v.length;
+
+    }
+
+  }
+
+
+  return v;
+
+}
+
+
+/*
+=====================================================
+BODY / GARMENT MEASUREMENT ROW
 =====================================================
 */
 
@@ -2123,61 +2868,26 @@ function addMeasurementRow(
     );
 
 
+  const type =
+    currentGarmentType();
+
+
+  const normalized =
+    normalizeMeasurementValues(
+      values,
+      type
+    );
+
+
+  const fields =
+    getMeasurementKeys(
+      type,
+      true
+    );
+
+
   row.className =
     "measurement-row";
-
-
-  const fields = [
-
-    [
-      "size",
-      "Size",
-      "Example: S, M, 12"
-    ],
-
-    [
-      "bust",
-      "Bust / Chest",
-      "Example: 92"
-    ],
-
-    [
-      "waist",
-      "Waist",
-      "Example: 74"
-    ],
-
-    [
-      "hips",
-      "Hips",
-      "Example: 100"
-    ],
-
-    [
-      "shoulder",
-      "Shoulder",
-      "Example: 39"
-    ],
-
-    [
-      "sleeve",
-      "Sleeve",
-      "Example: 61"
-    ],
-
-    [
-      "inseam",
-      "Inseam",
-      "Example: 78"
-    ],
-
-    [
-      "length",
-      "Length",
-      "Example: 140"
-    ]
-
-  ];
 
 
   row.innerHTML = `
@@ -2185,38 +2895,46 @@ function addMeasurementRow(
     <div class="measurement-grid">
 
       ${
-        fields.map(
-          field => {
+        fields
+          .map(
+            key => {
 
-            const [
-              key,
-              label,
-              placeholder
-            ] =
-              field;
+              const def =
+                MEASUREMENT_DEFINITIONS[
+                  key
+                ] ||
+                {
+                  label:
+                    key,
+                  placeholder:
+                    ""
+                };
 
 
-            return `
+              return `
 
-              <div>
+                <div>
 
-                <label>
-                  ${escapeHTML(label)}
-                </label>
+                  <label>
+                    ${escapeHTML(def.label)}
+                  </label>
 
-                <input
-                  type="text"
-                  data-measurement="${escapeAttribute(key)}"
-                  value="${escapeAttribute(values[key] || "")}"
-                  placeholder="${escapeAttribute(placeholder)}"
-                >
+                  <input
+                    type="text"
+                    data-measurement="${escapeAttribute(key)}"
+                    value="${escapeAttribute(normalized[key] || "")}"
+                    placeholder="${escapeAttribute(def.placeholder || "")}"
+                  >
 
-              </div>
+                </div>
 
-            `;
+              `;
 
-          }
-        ).join("")
+            }
+          )
+          .join(
+            ""
+          )
       }
 
     </div>
@@ -2238,11 +2956,8 @@ function addMeasurementRow(
     )
     .addEventListener(
       "click",
-      function() {
-
-        row.remove();
-
-      }
+      () =>
+        row.remove()
     );
 
 
@@ -2251,6 +2966,13 @@ function addMeasurementRow(
   );
 
 }
+
+
+/*
+=====================================================
+COLLECT MEASUREMENTS
+=====================================================
+*/
 
 
 function collectMeasurementRows(
@@ -2281,11 +3003,6 @@ function collectMeasurementRows(
           .forEach(
             input => {
 
-              const key =
-                input.dataset
-                  .measurement;
-
-
               const value =
                 input.value
                   .trim();
@@ -2295,7 +3012,11 @@ function collectMeasurementRows(
                 value
               ) {
 
-                result[key] =
+                result[
+                  input
+                    .dataset
+                    .measurement
+                ] =
                   value;
 
               }
@@ -2307,7 +3028,8 @@ function collectMeasurementRows(
         if (
           Object.keys(
             result
-          ).length > 0
+          ).length >
+          0
         ) {
 
           rows.push(
@@ -2327,7 +3049,175 @@ function collectMeasurementRows(
 
 /*
 =====================================================
-VARIANT ROWS
+REBUILD MEASUREMENTS AFTER GARMENT CHANGE
+=====================================================
+*/
+
+
+function rebuildMeasurementRows(
+  containerId,
+  existingRows = []
+) {
+
+  const container =
+    document.getElementById(
+      containerId
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if (
+    existingRows.length
+  ) {
+
+    existingRows.forEach(
+      row =>
+        addMeasurementRow(
+          containerId,
+          row
+        )
+    );
+
+  }
+
+  else {
+
+    addMeasurementRow(
+      containerId
+    );
+
+  }
+
+}
+
+
+/*
+=====================================================
+GARMENT INFO
+=====================================================
+*/
+
+
+function renderGarmentTypeInfo() {
+
+  const type =
+    document
+      .getElementById(
+        "fashion-garment-type"
+      )
+      .value;
+
+
+  const box =
+    document.getElementById(
+      "garment-type-info"
+    );
+
+
+  if (
+    !type
+  ) {
+
+    box.textContent =
+      "Choose the garment type so the correct measurement fields can appear automatically.";
+
+    return;
+
+  }
+
+
+  const labels =
+    getMeasurementKeys(
+      type,
+      false
+    )
+      .map(
+        key =>
+          (
+            MEASUREMENT_DEFINITIONS[
+              key
+            ] ||
+            {}
+          ).label ||
+          key
+      );
+
+
+  box.textContent =
+    (
+      GARMENT_LABELS[
+        type
+      ] ||
+      "This garment"
+    ) +
+    " measurements: " +
+    labels.join(
+      ", "
+    ) +
+    ".";
+
+}
+
+
+/*
+=====================================================
+GARMENT TYPE CHANGE
+=====================================================
+*/
+
+
+function handleGarmentTypeChange() {
+
+  const body =
+    collectMeasurementRows(
+      "body-size-rows"
+    );
+
+
+  const garment =
+    collectMeasurementRows(
+      "garment-measurement-rows"
+    );
+
+
+  rebuildMeasurementRows(
+    "body-size-rows",
+    body
+  );
+
+
+  rebuildMeasurementRows(
+    "garment-measurement-rows",
+    garment
+  );
+
+
+  renderGarmentTypeInfo();
+
+
+  renderSewMeasurementChecklist(
+    null
+  );
+
+}
+
+
+document
+  .getElementById(
+    "fashion-garment-type"
+  )
+  .addEventListener(
+    "change",
+    handleGarmentTypeChange
+  );
+
+
+/*
+=====================================================
+VARIANTS
 =====================================================
 */
 
@@ -2482,11 +3372,8 @@ function addVariantRow(
     )
     .addEventListener(
       "click",
-      function() {
-
-        row.remove();
-
-      }
+      () =>
+        row.remove()
     );
 
 
@@ -2495,6 +3382,13 @@ function addVariantRow(
   );
 
 }
+
+
+/*
+=====================================================
+COLLECT VARIANTS
+=====================================================
+*/
 
 
 function collectVariants() {
@@ -2557,10 +3451,6 @@ function collectVariants() {
             .trim();
 
 
-        /*
-          Empty rows are ignored.
-        */
-
         if (
           !size &&
           !color &&
@@ -2571,7 +3461,8 @@ function collectVariants() {
               "" ||
             Number(
               stockText
-            ) === 0
+            ) ===
+              0
           )
         ) {
 
@@ -2603,7 +3494,8 @@ function collectVariants() {
           !Number.isInteger(
             stock
           ) ||
-          stock < 0
+          stock <
+            0
         ) {
 
           throw new Error(
@@ -2632,7 +3524,8 @@ function collectVariants() {
             !Number.isFinite(
               priceOverride
             ) ||
-            priceOverride < 0
+            priceOverride <
+              0
           ) {
 
             throw new Error(
@@ -2645,11 +3538,9 @@ function collectVariants() {
 
 
         const duplicateKey =
-          (
-            size.toLowerCase() +
-            "|" +
-            color.toLowerCase()
-          );
+          size.toLowerCase() +
+          "|" +
+          color.toLowerCase();
 
 
         if (
@@ -2752,7 +3643,7 @@ async function saveProductVariants(
 
 
   if (
-    deletedIds.length > 0
+    deletedIds.length
   ) {
 
     const {
@@ -2918,6 +3809,600 @@ async function saveProductVariants(
 
 /*
 =====================================================
+SEW ON DEMAND VISIBILITY
+=====================================================
+*/
+
+
+function setSewVisibility() {
+
+  const enabled =
+    document
+      .getElementById(
+        "sew-on-demand-enabled"
+      )
+      .checked;
+
+
+  document
+    .getElementById(
+      "sew-on-demand-fields"
+    )
+    .classList
+    .toggle(
+      "hidden",
+      !enabled
+    );
+
+}
+
+
+/*
+=====================================================
+SEW ON DEMAND PRICE
+=====================================================
+*/
+
+
+function updateSewPriceField() {
+
+  const mode =
+    document
+      .getElementById(
+        "sew-price-mode"
+      )
+      .value;
+
+
+  const wrap =
+    document.getElementById(
+      "sew-price-value-wrap"
+    );
+
+
+  const label =
+    document.getElementById(
+      "sew-price-value-label"
+    );
+
+
+  if (
+    mode ===
+    "same_price"
+  ) {
+
+    wrap.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+
+  wrap.classList.remove(
+    "hidden"
+  );
+
+
+  label.textContent =
+    mode ===
+      "surcharge"
+      ? "Sew on Demand Surcharge (€)"
+      : "Sew on Demand Total Price (€)";
+
+}
+
+
+document
+  .getElementById(
+    "sew-on-demand-enabled"
+  )
+  .addEventListener(
+    "change",
+    setSewVisibility
+  );
+
+
+document
+  .getElementById(
+    "sew-price-mode"
+  )
+  .addEventListener(
+    "change",
+    updateSewPriceField
+  );
+
+
+/*
+=====================================================
+SEW MEASUREMENT CHECKLIST
+=====================================================
+*/
+
+
+function renderSewMeasurementChecklist(
+  selectedKeys =
+    null
+) {
+
+  const container =
+    document.getElementById(
+      "sew-measurement-checklist"
+    );
+
+
+  const keys =
+    getMeasurementKeys(
+      currentGarmentType(),
+      false
+    );
+
+
+  const selected =
+    Array.isArray(
+      selectedKeys
+    )
+      ? new Set(
+          selectedKeys
+        )
+      : null;
+
+
+  container.innerHTML =
+    "";
+
+
+  if (
+    !document
+      .getElementById(
+        "fashion-garment-type"
+      )
+      .value
+  ) {
+
+    container.innerHTML =
+      '<p class="image-help">Select a Garment Type first.</p>';
+
+    return;
+
+  }
+
+
+  keys.forEach(
+    key => {
+
+      const def =
+        MEASUREMENT_DEFINITIONS[
+          key
+        ] ||
+        {
+          label:
+            key
+        };
+
+
+      const box =
+        document.createElement(
+          "div"
+        );
+
+
+      box.className =
+        "measurement-check";
+
+
+      box.innerHTML = `
+
+        <input
+          type="checkbox"
+          data-sew-measurement="${escapeAttribute(key)}"
+          id="sew-measure-${escapeAttribute(key)}"
+          ${
+            selected
+              ? (
+                  selected.has(
+                    key
+                  )
+                    ? "checked"
+                    : ""
+                )
+              : "checked"
+          }
+        >
+
+        <label
+          for="sew-measure-${escapeAttribute(key)}"
+        >
+          ${escapeHTML(def.label)}
+        </label>
+
+      `;
+
+
+      container.appendChild(
+        box
+      );
+
+    }
+  );
+
+}
+
+
+/*
+=====================================================
+COLLECT SEW MEASUREMENTS
+=====================================================
+*/
+
+
+function collectSewMeasurementKeys() {
+
+  return Array.from(
+    document.querySelectorAll(
+      "[data-sew-measurement]:checked"
+    )
+  )
+    .map(
+      input =>
+        input.dataset
+          .sewMeasurement
+    );
+
+}
+
+
+/*
+=====================================================
+CUSTOM SEW MEASUREMENT
+=====================================================
+*/
+
+
+function addCustomMeasurementRow(
+  values = {}
+) {
+
+  const container =
+    document.getElementById(
+      "custom-measurement-rows"
+    );
+
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "custom-measurement-row";
+
+
+  row.innerHTML = `
+
+    <div class="sew-grid">
+
+
+      <div>
+
+        <label>
+          Measurement Name
+        </label>
+
+        <input
+          type="text"
+          class="custom-measurement-name"
+          value="${escapeAttribute(values.name || "")}"
+          placeholder="Example: Cape Length"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Optional Instruction
+        </label>
+
+        <input
+          type="text"
+          class="custom-measurement-instruction"
+          value="${escapeAttribute(values.instruction || "")}"
+          placeholder="Example: Measure from shoulder to desired cape end"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <button
+      type="button"
+      class="remove-button"
+    >
+      Remove Custom Measurement
+    </button>
+
+  `;
+
+
+  row
+    .querySelector(
+      ".remove-button"
+    )
+    .addEventListener(
+      "click",
+      () =>
+        row.remove()
+    );
+
+
+  container.appendChild(
+    row
+  );
+
+}
+
+
+/*
+=====================================================
+COLLECT CUSTOM SEW MEASUREMENTS
+=====================================================
+*/
+
+
+function collectCustomMeasurements() {
+
+  const list =
+    [];
+
+
+  document
+    .querySelectorAll(
+      "#custom-measurement-rows .custom-measurement-row"
+    )
+    .forEach(
+      row => {
+
+        const name =
+          row
+            .querySelector(
+              ".custom-measurement-name"
+            )
+            .value
+            .trim();
+
+
+        const instruction =
+          row
+            .querySelector(
+              ".custom-measurement-instruction"
+            )
+            .value
+            .trim();
+
+
+        if (
+          name
+        ) {
+
+          list.push({
+
+            name,
+
+            instruction
+
+          });
+
+        }
+
+      }
+    );
+
+
+  return list;
+
+}
+
+
+/*
+=====================================================
+VALIDATE SEW ON DEMAND
+=====================================================
+*/
+
+
+function validateSewOnDemand() {
+
+  if (
+    !document
+      .getElementById(
+        "sew-on-demand-enabled"
+      )
+      .checked
+  ) {
+
+    return;
+
+  }
+
+
+  const garmentType =
+    document
+      .getElementById(
+        "fashion-garment-type"
+      )
+      .value;
+
+
+  if (
+    !garmentType
+  ) {
+
+    throw new Error(
+      "Please select a Garment Type before enabling Sew on Demand."
+    );
+
+  }
+
+
+  const mode =
+    document
+      .getElementById(
+        "sew-price-mode"
+      )
+      .value;
+
+
+  const valueText =
+    document
+      .getElementById(
+        "sew-price-value"
+      )
+      .value;
+
+
+  if (
+    mode !==
+    "same_price"
+  ) {
+
+    if (
+      valueText ===
+      ""
+    ) {
+
+      throw new Error(
+
+        mode ===
+          "surcharge"
+
+          ? "Please enter the Sew on Demand surcharge."
+
+          : "Please enter the Sew on Demand total price."
+
+      );
+
+    }
+
+
+    const value =
+      Number(
+        valueText
+      );
+
+
+    if (
+      !Number.isFinite(
+        value
+      ) ||
+      value <
+        0
+    ) {
+
+      throw new Error(
+        "Sew on Demand price must be 0 or more."
+      );
+
+    }
+
+  }
+
+
+  if (
+    collectSewMeasurementKeys()
+      .length ===
+      0 &&
+    collectCustomMeasurements()
+      .length ===
+      0
+  ) {
+
+    throw new Error(
+      "Please keep at least one Sew on Demand measurement or add a custom measurement."
+    );
+
+  }
+
+}
+
+
+/*
+=====================================================
+RESET SEW ON DEMAND
+=====================================================
+*/
+
+
+function resetSewOnDemand() {
+
+  document
+    .getElementById(
+      "sew-on-demand-enabled"
+    )
+    .checked =
+      false;
+
+
+  document
+    .getElementById(
+      "sew-production-time"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "sew-price-mode"
+    )
+    .value =
+      "same_price";
+
+
+  document
+    .getElementById(
+      "sew-price-value"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "sew-instructions"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "custom-measurement-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  setSewVisibility();
+
+
+  updateSewPriceField();
+
+
+  renderSewMeasurementChecklist(
+    null
+  );
+
+}
+
+
+/*
+=====================================================
 RESET FASHION ROWS
 =====================================================
 */
@@ -2965,6 +4450,9 @@ function resetFashionRows() {
   editingVariantIds =
     [];
 
+
+  renderGarmentTypeInfo();
+
 }
 
 
@@ -3001,7 +4489,8 @@ async function loadProducts() {
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
@@ -3018,7 +4507,6 @@ async function loadProducts() {
     list.textContent =
       "Products could not be loaded.";
 
-
     return;
 
   }
@@ -3032,7 +4520,6 @@ async function loadProducts() {
 
     list.textContent =
       "No products have been added yet.";
-
 
     return;
 
@@ -3056,24 +4543,17 @@ async function loadProducts() {
         "product-item";
 
 
-      let imageHTML =
-        "";
-
-
-      if (
+      const imageHTML =
         product.image_url
-      ) {
 
-        imageHTML = `
+          ? `
+            <img
+              src="${escapeAttribute(product.image_url)}"
+              alt="${escapeAttribute(product.name || "Product")}"
+            >
+          `
 
-          <img
-            src="${escapeAttribute(product.image_url)}"
-            alt="${escapeAttribute(product.name || "Product")}"
-          >
-
-        `;
-
-      }
+          : "";
 
 
       const priceHTML =
@@ -3109,14 +4589,42 @@ async function loadProducts() {
           : "No rating";
 
 
+      const fashionDetails =
+        product.fashion_details &&
+        typeof product.fashion_details ===
+          "object" &&
+        !Array.isArray(
+          product.fashion_details
+        )
+
+          ? product.fashion_details
+
+          : {};
+
+
       const fashionHTML =
-        product
-          .fashion_enabled ===
+        product.fashion_enabled ===
           true
 
           ? `
             <span class="fashion-badge">
               👗 Fashion Setup
+            </span>
+          `
+
+          : "";
+
+
+      const sewHTML =
+        product.fashion_enabled ===
+          true &&
+        fashionDetails.sew_on_demand &&
+        fashionDetails.sew_on_demand.enabled ===
+          true
+
+          ? `
+            <span class="sew-badge">
+              ✂️ Sew on Demand
             </span>
           `
 
@@ -3129,35 +4637,27 @@ async function loadProducts() {
 
 
         <h3>
-          ${escapeHTML(
-            product.name ||
-            "Product"
-          )}
+          ${escapeHTML(product.name || "Product")}
         </h3>
 
 
         ${fashionHTML}
 
+        ${sewHTML}
+
 
         <p class="small">
-          ${escapeHTML(
-            product.category ||
-            ""
-          )}
+          ${escapeHTML(product.category || "")}
         </p>
 
 
         <p>
-          ${escapeHTML(
-            priceHTML
-          )}
+          ${escapeHTML(priceHTML)}
         </p>
 
 
         <p class="small">
-          ${escapeHTML(
-            ratingHTML
-          )}
+          ${escapeHTML(ratingHTML)}
         </p>
 
 
@@ -3165,12 +4665,10 @@ async function loadProducts() {
           product.slug
 
             ? `
-
               <p class="small">
                 Public Link:
                 https://giftedgiftempire.com/${escapeHTML(product.slug)}
               </p>
-
             `
 
             : ""
@@ -3297,7 +4795,6 @@ document
           )
           .focus();
 
-
         return;
 
       }
@@ -3316,7 +4813,6 @@ document
             "slug"
           )
           .focus();
-
 
         return;
 
@@ -3337,16 +4833,10 @@ document
           )
           .focus();
 
-
         return;
 
       }
 
-
-      /*
-        Validate fashion variants BEFORE
-        uploading or saving anything.
-      */
 
       if (
         fashionEnabled
@@ -3356,15 +4846,17 @@ document
 
           collectVariants();
 
+
+          validateSewOnDemand();
+
         }
 
-        catch (
+        catch(
           validationError
         ) {
 
           message.textContent =
             validationError.message;
-
 
           return;
 
@@ -3383,6 +4875,7 @@ document
 
       try {
 
+
         await checkGlobalSlugAvailability(
           slug,
           id ||
@@ -3392,7 +4885,7 @@ document
 
         /*
         ---------------------------------------------
-        MAIN PRODUCT IMAGE
+        PRODUCT IMAGE
         ---------------------------------------------
         */
 
@@ -3500,7 +4993,7 @@ document
 
         /*
         ---------------------------------------------
-        BASE PRODUCT DATA
+        BASIC PRODUCT DATA
         ---------------------------------------------
         */
 
@@ -3598,8 +5091,43 @@ document
           fashionEnabled
         ) {
 
+          const sewEnabled =
+            document
+              .getElementById(
+                "sew-on-demand-enabled"
+              )
+              .checked;
+
+
+          const priceMode =
+            document
+              .getElementById(
+                "sew-price-mode"
+              )
+              .value;
+
+
+          const priceValueText =
+            document
+              .getElementById(
+                "sew-price-value"
+              )
+              .value;
+
+
           productData
             .fashion_details = {
+
+              ...editingFashionDetails,
+
+
+              garment_type:
+                document
+                  .getElementById(
+                    "fashion-garment-type"
+                  )
+                  .value,
+
 
               fabric:
                 document
@@ -3609,6 +5137,7 @@ document
                   .value
                   .trim(),
 
+
               fit:
                 document
                   .getElementById(
@@ -3616,12 +5145,14 @@ document
                   )
                   .value,
 
+
               stretch:
                 document
                   .getElementById(
                     "fashion-stretch"
                   )
                   .value,
+
 
               length:
                 document
@@ -3631,12 +5162,14 @@ document
                   .value
                   .trim(),
 
+
               measurement_unit:
                 document
                   .getElementById(
                     "fashion-measurement-unit"
                   )
                   .value,
+
 
               care_instructions:
                 document
@@ -3646,6 +5179,7 @@ document
                   .value
                   .trim(),
 
+
               model_info:
                 document
                   .getElementById(
@@ -3654,13 +5188,77 @@ document
                   .value
                   .trim(),
 
+
               size_guide_notes:
                 document
                   .getElementById(
                     "fashion-size-guide-notes"
                   )
                   .value
-                  .trim()
+                  .trim(),
+
+
+              sew_on_demand: {
+
+                ...(
+                  editingFashionDetails
+                    .sew_on_demand ||
+                  {}
+                ),
+
+
+                enabled:
+                  sewEnabled,
+
+
+                production_time:
+                  document
+                    .getElementById(
+                      "sew-production-time"
+                    )
+                    .value
+                    .trim(),
+
+
+                price_mode:
+                  priceMode,
+
+
+                price_value:
+                  priceMode ===
+                    "same_price"
+
+                    ? null
+
+                    : (
+                        priceValueText ===
+                          ""
+
+                          ? null
+
+                          : Number(
+                              priceValueText
+                            )
+                      ),
+
+
+                instructions:
+                  document
+                    .getElementById(
+                      "sew-instructions"
+                    )
+                    .value
+                    .trim(),
+
+
+                measurement_keys:
+                  collectSewMeasurementKeys(),
+
+
+                custom_measurements:
+                  collectCustomMeasurements()
+
+              }
 
             };
 
@@ -3688,7 +5286,7 @@ document
 
         /*
         ---------------------------------------------
-        SAVE / UPDATE PRODUCT
+        SAVE PRODUCT
         ---------------------------------------------
         */
 
@@ -3757,12 +5355,6 @@ document
               result.data.id;
 
 
-            /*
-              If a later fashion save fails,
-              retrying will UPDATE instead
-              of creating a duplicate product.
-            */
-
             document
               .getElementById(
                 "product-id"
@@ -3806,7 +5398,7 @@ document
 
         /*
         ---------------------------------------------
-        SAVE FASHION VARIANTS
+        SAVE VARIANTS
         ---------------------------------------------
         */
 
@@ -3842,7 +5434,7 @@ document
 
       }
 
-      catch (
+      catch(
         error
       ) {
 
@@ -3942,7 +5534,6 @@ async function editProduct(
     alert(
       "Product could not be opened."
     );
-
 
     return;
 
@@ -4111,6 +5702,23 @@ async function editProduct(
       : {};
 
 
+  editingFashionDetails =
+    JSON.parse(
+      JSON.stringify(
+        fashionDetails ||
+        {}
+      )
+    );
+
+
+  ensureSelectValue(
+    "fashion-garment-type",
+    fashionDetails
+      .garment_type ||
+    ""
+  );
+
+
   document
     .getElementById(
       "fashion-fabric"
@@ -4187,6 +5795,16 @@ async function editProduct(
       "";
 
 
+  renderGarmentTypeInfo();
+
+
+  /*
+  ---------------------------------------------------
+  SIZE CHART IMAGE
+  ---------------------------------------------------
+  */
+
+
   document
     .getElementById(
       "current-size-chart-image-url"
@@ -4211,7 +5829,9 @@ async function editProduct(
 
 
   /*
-  BODY SIZE CHART
+  ---------------------------------------------------
+  BODY SIZE GUIDE
+  ---------------------------------------------------
   */
 
 
@@ -4234,19 +5854,15 @@ async function editProduct(
 
 
   if (
-    bodyRows.length >
-    0
+    bodyRows.length
   ) {
 
     bodyRows.forEach(
-      row => {
-
+      row =>
         addMeasurementRow(
           "body-size-rows",
           row
-        );
-
-      }
+        )
     );
 
   }
@@ -4261,7 +5877,9 @@ async function editProduct(
 
 
   /*
+  ---------------------------------------------------
   GARMENT MEASUREMENTS
+  ---------------------------------------------------
   */
 
 
@@ -4284,19 +5902,15 @@ async function editProduct(
 
 
   if (
-    garmentRows.length >
-    0
+    garmentRows.length
   ) {
 
     garmentRows.forEach(
-      row => {
-
+      row =>
         addMeasurementRow(
           "garment-measurement-rows",
           row
-        );
-
-      }
+        )
     );
 
   }
@@ -4311,7 +5925,119 @@ async function editProduct(
 
 
   /*
-  PRODUCT VARIANTS
+  ---------------------------------------------------
+  SEW ON DEMAND
+  ---------------------------------------------------
+  */
+
+
+  const sew =
+    fashionDetails.sew_on_demand &&
+    typeof fashionDetails.sew_on_demand ===
+      "object"
+
+      ? fashionDetails.sew_on_demand
+
+      : {};
+
+
+  document
+    .getElementById(
+      "sew-on-demand-enabled"
+    )
+    .checked =
+      sew.enabled ===
+      true;
+
+
+  document
+    .getElementById(
+      "sew-production-time"
+    )
+    .value =
+      sew.production_time ||
+      "";
+
+
+  ensureSelectValue(
+    "sew-price-mode",
+    sew.price_mode ||
+    "same_price"
+  );
+
+
+  document
+    .getElementById(
+      "sew-price-value"
+    )
+    .value =
+      sew.price_value !==
+        null &&
+      sew.price_value !==
+        undefined
+
+        ? sew.price_value
+
+        : "";
+
+
+  document
+    .getElementById(
+      "sew-instructions"
+    )
+    .value =
+      sew.instructions ||
+      "";
+
+
+  setSewVisibility();
+
+
+  updateSewPriceField();
+
+
+  renderSewMeasurementChecklist(
+
+    Array.isArray(
+      sew.measurement_keys
+    )
+
+      ? sew.measurement_keys
+
+      : null
+
+  );
+
+
+  document
+    .getElementById(
+      "custom-measurement-rows"
+    )
+    .innerHTML =
+      "";
+
+
+  if (
+    Array.isArray(
+      sew.custom_measurements
+    )
+  ) {
+
+    sew.custom_measurements
+      .forEach(
+        item =>
+          addCustomMeasurementRow(
+            item
+          )
+      );
+
+  }
+
+
+  /*
+  ---------------------------------------------------
+  VARIANTS
+  ---------------------------------------------------
   */
 
 
@@ -4341,7 +6067,8 @@ async function editProduct(
       .order(
         "id",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
@@ -4377,28 +6104,26 @@ async function editProduct(
 
 
     editingVariantIds =
-      safeVariants.map(
-        variant =>
-          Number(
-            variant.id
-          )
-      );
+      safeVariants
+        .map(
+          variant =>
+            Number(
+              variant.id
+            )
+        );
 
 
     if (
-      safeVariants.length >
-      0
+      safeVariants.length
     ) {
 
-      safeVariants.forEach(
-        variant => {
-
-          addVariantRow(
-            variant
-          );
-
-        }
-      );
+      safeVariants
+        .forEach(
+          variant =>
+            addVariantRow(
+              variant
+            )
+        );
 
     }
 
@@ -4589,26 +6314,15 @@ async function deleteProduct(
   id
 ) {
 
-  const confirmed =
-    confirm(
-      "Are you sure you want to delete this product?"
-    );
-
-
   if (
-    !confirmed
+    !confirm(
+      "Are you sure you want to delete this product?"
+    )
   ) {
 
     return;
 
   }
-
-
-  /*
-    product_variants are automatically
-    deleted because the database foreign key
-    uses ON DELETE CASCADE.
-  */
 
 
   const {
@@ -4637,7 +6351,6 @@ async function deleteProduct(
     alert(
       "Product could not be deleted."
     );
-
 
     return;
 
@@ -4684,6 +6397,10 @@ function resetForm() {
 
   slugWasEdited =
     false;
+
+
+  editingFashionDetails =
+    {};
 
 
   updateSlugPreview();
@@ -4739,7 +6456,18 @@ function resetForm() {
   );
 
 
+  document
+    .getElementById(
+      "fashion-garment-type"
+    )
+    .value =
+      "";
+
+
   resetFashionRows();
+
+
+  resetSewOnDemand();
 
 
   toggleFashionSection(
@@ -4836,7 +6564,5 @@ protectPage();
 
 </script>
 
-
 </body>
-
 </html>
