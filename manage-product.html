@@ -508,6 +508,26 @@ FASHION
 >
 
 
+<label for="weight_kg">
+  Product Shipping Weight (kg)
+</label>
+
+<input
+  type="number"
+  id="weight_kg"
+  step="0.001"
+  min="0.001"
+  placeholder="Example: 0.50"
+  required
+>
+
+<p class="image-help">
+  Enter the packed shipping weight of ONE item.
+  Examples: 0.25 = 250 g, 0.50 = 500 g,
+  1.20 = 1.2 kg.
+</p>
+
+
 <label for="category">
   Category
 </label>
@@ -4781,6 +4801,25 @@ document
         );
 
 
+      const weightText =
+        document
+          .getElementById(
+            "weight_kg"
+          )
+          .value;
+
+
+      const weightKg =
+        weightText ===
+          ""
+
+          ? null
+
+          : Number(
+              weightText
+            );
+
+
       if (
         !name
       ) {
@@ -4830,6 +4869,31 @@ document
         document
           .getElementById(
             "category"
+          )
+          .focus();
+
+        return;
+
+      }
+
+
+      if (
+        weightKg ===
+          null ||
+        !Number.isFinite(
+          weightKg
+        ) ||
+        weightKg <=
+          0
+      ) {
+
+        message.textContent =
+          "Please enter the Product Shipping Weight in kilograms. Example: 0.50 for 500 g.";
+
+
+        document
+          .getElementById(
+            "weight_kg"
           )
           .focus();
 
@@ -5028,6 +5092,9 @@ document
                 )
 
               : null,
+
+          weight_kg:
+            weightKg,
 
           category,
 
@@ -5590,6 +5657,15 @@ async function editProduct(
     )
     .value =
       data.price ??
+      "";
+
+
+  document
+    .getElementById(
+      "weight_kg"
+    )
+    .value =
+      data.weight_kg ??
       "";
 
 
