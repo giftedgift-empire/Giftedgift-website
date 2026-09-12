@@ -2,12 +2,20 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manage Orders | GiftedGift Empire</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Manage Orders | GiftedGift Empire
+</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
 
 <style>
 
@@ -38,8 +46,13 @@ header p {
   margin: 0;
 }
 
+
+/* =========================
+   TOP ACTIONS
+========================= */
+
 .top-actions {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
   padding: 22px 18px 5px;
   display: flex;
@@ -64,8 +77,13 @@ header p {
   color: #111;
 }
 
+
+/* =========================
+   MAIN
+========================= */
+
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
   padding: 20px 18px 70px;
 }
@@ -76,11 +94,17 @@ header p {
   font-weight: bold;
 }
 
+
+/* =========================
+   MESSAGE
+========================= */
+
 .message {
   display: none;
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .message.error {
@@ -95,9 +119,18 @@ header p {
   color: #176b31;
 }
 
+
+/* =========================
+   STATS
+========================= */
+
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(145px, 1fr)
+    );
   gap: 15px;
   margin-bottom: 25px;
 }
@@ -105,23 +138,102 @@ header p {
 .stat {
   background: white;
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  padding: 18px;
+  box-shadow:
+    0 3px 12px
+    rgba(0,0,0,0.07);
 }
 
 .stat strong {
   display: block;
-  font-size: 26px;
+  font-size: 25px;
   color: #123a8c;
   margin-bottom: 5px;
 }
+
+
+/* =========================
+   WORKFLOW TABS
+========================= */
+
+.workflow-panel {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow:
+    0 3px 12px
+    rgba(0,0,0,0.07);
+}
+
+.workflow-panel h2 {
+  margin: 0 0 15px;
+  color: #123a8c;
+  font-size: 20px;
+}
+
+.workflow-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.workflow-tab {
+  border: 1px solid #ccd5e5;
+  background: #f7f9fc;
+  color: #123a8c;
+  padding: 10px 13px;
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.workflow-tab:hover {
+  border-color: #123a8c;
+}
+
+.workflow-tab.active {
+  background: #123a8c;
+  color: white;
+  border-color: #123a8c;
+}
+
+.workflow-tab .count {
+  display: inline-block;
+  margin-left: 5px;
+  background: rgba(255,255,255,0.25);
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.workflow-tab:not(.active) .count {
+  background: #e8eef9;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
 
 .filters {
   background: white;
   padding: 18px;
   border-radius: 12px;
   margin-bottom: 25px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  box-shadow:
+    0 3px 12px
+    rgba(0,0,0,0.07);
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+  gap: 10px;
 }
 
 .filters input,
@@ -131,15 +243,28 @@ header p {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
-  margin-bottom: 10px;
 }
+
+.filter-note {
+  margin-top: 11px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   ORDER
+========================= */
 
 .order-card {
   background: white;
   border-radius: 14px;
   padding: 22px;
   margin-bottom: 22px;
-  box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+  box-shadow:
+    0 3px 14px
+    rgba(0,0,0,0.08);
 }
 
 .order-top {
@@ -177,6 +302,11 @@ header p {
   font-weight: bold;
 }
 
+
+/* =========================
+   PAYMENT BADGES
+========================= */
+
 .badge-paid {
   background: #e3f6e8;
   color: #176b31;
@@ -192,9 +322,68 @@ header p {
   color: #9b1c1c;
 }
 
+
+/* =========================
+   STATUS BADGES
+========================= */
+
 .badge-status {
   background: #e7eefc;
   color: #123a8c;
+}
+
+.badge-production {
+  background: #f3e8ff;
+  color: #6c2ca7;
+}
+
+.badge-ready {
+  background: #e4f5ff;
+  color: #05617e;
+}
+
+.badge-shipped {
+  background: #e7f7f0;
+  color: #146846;
+}
+
+.badge-fulfilled {
+  background: #e3f6e8;
+  color: #176b31;
+}
+
+.badge-cancelled {
+  background: #f4e8e8;
+  color: #8e3232;
+}
+
+.badge-archived {
+  background: #ececec;
+  color: #555;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.order-details {
+  margin-top: 18px;
+  border: 1px solid #dce1ea;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.order-details summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  color: #123a8c;
+  background: #f7f9fc;
+  font-weight: bold;
+}
+
+.order-details-content {
+  padding: 0 16px 18px;
 }
 
 .order-section {
@@ -208,7 +397,11 @@ header p {
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px, 1fr)
+    );
   gap: 15px;
 }
 
@@ -225,18 +418,150 @@ header p {
   margin-bottom: 4px;
 }
 
+
+/* =========================
+   ITEMS
+========================= */
+
 .item {
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
 }
 
 .item-name {
   font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 19px;
+  margin-bottom: 10px;
+  color: #123a8c;
 }
+
+.item-basic {
+  line-height: 1.7;
+}
+
+.purchase-badge {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.purchase-ready {
+  background: #e7eefc;
+  color: #123a8c;
+}
+
+.purchase-custom {
+  background: #f1e5ff;
+  color: #6c2ca7;
+}
+
+
+/* =========================
+   FASHION DETAILS
+========================= */
+
+.fashion-details {
+  margin-top: 13px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #f8faff;
+  border: 1px solid #ccd8ef;
+}
+
+.fashion-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(180px,1fr)
+    );
+  gap: 10px;
+}
+
+.fashion-detail {
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e1e5eb;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.fashion-detail strong {
+  display: block;
+  color: #123a8c;
+  margin-bottom: 3px;
+}
+
+
+/* =========================
+   MEASUREMENTS
+========================= */
+
+.measurements {
+  margin-top: 14px;
+  border-top: 1px solid #dce1ea;
+  padding-top: 14px;
+}
+
+.measurements-title {
+  font-weight: bold;
+  color: #123a8c;
+  margin-bottom: 10px;
+}
+
+.private-note {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #fff6d8;
+  color: #665300;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.measurement-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(170px,1fr)
+    );
+  gap: 8px;
+}
+
+.measurement {
+  background: white;
+  border: 1px solid #e1e5eb;
+  border-radius: 8px;
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.measurement strong {
+  color: #333;
+}
+
+.fitting-note {
+  margin-top: 13px;
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #e1e5eb;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
 
 .summary {
   background: #f8f9fb;
@@ -259,6 +584,11 @@ header p {
   font-weight: bold;
   color: #123a8c;
 }
+
+
+/* =========================
+   STATUS CONTROL
+========================= */
 
 .status-control {
   margin-top: 20px;
@@ -299,11 +629,70 @@ header p {
   cursor: not-allowed;
 }
 
+.status-help {
+  margin: 10px 0 0;
+  color: #665300;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+
+/* =========================
+   ARCHIVE
+========================= */
+
+.archive-area {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ddd;
+}
+
+.archive-button {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  background: #666;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.archive-button:hover {
+  background: #4f4f4f;
+}
+
+.archive-note {
+  margin-top: 8px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
 .empty {
   background: white;
   border-radius: 12px;
   padding: 35px;
   text-align: center;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 760px) {
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+
 }
 
 @media (max-width: 600px) {
@@ -313,17 +702,24 @@ header p {
   }
 
   .order-card {
-    padding: 18px;
+    padding: 17px;
   }
 
   .summary-row {
     font-size: 15px;
   }
 
+  .workflow-tab {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
@@ -333,15 +729,20 @@ header p {
 </div>
 
 
-<div id="page" style="display:none;">
+<div
+  id="page"
+  style="display:none;"
+>
 
 
 <header>
 
-  <h1>Manage Orders</h1>
+  <h1>
+    Manage Orders
+  </h1>
 
   <p>
-    Physical customer orders
+    Physical customer orders and fulfillment
   </p>
 
 </header>
@@ -376,6 +777,10 @@ header p {
   ></div>
 
 
+  <!-- =========================
+       STATS
+  ========================= -->
+
   <div class="stats">
 
     <div class="stat">
@@ -390,7 +795,17 @@ header p {
 
     <div class="stat">
       <strong id="new-orders">0</strong>
-      New Orders
+      New
+    </div>
+
+    <div class="stat">
+      <strong id="production-orders">0</strong>
+      In Production
+    </div>
+
+    <div class="stat">
+      <strong id="ready-orders">0</strong>
+      Ready to Ship
     </div>
 
     <div class="stat">
@@ -398,61 +813,92 @@ header p {
       Shipped
     </div>
 
+    <div class="stat">
+      <strong id="fulfilled-orders">0</strong>
+      Fulfilled
+    </div>
+
   </div>
 
 
+  <!-- =========================
+       WORKFLOW
+  ========================= -->
+
+  <section class="workflow-panel">
+
+    <h2>
+      Order Workflow
+    </h2>
+
+    <div
+      id="workflow-tabs"
+      class="workflow-tabs"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================
+       FILTERS
+  ========================= -->
+
   <div class="filters">
 
-    <input
-      type="text"
-      id="search"
-      placeholder="Search by order number, customer name or email"
-    >
+    <div class="filters-grid">
 
-    <select id="payment-filter">
-
-      <option value="">
-        All Payment Statuses
-      </option>
-
-      <option value="paid">
-        Paid
-      </option>
-
-      <option value="pending">
-        Pending
-      </option>
-
-      <option value="review">
-        Review
-      </option>
-
-    </select>
+      <input
+        type="text"
+        id="search"
+        placeholder="Search order, customer, email, PayPal ID or product"
+      >
 
 
-    <select id="fulfillment-filter">
+      <select id="payment-filter">
 
-      <option value="">
-        All Fulfillment Statuses
-      </option>
+        <option value="">
+          All Payment Statuses
+        </option>
 
-      <option value="new">
-        New
-      </option>
+        <option value="paid">
+          Paid
+        </option>
 
-      <option value="processing">
-        Processing
-      </option>
+        <option value="pending">
+          Pending
+        </option>
 
-      <option value="shipped">
-        Shipped
-      </option>
+        <option value="review">
+          Review
+        </option>
 
-      <option value="delivered">
-        Delivered
-      </option>
+      </select>
 
-    </select>
+
+      <select id="purchase-filter">
+
+        <option value="">
+          All Order Types
+        </option>
+
+        <option value="ready_to_wear">
+          Ready to Wear
+        </option>
+
+        <option value="made_to_measure">
+          Made to Measure
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-note">
+      Paid orders are kept as business records.
+      Use Fulfilled and Archive instead of permanently
+      deleting completed paid orders.
+    </div>
 
   </div>
 
@@ -467,11 +913,18 @@ header p {
 
 <script>
 
+
+/* =========================
+   CONFIG
+========================= */
+
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
+
 const SUPABASE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
 
 const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
@@ -485,87 +938,486 @@ const supabaseClient =
 
 
 const loadingBox =
-  document.getElementById("loading");
+  document.getElementById(
+    "loading"
+  );
+
 
 const page =
-  document.getElementById("page");
+  document.getElementById(
+    "page"
+  );
+
 
 const ordersBox =
-  document.getElementById("orders");
+  document.getElementById(
+    "orders"
+  );
+
 
 const messageBox =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
 
 
 let allOrders = [];
 let allItems = [];
 
 
-function escapeHtml(value) {
-
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+let activeWorkflow =
+  "";
 
 
-function money(value, currency = "EUR") {
+/* =========================
+   STATUS DEFINITIONS
+========================= */
 
-  const number =
-    Number(value || 0);
+const STATUS_LABELS = {
 
-  if (currency === "EUR") {
-    return "€" + number.toFixed(2);
+  new:
+    "New",
+
+  processing:
+    "Processing",
+
+  in_production:
+    "In Production",
+
+  ready_to_ship:
+    "Ready to Ship",
+
+  shipped:
+    "Shipped",
+
+  fulfilled:
+    "Fulfilled / Completed",
+
+  delivered:
+    "Delivered",
+
+  cancelled_refunded:
+    "Cancelled / Refunded",
+
+  needs_review:
+    "Needs Review",
+
+  archived:
+    "Archived"
+
+};
+
+
+const WORKFLOW_TABS = [
+
+  {
+    value: "",
+    label: "All"
+  },
+
+  {
+    value: "new",
+    label: "New"
+  },
+
+  {
+    value: "processing",
+    label: "Processing"
+  },
+
+  {
+    value: "in_production",
+    label: "In Production"
+  },
+
+  {
+    value: "ready_to_ship",
+    label: "Ready to Ship"
+  },
+
+  {
+    value: "shipped",
+    label: "Shipped"
+  },
+
+  {
+    value: "fulfilled",
+    label: "Fulfilled"
+  },
+
+  {
+    value: "cancelled_refunded",
+    label: "Cancelled / Refunded"
+  },
+
+  {
+    value: "needs_review",
+    label: "Needs Review"
+  },
+
+  {
+    value: "archived",
+    label: "Archived"
   }
 
-  return number.toFixed(2) + " " + currency;
+];
+
+
+const FASHION_MEASUREMENT_LABELS = {
+
+  size:
+    "Size",
+
+  bust:
+    "Bust / Chest",
+
+  under_bust:
+    "Under Bust",
+
+  waist:
+    "Waist",
+
+  hips:
+    "Hips",
+
+  shoulder:
+    "Shoulder",
+
+  armhole:
+    "Armhole",
+
+  sleeve:
+    "Sleeve Length",
+
+  sleeve_length:
+    "Sleeve Length",
+
+  bicep:
+    "Round Sleeve / Bicep",
+
+  wrist_cuff:
+    "Wrist / Cuff",
+
+  half_length:
+    "Half Length",
+
+  top_length:
+    "Top / Blouse Length",
+
+  waist_to_hip:
+    "Waist to Hip",
+
+  skirt_length:
+    "Skirt Length",
+
+  thigh:
+    "Thigh",
+
+  crotch_rise:
+    "Crotch / Rise",
+
+  trouser_length:
+    "Trouser Length",
+
+  inseam:
+    "Inseam",
+
+  knee:
+    "Knee",
+
+  ankle_hem:
+    "Ankle / Hem",
+
+  gown_length:
+    "Gown / Dress Length",
+
+  full_length:
+    "Full Length",
+
+  neck:
+    "Neck Width",
+
+  front_neck_depth:
+    "Front Neck Depth",
+
+  back_neck_depth:
+    "Back Neck Depth",
+
+  length:
+    "Length",
+
+  width:
+    "Width"
+
+};
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 }
 
 
-function formatDate(value) {
+function money(
+  value,
+  currency = "EUR"
+) {
 
-  if (!value) {
+  const number =
+    Number(
+      value || 0
+    );
+
+
+  if (
+    currency === "EUR"
+  ) {
+
+    return (
+      "€" +
+      number.toFixed(
+        2
+      )
+    );
+  }
+
+
+  return (
+    number.toFixed(
+      2
+    ) +
+    " " +
+    currency
+  );
+}
+
+
+function formatDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
     return "";
   }
 
-  const date =
-    new Date(value);
 
-  return date.toLocaleString();
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+  }
+
+
+  return date
+    .toLocaleString();
+}
+
+
+function measurementLabel(
+  key
+) {
+
+  if (
+    FASHION_MEASUREMENT_LABELS[
+      key
+    ]
+  ) {
+
+    return FASHION_MEASUREMENT_LABELS[
+      key
+    ];
+  }
+
+
+  return String(
+    key || ""
+  )
+    .replace(
+      /_/g,
+      " "
+    )
+    .replace(
+      /\b\w/g,
+      letter =>
+        letter.toUpperCase()
+    );
+}
+
+
+function garmentLabel(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .replace(
+      /_/g,
+      " "
+    )
+    .replace(
+      /\b\w/g,
+      letter =>
+        letter.toUpperCase()
+    );
+}
+
+
+function statusLabel(
+  value
+) {
+
+  return (
+    STATUS_LABELS[
+      value
+    ] ||
+    String(
+      value ||
+      "Unknown"
+    )
+  );
+}
+
+
+function parseMeasurementData(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return {};
+  }
+
+
+  if (
+    typeof value ===
+      "object" &&
+    !Array.isArray(
+      value
+    )
+  ) {
+
+    return value;
+  }
+
+
+  if (
+    typeof value ===
+      "string"
+  ) {
+
+    try {
+
+      const parsed =
+        JSON.parse(
+          value
+        );
+
+
+      return (
+        parsed &&
+        typeof parsed ===
+          "object"
+      )
+        ? parsed
+        : {};
+
+    } catch {
+
+      return {};
+    }
+  }
+
+
+  return {};
 }
 
 
 function showMessage(
   text,
-  type = "success"
+  type =
+    "success"
 ) {
 
   messageBox.className =
-    "message " + type;
+    "message " +
+    type;
+
 
   messageBox.textContent =
     text;
 
+
   messageBox.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
+    behavior:
+      "smooth",
+
+    block:
+      "center"
   });
 
 
-  setTimeout(() => {
+  setTimeout(
+    () => {
 
-    messageBox.className =
-      "message";
+      messageBox.className =
+        "message";
 
-    messageBox.textContent =
-      "";
 
-  }, 4000);
+      messageBox.textContent =
+        "";
+
+    },
+    4500
+  );
 }
 
+
+/* =========================
+   ADMIN PROTECTION
+========================= */
 
 async function protectPage() {
 
@@ -591,6 +1443,7 @@ async function protectPage() {
       "admin.html"
     );
 
+
     return false;
   }
 
@@ -604,9 +1457,11 @@ async function protectPage() {
       .auth
       .signOut();
 
+
     window.location.replace(
       "admin.html"
     );
+
 
     return false;
   }
@@ -615,6 +1470,7 @@ async function protectPage() {
   loadingBox.style.display =
     "none";
 
+
   page.style.display =
     "block";
 
@@ -622,6 +1478,10 @@ async function protectPage() {
   return true;
 }
 
+
+/* =========================
+   LOAD ORDERS
+========================= */
 
 async function loadOrders() {
 
@@ -634,24 +1494,33 @@ async function loadOrders() {
     error: orderError
   } =
     await supabaseClient
-      .from("physical_orders")
-      .select("*")
+      .from(
+        "physical_orders"
+      )
+      .select(
+        "*"
+      )
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:
+            false
         }
       );
 
 
-  if (orderError) {
+  if (
+    orderError
+  ) {
 
     console.error(
       orderError
     );
 
+
     ordersBox.innerHTML =
       "<div class='empty'>Could not load orders.</div>";
+
 
     return;
   }
@@ -662,24 +1531,33 @@ async function loadOrders() {
     error: itemError
   } =
     await supabaseClient
-      .from("physical_order_items")
-      .select("*")
+      .from(
+        "physical_order_items"
+      )
+      .select(
+        "*"
+      )
       .order(
         "id",
         {
-          ascending: true
+          ascending:
+            true
         }
       );
 
 
-  if (itemError) {
+  if (
+    itemError
+  ) {
 
     console.error(
       itemError
     );
 
+
     ordersBox.innerHTML =
       "<div class='empty'>Could not load order items.</div>";
+
 
     return;
   }
@@ -688,59 +1566,263 @@ async function loadOrders() {
   allOrders =
     orders || [];
 
+
   allItems =
     items || [];
 
 
   updateStats();
 
+  renderWorkflowTabs();
+
   renderOrders();
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function isFulfilled(
+  order
+) {
+
+  return (
+    order.fulfillment_status ===
+      "fulfilled" ||
+    order.fulfillment_status ===
+      "delivered"
+  );
 }
 
 
 function updateStats() {
 
   document
-    .getElementById("total-orders")
+    .getElementById(
+      "total-orders"
+    )
     .textContent =
       allOrders.length;
 
 
   document
-    .getElementById("paid-orders")
+    .getElementById(
+      "paid-orders"
+    )
     .textContent =
       allOrders.filter(
         order =>
           order.payment_status ===
-          "paid"
+            "paid"
       ).length;
 
 
   document
-    .getElementById("new-orders")
+    .getElementById(
+      "new-orders"
+    )
     .textContent =
       allOrders.filter(
         order =>
           order.fulfillment_status ===
-          "new"
+            "new"
       ).length;
 
 
   document
-    .getElementById("shipped-orders")
+    .getElementById(
+      "production-orders"
+    )
     .textContent =
       allOrders.filter(
         order =>
           order.fulfillment_status ===
-          "shipped"
+            "in_production"
+      ).length;
+
+
+  document
+    .getElementById(
+      "ready-orders"
+    )
+    .textContent =
+      allOrders.filter(
+        order =>
+          order.fulfillment_status ===
+            "ready_to_ship"
+      ).length;
+
+
+  document
+    .getElementById(
+      "shipped-orders"
+    )
+    .textContent =
+      allOrders.filter(
+        order =>
+          order.fulfillment_status ===
+            "shipped"
+      ).length;
+
+
+  document
+    .getElementById(
+      "fulfilled-orders"
+    )
+    .textContent =
+      allOrders.filter(
+        isFulfilled
       ).length;
 }
 
 
-function paymentBadge(status) {
+/* =========================
+   WORKFLOW
+========================= */
+
+function workflowMatches(
+  order,
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return true;
+  }
+
+
+  if (
+    value ===
+      "fulfilled"
+  ) {
+
+    return isFulfilled(
+      order
+    );
+  }
+
+
+  if (
+    value ===
+      "needs_review"
+  ) {
+
+    return (
+      order.fulfillment_status ===
+        "needs_review" ||
+      order.payment_status ===
+        "review"
+    );
+  }
+
+
+  return (
+    order.fulfillment_status ===
+      value
+  );
+}
+
+
+function workflowCount(
+  value
+) {
+
+  return allOrders.filter(
+    order =>
+      workflowMatches(
+        order,
+        value
+      )
+  ).length;
+}
+
+
+function renderWorkflowTabs() {
+
+  const box =
+    document.getElementById(
+      "workflow-tabs"
+    );
+
+
+  box.innerHTML =
+    WORKFLOW_TABS
+      .map(
+        tab => `
+
+          <button
+            type="button"
+            class="workflow-tab ${
+              activeWorkflow === tab.value
+                ? "active"
+                : ""
+            }"
+            data-workflow="${escapeHtml(
+              tab.value
+            )}"
+          >
+
+            ${escapeHtml(
+              tab.label
+            )}
+
+            <span class="count">
+              ${workflowCount(
+                tab.value
+              )}
+            </span>
+
+          </button>
+
+        `
+      )
+      .join("");
+
+
+  box
+    .querySelectorAll(
+      ".workflow-tab"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            activeWorkflow =
+              this.dataset.workflow ||
+              "";
+
+
+            renderWorkflowTabs();
+
+            renderOrders();
+
+          }
+        );
+
+      }
+    );
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+function paymentBadge(
+  status
+) {
 
   const value =
-    String(status || "")
+    String(
+      status ||
+      ""
+    )
       .toLowerCase();
 
 
@@ -748,31 +1830,529 @@ function paymentBadge(status) {
     "badge-pending";
 
 
-  if (value === "paid") {
+  if (
+    value ===
+      "paid"
+  ) {
+
     className =
       "badge-paid";
   }
 
 
-  if (value === "review") {
+  if (
+    value ===
+      "review"
+  ) {
+
     className =
       "badge-review";
   }
 
 
   return `
+
     <span class="badge ${className}">
-      Payment: ${escapeHtml(value || "unknown")}
+      Payment:
+      ${escapeHtml(
+        value ||
+        "unknown"
+      )}
     </span>
+
   `;
 }
 
+
+function fulfillmentBadge(
+  status
+) {
+
+  let className =
+    "badge-status";
+
+
+  if (
+    status ===
+      "in_production"
+  ) {
+
+    className =
+      "badge-production";
+  }
+
+
+  if (
+    status ===
+      "ready_to_ship"
+  ) {
+
+    className =
+      "badge-ready";
+  }
+
+
+  if (
+    status ===
+      "shipped"
+  ) {
+
+    className =
+      "badge-shipped";
+  }
+
+
+  if (
+    status ===
+      "fulfilled" ||
+    status ===
+      "delivered"
+  ) {
+
+    className =
+      "badge-fulfilled";
+  }
+
+
+  if (
+    status ===
+      "cancelled_refunded" ||
+    status ===
+      "needs_review"
+  ) {
+
+    className =
+      "badge-cancelled";
+  }
+
+
+  if (
+    status ===
+      "archived"
+  ) {
+
+    className =
+      "badge-archived";
+  }
+
+
+  return `
+
+    <span class="badge ${className}">
+
+      ${escapeHtml(
+        statusLabel(
+          status
+        )
+      )}
+
+    </span>
+
+  `;
+}
+
+
+/* =========================
+   FASHION ITEM
+========================= */
+
+function buildMeasurements(
+  item
+) {
+
+  const data =
+    parseMeasurementData(
+      item.customer_measurements
+    );
+
+
+  const unit =
+    data.measurement_unit ||
+    "";
+
+
+  const measurements =
+    (
+      data.measurements &&
+      typeof data.measurements ===
+        "object" &&
+      !Array.isArray(
+        data.measurements
+      )
+    )
+      ? data.measurements
+      : {};
+
+
+  const customMeasurements =
+    Array.isArray(
+      data.custom_measurements
+    )
+      ? data.custom_measurements
+      : [];
+
+
+  let html =
+    "";
+
+
+  Object.entries(
+    measurements
+  )
+    .forEach(
+      (
+        [
+          key,
+          value
+        ]
+      ) => {
+
+        html += `
+
+          <div class="measurement">
+
+            <strong>
+              ${escapeHtml(
+                measurementLabel(
+                  key
+                )
+              )}:
+            </strong>
+
+            ${escapeHtml(
+              value
+            )}
+
+            ${
+              unit
+                ? " " +
+                  escapeHtml(
+                    unit
+                  )
+                : ""
+            }
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+  customMeasurements
+    .forEach(
+      measurement => {
+
+        if (
+          !measurement ||
+          !measurement.name
+        ) {
+
+          return;
+        }
+
+
+        html += `
+
+          <div class="measurement">
+
+            <strong>
+              ${escapeHtml(
+                measurement.name
+              )}:
+            </strong>
+
+            ${escapeHtml(
+              measurement.value
+            )}
+
+            ${
+              unit
+                ? " " +
+                  escapeHtml(
+                    unit
+                  )
+                : ""
+            }
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+  if (
+    !html
+  ) {
+
+    return `
+      <div class="measurement">
+        No measurements were saved.
+      </div>
+    `;
+  }
+
+
+  return html;
+}
+
+
+function buildFashionDetails(
+  item
+) {
+
+  const mode =
+    item.purchase_mode ||
+    "";
+
+
+  if (
+    mode ===
+      "made_to_measure"
+  ) {
+
+    return `
+
+      <div class="fashion-details">
+
+        <span class="purchase-badge purchase-custom">
+          ✂️ Sew on Demand / Made to Measure
+        </span>
+
+
+        <div class="fashion-grid">
+
+          <div class="fashion-detail">
+
+            <strong>
+              Garment Type
+            </strong>
+
+            ${escapeHtml(
+              garmentLabel(
+                item.garment_type
+              ) ||
+              "Not specified"
+            )}
+
+          </div>
+
+
+          <div class="fashion-detail">
+
+            <strong>
+              Production Time
+            </strong>
+
+            ${escapeHtml(
+              item.production_time ||
+              "Not specified"
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div class="measurements">
+
+          <div class="measurements-title">
+            Customer Measurements
+          </div>
+
+          <div class="private-note">
+            🔒 Private order information
+          </div>
+
+
+          <div class="measurement-grid">
+
+            ${buildMeasurements(
+              item
+            )}
+
+          </div>
+
+        </div>
+
+
+        ${
+          item.fitting_note
+            ? `
+
+              <div class="fitting-note">
+
+                <strong>
+                  Special Sewing / Fitting Note:
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                  item.fitting_note
+                )}
+
+              </div>
+
+            `
+            : ""
+        }
+
+      </div>
+
+    `;
+  }
+
+
+  if (
+    mode ===
+      "ready_to_wear" ||
+    item.variant_id
+  ) {
+
+    return `
+
+      <div class="fashion-details">
+
+        <span class="purchase-badge purchase-ready">
+          👗 Ready to Wear
+        </span>
+
+
+        <div class="fashion-grid">
+
+          ${
+            item.variant_size
+              ? `
+
+                <div class="fashion-detail">
+
+                  <strong>
+                    Size
+                  </strong>
+
+                  ${escapeHtml(
+                    item.variant_size
+                  )}
+
+                </div>
+
+              `
+              : ""
+          }
+
+
+          ${
+            item.variant_color
+              ? `
+
+                <div class="fashion-detail">
+
+                  <strong>
+                    Colour
+                  </strong>
+
+                  ${escapeHtml(
+                    item.variant_color
+                  )}
+
+                </div>
+
+              `
+              : ""
+          }
+
+
+          ${
+            item.variant_sku
+              ? `
+
+                <div class="fashion-detail">
+
+                  <strong>
+                    SKU
+                  </strong>
+
+                  ${escapeHtml(
+                    item.variant_sku
+                  )}
+
+                </div>
+
+              `
+              : ""
+          }
+
+
+          ${
+            item.variant_id
+              ? `
+
+                <div class="fashion-detail">
+
+                  <strong>
+                    Variant ID
+                  </strong>
+
+                  ${escapeHtml(
+                    item.variant_id
+                  )}
+
+                </div>
+
+              `
+              : ""
+          }
+
+        </div>
+
+      </div>
+
+    `;
+  }
+
+
+  return "";
+}
+
+
+/* =========================
+   ORDER TYPE
+========================= */
+
+function orderHasMode(
+  orderId,
+  mode
+) {
+
+  return allItems.some(
+    item =>
+      Number(
+        item.order_id
+      ) ===
+        Number(
+          orderId
+        ) &&
+      item.purchase_mode ===
+        mode
+  );
+}
+
+
+/* =========================
+   RENDER
+========================= */
 
 function renderOrders() {
 
   const search =
     document
-      .getElementById("search")
+      .getElementById(
+        "search"
+      )
       .value
       .trim()
       .toLowerCase();
@@ -780,72 +2360,141 @@ function renderOrders() {
 
   const paymentFilter =
     document
-      .getElementById("payment-filter")
+      .getElementById(
+        "payment-filter"
+      )
       .value;
 
 
-  const fulfillmentFilter =
+  const purchaseFilter =
     document
-      .getElementById("fulfillment-filter")
+      .getElementById(
+        "purchase-filter"
+      )
       .value;
 
 
   const filtered =
-    allOrders.filter(order => {
-
-
-      if (
-        paymentFilter &&
-        order.payment_status !==
-        paymentFilter
-      ) {
-        return false;
-      }
-
-
-      if (
-        fulfillmentFilter &&
-        order.fulfillment_status !==
-        fulfillmentFilter
-      ) {
-        return false;
-      }
-
-
-      if (search) {
-
-        const searchable =
-          [
-            order.id,
-            order.customer_name,
-            order.customer_email,
-            order.paypal_order_id
-          ]
-          .join(" ")
-          .toLowerCase();
+    allOrders.filter(
+      order => {
 
 
         if (
-          !searchable.includes(
-            search
+          activeWorkflow &&
+          !workflowMatches(
+            order,
+            activeWorkflow
           )
         ) {
+
           return false;
         }
+
+
+        if (
+          paymentFilter &&
+          order.payment_status !==
+            paymentFilter
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          purchaseFilter &&
+          !orderHasMode(
+            order.id,
+            purchaseFilter
+          )
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          search
+        ) {
+
+          const itemText =
+            allItems
+              .filter(
+                item =>
+                  Number(
+                    item.order_id
+                  ) ===
+                    Number(
+                      order.id
+                    )
+              )
+              .map(
+                item =>
+                  [
+                    item.product_name,
+                    item.variant_size,
+                    item.variant_color,
+                    item.variant_sku,
+                    item.purchase_mode,
+                    item.garment_type
+                  ]
+                    .filter(
+                      Boolean
+                    )
+                    .join(
+                      " "
+                    )
+              )
+              .join(
+                " "
+              );
+
+
+          const searchable =
+            [
+              order.id,
+              order.customer_name,
+              order.customer_email,
+              order.customer_phone,
+              order.paypal_order_id,
+              order.paypal_capture_id,
+              itemText
+            ]
+              .join(
+                " "
+              )
+              .toLowerCase();
+
+
+          if (
+            !searchable.includes(
+              search
+            )
+          ) {
+
+            return false;
+          }
+        }
+
+
+        return true;
+
       }
+    );
 
 
-      return true;
-    });
-
-
-  if (!filtered.length) {
+  if (
+    !filtered.length
+  ) {
 
     ordersBox.innerHTML = `
+
       <div class="empty">
-        No orders found.
+        No orders found in this section.
       </div>
+
     `;
+
 
     return;
   }
@@ -853,61 +2502,259 @@ function renderOrders() {
 
   ordersBox.innerHTML =
     filtered
-      .map(buildOrderCard)
+      .map(
+        buildOrderCard
+      )
       .join("");
 }
 
 
-function buildOrderCard(order) {
+/* =========================
+   ITEM CARD
+========================= */
+
+function buildItemCard(
+  item,
+  order
+) {
+
+  return `
+
+    <div class="item">
+
+      <div class="item-name">
+        ${escapeHtml(
+          item.product_name
+        )}
+      </div>
+
+
+      <div class="item-basic">
+
+        Quantity:
+        <strong>
+          ${escapeHtml(
+            item.quantity
+          )}
+        </strong>
+
+        <br>
+
+        Unit price:
+        <strong>
+          ${money(
+            item.unit_price,
+            order.currency
+          )}
+        </strong>
+
+        <br>
+
+        Unit weight:
+        ${escapeHtml(
+          item.unit_weight_kg
+        )}
+        kg
+
+        <br>
+
+        Line total:
+
+        <strong>
+          ${money(
+            item.line_total,
+            order.currency
+          )}
+        </strong>
+
+      </div>
+
+
+      ${buildFashionDetails(
+        item
+      )}
+
+    </div>
+
+  `;
+}
+
+
+/* =========================
+   STATUS OPTIONS
+========================= */
+
+function buildStatusOptions(
+  order
+) {
+
+  let statuses;
+
+
+  if (
+    order.payment_status ===
+      "paid"
+  ) {
+
+    statuses = [
+
+      "new",
+      "processing",
+      "in_production",
+      "ready_to_ship",
+      "shipped",
+      "fulfilled",
+      "cancelled_refunded",
+      "needs_review"
+
+    ];
+
+  } else {
+
+    statuses = [
+
+      "new",
+      "needs_review",
+      "cancelled_refunded"
+
+    ];
+  }
+
+
+  if (
+    order.fulfillment_status ===
+      "delivered"
+  ) {
+
+    statuses.push(
+      "delivered"
+    );
+  }
+
+
+  if (
+    order.fulfillment_status ===
+      "archived"
+  ) {
+
+    statuses.push(
+      "archived"
+    );
+  }
+
+
+  return statuses
+    .map(
+      status => `
+
+        <option
+          value="${escapeHtml(
+            status
+          )}"
+          ${
+            order.fulfillment_status ===
+              status
+
+              ? "selected"
+              : ""
+          }
+        >
+
+          ${escapeHtml(
+            statusLabel(
+              status
+            )
+          )}
+
+        </option>
+
+      `
+    )
+    .join("");
+}
+
+
+/* =========================
+   ARCHIVE RULE
+========================= */
+
+function canArchiveOrder(
+  order
+) {
+
+  if (
+    order.fulfillment_status ===
+      "archived"
+  ) {
+
+    return false;
+  }
+
+
+  /*
+    Unpaid / test / abandoned orders can
+    be archived without being fulfilled.
+  */
+
+  if (
+    order.payment_status !==
+      "paid"
+  ) {
+
+    return true;
+  }
+
+
+  /*
+    Paid active orders should only be archived
+    after reaching a final state.
+  */
+
+  return [
+
+    "fulfilled",
+    "delivered",
+    "cancelled_refunded"
+
+  ].includes(
+    order.fulfillment_status
+  );
+}
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+function buildOrderCard(
+  order
+) {
 
   const items =
     allItems.filter(
       item =>
-        Number(item.order_id) ===
-        Number(order.id)
+        Number(
+          item.order_id
+        ) ===
+        Number(
+          order.id
+        )
     );
 
 
   const itemHtml =
     items.length
-      ? items.map(item => `
 
-          <div class="item">
+      ? items
+          .map(
+            item =>
+              buildItemCard(
+                item,
+                order
+              )
+          )
+          .join("")
 
-            <div class="item-name">
-              ${escapeHtml(item.product_name)}
-            </div>
-
-            <div>
-              ${item.quantity}
-              ×
-              ${money(
-                item.unit_price,
-                order.currency
-              )}
-            </div>
-
-            <div>
-              Unit weight:
-              ${escapeHtml(
-                item.unit_weight_kg
-              )}
-              kg
-            </div>
-
-            <div>
-              Line total:
-              <strong>
-                ${money(
-                  item.line_total,
-                  order.currency
-                )}
-              </strong>
-            </div>
-
-          </div>
-
-        `).join("")
       : "<p>No items found for this order.</p>";
 
 
@@ -919,32 +2766,72 @@ function buildOrderCard(order) {
       order.city,
       order.country_code
     ]
-    .filter(Boolean)
-    .map(escapeHtml)
-    .join("<br>");
+      .filter(
+        Boolean
+      )
+      .map(
+        escapeHtml
+      )
+      .join(
+        "<br>"
+      );
 
 
-  const canFulfill =
-    order.payment_status ===
-    "paid";
+  const hasMadeToMeasure =
+    items.some(
+      item =>
+        item.purchase_mode ===
+          "made_to_measure"
+    );
+
+
+  const hasReadyToWear =
+    items.some(
+      item =>
+        item.purchase_mode ===
+          "ready_to_wear"
+    );
+
+
+  const archived =
+    order.fulfillment_status ===
+      "archived";
+
+
+  const archiveAllowed =
+    canArchiveOrder(
+      order
+    );
 
 
   return `
 
     <section class="order-card">
 
+
       <div class="order-top">
+
 
         <div>
 
           <div class="order-number">
-            Order #${escapeHtml(order.id)}
+
+            Order #
+            ${escapeHtml(
+              order.id
+            )}
+
           </div>
 
+
           <div class="order-date">
+
             ${escapeHtml(
-              formatDate(order.created_at)
+              formatDate(
+                order.created_at
+              )
             )}
+
           </div>
 
         </div>
@@ -956,284 +2843,497 @@ function buildOrderCard(order) {
             order.payment_status
           )}
 
-          <span class="badge badge-status">
-            ${escapeHtml(
-              order.fulfillment_status
-            )}
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <div class="order-section">
-
-        <h3>Customer</h3>
-
-        <div class="info-grid">
-
-          <div class="info-box">
-
-            <strong>
-              ${escapeHtml(
-                order.customer_name
-              )}
-            </strong>
-
-            ${escapeHtml(
-              order.customer_email
-            )}
-
-            ${
-              order.customer_phone
-                ? "<br>" +
-                  escapeHtml(
-                    order.customer_phone
-                  )
-                : ""
-            }
-
-          </div>
-
-
-          <div class="info-box">
-
-            <strong>
-              Delivery Address
-            </strong>
-
-            ${address}
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="order-section">
-
-        <h3>Products</h3>
-
-        ${itemHtml}
-
-      </div>
-
-
-      <div class="order-section">
-
-        <h3>Shipping</h3>
-
-        <div class="info-box">
-
-          <strong>
-            ${escapeHtml(
-              order.carrier
-            )}
-            ${
-              order.shipping_service
-                ? " — " +
-                  escapeHtml(
-                    order.shipping_service
-                  )
-                : ""
-            }
-          </strong>
-
-          Shipping:
-          ${money(
-            order.shipping_amount,
-            order.currency
+          ${fulfillmentBadge(
+            order.fulfillment_status
           )}
 
-        </div>
 
-      </div>
+          ${
+            hasMadeToMeasure
 
+              ? `
+                <span class="badge badge-production">
+                  Made to Measure
+                </span>
+              `
 
-      <div class="order-section">
-
-        <h3>Payment</h3>
-
-        <div class="info-grid">
-
-          <div class="info-box">
-
-            <strong>
-              PayPal Order ID
-            </strong>
-
-            ${escapeHtml(
-              order.paypal_order_id ||
-              "Not available"
-            )}
-
-          </div>
+              : ""
+          }
 
 
-          <div class="info-box">
+          ${
+            hasReadyToWear
 
-            <strong>
-              PayPal Capture ID
-            </strong>
+              ? `
+                <span class="badge badge-status">
+                  Ready to Wear
+                </span>
+              `
 
-            ${escapeHtml(
-              order.paypal_capture_id ||
-              "Not captured"
-            )}
-
-          </div>
+              : ""
+          }
 
         </div>
 
       </div>
 
 
-      <div class="order-section">
+      <details class="order-details">
 
-        <h3>Order Total</h3>
+        <summary>
+          View Full Order Details
+        </summary>
 
-        <div class="summary">
 
-          <div class="summary-row">
-            <span>Products</span>
+        <div class="order-details-content">
 
-            <strong>
-              ${money(
-                order.subtotal,
-                order.currency
-              )}
-            </strong>
+
+          <!-- CUSTOMER -->
+
+          <div class="order-section">
+
+            <h3>
+              Customer
+            </h3>
+
+
+            <div class="info-grid">
+
+
+              <div class="info-box">
+
+                <strong>
+                  ${escapeHtml(
+                    order.customer_name
+                  )}
+                </strong>
+
+                ${escapeHtml(
+                  order.customer_email
+                )}
+
+                ${
+                  order.customer_phone
+
+                    ? "<br>" +
+                      escapeHtml(
+                        order.customer_phone
+                      )
+
+                    : ""
+                }
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  Delivery Address
+                </strong>
+
+                ${address}
+
+              </div>
+
+            </div>
+
           </div>
 
 
-          <div class="summary-row">
-            <span>Shipping</span>
+          <!-- PRODUCTS -->
 
-            <strong>
-              ${money(
-                order.shipping_amount,
-                order.currency
-              )}
-            </strong>
+          <div class="order-section">
+
+            <h3>
+              Products
+            </h3>
+
+            ${itemHtml}
+
+          </div>
+
+
+          <!-- SHIPPING -->
+
+          <div class="order-section">
+
+            <h3>
+              Shipping
+            </h3>
+
+
+            <div class="info-grid">
+
+              <div class="info-box">
+
+                <strong>
+                  Carrier / Service
+                </strong>
+
+                ${escapeHtml(
+                  order.carrier ||
+                  "Not available"
+                )}
+
+                ${
+                  order.shipping_service
+
+                    ? " — " +
+                      escapeHtml(
+                        order.shipping_service
+                      )
+
+                    : ""
+                }
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  Shipping Amount
+                </strong>
+
+                ${money(
+                  order.shipping_amount,
+                  order.currency
+                )}
+
+              </div>
+
+            </div>
+
           </div>
 
 
-          <div class="summary-row">
-            <span>VAT</span>
+          <!-- PAYMENT -->
 
-            <strong>
-              ${money(
-                order.vat_amount,
-                order.currency
-              )}
-            </strong>
+          <div class="order-section">
+
+            <h3>
+              Payment
+            </h3>
+
+
+            <div class="info-grid">
+
+
+              <div class="info-box">
+
+                <strong>
+                  Payment Status
+                </strong>
+
+                ${escapeHtml(
+                  order.payment_status ||
+                  "Unknown"
+                )}
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  Paid At
+                </strong>
+
+                ${escapeHtml(
+                  formatDate(
+                    order.paid_at
+                  ) ||
+                  "Not paid yet"
+                )}
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  PayPal Order ID
+                </strong>
+
+                ${escapeHtml(
+                  order.paypal_order_id ||
+                  "Not available"
+                )}
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  PayPal Capture ID
+                </strong>
+
+                ${escapeHtml(
+                  order.paypal_capture_id ||
+                  "Not captured"
+                )}
+
+              </div>
+
+            </div>
+
           </div>
 
 
-          <div class="summary-row total">
+          <!-- INVENTORY -->
 
-            <span>Total</span>
+          <div class="order-section">
 
-            <span>
-              ${money(
-                order.total_amount,
-                order.currency
-              )}
-            </span>
+            <h3>
+              Inventory
+            </h3>
+
+
+            <div class="info-box">
+
+              <strong>
+                Inventory Processed
+              </strong>
+
+              ${
+                order.inventory_processed_at
+
+                  ? "Yes — " +
+                    escapeHtml(
+                      formatDate(
+                        order.inventory_processed_at
+                      )
+                    )
+
+                  : "Not yet"
+              }
+
+            </div>
 
           </div>
+
+
+          <!-- TOTAL -->
+
+          <div class="order-section">
+
+            <h3>
+              Order Total
+            </h3>
+
+
+            <div class="summary">
+
+
+              <div class="summary-row">
+
+                <span>
+                  Products
+                </span>
+
+                <strong>
+
+                  ${money(
+                    order.subtotal,
+                    order.currency
+                  )}
+
+                </strong>
+
+              </div>
+
+
+              <div class="summary-row">
+
+                <span>
+                  Shipping
+                </span>
+
+                <strong>
+
+                  ${money(
+                    order.shipping_amount,
+                    order.currency
+                  )}
+
+                </strong>
+
+              </div>
+
+
+              <div class="summary-row">
+
+                <span>
+                  VAT
+                </span>
+
+                <strong>
+
+                  ${money(
+                    order.vat_amount,
+                    order.currency
+                  )}
+
+                </strong>
+
+              </div>
+
+
+              <div class="summary-row total">
+
+                <span>
+                  Total
+                </span>
+
+                <span>
+
+                  ${money(
+                    order.total_amount,
+                    order.currency
+                  )}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- WORKFLOW -->
+
+          <div class="status-control">
+
+            <label>
+              Order / Fulfillment Status
+            </label>
+
+
+            <select
+              id="status-${Number(
+                order.id
+              )}"
+            >
+
+              ${buildStatusOptions(
+                order
+              )}
+
+            </select>
+
+
+            <button
+              type="button"
+              onclick="updateStatus(${Number(
+                order.id
+              )})"
+            >
+              Save Status
+            </button>
+
+
+            <p class="status-help">
+
+              Suggested Ready-to-Wear flow:
+              New → Processing →
+              Ready to Ship → Shipped →
+              Fulfilled.
+
+              <br><br>
+
+              Suggested Made-to-Measure flow:
+              New → Processing →
+              In Production →
+              Ready to Ship → Shipped →
+              Fulfilled.
+
+              <br><br>
+
+              Changing an order to
+              Cancelled / Refunded does not
+              automatically issue a PayPal refund.
+
+            </p>
+
+
+            ${
+              archiveAllowed
+
+                ? `
+
+                  <div class="archive-area">
+
+                    <button
+                      type="button"
+                      class="archive-button"
+                      onclick="archiveOrder(${Number(
+                        order.id
+                      )})"
+                    >
+                      Archive Order
+                    </button>
+
+
+                    <div class="archive-note">
+
+                      ${
+                        order.payment_status ===
+                          "paid"
+
+                          ? "Paid orders remain stored permanently as business records."
+
+                          : "Use Archive for abandoned, unpaid or test orders you no longer need in the active list."
+                      }
+
+                    </div>
+
+                  </div>
+
+                `
+
+                : ""
+            }
+
+
+            ${
+              archived
+
+                ? `
+
+                  <div class="archive-note">
+
+                    Archived:
+
+                    ${escapeHtml(
+                      formatDate(
+                        order.archived_at
+                      ) ||
+                      "date unavailable"
+                    )}
+
+                    <br>
+
+                    To restore this order,
+                    choose another status above
+                    and press Save Status.
+
+                  </div>
+
+                `
+
+                : ""
+            }
+
+          </div>
+
 
         </div>
 
-      </div>
+      </details>
 
-
-      <div class="status-control">
-
-        <label>
-          Fulfillment Status
-        </label>
-
-
-        ${
-          !canFulfill
-            ? `
-              <p>
-                This order has not been paid yet.
-                Fulfillment changes are disabled.
-              </p>
-            `
-            : ""
-        }
-
-
-        <select
-          id="status-${order.id}"
-          ${canFulfill ? "" : "disabled"}
-        >
-
-          <option
-            value="new"
-            ${
-              order.fulfillment_status ===
-              "new"
-                ? "selected"
-                : ""
-            }
-          >
-            New
-          </option>
-
-          <option
-            value="processing"
-            ${
-              order.fulfillment_status ===
-              "processing"
-                ? "selected"
-                : ""
-            }
-          >
-            Processing
-          </option>
-
-          <option
-            value="shipped"
-            ${
-              order.fulfillment_status ===
-              "shipped"
-                ? "selected"
-                : ""
-            }
-          >
-            Shipped
-          </option>
-
-          <option
-            value="delivered"
-            ${
-              order.fulfillment_status ===
-              "delivered"
-                ? "selected"
-                : ""
-            }
-          >
-            Delivered
-          </option>
-
-        </select>
-
-
-        <button
-          type="button"
-          onclick="updateStatus(${Number(order.id)})"
-          ${canFulfill ? "" : "disabled"}
-        >
-          Save Status
-        </button>
-
-      </div>
 
     </section>
 
@@ -1241,11 +3341,44 @@ function buildOrderCard(order) {
 }
 
 
-async function updateStatus(orderId) {
+/* =========================
+   UPDATE STATUS
+========================= */
+
+async function updateStatus(
+  orderId
+) {
+
+  const order =
+    allOrders.find(
+      item =>
+        Number(
+          item.id
+        ) ===
+        Number(
+          orderId
+        )
+    );
+
+
+  if (
+    !order
+  ) {
+
+    showMessage(
+      "Order could not be found.",
+      "error"
+    );
+
+
+    return;
+  }
+
 
   const select =
     document.getElementById(
-      "status-" + orderId
+      "status-" +
+      orderId
     );
 
 
@@ -1257,8 +3390,14 @@ async function updateStatus(orderId) {
     [
       "new",
       "processing",
+      "in_production",
+      "ready_to_ship",
       "shipped",
-      "delivered"
+      "fulfilled",
+      "delivered",
+      "cancelled_refunded",
+      "needs_review",
+      "archived"
     ];
 
 
@@ -1273,51 +3412,136 @@ async function updateStatus(orderId) {
       "error"
     );
 
+
     return;
+  }
+
+
+  /*
+    Unpaid orders should never accidentally
+    enter normal fulfillment workflow.
+  */
+
+  if (
+    order.payment_status !==
+      "paid" &&
+    ![
+      "new",
+      "needs_review",
+      "cancelled_refunded",
+      "archived"
+    ].includes(
+      newStatus
+    )
+  ) {
+
+    showMessage(
+      "This order has not been paid. It cannot enter the normal fulfillment workflow.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  if (
+    newStatus ===
+      "cancelled_refunded"
+  ) {
+
+    const confirmed =
+      confirm(
+        "Mark Order #" +
+        orderId +
+        " as Cancelled / Refunded?\n\nThis changes the website order status only. It does NOT automatically send a PayPal refund."
+      );
+
+
+    if (
+      !confirmed
+    ) {
+
+      return;
+    }
   }
 
 
   const button =
     select.parentElement
-      .querySelector("button");
+      .querySelector(
+        "button"
+      );
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
+
+
   button.textContent =
     "Saving...";
+
+
+  const payload = {
+
+    fulfillment_status:
+      newStatus,
+
+    status_updated_at:
+      new Date()
+        .toISOString()
+
+  };
+
+
+  if (
+    newStatus !==
+      "archived"
+  ) {
+
+    payload.archived_at =
+      null;
+  }
 
 
   const {
     error
   } =
     await supabaseClient
-      .from("physical_orders")
-      .update({
-        fulfillment_status:
-          newStatus
-      })
+      .from(
+        "physical_orders"
+      )
+      .update(
+        payload
+      )
       .eq(
         "id",
         orderId
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     console.error(
       error
     );
+
 
     showMessage(
       "Could not update the order status.",
       "error"
     );
 
+
     button.disabled =
       false;
 
+
     button.textContent =
       "Save Status";
+
 
     return;
   }
@@ -1327,7 +3551,9 @@ async function updateStatus(orderId) {
     "Order #" +
     orderId +
     " updated to " +
-    newStatus +
+    statusLabel(
+      newStatus
+    ) +
     "."
   );
 
@@ -1336,8 +3562,140 @@ async function updateStatus(orderId) {
 }
 
 
+/* =========================
+   ARCHIVE
+========================= */
+
+async function archiveOrder(
+  orderId
+) {
+
+  const order =
+    allOrders.find(
+      item =>
+        Number(
+          item.id
+        ) ===
+        Number(
+          orderId
+        )
+    );
+
+
+  if (
+    !order
+  ) {
+
+    showMessage(
+      "Order could not be found.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  if (
+    !canArchiveOrder(
+      order
+    )
+  ) {
+
+    showMessage(
+      "Finish or cancel this paid order before archiving it.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Archive Order #" +
+      orderId +
+      "?\n\nThe order will remain safely stored and can be found under Archived."
+    );
+
+
+  if (
+    !confirmed
+  ) {
+
+    return;
+  }
+
+
+  const now =
+    new Date()
+      .toISOString();
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from(
+        "physical_orders"
+      )
+      .update({
+
+        fulfillment_status:
+          "archived",
+
+        archived_at:
+          now,
+
+        status_updated_at:
+          now
+
+      })
+      .eq(
+        "id",
+        orderId
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "Could not archive this order.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  showMessage(
+    "Order #" +
+    orderId +
+    " moved to Archived."
+  );
+
+
+  await loadOrders();
+}
+
+
+/* =========================
+   FILTER EVENTS
+========================= */
+
 document
-  .getElementById("search")
+  .getElementById(
+    "search"
+  )
   .addEventListener(
     "input",
     renderOrders
@@ -1345,7 +3703,9 @@ document
 
 
 document
-  .getElementById("payment-filter")
+  .getElementById(
+    "payment-filter"
+  )
   .addEventListener(
     "change",
     renderOrders
@@ -1353,12 +3713,18 @@ document
 
 
 document
-  .getElementById("fulfillment-filter")
+  .getElementById(
+    "purchase-filter"
+  )
   .addEventListener(
     "change",
     renderOrders
   );
 
+
+/* =========================
+   START
+========================= */
 
 async function start() {
 
@@ -1366,7 +3732,10 @@ async function start() {
     await protectPage();
 
 
-  if (!allowed) {
+  if (
+    !allowed
+  ) {
+
     return;
   }
 
@@ -1379,5 +3748,7 @@ start();
 
 </script>
 
+
 </body>
+
 </html>
