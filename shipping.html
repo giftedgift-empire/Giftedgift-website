@@ -635,6 +635,140 @@
   }
 
 
+  function normalizeVariantId(
+    value
+  ) {
+
+    const number =
+      Number(
+        value
+      );
+
+
+    return (
+      Number.isInteger(number) &&
+      number > 0
+    )
+      ? number
+      : null;
+  }
+
+
+  function getPurchaseMode(
+    item
+  ) {
+
+    if (
+      item &&
+      (
+        item.purchase_mode ===
+          "made_to_measure" ||
+        (
+          item.fashion &&
+          item.fashion.purchase_mode ===
+            "made_to_measure"
+        )
+      )
+    ) {
+
+      return "made_to_measure";
+    }
+
+
+    return "ready_to_wear";
+  }
+
+
+  function getVariantId(
+    item
+  ) {
+
+    return normalizeVariantId(
+      item &&
+      item.fashion
+        ? item.fashion.variant_id
+        : null
+    );
+  }
+
+
+  function getFashionDetails(
+    product
+  ) {
+
+    if (
+      !product ||
+      !product.fashion_details ||
+      typeof product.fashion_details !==
+        "object" ||
+      Array.isArray(
+        product.fashion_details
+      )
+    ) {
+
+      return {};
+    }
+
+
+    return product.fashion_details;
+  }
+
+
+  function getSewConfig(
+    product
+  ) {
+
+    const details =
+      getFashionDetails(
+        product
+      );
+
+
+    if (
+      !details.sew_on_demand ||
+      typeof details.sew_on_demand !==
+        "object" ||
+      Array.isArray(
+        details.sew_on_demand
+      )
+    ) {
+
+      return {};
+    }
+
+
+    return details.sew_on_demand;
+  }
+
+
+  function parseOptionalNumber(
+    value
+  ) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+
+      return null;
+    }
+
+
+    const number =
+      Number(
+        value
+      );
+
+
+    return Number.isFinite(
+      number
+    )
+      ? number
+      : null;
+  }
+
+
   function formatPrice(
     amount
   ) {
@@ -873,6 +1007,281 @@
   }
 
 
+  function getVerifiedVariant(
+    item,
+    product,
+    variantMap
+  ) {
+
+    const variantId =
+      getVariantId(
+        item
+      );
+
+
+    if (
+      !variantId
+    ) {
+
+      return null;
+    }
+
+
+    const variant =
+      variantMap.get(
+        variantId
+      );
+
+
+    if (
+      !variant ||
+      variant.active !== true ||
+      Number(
+        variant.product_id
+      ) !==
+      Number(
+        product.id
+      )
+    ) {
+
+      return null;
+    }
+
+
+    return variant;
+  }
+
+
+  function getEffectivePrice(
+    item,
+    product,
+    dealMap,
+    variantMap
+  ) {
+
+    const purchaseMode =
+      getPurchaseMode(
+        item
+      );
+
+
+    const normalPrice =
+      Number(
+        product.price
+      );
+
+
+    const dealId =
+      normalizeDealId(
+        item.deal_id
+      );
+
+
+    const deal =
+      dealId
+        ? dealMap.get(
+            dealId
+          )
+        : null;
+
+
+    const verifiedDealPrice =
+      getVerifiedDealPrice(
+        deal,
+        product
+      );
+
+
+    /*
+      MADE TO MEASURE
+    */
+
+    if (
+      product.fashion_enabled ===
+        true &&
+      purchaseMode ===
+        "made_to_measure"
+    ) {
+
+      const config =
+        getSewConfig(
+          product
+        );
+
+
+      if (
+        config.enabled !==
+          true
+      ) {
+
+        throw new Error(
+          `Sew on Demand is no longer available for ${product.name}.`
+        );
+      }
+
+
+      const basePrice =
+        verifiedDealPrice !==
+          null
+
+          ? verifiedDealPrice
+
+          : normalPrice;
+
+
+      const priceMode =
+        String(
+          config.price_mode ||
+          "same_price"
+        );
+
+
+      const priceValue =
+        parseOptionalNumber(
+          config.price_value
+        );
+
+
+      if (
+        priceMode ===
+          "same_price"
+      ) {
+
+        return basePrice;
+      }
+
+
+      if (
+        priceMode ===
+          "surcharge"
+      ) {
+
+        if (
+          priceValue === null ||
+          priceValue < 0
+        ) {
+
+          throw new Error(
+            `The Sew on Demand surcharge for ${product.name} is not valid.`
+          );
+        }
+
+
+        return (
+          basePrice +
+          priceValue
+        );
+      }
+
+
+      if (
+        priceMode ===
+          "custom_price"
+      ) {
+
+        if (
+          priceValue === null ||
+          priceValue <= 0
+        ) {
+
+          throw new Error(
+            `The Sew on Demand price for ${product.name} is not valid.`
+          );
+        }
+
+
+        return priceValue;
+      }
+
+
+      throw new Error(
+        `The Sew on Demand pricing setup for ${product.name} is not valid.`
+      );
+    }
+
+
+    /*
+      READY TO WEAR DEAL
+
+      A current valid Deal takes priority
+      over an optional variant price.
+    */
+
+    if (
+      verifiedDealPrice !==
+        null
+    ) {
+
+      return verifiedDealPrice;
+    }
+
+
+    /*
+      READY TO WEAR VARIANT PRICE
+    */
+
+    if (
+      product.fashion_enabled ===
+        true &&
+      purchaseMode ===
+        "ready_to_wear"
+    ) {
+
+      const variant =
+        getVerifiedVariant(
+          item,
+          product,
+          variantMap
+        );
+
+
+      if (
+        getVariantId(
+          item
+        ) &&
+        !variant
+      ) {
+
+        throw new Error(
+          `The selected size / colour for ${product.name} is no longer available.`
+        );
+      }
+
+
+      if (
+        variant
+      ) {
+
+        const override =
+          parseOptionalNumber(
+            variant.price_override
+          );
+
+
+        if (
+          override !== null
+        ) {
+
+          if (
+            override <= 0
+          ) {
+
+            throw new Error(
+              `The selected option for ${product.name} has an invalid price.`
+            );
+          }
+
+
+          return override;
+        }
+      }
+    }
+
+
+    return normalPrice;
+  }
+
+
   async function calculateCartSummary() {
 
     const cart =
@@ -910,7 +1319,7 @@
           "products"
         )
         .select(
-          "id,name,price,in_stock,weight_kg"
+          "id,name,price,in_stock,weight_kg,fashion_enabled,fashion_details"
         )
         .in(
           "id",
@@ -1000,12 +1409,6 @@
         dealError
       ) {
 
-        /*
-          If deals cannot be verified,
-          we do not trust the discounted
-          prices. Normal prices will apply.
-        */
-
         console.error(
           "Could not verify deals:",
           dealError
@@ -1030,6 +1433,89 @@
     }
 
 
+    /*
+      Load only the Fashion variants
+      referenced by this cart.
+    */
+
+    const variantIds = [
+      ...new Set(
+        cart
+          .filter(
+            item =>
+              getPurchaseMode(
+                item
+              ) ===
+                "ready_to_wear"
+          )
+          .map(
+            item =>
+              getVariantId(
+                item
+              )
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+    const variantMap =
+      new Map();
+
+
+    if (
+      variantIds.length > 0
+    ) {
+
+      const {
+        data: variants,
+        error: variantError
+      } =
+        await supabaseClient
+          .from(
+            "product_variants"
+          )
+          .select(
+            "id,product_id,size,color,sku,stock_quantity,price_override,active"
+          )
+          .in(
+            "id",
+            variantIds
+          );
+
+
+      if (
+        variantError
+      ) {
+
+        console.error(
+          "Fashion variant verification error:",
+          variantError
+        );
+
+
+        throw new Error(
+          "Your selected Fashion options could not be verified."
+        );
+      }
+
+
+      (
+        variants || []
+      ).forEach(
+        variant => {
+
+          variantMap.set(
+            Number(
+              variant.id
+            ),
+            variant
+          );
+        }
+      );
+    }
+
+
     let totalItems =
       0;
 
@@ -1040,6 +1526,10 @@
 
     let totalWeightKg =
       0;
+
+
+    const requestedVariantQuantities =
+      new Map();
 
 
     for (
@@ -1061,16 +1551,6 @@
 
         throw new Error(
           "One of the products in your cart no longer exists."
-        );
-      }
-
-
-      if (
-        product.in_stock !== true
-      ) {
-
-        throw new Error(
-          `${product.name} is currently out of stock.`
         );
       }
 
@@ -1097,7 +1577,8 @@
         !Number.isInteger(
           quantity
         ) ||
-        quantity <= 0
+        quantity <= 0 ||
+        quantity > 99
       ) {
 
         throw new Error(
@@ -1132,41 +1613,159 @@
       }
 
 
-      let effectivePrice =
-        normalPrice;
-
-
-      const dealId =
-        normalizeDealId(
-          item.deal_id
+      const purchaseMode =
+        getPurchaseMode(
+          item
         );
 
 
+      /*
+        MADE TO MEASURE
+
+        Ready-to-Wear stock does not control
+        a Sew on Demand order.
+      */
+
       if (
-        dealId
+        purchaseMode ===
+          "made_to_measure"
       ) {
 
-        const deal =
-          dealMap.get(
-            dealId
-          );
-
-
-        const verifiedDealPrice =
-          getVerifiedDealPrice(
-            deal,
+        const config =
+          getSewConfig(
             product
           );
 
 
         if (
-          verifiedDealPrice !==
-          null
+          product.fashion_enabled !==
+            true ||
+          config.enabled !==
+            true
         ) {
 
-          effectivePrice =
-            verifiedDealPrice;
+          throw new Error(
+            `Sew on Demand is no longer available for ${product.name}.`
+          );
         }
+
+      } else {
+
+        /*
+          READY TO WEAR / NORMAL PRODUCT
+        */
+
+        if (
+          product.in_stock !==
+            true
+        ) {
+
+          throw new Error(
+            `${product.name} is currently out of stock.`
+          );
+        }
+
+
+        const variantId =
+          getVariantId(
+            item
+          );
+
+
+        if (
+          variantId
+        ) {
+
+          const variant =
+            getVerifiedVariant(
+              item,
+              product,
+              variantMap
+            );
+
+
+          if (
+            !variant
+          ) {
+
+            throw new Error(
+              `The selected size / colour for ${product.name} is no longer available.`
+            );
+          }
+
+
+          const stock =
+            Number(
+              variant.stock_quantity
+            );
+
+
+          if (
+            !Number.isInteger(
+              stock
+            ) ||
+            stock < 0
+          ) {
+
+            throw new Error(
+              `The stock for the selected option of ${product.name} is not valid.`
+            );
+          }
+
+
+          const alreadyRequested =
+            requestedVariantQuantities.get(
+              variantId
+            ) || 0;
+
+
+          const requestedNow =
+            alreadyRequested +
+            quantity;
+
+
+          if (
+            requestedNow >
+            stock
+          ) {
+
+            throw new Error(
+              `Only ${stock} ${
+                stock === 1
+                  ? "item is"
+                  : "items are"
+              } currently available for the selected option of ${product.name}.`
+            );
+          }
+
+
+          requestedVariantQuantities.set(
+            variantId,
+            requestedNow
+          );
+        }
+      }
+
+
+      const effectivePrice =
+        getEffectivePrice(
+          item,
+          product,
+          dealMap,
+          variantMap
+        );
+
+
+      if (
+        !Number.isFinite(
+          effectivePrice
+        ) ||
+        effectivePrice <= 0
+      ) {
+
+        throw new Error(
+          `${product.name} does not currently have a valid price.`
+        );
       }
 
 
