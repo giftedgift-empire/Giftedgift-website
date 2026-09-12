@@ -46,9 +46,10 @@
       font-weight: bold;
     }
 
-    nav a:hover {
-      color: #f2bd16;
-    }
+    nav a:hover,
+nav a.active {
+  color: #f2bd16;
+}
 
     .hero {
       background: white;
@@ -575,10 +576,13 @@
 
     <a href="contact.html">Contact</a>
 
-    <a href="cart.html">
-      🛒 Cart
-      (<span id="cart-count">0</span>)
-    </a>
+    <a
+  href="cart.html"
+  class="active"
+>
+  🛒 Cart
+  (<span id="cart-count">0</span>)
+</a>
 
   </nav>
 
