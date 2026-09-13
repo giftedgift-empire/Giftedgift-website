@@ -418,6 +418,12 @@ header p {
   margin-bottom: 4px;
 }
 
+.tracking-link {
+  color: #123a8c;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
 
 /* =========================
    ITEMS
@@ -603,7 +609,8 @@ header p {
   margin-bottom: 10px;
 }
 
-.status-control select {
+.status-control select,
+.status-control input {
   width: 100%;
   padding: 12px;
   border: 1px solid #bbb;
@@ -611,9 +618,31 @@ header p {
   font-size: 16px;
 }
 
+.tracking-fields {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #dfcf93;
+}
+
+.tracking-fields label {
+  margin-top: 13px;
+  margin-bottom: 7px;
+}
+
+.tracking-fields label:first-child {
+  margin-top: 0;
+}
+
+.tracking-note {
+  margin: 9px 0 0;
+  color: #665300;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .status-control button {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 14px;
   padding: 13px;
   border: none;
   border-radius: 8px;
@@ -652,14 +681,14 @@ header p {
   border: none;
   border-radius: 8px;
   padding: 12px;
-  background: #666;
+  background: #666 !important;
   color: white;
   font-weight: bold;
   cursor: pointer;
 }
 
 .archive-button:hover {
-  background: #4f4f4f;
+  background: #4f4f4f !important;
 }
 
 .archive-note {
@@ -850,7 +879,7 @@ header p {
       <input
         type="text"
         id="search"
-        placeholder="Search order, customer, email, PayPal ID or product"
+        placeholder="Search order, customer, tracking number, PayPal ID or product"
       >
 
 
@@ -1250,6 +1279,54 @@ function formatDate(
 
   return date
     .toLocaleString();
+}
+
+
+function trackingLinkHtml(
+  value
+) {
+
+  const url =
+    String(
+      value || ""
+    )
+      .trim();
+
+
+  if (
+    !url
+  ) {
+
+    return "Not added yet";
+  }
+
+
+  if (
+    !/^https?:\/\//i.test(
+      url
+    )
+  ) {
+
+    return escapeHtml(
+      url
+    );
+  }
+
+
+  return `
+
+    <a
+      href="${escapeHtml(
+        url
+      )}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="tracking-link"
+    >
+      Open Tracking Page
+    </a>
+
+  `;
 }
 
 
@@ -2458,8 +2535,17 @@ function renderOrders() {
               order.customer_phone,
               order.paypal_order_id,
               order.paypal_capture_id,
+              order.tracking_number,
+              order.tracking_url,
+              order.carrier,
+              order.shipping_service,
               itemText
             ]
+              .filter(
+                value =>
+                  value !== null &&
+                  value !== undefined
+              )
               .join(
                 " "
               )
@@ -3003,6 +3089,49 @@ function buildOrderCard(
 
               </div>
 
+
+              <div class="info-box">
+
+                <strong>
+                  Tracking / Reference Number
+                </strong>
+
+                ${escapeHtml(
+                  order.tracking_number ||
+                  "Not added yet"
+                )}
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  Tracking Page
+                </strong>
+
+                ${trackingLinkHtml(
+                  order.tracking_url
+                )}
+
+              </div>
+
+
+              <div class="info-box">
+
+                <strong>
+                  Shipped At
+                </strong>
+
+                ${escapeHtml(
+                  formatDate(
+                    order.shipped_at
+                  ) ||
+                  "Not shipped yet"
+                )}
+
+              </div>
+
             </div>
 
           </div>
@@ -3207,7 +3336,11 @@ function buildOrderCard(
 
           <div class="status-control">
 
-            <label>
+            <label
+              for="status-${Number(
+                order.id
+              )}"
+            >
               Order / Fulfillment Status
             </label>
 
@@ -3225,8 +3358,68 @@ function buildOrderCard(
             </select>
 
 
+            <div class="tracking-fields">
+
+              <label
+                for="tracking-number-${Number(
+                  order.id
+                )}"
+              >
+                Parcel Tracking / Reference Number
+              </label>
+
+
+              <input
+                type="text"
+                id="tracking-number-${Number(
+                  order.id
+                )}"
+                value="${escapeHtml(
+                  order.tracking_number ||
+                  ""
+                )}"
+                placeholder="e.g. XY123456789FR"
+                autocomplete="off"
+              >
+
+
+              <label
+                for="tracking-url-${Number(
+                  order.id
+                )}"
+              >
+                Tracking URL
+              </label>
+
+
+              <input
+                type="url"
+                id="tracking-url-${Number(
+                  order.id
+                )}"
+                value="${escapeHtml(
+                  order.tracking_url ||
+                  ""
+                )}"
+                placeholder="https://..."
+                autocomplete="off"
+              >
+
+
+              <p class="tracking-note">
+                A tracking/reference number is required
+                before an order can be marked as Shipped.
+                The tracking URL is optional.
+              </p>
+
+            </div>
+
+
             <button
               type="button"
+              id="save-status-${Number(
+                order.id
+              )}"
               onclick="updateStatus(${Number(
                 order.id
               )})"
@@ -3382,8 +3575,58 @@ async function updateStatus(
     );
 
 
+  const trackingNumberInput =
+    document.getElementById(
+      "tracking-number-" +
+      orderId
+    );
+
+
+  const trackingUrlInput =
+    document.getElementById(
+      "tracking-url-" +
+      orderId
+    );
+
+
+  const button =
+    document.getElementById(
+      "save-status-" +
+      orderId
+    );
+
+
+  if (
+    !select ||
+    !trackingNumberInput ||
+    !trackingUrlInput ||
+    !button
+  ) {
+
+    showMessage(
+      "The order controls could not be found. Refresh the page and try again.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
   const newStatus =
     select.value;
+
+
+  const trackingNumber =
+    trackingNumberInput
+      .value
+      .trim();
+
+
+  const trackingUrl =
+    trackingUrlInput
+      .value
+      .trim();
 
 
   const allowed =
@@ -3409,6 +3652,51 @@ async function updateStatus(
 
     showMessage(
       "Invalid order status.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  /*
+    Tracking URL is optional,
+    but if supplied it must be
+    a normal HTTP/HTTPS link.
+  */
+
+  if (
+    trackingUrl &&
+    !/^https?:\/\//i.test(
+      trackingUrl
+    )
+  ) {
+
+    showMessage(
+      "Tracking URL must start with http:// or https://.",
+      "error"
+    );
+
+
+    return;
+  }
+
+
+  /*
+    Do not allow an order to
+    become Shipped without a
+    parcel tracking/reference.
+  */
+
+  if (
+    newStatus ===
+      "shipped" &&
+    !trackingNumber
+  ) {
+
+    showMessage(
+      "Enter the parcel tracking/reference number before marking this order as Shipped.",
       "error"
     );
 
@@ -3467,13 +3755,6 @@ async function updateStatus(
   }
 
 
-  const button =
-    select.parentElement
-      .querySelector(
-        "button"
-      );
-
-
   button.disabled =
     true;
 
@@ -3482,17 +3763,50 @@ async function updateStatus(
     "Saving...";
 
 
+  const now =
+    new Date()
+      .toISOString();
+
+
   const payload = {
 
     fulfillment_status:
       newStatus,
 
     status_updated_at:
-      new Date()
-        .toISOString()
+      now,
+
+    tracking_number:
+      trackingNumber ||
+      null,
+
+    tracking_url:
+      trackingUrl ||
+      null
 
   };
 
+
+  /*
+    Keep the first recorded
+    shipment time.
+  */
+
+  if (
+    newStatus ===
+      "shipped" &&
+    !order.shipped_at
+  ) {
+
+    payload.shipped_at =
+      now;
+  }
+
+
+  /*
+    Restoring an archived order
+    should clear archived_at.
+  */
 
   if (
     newStatus !==
