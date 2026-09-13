@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Manage Stock | GiftedGift Empire
+</title>
+
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+
+header {
+  background: #123a8c;
+  color: #fff;
+  padding: 22px 20px;
+}
+
+
+header h1 {
+  margin: 0 0 5px;
+  color: #f2bd16;
+}
+
+
+.container {
+  max-width: 950px;
+  margin: auto;
+  padding: 25px 18px;
+}
+
+
+.top-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #123a8c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+.panel {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+  margin-bottom: 25px;
+}
+
+
+.panel h2 {
+  color: #123a8c;
+  margin-top: 0;
+}
+
+
+.note {
+  background: #eef4ff;
+  border: 1px solid #cbd9f2;
+  border-radius: 9px;
+  padding: 13px;
+  color: #27406f;
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+
+.search {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+
+.stock-item {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    140px
+    145px;
+
+  gap: 14px;
+  align-items: end;
+
+  padding: 18px 0;
+
+  border-bottom:
+    1px solid #ddd;
+}
+
+
+.stock-item:last-child {
+  border-bottom: none;
+}
+
+
+.stock-name {
+  font-weight: bold;
+  color: #123a8c;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+
+.small {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+
+input[type="number"] {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+}
+
+
+button {
+  background: #f2bd16;
+  color: #111;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+button:hover {
+  opacity: .9;
+}
+
+
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+
+.stock-status {
+  margin-top: 7px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+
+.in-stock {
+  color: #177245;
+}
+
+
+.out-of-stock {
+  color: #b3261e;
+}
+
+
+#page-status {
+  text-align: center;
+  padding: 50px 20px;
+  font-weight: bold;
+}
+
+
+.empty {
+  color: #666;
+  padding: 18px 0;
+  line-height: 1.5;
+}
+
+
+.success-message {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #177245;
+}
+
+
+.error-message {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #b3261e;
+}
+
+
+@media(max-width:650px) {
+
+  .stock-item {
+    grid-template-columns: 1fr;
+  }
+
+
+  .panel {
+    padding: 18px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="page-status">
+  Checking admin login...
+</div>
+
+
+<div
+  id="page"
+  style="display:none;"
+>
+
+
+<header>
+
+  <h1>
+    GiftedGift Empire
+  </h1>
+
+  <p>
+    Manage Ordinary Product Stock
+  </p>
+
+</header>
+
+
+<main class="container">
+
+
+<a
+  href="dashboard.html"
+  class="top-link"
+>
+  ← Back to Dashboard
+</a>
+
+
+<div class="panel">
+
+
+<h2>
+  Ordinary Physical Product Stock
+</h2>
+
+
+<div class="note">
+
+  This page manages stock for ordinary physical
+  products only.
+
+  Fashion Ready-to-Wear products that use
+  Size / Colour variants remain controlled by
+  their existing Fashion inventory system.
+
+  Made-to-Measure products are also excluded.
+
+</div>
+
+
+<input
+  id="search"
+  class="search"
+  type="search"
+  placeholder="Search ordinary products..."
+>
+
+
+<div id="stock-list">
+  Loading products...
+</div>
+
+
+</div>
+
+
+</main>
+
+</div>
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+
+/*
+=====================================================
+SUPABASE
+=====================================================
+*/
+
+
+const SUPABASE_URL =
+  "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+const ADMIN_USER_ID =
+  "57a302e5-9a38-443b-8568-cc32c5a91bdf";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+let ordinaryProducts =
+  [];
+
+
+/*
+=====================================================
+ESCAPE HTML
+=====================================================
+*/
+
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/*
+=====================================================
+MADE TO MEASURE CHECK
+=====================================================
+*/
+
+
+function isMadeToMeasureProduct(
+  product
+) {
+
+  const details =
+    product &&
+    product.fashion_details &&
+    typeof product.fashion_details ===
+      "object" &&
+    !Array.isArray(
+      product.fashion_details
+    )
+
+      ? product.fashion_details
+
+      : {};
+
+
+  const sew =
+    details.sew_on_demand &&
+    typeof details.sew_on_demand ===
+      "object"
+
+      ? details.sew_on_demand
+
+      : {};
+
+
+  return sew.enabled ===
+    true;
+
+}
+
+
+/*
+=====================================================
+ADMIN PROTECTION
+=====================================================
+*/
+
+
+async function protectPage() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if (
+    error ||
+    !data.session ||
+    !data.session.user ||
+    data.session.user.id !==
+      ADMIN_USER_ID
+  ) {
+
+    window.location.replace(
+      "admin.html"
+    );
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      "page-status"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "page"
+    )
+    .style.display =
+      "block";
+
+
+  await loadProducts();
+
+}
+
+
+/*
+=====================================================
+LOAD PRODUCTS
+=====================================================
+*/
+
+
+async function loadProducts() {
+
+  const list =
+    document.getElementById(
+      "stock-list"
+    );
+
+
+  list.textContent =
+    "Loading products...";
+
+
+  /*
+    Load physical products.
+
+    We intentionally do NOT decide stock type
+    from the category name.
+
+    A bag or accessory may belong to Fashion
+    but still use ordinary stock.
+  */
+
+
+  const {
+    data: products,
+    error: productError
+  } =
+    await supabaseClient
+
+      .from(
+        "products"
+      )
+
+      .select(
+        "id,name,category,stock_quantity,in_stock,fashion_enabled,fashion_details"
+      )
+
+      .order(
+        "name",
+        {
+          ascending:
+            true
+        }
+      );
+
+
+  if (
+    productError
+  ) {
+
+    console.error(
+      "Product loading error:",
+      productError
+    );
+
+
+    list.textContent =
+      "Products could not be loaded.";
+
+    return;
+
+  }
+
+
+  /*
+    Load Fashion variants.
+
+    Any product that actually has a Size /
+    Colour variant remains under the Fashion
+    inventory system and will NOT appear here.
+  */
+
+
+  const {
+    data: variants,
+    error: variantError
+  } =
+    await supabaseClient
+
+      .from(
+        "product_variants"
+      )
+
+      .select(
+        "product_id,active"
+      );
+
+
+  if (
+    variantError
+  ) {
+
+    console.error(
+      "Variant loading error:",
+      variantError
+    );
+
+
+    list.textContent =
+      "Fashion inventory could not be verified safely. Stock management has been stopped.";
+
+    return;
+
+  }
+
+
+  const fashionVariantProductIds =
+    new Set();
+
+
+  (
+    variants ||
+    []
+  )
+    .forEach(
+      variant => {
+
+        /*
+          Even an inactive historical variant means
+          this product belongs to the variant-based
+          Fashion inventory structure.
+
+          This avoids accidentally moving Fashion
+          stock into ordinary stock.
+        */
+
+
+        if (
+          variant.product_id !==
+            null &&
+          variant.product_id !==
+            undefined
+        ) {
+
+          fashionVariantProductIds.add(
+            String(
+              variant.product_id
+            )
+          );
+
+        }
+
+      }
+    );
+
+
+  ordinaryProducts =
+    (
+      products ||
+      []
+    )
+      .filter(
+        product => {
+
+          const hasFashionVariants =
+            fashionVariantProductIds.has(
+              String(
+                product.id
+              )
+            );
+
+
+          const madeToMeasure =
+            isMadeToMeasureProduct(
+              product
+            );
+
+
+          return (
+            !hasFashionVariants &&
+            !madeToMeasure
+          );
+
+        }
+      );
+
+
+  renderProducts();
+
+}
+
+
+/*
+=====================================================
+RENDER PRODUCTS
+=====================================================
+*/
+
+
+function renderProducts() {
+
+  const list =
+    document.getElementById(
+      "stock-list"
+    );
+
+
+  const searchTerm =
+    document
+      .getElementById(
+        "search"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const filtered =
+    ordinaryProducts
+      .filter(
+        product => {
+
+          const name =
+            String(
+              product.name ||
+              ""
+            )
+              .toLowerCase();
+
+
+          const category =
+            String(
+              product.category ||
+              ""
+            )
+              .toLowerCase();
+
+
+          return (
+            name.includes(
+              searchTerm
+            ) ||
+            category.includes(
+              searchTerm
+            )
+          );
+
+        }
+      );
+
+
+  if (
+    filtered.length ===
+      0
+  ) {
+
+    list.innerHTML =
+      `
+        <div class="empty">
+          No ordinary physical products found.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    "";
+
+
+  filtered.forEach(
+    product => {
+
+      const rawQuantity =
+        Number(
+          product.stock_quantity
+        );
+
+
+      const quantity =
+        Number.isInteger(
+          rawQuantity
+        ) &&
+        rawQuantity >=
+          0
+
+          ? rawQuantity
+
+          : 0;
+
+
+      const currentlyAvailable =
+        quantity >
+          0 &&
+        product.in_stock ===
+          true;
+
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "stock-item";
+
+
+      item.innerHTML = `
+
+        <div>
+
+          <div class="stock-name">
+            ${escapeHTML(
+              product.name ||
+              "Product"
+            )}
+          </div>
+
+
+          <div class="small">
+            Category:
+            ${escapeHTML(
+              product.category ||
+              "No category"
+            )}
+          </div>
+
+
+          <div
+            class="
+              stock-status
+              ${
+                currentlyAvailable
+                  ? "in-stock"
+                  : "out-of-stock"
+              }
+            "
+          >
+
+            ${
+              currentlyAvailable
+
+                ? `In stock — ${quantity} available`
+
+                : "Out of stock"
+            }
+
+          </div>
+
+
+          <div
+            id="message-${product.id}"
+          ></div>
+
+        </div>
+
+
+        <div>
+
+          <label
+            for="stock-${product.id}"
+          >
+            Quantity
+          </label>
+
+
+          <input
+            id="stock-${product.id}"
+            type="number"
+            min="0"
+            step="1"
+            value="${quantity}"
+          >
+
+        </div>
+
+
+        <div>
+
+          <button
+            id="save-${product.id}"
+            type="button"
+            onclick="saveStock(${product.id})"
+          >
+            Save Stock
+          </button>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/*
+=====================================================
+SAVE STOCK
+=====================================================
+*/
+
+
+async function saveStock(
+  productId
+) {
+
+  const product =
+    ordinaryProducts.find(
+      item =>
+        Number(
+          item.id
+        ) ===
+        Number(
+          productId
+        )
+    );
+
+
+  /*
+    Safety check:
+
+    Only products already verified by loadProducts()
+    as ordinary inventory can be updated here.
+  */
+
+
+  if (
+    !product
+  ) {
+
+    alert(
+      "This product could not be verified as an ordinary physical product."
+    );
+
+    return;
+
+  }
+
+
+  const input =
+    document.getElementById(
+      `stock-${productId}`
+    );
+
+
+  const button =
+    document.getElementById(
+      `save-${productId}`
+    );
+
+
+  const message =
+    document.getElementById(
+      `message-${productId}`
+    );
+
+
+  const quantity =
+    Number(
+      input.value
+    );
+
+
+  message.textContent =
+    "";
+
+
+  message.className =
+    "";
+
+
+  if (
+    !Number.isInteger(
+      quantity
+    ) ||
+    quantity <
+      0
+  ) {
+
+    alert(
+      "Please enter a whole Stock Quantity of 0 or more."
+    );
+
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Saving...";
+
+
+  /*
+    Check Admin session again immediately
+    before making the database update.
+  */
+
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if (
+    sessionError ||
+    !sessionData.session ||
+    !sessionData.session.user ||
+    sessionData.session.user.id !==
+      ADMIN_USER_ID
+  ) {
+
+    alert(
+      "Admin login could not be verified."
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Save Stock";
+
+
+    return;
+
+  }
+
+
+  /*
+    Quantity automatically controls availability.
+
+    0 = Out of Stock
+    1 or more = In Stock
+  */
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+
+      .from(
+        "products"
+      )
+
+      .update({
+
+        stock_quantity:
+          quantity,
+
+        in_stock:
+          quantity >
+          0
+
+      })
+
+      .eq(
+        "id",
+        productId
+      );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Stock update error:",
+      error
+    );
+
+
+    message.textContent =
+      "Stock could not be saved.";
+
+
+    message.className =
+      "error-message";
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Save Stock";
+
+
+    return;
+
+  }
+
+
+  /*
+    Keep our local copy synchronized.
+  */
+
+
+  product.stock_quantity =
+    quantity;
+
+
+  product.in_stock =
+    quantity >
+    0;
+
+
+  message.textContent =
+    quantity >
+      0
+
+      ? `Saved — ${quantity} unit${quantity === 1 ? "" : "s"} available.`
+
+      : "Saved — product is now out of stock.";
+
+
+  message.className =
+    "success-message";
+
+
+  button.disabled =
+    false;
+
+
+  button.textContent =
+    "Save Stock";
+
+
+  /*
+    Re-render shortly after showing success,
+    so the status display updates too.
+  */
+
+
+  setTimeout(
+    () => {
+
+      renderProducts();
+
+    },
+    700
+  );
+
+}
+
+
+/*
+=====================================================
+SEARCH
+=====================================================
+*/
+
+
+document
+  .getElementById(
+    "search"
+  )
+  .addEventListener(
+    "input",
+    renderProducts
+  );
+
+
+/*
+=====================================================
+START
+=====================================================
+*/
+
+
+protectPage();
+
+
+</script>
+
+
+</body>
+
+</html>
