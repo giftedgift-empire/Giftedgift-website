@@ -782,13 +782,6 @@ FASHION DETAILS
 ></textarea>
 
 
-
-<!--
-=====================================================
-SIZE CHART IMAGE
-=====================================================
--->
-
 <div class="subsection">
 
 <h4>
@@ -821,13 +814,6 @@ SIZE CHART IMAGE
 </div>
 
 
-
-<!--
-=====================================================
-BODY SIZE GUIDE
-=====================================================
--->
-
 <div class="subsection">
 
 <h4>
@@ -854,13 +840,6 @@ BODY SIZE GUIDE
 </div>
 
 
-
-<!--
-=====================================================
-GARMENT MEASUREMENTS
-=====================================================
--->
-
 <div class="subsection">
 
 <h4>
@@ -886,13 +865,6 @@ GARMENT MEASUREMENTS
 
 </div>
 
-
-
-<!--
-=====================================================
-VARIANTS
-=====================================================
--->
 
 <div class="subsection">
 
@@ -923,13 +895,6 @@ VARIANTS
 
 </div>
 
-
-
-<!--
-=====================================================
-SEW ON DEMAND
-=====================================================
--->
 
 <div class="subsection">
 
@@ -1097,7 +1062,6 @@ SEW ON DEMAND
 </section>
 
 
-
 <label for="product-image">
   Product Image
 </label>
@@ -1164,6 +1128,34 @@ SEW ON DEMAND
 </div>
 
 
+<!--
+=====================================================
+ORDINARY PHYSICAL PRODUCT STOCK
+=====================================================
+-->
+
+<label for="stock_quantity">
+  Stock Quantity
+</label>
+
+<input
+  type="number"
+  id="stock_quantity"
+  min="0"
+  step="1"
+  value="0"
+>
+
+<p class="image-help">
+  For ordinary physical products, enter the number
+  of items currently available.
+  When the quantity reaches 0, the product is
+  automatically treated as out of stock.
+  Fashion Ready-to-Wear continues to use the
+  separate Sizes, Colours & Stock section above.
+</p>
+
+
 <div class="checkbox-row">
 
   <input
@@ -1173,7 +1165,7 @@ SEW ON DEMAND
   >
 
   <label for="in_stock">
-    In Stock
+    Product Available for Sale
   </label>
 
 </div>
@@ -1233,13 +1225,6 @@ SEW ON DEMAND
 
 
 <script>
-
-
-/*
-=====================================================
-SUPABASE
-=====================================================
-*/
 
 
 const SUPABASE_URL =
@@ -1433,9 +1418,7 @@ GARMENT-SPECIFIC MEASUREMENTS
 
 const GARMENT_TEMPLATES = {
 
-
   blouse_top: [
-
     "size",
     "bust",
     "under_bust",
@@ -1450,23 +1433,17 @@ const GARMENT_TEMPLATES = {
     "neck",
     "front_neck_depth",
     "back_neck_depth"
-
   ],
 
-
   skirt: [
-
     "size",
     "waist",
     "hips",
     "waist_to_hip",
     "skirt_length"
-
   ],
 
-
   trousers: [
-
     "size",
     "waist",
     "hips",
@@ -1476,12 +1453,9 @@ const GARMENT_TEMPLATES = {
     "inseam",
     "knee",
     "ankle_hem"
-
   ],
 
-
   gown_dress: [
-
     "size",
     "bust",
     "under_bust",
@@ -1498,12 +1472,9 @@ const GARMENT_TEMPLATES = {
     "neck",
     "front_neck_depth",
     "back_neck_depth"
-
   ],
 
-
   jumpsuit: [
-
     "size",
     "bust",
     "under_bust",
@@ -1525,12 +1496,9 @@ const GARMENT_TEMPLATES = {
     "neck",
     "front_neck_depth",
     "back_neck_depth"
-
   ],
 
-
   top_skirt_set: [
-
     "size",
     "bust",
     "under_bust",
@@ -1548,12 +1516,9 @@ const GARMENT_TEMPLATES = {
     "neck",
     "front_neck_depth",
     "back_neck_depth"
-
   ],
 
-
   top_trouser_set: [
-
     "size",
     "bust",
     "under_bust",
@@ -1575,21 +1540,15 @@ const GARMENT_TEMPLATES = {
     "neck",
     "front_neck_depth",
     "back_neck_depth"
-
   ],
 
-
   other: [
-
     "size",
     "length",
     "width"
-
   ],
 
-
   generic: [
-
     "size",
     "bust",
     "waist",
@@ -1598,7 +1557,6 @@ const GARMENT_TEMPLATES = {
     "sleeve_length",
     "inseam",
     "length"
-
   ]
 
 };
@@ -1686,12 +1644,9 @@ async function protectPage() {
 
   await loadCategoryOptions();
 
-
   resetFashionRows();
 
-
   resetSewOnDemand();
-
 
   await loadProducts();
 
@@ -1746,7 +1701,6 @@ async function loadCategoryOptions() {
       error
     );
 
-
     select.innerHTML =
       '<option value="">Categories could not be loaded</option>';
 
@@ -1775,9 +1729,7 @@ async function loadCategoryOptions() {
       if (
         !category.name
       ) {
-
         return;
-
       }
 
 
@@ -1790,10 +1742,8 @@ async function loadCategoryOptions() {
       option.value =
         category.name;
 
-
       option.textContent =
         category.name;
-
 
       select.appendChild(
         option
@@ -1978,9 +1928,7 @@ document
       if (
         slugWasEdited
       ) {
-
         return;
-
       }
 
 
@@ -2272,9 +2220,7 @@ function validateImageFile(
   if (
     !file
   ) {
-
     return true;
-
   }
 
 
@@ -2339,9 +2285,7 @@ document
       if (
         !file
       ) {
-
         return;
-
       }
 
 
@@ -2439,9 +2383,7 @@ document
       if (
         !file
       ) {
-
         return;
-
       }
 
 
@@ -2529,9 +2471,7 @@ async function uploadProductImage(
   if (
     !file
   ) {
-
     return null;
-
   }
 
 
@@ -3888,7 +3828,7 @@ function updateSewPriceField() {
 
   if (
     mode ===
-    "same_price"
+      "same_price"
   ) {
 
     wrap.classList.add(
@@ -4245,9 +4185,7 @@ function validateSewOnDemand() {
       )
       .checked
   ) {
-
     return;
-
   }
 
 
@@ -4288,12 +4226,12 @@ function validateSewOnDemand() {
 
   if (
     mode !==
-    "same_price"
+      "same_price"
   ) {
 
     if (
       valueText ===
-      ""
+        ""
     ) {
 
       throw new Error(
@@ -4410,9 +4348,7 @@ function resetSewOnDemand() {
 
   setSewVisibility();
 
-
   updateSewPriceField();
-
 
   renderSewMeasurementChecklist(
     null
@@ -4651,6 +4587,19 @@ async function loadProducts() {
           : "";
 
 
+      const stockHTML =
+        product.fashion_enabled ===
+          true
+
+          ? "Variant stock"
+
+          : "Stock: " +
+            Number(
+              product.stock_quantity ??
+              0
+            );
+
+
       item.innerHTML = `
 
         ${imageHTML}
@@ -4678,6 +4627,11 @@ async function loadProducts() {
 
         <p class="small">
           ${escapeHTML(ratingHTML)}
+        </p>
+
+
+        <p class="small">
+          ${escapeHTML(stockHTML)}
         </p>
 
 
@@ -4820,6 +4774,25 @@ document
             );
 
 
+      const stockQuantityText =
+        document
+          .getElementById(
+            "stock_quantity"
+          )
+          .value;
+
+
+      const stockQuantity =
+        stockQuantityText ===
+          ""
+
+          ? 0
+
+          : Number(
+              stockQuantityText
+            );
+
+
       if (
         !name
       ) {
@@ -4902,6 +4875,40 @@ document
       }
 
 
+      /*
+      -------------------------------------------------
+      ORDINARY PRODUCT STOCK VALIDATION
+      -------------------------------------------------
+      */
+
+
+      if (
+        !fashionEnabled &&
+        (
+          !Number.isInteger(
+            stockQuantity
+          ) ||
+          stockQuantity <
+            0
+        )
+      ) {
+
+        message.textContent =
+          "Please enter a valid Stock Quantity of 0 or more.";
+
+
+        document
+          .getElementById(
+            "stock_quantity"
+          )
+          .focus();
+
+
+        return;
+
+      }
+
+
       if (
         fashionEnabled
       ) {
@@ -4909,7 +4916,6 @@ document
         try {
 
           collectVariants();
-
 
           validateSewOnDemand();
 
@@ -4945,13 +4951,6 @@ document
           id ||
           null
         );
-
-
-        /*
-        ---------------------------------------------
-        PRODUCT IMAGE
-        ---------------------------------------------
-        */
 
 
         let imageURL =
@@ -4994,13 +4993,6 @@ document
             );
 
         }
-
-
-        /*
-        ---------------------------------------------
-        SIZE CHART IMAGE
-        ---------------------------------------------
-        */
 
 
         let sizeChartImageURL =
@@ -5053,13 +5045,6 @@ document
 
         message.textContent =
           "Saving product...";
-
-
-        /*
-        ---------------------------------------------
-        BASIC PRODUCT DATA
-        ---------------------------------------------
-        */
 
 
         const productData = {
@@ -5134,24 +5119,46 @@ document
               )
               .checked,
 
+
+          /*
+          Ordinary products use products.stock_quantity.
+
+          Fashion Ready-to-Wear continues using
+          product_variants.stock_quantity.
+          */
+
+          stock_quantity:
+            fashionEnabled
+
+              ? 0
+
+              : stockQuantity,
+
+
           in_stock:
-            document
-              .getElementById(
-                "in_stock"
-              )
-              .checked,
+            fashionEnabled
+
+              ? document
+                  .getElementById(
+                    "in_stock"
+                  )
+                  .checked
+
+              : (
+                  document
+                    .getElementById(
+                      "in_stock"
+                    )
+                    .checked &&
+                  stockQuantity >
+                    0
+                ),
+
 
           fashion_enabled:
             fashionEnabled
 
         };
-
-
-        /*
-        ---------------------------------------------
-        FASHION DATA
-        ---------------------------------------------
-        */
 
 
         if (
@@ -5351,13 +5358,6 @@ document
         }
 
 
-        /*
-        ---------------------------------------------
-        SAVE PRODUCT
-        ---------------------------------------------
-        */
-
-
         let productError =
           null;
 
@@ -5445,7 +5445,7 @@ document
 
           if (
             productError.code ===
-            "23505"
+              "23505"
           ) {
 
             throw new Error(
@@ -5461,13 +5461,6 @@ document
           );
 
         }
-
-
-        /*
-        ---------------------------------------------
-        SAVE VARIANTS
-        ---------------------------------------------
-        */
 
 
         if (
@@ -5735,6 +5728,47 @@ async function editProduct(
       );
 
 
+  /*
+  ---------------------------------------------------
+  ORDINARY PRODUCT STOCK
+  ---------------------------------------------------
+  */
+
+
+  document
+    .getElementById(
+      "stock_quantity"
+    )
+    .value =
+      (
+        data.fashion_enabled ===
+          true ||
+        isFashionCategory(
+          data.category
+        )
+      )
+
+        ? 0
+
+        : (
+            Number.isInteger(
+              Number(
+                data.stock_quantity
+              )
+            ) &&
+            Number(
+              data.stock_quantity
+            ) >=
+              0
+
+            ? Number(
+                data.stock_quantity
+              )
+
+            : 0
+          );
+
+
   document
     .getElementById(
       "in_stock"
@@ -5874,13 +5908,6 @@ async function editProduct(
   renderGarmentTypeInfo();
 
 
-  /*
-  ---------------------------------------------------
-  SIZE CHART IMAGE
-  ---------------------------------------------------
-  */
-
-
   document
     .getElementById(
       "current-size-chart-image-url"
@@ -5902,13 +5929,6 @@ async function editProduct(
     data.size_chart_image_url ||
     ""
   );
-
-
-  /*
-  ---------------------------------------------------
-  BODY SIZE GUIDE
-  ---------------------------------------------------
-  */
 
 
   document
@@ -5952,13 +5972,6 @@ async function editProduct(
   }
 
 
-  /*
-  ---------------------------------------------------
-  GARMENT MEASUREMENTS
-  ---------------------------------------------------
-  */
-
-
   document
     .getElementById(
       "garment-measurement-rows"
@@ -6000,13 +6013,6 @@ async function editProduct(
   }
 
 
-  /*
-  ---------------------------------------------------
-  SEW ON DEMAND
-  ---------------------------------------------------
-  */
-
-
   const sew =
     fashionDetails.sew_on_demand &&
     typeof fashionDetails.sew_on_demand ===
@@ -6023,7 +6029,7 @@ async function editProduct(
     )
     .checked =
       sew.enabled ===
-      true;
+        true;
 
 
   document
@@ -6068,7 +6074,6 @@ async function editProduct(
 
   setSewVisibility();
 
-
   updateSewPriceField();
 
 
@@ -6108,13 +6113,6 @@ async function editProduct(
       );
 
   }
-
-
-  /*
-  ---------------------------------------------------
-  VARIANTS
-  ---------------------------------------------------
-  */
 
 
   document
@@ -6328,9 +6326,7 @@ function ensureCategoryOption(
   if (
     !categoryName
   ) {
-
     return;
-
   }
 
 
@@ -6395,9 +6391,7 @@ async function deleteProduct(
       "Are you sure you want to delete this product?"
     )
   ) {
-
     return;
-
   }
 
 
@@ -6508,6 +6502,14 @@ function resetForm() {
 
   document
     .getElementById(
+      "stock_quantity"
+    )
+    .value =
+      0;
+
+
+  document
+    .getElementById(
       "in_stock"
     )
     .checked =
@@ -6542,9 +6544,7 @@ function resetForm() {
 
   resetFashionRows();
 
-
   resetSewOnDemand();
-
 
   toggleFashionSection(
     false
