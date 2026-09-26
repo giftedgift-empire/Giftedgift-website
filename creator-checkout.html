@@ -2946,18 +2946,18 @@
     try {
 
       const result =
-        await invokeEdgeFunction(
-          "creator-download-product",
-          {
+  await invokeEdgeFunction(
+    "creator-download-product",
+    {
 
-            order_id:
-              currentOrder.order_id,
+      order_id:
+        currentOrder.order_id,
 
-            request_id:
-              checkoutRequestId
+      checkout_request_id:
+        checkoutRequestId
 
-          }
-        );
+    }
+  );
 
 
       if (
