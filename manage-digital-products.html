@@ -2490,7 +2490,50 @@ document
             uploadedFile.name;
 
         }
+/* =========================================================
+   OPTIONAL SECOND / BONUS DOWNLOAD
+   ========================================================= */
 
+const bonusFileInput =
+  document.getElementById("bonus-digital-file") ||
+  document.getElementById("bonus-file");
+
+const selectedBonusFile =
+  bonusFileInput?.files?.[0] || null;
+
+let bonusFilePath =
+  (
+    document.getElementById("current-bonus-file-path")?.value ||
+    document.getElementById("bonus-file-path")?.value ||
+    ""
+  ).trim();
+
+let bonusFileName =
+  (
+    document.getElementById("current-bonus-file-name")?.value ||
+    document.getElementById("bonus-file-name")?.value ||
+    ""
+  ).trim();
+
+if (selectedBonusFile) {
+
+  message.textContent =
+    "Uploading bonus digital file...";
+
+  saveButton.textContent =
+    "Uploading Bonus File...";
+
+  const uploadedBonusFile =
+    await uploadDigitalFile(
+      selectedBonusFile
+    );
+
+  bonusFilePath =
+    uploadedBonusFile.path;
+
+  bonusFileName =
+    uploadedBonusFile.name;
+}
 
         if (
           !filePath
