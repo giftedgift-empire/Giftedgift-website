@@ -92,6 +92,12 @@ input[type="file"] {
   background: #f7f7f7;
 }
 
+input:disabled,
+select:disabled {
+  background: #eeeeee;
+  cursor: not-allowed;
+}
+
 .help {
   color: #666;
   font-size: 14px;
@@ -449,6 +455,7 @@ button:disabled {
 </label>
 
 <select id="is-free">
+
   <option value="false">
     Paid Digital Product
   </option>
@@ -456,11 +463,13 @@ button:disabled {
   <option value="true">
     Free Digital Product
   </option>
+
 </select>
 
 <p class="help">
   Choose Free if customers should receive this product without payment.
 </p>
+
 
 
 <!-- NEWSLETTER REQUIREMENT -->
@@ -473,6 +482,7 @@ button:disabled {
 </label>
 
 <select id="requires-newsletter-subscription">
+
   <option value="false">
     No — newsletter subscription not required
   </option>
@@ -480,11 +490,13 @@ button:disabled {
   <option value="true">
     Yes — subscribe before download
   </option>
+
 </select>
 
 <p class="help">
-  Use this when you want visitors to subscribe to the GiftedGift Empire newsletter before receiving the free product.
+  Use this when visitors must subscribe to the GiftedGift Empire newsletter before receiving the free product.
 </p>
+
 
 
 <!-- MAIN DIGITAL FILE -->
@@ -499,6 +511,7 @@ button:disabled {
 <input
   type="file"
   id="digital-file"
+  accept=".pdf,.epub,.zip,.doc,.docx,.txt"
 >
 
 <p class="help">
@@ -512,6 +525,7 @@ button:disabled {
 >
   No digital file selected.
 </div>
+
 
 
 <!-- OPTIONAL BONUS FILE -->
@@ -545,10 +559,12 @@ button:disabled {
 <input
   type="file"
   id="bonus-file"
+  accept=".pdf,.epub,.zip,.doc,.docx,.txt"
 >
 
 <p class="help">
   Optional second download for offers such as Buy One Get One Free.
+  Maximum 6 MB for now.
 </p>
 
 <div
@@ -858,13 +874,29 @@ function updateSlugPreview() {
     );
 
 
+  const isFree =
+    document
+      .getElementById(
+        "is-free"
+      )
+      .value ===
+      "true";
+
+
   document
     .getElementById(
       "slug-preview"
     )
     .textContent =
-      slug ||
-      "product-name";
+      isFree
+        ? "free/" +
+          (
+            slug ||
+            "product-name"
+          )
+        :
+          slug ||
+          "product-name";
 
 }
 
@@ -872,7 +904,7 @@ function updateSlugPreview() {
 
 /*
   =====================================================
-  AFFILIATE ELIGIBILITY UI
+  PRODUCT ACCESS + AFFILIATE UI
   =====================================================
 */
 
@@ -932,13 +964,141 @@ function syncAffiliateEligibilityUI() {
 
 
 
+function syncAccessDependentUI() {
+
+  const isFree =
+    document
+      .getElementById(
+        "is-free"
+      )
+      .value ===
+      "true";
+
+
+  const newsletterSelect =
+    document.getElementById(
+      "requires-newsletter-subscription"
+    );
+
+
+  const priceInput =
+    document.getElementById(
+      "price"
+    );
+
+
+  const checkoutInput =
+    document.getElementById(
+      "checkout-url"
+    );
+
+
+  newsletterSelect.disabled =
+    !isFree;
+
+
+  priceInput.disabled =
+    isFree;
+
+
+  checkoutInput.disabled =
+    isFree;
+
+
+  if (
+    !isFree
+  ) {
+
+    newsletterSelect.value =
+      "false";
+
+  }
+
+
+  updateSlugPreview();
+
+}
+
+
+
+function syncAccessFromProductType() {
+
+  const productType =
+    document
+      .getElementById(
+        "product-type"
+      )
+      .value;
+
+
+  document
+    .getElementById(
+      "is-free"
+    )
+    .value =
+      productType ===
+      "free"
+        ? "true"
+        : "false";
+
+
+  syncAccessDependentUI();
+
+
+  syncAffiliateEligibilityUI();
+
+}
+
+
+
+function syncProductTypeFromAccess() {
+
+  const isFree =
+    document
+      .getElementById(
+        "is-free"
+      )
+      .value ===
+      "true";
+
+
+  document
+    .getElementById(
+      "product-type"
+    )
+    .value =
+      isFree
+        ? "free"
+        : "paid";
+
+
+  syncAccessDependentUI();
+
+
+  syncAffiliateEligibilityUI();
+
+}
+
+
+
 document
   .getElementById(
     "product-type"
   )
   .addEventListener(
     "change",
-    syncAffiliateEligibilityUI
+    syncAccessFromProductType
+  );
+
+
+
+document
+  .getElementById(
+    "is-free"
+  )
+  .addEventListener(
+    "change",
+    syncProductTypeFromAccess
   );
 
 
@@ -956,6 +1116,7 @@ document
       ) {
 
         return;
+
       }
 
 
@@ -1238,6 +1399,13 @@ async function checkGlobalSlugAvailability(
 
 
 
+/*
+  =====================================================
+  ADMIN PROTECTION
+  =====================================================
+*/
+
+
 async function protectPage() {
 
   const {
@@ -1290,6 +1458,13 @@ async function protectPage() {
 
 }
 
+
+
+/*
+  =====================================================
+  CATEGORIES
+  =====================================================
+*/
 
 
 async function loadCategoryOptions() {
@@ -1394,6 +1569,13 @@ async function loadCategoryOptions() {
 
 
 
+/*
+  =====================================================
+  COVER IMAGE VALIDATION
+  =====================================================
+*/
+
+
 document
   .getElementById(
     "cover-image"
@@ -1474,6 +1656,13 @@ document
 
 
 
+/*
+  =====================================================
+  MAIN DIGITAL FILE VALIDATION
+  =====================================================
+*/
+
+
 document
   .getElementById(
     "digital-file"
@@ -1541,6 +1730,80 @@ document
 
 
 
+/*
+  =====================================================
+  BONUS DIGITAL FILE VALIDATION
+  =====================================================
+*/
+
+
+document
+  .getElementById(
+    "bonus-file"
+  )
+  .addEventListener(
+    "change",
+    function(
+      event
+    ) {
+
+      const file =
+        event.target.files[
+          0
+        ];
+
+
+      const status =
+        document.getElementById(
+          "bonus-file-status"
+        );
+
+
+      if (
+        !file
+      ) {
+
+        status.textContent =
+          "No bonus digital file selected.";
+
+
+        return;
+
+      }
+
+
+      if (
+        file.size >
+        MAX_DIGITAL_SIZE
+      ) {
+
+        alert(
+          "Please choose a bonus digital file smaller than 6 MB."
+        );
+
+
+        event.target.value =
+          "";
+
+
+        status.textContent =
+          "No bonus digital file selected.";
+
+
+        return;
+
+      }
+
+
+      status.textContent =
+        "Selected bonus file: " +
+        file.name;
+
+    }
+  );
+
+
+
 function showImagePreview(
   url
 ) {
@@ -1586,6 +1849,13 @@ function showImagePreview(
 
 
 
+/*
+  =====================================================
+  VERIFY ADMIN
+  =====================================================
+*/
+
+
 async function verifyAdminSession() {
 
   const {
@@ -1613,6 +1883,13 @@ async function verifyAdminSession() {
 
 }
 
+
+
+/*
+  =====================================================
+  SAFE FILE NAME
+  =====================================================
+*/
 
 
 function makeSafeFileName(
@@ -1674,6 +1951,13 @@ function makeSafeFileName(
 
 }
 
+
+
+/*
+  =====================================================
+  UPLOAD COVER IMAGE
+  =====================================================
+*/
 
 
 async function uploadCoverImage(
@@ -1800,6 +2084,13 @@ async function uploadCoverImage(
 
 }
 
+
+
+/*
+  =====================================================
+  UPLOAD PRIVATE DIGITAL FILE
+  =====================================================
+*/
 
 
 async function uploadDigitalFile(
@@ -2026,9 +2317,17 @@ async function loadDigitalProducts() {
       }
 
 
+      const isFreeProduct =
+        (
+          product.is_free ===
+            true ||
+          product.product_type ===
+            "free"
+        );
+
+
       const priceHTML =
-        product.product_type ===
-        "free"
+        isFreeProduct
           ? "Free"
           :
             product.price !== null &&
@@ -2051,8 +2350,7 @@ async function loadDigitalProducts() {
 
       const affiliateAllowed =
         (
-          product.product_type ===
-            "paid" &&
+          !isFreeProduct &&
           product.allow_affiliates ===
             true
         );
@@ -2060,10 +2358,28 @@ async function loadDigitalProducts() {
 
       const publicLink =
         product.slug
-          ? SITE_URL +
-            "/" +
-            product.slug
+          ? (
+              isFreeProduct
+                ? SITE_URL +
+                  "/free/" +
+                  product.slug
+                : SITE_URL +
+                  "/" +
+                  product.slug
+            )
           : "";
+
+
+      const newsletterHTML =
+        isFreeProduct
+          ? (
+              product
+                .requires_newsletter_subscription ===
+                true
+                ? "Required"
+                : "Not Required"
+            )
+          : "Not Applicable";
 
 
       item.innerHTML = `
@@ -2122,17 +2438,35 @@ async function loadDigitalProducts() {
 
           Type:
 
-          ${escapeHTML(
-            product.product_type ||
-            "paid"
-          )}
+          ${isFreeProduct
+            ? "Free"
+            : "Paid"}
 
         </p>
 
 
+        ${
+          isFreeProduct
+            ? `
+
+              <p class="small">
+
+                Newsletter Subscription:
+
+                ${escapeHTML(
+                  newsletterHTML
+                )}
+
+              </p>
+
+            `
+            : ""
+        }
+
+
         <p class="small">
 
-          File:
+          Main File:
 
           ${escapeHTML(
             product.file_name ||
@@ -2140,6 +2474,26 @@ async function loadDigitalProducts() {
           )}
 
         </p>
+
+
+        ${
+          product.bonus_file_name
+            ? `
+
+              <p class="small">
+
+                Bonus:
+
+                ${escapeHTML(
+                  product.bonus_title ||
+                  product.bonus_file_name
+                )}
+
+              </p>
+
+            `
+            : ""
+        }
 
 
         <p class="small">
@@ -2278,12 +2632,39 @@ document
           .value;
 
 
-      const productType =
+      const isFree =
         document
           .getElementById(
-            "product-type"
+            "is-free"
           )
-          .value;
+          .value ===
+          "true";
+
+
+      const requiresNewsletterSubscription =
+        (
+          isFree &&
+          document
+            .getElementById(
+              "requires-newsletter-subscription"
+            )
+            .value ===
+            "true"
+        );
+
+
+      const productType =
+        isFree
+          ? "free"
+          : "paid";
+
+
+      document
+        .getElementById(
+          "product-type"
+        )
+        .value =
+          productType;
 
 
       if (
@@ -2428,6 +2809,24 @@ document
           null;
 
 
+        let bonusFilePath =
+          document
+            .getElementById(
+              "current-bonus-file-path"
+            )
+            .value ||
+          null;
+
+
+        let bonusFileName =
+          document
+            .getElementById(
+              "current-bonus-file-name"
+            )
+            .value ||
+          null;
+
+
         const imageInput =
           document.getElementById(
             "cover-image"
@@ -2439,6 +2838,22 @@ document
           imageInput.files.length >
             0
             ? imageInput.files[
+                0
+              ]
+            : null;
+
+
+        const bonusFileInput =
+          document.getElementById(
+            "bonus-file"
+          );
+
+
+        const selectedBonusFile =
+          bonusFileInput.files &&
+          bonusFileInput.files.length >
+            0
+            ? bonusFileInput.files[
                 0
               ]
             : null;
@@ -2490,50 +2905,35 @@ document
             uploadedFile.name;
 
         }
-/* =========================================================
-   OPTIONAL SECOND / BONUS DOWNLOAD
-   ========================================================= */
 
-const bonusFileInput =
-  document.getElementById("bonus-digital-file") ||
-  document.getElementById("bonus-file");
 
-const selectedBonusFile =
-  bonusFileInput?.files?.[0] || null;
+        if (
+          selectedBonusFile
+        ) {
 
-let bonusFilePath =
-  (
-    document.getElementById("current-bonus-file-path")?.value ||
-    document.getElementById("bonus-file-path")?.value ||
-    ""
-  ).trim();
+          message.textContent =
+            "Uploading bonus digital file...";
 
-let bonusFileName =
-  (
-    document.getElementById("current-bonus-file-name")?.value ||
-    document.getElementById("bonus-file-name")?.value ||
-    ""
-  ).trim();
 
-if (selectedBonusFile) {
+          saveButton.textContent =
+            "Uploading Bonus File...";
 
-  message.textContent =
-    "Uploading bonus digital file...";
 
-  saveButton.textContent =
-    "Uploading Bonus File...";
+          const uploadedBonusFile =
+            await uploadDigitalFile(
+              selectedBonusFile
+            );
 
-  const uploadedBonusFile =
-    await uploadDigitalFile(
-      selectedBonusFile
-    );
 
-  bonusFilePath =
-    uploadedBonusFile.path;
+          bonusFilePath =
+            uploadedBonusFile.path;
 
-  bonusFileName =
-    uploadedBonusFile.name;
-}
+
+          bonusFileName =
+            uploadedBonusFile.name;
+
+        }
+
 
         if (
           !filePath
@@ -2573,19 +2973,22 @@ if (selectedBonusFile) {
 
 
           price:
-            document
-              .getElementById(
-                "price"
-              )
-              .value
-              ? Number(
-                  document
-                    .getElementById(
-                      "price"
+            isFree
+              ? 0
+              :
+                document
+                  .getElementById(
+                    "price"
+                  )
+                  .value
+                  ? Number(
+                      document
+                        .getElementById(
+                          "price"
+                        )
+                        .value
                     )
-                    .value
-                )
-              : null,
+                  : null,
 
 
           product_type:
@@ -2605,43 +3008,51 @@ if (selectedBonusFile) {
 
           file_name:
             fileName,
-bonus_file_path:
-  bonusFilePath || null,
 
-bonus_file_name:
-  bonusFileName || null,
 
-bonus_title:
-  (
-    document.getElementById("bonus-title")?.value ||
-    ""
-  ).trim() || null,
+          bonus_file_path:
+            bonusFilePath ||
+            null,
 
-is_free:
-  document
-    .getElementById(
-      "is-free"
-    )
-    .value ===
-    "true",
 
-requires_newsletter_subscription:
-  document
-    .getElementById(
-      "requires-newsletter-subscription"
-    )
-    .value ===
-    "true",
+          bonus_file_name:
+            bonusFileName ||
+            null,
+
+
+          bonus_title:
+            (
+              document
+                .getElementById(
+                  "bonus-title"
+                )
+                .value ||
+              ""
+            )
+              .trim() ||
+            null,
+
+
+          is_free:
+            isFree,
+
+
+          requires_newsletter_subscription:
+            requiresNewsletterSubscription,
+
 
           checkout_url:
-            document
-              .getElementById(
-                "checkout-url"
-              )
-              .value
-              .trim()
-            ||
-            null,
+            isFree
+              ? null
+              :
+                document
+                  .getElementById(
+                    "checkout-url"
+                  )
+                  .value
+                  .trim()
+                ||
+                null,
 
 
           rating:
@@ -2678,8 +3089,7 @@ requires_newsletter_subscription:
 
           allow_affiliates:
             (
-              productType ===
-                "paid" &&
+              !isFree &&
               document
                 .getElementById(
                   "allow-affiliates"
@@ -2881,6 +3291,15 @@ async function editDigitalProduct(
   }
 
 
+  const editingIsFree =
+    (
+      data.is_free ===
+        true ||
+      data.product_type ===
+        "free"
+    );
+
+
   document
     .getElementById(
       "digital-id"
@@ -2913,9 +3332,6 @@ async function editDigitalProduct(
     true;
 
 
-  updateSlugPreview();
-
-
   document
     .getElementById(
       "description"
@@ -2939,8 +3355,34 @@ async function editDigitalProduct(
       "product-type"
     )
     .value =
-      data.product_type ||
-      "paid";
+      editingIsFree
+        ? "free"
+        : "paid";
+
+
+  document
+    .getElementById(
+      "is-free"
+    )
+    .value =
+      editingIsFree
+        ? "true"
+        : "false";
+
+
+  document
+    .getElementById(
+      "requires-newsletter-subscription"
+    )
+    .value =
+      (
+        editingIsFree &&
+        data
+          .requires_newsletter_subscription ===
+          true
+      )
+        ? "true"
+        : "false";
 
 
   ensureCategoryOption(
@@ -2983,90 +3425,34 @@ async function editDigitalProduct(
     .value =
       data.file_name ||
       "";
-/* =========================================================
-   LOAD FREE PRODUCT + BONUS DOWNLOAD SETTINGS
-   ========================================================= */
 
-const currentBonusPath =
-  document.getElementById(
-    "current-bonus-file-path"
-  );
 
-if (currentBonusPath) {
-  currentBonusPath.value =
-    data.bonus_file_path || "";
-}
+  document
+    .getElementById(
+      "current-bonus-file-path"
+    )
+    .value =
+      data.bonus_file_path ||
+      "";
 
-const currentBonusName =
-  document.getElementById(
-    "current-bonus-file-name"
-  );
 
-if (currentBonusName) {
-  currentBonusName.value =
-    data.bonus_file_name || "";
-}
+  document
+    .getElementById(
+      "current-bonus-file-name"
+    )
+    .value =
+      data.bonus_file_name ||
+      "";
 
-const bonusTitleInput =
-  document.getElementById(
-    "bonus-title"
-  );
 
-if (bonusTitleInput) {
-  bonusTitleInput.value =
-    data.bonus_title || "";
-}
+  document
+    .getElementById(
+      "bonus-title"
+    )
+    .value =
+      data.bonus_title ||
+      "";
 
-const freeProductCheckbox =
-  document.getElementById(
-    "is-free"
-  ) ||
-  document.getElementById(
-    "free-product"
-  );
-
-if (freeProductCheckbox) {
-  freeProductCheckbox.checked =
-    data.is_free === true;
-}
-
-const newsletterRequiredCheckbox =
-  document.getElementById(
-    "requires-newsletter-subscription"
-  ) ||
-  document.getElementById(
-    "newsletter-required"
-  );
-
-if (newsletterRequiredCheckbox) {
-  newsletterRequiredCheckbox.checked =
-    data.requires_newsletter_subscription === true;
-}
-
-const bonusFileInput =
-  document.getElementById(
-    "bonus-digital-file"
-  ) ||
-  document.getElementById(
-    "bonus-file"
-  );
-
-if (bonusFileInput) {
-  bonusFileInput.value = "";
-}
-
-const bonusFileStatus =
-  document.getElementById(
-    "bonus-file-status"
-  );
-
-if (bonusFileStatus) {
-  bonusFileStatus.textContent =
-    data.bonus_file_name
-      ? "Current bonus file: " +
-        data.bonus_file_name
-      : "No bonus file saved.";
-}
 
   document
     .getElementById(
@@ -3079,6 +3465,14 @@ if (bonusFileStatus) {
   document
     .getElementById(
       "digital-file"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "bonus-file"
     )
     .value =
       "";
@@ -3099,6 +3493,17 @@ if (bonusFileStatus) {
         ? "Current file: " +
           data.file_name
         : "No digital file saved.";
+
+
+  document
+    .getElementById(
+      "bonus-file-status"
+    )
+    .textContent =
+      data.bonus_file_name
+        ? "Current bonus file: " +
+          data.bonus_file_name
+        : "No bonus file saved.";
 
 
   document
@@ -3149,7 +3554,10 @@ if (bonusFileStatus) {
       );
 
 
-  syncAffiliateEligibilityUI();
+  syncProductTypeFromAccess();
+
+
+  updateSlugPreview();
 
 
   document
@@ -3188,6 +3596,13 @@ if (bonusFileStatus) {
 
 }
 
+
+
+/*
+  =====================================================
+  ENSURE EXISTING CATEGORY
+  =====================================================
+*/
 
 
 function ensureCategoryOption(
@@ -3252,7 +3667,7 @@ function ensureCategoryOption(
 
 /*
   =====================================================
-  DELETE
+  DELETE DIGITAL PRODUCT
   =====================================================
 */
 
@@ -3380,10 +3795,58 @@ function resetForm() {
 
   document
     .getElementById(
+      "current-bonus-file-path"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "current-bonus-file-name"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "bonus-title"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "bonus-file"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
       "product-type"
     )
     .value =
       "paid";
+
+
+  document
+    .getElementById(
+      "is-free"
+    )
+    .value =
+      "false";
+
+
+  document
+    .getElementById(
+      "requires-newsletter-subscription"
+    )
+    .value =
+      "false";
 
 
   document
@@ -3418,15 +3881,20 @@ function resetForm() {
       "No digital file selected.";
 
 
+  document
+    .getElementById(
+      "bonus-file-status"
+    )
+    .textContent =
+      "No bonus digital file selected.";
+
+
   showImagePreview(
     ""
   );
 
 
-  updateSlugPreview();
-
-
-  syncAffiliateEligibilityUI();
+  syncProductTypeFromAccess();
 
 
   document
@@ -3454,6 +3922,13 @@ function resetForm() {
 
 }
 
+
+
+/*
+  =====================================================
+  ESCAPING
+  =====================================================
+*/
 
 
 function escapeHTML(
@@ -3509,7 +3984,7 @@ function escapeAttribute(
 */
 
 
-syncAffiliateEligibilityUI();
+syncAccessFromProductType();
 
 
 protectPage();
