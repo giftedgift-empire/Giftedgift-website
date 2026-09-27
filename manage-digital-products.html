@@ -2605,7 +2605,37 @@ if (selectedBonusFile) {
 
           file_name:
             fileName,
+bonus_file_path:
+  bonusFilePath || null,
 
+bonus_file_name:
+  bonusFileName || null,
+
+bonus_title:
+  (
+    document.getElementById("bonus-title")?.value ||
+    ""
+  ).trim() || null,
+
+is_free:
+  Boolean(
+    (
+      document.getElementById("is-free") ||
+      document.getElementById("free-product")
+    )?.checked
+  ),
+
+requires_newsletter_subscription:
+  Boolean(
+    (
+      document.getElementById(
+        "requires-newsletter-subscription"
+      ) ||
+      document.getElementById(
+        "newsletter-required"
+      )
+    )?.checked
+  ),
 
           checkout_url:
             document
