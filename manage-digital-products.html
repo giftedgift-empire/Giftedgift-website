@@ -2987,7 +2987,90 @@ async function editDigitalProduct(
     .value =
       data.file_name ||
       "";
+/* =========================================================
+   LOAD FREE PRODUCT + BONUS DOWNLOAD SETTINGS
+   ========================================================= */
 
+const currentBonusPath =
+  document.getElementById(
+    "current-bonus-file-path"
+  );
+
+if (currentBonusPath) {
+  currentBonusPath.value =
+    data.bonus_file_path || "";
+}
+
+const currentBonusName =
+  document.getElementById(
+    "current-bonus-file-name"
+  );
+
+if (currentBonusName) {
+  currentBonusName.value =
+    data.bonus_file_name || "";
+}
+
+const bonusTitleInput =
+  document.getElementById(
+    "bonus-title"
+  );
+
+if (bonusTitleInput) {
+  bonusTitleInput.value =
+    data.bonus_title || "";
+}
+
+const freeProductCheckbox =
+  document.getElementById(
+    "is-free"
+  ) ||
+  document.getElementById(
+    "free-product"
+  );
+
+if (freeProductCheckbox) {
+  freeProductCheckbox.checked =
+    data.is_free === true;
+}
+
+const newsletterRequiredCheckbox =
+  document.getElementById(
+    "requires-newsletter-subscription"
+  ) ||
+  document.getElementById(
+    "newsletter-required"
+  );
+
+if (newsletterRequiredCheckbox) {
+  newsletterRequiredCheckbox.checked =
+    data.requires_newsletter_subscription === true;
+}
+
+const bonusFileInput =
+  document.getElementById(
+    "bonus-digital-file"
+  ) ||
+  document.getElementById(
+    "bonus-file"
+  );
+
+if (bonusFileInput) {
+  bonusFileInput.value = "";
+}
+
+const bonusFileStatus =
+  document.getElementById(
+    "bonus-file-status"
+  );
+
+if (bonusFileStatus) {
+  bonusFileStatus.textContent =
+    data.bonus_file_name
+      ? "Current bonus file: " +
+        data.bonus_file_name
+      : "No bonus file saved.";
+}
 
   document
     .getElementById(
