@@ -2618,24 +2618,20 @@ bonus_title:
   ).trim() || null,
 
 is_free:
-  Boolean(
-    (
-      document.getElementById("is-free") ||
-      document.getElementById("free-product")
-    )?.checked
-  ),
+  document
+    .getElementById(
+      "is-free"
+    )
+    .value ===
+    "true",
 
 requires_newsletter_subscription:
-  Boolean(
-    (
-      document.getElementById(
-        "requires-newsletter-subscription"
-      ) ||
-      document.getElementById(
-        "newsletter-required"
-      )
-    )?.checked
-  ),
+  document
+    .getElementById(
+      "requires-newsletter-subscription"
+    )
+    .value ===
+    "true",
 
           checkout_url:
             document
