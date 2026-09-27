@@ -442,23 +442,69 @@ button:disabled {
 
 
 
-<label for="digital-file">
-  Digital File
+<!-- PRODUCT ACCESS TYPE -->
+
+<label for="is-free">
+  Product Access
 </label>
 
+<select id="is-free">
+  <option value="false">
+    Paid Digital Product
+  </option>
+
+  <option value="true">
+    Free Digital Product
+  </option>
+</select>
+
+<p class="help">
+  Choose Free if customers should receive this product without payment.
+</p>
+
+
+<!-- NEWSLETTER REQUIREMENT -->
+
+<label
+  for="requires-newsletter-subscription"
+  style="margin-top:18px;"
+>
+  Free Product Newsletter Requirement
+</label>
+
+<select id="requires-newsletter-subscription">
+  <option value="false">
+    No — newsletter subscription not required
+  </option>
+
+  <option value="true">
+    Yes — subscribe before download
+  </option>
+</select>
+
+<p class="help">
+  Use this when you want visitors to subscribe to the GiftedGift Empire newsletter before receiving the free product.
+</p>
+
+
+<!-- MAIN DIGITAL FILE -->
+
+<label
+  for="digital-file"
+  style="margin-top:18px;"
+>
+  Main Digital File
+</label>
 
 <input
   type="file"
   id="digital-file"
-  accept=".pdf,.epub,.zip,.doc,.docx,.txt"
 >
 
-
 <p class="help">
-  Upload the PDF, ebook or other digital file.
+  Upload the main downloadable digital product.
   Maximum 6 MB for now.
 </p>
-
 
 <div
   id="file-status"
@@ -466,6 +512,64 @@ button:disabled {
 >
   No digital file selected.
 </div>
+
+
+<!-- OPTIONAL BONUS FILE -->
+
+<label
+  for="bonus-title"
+  style="margin-top:22px;"
+>
+  Bonus Download Title
+</label>
+
+<input
+  type="text"
+  id="bonus-title"
+  maxlength="180"
+  placeholder="Example: FREE BONUS — Business Checklist"
+>
+
+<p class="help">
+  Optional. Use this when the customer should receive a second downloadable product.
+</p>
+
+
+<label
+  for="bonus-file"
+  style="margin-top:18px;"
+>
+  Optional Bonus Digital File
+</label>
+
+<input
+  type="file"
+  id="bonus-file"
+>
+
+<p class="help">
+  Optional second download for offers such as Buy One Get One Free.
+</p>
+
+<div
+  id="bonus-file-status"
+  class="file-status"
+>
+  No bonus digital file selected.
+</div>
+
+
+<input
+  type="hidden"
+  id="current-bonus-file-path"
+  value=""
+>
+
+<input
+  type="hidden"
+  id="current-bonus-file-name"
+  value=""
+>
 
 
 
