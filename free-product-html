@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Free Digital Product | GiftedGift Empire
+  </title>
+
+  <meta
+    id="meta-description"
+    name="description"
+    content="Get a free digital product from GiftedGift Empire."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <link
+    id="canonical-link"
+    rel="canonical"
+    href="https://giftedgiftempire.com/free-product"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #222;
+      background:
+        linear-gradient(
+          180deg,
+          #eef4ff 0%,
+          #f8f9fc 48%,
+          #ffffff 100%
+        );
+      min-height: 100vh;
+    }
+
+    header {
+      background: #123a8c;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: #f2bd16;
+      font-size: 24px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      padding: 35px 16px 70px;
+    }
+
+    .loading,
+    .error-box {
+      max-width: 680px;
+      margin: auto;
+      text-align: center;
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 16px;
+      padding: 32px 20px;
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .error-box {
+      display: none;
+      color: #b42318;
+      border-color: #fecdca;
+      background: #fef3f2;
+    }
+
+    #page-content {
+      display: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(280px, 0.9fr)
+        minmax(0, 1.1fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #dfe4ec;
+      border-radius: 18px;
+      box-shadow:
+        0 7px 28px rgba(0,0,0,0.06);
+      padding: 25px;
+    }
+
+    .cover-box {
+      width: 100%;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f7f8fb;
+    }
+
+    #product-image {
+      display: none;
+      width: 100%;
+      max-height: 550px;
+      object-fit: contain;
+    }
+
+    #cover-placeholder {
+      padding: 25px;
+      color: #777;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .free-badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #ecfdf3;
+      color: #067647;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    h1 {
+      color: #123a8c;
+      font-size: 38px;
+      line-height: 1.15;
+      margin: 8px 0 15px;
+    }
+
+    .description {
+      color: #555;
+      font-size: 17px;
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .price {
+      margin: 24px 0;
+      font-size: 31px;
+      color: #067647;
+      font-weight: 900;
+    }
+
+    .benefit-box {
+      margin: 22px 0;
+      padding: 15px;
+      border-radius: 11px;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+      color: #175cd3;
+      line-height: 1.6;
+    }
+
+    .form-card h2 {
+      margin-top: 0;
+      color: #123a8c;
+      font-size: 27px;
+    }
+
+    .intro {
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 800;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      min-height: 49px;
+      padding: 12px;
+      border: 1px solid #ccd3dd;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #123a8c;
+      box-shadow:
+        0 0 0 3px rgba(18,58,140,0.08);
+    }
+
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 18px 0 21px;
+      line-height: 1.55;
+    }
+
+    .consent-row input {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .consent-row label {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .consent-row a {
+      color: #123a8c;
+      font-weight: 700;
+    }
+
+    .button {
+      width: 100%;
+      min-height: 53px;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .subscribe-button {
+      background: #f2bd16;
+      color: #111;
+    }
+
+    .download-button {
+      background: #123a8c;
+      color: white;
+      margin-top: 15px;
+    }
+
+    .message {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+      line-height: 1.55;
+    }
+
+    .message.error {
+      display: block;
+      color: #b42318;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      color: #175cd3;
+      background: #eff8ff;
+      border: 1px solid #b2ddff;
+    }
+
+    .message.success {
+      display: block;
+      color: #067647;
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+    }
+
+    #success-box {
+      display: none;
+      text-align: center;
+    }
+
+    .success-icon {
+      font-size: 52px;
+      margin-bottom: 8px;
+    }
+
+    #success-box h2 {
+      color: #067647;
+      font-size: 29px;
+      margin-bottom: 10px;
+    }
+
+    .success-note {
+      line-height: 1.65;
+      color: #555;
+    }
+
+    .access-note {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+      color: #7a2e0e;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .privacy-note {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.55;
+      margin-top: 14px;
+    }
+
+    .honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    footer {
+      padding: 28px 16px;
+      text-align: center;
+      background: #123a8c;
+      color: white;
+      line-height: 1.8;
+    }
+
+    footer a {
+      color: #f2bd16;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .cover-box {
+        min-height: 280px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      href="/"
+      class="brand"
+    >
+      GiftedGift Empire
+    </a>
+
+    <a
+      href="/shop"
+      class="back-link"
+    >
+      Visit Shop →
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    Loading your free GiftedGift Empire resource...
+  </div>
+
+
+  <div
+    id="error-box"
+    class="error-box"
+  >
+    This free product is unavailable.
+  </div>
+
+
+  <div id="page-content">
+
+    <div class="hero-grid">
+
+
+      <section class="card">
+
+        <div class="cover-box">
+
+          <img
+            id="product-image"
+            src=""
+            alt=""
+          >
+
+          <div id="cover-placeholder">
+            Loading product cover...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="card form-card">
+
+        <div class="free-badge">
+          🎁 FREE DIGITAL DOWNLOAD
+        </div>
+
+
+        <h1 id="product-name">
+          Free Digital Product
+        </h1>
+
+
+        <div
+          id="product-description"
+          class="description"
+        ></div>
+
+
+        <div class="price">
+          FREE
+        </div>
+
+
+        <div
+          id="benefit-box"
+          class="benefit-box"
+        >
+          Subscribe to GiftedGift Empire and your
+          free download will be unlocked immediately.
+        </div>
+
+
+        <div id="subscription-area">
+
+          <h2>
+            Get Your Free Copy
+          </h2>
+
+
+          <p class="intro">
+
+            Enter your details below. After your
+            newsletter subscription is completed,
+            your secure download button will appear
+            immediately.
+
+          </p>
+
+
+          <div
+            id="form-message"
+            class="message"
+          ></div>
+
+
+          <form
+            id="free-product-form"
+            onsubmit="subscribeAndUnlock(event)"
+          >
+
+
+            <div class="field">
+
+              <label for="subscriber-name">
+                Your Name *
+              </label>
+
+              <input
+                id="subscriber-name"
+                type="text"
+                maxlength="150"
+                autocomplete="name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="subscriber-email">
+                Email Address *
+              </label>
+
+              <input
+                id="subscriber-email"
+                type="email"
+                maxlength="254"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <div
+              id="consent-area"
+              class="consent-row"
+            >
+
+              <input
+                id="newsletter-consent"
+                type="checkbox"
+              >
+
+              <label for="newsletter-consent">
+
+                Yes, subscribe me to GiftedGift Empire
+                emails and give me access to this free
+                digital product. I understand that I can
+                unsubscribe at any time.
+
+                <a href="/privacy-policy">
+                  Privacy Policy
+                </a>
+
+              </label>
+
+            </div>
+
+
+            <div class="honeypot">
+
+              <label for="website">
+                Website
+              </label>
+
+              <input
+                id="website"
+                type="text"
+                tabindex="-1"
+                autocomplete="off"
+              >
+
+            </div>
+
+
+            <button
+              id="subscribe-button"
+              type="submit"
+              class="button subscribe-button"
+            >
+              SUBSCRIBE & GET FREE PRODUCT
+            </button>
+
+
+          </form>
+
+
+          <p class="privacy-note">
+
+            We use your details to provide the
+            requested free product and, where you
+            consent, send GiftedGift Empire newsletter
+            emails. You can unsubscribe from marketing
+            emails at any time.
+
+          </p>
+
+        </div>
+
+
+        <div id="success-box">
+
+          <div class="success-icon">
+            ✅
+          </div>
+
+          <h2>
+            Your Free Product Is Ready!
+          </h2>
+
+          <p
+            id="success-message"
+            class="success-note"
+          >
+            Your subscription was successful.
+            Tap below to download your product.
+          </p>
+
+
+          <div
+            id="download-message"
+            class="message"
+          ></div>
+
+
+          <button
+            id="download-button"
+            type="button"
+            class="button download-button"
+            onclick="downloadFreeProduct()"
+          >
+            DOWNLOAD YOUR FREE PRODUCT
+          </button>
+
+
+          <div class="access-note">
+
+            Your secure access lasts
+            <strong>3 days</strong> and allows a maximum
+            of <strong>2 downloads</strong>.
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+  </div>
+
+
+</main>
+
+
+<footer>
+
+  © GiftedGift Empire
+
+  <br>
+
+  <a href="/privacy-policy">
+    Privacy Policy
+  </a>
+
+  &nbsp; • &nbsp;
+
+  <a href="/terms-conditions">
+    Terms & Conditions
+  </a>
+
+  &nbsp; • &nbsp;
+
+  <a href="/customer-service">
+    Customer Service
+  </a>
+
+</footer>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script>
+
+  /*
+  ==================================================
+  SUPABASE
+  ==================================================
+  */
+
+  const SUPABASE_URL =
+    "https://mvoxizdzjmtcvokowhpd.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
+
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /*
+  ==================================================
+  STATE
+  ==================================================
+  */
+
+  let currentProduct =
+    null;
+
+  let currentDownloadToken =
+    null;
+
+
+  /*
+  ==================================================
+  SLUG
+
+  Supports:
+  /free-product.html?slug=my-book
+  /free-product?slug=my-book
+  /free/my-book
+  ==================================================
+  */
+
+  function getSlug() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const querySlug =
+      String(
+        params.get("slug") || ""
+      ).trim();
+
+
+    if (querySlug) {
+      return querySlug;
+    }
+
+
+    const pathParts =
+      window.location.pathname
+        .split("/")
+        .filter(Boolean);
+
+
+    const freeIndex =
+      pathParts.indexOf("free");
+
+
+    if (
+      freeIndex >= 0 &&
+      pathParts[
+        freeIndex + 1
+      ]
+    ) {
+
+      return decodeURIComponent(
+        pathParts[
+          freeIndex + 1
+        ]
+      ).trim();
+
+    }
+
+
+    return "";
+
+  }
+
+
+  /*
+  ==================================================
+  MESSAGE HELPERS
+  ==================================================
+  */
+
+  function showMessage(
+    id,
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        id
+      );
+
+
+    box.className =
+      "message " +
+      type;
+
+
+    box.textContent =
+      text;
+
+  }
+
+
+  function clearMessage(
+    id
+  ) {
+
+    const box =
+      document.getElementById(
+        id
+      );
+
+
+    box.className =
+      "message";
+
+
+    box.textContent =
+      "";
+
+  }
+
+
+  /*
+  ==================================================
+  EDGE FUNCTION
+  ==================================================
+  */
+
+  async function invokeFunction(
+    functionName,
+    body
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .functions
+        .invoke(
+          functionName,
+          {
+            body
+          }
+        );
+
+
+    if (error) {
+
+      let message =
+        error.message ||
+        "The secure request failed.";
+
+
+      try {
+
+        if (
+          error.context &&
+          typeof error.context.json ===
+            "function"
+        ) {
+
+          const details =
+            await error.context.json();
+
+
+          if (details?.error) {
+            message =
+              details.error;
+          }
+
+        }
+
+      }
+
+      catch (
+        parseError
+      ) {
+
+        console.error(
+          "Function error:",
+          parseError
+        );
+
+      }
+
+
+      throw new Error(
+        message
+      );
+
+    }
+
+
+    if (data?.error) {
+      throw new Error(
+        data.error
+      );
+    }
+
+
+    return data;
+
+  }
+
+
+  /*
+  ==================================================
+  LOAD FREE PRODUCT
+  ==================================================
+  */
+
+  async function loadProduct() {
+
+    const slug =
+      getSlug();
+
+
+    if (!slug) {
+      showProductError(
+        "Free product link is incomplete."
+      );
+
+      return;
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "get_public_free_digital_product_by_slug",
+          {
+            p_slug:
+              slug
+          }
+        );
+
+
+    const product =
+      Array.isArray(
+        data
+      )
+        ? data[0]
+        : null;
+
+
+    if (
+      error ||
+      !product
+    ) {
+
+      console.error(
+        "Free product:",
+        error
+      );
+
+
+      showProductError(
+        "This free product is unavailable."
+      );
+
+      return;
+    }
+
+
+    currentProduct =
+      product;
+
+
+    renderProduct(
+      product
+    );
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "page-content"
+      )
+      .style.display =
+        "block";
+
+  }
+
+
+  function renderProduct(
+    product
+  ) {
+
+    document
+      .getElementById(
+        "product-name"
+      )
+      .textContent =
+        product.name ||
+        "Free Digital Product";
+
+
+    document
+      .getElementById(
+        "product-description"
+      )
+      .textContent =
+        product.description ||
+        "Download this free GiftedGift Empire digital resource.";
+
+
+    /*
+    ================================================
+    IMAGE
+    ================================================
+    */
+
+    const image =
+      document.getElementById(
+        "product-image"
+      );
+
+
+    const placeholder =
+      document.getElementById(
+        "cover-placeholder"
+      );
+
+
+    if (
+      product.image_url
+    ) {
+
+      image.src =
+        product.image_url;
+
+
+      image.alt =
+        product.name ||
+        "Free digital product";
+
+
+      image.onload =
+        () => {
+
+          image.style.display =
+            "block";
+
+
+          placeholder.style.display =
+            "none";
+
+        };
+
+
+      image.onerror =
+        () => {
+
+          placeholder.textContent =
+            "Product cover unavailable.";
+
+        };
+
+    }
+
+    else {
+
+      placeholder.textContent =
+        "Product cover unavailable.";
+
+    }
+
+
+    /*
+    ================================================
+    NEWSLETTER REQUIREMENT
+    ================================================
+    */
+
+    const requiresNewsletter =
+      product
+        .requires_newsletter_subscription ===
+      true;
+
+
+    const consentArea =
+      document.getElementById(
+        "consent-area"
+      );
+
+
+    const consentCheckbox =
+      document.getElementById(
+        "newsletter-consent"
+      );
+
+
+    const button =
+      document.getElementById(
+        "subscribe-button"
+      );
+
+
+    const benefitBox =
+      document.getElementById(
+        "benefit-box"
+      );
+
+
+    if (
+      requiresNewsletter
+    ) {
+
+      consentArea.style.display =
+        "flex";
+
+
+      consentCheckbox.required =
+        true;
+
+
+      button.textContent =
+        "SUBSCRIBE & GET FREE PRODUCT";
+
+
+      benefitBox.textContent =
+        "Subscribe to GiftedGift Empire and your free download will be unlocked immediately.";
+
+    }
+
+    else {
+
+      consentArea.style.display =
+        "none";
+
+
+      consentCheckbox.required =
+        false;
+
+
+      button.textContent =
+        "GET FREE PRODUCT";
+
+
+      benefitBox.textContent =
+        "Enter your details below and your free download will be unlocked immediately.";
+
+    }
+
+
+    /*
+    ================================================
+    SEO
+    ================================================
+    */
+
+    document.title =
+      (product.name ||
+        "Free Digital Product") +
+      " | GiftedGift Empire";
+
+
+    const metaDescription =
+      document.getElementById(
+        "meta-description"
+      );
+
+
+    metaDescription.content =
+      String(
+        product.description ||
+        "Get this free digital product from GiftedGift Empire."
+      )
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(
+          0,
+          155
+        );
+
+
+    const canonical =
+      document.getElementById(
+        "canonical-link"
+      );
+
+
+    canonical.href =
+      "https://giftedgiftempire.com/free/" +
+      encodeURIComponent(
+        product.slug
+      );
+
+  }
+
+
+  function showProductError(
+    message
+  ) {
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+        "none";
+
+
+    const errorBox =
+      document.getElementById(
+        "error-box"
+      );
+
+
+    errorBox.textContent =
+      message;
+
+
+    errorBox.style.display =
+      "block";
+
+  }
+
+
+  /*
+  ==================================================
+  SUBSCRIBE + UNLOCK
+  ==================================================
+  */
+
+  async function subscribeAndUnlock(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    clearMessage(
+      "form-message"
+    );
+
+
+    if (
+      !currentProduct
+    ) {
+
+      showMessage(
+        "form-message",
+        "This free product could not be loaded.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const name =
+      document
+        .getElementById(
+          "subscriber-name"
+        )
+        .value
+        .trim();
+
+
+    const email =
+      document
+        .getElementById(
+          "subscriber-email"
+        )
+        .value
+        .trim();
+
+
+    const consent =
+      document
+        .getElementById(
+          "newsletter-consent"
+        )
+        .checked;
+
+
+    const website =
+      document
+        .getElementById(
+          "website"
+        )
+        .value
+        .trim();
+
+
+    if (
+      name.length < 2
+    ) {
+
+      showMessage(
+        "form-message",
+        "Please enter your name.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (!email) {
+
+      showMessage(
+        "form-message",
+        "Please enter your email address.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      currentProduct
+        .requires_newsletter_subscription ===
+        true &&
+      !consent
+    ) {
+
+      showMessage(
+        "form-message",
+        "Please agree to subscribe to the newsletter to receive this free product.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const button =
+      document.getElementById(
+        "subscribe-button"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "PREPARING YOUR FREE PRODUCT...";
+
+
+    showMessage(
+      "form-message",
+      "Please wait while we prepare your free download...",
+      "info"
+    );
+
+
+    try {
+
+      const result =
+        await invokeFunction(
+          "free-product-subscribe",
+          {
+
+            slug:
+              currentProduct.slug,
+
+            name:
+              name,
+
+            email:
+              email,
+
+            consent:
+              consent,
+
+            website:
+              website
+
+          }
+        );
+
+
+      if (
+        !result?.download_token
+      ) {
+
+        throw new Error(
+          "Secure download access was not returned."
+        );
+
+      }
+
+
+      currentDownloadToken =
+        result.download_token;
+
+
+      document
+        .getElementById(
+          "subscription-area"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "success-box"
+        )
+        .style.display =
+          "block";
+
+
+      document
+        .getElementById(
+          "success-message"
+        )
+        .textContent =
+          result.message ||
+          "Your free product is ready.";
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Free product unlock:",
+        error
+      );
+
+
+      showMessage(
+        "form-message",
+        error.message ||
+        "Your free product could not be prepared.",
+        "error"
+      );
+
+    }
+
+    finally {
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        currentProduct
+          ?.requires_newsletter_subscription ===
+        true
+          ? "SUBSCRIBE & GET FREE PRODUCT"
+          : "GET FREE PRODUCT";
+
+    }
+
+  }
+
+
+  /*
+  ==================================================
+  SECURE DOWNLOAD
+  ==================================================
+  */
+
+  async function downloadFreeProduct() {
+
+    clearMessage(
+      "download-message"
+    );
+
+
+    if (
+      !currentDownloadToken
+    ) {
+
+      showMessage(
+        "download-message",
+        "Your secure download session is unavailable. Please submit the form again.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const button =
+      document.getElementById(
+        "download-button"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "PREPARING SECURE DOWNLOAD...";
+
+
+    showMessage(
+      "download-message",
+      "Preparing your private download link...",
+      "info"
+    );
+
+
+    try {
+
+      const result =
+        await invokeFunction(
+          "free-digital-download",
+          {
+            download_token:
+              currentDownloadToken
+          }
+        );
+
+
+      if (
+        !result?.download_url
+      ) {
+
+        throw new Error(
+          "Secure download link was not returned."
+        );
+
+      }
+
+
+      const remaining =
+        Number(
+          result.downloads_remaining ??
+          0
+        );
+
+
+      showMessage(
+        "download-message",
+        "Your secure download is ready. Downloads remaining: " +
+          remaining +
+          ".",
+        "success"
+      );
+
+
+      window.location.assign(
+        result.download_url
+      );
+
+    }
+
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Free download:",
+        error
+      );
+
+
+      showMessage(
+        "download-message",
+        error.message ||
+        "Your secure download could not be prepared.",
+        "error"
+      );
+
+    }
+
+    finally {
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "DOWNLOAD YOUR FREE PRODUCT";
+
+    }
+
+  }
+
+
+  /*
+  ==================================================
+  START
+  ==================================================
+  */
+
+  loadProduct();
+
+</script>
+
+
+<script
+  src="cookie-consent.js"
+  defer
+></script>
+
+<script
+  src="tracking.js"
+  defer
+></script>
+
+
+</body>
+
+</html>
