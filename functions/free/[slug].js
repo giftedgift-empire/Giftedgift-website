@@ -13,7 +13,9 @@ export async function onRequest(context) {
     ).trim();
 
 
-  if (!slug) {
+  if (
+    !slug
+  ) {
 
     return new Response(
       "Free product not found.",
@@ -25,49 +27,31 @@ export async function onRequest(context) {
   }
 
 
-  /*
-  ==========================================
-  SERVE THE FREE PRODUCT LANDING PAGE
-
-  The browser keeps:
-  /free/my-book-slug
-
-  But Cloudflare internally serves:
-  /free-product.html
-  ==========================================
-  */
-
-  const url =
+  const incomingURL =
     new URL(
       request.url
     );
 
 
-  const assetUrl =
-    new URL(
-      "/free-product.html",
-      url.origin
-    );
-
-
   /*
-  Preserve Facebook / advertising tracking
-  parameters such as utm_source, fbclid, etc.
+    IMPORTANT:
+    Cloudflare Pages ASSETS must use the
+    pretty asset path, not /free-product.html
   */
 
-  assetUrl.search =
-    url.search;
-
-
-  const assetRequest =
-    new Request(
-      assetUrl.toString(),
-      request
+  const assetURL =
+    new URL(
+      "/free-product",
+      incomingURL.origin
     );
+
+
+  assetURL.search =
+    incomingURL.search;
 
 
   return env.ASSETS.fetch(
-    assetRequest
+    assetURL
   );
 
 }
