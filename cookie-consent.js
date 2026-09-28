@@ -1524,3 +1524,46 @@
   }
 
 })();
+
+/*
+=========================================================
+LOAD GIFTEDGIFT LANGUAGE SYSTEM
+=========================================================
+*/
+
+(function () {
+
+  if (
+    document.getElementById(
+      "giftedgift-language-script"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.id =
+    "giftedgift-language-script";
+
+
+  script.src =
+    "/language.js";
+
+
+  script.defer =
+    true;
+
+
+  document.head.appendChild(
+    script
+  );
+
+})();
