@@ -405,17 +405,6 @@
       line-height: 1.55;
     }
 
-    .access-note {
-      margin-top: 20px;
-      padding: 14px;
-      border-radius: 10px;
-      background: #fffaeb;
-      border: 1px solid #fedf89;
-      color: #7a2e0e;
-      line-height: 1.55;
-      font-size: 14px;
-    }
-
     .privacy-note {
       color: #777;
       font-size: 12px;
@@ -562,8 +551,8 @@
           id="benefit-box"
           class="benefit-box"
         >
-          Subscribe to GiftedGift Empire and your
-          free download will be unlocked immediately.
+          Join the GiftedGift Empire community and
+          unlock your free digital download instantly.
         </div>
 
 
@@ -578,10 +567,8 @@
             id="form-intro"
             class="intro"
           >
-            Enter your details below. After your
-            newsletter subscription is completed,
-            your secure download button will appear
-            immediately.
+            Enter your name and email address below,
+            then confirm to receive your free download.
           </p>
 
 
@@ -643,10 +630,9 @@
 
               <label for="newsletter-consent">
 
-                Yes, subscribe me to GiftedGift Empire
-                emails and give me access to this free
-                digital product. I understand that I can
-                unsubscribe at any time.
+                Yes, I’d like to receive GiftedGift Empire
+                emails and access this free digital
+                product.
 
                 <a href="/privacy-policy">
                   Privacy Policy
@@ -678,7 +664,7 @@
               type="submit"
               class="button subscribe-button"
             >
-              SUBSCRIBE & GET FREE PRODUCT
+              GET MY FREE DOWNLOAD
             </button>
 
 
@@ -689,12 +675,8 @@
             id="privacy-note"
             class="privacy-note"
           >
-
-            This free resource is offered in exchange
-            for joining the GiftedGift Empire newsletter.
-            You can unsubscribe from marketing emails
-            at any time.
-
+            By subscribing, you agree to receive
+            GiftedGift Empire emails.
           </p>
 
         </div>
@@ -714,8 +696,7 @@
             id="success-message"
             class="success-note"
           >
-            Your access is ready.
-            Tap below to download your product.
+            Thank you! Tap below to get your free download.
           </p>
 
 
@@ -763,15 +744,6 @@
 
           </div>
 
-
-          <div
-            id="access-note"
-            class="access-note"
-          >
-            Your secure access is temporary.
-            Private download links are generated only
-            when you tap a download button.
-          </div>
 
         </div>
 
@@ -1024,7 +996,7 @@
 
       let message =
         error.message ||
-        "The secure request failed.";
+        "Your request could not be completed.";
 
 
       try {
@@ -1392,19 +1364,19 @@
 
 
       button.textContent =
-        "SUBSCRIBE & GET FREE PRODUCT";
+        "GET MY FREE DOWNLOAD";
 
 
       benefitBox.textContent =
-        "This free resource is offered in exchange for joining the GiftedGift Empire newsletter. Your download will unlock immediately after subscribing.";
+        "Join the GiftedGift Empire community and unlock your free digital download instantly.";
 
 
       formIntro.textContent =
-        "Enter your name and email address, then confirm your newsletter subscription. Your secure download will be unlocked immediately.";
+        "Enter your name and email address below, then confirm to receive your free download.";
 
 
       privacyNote.textContent =
-        "By choosing to subscribe, you agree to receive GiftedGift Empire newsletter emails. You can unsubscribe at any time. Please see our Privacy Policy for more information.";
+        "By subscribing, you agree to receive GiftedGift Empire emails.";
 
     }
 
@@ -1423,19 +1395,19 @@
 
 
       button.textContent =
-        "GET FREE PRODUCT";
+        "GET MY FREE DOWNLOAD";
 
 
       benefitBox.textContent =
-        "Enter your details below and your secure free download will be prepared immediately.";
+        "Your free digital download is ready to be claimed.";
 
 
       formIntro.textContent =
-        "Enter your name and email address below to generate secure access to this free digital product.";
+        "Enter your name and email address below to receive your free download.";
 
 
       privacyNote.textContent =
-        "Your details are used to provide access to the requested free product. This offer does not subscribe you to the newsletter unless newsletter subscription is specifically required for the product.";
+        "Your details are used to provide access to this free digital product.";
 
     }
 
@@ -1701,7 +1673,7 @@
 
       showMessage(
         "form-message",
-        "Please confirm your newsletter subscription to receive this free product.",
+        "Please tick the box to continue.",
         "error"
       );
 
@@ -1722,12 +1694,12 @@
 
 
     button.textContent =
-      "PREPARING YOUR FREE PRODUCT...";
+      "PREPARING YOUR FREE DOWNLOAD...";
 
 
     showMessage(
       "form-message",
-      "Please wait while we prepare your secure access...",
+      "Please wait while we prepare your free download...",
       "info"
     );
 
@@ -1760,7 +1732,7 @@
       ) {
 
         throw new Error(
-          "Secure download access was not returned."
+          "Your download could not be prepared."
         );
 
       }
@@ -1801,8 +1773,7 @@
           "success-message"
         )
         .textContent =
-          result.message ||
-          "Your free product is ready. Tap below to download it.";
+          "Thank you! Tap below to get your free download.";
 
 
       const bonusSection =
@@ -1836,11 +1807,6 @@
           "none";
 
       }
-
-
-      updateAccessNote(
-        result
-      );
 
 
       document
@@ -1885,94 +1851,9 @@
 
 
       button.textContent =
-        currentProduct
-          ?.requires_newsletter_subscription ===
-        true
-          ? "SUBSCRIBE & GET FREE PRODUCT"
-          : "GET FREE PRODUCT";
+        "GET MY FREE DOWNLOAD";
 
     }
-
-  }
-
-
-  /*
-  ==================================================
-  ACCESS NOTE
-  ==================================================
-  */
-
-
-  function updateAccessNote(
-    result
-  ) {
-
-    const note =
-      document.getElementById(
-        "access-note"
-      );
-
-
-    const expiresAt =
-      result &&
-      result.expires_at
-        ? new Date(
-            result.expires_at
-          )
-        : null;
-
-
-    const maxDownloads =
-      Number(
-        result
-          ?.max_downloads
-      );
-
-
-    let text =
-      "Your secure access is temporary. Private download links are generated only when you tap a download button.";
-
-
-    if (
-      expiresAt &&
-      !Number.isNaN(
-        expiresAt.getTime()
-      )
-    ) {
-
-      text =
-        "Your secure access is available until " +
-        expiresAt.toLocaleString() +
-        ".";
-
-    }
-
-
-    if (
-      Number.isFinite(
-        maxDownloads
-      ) &&
-      maxDownloads >
-        0
-    ) {
-
-      text +=
-        " This access allows up to " +
-        maxDownloads +
-        " secure download request" +
-        (
-          maxDownloads ===
-          1
-            ? ""
-            : "s"
-        ) +
-        ".";
-
-    }
-
-
-    note.textContent =
-      text;
 
   }
 
@@ -1999,7 +1880,7 @@
 
       showMessage(
         "download-message",
-        "Your secure download session is unavailable. Please submit the form again.",
+        "Please submit the form again to continue.",
         "error"
       );
 
@@ -2060,12 +1941,12 @@
 
 
     clickedButton.textContent =
-      "PREPARING SECURE DOWNLOAD...";
+      "PREPARING DOWNLOAD...";
 
 
     showMessage(
       "download-message",
-      "Preparing your private download link...",
+      "Preparing your download...",
       "info"
     );
 
@@ -2136,7 +2017,7 @@
       ) {
 
         throw new Error(
-          "Secure download link was not returned."
+          "Your download could not be prepared."
         );
 
       }
@@ -2154,40 +2035,17 @@
       ) {
 
         throw new Error(
-          "The secure download link was invalid."
+          "Your download could not be prepared."
         );
 
       }
 
 
-      const remaining =
-        Number(
-          result
-            .downloads_remaining
-      );
-
-
-      let readyMessage =
+      const readyMessage =
         fileKind ===
           "bonus"
           ? "Your bonus download is ready."
           : "Your free product download is ready.";
-
-
-      if (
-        Number.isFinite(
-          remaining
-        ) &&
-        remaining >=
-          0
-      ) {
-
-        readyMessage +=
-          " Secure download requests remaining: " +
-          remaining +
-          ".";
-
-      }
 
 
       showMessage(
@@ -2242,7 +2100,7 @@
       showMessage(
         "download-message",
         error.message ||
-        "Your secure download could not be prepared.",
+        "Your download could not be prepared.",
         "error"
       );
 
