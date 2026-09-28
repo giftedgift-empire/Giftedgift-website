@@ -1296,6 +1296,81 @@ EN = English | FR = French | DE = German | NL = Dutch
 
 
     /*
+        /*
+    =====================================================
+    GIFTANA
+    =====================================================
+    */
+
+    "Welcome from":
+      [
+        "Bienvenue de la part de",
+        "Willkommen von",
+        "Welkom van"
+      ],
+
+    "Welcome to GiftedGift Empire. I’m Giftana, and I’m happy to have you here. Take your time, explore our products and discover whatever catches your eye. If you need any assistance, we’re always happy to help. Enjoy your time at GiftedGift Empire.":
+      [
+        "Bienvenue chez GiftedGift Empire. Je suis Giftana et je suis heureuse de vous accueillir. Prenez votre temps, découvrez nos produits et explorez tout ce qui attire votre attention. Si vous avez besoin d’aide, nous sommes toujours heureux de vous accompagner. Profitez de votre visite chez GiftedGift Empire.",
+        "Willkommen bei GiftedGift Empire. Ich bin Giftana und freue mich, Sie hier begrüßen zu dürfen. Nehmen Sie sich Zeit, entdecken Sie unsere Produkte und schauen Sie sich alles an, was Ihnen gefällt. Wenn Sie Hilfe benötigen, helfen wir Ihnen gerne weiter. Viel Freude bei GiftedGift Empire.",
+        "Welkom bij GiftedGift Empire. Ik ben Giftana en ik ben blij dat je er bent. Neem rustig de tijd, ontdek onze producten en bekijk wat je aanspreekt. Als je hulp nodig hebt, helpen we je graag. Veel plezier bij GiftedGift Empire."
+      ],
+
+    "🛍️ Start Shopping":
+      [
+        "🛍️ Commencer vos achats",
+        "🛍️ Einkauf starten",
+        "🛍️ Begin met winkelen"
+      ],
+
+    "📂 Browse Categories":
+      [
+        "📂 Parcourir les catégories",
+        "📂 Kategorien durchsuchen",
+        "📂 Categorieën bekijken"
+      ],
+
+    "🎧 Customer Support":
+      [
+        "🎧 Assistance client",
+        "🎧 Kundensupport",
+        "🎧 Klantenservice"
+      ],
+
+    "🔊 Hear Giftana":
+      [
+        "🔊 Écouter Giftana",
+        "🔊 Giftana anhören",
+        "🔊 Luister naar Giftana"
+      ],
+
+    "Giftana welcomes you once during your visit. You can replay her voice whenever you like.":
+      [
+        "Giftana vous accueille une fois pendant votre visite. Vous pouvez réécouter sa voix quand vous le souhaitez.",
+        "Giftana begrüßt Sie einmal während Ihres Besuchs. Sie können ihre Stimme jederzeit erneut abspielen.",
+        "Giftana verwelkomt je één keer tijdens je bezoek. Je kunt haar stem opnieuw afspelen wanneer je wilt."
+      ],
+
+    "🔊 Hear Giftana Again":
+      [
+        "🔊 Réécouter Giftana",
+        "🔊 Giftana erneut anhören",
+        "🔊 Luister opnieuw naar Giftana"
+      ],
+
+    "Close Giftana":
+      [
+        "Fermer Giftana",
+        "Giftana schließen",
+        "Giftana sluiten"
+      ],
+
+    "Hear Giftana again":
+      [
+        "Réécouter Giftana",
+        "Giftana erneut anhören",
+        "Luister opnieuw naar Giftana"
+      ],
     =====================================================
     COOKIE SETTINGS
     =====================================================
@@ -2113,7 +2188,7 @@ EN = English | FR = French | DE = German | NL = Dutch
         top: 96px;
         right: 12px;
 
-        z-index: 9000;
+        z-index: 4000;
 
         display: flex;
 
