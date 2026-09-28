@@ -1,57 +1,53 @@
-export async function onRequest(context) {
+import html from "../../free-product.html";
 
-  const {
-    request,
-    env,
-    params
-  } = context;
 
+export async function onRequestGet(
+  context
+) {
 
   const slug =
     String(
-      params.slug || ""
-    ).trim();
+      context.params.slug ||
+      ""
+    )
+      .trim()
+      .toLowerCase();
 
 
   if (
-    !slug
+    !slug ||
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/
+      .test(
+        slug
+      )
   ) {
 
     return new Response(
       "Free product not found.",
       {
-        status: 404
+        status: 404,
+        headers: {
+          "Content-Type":
+            "text/plain; charset=UTF-8"
+        }
       }
     );
 
   }
 
 
-  const incomingURL =
-    new URL(
-      request.url
-    );
+  return new Response(
+    html,
+    {
+      status: 200,
+      headers: {
+        "Content-Type":
+          "text/html; charset=UTF-8",
 
-
-  /*
-    IMPORTANT:
-    Cloudflare Pages ASSETS must use the
-    pretty asset path, not /free-product.html
-  */
-
-  const assetURL =
-    new URL(
-      "/free-product",
-      incomingURL.origin
-    );
-
-
-  assetURL.search =
-    incomingURL.search;
-
-
-  return env.ASSETS.fetch(
-    assetURL
+        "Cache-Control":
+          "no-store"
+      }
+    }
   );
 
 }
