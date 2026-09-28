@@ -574,6 +574,44 @@
       cursor: not-allowed;
     }
 
+
+    /*
+      =====================================================
+      BONUS DOWNLOAD
+      =====================================================
+    */
+
+    .bonus-download-wrap {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #d7e2f4;
+    }
+
+    .bonus-download-title {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #123a8c;
+    }
+
+    .bonus-download-btn {
+      border: 0;
+      background: #f2bd16;
+      color: #111;
+      padding: 14px 22px;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .bonus-download-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+
     .secure-note {
       margin-top: 18px;
       font-size: 13px;
@@ -628,6 +666,11 @@
       .payment-highlight,
       .card-highlight-text {
         font-size: 15px;
+      }
+
+      .download-btn,
+      .bonus-download-btn {
+        width: 100%;
       }
 
     }
@@ -945,6 +988,29 @@
         >
           Download Your Product
         </button>
+
+
+        <div
+          id="bonus-download-wrap"
+          class="bonus-download-wrap"
+        >
+
+          <p
+            id="bonus-download-title"
+            class="bonus-download-title"
+          >
+            Free Bonus Download
+          </p>
+
+          <button
+            id="bonus-download-button"
+            class="bonus-download-btn"
+            type="button"
+          >
+            🎁 Download Your Free Bonus
+          </button>
+
+        </div>
 
       </div>
 
@@ -1316,7 +1382,7 @@ async function loadProduct() {
           "digital_products"
         )
         .select(
-          "id,name,description,price,image_url,product_type,active"
+          "id,name,description,price,image_url,product_type,active,bonus_title,bonus_file_name"
         )
         .eq(
           "id",
@@ -2401,6 +2467,15 @@ async function maybeConfigurePayPal() {
                     "block";
 
 
+                /*
+                  Show the bonus only when the
+                  purchased product actually has
+                  a saved bonus file.
+                */
+
+                showBonusDownloadIfAvailable();
+
+
                 if (
                   linkedToCustomer
                 ) {
@@ -2686,6 +2761,192 @@ async function maybeConfigurePayPal() {
 
 
 
+/*
+  =========================================================
+  BONUS DOWNLOAD DISPLAY
+  =========================================================
+*/
+
+
+function showBonusDownloadIfAvailable() {
+
+  const bonusWrap =
+    document.getElementById(
+      "bonus-download-wrap"
+    );
+
+
+  const bonusTitle =
+    document.getElementById(
+      "bonus-download-title"
+    );
+
+
+  if (
+    currentProduct &&
+    currentProduct.bonus_file_name
+  ) {
+
+
+    bonusTitle.textContent =
+      currentProduct.bonus_title ||
+      "Free Bonus Download";
+
+
+    bonusWrap.style.display =
+      "block";
+
+
+  } else {
+
+
+    bonusWrap.style.display =
+      "none";
+
+  }
+
+}
+
+
+
+/*
+  =========================================================
+  BONUS DOWNLOAD
+  =========================================================
+*/
+
+
+async function downloadBonusProduct() {
+
+
+  if (
+    !downloadToken
+  ) {
+
+
+    showError(
+      "Your secure download token is missing."
+    );
+
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "bonus-download-button"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Preparing Your Free Bonus...";
+
+
+  try {
+
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+          "/functions/v1/digital-bonus-download",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              download_token:
+                downloadToken
+
+            })
+
+        }
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      data.success !== true ||
+      !data.download_url
+    ) {
+
+
+      throw new Error(
+
+        data.error ||
+        "Your bonus download could not be prepared."
+
+      );
+
+    }
+
+
+    window.location.href =
+      data.download_url;
+
+
+  } catch (
+    error
+  ) {
+
+
+    console.error(
+      "Bonus download:",
+      error
+    );
+
+
+    showError(
+
+      error instanceof Error
+        ? error.message
+        : "Your bonus download could not be prepared."
+
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "🎁 Download Your Free Bonus";
+
+  }
+
+}
+
+
+
+/*
+  =========================================================
+  MAIN PRODUCT DOWNLOAD
+  =========================================================
+*/
+
+
 async function downloadProduct() {
 
 
@@ -2810,6 +3071,17 @@ document
   .addEventListener(
     "click",
     downloadProduct
+  );
+
+
+
+document
+  .getElementById(
+    "bonus-download-button"
+  )
+  .addEventListener(
+    "click",
+    downloadBonusProduct
   );
 
 
