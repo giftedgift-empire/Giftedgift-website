@@ -9,16 +9,6 @@ const SUPABASE_PUBLISHABLE_KEY =
   =====================================================
   PRODUCT / FOODSTUFF LOOKUP
   =====================================================
-
-  This is the SAME lookup already working for:
-
-  - affiliate_products
-  - products
-  - digital_products
-  - foodstuffs
-
-  When requireActive is true,
-  only active=true items are accepted.
 */
 
 async function getItemBySlug(
@@ -35,9 +25,13 @@ async function getItemBySlug(
     "&slug=eq." +
     encodeURIComponent(slug);
 
-  if (requireActive) {
+  if (
+    requireActive
+  ) {
+
     apiURL +=
       "&active=eq.true";
+
   }
 
   apiURL +=
@@ -49,6 +43,7 @@ async function getItemBySlug(
       apiURL,
       {
         headers: {
+
           apikey:
             SUPABASE_PUBLISHABLE_KEY,
 
@@ -58,12 +53,15 @@ async function getItemBySlug(
 
           Accept:
             "application/json"
+
         }
       }
     );
 
 
-  if (!response.ok) {
+  if (
+    !response.ok
+  ) {
 
     console.error(
       "Slug lookup failed:",
@@ -71,7 +69,9 @@ async function getItemBySlug(
       response.status
     );
 
+
     return null;
+
   }
 
 
@@ -80,14 +80,20 @@ async function getItemBySlug(
 
 
   if (
-    !Array.isArray(items) ||
-    items.length === 0
+    !Array.isArray(
+      items
+    ) ||
+    items.length ===
+      0
   ) {
+
     return null;
+
   }
 
 
   return items[0];
+
 }
 
 
@@ -96,14 +102,6 @@ async function getItemBySlug(
   =====================================================
   BLOG / DAILY INSPIRATION LOOKUP
   =====================================================
-
-  Blog posts and Daily Inspiration use:
-
-  published=true
-
-  instead of:
-
-  active=true
 */
 
 async function getPublishedItemBySlug(
@@ -127,6 +125,7 @@ async function getPublishedItemBySlug(
       apiURL,
       {
         headers: {
+
           apikey:
             SUPABASE_PUBLISHABLE_KEY,
 
@@ -136,12 +135,15 @@ async function getPublishedItemBySlug(
 
           Accept:
             "application/json"
+
         }
       }
     );
 
 
-  if (!response.ok) {
+  if (
+    !response.ok
+  ) {
 
     console.error(
       "Published slug lookup failed:",
@@ -149,7 +151,9 @@ async function getPublishedItemBySlug(
       response.status
     );
 
+
     return null;
+
   }
 
 
@@ -158,14 +162,61 @@ async function getPublishedItemBySlug(
 
 
   if (
-    !Array.isArray(items) ||
-    items.length === 0
+    !Array.isArray(
+      items
+    ) ||
+    items.length ===
+      0
   ) {
+
     return null;
+
   }
 
 
   return items[0];
+
+}
+
+
+
+/*
+  =====================================================
+  SERVE STATIC PAGE
+  =====================================================
+
+  Used for real website pages which must not be
+  mistaken for database product slugs.
+
+  IMPORTANT:
+  Cloudflare Pages ASSETS uses the pretty path,
+  so free-product.html is requested internally as:
+
+  /free-product
+
+  Query parameters such as ?slug=test-free-download
+  are preserved.
+*/
+
+async function serveStaticPage(
+  context,
+  pathname
+) {
+
+  const assetURL =
+    new URL(
+      context.request.url
+    );
+
+
+  assetURL.pathname =
+    pathname;
+
+
+  return context.env.ASSETS.fetch(
+    assetURL
+  );
+
 }
 
 
@@ -197,10 +248,8 @@ async function serveLandingPage(
     Remove the public query string only
     from the INTERNAL asset request.
 
-    The customer's browser URL still keeps
-    things such as:
-
-    /test-product?deal_id=4
+    The visitor's browser URL still keeps
+    the original query string.
   */
 
   landingURL.search =
@@ -216,13 +265,17 @@ async function serveLandingPage(
   if (
     !landingResponse.ok
   ) {
+
     return null;
+
   }
 
 
   const safeItemID =
     JSON.stringify(
-      String(itemID)
+      String(
+        itemID
+      )
     );
 
 
@@ -230,7 +283,10 @@ async function serveLandingPage(
     .on(
       "head",
       {
-        element(element) {
+
+        element(
+          element
+        ) {
 
           element.append(
             `
@@ -240,16 +296,19 @@ async function serveLandingPage(
               </script>
             `,
             {
-              html: true
+              html:
+                true
             }
           );
 
         }
+
       }
     )
     .transform(
       landingResponse
     );
+
 }
 
 
@@ -273,15 +332,55 @@ export async function onRequestGet(
       .toLowerCase();
 
 
-  if (!slug) {
+  if (
+    !slug
+  ) {
 
     return context.env.ASSETS.fetch(
       context.request
     );
+
   }
 
 
   try {
+
+
+    /*
+      =================================================
+      IMPORTANT STATIC FREE-PRODUCT PAGE
+
+      Cloudflare changes:
+
+      /free-product.html?slug=my-book
+
+      into:
+
+      /free-product?slug=my-book
+
+      Because this file is functions/[slug].js,
+      /free-product arrives here.
+
+      We must serve the actual free-product page
+      BEFORE trying database slug lookups.
+      =================================================
+    */
+
+    if (
+      slug ===
+        "free-product" ||
+      slug ===
+        "free-product.html"
+    ) {
+
+      return serveStaticPage(
+        context,
+        "/free-product"
+      );
+
+    }
+
+
 
     /*
       =================================================
@@ -300,20 +399,27 @@ export async function onRequestGet(
       );
 
 
-    if (affiliateProduct) {
+    if (
+      affiliateProduct
+    ) {
 
       const response =
         await serveLandingPage(
           context,
-          "/affiliate-products.html",
+          "/affiliate-products",
           "__AFFILIATE_PRODUCT_ID",
           affiliateProduct.id
         );
 
 
-      if (response) {
+      if (
+        response
+      ) {
+
         return response;
+
       }
+
     }
 
 
@@ -324,9 +430,6 @@ export async function onRequestGet(
 
       Example:
       /test-product
-
-      Also keeps:
-      /test-product?deal_id=4
       =================================================
     */
 
@@ -337,20 +440,27 @@ export async function onRequestGet(
       );
 
 
-    if (physicalProduct) {
+    if (
+      physicalProduct
+    ) {
 
       const response =
         await serveLandingPage(
           context,
-          "/product.html",
+          "/product",
           "__PHYSICAL_PRODUCT_ID",
           physicalProduct.id
         );
 
 
-      if (response) {
+      if (
+        response
+      ) {
+
         return response;
+
       }
+
     }
 
 
@@ -372,20 +482,27 @@ export async function onRequestGet(
       );
 
 
-    if (digitalProduct) {
+    if (
+      digitalProduct
+    ) {
 
       const response =
         await serveLandingPage(
           context,
-          "/digital-product.html",
+          "/digital-product",
           "__DIGITAL_PRODUCT_ID",
           digitalProduct.id
         );
 
 
-      if (response) {
+      if (
+        response
+      ) {
+
         return response;
+
       }
+
     }
 
 
@@ -407,20 +524,27 @@ export async function onRequestGet(
       );
 
 
-    if (foodstuff) {
+    if (
+      foodstuff
+    ) {
 
       const response =
         await serveLandingPage(
           context,
-          "/foodstuffs.html",
+          "/foodstuffs",
           "__FOODSTUFF_ID",
           foodstuff.id
         );
 
 
-      if (response) {
+      if (
+        response
+      ) {
+
         return response;
+
       }
+
     }
 
 
@@ -428,11 +552,6 @@ export async function onRequestGet(
     /*
       =================================================
       5. BLOG POSTS
-
-      Example:
-      /how-to-choose-the-perfect-gift
-
-      Only published blog posts can open publicly.
       =================================================
     */
 
@@ -443,20 +562,27 @@ export async function onRequestGet(
       );
 
 
-    if (blogPost) {
+    if (
+      blogPost
+    ) {
 
       const response =
         await serveLandingPage(
           context,
-          "/blog.html",
+          "/blog",
           "__BLOG_POST_ID",
           blogPost.id
         );
 
 
-      if (response) {
+      if (
+        response
+      ) {
+
         return response;
+
       }
+
     }
 
 
@@ -464,11 +590,6 @@ export async function onRequestGet(
     /*
       =================================================
       6. DAILY INSPIRATION
-
-      Example:
-      /gods-word-for-today
-
-      Only published inspirations can open publicly.
       =================================================
     */
 
@@ -479,20 +600,27 @@ export async function onRequestGet(
       );
 
 
-    if (dailyInspiration) {
+    if (
+      dailyInspiration
+    ) {
 
       const response =
         await serveLandingPage(
           context,
-          "/daily-inspiration.html",
+          "/daily-inspiration",
           "__DAILY_INSPIRATION_ID",
           dailyInspiration.id
         );
 
 
-      if (response) {
+      if (
+        response
+      ) {
+
         return response;
+
       }
+
     }
 
 
@@ -501,17 +629,7 @@ export async function onRequestGet(
       =================================================
       NOTHING MATCHED
 
-      Allow Cloudflare to load the normal website
-      file exactly as before.
-
-      Examples:
-
-      /shop.html
-      /blog.html
-      /daily-inspiration.html
-      /about.html
-      /contact.html
-      /my-logo.png
+      Let Cloudflare serve the normal website asset.
       =================================================
     */
 
@@ -520,7 +638,11 @@ export async function onRequestGet(
     );
 
 
-  } catch (error) {
+  }
+
+  catch (
+    error
+  ) {
 
     console.error(
       "Clean URL router error:",
@@ -531,5 +653,7 @@ export async function onRequestGet(
     return context.env.ASSETS.fetch(
       context.request
     );
+
   }
+
 }
