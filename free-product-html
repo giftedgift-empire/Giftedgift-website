@@ -32,6 +32,36 @@
   >
 
 
+  <meta
+    id="og-title"
+    property="og:title"
+    content="Free Digital Product | GiftedGift Empire"
+  >
+
+  <meta
+    id="og-description"
+    property="og:description"
+    content="Get a free digital product from GiftedGift Empire."
+  >
+
+  <meta
+    id="og-url"
+    property="og:url"
+    content="https://giftedgiftempire.com/free-product"
+  >
+
+  <meta
+    id="og-image"
+    property="og:image"
+    content=""
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+
   <style>
 
     * {
@@ -289,6 +319,12 @@
       margin-top: 15px;
     }
 
+    .bonus-download-button {
+      background: #f2bd16;
+      color: #111;
+      margin-top: 12px;
+    }
+
     .message {
       display: none;
       border-radius: 10px;
@@ -337,6 +373,36 @@
     .success-note {
       line-height: 1.65;
       color: #555;
+    }
+
+    .bonus-box {
+      display: none;
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 13px;
+      border: 1px solid #fedf89;
+      background: #fffaeb;
+      text-align: left;
+    }
+
+    .bonus-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #7a2e0e;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .bonus-box h3 {
+      color: #123a8c;
+      margin: 5px 0 8px;
+      font-size: 21px;
+    }
+
+    .bonus-box p {
+      margin: 0;
+      color: #555;
+      line-height: 1.55;
     }
 
     .access-note {
@@ -508,25 +574,26 @@
           </h2>
 
 
-          <p class="intro">
-
+          <p
+            id="form-intro"
+            class="intro"
+          >
             Enter your details below. After your
             newsletter subscription is completed,
             your secure download button will appear
             immediately.
-
           </p>
 
 
           <div
             id="form-message"
             class="message"
+            aria-live="polite"
           ></div>
 
 
           <form
             id="free-product-form"
-            onsubmit="subscribeAndUnlock(event)"
           >
 
 
@@ -618,13 +685,15 @@
           </form>
 
 
-          <p class="privacy-note">
+          <p
+            id="privacy-note"
+            class="privacy-note"
+          >
 
-            We use your details to provide the
-            requested free product and, where you
-            consent, send GiftedGift Empire newsletter
-            emails. You can unsubscribe from marketing
-            emails at any time.
+            This free resource is offered in exchange
+            for joining the GiftedGift Empire newsletter.
+            You can unsubscribe from marketing emails
+            at any time.
 
           </p>
 
@@ -645,7 +714,7 @@
             id="success-message"
             class="success-note"
           >
-            Your subscription was successful.
+            Your access is ready.
             Tap below to download your product.
           </p>
 
@@ -653,25 +722,55 @@
           <div
             id="download-message"
             class="message"
+            aria-live="polite"
           ></div>
 
 
           <button
-            id="download-button"
+            id="download-main-button"
             type="button"
             class="button download-button"
-            onclick="downloadFreeProduct()"
           >
             DOWNLOAD YOUR FREE PRODUCT
           </button>
 
 
-          <div class="access-note">
+          <div
+            id="bonus-download-section"
+            class="bonus-box"
+          >
 
-            Your secure access lasts
-            <strong>3 days</strong> and allows a maximum
-            of <strong>2 downloads</strong>.
+            <div class="bonus-label">
+              🎁 BONUS INCLUDED
+            </div>
 
+            <h3 id="bonus-download-title">
+              Free Bonus Download
+            </h3>
+
+            <p>
+              Your offer includes an additional
+              digital download.
+            </p>
+
+            <button
+              id="download-bonus-button"
+              type="button"
+              class="button bonus-download-button"
+            >
+              DOWNLOAD YOUR FREE BONUS
+            </button>
+
+          </div>
+
+
+          <div
+            id="access-note"
+            class="access-note"
+          >
+            Your secure access is temporary.
+            Private download links are generated only
+            when you tap a download button.
           </div>
 
         </div>
@@ -726,6 +825,7 @@
   ==================================================
   */
 
+
   const SUPABASE_URL =
     "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
@@ -747,23 +847,25 @@
   ==================================================
   */
 
+
   let currentProduct =
     null;
+
 
   let currentDownloadToken =
     null;
 
 
+  let currentHasBonus =
+    false;
+
+
   /*
   ==================================================
   SLUG
-
-  Supports:
-  /free-product.html?slug=my-book
-  /free-product?slug=my-book
-  /free/my-book
   ==================================================
   */
+
 
   function getSlug() {
 
@@ -775,12 +877,19 @@
 
     const querySlug =
       String(
-        params.get("slug") || ""
-      ).trim();
+        params.get("slug") ||
+        ""
+      )
+        .trim()
+        .toLowerCase();
 
 
-    if (querySlug) {
+    if (
+      querySlug
+    ) {
+
       return querySlug;
+
     }
 
 
@@ -791,7 +900,9 @@
 
 
     const freeIndex =
-      pathParts.indexOf("free");
+      pathParts.indexOf(
+        "free"
+      );
 
 
     if (
@@ -805,7 +916,9 @@
         pathParts[
           freeIndex + 1
         ]
-      ).trim();
+      )
+        .trim()
+        .toLowerCase();
 
     }
 
@@ -815,11 +928,25 @@
   }
 
 
+
+  function isValidSlug(
+    slug
+  ) {
+
+    return /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+      .test(
+        slug
+      );
+
+  }
+
+
   /*
   ==================================================
   MESSAGE HELPERS
   ==================================================
   */
+
 
   function showMessage(
     id,
@@ -844,6 +971,7 @@
   }
 
 
+
   function clearMessage(
     id
   ) {
@@ -866,9 +994,10 @@
 
   /*
   ==================================================
-  EDGE FUNCTION
+  EDGE FUNCTION HELPER
   ==================================================
   */
+
 
   async function invokeFunction(
     functionName,
@@ -889,7 +1018,9 @@
         );
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       let message =
         error.message ||
@@ -905,12 +1036,18 @@
         ) {
 
           const details =
-            await error.context.json();
+            await error.context
+              .json();
 
 
-          if (details?.error) {
+          if (
+            details &&
+            details.error
+          ) {
+
             message =
               details.error;
+
           }
 
         }
@@ -936,10 +1073,15 @@
     }
 
 
-    if (data?.error) {
+    if (
+      data &&
+      data.error
+    ) {
+
       throw new Error(
         data.error
       );
+
     }
 
 
@@ -954,18 +1096,27 @@
   ==================================================
   */
 
+
   async function loadProduct() {
 
     const slug =
       getSlug();
 
 
-    if (!slug) {
+    if (
+      !slug ||
+      !isValidSlug(
+        slug
+      )
+    ) {
+
       showProductError(
-        "Free product link is incomplete."
+        "Free product link is incomplete or invalid."
       );
 
+
       return;
+
     }
 
 
@@ -983,17 +1134,48 @@
         );
 
 
-    const product =
+    let product =
+      null;
+
+
+    if (
       Array.isArray(
         data
       )
-        ? data[0]
-        : null;
+    ) {
+
+      product =
+        data[0] ||
+        null;
+
+    }
+
+    else if (
+      data &&
+      data.product
+    ) {
+
+      product =
+        data.product;
+
+    }
+
+    else if (
+      data &&
+      typeof data ===
+        "object"
+    ) {
+
+      product =
+        data;
+
+    }
 
 
     if (
       error ||
-      !product
+      !product ||
+      !product.slug
     ) {
 
       console.error(
@@ -1006,7 +1188,9 @@
         "This free product is unavailable."
       );
 
+
       return;
+
     }
 
 
@@ -1037,17 +1221,27 @@
   }
 
 
+
   function renderProduct(
     product
   ) {
+
+    const productName =
+      product.name ||
+      "Free Digital Product";
+
+
+    const productDescription =
+      product.description ||
+      "Download this free GiftedGift Empire digital resource.";
+
 
     document
       .getElementById(
         "product-name"
       )
       .textContent =
-        product.name ||
-        "Free Digital Product";
+        productName;
 
 
     document
@@ -1055,8 +1249,7 @@
         "product-description"
       )
       .textContent =
-        product.description ||
-        "Download this free GiftedGift Empire digital resource.";
+        productDescription;
 
 
     /*
@@ -1064,6 +1257,7 @@
     IMAGE
     ================================================
     */
+
 
     const image =
       document.getElementById(
@@ -1086,12 +1280,11 @@
 
 
       image.alt =
-        product.name ||
-        "Free digital product";
+        productName;
 
 
       image.onload =
-        () => {
+        function() {
 
           image.style.display =
             "block";
@@ -1104,7 +1297,15 @@
 
 
       image.onerror =
-        () => {
+        function() {
+
+          image.style.display =
+            "none";
+
+
+          placeholder.style.display =
+            "block";
+
 
           placeholder.textContent =
             "Product cover unavailable.";
@@ -1114,6 +1315,14 @@
     }
 
     else {
+
+      image.style.display =
+        "none";
+
+
+      placeholder.style.display =
+        "block";
+
 
       placeholder.textContent =
         "Product cover unavailable.";
@@ -1126,6 +1335,7 @@
     NEWSLETTER REQUIREMENT
     ================================================
     */
+
 
     const requiresNewsletter =
       product
@@ -1157,6 +1367,18 @@
       );
 
 
+    const formIntro =
+      document.getElementById(
+        "form-intro"
+      );
+
+
+    const privacyNote =
+      document.getElementById(
+        "privacy-note"
+      );
+
+
     if (
       requiresNewsletter
     ) {
@@ -1174,7 +1396,15 @@
 
 
       benefitBox.textContent =
-        "Subscribe to GiftedGift Empire and your free download will be unlocked immediately.";
+        "This free resource is offered in exchange for joining the GiftedGift Empire newsletter. Your download will unlock immediately after subscribing.";
+
+
+      formIntro.textContent =
+        "Enter your name and email address, then confirm your newsletter subscription. Your secure download will be unlocked immediately.";
+
+
+      privacyNote.textContent =
+        "By choosing to subscribe, you agree to receive GiftedGift Empire newsletter emails. You can unsubscribe at any time. Please see our Privacy Policy for more information.";
 
     }
 
@@ -1188,12 +1418,24 @@
         false;
 
 
+      consentCheckbox.checked =
+        false;
+
+
       button.textContent =
         "GET FREE PRODUCT";
 
 
       benefitBox.textContent =
-        "Enter your details below and your free download will be unlocked immediately.";
+        "Enter your details below and your secure free download will be prepared immediately.";
+
+
+      formIntro.textContent =
+        "Enter your name and email address below to generate secure access to this free digital product.";
+
+
+      privacyNote.textContent =
+        "Your details are used to provide access to the requested free product. This offer does not subscribe you to the newsletter unless newsletter subscription is specifically required for the product.";
 
     }
 
@@ -1204,24 +1446,22 @@
     ================================================
     */
 
-    document.title =
-      (product.name ||
-        "Free Digital Product") +
-      " | GiftedGift Empire";
 
-
-    const metaDescription =
-      document.getElementById(
-        "meta-description"
+    const canonicalURL =
+      "https://giftedgiftempire.com/free/" +
+      encodeURIComponent(
+        product.slug
       );
 
 
-    metaDescription.content =
+    const shortDescription =
       String(
-        product.description ||
-        "Get this free digital product from GiftedGift Empire."
+        productDescription
       )
-        .replace(/\s+/g, " ")
+        .replace(
+          /\s+/g,
+          " "
+        )
         .trim()
         .slice(
           0,
@@ -1229,19 +1469,67 @@
         );
 
 
-    const canonical =
-      document.getElementById(
+    document.title =
+      productName +
+      " | GiftedGift Empire";
+
+
+    document
+      .getElementById(
+        "meta-description"
+      )
+      .content =
+        shortDescription;
+
+
+    document
+      .getElementById(
         "canonical-link"
-      );
+      )
+      .href =
+        canonicalURL;
 
 
-    canonical.href =
-      "https://giftedgiftempire.com/free/" +
-      encodeURIComponent(
-        product.slug
-      );
+    document
+      .getElementById(
+        "og-title"
+      )
+      .content =
+        productName +
+        " | GiftedGift Empire";
+
+
+    document
+      .getElementById(
+        "og-description"
+      )
+      .content =
+        shortDescription;
+
+
+    document
+      .getElementById(
+        "og-url"
+      )
+      .content =
+        canonicalURL;
+
+
+    if (
+      product.image_url
+    ) {
+
+      document
+        .getElementById(
+          "og-image"
+        )
+        .content =
+          product.image_url;
+
+    }
 
   }
+
 
 
   function showProductError(
@@ -1251,6 +1539,14 @@
     document
       .getElementById(
         "loading"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "page-content"
       )
       .style.display =
         "none";
@@ -1274,9 +1570,10 @@
 
   /*
   ==================================================
-  SUBSCRIBE + UNLOCK
+  SUBSCRIBE / UNLOCK
   ==================================================
   */
+
 
   async function subscribeAndUnlock(
     event
@@ -1300,7 +1597,9 @@
         "error"
       );
 
+
       return;
+
     }
 
 
@@ -1313,13 +1612,17 @@
         .trim();
 
 
+    const emailInput =
+      document.getElementById(
+        "subscriber-email"
+      );
+
+
     const email =
-      document
-        .getElementById(
-          "subscriber-email"
-        )
+      emailInput
         .value
-        .trim();
+        .trim()
+        .toLowerCase();
 
 
     const consent =
@@ -1340,7 +1643,24 @@
 
 
     if (
-      name.length < 2
+      website
+    ) {
+
+      showMessage(
+        "form-message",
+        "Your request could not be completed.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    if (
+      name.length <
+      2
     ) {
 
       showMessage(
@@ -1349,19 +1669,26 @@
         "error"
       );
 
+
       return;
+
     }
 
 
-    if (!email) {
+    if (
+      !email ||
+      !emailInput.checkValidity()
+    ) {
 
       showMessage(
         "form-message",
-        "Please enter your email address.",
+        "Please enter a valid email address.",
         "error"
       );
 
+
       return;
+
     }
 
 
@@ -1374,11 +1701,13 @@
 
       showMessage(
         "form-message",
-        "Please agree to subscribe to the newsletter to receive this free product.",
+        "Please confirm your newsletter subscription to receive this free product.",
         "error"
       );
 
+
       return;
+
     }
 
 
@@ -1398,7 +1727,7 @@
 
     showMessage(
       "form-message",
-      "Please wait while we prepare your free download...",
+      "Please wait while we prepare your secure access...",
       "info"
     );
 
@@ -1413,24 +1742,21 @@
             slug:
               currentProduct.slug,
 
-            name:
-              name,
+            name,
 
-            email:
-              email,
+            email,
 
-            consent:
-              consent,
+            consent,
 
-            website:
-              website
+            website
 
           }
         );
 
 
       if (
-        !result?.download_token
+        !result ||
+        !result.download_token
       ) {
 
         throw new Error(
@@ -1442,6 +1768,16 @@
 
       currentDownloadToken =
         result.download_token;
+
+
+      currentHasBonus =
+        (
+          result.has_bonus_file ===
+            true ||
+          currentProduct
+            .has_bonus_file ===
+            true
+        );
 
 
       document
@@ -1466,13 +1802,60 @@
         )
         .textContent =
           result.message ||
-          "Your free product is ready.";
+          "Your free product is ready. Tap below to download it.";
 
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      const bonusSection =
+        document.getElementById(
+          "bonus-download-section"
+        );
+
+
+      if (
+        currentHasBonus
+      ) {
+
+        bonusSection.style.display =
+          "block";
+
+
+        document
+          .getElementById(
+            "bonus-download-title"
+          )
+          .textContent =
+            result.bonus_title ||
+            currentProduct.bonus_title ||
+            "Free Bonus Download";
+
+      }
+
+      else {
+
+        bonusSection.style.display =
+          "none";
+
+      }
+
+
+      updateAccessNote(
+        result
+      );
+
+
+      document
+        .getElementById(
+          "success-box"
+        )
+        .scrollIntoView(
+          {
+            behavior:
+              "smooth",
+
+            block:
+              "center"
+          }
+        );
 
     }
 
@@ -1515,11 +1898,95 @@
 
   /*
   ==================================================
+  ACCESS NOTE
+  ==================================================
+  */
+
+
+  function updateAccessNote(
+    result
+  ) {
+
+    const note =
+      document.getElementById(
+        "access-note"
+      );
+
+
+    const expiresAt =
+      result &&
+      result.expires_at
+        ? new Date(
+            result.expires_at
+          )
+        : null;
+
+
+    const maxDownloads =
+      Number(
+        result
+          ?.max_downloads
+      );
+
+
+    let text =
+      "Your secure access is temporary. Private download links are generated only when you tap a download button.";
+
+
+    if (
+      expiresAt &&
+      !Number.isNaN(
+        expiresAt.getTime()
+      )
+    ) {
+
+      text =
+        "Your secure access is available until " +
+        expiresAt.toLocaleString() +
+        ".";
+
+    }
+
+
+    if (
+      Number.isFinite(
+        maxDownloads
+      ) &&
+      maxDownloads >
+        0
+    ) {
+
+      text +=
+        " This access allows up to " +
+        maxDownloads +
+        " secure download request" +
+        (
+          maxDownloads ===
+          1
+            ? ""
+            : "s"
+        ) +
+        ".";
+
+    }
+
+
+    note.textContent =
+      text;
+
+  }
+
+
+  /*
+  ==================================================
   SECURE DOWNLOAD
   ==================================================
   */
 
-  async function downloadFreeProduct() {
+
+  async function downloadFreeProduct(
+    fileKind
+  ) {
 
     clearMessage(
       "download-message"
@@ -1536,21 +2003,63 @@
         "error"
       );
 
+
       return;
+
     }
 
 
-    const button =
-      document.getElementById(
-        "download-button"
+    if (
+      fileKind ===
+        "bonus" &&
+      !currentHasBonus
+    ) {
+
+      showMessage(
+        "download-message",
+        "No bonus download is available for this product.",
+        "error"
       );
 
 
-    button.disabled =
+      return;
+
+    }
+
+
+    const mainButton =
+      document.getElementById(
+        "download-main-button"
+      );
+
+
+    const bonusButton =
+      document.getElementById(
+        "download-bonus-button"
+      );
+
+
+    const clickedButton =
+      fileKind ===
+        "bonus"
+        ? bonusButton
+        : mainButton;
+
+
+    const originalText =
+      clickedButton
+        .textContent;
+
+
+    mainButton.disabled =
       true;
 
 
-    button.textContent =
+    bonusButton.disabled =
+      true;
+
+
+    clickedButton.textContent =
       "PREPARING SECURE DOWNLOAD...";
 
 
@@ -1561,20 +2070,69 @@
     );
 
 
+    /*
+      Open a blank tab immediately while the user
+      click is still active. This helps mobile
+      browsers keep the GiftedGift Empire page open
+      so a customer can return for the bonus file.
+    */
+
+
+    let downloadWindow =
+      null;
+
+
     try {
+
+      downloadWindow =
+        window.open(
+          "about:blank",
+          "_blank"
+        );
+
+
+      if (
+        downloadWindow
+      ) {
+
+        try {
+
+          downloadWindow.opener =
+            null;
+
+        }
+
+        catch (
+          openerError
+        ) {
+
+          console.error(
+            openerError
+          );
+
+        }
+
+      }
+
 
       const result =
         await invokeFunction(
           "free-digital-download",
           {
+
             download_token:
-              currentDownloadToken
+              currentDownloadToken,
+
+            file_kind:
+              fileKind
+
           }
         );
 
 
       if (
-        !result?.download_url
+        !result ||
+        !result.download_url
       ) {
 
         throw new Error(
@@ -1584,31 +2142,96 @@
       }
 
 
+      const downloadURL =
+        new URL(
+          result.download_url
+        );
+
+
+      if (
+        downloadURL.protocol !==
+        "https:"
+      ) {
+
+        throw new Error(
+          "The secure download link was invalid."
+        );
+
+      }
+
+
       const remaining =
         Number(
-          result.downloads_remaining ??
+          result
+            .downloads_remaining
+      );
+
+
+      let readyMessage =
+        fileKind ===
+          "bonus"
+          ? "Your bonus download is ready."
+          : "Your free product download is ready.";
+
+
+      if (
+        Number.isFinite(
+          remaining
+        ) &&
+        remaining >=
           0
-        );
+      ) {
+
+        readyMessage +=
+          " Secure download requests remaining: " +
+          remaining +
+          ".";
+
+      }
 
 
       showMessage(
         "download-message",
-        "Your secure download is ready. Downloads remaining: " +
-          remaining +
-          ".",
+        readyMessage,
         "success"
       );
 
 
-      window.location.assign(
-        result.download_url
-      );
+      if (
+        downloadWindow &&
+        !downloadWindow.closed
+      ) {
+
+        downloadWindow.location
+          .replace(
+            downloadURL.href
+          );
+
+      }
+
+      else {
+
+        window.location.assign(
+          downloadURL.href
+        );
+
+      }
 
     }
 
     catch (
       error
     ) {
+
+      if (
+        downloadWindow &&
+        !downloadWindow.closed
+      ) {
+
+        downloadWindow.close();
+
+      }
+
 
       console.error(
         "Free download:",
@@ -1627,12 +2250,16 @@
 
     finally {
 
-      button.disabled =
+      mainButton.disabled =
         false;
 
 
-      button.textContent =
-        "DOWNLOAD YOUR FREE PRODUCT";
+      bonusButton.disabled =
+        false;
+
+
+      clickedButton.textContent =
+        originalText;
 
     }
 
@@ -1641,9 +2268,59 @@
 
   /*
   ==================================================
+  EVENTS
+  ==================================================
+  */
+
+
+  document
+    .getElementById(
+      "free-product-form"
+    )
+    .addEventListener(
+      "submit",
+      subscribeAndUnlock
+    );
+
+
+  document
+    .getElementById(
+      "download-main-button"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        downloadFreeProduct(
+          "main"
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "download-bonus-button"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        downloadFreeProduct(
+          "bonus"
+        );
+
+      }
+    );
+
+
+  /*
+  ==================================================
   START
   ==================================================
   */
+
 
   loadProduct();
 
