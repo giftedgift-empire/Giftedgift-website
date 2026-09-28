@@ -2239,6 +2239,617 @@ loadProduct();
 
 
 <script
+  <script>
+
+(() => {
+
+  /*
+    =========================================================
+    FLUTTERWAVE BOGO / BONUS DOWNLOAD
+    Separate from the existing payment and main-download logic.
+    =========================================================
+  */
+
+
+  const bonusState = {
+
+    loaded: false,
+
+    hasBonus: false,
+
+    title:
+      "Free Bonus Download"
+
+  };
+
+
+  /*
+    Add styles without changing the existing stylesheet.
+  */
+
+  const style =
+    document.createElement(
+      "style"
+    );
+
+
+  style.textContent = `
+
+    .flutterwave-bonus-wrap {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #cfe3d4;
+    }
+
+    .flutterwave-bonus-title {
+      margin: 0 0 10px;
+      color: #123a8c;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .flutterwave-bonus-button {
+      border: 0;
+      background: #f2bd16;
+      color: #111;
+      padding: 14px 22px;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .flutterwave-bonus-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+
+      .flutterwave-bonus-button {
+        width: 100%;
+      }
+
+    }
+
+  `;
+
+
+  document.head.appendChild(
+    style
+  );
+
+
+  /*
+    =========================================================
+    LOAD ONLY PUBLIC BONUS INFORMATION
+    =========================================================
+  */
+
+
+  async function loadFlutterwaveBonusInfo() {
+
+
+    if (
+      bonusState.loaded
+    ) {
+
+      return;
+
+    }
+
+
+    const productID =
+      Number(
+        window.__DIGITAL_PRODUCT_ID ||
+        new URLSearchParams(
+          window.location.search
+        ).get(
+          "product_id"
+        ) ||
+        new URLSearchParams(
+          window.location.search
+        ).get(
+          "id"
+        )
+      );
+
+
+    if (
+      !Number.isInteger(
+        productID
+      ) ||
+      productID <= 0
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from(
+            "digital_products"
+          )
+          .select(
+            "bonus_title,bonus_file_name"
+          )
+          .eq(
+            "id",
+            productID
+          )
+          .maybeSingle();
+
+
+      if (
+        error
+      ) {
+
+        console.warn(
+          "Flutterwave bonus information:",
+          error
+        );
+
+        return;
+
+      }
+
+
+      bonusState.loaded =
+        true;
+
+
+      bonusState.hasBonus =
+        Boolean(
+          data?.bonus_file_name
+        );
+
+
+      bonusState.title =
+        data?.bonus_title ||
+        "Free Bonus Download";
+
+
+      if (
+        bonusState.hasBonus
+      ) {
+
+        createFlutterwaveBonusButton();
+
+      }
+
+
+    } catch (
+      error
+    ) {
+
+
+      console.warn(
+        "Flutterwave bonus information:",
+        error
+      );
+
+    }
+
+  }
+
+
+
+  /*
+    =========================================================
+    CREATE BONUS BUTTON
+    =========================================================
+  */
+
+
+  function createFlutterwaveBonusButton() {
+
+
+    if (
+      document.getElementById(
+        "flutterwave-bonus-wrap"
+      )
+    ) {
+
+      updateFlutterwaveBonusVisibility();
+
+      return;
+
+    }
+
+
+    const downloadArea =
+      document.getElementById(
+        "download-area"
+      );
+
+
+    const mainButton =
+      document.getElementById(
+        "download-button"
+      );
+
+
+    if (
+      !downloadArea ||
+      !mainButton
+    ) {
+
+      return;
+
+    }
+
+
+    const wrap =
+      document.createElement(
+        "div"
+      );
+
+
+    wrap.id =
+      "flutterwave-bonus-wrap";
+
+
+    wrap.className =
+      "flutterwave-bonus-wrap";
+
+
+    const title =
+      document.createElement(
+        "p"
+      );
+
+
+    title.className =
+      "flutterwave-bonus-title";
+
+
+    title.textContent =
+      bonusState.title;
+
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+
+    button.type =
+      "button";
+
+
+    button.id =
+      "flutterwave-bonus-button";
+
+
+    button.className =
+      "flutterwave-bonus-button";
+
+
+    button.textContent =
+      "🎁 Download Your Free Bonus";
+
+
+    button.addEventListener(
+      "click",
+      downloadFlutterwaveBonus
+    );
+
+
+    wrap.appendChild(
+      title
+    );
+
+
+    wrap.appendChild(
+      button
+    );
+
+
+    mainButton.insertAdjacentElement(
+      "afterend",
+      wrap
+    );
+
+
+    updateFlutterwaveBonusVisibility();
+
+  }
+
+
+
+  /*
+    =========================================================
+    SHOW ONLY AFTER PAYMENT HAS BEEN VERIFIED
+    =========================================================
+  */
+
+
+  function updateFlutterwaveBonusVisibility() {
+
+
+    const downloadArea =
+      document.getElementById(
+        "download-area"
+      );
+
+
+    const bonusWrap =
+      document.getElementById(
+        "flutterwave-bonus-wrap"
+      );
+
+
+    if (
+      !bonusWrap ||
+      !downloadArea
+    ) {
+
+      return;
+
+    }
+
+
+    const paymentSuccessVisible =
+      window
+        .getComputedStyle(
+          downloadArea
+        )
+        .display !==
+      "none";
+
+
+    bonusWrap.style.display =
+      bonusState.hasBonus &&
+      paymentSuccessVisible
+        ? "block"
+        : "none";
+
+  }
+
+
+
+  /*
+    =========================================================
+    DOWNLOAD BONUS THROUGH OUR SEPARATE FUNCTION
+    =========================================================
+  */
+
+
+  async function downloadFlutterwaveBonus() {
+
+
+    if (
+      !downloadToken
+    ) {
+
+
+      showMessage(
+        "Your secure download token is missing.",
+        "error"
+      );
+
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "flutterwave-bonus-button"
+      );
+
+
+    if (
+      !button
+    ) {
+
+      return;
+
+    }
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Preparing Your Free Bonus...";
+
+
+    try {
+
+
+      const response =
+        await fetch(
+
+          SUPABASE_URL +
+            "/functions/v1/digital-bonus-download",
+
+          {
+
+            method:
+              "POST",
+
+            headers: {
+
+              "Content-Type":
+                "application/json"
+
+            },
+
+            body:
+              JSON.stringify({
+
+                download_token:
+                  downloadToken
+
+              })
+
+          }
+
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !response.ok ||
+        data.success !== true ||
+        !data.download_url
+      ) {
+
+
+        throw new Error(
+
+          data.error ||
+          "Your bonus download could not be prepared."
+
+        );
+
+      }
+
+
+      window.location.href =
+        data.download_url;
+
+
+    } catch (
+      error
+    ) {
+
+
+      console.error(
+        "Flutterwave bonus download:",
+        error
+      );
+
+
+      showMessage(
+
+        error instanceof Error
+          ? error.message
+          : "Your bonus download could not be prepared.",
+
+        "error"
+
+      );
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "🎁 Download Your Free Bonus";
+
+    }
+
+  }
+
+
+
+  /*
+    =========================================================
+    WATCH THE EXISTING PAYMENT SUCCESS AREA
+    =========================================================
+  */
+
+
+  const downloadArea =
+    document.getElementById(
+      "download-area"
+    );
+
+
+  if (
+    downloadArea
+  ) {
+
+
+    const observer =
+      new MutationObserver(
+        () => {
+
+          updateFlutterwaveBonusVisibility();
+
+        }
+      );
+
+
+    observer.observe(
+      downloadArea,
+      {
+
+        attributes: true,
+
+        attributeFilter: [
+          "style",
+          "class"
+        ]
+
+      }
+    );
+
+  }
+
+
+
+  /*
+    The original page loads the product asynchronously.
+    Wait briefly for it without changing its existing code.
+  */
+
+
+  let attempts =
+    0;
+
+
+  const bonusLoader =
+    setInterval(
+      async () => {
+
+
+        attempts +=
+          1;
+
+
+        await loadFlutterwaveBonusInfo();
+
+
+        updateFlutterwaveBonusVisibility();
+
+
+        if (
+          bonusState.loaded ||
+          attempts >= 30
+        ) {
+
+          clearInterval(
+            bonusLoader
+          );
+
+        }
+
+      },
+      300
+    );
+
+
+})();
+
+</script>
   src="cookie-consent.js"
 ></script>
 
