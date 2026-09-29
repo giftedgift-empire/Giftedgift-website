@@ -1418,3 +1418,106 @@
   }
 
 })();
+
+/*
+=========================================================
+GIFTEDGIFT LANGUAGE SYSTEM — BACKUP LOADER
+=========================================================
+*/
+
+(function () {
+
+  function loadGiftedGiftLanguage() {
+
+    /*
+    If the language system has already
+    loaded successfully, do nothing.
+    */
+
+    if (
+      window.__GiftedGiftLanguageLoaded
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+    Remove an older loader if it exists
+    but did not successfully load.
+    */
+
+    const oldScript =
+      document.getElementById(
+        "giftedgift-language-script"
+      );
+
+
+    if (
+      oldScript
+    ) {
+
+      oldScript.remove();
+
+    }
+
+
+    const oldBackup =
+      document.getElementById(
+        "giftedgift-language-backup-script"
+      );
+
+
+    if (
+      oldBackup
+    ) {
+
+      oldBackup.remove();
+
+    }
+
+
+    /*
+    Load a fresh copy.
+    The version prevents browsers from
+    holding onto an old cached file.
+    */
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.id =
+      "giftedgift-language-backup-script";
+
+
+    script.src =
+      "/language.js?v=20260929-2";
+
+
+    script.defer =
+      true;
+
+
+    document.head.appendChild(
+      script
+    );
+
+  }
+
+
+  /*
+  Give the normal loader a short chance
+  to work first. Only use this backup if
+  the language system is still missing.
+  */
+
+  setTimeout(
+    loadGiftedGiftLanguage,
+    1200
+  );
+
+})();
