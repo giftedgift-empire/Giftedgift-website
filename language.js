@@ -1370,7 +1370,9 @@ EN = English | FR = French | DE = German | NL = Dutch
         "Réécouter Giftana",
         "Giftana erneut anhören",
         "Luister opnieuw naar Giftana"
-      ],
+            ],
+
+    /*
     =====================================================
     COOKIE SETTINGS
     =====================================================
