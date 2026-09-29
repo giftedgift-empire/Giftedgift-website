@@ -2188,7 +2188,7 @@ EN = English | FR = French | DE = German | NL = Dutch
         top: 96px;
         right: 12px;
 
-        z-index: 12000;
+        z-index: 3000;
 
         display: flex;
 
