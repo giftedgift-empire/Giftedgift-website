@@ -5069,7 +5069,16 @@ const turnstileToken =
         return;
 
       }
+if (!turnstileToken) {
 
+  showNewsletterMessage(
+    "Please complete the security check.",
+    "error"
+  );
+
+  return;
+
+}
 
       button.disabled =
         true;
