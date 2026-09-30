@@ -12,6 +12,7 @@
   <title>Website Settings | GiftedGift Empire</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -66,6 +67,12 @@
       color: #123a8c;
     }
 
+    .card-description {
+      color: #666;
+      line-height: 1.6;
+      margin: -4px 0 22px;
+    }
+
     .field {
       margin-bottom: 20px;
     }
@@ -77,6 +84,7 @@
     }
 
     input[type="text"],
+    input[type="url"],
     input[type="number"],
     textarea {
       width: 100%;
@@ -132,6 +140,49 @@
       width: 24px;
       height: 24px;
       cursor: pointer;
+    }
+
+    .social-master {
+      margin-bottom: 24px;
+      padding: 15px;
+      background: #eef4ff;
+      border: 1px solid #c9d9f7;
+      border-radius: 10px;
+    }
+
+    .social-item {
+      border: 1px solid #e4e6ea;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+      background: #fafafa;
+    }
+
+    .social-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .social-item h3 {
+      margin: 0 0 14px;
+      color: #123a8c;
+      font-size: 18px;
+    }
+
+    .social-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .social-switch input {
+      width: 20px;
+      height: 20px;
+    }
+
+    .social-switch label {
+      margin: 0;
+      font-size: 14px;
     }
 
     .warning {
@@ -191,6 +242,7 @@
     }
 
     @media (max-width: 600px) {
+
       .page {
         padding-left: 14px;
         padding-right: 14px;
@@ -203,7 +255,13 @@
       .toggle-row {
         align-items: flex-start;
       }
+
+      .social-item {
+        padding: 15px;
+      }
+
     }
+
   </style>
 </head>
 
@@ -248,6 +306,10 @@
     class="message"
   ></div>
 
+
+  <!-- =========================================
+       CURRENCY
+  ========================================== -->
 
   <section class="card">
 
@@ -294,6 +356,11 @@
   </section>
 
 
+
+  <!-- =========================================
+       STORE MESSAGES
+  ========================================== -->
+
   <section class="card">
 
     <h2>
@@ -335,6 +402,480 @@
   </section>
 
 
+
+  <!-- =========================================
+       SOCIAL MEDIA
+  ========================================== -->
+
+  <section class="card">
+
+    <h2>
+      Social Media & External Links
+    </h2>
+
+    <p class="card-description">
+      Add your official GiftedGift Empire social accounts here.
+      These links can later appear in the website footer and
+      Follow GiftedGift Empire sections.
+    </p>
+
+
+    <div class="social-master">
+
+      <div class="toggle-row">
+
+        <div class="toggle-info">
+
+          <strong>
+            Show Social Media Links
+          </strong>
+
+          <span>
+            Master switch for all public social media icons.
+          </span>
+
+        </div>
+
+        <input
+          id="social-links-enabled"
+          type="checkbox"
+        >
+
+      </div>
+
+    </div>
+
+
+
+    <!-- YOUTUBE -->
+
+    <div class="social-item">
+
+      <h3>
+        ▶ YouTube
+      </h3>
+
+      <div class="field">
+
+        <label for="youtube-url">
+          YouTube Channel URL
+        </label>
+
+        <input
+          id="youtube-url"
+          type="url"
+          placeholder="https://www.youtube.com/@GiftedGift_Empire"
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="youtube-enabled"
+          type="checkbox"
+        >
+
+        <label for="youtube-enabled">
+          Show YouTube publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PINTEREST -->
+
+    <div class="social-item">
+
+      <h3>
+        Pinterest
+      </h3>
+
+      <div class="field">
+
+        <label for="pinterest-url">
+          Pinterest Profile URL
+        </label>
+
+        <input
+          id="pinterest-url"
+          type="url"
+          placeholder="https://www.pinterest.com/..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="pinterest-enabled"
+          type="checkbox"
+        >
+
+        <label for="pinterest-enabled">
+          Show Pinterest publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- FACEBOOK -->
+
+    <div class="social-item">
+
+      <h3>
+        Facebook
+      </h3>
+
+      <div class="field">
+
+        <label for="facebook-url">
+          Facebook Page URL
+        </label>
+
+        <input
+          id="facebook-url"
+          type="url"
+          placeholder="https://www.facebook.com/..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="facebook-enabled"
+          type="checkbox"
+        >
+
+        <label for="facebook-enabled">
+          Show Facebook publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- INSTAGRAM -->
+
+    <div class="social-item">
+
+      <h3>
+        Instagram
+      </h3>
+
+      <div class="field">
+
+        <label for="instagram-url">
+          Instagram Profile URL
+        </label>
+
+        <input
+          id="instagram-url"
+          type="url"
+          placeholder="https://www.instagram.com/..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="instagram-enabled"
+          type="checkbox"
+        >
+
+        <label for="instagram-enabled">
+          Show Instagram publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- TIKTOK -->
+
+    <div class="social-item">
+
+      <h3>
+        TikTok
+      </h3>
+
+      <div class="field">
+
+        <label for="tiktok-url">
+          TikTok Profile URL
+        </label>
+
+        <input
+          id="tiktok-url"
+          type="url"
+          placeholder="https://www.tiktok.com/@..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="tiktok-enabled"
+          type="checkbox"
+        >
+
+        <label for="tiktok-enabled">
+          Show TikTok publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- X -->
+
+    <div class="social-item">
+
+      <h3>
+        X / Twitter
+      </h3>
+
+      <div class="field">
+
+        <label for="x-url">
+          X Profile URL
+        </label>
+
+        <input
+          id="x-url"
+          type="url"
+          placeholder="https://x.com/..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="x-enabled"
+          type="checkbox"
+        >
+
+        <label for="x-enabled">
+          Show X publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- WHATSAPP -->
+
+    <div class="social-item">
+
+      <h3>
+        WhatsApp
+      </h3>
+
+      <div class="field">
+
+        <label for="whatsapp-url">
+          WhatsApp Link
+        </label>
+
+        <input
+          id="whatsapp-url"
+          type="url"
+          placeholder="https://wa.me/..."
+        >
+
+        <div class="help">
+          You can use a WhatsApp contact link,
+          group link or channel link.
+        </div>
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="whatsapp-enabled"
+          type="checkbox"
+        >
+
+        <label for="whatsapp-enabled">
+          Show WhatsApp publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- LINKEDIN -->
+
+    <div class="social-item">
+
+      <h3>
+        LinkedIn
+      </h3>
+
+      <div class="field">
+
+        <label for="linkedin-url">
+          LinkedIn URL
+        </label>
+
+        <input
+          id="linkedin-url"
+          type="url"
+          placeholder="https://www.linkedin.com/..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="linkedin-enabled"
+          type="checkbox"
+        >
+
+        <label for="linkedin-enabled">
+          Show LinkedIn publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- CUSTOM LINK 1 -->
+
+    <div class="social-item">
+
+      <h3>
+        Custom Link 1
+      </h3>
+
+      <div class="field">
+
+        <label for="custom-link-1-label">
+          Link Name
+        </label>
+
+        <input
+          id="custom-link-1-label"
+          type="text"
+          placeholder="Example: My Podcast"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="custom-link-1-url">
+          URL
+        </label>
+
+        <input
+          id="custom-link-1-url"
+          type="url"
+          placeholder="https://..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="custom-link-1-enabled"
+          type="checkbox"
+        >
+
+        <label for="custom-link-1-enabled">
+          Show Custom Link 1 publicly
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- CUSTOM LINK 2 -->
+
+    <div class="social-item">
+
+      <h3>
+        Custom Link 2
+      </h3>
+
+      <div class="field">
+
+        <label for="custom-link-2-label">
+          Link Name
+        </label>
+
+        <input
+          id="custom-link-2-label"
+          type="text"
+          placeholder="Example: Free Resources"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="custom-link-2-url">
+          URL
+        </label>
+
+        <input
+          id="custom-link-2-url"
+          type="url"
+          placeholder="https://..."
+        >
+
+      </div>
+
+      <div class="social-switch">
+
+        <input
+          id="custom-link-2-enabled"
+          type="checkbox"
+        >
+
+        <label for="custom-link-2-enabled">
+          Show Custom Link 2 publicly
+        </label>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       STORE FEATURES
+  ========================================== -->
+
   <section class="card">
 
     <h2>
@@ -345,6 +886,7 @@
     <div class="toggle-row">
 
       <div class="toggle-info">
+
         <strong>
           Deals
         </strong>
@@ -352,6 +894,7 @@
         <span>
           Allow Deals features on the store.
         </span>
+
       </div>
 
       <input
@@ -365,6 +908,7 @@
     <div class="toggle-row">
 
       <div class="toggle-info">
+
         <strong>
           Reviews
         </strong>
@@ -372,6 +916,7 @@
         <span>
           Allow Reviews features on the store.
         </span>
+
       </div>
 
       <input
@@ -385,6 +930,7 @@
     <div class="toggle-row">
 
       <div class="toggle-info">
+
         <strong>
           Digital Products
         </strong>
@@ -392,6 +938,7 @@
         <span>
           Allow digital products to be available.
         </span>
+
       </div>
 
       <input
@@ -404,6 +951,11 @@
   </section>
 
 
+
+  <!-- =========================================
+       TAX
+  ========================================== -->
+
   <section class="card">
 
     <h2>
@@ -413,13 +965,15 @@
 
     <div class="warning">
       Your tax settings are currently not finalized.
-      Do not enable VAT or enter a new rate unless the correct tax treatment has been confirmed.
+      Do not enable VAT or enter a new rate unless the correct
+      tax treatment has been confirmed.
     </div>
 
 
     <div class="toggle-row">
 
       <div class="toggle-info">
+
         <strong>
           Enable Tax
         </strong>
@@ -427,6 +981,7 @@
         <span>
           Turns automatic tax calculation on or off.
         </span>
+
       </div>
 
       <input
@@ -440,6 +995,7 @@
     <div class="toggle-row">
 
       <div class="toggle-info">
+
         <strong>
           Prices Include Tax
         </strong>
@@ -447,6 +1003,7 @@
         <span>
           Indicates whether product prices already include tax.
         </span>
+
       </div>
 
       <input
@@ -457,7 +1014,10 @@
     </div>
 
 
-    <div class="field" style="margin-top:20px;">
+    <div
+      class="field"
+      style="margin-top:20px;"
+    >
 
       <label for="default-tax-rate">
         Default Tax Rate
@@ -472,14 +1032,19 @@
       >
 
       <div class="help">
-        This saves the exact numeric value stored in Supabase.
-        Leave it unchanged for now if your VAT setup has not been confirmed.
+        Leave this unchanged for now if your VAT setup has
+        not been confirmed.
       </div>
 
     </div>
 
   </section>
 
+
+
+  <!-- =========================================
+       FREE SHIPPING
+  ========================================== -->
 
   <section class="card">
 
@@ -491,6 +1056,7 @@
     <div class="toggle-row">
 
       <div class="toggle-info">
+
         <strong>
           Enable Free Shipping
         </strong>
@@ -498,6 +1064,7 @@
         <span>
           Allow free shipping once the required order value is reached.
         </span>
+
       </div>
 
       <input
@@ -508,7 +1075,10 @@
     </div>
 
 
-    <div class="field" style="margin-top:20px;">
+    <div
+      class="field"
+      style="margin-top:20px;"
+    >
 
       <label for="free-shipping-threshold">
         Free Shipping Threshold
@@ -574,6 +1144,7 @@ const SETTINGS_ID =
   1;
 
 
+
 function showMessage(
   text,
   type = "success"
@@ -597,7 +1168,136 @@ function showMessage(
     behavior: "smooth",
     block: "center"
   });
+
 }
+
+
+
+function setValue(
+  id,
+  value
+) {
+
+  document.getElementById(
+    id
+  ).value =
+    value || "";
+
+}
+
+
+
+function setChecked(
+  id,
+  value
+) {
+
+  document.getElementById(
+    id
+  ).checked =
+    value === true;
+
+}
+
+
+
+function getValue(
+  id
+) {
+
+  return document
+    .getElementById(
+      id
+    )
+    .value
+    .trim();
+
+}
+
+
+
+function validHttpUrl(
+  value
+) {
+
+  if (!value) {
+    return true;
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        value
+      );
+
+
+    return (
+      url.protocol ===
+        "https:" ||
+      url.protocol ===
+        "http:"
+    );
+
+  } catch {
+
+    return false;
+
+  }
+
+}
+
+
+
+function validateSocialUrl(
+  urlId,
+  enabledId,
+  label
+) {
+
+  const value =
+    getValue(
+      urlId
+    );
+
+
+  const enabled =
+    document.getElementById(
+      enabledId
+    ).checked;
+
+
+  if (
+    enabled &&
+    !value
+  ) {
+
+    throw new Error(
+      `Please enter the ${label} URL or turn that link off.`
+    );
+
+  }
+
+
+  if (
+    value &&
+    !validHttpUrl(
+      value
+    )
+  ) {
+
+    throw new Error(
+      `Please enter a valid ${label} URL beginning with https://`
+    );
+
+  }
+
+
+  return value || null;
+
+}
+
 
 
 async function loadSettings() {
@@ -610,9 +1310,57 @@ async function loadSettings() {
       .from(
         "shop_settings"
       )
-      .select(
-        "id,currency_code,currency_symbol,shop_notice,affiliate_disclosure,deals_enabled,reviews_enabled,digital_products_enabled,tax_enabled,prices_include_tax,default_tax_rate,free_shipping_enabled,free_shipping_threshold,updated_at"
-      )
+      .select(`
+        id,
+        currency_code,
+        currency_symbol,
+        shop_notice,
+        affiliate_disclosure,
+        deals_enabled,
+        reviews_enabled,
+        digital_products_enabled,
+        tax_enabled,
+        prices_include_tax,
+        default_tax_rate,
+        free_shipping_enabled,
+        free_shipping_threshold,
+
+        social_links_enabled,
+
+        youtube_url,
+        youtube_enabled,
+
+        pinterest_url,
+        pinterest_enabled,
+
+        facebook_url,
+        facebook_enabled,
+
+        instagram_url,
+        instagram_enabled,
+
+        tiktok_url,
+        tiktok_enabled,
+
+        x_url,
+        x_enabled,
+
+        whatsapp_url,
+        whatsapp_enabled,
+
+        linkedin_url,
+        linkedin_enabled,
+
+        custom_link_1_label,
+        custom_link_1_url,
+        custom_link_1_enabled,
+
+        custom_link_2_label,
+        custom_link_2_url,
+        custom_link_2_enabled,
+
+        updated_at
+      `)
       .eq(
         "id",
         SETTINGS_ID
@@ -639,58 +1387,60 @@ async function loadSettings() {
   }
 
 
-  document.getElementById(
-    "currency-code"
-  ).value =
-    data.currency_code || "";
+
+  setValue(
+    "currency-code",
+    data.currency_code
+  );
 
 
-  document.getElementById(
-    "currency-symbol"
-  ).value =
-    data.currency_symbol || "";
+  setValue(
+    "currency-symbol",
+    data.currency_symbol
+  );
 
 
-  document.getElementById(
-    "shop-notice"
-  ).value =
-    data.shop_notice || "";
+  setValue(
+    "shop-notice",
+    data.shop_notice
+  );
 
 
-  document.getElementById(
-    "affiliate-disclosure"
-  ).value =
-    data.affiliate_disclosure || "";
+  setValue(
+    "affiliate-disclosure",
+    data.affiliate_disclosure
+  );
 
 
-  document.getElementById(
-    "deals-enabled"
-  ).checked =
-    data.deals_enabled === true;
+
+  setChecked(
+    "deals-enabled",
+    data.deals_enabled
+  );
 
 
-  document.getElementById(
-    "reviews-enabled"
-  ).checked =
-    data.reviews_enabled === true;
+  setChecked(
+    "reviews-enabled",
+    data.reviews_enabled
+  );
 
 
-  document.getElementById(
-    "digital-products-enabled"
-  ).checked =
-    data.digital_products_enabled === true;
+  setChecked(
+    "digital-products-enabled",
+    data.digital_products_enabled
+  );
 
 
-  document.getElementById(
-    "tax-enabled"
-  ).checked =
-    data.tax_enabled === true;
+  setChecked(
+    "tax-enabled",
+    data.tax_enabled
+  );
 
 
-  document.getElementById(
-    "prices-include-tax"
-  ).checked =
-    data.prices_include_tax === true;
+  setChecked(
+    "prices-include-tax",
+    data.prices_include_tax
+  );
 
 
   document.getElementById(
@@ -699,36 +1449,179 @@ async function loadSettings() {
     data.default_tax_rate ?? 0;
 
 
-  document.getElementById(
-    "free-shipping-enabled"
-  ).checked =
-    data.free_shipping_enabled === true;
+  setChecked(
+    "free-shipping-enabled",
+    data.free_shipping_enabled
+  );
 
 
   document.getElementById(
     "free-shipping-threshold"
   ).value =
     data.free_shipping_threshold ?? "";
+
+
+
+  /*
+  =========================================
+  SOCIAL MEDIA
+  =========================================
+  */
+
+
+  setChecked(
+    "social-links-enabled",
+    data.social_links_enabled
+  );
+
+
+  setValue(
+    "youtube-url",
+    data.youtube_url
+  );
+
+
+  setChecked(
+    "youtube-enabled",
+    data.youtube_enabled
+  );
+
+
+  setValue(
+    "pinterest-url",
+    data.pinterest_url
+  );
+
+
+  setChecked(
+    "pinterest-enabled",
+    data.pinterest_enabled
+  );
+
+
+  setValue(
+    "facebook-url",
+    data.facebook_url
+  );
+
+
+  setChecked(
+    "facebook-enabled",
+    data.facebook_enabled
+  );
+
+
+  setValue(
+    "instagram-url",
+    data.instagram_url
+  );
+
+
+  setChecked(
+    "instagram-enabled",
+    data.instagram_enabled
+  );
+
+
+  setValue(
+    "tiktok-url",
+    data.tiktok_url
+  );
+
+
+  setChecked(
+    "tiktok-enabled",
+    data.tiktok_enabled
+  );
+
+
+  setValue(
+    "x-url",
+    data.x_url
+  );
+
+
+  setChecked(
+    "x-enabled",
+    data.x_enabled
+  );
+
+
+  setValue(
+    "whatsapp-url",
+    data.whatsapp_url
+  );
+
+
+  setChecked(
+    "whatsapp-enabled",
+    data.whatsapp_enabled
+  );
+
+
+  setValue(
+    "linkedin-url",
+    data.linkedin_url
+  );
+
+
+  setChecked(
+    "linkedin-enabled",
+    data.linkedin_enabled
+  );
+
+
+  setValue(
+    "custom-link-1-label",
+    data.custom_link_1_label
+  );
+
+
+  setValue(
+    "custom-link-1-url",
+    data.custom_link_1_url
+  );
+
+
+  setChecked(
+    "custom-link-1-enabled",
+    data.custom_link_1_enabled
+  );
+
+
+  setValue(
+    "custom-link-2-label",
+    data.custom_link_2_label
+  );
+
+
+  setValue(
+    "custom-link-2-url",
+    data.custom_link_2_url
+  );
+
+
+  setChecked(
+    "custom-link-2-enabled",
+    data.custom_link_2_enabled
+  );
+
 }
+
 
 
 async function saveSettings() {
 
   const currencyCode =
-    document.getElementById(
+    getValue(
       "currency-code"
-    )
-      .value
-      .trim()
-      .toUpperCase();
+    ).toUpperCase();
 
 
   const currencySymbol =
-    document.getElementById(
+    getValue(
       "currency-symbol"
-    )
-      .value
-      .trim();
+    );
 
 
   if (
@@ -757,6 +1650,7 @@ async function saveSettings() {
 
     return;
   }
+
 
 
   const taxRateValue =
@@ -796,6 +1690,7 @@ async function saveSettings() {
   }
 
 
+
   let freeShippingThreshold =
     null;
 
@@ -825,7 +1720,150 @@ async function saveSettings() {
 
       return;
     }
+
   }
+
+
+
+  let youtubeUrl;
+  let pinterestUrl;
+  let facebookUrl;
+  let instagramUrl;
+  let tiktokUrl;
+  let xUrl;
+  let whatsappUrl;
+  let linkedinUrl;
+  let customLink1Url;
+  let customLink2Url;
+
+
+  try {
+
+    youtubeUrl =
+      validateSocialUrl(
+        "youtube-url",
+        "youtube-enabled",
+        "YouTube"
+      );
+
+
+    pinterestUrl =
+      validateSocialUrl(
+        "pinterest-url",
+        "pinterest-enabled",
+        "Pinterest"
+      );
+
+
+    facebookUrl =
+      validateSocialUrl(
+        "facebook-url",
+        "facebook-enabled",
+        "Facebook"
+      );
+
+
+    instagramUrl =
+      validateSocialUrl(
+        "instagram-url",
+        "instagram-enabled",
+        "Instagram"
+      );
+
+
+    tiktokUrl =
+      validateSocialUrl(
+        "tiktok-url",
+        "tiktok-enabled",
+        "TikTok"
+      );
+
+
+    xUrl =
+      validateSocialUrl(
+        "x-url",
+        "x-enabled",
+        "X"
+      );
+
+
+    whatsappUrl =
+      validateSocialUrl(
+        "whatsapp-url",
+        "whatsapp-enabled",
+        "WhatsApp"
+      );
+
+
+    linkedinUrl =
+      validateSocialUrl(
+        "linkedin-url",
+        "linkedin-enabled",
+        "LinkedIn"
+      );
+
+
+    customLink1Url =
+      validateSocialUrl(
+        "custom-link-1-url",
+        "custom-link-1-enabled",
+        "Custom Link 1"
+      );
+
+
+    customLink2Url =
+      validateSocialUrl(
+        "custom-link-2-url",
+        "custom-link-2-enabled",
+        "Custom Link 2"
+      );
+
+
+    if (
+      document.getElementById(
+        "custom-link-1-enabled"
+      ).checked &&
+      !getValue(
+        "custom-link-1-label"
+      )
+    ) {
+
+      throw new Error(
+        "Please enter a name for Custom Link 1."
+      );
+
+    }
+
+
+    if (
+      document.getElementById(
+        "custom-link-2-enabled"
+      ).checked &&
+      !getValue(
+        "custom-link-2-label"
+      )
+    ) {
+
+      throw new Error(
+        "Please enter a name for Custom Link 2."
+      );
+
+    }
+
+  } catch (
+    error
+  ) {
+
+    showMessage(
+      error.message,
+      "error"
+    );
+
+
+    return;
+
+  }
+
 
 
   const payload = {
@@ -837,14 +1875,15 @@ async function saveSettings() {
       currencySymbol,
 
     shop_notice:
-      document.getElementById(
+      getValue(
         "shop-notice"
-      ).value.trim() || null,
+      ) || null,
 
     affiliate_disclosure:
-      document.getElementById(
+      getValue(
         "affiliate-disclosure"
-      ).value.trim() || null,
+      ) || null,
+
 
     deals_enabled:
       document.getElementById(
@@ -861,6 +1900,7 @@ async function saveSettings() {
         "digital-products-enabled"
       ).checked,
 
+
     tax_enabled:
       document.getElementById(
         "tax-enabled"
@@ -874,6 +1914,7 @@ async function saveSettings() {
     default_tax_rate:
       taxRate,
 
+
     free_shipping_enabled:
       document.getElementById(
         "free-shipping-enabled"
@@ -882,10 +1923,125 @@ async function saveSettings() {
     free_shipping_threshold:
       freeShippingThreshold,
 
+
+    /*
+    =========================================
+    SOCIAL MEDIA
+    =========================================
+    */
+
+
+    social_links_enabled:
+      document.getElementById(
+        "social-links-enabled"
+      ).checked,
+
+
+    youtube_url:
+      youtubeUrl,
+
+    youtube_enabled:
+      document.getElementById(
+        "youtube-enabled"
+      ).checked,
+
+
+    pinterest_url:
+      pinterestUrl,
+
+    pinterest_enabled:
+      document.getElementById(
+        "pinterest-enabled"
+      ).checked,
+
+
+    facebook_url:
+      facebookUrl,
+
+    facebook_enabled:
+      document.getElementById(
+        "facebook-enabled"
+      ).checked,
+
+
+    instagram_url:
+      instagramUrl,
+
+    instagram_enabled:
+      document.getElementById(
+        "instagram-enabled"
+      ).checked,
+
+
+    tiktok_url:
+      tiktokUrl,
+
+    tiktok_enabled:
+      document.getElementById(
+        "tiktok-enabled"
+      ).checked,
+
+
+    x_url:
+      xUrl,
+
+    x_enabled:
+      document.getElementById(
+        "x-enabled"
+      ).checked,
+
+
+    whatsapp_url:
+      whatsappUrl,
+
+    whatsapp_enabled:
+      document.getElementById(
+        "whatsapp-enabled"
+      ).checked,
+
+
+    linkedin_url:
+      linkedinUrl,
+
+    linkedin_enabled:
+      document.getElementById(
+        "linkedin-enabled"
+      ).checked,
+
+
+    custom_link_1_label:
+      getValue(
+        "custom-link-1-label"
+      ) || null,
+
+    custom_link_1_url:
+      customLink1Url,
+
+    custom_link_1_enabled:
+      document.getElementById(
+        "custom-link-1-enabled"
+      ).checked,
+
+
+    custom_link_2_label:
+      getValue(
+        "custom-link-2-label"
+      ) || null,
+
+    custom_link_2_url:
+      customLink2Url,
+
+    custom_link_2_enabled:
+      document.getElementById(
+        "custom-link-2-enabled"
+      ).checked,
+
+
     updated_at:
       new Date().toISOString()
 
   };
+
 
 
   const button =
@@ -933,6 +2089,7 @@ async function saveSettings() {
         error.message ||
         "Website settings could not be saved."
       );
+
     }
 
 
@@ -941,7 +2098,9 @@ async function saveSettings() {
     );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     console.error(
       error
@@ -964,8 +2123,11 @@ async function saveSettings() {
 
     button.textContent =
       "Save Website Settings";
+
   }
+
 }
+
 
 
 async function protectPage() {
@@ -996,6 +2158,7 @@ async function protectPage() {
 
 
     return;
+
   }
 
 
@@ -1012,7 +2175,9 @@ async function protectPage() {
 
 
   await loadSettings();
+
 }
+
 
 
 document.getElementById(
