@@ -5,6 +5,15 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
+const SITE_URL =
+  "https://giftedgiftempire.com";
+
+
+const DEFAULT_SOCIAL_IMAGE =
+  SITE_URL +
+  "/my-logo.png";
+
+
 /*
   =====================================================
   PRODUCT / FOODSTUFF LOOKUP
@@ -175,6 +184,716 @@ async function getPublishedItemBySlug(
 
 
   return items[0];
+
+}
+
+
+
+/*
+  =====================================================
+  BLOG SEO LOOKUP
+  =====================================================
+*/
+
+async function getPublishedBlogPostBySlug(
+  slug
+) {
+
+  const selectFields =
+    [
+      "id",
+      "title",
+      "category",
+      "author_name",
+      "slug",
+      "excerpt",
+      "seo_title",
+      "meta_description",
+      "youtube_url",
+      "content",
+      "image_url",
+      "published",
+      "published_at",
+      "created_at",
+      "updated_at"
+    ]
+      .join(
+        ","
+      );
+
+
+  const apiURL =
+    SUPABASE_URL +
+    "/rest/v1/blog_posts" +
+    "?select=" +
+    encodeURIComponent(
+      selectFields
+    ) +
+    "&slug=eq." +
+    encodeURIComponent(
+      slug
+    ) +
+    "&published=eq.true" +
+    "&limit=1";
+
+
+  const response =
+    await fetch(
+      apiURL,
+      {
+        headers: {
+
+          apikey:
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Authorization:
+            "Bearer " +
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Accept:
+            "application/json"
+
+        }
+      }
+    );
+
+
+  if (
+    !response.ok
+  ) {
+
+    console.error(
+      "Blog SEO lookup failed:",
+      response.status
+    );
+
+
+    return null;
+
+  }
+
+
+  const items =
+    await response.json();
+
+
+  if (
+    !Array.isArray(
+      items
+    ) ||
+    items.length ===
+      0
+  ) {
+
+    return null;
+
+  }
+
+
+  return items[0];
+
+}
+
+
+
+/*
+  =====================================================
+  BLOG SEO HELPERS
+  =====================================================
+*/
+
+function cleanBlogText(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+
+}
+
+
+function blogDescription(
+  value
+) {
+
+  const text =
+    cleanBlogText(
+      value
+    );
+
+
+  if (
+    !text
+  ) {
+
+    return (
+      "Discover helpful ideas, practical guides and useful resources from GiftedGift Empire."
+    );
+
+  }
+
+
+  if (
+    text.length <=
+      160
+  ) {
+
+    return text;
+
+  }
+
+
+  return (
+    text.slice(
+      0,
+      157
+    ) +
+    "..."
+  );
+
+}
+
+
+function safeBlogImage(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return DEFAULT_SOCIAL_IMAGE;
+
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value
+        ).trim(),
+        SITE_URL
+      );
+
+
+    if (
+      url.protocol ===
+        "https:" ||
+      url.protocol ===
+        "http:"
+    ) {
+
+      return url.href;
+
+    }
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Invalid Blog image URL:",
+      error
+    );
+
+  }
+
+
+  return DEFAULT_SOCIAL_IMAGE;
+
+}
+
+
+
+/*
+  =====================================================
+  SERVE BLOG PAGE WITH SERVER-SIDE SEO
+  =====================================================
+*/
+
+async function serveBlogLandingPage(
+  context,
+  post
+) {
+
+  const landingURL =
+    new URL(
+      context.request.url
+    );
+
+
+  landingURL.pathname =
+    "/blog";
+
+
+  landingURL.search =
+    "";
+
+
+  const landingResponse =
+    await context.env.ASSETS.fetch(
+      landingURL
+    );
+
+
+  if (
+    !landingResponse.ok
+  ) {
+
+    return null;
+
+  }
+
+
+  const title =
+    cleanBlogText(
+      post.title ||
+      "Article"
+    );
+
+
+  const seoTitle =
+    cleanBlogText(
+      post.seo_title
+    );
+
+
+  const pageTitle =
+    seoTitle ||
+    (
+      title +
+      " | GiftedGift Empire"
+    );
+
+
+  const description =
+    blogDescription(
+      post.meta_description ||
+      post.excerpt ||
+      post.content
+    );
+
+
+  const canonicalURL =
+    SITE_URL +
+    "/" +
+    encodeURIComponent(
+      post.slug
+    );
+
+
+  const image =
+    safeBlogImage(
+      post.image_url
+    );
+
+
+  const authorName =
+    cleanBlogText(
+      post.author_name ||
+      "GiftedGift Empire"
+    );
+
+
+  const authorSchema =
+    authorName
+      .toLowerCase() ===
+        "giftedgift empire"
+      ? {
+
+          "@type":
+            "Organization",
+
+          "name":
+            "GiftedGift Empire",
+
+          "url":
+            SITE_URL
+
+        }
+      : {
+
+          "@type":
+            "Person",
+
+          "name":
+            authorName
+
+        };
+
+
+  const articleSchema = {
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "BlogPosting",
+
+    "headline":
+      title,
+
+    "description":
+      description,
+
+    "url":
+      canonicalURL,
+
+    "mainEntityOfPage": {
+
+      "@type":
+        "WebPage",
+
+      "@id":
+        canonicalURL
+
+    },
+
+    "author":
+      authorSchema,
+
+    "publisher": {
+
+      "@type":
+        "Organization",
+
+      "name":
+        "GiftedGift Empire",
+
+      "url":
+        SITE_URL,
+
+      "logo": {
+
+        "@type":
+          "ImageObject",
+
+        "url":
+          DEFAULT_SOCIAL_IMAGE
+
+      }
+
+    },
+
+    "image":
+      [
+        image
+      ]
+
+  };
+
+
+  if (
+    post.category
+  ) {
+
+    articleSchema.articleSection =
+      post.category;
+
+  }
+
+
+  if (
+    post.published_at ||
+    post.created_at
+  ) {
+
+    articleSchema.datePublished =
+      post.published_at ||
+      post.created_at;
+
+  }
+
+
+  if (
+    post.updated_at
+  ) {
+
+    articleSchema.dateModified =
+      post.updated_at;
+
+  }
+
+
+  const safeItemID =
+    JSON.stringify(
+      String(
+        post.id
+      )
+    );
+
+
+  const safeSchema =
+    JSON.stringify(
+      articleSchema
+    )
+      .replace(
+        /</g,
+        "\\u003c"
+      );
+
+
+  const injectedHead =
+    "<script>" +
+    "window.__BLOG_POST_ID = " +
+    safeItemID +
+    ";" +
+    "<\/script>" +
+    "<script id=\"blog-structured-data\" type=\"application/ld+json\">" +
+    safeSchema +
+    "<\/script>";
+
+
+  return new HTMLRewriter()
+
+    .on(
+      "title",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setInnerContent(
+            pageTitle
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#page-description-meta",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            description
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#canonical-link",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "href",
+            canonicalURL
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#og-type",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            "article"
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#og-title",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            pageTitle
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#og-description",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            description
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#og-url",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            canonicalURL
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#og-image",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            image
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#og-image-alt",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            title
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#twitter-title",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            pageTitle
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#twitter-description",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            description
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "#twitter-image",
+      {
+
+        element(
+          element
+        ) {
+
+          element.setAttribute(
+            "content",
+            image
+          );
+
+        }
+
+      }
+    )
+
+    .on(
+      "head",
+      {
+
+        element(
+          element
+        ) {
+
+          element.append(
+            injectedHead,
+            {
+              html:
+                true
+            }
+          );
+
+        }
+
+      }
+    )
+
+    .transform(
+      landingResponse
+    );
 
 }
 
@@ -556,8 +1275,7 @@ export async function onRequestGet(
     */
 
     const blogPost =
-      await getPublishedItemBySlug(
-        "blog_posts",
+      await getPublishedBlogPostBySlug(
         slug
       );
 
@@ -567,11 +1285,9 @@ export async function onRequestGet(
     ) {
 
       const response =
-        await serveLandingPage(
+        await serveBlogLandingPage(
           context,
-          "/blog",
-          "__BLOG_POST_ID",
-          blogPost.id
+          blogPost
         );
 
 
