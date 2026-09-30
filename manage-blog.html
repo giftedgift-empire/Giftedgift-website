@@ -131,6 +131,50 @@
       word-break: break-word;
     }
 
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .seo-section {
+      margin-top: 28px;
+      padding: 20px;
+      border: 1px solid #d9e3f7;
+      border-radius: 12px;
+      background: #f7faff;
+    }
+
+    .seo-section h3 {
+      margin: 0 0 8px;
+      color: #123a8c;
+    }
+
+    .counter {
+      margin-top: 6px;
+      color: #777;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .category-badge {
+      display: inline-block;
+      margin: 0 0 10px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #edf3ff;
+      color: #123a8c;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .post-meta {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
     .image-preview {
       display: none;
       margin-top: 15px;
@@ -323,8 +367,14 @@
         padding: 20px;
       }
 
-      .promotion-section {
+      .promotion-section,
+      .seo-section {
         padding: 16px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+        gap: 0;
       }
 
       .actions {
@@ -404,6 +454,76 @@
     </div>
 
 
+    <div class="field-row">
+
+      <div class="field">
+
+        <label for="category">
+          Article Category
+        </label>
+
+        <select id="category">
+
+          <option value="">
+            Select a category
+          </option>
+
+          <option>Small Business Ideas &amp; Side Hustles</option>
+          <option>Digital Resources &amp; eBooks</option>
+          <option>Fashion &amp; Outfit Inspiration</option>
+          <option>Beauty &amp; Self-Care</option>
+          <option>Useful Finds for Everyday Life</option>
+          <option>GiftedGift Empire Picks</option>
+          <option>Home &amp; Lifestyle Finds</option>
+          <option>Faith &amp; Christian Living</option>
+          <option>African Food &amp; Recipes</option>
+          <option>Make Money Online</option>
+          <option>African Fashion &amp; Fabric Ideas</option>
+          <option>Smart Shopping &amp; Deals</option>
+          <option>AI Tools &amp; Prompts</option>
+          <option>Digital Product Ideas &amp; Creation</option>
+          <option>Online Selling &amp; eCommerce</option>
+          <option>Marketing &amp; Social Media Tips</option>
+          <option>Work From Home Ideas</option>
+          <option>Business Tips for Beginners</option>
+          <option>Side Hustles for Women</option>
+          <option>Small Business Marketing Ideas</option>
+          <option>eBook &amp; Publishing Ideas</option>
+          <option>Online Business Tools &amp; Resources</option>
+          <option>Content Creation Ideas &amp; Tools</option>
+          <option>Website &amp; Blogging Tips</option>
+          <option>Pinterest Marketing &amp; Traffic</option>
+          <option>Email Marketing &amp; Newsletter Growth</option>
+          <option>Affiliate Marketing Tips</option>
+
+        </select>
+
+        <p class="help">
+          Choose the main category that best matches this article.
+          Daily Inspiration remains a separate section of the website.
+        </p>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="author-name">
+          Author Name
+        </label>
+
+        <input
+          id="author-name"
+          type="text"
+          value="GiftedGift Empire"
+          placeholder="GiftedGift Empire"
+        >
+
+      </div>
+
+    </div>
+
+
     <div class="field">
 
       <label for="slug">
@@ -434,6 +554,85 @@
         id="excerpt"
         placeholder="Write a short introduction that will appear on the Blog page..."
       ></textarea>
+
+    </div>
+
+
+    <div class="seo-section">
+
+      <h3>
+        SEO & Sharing
+      </h3>
+
+      <p class="help">
+        These fields help search engines, Pinterest and social sharing.
+        Leave SEO Title blank to use the normal Article Title.
+      </p>
+
+
+      <div class="field">
+
+        <label for="seo-title">
+          SEO Title
+        </label>
+
+        <input
+          id="seo-title"
+          type="text"
+          maxlength="70"
+          placeholder="Search-friendly title for this article"
+        >
+
+        <div
+          id="seo-title-counter"
+          class="counter"
+        >
+          0 / 70
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="meta-description">
+          Meta Description
+        </label>
+
+        <textarea
+          id="meta-description"
+          maxlength="180"
+          placeholder="Write a clear description of the article for search engines and social sharing..."
+        ></textarea>
+
+        <div
+          id="meta-description-counter"
+          class="counter"
+        >
+          0 / 180
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="youtube-url">
+          Related YouTube Video URL
+        </label>
+
+        <input
+          id="youtube-url"
+          type="url"
+          placeholder="https://www.youtube.com/watch?v=..."
+        >
+
+        <p class="help">
+          Optional. Add one specific YouTube video connected to this article.
+          Your main YouTube channel remains in Website Settings.
+        </p>
+
+      </div>
 
     </div>
 
@@ -716,6 +915,10 @@ let existingPromotionImageUrl =
   "";
 
 
+let existingPublishedAt =
+  null;
+
+
 let slugWasEdited =
   false;
 
@@ -723,6 +926,18 @@ let slugWasEdited =
 const titleInput =
   document.getElementById(
     "title"
+  );
+
+
+const categoryInput =
+  document.getElementById(
+    "category"
+  );
+
+
+const authorNameInput =
+  document.getElementById(
+    "author-name"
   );
 
 
@@ -735,6 +950,24 @@ const slugInput =
 const excerptInput =
   document.getElementById(
     "excerpt"
+  );
+
+
+const seoTitleInput =
+  document.getElementById(
+    "seo-title"
+  );
+
+
+const metaDescriptionInput =
+  document.getElementById(
+    "meta-description"
+  );
+
+
+const youtubeUrlInput =
+  document.getElementById(
+    "youtube-url"
   );
 
 
@@ -907,6 +1140,77 @@ slugInput
   );
 
 
+function updateSeoCounters() {
+
+  document.getElementById(
+    "seo-title-counter"
+  ).textContent =
+    seoTitleInput.value.length +
+    " / 70";
+
+
+  document.getElementById(
+    "meta-description-counter"
+  ).textContent =
+    metaDescriptionInput.value.length +
+    " / 180";
+}
+
+
+seoTitleInput.addEventListener(
+  "input",
+  updateSeoCounters
+);
+
+
+metaDescriptionInput.addEventListener(
+  "input",
+  updateSeoCounters
+);
+
+
+function isValidYouTubeUrl(
+  value
+) {
+
+  if (!value) {
+    return true;
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        value
+      );
+
+
+    const host =
+      url.hostname
+        .toLowerCase()
+        .replace(
+          /^www\./,
+          ""
+        );
+
+
+    return (
+      url.protocol === "https:" &&
+      (
+        host === "youtube.com" ||
+        host.endsWith(".youtube.com") ||
+        host === "youtu.be"
+      )
+    );
+
+  } catch {
+
+    return false;
+  }
+}
+
+
 promotionTypeInput
   .addEventListener(
     "change",
@@ -1071,12 +1375,24 @@ function resetForm() {
     "";
 
 
+  existingPublishedAt =
+    null;
+
+
   slugWasEdited =
     false;
 
 
   titleInput.value =
     "";
+
+
+  categoryInput.value =
+    "";
+
+
+  authorNameInput.value =
+    "GiftedGift Empire";
 
 
   slugInput.value =
@@ -1088,6 +1404,21 @@ function resetForm() {
 
   excerptInput.value =
     "";
+
+
+  seoTitleInput.value =
+    "";
+
+
+  metaDescriptionInput.value =
+    "";
+
+
+  youtubeUrlInput.value =
+    "";
+
+
+  updateSeoCounters();
 
 
   contentInput.value =
@@ -1304,11 +1635,6 @@ async function checkGlobalSlugAvailability(
   }
 
 
-  /*
-    Stop articles from taking the clean URL
-    of an important normal website page.
-  */
-
   if (
     RESERVED_ROOT_SLUGS.has(
       cleanValue
@@ -1320,11 +1646,6 @@ async function checkGlobalSlugAvailability(
     );
   }
 
-
-  /*
-    Check every table that uses the same
-    root clean-URL system.
-  */
 
   for (
     const source of
@@ -1344,11 +1665,6 @@ async function checkGlobalSlugAvailability(
           cleanValue
         );
 
-
-    /*
-      When editing an existing Blog post,
-      allow that post to keep its own slug.
-    */
 
     if (
       source.table ===
@@ -1511,6 +1827,15 @@ async function savePost() {
     titleInput.value.trim();
 
 
+  const category =
+    categoryInput.value.trim();
+
+
+  const authorName =
+    authorNameInput.value.trim() ||
+    "GiftedGift Empire";
+
+
   const slug =
     cleanSlug(
       slugInput.value
@@ -1519,6 +1844,18 @@ async function savePost() {
 
   const excerpt =
     excerptInput.value.trim();
+
+
+  const seoTitle =
+    seoTitleInput.value.trim();
+
+
+  const metaDescription =
+    metaDescriptionInput.value.trim();
+
+
+  const youtubeUrl =
+    youtubeUrlInput.value.trim();
 
 
   const content =
@@ -1557,6 +1894,21 @@ async function savePost() {
     );
 
     titleInput.focus();
+
+    return;
+  }
+
+
+  if (
+    !category
+  ) {
+
+    showMessage(
+      "Please select an article category.",
+      "error"
+    );
+
+    categoryInput.focus();
 
     return;
   }
@@ -1602,6 +1954,24 @@ async function savePost() {
     );
 
     contentInput.focus();
+
+    return;
+  }
+
+
+  if (
+    youtubeUrl &&
+    !isValidYouTubeUrl(
+      youtubeUrl
+    )
+  ) {
+
+    showMessage(
+      "Please enter a valid YouTube URL beginning with https://",
+      "error"
+    );
+
+    youtubeUrlInput.focus();
 
     return;
   }
@@ -1657,12 +2027,6 @@ async function savePost() {
 
   try {
 
-    /*
-      IMPORTANT:
-      Check the clean URL before uploading
-      images or saving anything.
-    */
-
     await checkGlobalSlugAvailability(
       slug
     );
@@ -1700,13 +2064,43 @@ async function savePost() {
       );
 
 
+    const now =
+      new Date().toISOString();
+
+
+    const publishedAt =
+      publishedInput.checked
+        ? (
+            existingPublishedAt ||
+            now
+          )
+        : existingPublishedAt;
+
+
     const payload = {
 
       title,
 
+      category,
+
+      author_name:
+        authorName,
+
       slug,
 
       excerpt,
+
+      seo_title:
+        seoTitle ||
+        null,
+
+      meta_description:
+        metaDescription ||
+        null,
+
+      youtube_url:
+        youtubeUrl ||
+        null,
 
       content,
 
@@ -1745,7 +2139,13 @@ async function savePost() {
             null,
 
       published:
-        publishedInput.checked
+        publishedInput.checked,
+
+      published_at:
+        publishedAt,
+
+      updated_at:
+        now
 
     };
 
@@ -1799,12 +2199,6 @@ async function savePost() {
         error
       );
 
-
-      /*
-        Keep the database duplicate check too.
-        This protects against two saves happening
-        at almost exactly the same time.
-      */
 
       if (
         error.code ===
@@ -1909,7 +2303,7 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-        "id,title,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,created_at"
+        "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
       )
       .order(
         "created_at",
@@ -1980,10 +2374,15 @@ async function loadPosts() {
         "post-card";
 
 
+      const dateSource =
+        post.published_at ||
+        post.created_at;
+
+
       const date =
-        post.created_at
+        dateSource
           ? new Date(
-              post.created_at
+              dateSource
             ).toLocaleString()
           : "";
 
@@ -2100,6 +2499,38 @@ async function loadPosts() {
             post.title
           )}
         </h3>
+
+
+        ${
+          post.category
+
+            ? `
+              <div class="category-badge">
+                ${escapeHTML(
+                  post.category
+                )}
+              </div>
+            `
+
+            : ""
+        }
+
+
+        <div class="post-meta">
+
+          Author:
+          ${escapeHTML(
+            post.author_name ||
+            "GiftedGift Empire"
+          )}
+
+          ${
+            post.youtube_url
+              ? " • YouTube video linked"
+              : ""
+          }
+
+        </div>
 
 
         <span
@@ -2236,9 +2667,24 @@ function startEditing(
     "";
 
 
+  existingPublishedAt =
+    post.published_at ||
+    null;
+
+
   titleInput.value =
     post.title ||
     "";
+
+
+  categoryInput.value =
+    post.category ||
+    "";
+
+
+  authorNameInput.value =
+    post.author_name ||
+    "GiftedGift Empire";
 
 
   slugInput.value =
@@ -2258,6 +2704,24 @@ function startEditing(
   excerptInput.value =
     post.excerpt ||
     "";
+
+
+  seoTitleInput.value =
+    post.seo_title ||
+    "";
+
+
+  metaDescriptionInput.value =
+    post.meta_description ||
+    "";
+
+
+  youtubeUrlInput.value =
+    post.youtube_url ||
+    "";
+
+
+  updateSeoCounters();
 
 
   contentInput.value =
