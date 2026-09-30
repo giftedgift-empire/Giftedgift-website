@@ -4532,7 +4532,318 @@
 
   }
 
+/* =========================
+   PUBLIC SOCIAL LINKS
+========================= */
 
+function normalizeSocialUrl(
+  value
+) {
+
+  let raw =
+    String(
+      value || ""
+    ).trim();
+
+
+  if (!raw) {
+    return "";
+  }
+
+
+  try {
+
+    if (
+      !/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(
+        raw
+      )
+    ) {
+
+      raw =
+        "https://" +
+        raw.replace(
+          /^\/+/,
+          ""
+        );
+
+    }
+
+
+    const url =
+      new URL(raw);
+
+
+    if (
+      url.protocol !== "https:" &&
+      url.protocol !== "http:"
+    ) {
+
+      return "";
+
+    }
+
+
+    return url.href;
+
+  }
+
+  catch {
+
+    return "";
+
+  }
+
+}
+
+
+async function loadFooterSocialLinks() {
+
+  const section =
+    document.getElementById(
+      "footer-social"
+    );
+
+
+  const container =
+    document.getElementById(
+      "footer-social-links"
+    );
+
+
+  if (
+    !section ||
+    !container
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("shop_settings")
+      .select(`
+        social_links_enabled,
+        youtube_url,
+        youtube_enabled,
+        pinterest_url,
+        pinterest_enabled,
+        facebook_url,
+        facebook_enabled,
+        instagram_url,
+        instagram_enabled,
+        tiktok_url,
+        tiktok_enabled,
+        x_url,
+        x_enabled,
+        whatsapp_url,
+        whatsapp_enabled,
+        linkedin_url,
+        linkedin_enabled,
+        custom_link_1_label,
+        custom_link_1_url,
+        custom_link_1_enabled,
+        custom_link_2_label,
+        custom_link_2_url,
+        custom_link_2_enabled
+      `)
+      .limit(1);
+
+
+  if (error) {
+
+    console.error(
+      "Social links error:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  const settings =
+    Array.isArray(data) &&
+    data.length
+      ? data[0]
+      : null;
+
+
+  if (
+    !settings ||
+    settings.social_links_enabled !== true
+  ) {
+
+    section.hidden =
+      true;
+
+    return;
+
+  }
+
+
+  const links = [
+
+    {
+      label: "YouTube",
+      url: settings.youtube_url,
+      enabled: settings.youtube_enabled
+    },
+
+    {
+      label: "Pinterest",
+      url: settings.pinterest_url,
+      enabled: settings.pinterest_enabled
+    },
+
+    {
+      label: "Facebook",
+      url: settings.facebook_url,
+      enabled: settings.facebook_enabled
+    },
+
+    {
+      label: "Instagram",
+      url: settings.instagram_url,
+      enabled: settings.instagram_enabled
+    },
+
+    {
+      label: "TikTok",
+      url: settings.tiktok_url,
+      enabled: settings.tiktok_enabled
+    },
+
+    {
+      label: "X",
+      url: settings.x_url,
+      enabled: settings.x_enabled
+    },
+
+    {
+      label: "WhatsApp",
+      url: settings.whatsapp_url,
+      enabled: settings.whatsapp_enabled
+    },
+
+    {
+      label: "LinkedIn",
+      url: settings.linkedin_url,
+      enabled: settings.linkedin_enabled
+    },
+
+    {
+      label:
+        settings.custom_link_1_label ||
+        "More",
+      url:
+        settings.custom_link_1_url,
+      enabled:
+        settings.custom_link_1_enabled
+    },
+
+    {
+      label:
+        settings.custom_link_2_label ||
+        "More",
+      url:
+        settings.custom_link_2_url,
+      enabled:
+        settings.custom_link_2_enabled
+    }
+
+  ];
+
+
+  container.innerHTML =
+    "";
+
+
+  links.forEach(
+    item => {
+
+      if (
+        item.enabled !== true
+      ) {
+
+        return;
+
+      }
+
+
+      const safeUrl =
+        normalizeSocialUrl(
+          item.url
+        );
+
+
+      if (!safeUrl) {
+        return;
+      }
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.className =
+        "footer-social-link";
+
+
+      link.href =
+        safeUrl;
+
+
+      link.target =
+        "_blank";
+
+
+      link.rel =
+        "noopener noreferrer";
+
+
+      link.textContent =
+        item.label;
+
+
+      link.setAttribute(
+        "aria-label",
+        "Visit GiftedGift Empire on " +
+        item.label
+      );
+
+
+      container.appendChild(
+        link
+      );
+
+    }
+  );
+
+
+  if (
+    container.children.length > 0
+  ) {
+
+    section.hidden =
+      false;
+
+  }
+
+  else {
+
+    section.hidden =
+      true;
+
+  }
+
+}
   /* =========================
      CART COUNT
   ========================= */
