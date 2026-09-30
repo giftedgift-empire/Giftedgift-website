@@ -2,56 +2,151 @@
 =========================================================
 GIFTEDGIFT EMPIRE
 MULTI-LANGUAGE SYSTEM
-EN = English | FR = French | DE = German | NL = Dutch
+
+EN = English
+FR = French
+DE = German
+NL = Dutch
 =========================================================
 */
 
 (function () {
   "use strict";
 
-  if (window.__GiftedGiftLanguageLoaded) return;
-  window.__GiftedGiftLanguageLoaded = true;
 
-  const STORAGE_KEY = "giftedgift_language";
-  const SUPPORTED = ["en", "fr", "de", "nl"];
-  const LANGUAGE_INDEX = { fr: 0, de: 1, nl: 2 };
+  /*
+  =========================================================
+  PREVENT DUPLICATE LOADING
+  =========================================================
+  */
+
+  if (
+    window.__GiftedGiftLanguageLoaded
+  ) {
+
+    return;
+
+  }
+
+
+  window.__GiftedGiftLanguageLoaded =
+    true;
+
+
+  /*
+  =========================================================
+  CONFIGURATION
+  =========================================================
+  */
+
+  const STORAGE_KEY =
+    "giftedgift_language";
+
+
+  const SUPPORTED =
+    [
+      "en",
+      "fr",
+      "de",
+      "nl"
+    ];
+
+
+  const LANGUAGE_INDEX = {
+
+    fr: 0,
+
+    de: 1,
+
+    nl: 2
+
+  };
+
 
   /*
   Each translation row:
   [French, German, Dutch]
   */
 
+
   const T = {
 
+
+    /*
+    =====================================================
+    MAIN NAVIGATION
+    =====================================================
+    */
+
     "Home":
-      ["Accueil", "Startseite", "Home"],
+      [
+        "Accueil",
+        "Startseite",
+        "Home"
+      ],
 
     "Shop":
-      ["Boutique", "Shop", "Winkel"],
+      [
+        "Boutique",
+        "Shop",
+        "Winkel"
+      ],
 
     "Categories":
-      ["Catégories", "Kategorien", "Categorieën"],
+      [
+        "Catégories",
+        "Kategorien",
+        "Categorieën"
+      ],
 
     "Daily Inspiration":
-      ["Inspiration du jour", "Tägliche Inspiration", "Dagelijkse inspiratie"],
+      [
+        "Inspiration du jour",
+        "Tägliche Inspiration",
+        "Dagelijkse inspiratie"
+      ],
 
     "Blog":
-      ["Blog", "Blog", "Blog"],
+      [
+        "Blog",
+        "Blog",
+        "Blog"
+      ],
 
     "Deals":
-      ["Offres", "Angebote", "Aanbiedingen"],
+      [
+        "Offres",
+        "Angebote",
+        "Aanbiedingen"
+      ],
 
     "About":
-      ["À propos", "Über uns", "Over ons"],
+      [
+        "À propos",
+        "Über uns",
+        "Over ons"
+      ],
 
     "Contact":
-      ["Contact", "Kontakt", "Contact"],
+      [
+        "Contact",
+        "Kontakt",
+        "Contact"
+      ],
 
     "Cart":
-      ["Panier", "Warenkorb", "Winkelwagen"],
+      [
+        "Panier",
+        "Warenkorb",
+        "Winkelwagen"
+      ],
 
     "🛒 Cart":
-      ["🛒 Panier", "🛒 Warenkorb", "🛒 Winkelwagen"],
+      [
+        "🛒 Panier",
+        "🛒 Warenkorb",
+        "🛒 Winkelwagen"
+      ],
 
 
     /*
@@ -188,8 +283,8 @@ EN = English | FR = French | DE = German | NL = Dutch
 
     "Browse our main shopping categories and find products that suit your needs.":
       [
-        "Parcourez nos principales catégories et trouvez les produits qui répondent à vos besoins.",
-        "Durchsuchen Sie unsere wichtigsten Einkaufskategorien und finden Sie Produkte, die zu Ihren Bedürfnissen passen.",
+        "Parcourez nos principales catégories et trouvez des produits adaptés à vos besoins.",
+        "Durchsuchen Sie unsere wichtigsten Einkaufskategorien und finden Sie passende Produkte.",
         "Bekijk onze belangrijkste winkelcategorieën en vind producten die bij je behoeften passen."
       ],
 
@@ -473,29 +568,95 @@ EN = English | FR = French | DE = German | NL = Dutch
         "Hoor als eerste over nieuwe producten, speciale aanbiedingen, handige updates en nieuws van GiftedGift Empire."
       ],
 
+    "Stay Connected With GiftedGift Empire":
+      [
+        "Restez connecté avec GiftedGift Empire",
+        "Bleiben Sie mit GiftedGift Empire verbunden",
+        "Blijf verbonden met GiftedGift Empire"
+      ],
+
+    "Receive faith inspiration, useful ideas, resources and new GiftedGift Empire content by email.":
+      [
+        "Recevez par e-mail des inspirations de foi, des idées utiles, des ressources et les nouveaux contenus de GiftedGift Empire.",
+        "Erhalten Sie Glaubensinspiration, nützliche Ideen, Ressourcen und neue Inhalte von GiftedGift Empire per E-Mail.",
+        "Ontvang geloofsinspiratie, handige ideeën, bronnen en nieuwe GiftedGift Empire-content per e-mail."
+      ],
+
+    "Get useful business ideas, digital resources, smart finds, fashion inspiration and new GiftedGift Empire content.":
+      [
+        "Recevez des idées d’entreprise utiles, des ressources numériques, des trouvailles pratiques, de l’inspiration mode et les nouveaux contenus de GiftedGift Empire.",
+        "Erhalten Sie nützliche Geschäftsideen, digitale Ressourcen, clevere Funde, Modeinspiration und neue Inhalte von GiftedGift Empire.",
+        "Ontvang handige businessideeën, digitale bronnen, slimme vondsten, mode-inspiratie en nieuwe GiftedGift Empire-content."
+      ],
+
+    "Name":
+      [
+        "Nom",
+        "Name",
+        "Naam"
+      ],
+
     "Your Name":
-      ["Votre nom", "Ihr Name", "Je naam"],
+      [
+        "Votre nom",
+        "Ihr Name",
+        "Je naam"
+      ],
 
     "Your Name *":
-      ["Votre nom *", "Ihr Name *", "Je naam *"],
+      [
+        "Votre nom *",
+        "Ihr Name *",
+        "Je naam *"
+      ],
+
+    "Email":
+      [
+        "E-mail",
+        "E-Mail",
+        "E-mail"
+      ],
 
     "Email Address":
-      ["Adresse e-mail", "E-Mail-Adresse", "E-mailadres"],
+      [
+        "Adresse e-mail",
+        "E-Mail-Adresse",
+        "E-mailadres"
+      ],
 
     "Email Address *":
-      ["Adresse e-mail *", "E-Mail-Adresse *", "E-mailadres *"],
+      [
+        "Adresse e-mail *",
+        "E-Mail-Adresse *",
+        "E-mailadres *"
+      ],
 
     "Website":
-      ["Site web", "Webseite", "Website"],
+      [
+        "Site web",
+        "Webseite",
+        "Website"
+      ],
 
     "Subscribe":
-      ["S’abonner", "Abonnieren", "Inschrijven"],
+      [
+        "S’abonner",
+        "Abonnieren",
+        "Inschrijven"
+      ],
 
     "I agree to receive emails from GiftedGift Empire. I understand that I can unsubscribe at any time.":
       [
         "J’accepte de recevoir des e-mails de GiftedGift Empire. Je comprends que je peux me désabonner à tout moment.",
         "Ich stimme zu, E-Mails von GiftedGift Empire zu erhalten. Ich kann mich jederzeit abmelden.",
         "Ik ga ermee akkoord e-mails van GiftedGift Empire te ontvangen. Ik kan me op elk moment uitschrijven."
+      ],
+
+    "I agree to receive GiftedGift Empire emails. I can unsubscribe at any time.":
+      [
+        "J’accepte de recevoir les e-mails de GiftedGift Empire. Je peux me désabonner à tout moment.",
+        "Ich stimme dem Erhalt von E-Mails von GiftedGift Empire zu. Ich kann mich jederzeit abmelden.",
+        "Ik ga akkoord met het ontvangen van e-mails van GiftedGift Empire. Ik kan me op elk moment afmelden."
       ],
 
     "We respect your privacy and will not sell your email address. See our":
@@ -513,31 +674,67 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Privacy Policy":
-      ["Politique de confidentialité", "Datenschutzerklärung", "Privacybeleid"],
+      [
+        "Politique de confidentialité",
+        "Datenschutzerklärung",
+        "Privacybeleid"
+      ],
 
     "Returns & Refunds":
-      ["Retours et remboursements", "Rückgabe & Erstattung", "Retouren & terugbetalingen"],
+      [
+        "Retours et remboursements",
+        "Rückgabe & Erstattung",
+        "Retouren & terugbetalingen"
+      ],
 
     "Shipping Policy":
-      ["Politique d’expédition", "Versandrichtlinie", "Verzendbeleid"],
+      [
+        "Politique d’expédition",
+        "Versandrichtlinie",
+        "Verzendbeleid"
+      ],
 
     "Terms & Conditions":
-      ["Conditions générales", "Allgemeine Geschäftsbedingungen", "Algemene voorwaarden"],
+      [
+        "Conditions générales",
+        "Allgemeine Geschäftsbedingungen",
+        "Algemene voorwaarden"
+      ],
 
     "Legal Notice":
-      ["Mentions légales", "Impressum", "Juridische informatie"],
+      [
+        "Mentions légales",
+        "Impressum",
+        "Juridische informatie"
+      ],
 
     "Information":
-      ["Informations", "Informationen", "Informatie"],
+      [
+        "Informations",
+        "Informationen",
+        "Informatie"
+      ],
 
     "Work With Us":
-      ["Collaborez avec nous", "Mit uns arbeiten", "Werk met ons"],
+      [
+        "Collaborez avec nous",
+        "Mit uns arbeiten",
+        "Werk met ons"
+      ],
 
     "Affiliate Program":
-      ["Programme d’affiliation", "Affiliate-Programm", "Affiliateprogramma"],
+      [
+        "Programme d’affiliation",
+        "Affiliate-Programm",
+        "Affiliateprogramma"
+      ],
 
     "Customer Support":
-      ["Assistance client", "Kundensupport", "Klantenondersteuning"],
+      [
+        "Assistance client",
+        "Kundensupport",
+        "Klantenondersteuning"
+      ],
 
 
     /*
@@ -547,19 +744,39 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Product Type":
-      ["Type de produit", "Produkttyp", "Producttype"],
+      [
+        "Type de produit",
+        "Produkttyp",
+        "Producttype"
+      ],
 
     "Physical":
-      ["Physique", "Physisch", "Fysiek"],
+      [
+        "Physique",
+        "Physisch",
+        "Fysiek"
+      ],
 
     "Digital":
-      ["Numérique", "Digital", "Digitaal"],
+      [
+        "Numérique",
+        "Digital",
+        "Digitaal"
+      ],
 
     "Creator Marketplace":
-      ["Marché des créateurs", "Creator-Marktplatz", "Creator-marktplaats"],
+      [
+        "Marché des créateurs",
+        "Creator-Marktplatz",
+        "Creator-marktplaats"
+      ],
 
     "Affiliate":
-      ["Affiliation", "Affiliate", "Affiliate"],
+      [
+        "Affiliation",
+        "Affiliate",
+        "Affiliate"
+      ],
 
     "🥘 Shop African Foodstuffs on WhatsApp":
       [
@@ -569,25 +786,53 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "All Categories":
-      ["Toutes les catégories", "Alle Kategorien", "Alle categorieën"],
+      [
+        "Toutes les catégories",
+        "Alle Kategorien",
+        "Alle categorieën"
+      ],
 
     "Home & Living":
-      ["Maison et quotidien", "Wohnen & Alltag", "Wonen & leven"],
+      [
+        "Maison et quotidien",
+        "Wohnen & Alltag",
+        "Wonen & leven"
+      ],
 
     "Fashion & Accessories":
-      ["Mode et accessoires", "Mode & Accessoires", "Mode & accessoires"],
+      [
+        "Mode et accessoires",
+        "Mode & Accessoires",
+        "Mode & accessoires"
+      ],
 
     "Useful Finds":
-      ["Trouvailles utiles", "Nützliche Entdeckungen", "Handige vondsten"],
+      [
+        "Trouvailles utiles",
+        "Nützliche Entdeckungen",
+        "Handige vondsten"
+      ],
 
     "Beauty & Lifestyle":
-      ["Beauté et art de vivre", "Beauty & Lifestyle", "Beauty & lifestyle"],
+      [
+        "Beauté et art de vivre",
+        "Beauty & Lifestyle",
+        "Beauty & lifestyle"
+      ],
 
     "Health & Wellness":
-      ["Santé et bien-être", "Gesundheit & Wellness", "Gezondheid & wellness"],
+      [
+        "Santé et bien-être",
+        "Gesundheit & Wellness",
+        "Gezondheid & wellness"
+      ],
 
     "Digital Products":
-      ["Produits numériques", "Digitale Produkte", "Digitale producten"],
+      [
+        "Produits numériques",
+        "Digitale Produkte",
+        "Digitale producten"
+      ],
 
 
     /*
@@ -597,7 +842,11 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Deals & Special Offers":
-      ["Offres et promotions", "Angebote & Aktionen", "Aanbiedingen & acties"],
+      [
+        "Offres et promotions",
+        "Angebote & Aktionen",
+        "Aanbiedingen & acties"
+      ],
 
     "Discover current discounts and special offers available across GiftedGift Empire.":
       [
@@ -607,7 +856,11 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Current Deals":
-      ["Offres en cours", "Aktuelle Angebote", "Actuele aanbiedingen"],
+      [
+        "Offres en cours",
+        "Aktuelle Angebote",
+        "Actuele aanbiedingen"
+      ],
 
     "Limited-time offers available right now.":
       [
@@ -617,13 +870,25 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Loading current deals...":
-      ["Chargement des offres en cours...", "Angebote werden geladen...", "Aanbiedingen laden..."],
+      [
+        "Chargement des offres en cours...",
+        "Angebote werden geladen...",
+        "Aanbiedingen laden..."
+      ],
 
     "No active deals right now":
-      ["Aucune offre active pour le moment", "Derzeit keine aktiven Angebote", "Momenteel geen actieve aanbiedingen"],
+      [
+        "Aucune offre active pour le moment",
+        "Derzeit keine aktiven Angebote",
+        "Momenteel geen actieve aanbiedingen"
+      ],
 
     "Shop Now":
-      ["Acheter maintenant", "Jetzt einkaufen", "Nu winkelen"],
+      [
+        "Acheter maintenant",
+        "Jetzt einkaufen",
+        "Nu winkelen"
+      ],
 
 
     /*
@@ -633,19 +898,39 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "ABOUT OUR PLATFORM":
-      ["À PROPOS DE NOTRE PLATEFORME", "ÜBER UNSERE PLATTFORM", "OVER ONS PLATFORM"],
+      [
+        "À PROPOS DE NOTRE PLATEFORME",
+        "ÜBER UNSERE PLATTFORM",
+        "OVER ONS PLATFORM"
+      ],
 
     "What Is GiftedGift Empire?":
-      ["Qu’est-ce que GiftedGift Empire ?", "Was ist GiftedGift Empire?", "Wat is GiftedGift Empire?"],
+      [
+        "Qu’est-ce que GiftedGift Empire ?",
+        "Was ist GiftedGift Empire?",
+        "Wat is GiftedGift Empire?"
+      ],
 
     "What You Can Discover":
-      ["Ce que vous pouvez découvrir", "Was Sie entdecken können", "Wat je kunt ontdekken"],
+      [
+        "Ce que vous pouvez découvrir",
+        "Was Sie entdecken können",
+        "Wat je kunt ontdekken"
+      ],
 
     "Lifestyle Products":
-      ["Produits du quotidien", "Lifestyle-Produkte", "Lifestyleproducten"],
+      [
+        "Produits du quotidien",
+        "Lifestyle-Produkte",
+        "Lifestyleproducten"
+      ],
 
     "Deals & Recommendations":
-      ["Offres et recommandations", "Angebote & Empfehlungen", "Aanbiedingen & aanbevelingen"],
+      [
+        "Offres et recommandations",
+        "Angebote & Empfehlungen",
+        "Aanbiedingen & aanbevelingen"
+      ],
 
     "Opportunities With GiftedGift Empire":
       [
@@ -655,7 +940,11 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Our Mission":
-      ["Notre mission", "Unsere Mission", "Onze missie"],
+      [
+        "Notre mission",
+        "Unsere Mission",
+        "Onze missie"
+      ],
 
 
     /*
@@ -700,25 +989,53 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "← Back to Shop":
-      ["← Retour à la boutique", "← Zurück zum Shop", "← Terug naar de winkel"],
+      [
+        "← Retour à la boutique",
+        "← Zurück zum Shop",
+        "← Terug naar de winkel"
+      ],
 
     "Loading product...":
-      ["Chargement du produit...", "Produkt wird geladen...", "Product laden..."],
+      [
+        "Chargement du produit...",
+        "Produkt wird geladen...",
+        "Product laden..."
+      ],
 
     "Product image coming soon":
-      ["Image du produit bientôt disponible", "Produktbild folgt in Kürze", "Productafbeelding binnenkort beschikbaar"],
+      [
+        "Image du produit bientôt disponible",
+        "Produktbild folgt in Kürze",
+        "Productafbeelding binnenkort beschikbaar"
+      ],
 
     "No customer reviews yet":
-      ["Aucun avis client pour le moment", "Noch keine Kundenbewertungen", "Nog geen klantbeoordelingen"],
+      [
+        "Aucun avis client pour le moment",
+        "Noch keine Kundenbewertungen",
+        "Nog geen klantbeoordelingen"
+      ],
 
     "👗 Fashion Details":
-      ["👗 Détails mode", "👗 Modedetails", "👗 Modedetails"],
+      [
+        "👗 Détails mode",
+        "👗 Modedetails",
+        "👗 Modedetails"
+      ],
 
     "How would you like to order?":
-      ["Comment souhaitez-vous commander ?", "Wie möchten Sie bestellen?", "Hoe wil je bestellen?"],
+      [
+        "Comment souhaitez-vous commander ?",
+        "Wie möchten Sie bestellen?",
+        "Hoe wil je bestellen?"
+      ],
 
     "Ready to Wear":
-      ["Prêt-à-porter", "Konfektionskleidung", "Ready-to-wear"],
+      [
+        "Prêt-à-porter",
+        "Konfektionskleidung",
+        "Ready-to-wear"
+      ],
 
     "Choose an available size and colour.":
       [
@@ -728,40 +1045,88 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Sew on Demand":
-      ["Confection sur demande", "Anfertigung auf Bestellung", "Op bestelling gemaakt"],
+      [
+        "Confection sur demande",
+        "Anfertigung auf Bestellung",
+        "Op bestelling gemaakt"
+      ],
 
     "Ready-to-Wear Options":
-      ["Options prêt-à-porter", "Konfektionsoptionen", "Ready-to-wear opties"],
+      [
+        "Options prêt-à-porter",
+        "Konfektionsoptionen",
+        "Ready-to-wear opties"
+      ],
 
     "Size":
-      ["Taille", "Größe", "Maat"],
+      [
+        "Taille",
+        "Größe",
+        "Maat"
+      ],
 
     "Select size":
-      ["Choisir une taille", "Größe auswählen", "Selecteer maat"],
+      [
+        "Choisir une taille",
+        "Größe auswählen",
+        "Selecteer maat"
+      ],
 
     "Colour":
-      ["Couleur", "Farbe", "Kleur"],
+      [
+        "Couleur",
+        "Farbe",
+        "Kleur"
+      ],
 
     "Select colour":
-      ["Choisir une couleur", "Farbe auswählen", "Selecteer kleur"],
+      [
+        "Choisir une couleur",
+        "Farbe auswählen",
+        "Selecteer kleur"
+      ],
 
     "Body Size Guide":
-      ["Guide des tailles corporelles", "Körpergrößen-Leitfaden", "Lichaamsmaattabel"],
+      [
+        "Guide des tailles corporelles",
+        "Körpergrößen-Leitfaden",
+        "Lichaamsmaattabel"
+      ],
 
     "Garment Measurements":
-      ["Mesures du vêtement", "Kleidungsmaße", "Kledingmaten"],
+      [
+        "Mesures du vêtement",
+        "Kleidungsmaße",
+        "Kledingmaten"
+      ],
 
     "Quantity":
-      ["Quantité", "Menge", "Aantal"],
+      [
+        "Quantité",
+        "Menge",
+        "Aantal"
+      ],
 
     "Add to Cart":
-      ["Ajouter au panier", "In den Warenkorb", "Toevoegen aan winkelwagen"],
+      [
+        "Ajouter au panier",
+        "In den Warenkorb",
+        "Toevoegen aan winkelwagen"
+      ],
 
     "🛒 View Cart & Checkout":
-      ["🛒 Voir le panier et passer au paiement", "🛒 Warenkorb & Kasse", "🛒 Winkelwagen & afrekenen"],
+      [
+        "🛒 Voir le panier et passer au paiement",
+        "🛒 Warenkorb & Kasse",
+        "🛒 Winkelwagen & afrekenen"
+      ],
 
     "OR":
-      ["OU", "ODER", "OF"],
+      [
+        "OU",
+        "ODER",
+        "OF"
+      ],
 
     "Complete Purchase on WhatsApp":
       [
@@ -771,25 +1136,53 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Full Name":
-      ["Nom complet", "Vollständiger Name", "Volledige naam"],
+      [
+        "Nom complet",
+        "Vollständiger Name",
+        "Volledige naam"
+      ],
 
     "Full Name *":
-      ["Nom complet *", "Vollständiger Name *", "Volledige naam *"],
+      [
+        "Nom complet *",
+        "Vollständiger Name *",
+        "Volledige naam *"
+      ],
 
     "Phone Number":
-      ["Numéro de téléphone", "Telefonnummer", "Telefoonnummer"],
+      [
+        "Numéro de téléphone",
+        "Telefonnummer",
+        "Telefoonnummer"
+      ],
 
     "Delivery Address":
-      ["Adresse de livraison", "Lieferadresse", "Bezorgadres"],
+      [
+        "Adresse de livraison",
+        "Lieferadresse",
+        "Bezorgadres"
+      ],
 
     "Postal Code":
-      ["Code postal", "Postleitzahl", "Postcode"],
+      [
+        "Code postal",
+        "Postleitzahl",
+        "Postcode"
+      ],
 
     "City":
-      ["Ville", "Stadt", "Plaats"],
+      [
+        "Ville",
+        "Stadt",
+        "Plaats"
+      ],
 
     "Country":
-      ["Pays", "Land", "Land"],
+      [
+        "Pays",
+        "Land",
+        "Land"
+      ],
 
     "Order Note (optional)":
       [
@@ -799,22 +1192,46 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Customer Reviews":
-      ["Avis clients", "Kundenbewertungen", "Klantbeoordelingen"],
+      [
+        "Avis clients",
+        "Kundenbewertungen",
+        "Klantbeoordelingen"
+      ],
 
     "Reviews":
-      ["Avis", "Bewertungen", "Beoordelingen"],
+      [
+        "Avis",
+        "Bewertungen",
+        "Beoordelingen"
+      ],
 
     "Leave a Review":
-      ["Laisser un avis", "Bewertung abgeben", "Beoordeling achterlaten"],
+      [
+        "Laisser un avis",
+        "Bewertung abgeben",
+        "Beoordeling achterlaten"
+      ],
 
     "Your Rating":
-      ["Votre note", "Ihre Bewertung", "Je beoordeling"],
+      [
+        "Votre note",
+        "Ihre Bewertung",
+        "Je beoordeling"
+      ],
 
     "Your Review":
-      ["Votre avis", "Ihre Rezension", "Je review"],
+      [
+        "Votre avis",
+        "Ihre Rezension",
+        "Je review"
+      ],
 
     "Submit Review":
-      ["Envoyer l’avis", "Bewertung senden", "Beoordeling versturen"],
+      [
+        "Envoyer l’avis",
+        "Bewertung senden",
+        "Beoordeling versturen"
+      ],
 
 
     /*
@@ -824,25 +1241,53 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "← Home":
-      ["← Accueil", "← Startseite", "← Home"],
+      [
+        "← Accueil",
+        "← Startseite",
+        "← Home"
+      ],
 
     "← All Foodstuffs":
-      ["← Tous les produits alimentaires", "← Alle Lebensmittel", "← Alle levensmiddelen"],
+      [
+        "← Tous les produits alimentaires",
+        "← Alle Lebensmittel",
+        "← Alle levensmiddelen"
+      ],
 
     "Loading foodstuffs...":
-      ["Chargement des produits alimentaires...", "Lebensmittel werden geladen...", "Levensmiddelen laden..."],
+      [
+        "Chargement des produits alimentaires...",
+        "Lebensmittel werden geladen...",
+        "Levensmiddelen laden..."
+      ],
 
     "Your Foodstuff Order":
-      ["Votre commande de produits alimentaires", "Ihre Lebensmittelbestellung", "Je levensmiddelenbestelling"],
+      [
+        "Votre commande de produits alimentaires",
+        "Ihre Lebensmittelbestellung",
+        "Je levensmiddelenbestelling"
+      ],
 
     "No foodstuff selected yet.":
-      ["Aucun produit alimentaire sélectionné pour le moment.", "Noch keine Lebensmittel ausgewählt.", "Nog geen levensmiddelen geselecteerd."],
+      [
+        "Aucun produit alimentaire sélectionné pour le moment.",
+        "Noch keine Lebensmittel ausgewählt.",
+        "Nog geen levensmiddelen geselecteerd."
+      ],
 
     "Product Total":
-      ["Total des produits", "Produktsumme", "Producttotaal"],
+      [
+        "Total des produits",
+        "Produktsumme",
+        "Producttotaal"
+      ],
 
     "Delivery Details":
-      ["Informations de livraison", "Lieferdetails", "Bezorggegevens"],
+      [
+        "Informations de livraison",
+        "Lieferdetails",
+        "Bezorggegevens"
+      ],
 
     "🟢 Submit Order on WhatsApp":
       [
@@ -854,27 +1299,107 @@ EN = English | FR = French | DE = German | NL = Dutch
 
     /*
     =====================================================
-    BLOG / INSPIRATION
+    BLOG
     =====================================================
     */
 
     "GiftedGift Empire Blog":
-      ["Blog GiftedGift Empire", "GiftedGift Empire Blog", "GiftedGift Empire Blog"],
+      [
+        "Blog GiftedGift Empire",
+        "GiftedGift Empire Blog",
+        "GiftedGift Empire Blog"
+      ],
 
     "Latest From the Blog":
-      ["Derniers articles du blog", "Neueste Blogbeiträge", "Nieuwste blogberichten"],
+      [
+        "Derniers articles du blog",
+        "Neueste Blogbeiträge",
+        "Nieuwste blogberichten"
+      ],
 
     "Loading articles...":
-      ["Chargement des articles...", "Artikel werden geladen...", "Artikelen laden..."],
+      [
+        "Chargement des articles...",
+        "Artikel werden geladen...",
+        "Artikelen laden..."
+      ],
 
     "Articles Coming Soon":
-      ["Articles bientôt disponibles", "Artikel folgen in Kürze", "Artikelen binnenkort beschikbaar"],
+      [
+        "Articles bientôt disponibles",
+        "Artikel folgen in Kürze",
+        "Artikelen binnenkort beschikbaar"
+      ],
 
     "← Back to Blog":
-      ["← Retour au blog", "← Zurück zum Blog", "← Terug naar blog"],
+      [
+        "← Retour au blog",
+        "← Zurück zum Blog",
+        "← Terug naar blog"
+      ],
 
     "View Product":
-      ["Voir le produit", "Produkt ansehen", "Product bekijken"],
+      [
+        "Voir le produit",
+        "Produkt ansehen",
+        "Product bekijken"
+      ],
+
+    "Related Articles":
+      [
+        "Articles connexes",
+        "Verwandte Artikel",
+        "Gerelateerde artikelen"
+      ],
+
+    "Continue exploring useful GiftedGift Empire content.":
+      [
+        "Continuez à découvrir les contenus utiles de GiftedGift Empire.",
+        "Entdecken Sie weitere nützliche Inhalte von GiftedGift Empire.",
+        "Ontdek meer nuttige content van GiftedGift Empire."
+      ],
+
+    "Useful products and digital resources you may also want to explore.":
+      [
+        "Des produits utiles et des ressources numériques que vous pourriez également découvrir.",
+        "Nützliche Produkte und digitale Ressourcen, die Sie ebenfalls entdecken können.",
+        "Handige producten en digitale bronnen die je misschien ook wilt bekijken."
+      ],
+
+    "Read Article":
+      [
+        "Lire l’article",
+        "Artikel lesen",
+        "Artikel lezen"
+      ],
+
+    "Watch the Related Video":
+      [
+        "Regarder la vidéo associée",
+        "Passendes Video ansehen",
+        "Bekijk de bijbehorende video"
+      ],
+
+    "Prefer to watch? Open the related GiftedGift Empire video on YouTube.":
+      [
+        "Vous préférez regarder ? Ouvrez la vidéo GiftedGift Empire associée sur YouTube.",
+        "Sie möchten lieber zuschauen? Öffnen Sie das passende GiftedGift Empire-Video auf YouTube.",
+        "Kijk je liever? Open de bijbehorende GiftedGift Empire-video op YouTube."
+      ],
+
+    "▶ Watch on YouTube":
+      [
+        "▶ Regarder sur YouTube",
+        "▶ Auf YouTube ansehen",
+        "▶ Bekijken op YouTube"
+      ],
+
+
+    /*
+    =====================================================
+    DAILY INSPIRATION
+    =====================================================
+    */
 
     "← Back to Daily Inspiration":
       [
@@ -884,7 +1409,235 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Loading inspiration...":
-      ["Chargement de l’inspiration...", "Inspiration wird geladen...", "Inspiratie laden..."],
+      [
+        "Chargement de l’inspiration...",
+        "Inspiration wird geladen...",
+        "Inspiratie laden..."
+      ],
+
+    "Explore by Category":
+      [
+        "Explorer par catégorie",
+        "Nach Kategorie entdecken",
+        "Ontdek per categorie"
+      ],
+
+    "Choose the kind of inspiration you want to read today.":
+      [
+        "Choisissez le type d’inspiration que vous souhaitez lire aujourd’hui.",
+        "Wählen Sie die Art von Inspiration, die Sie heute lesen möchten.",
+        "Kies het soort inspiratie dat je vandaag wilt lezen."
+      ],
+
+    "All":
+      [
+        "Tous",
+        "Alle",
+        "Alles"
+      ],
+
+    "God's Word for Today":
+      [
+        "La Parole de Dieu pour aujourd’hui",
+        "Gottes Wort für heute",
+        "Gods Woord voor vandaag"
+      ],
+
+    "Peace Before Sleep":
+      [
+        "Paix avant de dormir",
+        "Frieden vor dem Schlafengehen",
+        "Rust voor het slapen"
+      ],
+
+    "Breakthrough":
+      [
+        "Percée",
+        "Durchbruch",
+        "Doorbraak"
+      ],
+
+    "Prayer":
+      [
+        "Prière",
+        "Gebet",
+        "Gebed"
+      ],
+
+    "Prayer:":
+      [
+        "Prière :",
+        "Gebet:",
+        "Gebed:"
+      ],
+
+    "Encouragement":
+      [
+        "Encouragement",
+        "Ermutigung",
+        "Bemoediging"
+      ],
+
+    "Faith":
+      [
+        "Foi",
+        "Glaube",
+        "Geloof"
+      ],
+
+    "Open & Share Inspiration":
+      [
+        "Ouvrir et partager l’inspiration",
+        "Inspiration öffnen und teilen",
+        "Inspiratie openen en delen"
+      ],
+
+    "Share This Inspiration":
+      [
+        "Partager cette inspiration",
+        "Diese Inspiration teilen",
+        "Deel deze inspiratie"
+      ],
+
+    "Encourage someone today by sharing this message.":
+      [
+        "Encouragez quelqu’un aujourd’hui en partageant ce message.",
+        "Ermutigen Sie heute jemanden, indem Sie diese Botschaft teilen.",
+        "Bemoedig vandaag iemand door dit bericht te delen."
+      ],
+
+    "📌 Save on Pinterest":
+      [
+        "📌 Enregistrer sur Pinterest",
+        "📌 Auf Pinterest speichern",
+        "📌 Opslaan op Pinterest"
+      ],
+
+    "🔗 Copy Link":
+      [
+        "🔗 Copier le lien",
+        "🔗 Link kopieren",
+        "🔗 Link kopiëren"
+      ],
+
+    "↗ Share":
+      [
+        "↗ Partager",
+        "↗ Teilen",
+        "↗ Delen"
+      ],
+
+    "Link copied.":
+      [
+        "Lien copié.",
+        "Link kopiert.",
+        "Link gekopieerd."
+      ],
+
+    "More Daily Inspiration":
+      [
+        "Plus d’inspiration du jour",
+        "Mehr tägliche Inspiration",
+        "Meer dagelijkse inspiratie"
+      ],
+
+    "Continue with more prayers, Bible verses and encouragement.":
+      [
+        "Continuez avec davantage de prières, de versets bibliques et d’encouragements.",
+        "Entdecken Sie weitere Gebete, Bibelverse und Ermutigungen.",
+        "Ga verder met meer gebeden, Bijbelverzen en bemoediging."
+      ],
+
+    "Read Inspiration":
+      [
+        "Lire l’inspiration",
+        "Inspiration lesen",
+        "Inspiratie lezen"
+      ],
+
+    "Comments":
+      [
+        "Commentaires",
+        "Kommentare",
+        "Reacties"
+      ],
+
+    "Your Comment":
+      [
+        "Votre commentaire",
+        "Ihr Kommentar",
+        "Je reactie"
+      ],
+
+    "Post Comment":
+      [
+        "Publier le commentaire",
+        "Kommentar veröffentlichen",
+        "Reactie plaatsen"
+      ],
+
+    "No approved comments yet. Be the first to leave one.":
+      [
+        "Aucun commentaire approuvé pour le moment. Soyez le premier à en laisser un.",
+        "Noch keine freigegebenen Kommentare. Seien Sie der Erste.",
+        "Nog geen goedgekeurde reacties. Wees de eerste."
+      ],
+
+    "Thank you! Your comment has been submitted and is waiting for approval.":
+      [
+        "Merci ! Votre commentaire a été envoyé et attend d’être approuvé.",
+        "Vielen Dank! Ihr Kommentar wurde gesendet und wartet auf Freigabe.",
+        "Bedankt! Je reactie is verzonden en wacht op goedkeuring."
+      ],
+
+    "Please enter your name.":
+      [
+        "Veuillez saisir votre nom.",
+        "Bitte geben Sie Ihren Namen ein.",
+        "Vul je naam in."
+      ],
+
+    "Please write your comment.":
+      [
+        "Veuillez écrire votre commentaire.",
+        "Bitte schreiben Sie Ihren Kommentar.",
+        "Schrijf je reactie."
+      ],
+
+    "Your comment could not be submitted. Please try again.":
+      [
+        "Votre commentaire n’a pas pu être envoyé. Veuillez réessayer.",
+        "Ihr Kommentar konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+        "Je reactie kon niet worden verzonden. Probeer het opnieuw."
+      ],
+
+    "No inspiration is available in this category yet.":
+      [
+        "Aucune inspiration n’est encore disponible dans cette catégorie.",
+        "In dieser Kategorie ist noch keine Inspiration verfügbar.",
+        "Er is nog geen inspiratie beschikbaar in deze categorie."
+      ],
+
+    "Daily Inspiration could not be loaded. Please try again later.":
+      [
+        "L’inspiration du jour n’a pas pu être chargée. Veuillez réessayer plus tard.",
+        "Die tägliche Inspiration konnte nicht geladen werden. Bitte versuchen Sie es später erneut.",
+        "De dagelijkse inspiratie kon niet worden geladen. Probeer het later opnieuw."
+      ],
+
+    "More inspiration is coming soon.":
+      [
+        "D’autres inspirations arrivent bientôt.",
+        "Weitere Inspiration folgt bald.",
+        "Binnenkort komt er meer inspiratie."
+      ],
+
+    "This inspiration could not be found or is not currently published.":
+      [
+        "Cette inspiration est introuvable ou n’est pas publiée actuellement.",
+        "Diese Inspiration wurde nicht gefunden oder ist derzeit nicht veröffentlicht.",
+        "Deze inspiratie is niet gevonden of is momenteel niet gepubliceerd."
+      ],
 
 
     /*
@@ -894,31 +1647,67 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Submit a Support Request":
-      ["Envoyer une demande d’assistance", "Support-Anfrage senden", "Supportverzoek indienen"],
+      [
+        "Envoyer une demande d’assistance",
+        "Support-Anfrage senden",
+        "Supportverzoek indienen"
+      ],
 
     "Support Category *":
-      ["Catégorie d’assistance *", "Support-Kategorie *", "Supportcategorie *"],
+      [
+        "Catégorie d’assistance *",
+        "Support-Kategorie *",
+        "Supportcategorie *"
+      ],
 
     "Select a category":
-      ["Choisir une catégorie", "Kategorie auswählen", "Selecteer een categorie"],
+      [
+        "Choisir une catégorie",
+        "Kategorie auswählen",
+        "Selecteer een categorie"
+      ],
 
     "Order":
-      ["Commande", "Bestellung", "Bestelling"],
+      [
+        "Commande",
+        "Bestellung",
+        "Bestelling"
+      ],
 
     "Payment":
-      ["Paiement", "Zahlung", "Betaling"],
+      [
+        "Paiement",
+        "Zahlung",
+        "Betaling"
+      ],
 
     "Delivery / Shipping":
-      ["Livraison / Expédition", "Lieferung / Versand", "Bezorging / verzending"],
+      [
+        "Livraison / Expédition",
+        "Lieferung / Versand",
+        "Bezorging / verzending"
+      ],
 
     "Refund / Return":
-      ["Remboursement / Retour", "Erstattung / Rückgabe", "Terugbetaling / retour"],
+      [
+        "Remboursement / Retour",
+        "Erstattung / Rückgabe",
+        "Terugbetaling / retour"
+      ],
 
     "Digital Download":
-      ["Téléchargement numérique", "Digitaler Download", "Digitale download"],
+      [
+        "Téléchargement numérique",
+        "Digitaler Download",
+        "Digitale download"
+      ],
 
     "Account / Login":
-      ["Compte / Connexion", "Konto / Anmeldung", "Account / inloggen"],
+      [
+        "Compte / Connexion",
+        "Konto / Anmeldung",
+        "Account / inloggen"
+      ],
 
     "Creator / Seller Support":
       [
@@ -928,10 +1717,18 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Affiliate Support":
-      ["Assistance affiliation", "Affiliate-Support", "Affiliate-ondersteuning"],
+      [
+        "Assistance affiliation",
+        "Affiliate-Support",
+        "Affiliate-ondersteuning"
+      ],
 
     "Something Else":
-      ["Autre chose", "Etwas anderes", "Iets anders"],
+      [
+        "Autre chose",
+        "Etwas anderes",
+        "Iets anders"
+      ],
 
     "Order / Reference Number":
       [
@@ -941,19 +1738,39 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Subject *":
-      ["Objet *", "Betreff *", "Onderwerp *"],
+      [
+        "Objet *",
+        "Betreff *",
+        "Onderwerp *"
+      ],
 
     "Message *":
-      ["Message *", "Nachricht *", "Bericht *"],
+      [
+        "Message *",
+        "Nachricht *",
+        "Bericht *"
+      ],
 
     "Submit Support Request":
-      ["Envoyer la demande d’assistance", "Support-Anfrage senden", "Supportverzoek indienen"],
+      [
+        "Envoyer la demande d’assistance",
+        "Support-Anfrage senden",
+        "Supportverzoek indienen"
+      ],
 
     "Before You Submit":
-      ["Avant d’envoyer", "Vor dem Absenden", "Voordat je verstuurt"],
+      [
+        "Avant d’envoyer",
+        "Vor dem Absenden",
+        "Voordat je verstuurt"
+      ],
 
     "Frequently Asked Questions":
-      ["Questions fréquentes", "Häufig gestellte Fragen", "Veelgestelde vragen"],
+      [
+        "Questions fréquentes",
+        "Häufig gestellte Fragen",
+        "Veelgestelde vragen"
+      ],
 
     "General Business Enquiries":
       [
@@ -963,7 +1780,11 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Go to Contact Page →":
-      ["Aller à la page Contact →", "Zur Kontaktseite →", "Ga naar contactpagina →"],
+      [
+        "Aller à la page Contact →",
+        "Zur Kontaktseite →",
+        "Ga naar contactpagina →"
+      ],
 
 
     /*
@@ -973,10 +1794,18 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Visit Shop":
-      ["Visiter la boutique", "Shop besuchen", "Bezoek winkel"],
+      [
+        "Visiter la boutique",
+        "Shop besuchen",
+        "Bezoek winkel"
+      ],
 
     "Visit Shop →":
-      ["Visiter la boutique →", "Shop besuchen →", "Bezoek winkel →"],
+      [
+        "Visiter la boutique →",
+        "Shop besuchen →",
+        "Bezoek winkel →"
+      ],
 
     "Loading digital product...":
       [
@@ -986,25 +1815,53 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Product image unavailable":
-      ["Image du produit indisponible", "Produktbild nicht verfügbar", "Productafbeelding niet beschikbaar"],
+      [
+        "Image du produit indisponible",
+        "Produktbild nicht verfügbar",
+        "Productafbeelding niet beschikbaar"
+      ],
 
     "Featured":
-      ["À la une", "Empfohlen", "Uitgelicht"],
+      [
+        "À la une",
+        "Empfohlen",
+        "Uitgelicht"
+      ],
 
     "BUY NOW":
-      ["ACHETER MAINTENANT", "JETZT KAUFEN", "NU KOPEN"],
+      [
+        "ACHETER MAINTENANT",
+        "JETZT KAUFEN",
+        "NU KOPEN"
+      ],
 
     "Secure Digital Purchase":
-      ["Achat numérique sécurisé", "Sicherer digitaler Kauf", "Veilige digitale aankoop"],
+      [
+        "Achat numérique sécurisé",
+        "Sicherer digitaler Kauf",
+        "Veilige digitale aankoop"
+      ],
 
     "Share This Product":
-      ["Partager ce produit", "Dieses Produkt teilen", "Deel dit product"],
+      [
+        "Partager ce produit",
+        "Dieses Produkt teilen",
+        "Deel dit product"
+      ],
 
     "Copy Link":
-      ["Copier le lien", "Link kopieren", "Link kopiëren"],
+      [
+        "Copier le lien",
+        "Link kopieren",
+        "Link kopiëren"
+      ],
 
     "Share":
-      ["Partager", "Teilen", "Delen"],
+      [
+        "Partager",
+        "Teilen",
+        "Delen"
+      ],
 
 
     /*
@@ -1028,7 +1885,11 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "FREE":
-      ["GRATUIT", "KOSTENLOS", "GRATIS"],
+      [
+        "GRATUIT",
+        "KOSTENLOS",
+        "GRATIS"
+      ],
 
     "Get Your Free Copy":
       [
@@ -1094,31 +1955,67 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Your Shopping Cart":
-      ["Votre panier", "Ihr Warenkorb", "Je winkelwagen"],
+      [
+        "Votre panier",
+        "Ihr Warenkorb",
+        "Je winkelwagen"
+      ],
 
     "Loading your cart...":
-      ["Chargement de votre panier...", "Warenkorb wird geladen...", "Winkelwagen laden..."],
+      [
+        "Chargement de votre panier...",
+        "Warenkorb wird geladen...",
+        "Winkelwagen laden..."
+      ],
 
     "Your cart is currently empty":
-      ["Votre panier est vide", "Ihr Warenkorb ist derzeit leer", "Je winkelwagen is leeg"],
+      [
+        "Votre panier est vide",
+        "Ihr Warenkorb ist derzeit leer",
+        "Je winkelwagen is leeg"
+      ],
 
     "Continue Shopping":
-      ["Continuer mes achats", "Weiter einkaufen", "Verder winkelen"],
+      [
+        "Continuer mes achats",
+        "Weiter einkaufen",
+        "Verder winkelen"
+      ],
 
     "Order Summary":
-      ["Récapitulatif de la commande", "Bestellübersicht", "Besteloverzicht"],
+      [
+        "Récapitulatif de la commande",
+        "Bestellübersicht",
+        "Besteloverzicht"
+      ],
 
     "Total items":
-      ["Nombre total d’articles", "Gesamtanzahl Artikel", "Totaal aantal artikelen"],
+      [
+        "Nombre total d’articles",
+        "Gesamtanzahl Artikel",
+        "Totaal aantal artikelen"
+      ],
 
     "Total shipment weight":
-      ["Poids total de l’envoi", "Gesamtgewicht der Sendung", "Totaal verzendgewicht"],
+      [
+        "Poids total de l’envoi",
+        "Gesamtgewicht der Sendung",
+        "Totaal verzendgewicht"
+      ],
 
     "Subtotal":
-      ["Sous-total", "Zwischensumme", "Subtotaal"],
+      [
+        "Sous-total",
+        "Zwischensumme",
+        "Subtotaal"
+      ],
 
     "Continue to Shipping":
-      ["Continuer vers la livraison", "Weiter zum Versand", "Doorgaan naar verzending"],
+      [
+        "Continuer vers la livraison",
+        "Weiter zum Versand",
+        "Doorgaan naar verzending"
+      ],
 
 
     /*
@@ -1128,7 +2025,11 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Secure Checkout":
-      ["Paiement sécurisé", "Sicherer Checkout", "Veilig afrekenen"],
+      [
+        "Paiement sécurisé",
+        "Sicherer Checkout",
+        "Veilig afrekenen"
+      ],
 
     "Choose how you want to pay":
       [
@@ -1138,7 +2039,11 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Credit / Debit Card":
-      ["Carte de crédit / débit", "Kredit- / Debitkarte", "Creditcard / betaalpas"],
+      [
+        "Carte de crédit / débit",
+        "Kredit- / Debitkarte",
+        "Creditcard / betaalpas"
+      ],
 
     "Pay with Credit / Debit Card":
       [
@@ -1211,16 +2116,32 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "My Account":
-      ["Mon compte", "Mein Konto", "Mijn account"],
+      [
+        "Mon compte",
+        "Mein Konto",
+        "Mijn account"
+      ],
 
     "My Downloads":
-      ["Mes téléchargements", "Meine Downloads", "Mijn downloads"],
+      [
+        "Mes téléchargements",
+        "Meine Downloads",
+        "Mijn downloads"
+      ],
 
     "Refresh Purchases":
-      ["Actualiser les achats", "Käufe aktualisieren", "Aankopen vernieuwen"],
+      [
+        "Actualiser les achats",
+        "Käufe aktualisieren",
+        "Aankopen vernieuwen"
+      ],
 
     "Download Product":
-      ["Télécharger le produit", "Produkt herunterladen", "Product downloaden"],
+      [
+        "Télécharger le produit",
+        "Produkt herunterladen",
+        "Product downloaden"
+      ],
 
     "No Digital Purchases Found":
       [
@@ -1230,16 +2151,32 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Sign In":
-      ["Se connecter", "Anmelden", "Inloggen"],
+      [
+        "Se connecter",
+        "Anmelden",
+        "Inloggen"
+      ],
 
     "Log In":
-      ["Se connecter", "Anmelden", "Inloggen"],
+      [
+        "Se connecter",
+        "Anmelden",
+        "Inloggen"
+      ],
 
     "Login":
-      ["Connexion", "Anmeldung", "Inloggen"],
+      [
+        "Connexion",
+        "Anmeldung",
+        "Inloggen"
+      ],
 
     "Password":
-      ["Mot de passe", "Passwort", "Wachtwoord"],
+      [
+        "Mot de passe",
+        "Passwort",
+        "Wachtwoord"
+      ],
 
     "Forgot Password?":
       [
@@ -1249,16 +2186,32 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Create Account":
-      ["Créer un compte", "Konto erstellen", "Account aanmaken"],
+      [
+        "Créer un compte",
+        "Konto erstellen",
+        "Account aanmaken"
+      ],
 
     "Sign Up":
-      ["Créer un compte", "Registrieren", "Registreren"],
+      [
+        "Créer un compte",
+        "Registrieren",
+        "Registreren"
+      ],
 
     "Logout":
-      ["Se déconnecter", "Abmelden", "Uitloggen"],
+      [
+        "Se déconnecter",
+        "Abmelden",
+        "Uitloggen"
+      ],
 
     "Log Out":
-      ["Se déconnecter", "Abmelden", "Uitloggen"],
+      [
+        "Se déconnecter",
+        "Abmelden",
+        "Uitloggen"
+      ],
 
 
     /*
@@ -1268,35 +2221,70 @@ EN = English | FR = French | DE = German | NL = Dutch
     */
 
     "Search":
-      ["Rechercher", "Suchen", "Zoeken"],
+      [
+        "Rechercher",
+        "Suchen",
+        "Zoeken"
+      ],
 
     "Submit":
-      ["Envoyer", "Senden", "Versturen"],
+      [
+        "Envoyer",
+        "Senden",
+        "Versturen"
+      ],
 
     "Continue":
-      ["Continuer", "Weiter", "Doorgaan"],
+      [
+        "Continuer",
+        "Weiter",
+        "Doorgaan"
+      ],
 
     "Cancel":
-      ["Annuler", "Abbrechen", "Annuleren"],
+      [
+        "Annuler",
+        "Abbrechen",
+        "Annuleren"
+      ],
 
     "Close":
-      ["Fermer", "Schließen", "Sluiten"],
+      [
+        "Fermer",
+        "Schließen",
+        "Sluiten"
+      ],
 
     "Back":
-      ["Retour", "Zurück", "Terug"],
+      [
+        "Retour",
+        "Zurück",
+        "Terug"
+      ],
 
     "Next":
-      ["Suivant", "Weiter", "Volgende"],
+      [
+        "Suivant",
+        "Weiter",
+        "Volgende"
+      ],
 
     "Save":
-      ["Enregistrer", "Speichern", "Opslaan"],
+      [
+        "Enregistrer",
+        "Speichern",
+        "Opslaan"
+      ],
 
     "Loading...":
-      ["Chargement...", "Wird geladen...", "Laden..."],
+      [
+        "Chargement...",
+        "Wird geladen...",
+        "Laden..."
+      ],
 
 
     /*
-        /*
     =====================================================
     GIFTANA
     =====================================================
@@ -1370,7 +2358,8 @@ EN = English | FR = French | DE = German | NL = Dutch
         "Réécouter Giftana",
         "Giftana erneut anhören",
         "Luister opnieuw naar Giftana"
-            ],
+      ],
+
 
     /*
     =====================================================
@@ -1393,7 +2382,11 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Learn more":
-      ["En savoir plus", "Mehr erfahren", "Meer informatie"],
+      [
+        "En savoir plus",
+        "Mehr erfahren",
+        "Meer informatie"
+      ],
 
     "Accept optional":
       [
@@ -1424,16 +2417,32 @@ EN = English | FR = French | DE = German | NL = Dutch
       ],
 
     "Essential":
-      ["Essentiel", "Erforderlich", "Essentieel"],
+      [
+        "Essentiel",
+        "Erforderlich",
+        "Essentieel"
+      ],
 
     "Always active":
-      ["Toujours actif", "Immer aktiv", "Altijd actief"],
+      [
+        "Toujours actif",
+        "Immer aktiv",
+        "Altijd actief"
+      ],
 
     "Analytics":
-      ["Analyse", "Analyse", "Analyse"],
+      [
+        "Analyse",
+        "Analyse",
+        "Analyse"
+      ],
 
     "Marketing":
-      ["Marketing", "Marketing", "Marketing"],
+      [
+        "Marketing",
+        "Marketing",
+        "Marketing"
+      ],
 
     "Save my choices":
       [
@@ -1475,11 +2484,21 @@ EN = English | FR = French | DE = German | NL = Dutch
   const originalText =
     new WeakMap();
 
+
   const originalAttributes =
     new WeakMap();
 
+
   let currentLanguage =
     getSavedLanguage();
+
+
+  let observer =
+    null;
+
+
+  let giftanaObserver =
+    null;
 
 
   /*
@@ -1497,13 +2516,16 @@ EN = English | FR = French | DE = German | NL = Dutch
           STORAGE_KEY
         );
 
+
       return SUPPORTED.includes(
         saved
       )
         ? saved
         : "en";
 
-    } catch {
+    } catch (
+      error
+    ) {
 
       return "en";
 
@@ -1523,7 +2545,16 @@ EN = English | FR = French | DE = German | NL = Dutch
         language
       );
 
-    } catch {}
+    } catch (
+      error
+    ) {
+
+      /*
+      Storage may be blocked.
+      Language still works for the current page.
+      */
+
+    }
 
   }
 
@@ -1539,7 +2570,8 @@ EN = English | FR = French | DE = German | NL = Dutch
   ) {
 
     return String(
-      value || ""
+      value ||
+      ""
     )
       .trim()
       .replace(
@@ -1577,7 +2609,9 @@ EN = English | FR = French | DE = German | NL = Dutch
 
 
     const row =
-      T[key];
+      T[
+        key
+      ];
 
 
     const index =
@@ -1589,7 +2623,9 @@ EN = English | FR = French | DE = German | NL = Dutch
     if (
       row &&
       index !== undefined &&
-      row[index]
+      row[
+        index
+      ]
     ) {
 
       return row[
@@ -1666,6 +2702,195 @@ EN = English | FR = French | DE = German | NL = Dutch
     }
 
 
+    /*
+    =====================================================
+    DYNAMIC DAILY INSPIRATION LABELS
+    =====================================================
+    */
+
+    const dynamicNames = {
+
+      fr: {
+
+        like:
+          "❤️ J’aime",
+
+        liked:
+          "❤️ Aimé",
+
+        comments:
+          "💬 Commentaires",
+
+        published:
+          "Publié",
+
+        updated:
+          "Mis à jour"
+
+      },
+
+
+      de: {
+
+        like:
+          "❤️ Gefällt mir",
+
+        liked:
+          "❤️ Gefällt mir",
+
+        comments:
+          "💬 Kommentare",
+
+        published:
+          "Veröffentlicht",
+
+        updated:
+          "Aktualisiert"
+
+      },
+
+
+      nl: {
+
+        like:
+          "❤️ Leuk",
+
+        liked:
+          "❤️ Leuk gevonden",
+
+        comments:
+          "💬 Reacties",
+
+        published:
+          "Gepubliceerd",
+
+        updated:
+          "Bijgewerkt"
+
+      }
+
+    };
+
+
+    const names =
+      dynamicNames[
+        currentLanguage
+      ];
+
+
+    if (
+      names
+    ) {
+
+
+      if (
+        /^❤️\s*Like\s*·\s*\d+$/i.test(
+          key
+        )
+      ) {
+
+        return key.replace(
+          /^❤️\s*Like/i,
+          names.like
+        );
+
+      }
+
+
+      if (
+        /^❤️\s*Liked\s*·\s*\d+$/i.test(
+          key
+        )
+      ) {
+
+        return key.replace(
+          /^❤️\s*Liked/i,
+          names.liked
+        );
+
+      }
+
+
+      if (
+        /^💬\s*Comments\s*·\s*\d+$/i.test(
+          key
+        )
+      ) {
+
+        return key.replace(
+          /^💬\s*Comments/i,
+          names.comments
+        );
+
+      }
+
+
+      if (
+        /^Published\s+/i.test(
+          key
+        )
+      ) {
+
+        return key.replace(
+          /^Published/i,
+          names.published
+        );
+
+      }
+
+
+      if (
+        /^Updated\s+/i.test(
+          key
+        )
+      ) {
+
+        return key.replace(
+          /^Updated/i,
+          names.updated
+        );
+
+      }
+
+    }
+
+
+    /*
+    =====================================================
+    DYNAMIC CUSTOMER WELCOME
+    =====================================================
+    */
+
+    if (
+      /^Welcome,\s+/i.test(
+        key
+      )
+    ) {
+
+      const welcome = {
+
+        fr:
+          "Bienvenue,",
+
+        de:
+          "Willkommen,",
+
+        nl:
+          "Welkom,"
+
+      };
+
+
+      return key.replace(
+        /^Welcome,/i,
+        welcome[
+          currentLanguage
+        ]
+      );
+
+    }
+
+
     return value;
 
   }
@@ -1682,7 +2907,7 @@ EN = English | FR = French | DE = German | NL = Dutch
   ) {
 
     const parent =
-      node.parentElement;
+      node?.parentElement;
 
 
     if (
@@ -1744,7 +2969,8 @@ EN = English | FR = French | DE = German | NL = Dutch
 
       originalText.set(
         node,
-        node.nodeValue || ""
+        node.nodeValue ||
+        ""
       );
 
     }
@@ -1753,7 +2979,8 @@ EN = English | FR = French | DE = German | NL = Dutch
     const original =
       originalText.get(
         node
-      ) || "";
+      ) ||
+      "";
 
 
     const trimmed =
@@ -1798,13 +3025,15 @@ EN = English | FR = French | DE = German | NL = Dutch
     const leading =
       original.match(
         /^\s*/
-      )?.[0] || "";
+      )?.[0] ||
+      "";
 
 
     const trailing =
       original.match(
         /\s*$/
-      )?.[0] || "";
+      )?.[0] ||
+      "";
 
 
     const translated =
@@ -1917,52 +3146,59 @@ EN = English | FR = French | DE = German | NL = Dutch
       "placeholder",
       "title",
       "aria-label"
-    ].forEach(
-      name => {
+    ]
+      .forEach(
+        name => {
 
 
-        if (
-          !element.hasAttribute(
-            name
-          )
-        ) {
+          if (
+            !element.hasAttribute(
+              name
+            )
+          ) {
 
-          return;
+            return;
 
-        }
+          }
 
 
-        const original =
-          rememberAttribute(
-            element,
-            name
+          const original =
+            rememberAttribute(
+              element,
+              name
+            );
+
+
+          if (
+            original ===
+            null
+          ) {
+
+            return;
+
+          }
+
+
+          element.setAttribute(
+            name,
+
+            currentLanguage ===
+              "en"
+
+              ? original
+
+              : lookup(
+                  original
+                )
           );
 
-
-        if (
-          original === null
-        ) {
-
-          return;
-
         }
-
-
-        element.setAttribute(
-          name,
-          currentLanguage ===
-            "en"
-            ? original
-            : lookup(
-                original
-              )
-        );
-
-      }
-    );
+      );
 
 
     if (
+      typeof HTMLInputElement !==
+        "undefined" &&
       element instanceof
         HTMLInputElement &&
       [
@@ -1982,13 +3218,16 @@ EN = English | FR = French | DE = German | NL = Dutch
 
 
       if (
-        original !== null
+        original !==
+        null
       ) {
 
         element.value =
           currentLanguage ===
             "en"
+
             ? original
+
             : lookup(
                 original
               );
@@ -2007,7 +3246,8 @@ EN = English | FR = French | DE = German | NL = Dutch
   */
 
   function applyToTree(
-    root = document.body
+    root =
+      document.body
   ) {
 
     if (
@@ -2027,6 +3267,7 @@ EN = English | FR = French | DE = German | NL = Dutch
       applyTextNode(
         root
       );
+
 
       return;
 
@@ -2142,7 +3383,9 @@ EN = English | FR = French | DE = German | NL = Dutch
         {
 
           detail: {
+
             language
+
           }
 
         }
@@ -2185,18 +3428,26 @@ EN = English | FR = French | DE = German | NL = Dutch
 
       #gge-language-switcher {
 
-        position: fixed;
+        position:
+          fixed;
 
-        top: 96px;
-        right: 12px;
+        top:
+          96px;
 
-        z-index: 2000;
+        right:
+          12px;
 
-        display: flex;
+        z-index:
+          2000;
 
-        align-items: center;
+        display:
+          flex;
 
-        gap: 7px;
+        align-items:
+          center;
+
+        gap:
+          7px;
 
         padding:
           7px 10px;
@@ -2228,6 +3479,24 @@ EN = English | FR = French | DE = German | NL = Dutch
           Arial,
           Helvetica,
           sans-serif;
+
+        transition:
+          opacity 0.18s ease,
+          visibility 0.18s ease;
+
+      }
+
+
+      #gge-language-switcher.gge-language-hidden {
+
+        opacity:
+          0;
+
+        visibility:
+          hidden;
+
+        pointer-events:
+          none;
 
       }
 
@@ -2385,7 +3654,7 @@ EN = English | FR = French | DE = German | NL = Dutch
 
     select.addEventListener(
       "change",
-      () => {
+      function () {
 
         setLanguage(
           select.value
@@ -2432,13 +3701,117 @@ EN = English | FR = French | DE = German | NL = Dutch
 
   /*
   =========================================================
-  DYNAMIC CONTENT
+  GIFTANA POPUP PROTECTION
 
-  Watches only newly-added elements.
+  Hide the floating language selector while the
+  Giftana welcome popup is open.
+  =========================================================
+  */
 
-  It does NOT watch every character change.
-  This prevents translated text from being
-  accidentally treated as the original English.
+  function updateGiftanaSwitcherVisibility() {
+
+    const switcher =
+      document.getElementById(
+        "gge-language-switcher"
+      );
+
+
+    if (
+      !switcher
+    ) {
+
+      return;
+
+    }
+
+
+    const overlay =
+      document.getElementById(
+        "giftana-overlay"
+      );
+
+
+    const giftanaOpen =
+      Boolean(
+        overlay &&
+        overlay.classList.contains(
+          "show"
+        )
+      );
+
+
+    switcher.classList.toggle(
+      "gge-language-hidden",
+      giftanaOpen
+    );
+
+  }
+
+
+  function watchGiftana() {
+
+    const overlay =
+      document.getElementById(
+        "giftana-overlay"
+      );
+
+
+    updateGiftanaSwitcherVisibility();
+
+
+    if (
+      !overlay
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      giftanaObserver
+    ) {
+
+      giftanaObserver.disconnect();
+
+    }
+
+
+    giftanaObserver =
+      new MutationObserver(
+        function () {
+
+          updateGiftanaSwitcherVisibility();
+
+        }
+      );
+
+
+    giftanaObserver.observe(
+      overlay,
+      {
+
+        attributes:
+          true,
+
+        attributeFilter:
+          [
+            "class"
+          ]
+
+      }
+    );
+
+  }
+
+
+  /*
+  =========================================================
+  DYNAMIC CONTENT OBSERVER
+
+  Watches newly-added content from Supabase,
+  product cards, blog posts, Daily Inspiration,
+  comments, newsletter blocks and other dynamic UI.
   =========================================================
   */
 
@@ -2453,20 +3826,33 @@ EN = English | FR = French | DE = German | NL = Dutch
     }
 
 
-    const observer =
+    if (
+      observer
+    ) {
+
+      observer.disconnect();
+
+    }
+
+
+    observer =
       new MutationObserver(
-        mutations => {
+        function (
+          mutations
+        ) {
 
 
           mutations.forEach(
-            mutation => {
-
-
+            function (
               mutation
-                .addedNodes
-                .forEach(
-                  node => {
+            ) {
 
+
+              mutation.addedNodes
+                .forEach(
+                  function (
+                    node
+                  ) {
 
                     applyToTree(
                       node
@@ -2475,8 +3861,26 @@ EN = English | FR = French | DE = German | NL = Dutch
                   }
                 );
 
+
             }
           );
+
+
+          /*
+          Giftana could be created dynamically.
+          */
+
+
+          if (
+            document.getElementById(
+              "giftana-overlay"
+            ) &&
+            !giftanaObserver
+          ) {
+
+            watchGiftana();
+
+          }
 
         }
       );
@@ -2508,9 +3912,14 @@ EN = English | FR = French | DE = German | NL = Dutch
 
     createSwitcher();
 
+
     applyToTree(
       document.body
     );
+
+
+    watchGiftana();
+
 
     startObserver();
 
@@ -2526,8 +3935,11 @@ EN = English | FR = French | DE = German | NL = Dutch
   window.GiftedGiftLanguage = {
 
     get:
-      () =>
-        currentLanguage,
+      function () {
+
+        return currentLanguage;
+
+      },
 
 
     set:
@@ -2535,10 +3947,23 @@ EN = English | FR = French | DE = German | NL = Dutch
 
 
     refresh:
-      () =>
+      function () {
+
         applyToTree(
           document.body
-        )
+        );
+
+      },
+
+
+    supported:
+      function () {
+
+        return [
+          ...SUPPORTED
+        ];
+
+      }
 
   };
 
@@ -2558,7 +3983,8 @@ EN = English | FR = French | DE = German | NL = Dutch
       "DOMContentLoaded",
       initialise,
       {
-        once: true
+        once:
+          true
       }
     );
 
