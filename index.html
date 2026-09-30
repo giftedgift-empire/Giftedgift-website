@@ -5040,7 +5040,12 @@ async function loadFooterSocialLinks() {
           )
           .value
           .trim();
-
+const turnstileToken =
+  document
+    .querySelector(
+      '[name="cf-turnstile-response"]'
+    )
+    ?.value || "";
 
       if (!email) {
 
