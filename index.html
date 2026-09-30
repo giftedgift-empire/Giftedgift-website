@@ -5186,7 +5186,13 @@ turnstileToken:
 
         button.textContent =
           "Subscribe";
+if (
+  window.turnstile
+) {
 
+  window.turnstile.reset();
+
+}
       }
 
     }
