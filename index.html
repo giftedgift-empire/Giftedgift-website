@@ -4918,13 +4918,15 @@ async function loadFooterSocialLinks() {
 
     await Promise.all([
 
-      loadCategories(),
+  loadCategories(),
 
-      loadFeaturedProducts(),
+  loadFeaturedProducts(),
 
-      loadHomepageAdvertisement()
+  loadHomepageAdvertisement(),
 
-    ]);
+  loadFooterSocialLinks()
+
+]);
 
 
     updateCartCount();
