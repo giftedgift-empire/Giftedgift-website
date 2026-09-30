@@ -3174,7 +3174,115 @@ if (
 }
 
 </script>
+<!-- 
+  ==================================================
+     BLOG ARTICLE ENHANCEMENTS
+================================================== -->
 
+<script>
+
+(function () {
+
+  function loadBlogArticleEnhancements() {
+
+    const urlParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const articleId =
+      Number(
+        window.__BLOG_POST_ID ||
+        urlParams.get(
+          "id"
+        ) ||
+        0
+      );
+
+
+    if (
+      !Number.isInteger(
+        articleId
+      ) ||
+      articleId <= 0
+    ) {
+
+      return;
+    }
+
+
+    /*
+      Make sure the enhancement file
+      can also work with older ?id= links.
+    */
+
+    window.__BLOG_POST_ID =
+      articleId;
+
+
+    const singleArticle =
+      document.getElementById(
+        "single-article"
+      );
+
+
+    /*
+      Wait until the existing Blog system
+      has finished loading the article first.
+    */
+
+    if (
+      !singleArticle ||
+      singleArticle.style.display !==
+        "block"
+    ) {
+
+      setTimeout(
+        loadBlogArticleEnhancements,
+        75
+      );
+
+      return;
+    }
+
+
+    if (
+      document.getElementById(
+        "gge-blog-enhancement-script"
+      )
+    ) {
+
+      return;
+    }
+
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.id =
+      "gge-blog-enhancement-script";
+
+
+    script.src =
+      "/assets/blog-article-enhancements.js?v=20260930-1";
+
+
+    document.body.appendChild(
+      script
+    );
+
+  }
+
+
+  loadBlogArticleEnhancements();
+
+})();
+
+</script>
 
 <script src="/cookie-consent.js"></script>
 
