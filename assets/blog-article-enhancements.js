@@ -322,11 +322,6 @@
       }
 
 
-      /* ===============================================
-         MAIN ARTICLE HEADING — H2
-         ROYAL BLUE + GOLD ACCENT
-      =============================================== */
-
       .gge-article-content h2 {
         margin: 42px 0 17px;
         padding-left: 15px;
@@ -338,11 +333,6 @@
       }
 
 
-      /* ===============================================
-         ARTICLE SUBHEADING — H3
-         SMALLER DARK CHARCOAL
-      =============================================== */
-
       .gge-article-content h3 {
         margin: 31px 0 13px;
         color: #242424;
@@ -351,11 +341,6 @@
         line-height: 1.35;
       }
 
-
-      /* ===============================================
-         IMPORTANT / BOLD TEXT
-         GIFTEDGIFT GOLD
-      =============================================== */
 
       .gge-article-content
       .gge-gold-text {
@@ -367,7 +352,7 @@
       .gge-article-content ul,
       .gge-article-content ol {
         margin: 0 0 22px;
-        padding-left: 26px;
+        padding-left: 34px;
       }
 
 
@@ -375,10 +360,6 @@
         margin: 8px 0;
       }
 
-
-      /* ===============================================
-         CUSTOM ARTICLE CTA
-      =============================================== */
 
       .gge-inline-cta {
         margin: 26px 0;
@@ -919,16 +900,6 @@
 
 
 
-  /*
-  =====================================================
-  INLINE ARTICLE FORMATTING
-  =====================================================
-
-  **Important words**
-
-  becomes bold gold.
-  */
-
   function inlineFormat(
     text
   ) {
@@ -946,19 +917,6 @@
   }
 
 
-
-  /*
-  =====================================================
-  CUSTOM CTA BUTTON
-  =====================================================
-
-  Example:
-
-  [CTA|🎥 Watch the Full Video →|https://youtube.com/...]
-
-  You can change the button words and URL
-  to anything you want.
-  */
 
   function getCTAHTML(
     label,
@@ -1040,12 +998,6 @@
 
 
 
-  /*
-  =====================================================
-  ARTICLE CONTENT RENDERER
-  =====================================================
-  */
-
   function renderArticleContent(
     text
   ) {
@@ -1098,6 +1050,11 @@
       [];
 
 
+    let listStart =
+      1;
+
+
+
     function flushParagraph() {
 
       if (
@@ -1146,15 +1103,28 @@
           [];
 
 
+        listStart =
+          1;
+
+
         return;
       }
 
 
+      const openingTag =
+
+        listType === "ol"
+
+          ? '<ol start="' +
+            listStart +
+            '">'
+
+          : "<ul>";
+
+
       html.push(
 
-        "<" +
-        listType +
-        ">" +
+        openingTag +
 
         listItems
           .map(
@@ -1171,9 +1141,11 @@
             ""
           ) +
 
-        "</" +
-        listType +
-        ">"
+        (
+          listType === "ol"
+            ? "</ol>"
+            : "</ul>"
+        )
 
       );
 
@@ -1184,6 +1156,10 @@
 
       listItems =
         [];
+
+
+      listStart =
+        1;
     }
 
 
@@ -1206,14 +1182,6 @@
           return;
         }
 
-
-        /*
-        ===============================================
-        CUSTOM CTA
-
-        [CTA|Button Words|URL]
-        ===============================================
-        */
 
         const cta =
           line.match(
@@ -1251,14 +1219,6 @@
         }
 
 
-        /*
-        ===============================================
-        H3 SUBHEADING
-
-        ### Example
-        ===============================================
-        */
-
         const h3 =
           line.match(
             /^###\s+(.+)/
@@ -1289,14 +1249,6 @@
         }
 
 
-        /*
-        ===============================================
-        H2 MAIN HEADING
-
-        ## Example
-        ===============================================
-        */
-
         const h2 =
           line.match(
             /^##\s+(.+)/
@@ -1326,12 +1278,6 @@
           return;
         }
 
-
-        /*
-        ===============================================
-        BULLET LIST
-        ===============================================
-        */
 
         const bullet =
           line.match(
@@ -1369,15 +1315,9 @@
         }
 
 
-        /*
-        ===============================================
-        NUMBERED LIST
-        ===============================================
-        */
-
         const numbered =
           line.match(
-            /^\d+[.)]\s+(.+)/
+            /^(\d+)[.)]\s+(.+)/
           );
 
 
@@ -1386,6 +1326,12 @@
         ) {
 
           flushParagraph();
+
+
+          const currentNumber =
+            Number(
+              numbered[1]
+            ) || 1;
 
 
           if (
@@ -1398,12 +1344,22 @@
           }
 
 
+          if (
+            listType !==
+            "ol"
+          ) {
+
+            listStart =
+              currentNumber;
+          }
+
+
           listType =
             "ol";
 
 
           listItems.push(
-            numbered[1]
+            numbered[2]
           );
 
 
@@ -1448,12 +1404,6 @@
   }
 
 
-
-  /*
-  =====================================================
-  ARTICLE CATEGORY / AUTHOR / DATE
-  =====================================================
-  */
 
   function addArticleMeta(
     post
@@ -1648,12 +1598,6 @@
 
 
 
-  /*
-  =====================================================
-  FUTURE AD POSITIONS
-  =====================================================
-  */
-
   function createAdSlot(
     id,
     placement
@@ -1767,12 +1711,6 @@
 
 
 
-  /*
-  =====================================================
-  RELATED YOUTUBE VIDEO
-  =====================================================
-  */
-
   function addYouTubeCard(
     post
   ) {
@@ -1865,12 +1803,6 @@
   }
 
 
-
-  /*
-  =====================================================
-  NEWSLETTER
-  =====================================================
-  */
 
   function addNewsletterCard() {
 
@@ -2243,12 +2175,6 @@
 
 
 
-  /*
-  =====================================================
-  RELATED CONTENT MATCHING
-  =====================================================
-  */
-
   function tokenize(
     value
   ) {
@@ -2410,12 +2336,6 @@
   }
 
 
-
-  /*
-  =====================================================
-  RELATED ARTICLES
-  =====================================================
-  */
 
   async function loadRelatedArticles(
     post
@@ -2735,12 +2655,6 @@
   }
 
 
-
-  /*
-  =====================================================
-  RELATED GIFTEDGIFT PRODUCTS / RESOURCES
-  =====================================================
-  */
 
   async function loadRelatedResources(
     post
@@ -3109,12 +3023,6 @@
 
 
 
-  /*
-  =====================================================
-  CLIENT-SIDE SEO
-  =====================================================
-  */
-
   function updateClientSEO(
     post
   ) {
@@ -3456,12 +3364,6 @@
 
 
 
-  /*
-  =====================================================
-  LOAD ARTICLE DATA
-  =====================================================
-  */
-
   async function fetchPost() {
 
     const result =
@@ -3507,12 +3409,6 @@
   }
 
 
-
-  /*
-  =====================================================
-  START
-  =====================================================
-  */
 
   async function init() {
 
