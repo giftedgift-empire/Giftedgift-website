@@ -2517,9 +2517,19 @@ async function submitSupportTicket(
       .trim();
 
 
-  /* =========================
-     VALIDATION
-  ========================= */
+  const turnstileToken =
+    document
+      .querySelector(
+        '[name="cf-turnstile-response"]'
+      )
+      ?.value || "";
+
+
+  /*
+  =========================
+  VALIDATION
+  =========================
+  */
 
   if (
     name.length < 2
@@ -2614,6 +2624,21 @@ async function submitSupportTicket(
   }
 
 
+  if (
+    !turnstileToken
+  ) {
+
+    showFormMessage(
+      "Please complete the security check.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
   let finalMessage =
     message;
 
@@ -2640,53 +2665,100 @@ async function submitSupportTicket(
     "Submitting...";
 
 
-  const {
-    data:
-      ticketNumber,
+  let ticketNumber =
+    "";
 
-    error
-  } =
-    await supabaseClient
-      .rpc(
-        "submit_support_ticket",
+
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/functions/v1/support-submit",
         {
 
-          p_requester_name:
-            name,
+          method:
+            "POST",
 
-          p_requester_email:
-            email,
+          headers: {
 
-          p_order_reference:
-            orderReference ||
-            null,
+            "Content-Type":
+              "application/json",
 
-          p_category:
-            category,
+          },
 
-          p_subject:
-            subject,
+          body:
+            JSON.stringify(
+              {
 
-          p_message:
-            finalMessage,
+                name:
+                  name,
 
-          p_company_website:
-            companyWebsite ||
-            null
+                email:
+                  email,
+
+                orderReference:
+                  orderReference,
+
+                category:
+                  category,
+
+                subject:
+                  subject,
+
+                message:
+                  finalMessage,
+
+                companyWebsite:
+                  companyWebsite,
+
+                turnstileToken:
+                  turnstileToken,
+
+              }
+            ),
 
         }
       );
 
 
-  submitButton.disabled =
-    false;
+    let result = {};
 
 
-  submitButton.textContent =
-    "Submit Support Request";
+    try {
+
+      result =
+        await response.json();
+
+    }
+
+    catch {
+
+      result = {};
+
+    }
 
 
-  if (
+    if (
+      !response.ok ||
+      result.success !== true ||
+      !result.ticketNumber
+    ) {
+
+      throw new Error(
+        result.error ||
+        "We could not submit your support request."
+      );
+
+    }
+
+
+    ticketNumber =
+      result.ticketNumber;
+
+  }
+
+  catch (
     error
   ) {
 
@@ -2697,8 +2769,9 @@ async function submitSupportTicket(
 
 
     showFormMessage(
-      error.message ||
-      "We could not submit your support request.",
+      error instanceof Error
+        ? error.message
+        : "We could not submit your support request.",
       "error"
     );
 
@@ -2707,10 +2780,32 @@ async function submitSupportTicket(
 
   }
 
+  finally {
 
-  /* =========================
-     SUCCESS
-  ========================= */
+    submitButton.disabled =
+      false;
+
+
+    submitButton.textContent =
+      "Submit Support Request";
+
+
+    if (
+      window.turnstile
+    ) {
+
+      window.turnstile.reset();
+
+    }
+
+  }
+
+
+  /*
+  =========================
+  SUCCESS
+  =========================
+  */
 
   document
     .getElementById(
@@ -2755,7 +2850,6 @@ async function submitSupportTicket(
   });
 
 }
-
 
 /* =========================
    START
