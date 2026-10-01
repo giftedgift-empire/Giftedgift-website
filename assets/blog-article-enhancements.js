@@ -985,14 +985,16 @@
 
 
     const allowedStyles =
-      new Set([
-        "color",
-        "font-size",
-        "font-weight",
-        "font-style",
-        "text-decoration",
-        "text-align"
-      ]);
+  new Set([
+    "color",
+    "font-size",
+    "font-weight",
+    "font-style",
+    "text-decoration",
+    "text-align",
+    "border-bottom",
+    "padding-bottom"
+  ]);
 
 
     const elements =
