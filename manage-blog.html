@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -112,7 +111,7 @@
     .help {
       color: #666;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
       margin: 8px 0 0;
       word-break: break-word;
     }
@@ -123,27 +122,24 @@
       gap: 18px;
     }
 
-    .seo-section {
+    .seo-section,
+    .promotion-section {
       margin-top: 28px;
       padding: 20px;
-      border: 1px solid #d9e3f7;
       border-radius: 12px;
+    }
+
+    .seo-section {
+      border: 1px solid #d9e3f7;
       background: #f7faff;
     }
 
-    .seo-section h3 {
-      margin: 0 0 8px;
-      color: #123a8c;
-    }
-
     .promotion-section {
-      margin-top: 30px;
-      padding: 20px;
       border: 1px solid #e1e1e1;
-      border-radius: 12px;
       background: #fafafa;
     }
 
+    .seo-section h3,
     .promotion-section h3 {
       margin-top: 0;
       color: #123a8c;
@@ -156,8 +152,9 @@
       text-align: right;
     }
 
+
     /* ==================================================
-       VISUAL ARTICLE EDITOR
+       VISUAL EDITOR
     ================================================== */
 
     .editor-shell {
@@ -168,13 +165,29 @@
     }
 
     .editor-toolbar {
+      padding: 12px;
+      background: #f7f9fc;
+      border-bottom: 1px solid #dce2ea;
+    }
+
+    .toolbar-section {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 8px;
-      padding: 11px;
-      background: #f7f9fc;
-      border-bottom: 1px solid #dce2ea;
+      margin-bottom: 10px;
+    }
+
+    .toolbar-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .toolbar-label {
+      width: 100%;
+      color: #123a8c;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 2px;
     }
 
     .editor-toolbar button,
@@ -194,11 +207,16 @@
     }
 
     .editor-toolbar button:hover {
-      background: #edf3ff;
       border-color: #123a8c;
     }
 
-    .editor-color-control {
+    .editor-target {
+      border: 2px solid #123a8c !important;
+      color: #123a8c !important;
+      font-weight: 800 !important;
+    }
+
+    .editor-colour-control {
       display: inline-flex;
       align-items: center;
       gap: 7px;
@@ -212,7 +230,7 @@
     }
 
     #editor-color {
-      width: 34px;
+      width: 35px;
       height: 28px;
       margin: 0;
       padding: 0;
@@ -220,8 +238,19 @@
       background: transparent;
     }
 
-    .quick-colour {
-      min-width: 42px;
+    .colour-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .colour-dot {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.18);
+      flex-shrink: 0;
     }
 
     .editor-area {
@@ -295,12 +324,16 @@
 
     .editor-tip {
       margin-top: 10px;
-      padding: 12px;
+      padding: 13px;
       border-radius: 9px;
       background: #f7faff;
       color: #555;
       font-size: 14px;
       line-height: 1.6;
+    }
+
+    .editor-tip strong {
+      color: #123a8c;
     }
 
     .article-preview {
@@ -329,33 +362,9 @@
       font-size: 23px;
     }
 
-    .article-preview blockquote {
-      margin: 22px 0;
-      padding: 15px 18px;
-      border-left: 5px solid #d5a900;
-      background: #fffaf0;
-    }
-
-    .article-preview .gge-inline-cta {
-      margin: 22px 0;
-      padding: 18px;
-      border-left: 5px solid #d5a900;
-      background: #fffaf0;
-      border-radius: 12px;
-    }
-
-    .article-preview .gge-inline-cta-link {
-      display: inline-block;
-      padding: 12px 18px;
-      border-radius: 9px;
-      background: #123a8c;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
 
     /* ==================================================
-       IMAGES / POSTS
+       OTHER PAGE STYLES
     ================================================== */
 
     .image-preview {
@@ -420,7 +429,7 @@
     }
 
     button:disabled {
-      opacity: 0.6;
+      opacity: .6;
       cursor: not-allowed;
     }
 
@@ -502,11 +511,6 @@
       background: #fff8dd;
       border-radius: 9px;
       font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .promotion-preview strong {
-      color: #123a8c;
     }
 
     .status {
@@ -557,6 +561,7 @@
       font-weight: bold;
     }
 
+
     @media (max-width: 600px) {
 
       .page {
@@ -579,15 +584,22 @@
       }
 
       .editor-toolbar {
+        padding: 9px;
+      }
+
+      .toolbar-section {
         gap: 6px;
-        padding: 8px;
       }
 
       .editor-toolbar button,
       .editor-toolbar select {
-        min-height: 38px;
+        min-height: 39px;
         padding: 7px 9px;
         font-size: 13px;
+      }
+
+      #editor-target {
+        width: 100%;
       }
 
       .editor-area {
@@ -720,10 +732,6 @@
 
         </select>
 
-        <p class="help">
-          Choose the main category that best matches this article.
-        </p>
-
       </div>
 
 
@@ -737,7 +745,6 @@
           id="author-name"
           type="text"
           value="GiftedGift Empire"
-          placeholder="GiftedGift Empire"
         >
 
       </div>
@@ -773,7 +780,7 @@
 
       <textarea
         id="excerpt"
-        placeholder="Write a short introduction that will appear on the Blog page..."
+        placeholder="Write a short introduction..."
       ></textarea>
 
     </div>
@@ -785,12 +792,6 @@
         SEO & Sharing
       </h3>
 
-      <p class="help">
-        These fields help Google, Pinterest and social sharing.
-        Leave SEO Title blank to use the normal Article Title.
-      </p>
-
-
       <div class="field">
 
         <label for="seo-title">
@@ -801,7 +802,6 @@
           id="seo-title"
           type="text"
           maxlength="70"
-          placeholder="Search-friendly title for this article"
         >
 
         <div
@@ -823,7 +823,6 @@
         <textarea
           id="meta-description"
           maxlength="180"
-          placeholder="Write a clear description of the article for search engines and social sharing..."
         ></textarea>
 
         <div
@@ -848,10 +847,6 @@
           placeholder="https://www.youtube.com/watch?v=..."
         >
 
-        <p class="help">
-          Optional. Add one specific YouTube video connected to this article.
-        </p>
-
       </div>
 
     </div>
@@ -863,10 +858,6 @@
         Full Article
       </label>
 
-      <!--
-        Hidden storage field.
-        Existing database column "content" is still used.
-      -->
       <textarea
         id="content"
         aria-hidden="true"
@@ -881,237 +872,354 @@
           class="editor-toolbar"
         >
 
-          <select
-            id="editor-block"
-            aria-label="Text type"
-          >
 
-            <option value="p">
-              Normal Text
-            </option>
+          <!-- APPLY TO -->
 
-            <option value="h2">
-              Main Heading
-            </option>
+          <div class="toolbar-section">
 
-            <option value="h3">
-              Subheading
-            </option>
+            <div class="toolbar-label">
+              1. Apply formatting to:
+            </div>
 
-            <option value="blockquote">
-              Quote
-            </option>
-
-          </select>
-
-
-          <select
-            id="editor-size"
-            aria-label="Text size"
-          >
-
-            <option value="">
-              Text Size
-            </option>
-
-            <option value="14px">
-              14px
-            </option>
-
-            <option value="16px">
-              16px
-            </option>
-
-            <option value="18px">
-              18px
-            </option>
-
-            <option value="20px">
-              20px
-            </option>
-
-            <option value="22px">
-              22px
-            </option>
-
-            <option value="24px">
-              24px
-            </option>
-
-            <option value="28px">
-              28px
-            </option>
-
-            <option value="32px">
-              32px
-            </option>
-
-            <option value="36px">
-              36px
-            </option>
-
-          </select>
-
-
-          <label
-            class="editor-color-control"
-            for="editor-color"
-          >
-
-            Colour
-
-            <input
-              id="editor-color"
-              type="color"
-              value="#333333"
+            <select
+              id="editor-target"
+              class="editor-target"
             >
 
-          </label>
+              <option value="selected">
+                Selected Text
+              </option>
+
+              <option value="h2">
+                All Main Headings
+              </option>
+
+              <option value="h3">
+                All Subheadings
+              </option>
+
+              <option value="body">
+                All Normal Text
+              </option>
+
+              <option value="numbered">
+                All Numbered Items
+              </option>
+
+              <option value="bullets">
+                All Bullet Items
+              </option>
+
+            </select>
+
+          </div>
 
 
-          <button
-            class="quick-colour"
-            type="button"
-            data-colour="#123a8c"
-            title="GiftedGift Blue"
-          >
-            Blue
-          </button>
+          <!-- SIZE -->
+
+          <div class="toolbar-section">
+
+            <div class="toolbar-label">
+              2. Choose size:
+            </div>
+
+            <select id="editor-size">
+
+              <option value="">
+                Text Size
+              </option>
+
+              <option value="14px">14px</option>
+              <option value="16px">16px</option>
+              <option value="18px">18px</option>
+              <option value="20px">20px</option>
+              <option value="22px">22px</option>
+              <option value="24px">24px</option>
+              <option value="26px">26px</option>
+              <option value="28px">28px</option>
+              <option value="30px">30px</option>
+              <option value="32px">32px</option>
+              <option value="36px">36px</option>
+              <option value="40px">40px</option>
+
+            </select>
+
+          </div>
 
 
-          <button
-            class="quick-colour"
-            type="button"
-            data-colour="#a87900"
-            title="GiftedGift Gold"
-          >
-            Gold
-          </button>
+          <!-- COLOURS -->
+
+          <div class="toolbar-section">
+
+            <div class="toolbar-label">
+              3. Choose colour:
+            </div>
 
 
-          <button
-            class="quick-colour"
-            type="button"
-            data-colour="#333333"
-            title="Dark Charcoal"
-          >
-            Black
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#F2BD16"
+            >
+              <span
+                class="colour-dot"
+                style="background:#F2BD16;"
+              ></span>
+              Golden Yellow
+            </button>
 
 
-          <button
-            type="button"
-            data-command="bold"
-            title="Bold"
-          >
-            B
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#A87900"
+            >
+              <span
+                class="colour-dot"
+                style="background:#A87900;"
+              ></span>
+              Deep Gold
+            </button>
 
 
-          <button
-            type="button"
-            data-command="italic"
-            title="Italic"
-          >
-            <em>I</em>
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#123A8C"
+            >
+              <span
+                class="colour-dot"
+                style="background:#123A8C;"
+              ></span>
+              Royal Blue
+            </button>
 
 
-          <button
-            type="button"
-            data-command="underline"
-            title="Underline"
-          >
-            <u>U</u>
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#081F4D"
+            >
+              <span
+                class="colour-dot"
+                style="background:#081F4D;"
+              ></span>
+              Navy Blue
+            </button>
 
 
-          <button
-            type="button"
-            data-command="insertOrderedList"
-          >
-            1. List
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#1D4ED8"
+            >
+              <span
+                class="colour-dot"
+                style="background:#1D4ED8;"
+              ></span>
+              Bright Blue
+            </button>
 
 
-          <button
-            type="button"
-            data-command="insertUnorderedList"
-          >
-            • List
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#0EA5E9"
+            >
+              <span
+                class="colour-dot"
+                style="background:#0EA5E9;"
+              ></span>
+              Light Blue
+            </button>
 
 
-          <button
-            type="button"
-            data-command="justifyLeft"
-          >
-            Left
-          </button>
+            <button
+              type="button"
+              class="colour-button"
+              data-colour="#333333"
+            >
+              <span
+                class="colour-dot"
+                style="background:#333333;"
+              ></span>
+              Charcoal
+            </button>
 
 
-          <button
-            type="button"
-            data-command="justifyCenter"
-          >
-            Centre
-          </button>
+            <label
+              class="editor-colour-control"
+              for="editor-color"
+            >
+              Custom
+
+              <input
+                id="editor-color"
+                type="color"
+                value="#333333"
+              >
+            </label>
+
+          </div>
 
 
-          <button
-            type="button"
-            data-command="justifyRight"
-          >
-            Right
-          </button>
+          <!-- STYLE -->
+
+          <div class="toolbar-section">
+
+            <div class="toolbar-label">
+              4. Extra styling:
+            </div>
+
+            <button
+              type="button"
+              id="editor-bold"
+            >
+              <strong>B</strong>
+            </button>
+
+            <button
+              type="button"
+              id="editor-italic"
+            >
+              <em>I</em>
+            </button>
+
+            <button
+              type="button"
+              id="editor-underline"
+            >
+              <u>U</u>
+            </button>
+
+            <button
+              type="button"
+              id="editor-line-button"
+            >
+              ─ Line Below
+            </button>
+
+            <button
+              type="button"
+              id="align-left"
+            >
+              Left
+            </button>
+
+            <button
+              type="button"
+              id="align-centre"
+            >
+              Centre
+            </button>
+
+            <button
+              type="button"
+              id="align-right"
+            >
+              Right
+            </button>
+
+            <button
+              type="button"
+              id="editor-clear-button"
+            >
+              Clear Style
+            </button>
+
+          </div>
 
 
-          <button
-            id="editor-link-button"
-            type="button"
-          >
-            Link
-          </button>
+          <!-- INDIVIDUAL TOOLS -->
+
+          <div class="toolbar-section">
+
+            <div class="toolbar-label">
+              Individual text / writing tools:
+            </div>
 
 
-          <button
-            id="editor-cta-button"
-            type="button"
-          >
-            CTA
-          </button>
+            <select id="editor-block">
+
+              <option value="">
+                Change Current Line To...
+              </option>
+
+              <option value="p">
+                Normal Text
+              </option>
+
+              <option value="h2">
+                Main Heading
+              </option>
+
+              <option value="h3">
+                Subheading
+              </option>
+
+              <option value="blockquote">
+                Quote
+              </option>
+
+            </select>
 
 
-          <button
-            id="editor-clear-button"
-            type="button"
-          >
-            Clear Style
-          </button>
+            <button
+              type="button"
+              id="ordered-list-button"
+            >
+              1. List
+            </button>
 
 
-          <button
-            type="button"
-            data-command="undo"
-          >
-            Undo
-          </button>
+            <button
+              type="button"
+              id="bullet-list-button"
+            >
+              • List
+            </button>
 
 
-          <button
-            type="button"
-            data-command="redo"
-          >
-            Redo
-          </button>
+            <button
+              type="button"
+              id="editor-link-button"
+            >
+              Link Selected
+            </button>
 
 
-          <button
-            id="editor-preview-button"
-            type="button"
-          >
-            Preview
-          </button>
+            <button
+              type="button"
+              id="editor-cta-button"
+            >
+              CTA
+            </button>
+
+
+            <button
+              type="button"
+              id="editor-undo-button"
+            >
+              Undo
+            </button>
+
+
+            <button
+              type="button"
+              id="editor-redo-button"
+            >
+              Redo
+            </button>
+
+
+            <button
+              type="button"
+              id="editor-preview-button"
+            >
+              Preview
+            </button>
+
+          </div>
 
         </div>
 
@@ -1130,12 +1238,17 @@
 
       <div class="editor-tip">
 
-        Highlight any text and choose its
-        <strong>heading, size, colour, bold, italic, list or alignment.</strong>
+        <strong>Example:</strong>
+        Choose <b>All Subheadings</b>,
+        then tap <b>Golden Yellow</b>,
+        then choose <b>24px</b>.
+        Every subheading changes together.
 
-        You can also paste an article that already contains
-        <strong>## headings, ### subheadings or numbered lists</strong>.
-        The editor will convert them for you.
+        <br><br>
+
+        <b>U</b> underlines the words.
+        <b>Line Below</b> puts a proper line underneath
+        the heading, paragraph or group you selected.
 
       </div>
 
@@ -1160,10 +1273,6 @@
         accept="image/*"
       >
 
-      <p class="help">
-        Upload the main article image from your phone.
-      </p>
-
 
       <div
         class="field"
@@ -1178,13 +1287,11 @@
           id="image-alt-text"
           type="text"
           maxlength="180"
-          placeholder="Example: 50 Small Business Ideas You Can Start From Home in 2026"
+          placeholder="Describe the article image"
         >
 
         <p class="help">
-          Describe the image clearly for Google,
-          Pinterest and accessibility.
-          If left blank, the Article Title will be used automatically.
+          If left blank, the Article Title is used automatically.
         </p>
 
       </div>
@@ -1210,11 +1317,6 @@
       <h3>
         Optional Product / Advertising Promotion
       </h3>
-
-      <p class="help">
-        Leave Promotion Type as None for a normal blog article.
-      </p>
-
 
       <div class="field">
 
@@ -1254,7 +1356,6 @@
         <input
           id="promotion-name"
           type="text"
-          placeholder="Example: DELIFE Sirpio XL"
         >
 
       </div>
@@ -1269,7 +1370,6 @@
         <input
           id="promotion-url"
           type="url"
-          placeholder="https://giftedgiftempire.com/product-name"
         >
 
       </div>
@@ -1284,7 +1384,6 @@
         <input
           id="promotion-button-text"
           type="text"
-          placeholder="Shop This Product"
         >
 
       </div>
@@ -1346,7 +1445,6 @@
         Save Blog Post
       </button>
 
-
       <button
         id="cancel-button"
         class="cancel-button"
@@ -1390,22 +1488,17 @@
 const SUPABASE_URL =
   "https://mvoxizdzjmtcvokowhpd.supabase.co";
 
-
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
-
 
 const ADMIN_USER_ID =
   "57a302e5-9a38-443b-8568-cc32c5a91bdf";
 
-
 const SITE_URL =
   "https://giftedgiftempire.com";
 
-
 const RICH_CONTENT_MARKER =
   "<!--GGE_RICH_HTML-->";
-
 
 const db =
   supabase.createClient(
@@ -1414,28 +1507,12 @@ const db =
   );
 
 
-let editingId =
-  null;
-
-
-let existingImageUrl =
-  "";
-
-
-let existingPromotionImageUrl =
-  "";
-
-
-let existingPublishedAt =
-  null;
-
-
-let slugWasEdited =
-  false;
-
-
-let savedEditorRange =
-  null;
+let editingId = null;
+let existingImageUrl = "";
+let existingPromotionImageUrl = "";
+let existingPublishedAt = null;
+let slugWasEdited = false;
+let savedEditorRange = null;
 
 
 /* ==================================================
@@ -1443,152 +1520,88 @@ let savedEditorRange =
 ================================================== */
 
 const titleInput =
-  document.getElementById(
-    "title"
-  );
-
+  document.getElementById("title");
 
 const categoryInput =
-  document.getElementById(
-    "category"
-  );
-
+  document.getElementById("category");
 
 const authorNameInput =
-  document.getElementById(
-    "author-name"
-  );
-
+  document.getElementById("author-name");
 
 const slugInput =
-  document.getElementById(
-    "slug"
-  );
-
+  document.getElementById("slug");
 
 const excerptInput =
-  document.getElementById(
-    "excerpt"
-  );
-
+  document.getElementById("excerpt");
 
 const seoTitleInput =
-  document.getElementById(
-    "seo-title"
-  );
-
+  document.getElementById("seo-title");
 
 const metaDescriptionInput =
-  document.getElementById(
-    "meta-description"
-  );
-
+  document.getElementById("meta-description");
 
 const youtubeUrlInput =
-  document.getElementById(
-    "youtube-url"
-  );
-
+  document.getElementById("youtube-url");
 
 const contentInput =
-  document.getElementById(
-    "content"
-  );
-
+  document.getElementById("content");
 
 const contentEditor =
-  document.getElementById(
-    "content-editor"
-  );
-
+  document.getElementById("content-editor");
 
 const contentPreview =
-  document.getElementById(
-    "content-preview"
-  );
+  document.getElementById("content-preview");
 
+const editorTarget =
+  document.getElementById("editor-target");
 
 const imageAltTextInput =
-  document.getElementById(
-    "image-alt-text"
-  );
-
+  document.getElementById("image-alt-text");
 
 const imageFileInput =
-  document.getElementById(
-    "image-file"
-  );
-
+  document.getElementById("image-file");
 
 const promotionTypeInput =
-  document.getElementById(
-    "promotion-type"
-  );
-
+  document.getElementById("promotion-type");
 
 const promotionNameInput =
-  document.getElementById(
-    "promotion-name"
-  );
-
+  document.getElementById("promotion-name");
 
 const promotionUrlInput =
-  document.getElementById(
-    "promotion-url"
-  );
-
+  document.getElementById("promotion-url");
 
 const promotionButtonTextInput =
-  document.getElementById(
-    "promotion-button-text"
-  );
-
+  document.getElementById("promotion-button-text");
 
 const promotionImageFileInput =
-  document.getElementById(
-    "promotion-image-file"
-  );
-
+  document.getElementById("promotion-image-file");
 
 const publishedInput =
-  document.getElementById(
-    "published"
-  );
+  document.getElementById("published");
 
 
 /* ==================================================
-   HELPERS
+   BASIC HELPERS
 ================================================== */
 
-function escapeHTML(
-  value
-) {
+function escapeHTML(value) {
 
   const div =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   div.textContent =
     value ?? "";
-
 
   return div.innerHTML;
 }
 
 
-function cleanText(
-  value
-) {
+function cleanText(value) {
 
   return String(
     value || ""
   )
-    .replace(
-      /\s+/g,
-      " "
-    )
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -1599,18 +1612,13 @@ function showMessage(
 ) {
 
   const box =
-    document.getElementById(
-      "message"
-    );
-
+    document.getElementById("message");
 
   box.className =
     `message ${type}`;
 
-
   box.textContent =
     text;
-
 
   box.scrollIntoView({
     behavior: "smooth",
@@ -1622,14 +1630,10 @@ function showMessage(
 function clearMessage() {
 
   const box =
-    document.getElementById(
-      "message"
-    );
-
+    document.getElementById("message");
 
   box.className =
     "message";
-
 
   box.textContent =
     "";
@@ -1637,23 +1641,16 @@ function clearMessage() {
 
 
 /* ==================================================
-   RICH HTML SAFETY
+   SANITIZER
 ================================================== */
 
-function sanitizeRichHTML(
-  html
-) {
+function sanitizeRichHTML(html) {
 
   const template =
-    document.createElement(
-      "template"
-    );
-
+    document.createElement("template");
 
   template.innerHTML =
-    String(
-      html || ""
-    );
+    String(html || "");
 
 
   const allowedTags =
@@ -1684,13 +1681,14 @@ function sanitizeRichHTML(
       "font-weight",
       "font-style",
       "text-decoration",
-      "text-align"
+      "text-align",
+      "border-bottom",
+      "padding-bottom"
     ]);
 
 
   Array.from(
-    template.content
-      .querySelectorAll("*")
+    template.content.querySelectorAll("*")
   )
     .forEach(
       element => {
@@ -1753,7 +1751,7 @@ function sanitizeRichHTML(
 
                   if (
                     property ===
-                    "font-size" &&
+                      "font-size" &&
                     !/^\d{1,2}px$/.test(
                       value
                     )
@@ -1765,13 +1763,25 @@ function sanitizeRichHTML(
 
                   if (
                     property ===
-                    "text-align" &&
+                      "text-align" &&
                     ![
                       "left",
                       "center",
                       "right",
                       "justify"
                     ].includes(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  if (
+                    property ===
+                      "padding-bottom" &&
+                    !/^\d{1,2}px$/.test(
                       value
                     )
                   ) {
@@ -1810,55 +1820,41 @@ function sanitizeRichHTML(
 
 
               if (
-                element.tagName ===
-                  "A" &&
+                element.tagName === "A" &&
                 [
                   "href",
                   "target",
                   "rel",
                   "class"
-                ].includes(
-                  name
+                ].includes(name)
+              ) {
+
+                return;
+              }
+
+
+              if (
+                element.tagName === "OL" &&
+                name === "start"
+              ) {
+
+                return;
+              }
+
+
+              if (
+                name === "class" &&
+                (
+                  element.classList.contains(
+                    "gge-inline-cta"
+                  ) ||
+                  element.classList.contains(
+                    "gge-inline-cta-link"
+                  )
                 )
               ) {
 
                 return;
-              }
-
-
-              if (
-                element.tagName ===
-                  "OL" &&
-                name ===
-                  "start"
-              ) {
-
-                return;
-              }
-
-
-              if (
-                name ===
-                "class"
-              ) {
-
-                const allowedClass =
-                  element.classList
-                    .contains(
-                      "gge-inline-cta"
-                    ) ||
-                  element.classList
-                    .contains(
-                      "gge-inline-cta-link"
-                    );
-
-
-                if (
-                  allowedClass
-                ) {
-
-                  return;
-                }
               }
 
 
@@ -1870,24 +1866,18 @@ function sanitizeRichHTML(
 
 
         if (
-          element.tagName ===
-          "A"
+          element.tagName === "A"
         ) {
 
           const href =
-            element.getAttribute(
-              "href"
-            ) || "";
+            element.getAttribute("href") ||
+            "";
 
 
           if (
             href &&
-            !/^https?:\/\//i.test(
-              href
-            ) &&
-            !href.startsWith(
-              "/"
-            )
+            !/^https?:\/\//i.test(href) &&
+            !href.startsWith("/")
           ) {
 
             element.removeAttribute(
@@ -1911,53 +1901,28 @@ function sanitizeRichHTML(
 
 
 /* ==================================================
-   OLD ARTICLE → VISUAL EDITOR
+   OLD ARTICLE CONVERSION
 ================================================== */
 
-function legacyTextToHTML(
-  text
-) {
+function legacyTextToHTML(text) {
 
   const lines =
-    String(
-      text || ""
-    )
-      .replace(
-        /\r\n/g,
-        "\n"
-      )
-      .replace(
-        /\r/g,
-        "\n"
-      )
-      .split(
-        "\n"
-      );
+    String(text || "")
+      .replace(/\r\n/g, "\n")
+      .replace(/\r/g, "\n")
+      .split("\n");
 
 
-  const html =
-    [];
+  const html = [];
+
+  let listType = "";
+  let listStart = 1;
+  let listItems = [];
 
 
-  let listType =
-    "";
+  function inline(value) {
 
-
-  let listStart =
-    1;
-
-
-  let listItems =
-    [];
-
-
-  function inline(
-    value
-  ) {
-
-    return escapeHTML(
-      value
-    )
+    return escapeHTML(value)
       .replace(
         /\*\*([^*]+)\*\*/g,
         "<strong>$1</strong>"
@@ -1972,22 +1937,16 @@ function legacyTextToHTML(
       !listItems.length
     ) {
 
-      listType =
-        "";
-
-      listItems =
-        [];
-
-      listStart =
-        1;
+      listType = "";
+      listItems = [];
+      listStart = 1;
 
       return;
     }
 
 
-    const openTag =
-      listType ===
-        "ol"
+    const opening =
+      listType === "ol"
 
         ? (
             '<ol start="' +
@@ -1999,15 +1958,13 @@ function legacyTextToHTML(
 
 
     html.push(
-      openTag +
+      opening +
 
       listItems
         .map(
           item =>
             "<li>" +
-            inline(
-              item
-            ) +
+            inline(item) +
             "</li>"
         )
         .join("") +
@@ -2018,16 +1975,9 @@ function legacyTextToHTML(
     );
 
 
-    listType =
-      "";
-
-
-    listItems =
-      [];
-
-
-    listStart =
-      1;
+    listType = "";
+    listItems = [];
+    listStart = 1;
   }
 
 
@@ -2038,9 +1988,7 @@ function legacyTextToHTML(
         rawLine.trim();
 
 
-      if (
-        !line
-      ) {
+      if (!line) {
 
         flushList();
 
@@ -2054,21 +2002,15 @@ function legacyTextToHTML(
         );
 
 
-      if (
-        h3
-      ) {
+      if (h3) {
 
         flushList();
 
-
         html.push(
           "<h3>" +
-          inline(
-            h3[1]
-          ) +
+          inline(h3[1]) +
           "</h3>"
         );
-
 
         return;
       }
@@ -2080,21 +2022,15 @@ function legacyTextToHTML(
         );
 
 
-      if (
-        h2
-      ) {
+      if (h2) {
 
         flushList();
 
-
         html.push(
           "<h2>" +
-          inline(
-            h2[1]
-          ) +
+          inline(h2[1]) +
           "</h2>"
         );
-
 
         return;
       }
@@ -2106,14 +2042,11 @@ function legacyTextToHTML(
         );
 
 
-      if (
-        numbered
-      ) {
+      if (numbered) {
 
         if (
           listType &&
-          listType !==
-            "ol"
+          listType !== "ol"
         ) {
 
           flushList();
@@ -2121,25 +2054,20 @@ function legacyTextToHTML(
 
 
         if (
-          listType !==
-          "ol"
+          listType !== "ol"
         ) {
 
-          listType =
-            "ol";
-
+          listType = "ol";
 
           listStart =
-            Number(
-              numbered[1]
-            ) || 1;
+            Number(numbered[1]) ||
+            1;
         }
 
 
         listItems.push(
           numbered[2]
         );
-
 
         return;
       }
@@ -2151,28 +2079,22 @@ function legacyTextToHTML(
         );
 
 
-      if (
-        bullet
-      ) {
+      if (bullet) {
 
         if (
           listType &&
-          listType !==
-            "ul"
+          listType !== "ul"
         ) {
 
           flushList();
         }
 
 
-        listType =
-          "ul";
-
+        listType = "ul";
 
         listItems.push(
           bullet[1]
         );
-
 
         return;
       }
@@ -2187,41 +2109,29 @@ function legacyTextToHTML(
         );
 
 
-      if (
-        cta
-      ) {
+      if (cta) {
 
         const label =
-          cta[1]
-            .trim();
-
+          cta[1].trim();
 
         const href =
-          cta[2]
-            .trim();
+          cta[2].trim();
 
 
         if (
-          /^https?:\/\//i.test(
-            href
-          )
+          /^https?:\/\//i.test(href)
         ) {
 
           html.push(
             '<p class="gge-inline-cta">' +
             '<a class="gge-inline-cta-link" ' +
             'href="' +
-            escapeHTML(
-              href
-            ) +
+            escapeHTML(href) +
             '" target="_blank" rel="noopener noreferrer">' +
-            inline(
-              label
-            ) +
+            inline(label) +
             "</a></p>"
           );
         }
-
 
         return;
       }
@@ -2229,9 +2139,7 @@ function legacyTextToHTML(
 
       html.push(
         "<p>" +
-        inline(
-          line
-        ) +
+        inline(line) +
         "</p>"
       );
     }
@@ -2240,13 +2148,12 @@ function legacyTextToHTML(
 
   flushList();
 
-
   return html.join("");
 }
 
 
 /* ==================================================
-   EDITOR
+   SELECTION
 ================================================== */
 
 function editorContainsSelection() {
@@ -2257,8 +2164,7 @@ function editorContainsSelection() {
 
   if (
     !selection ||
-    selection.rangeCount ===
-      0
+    selection.rangeCount === 0
   ) {
 
     return false;
@@ -2269,18 +2175,21 @@ function editorContainsSelection() {
     selection.anchorNode;
 
 
-  return Boolean(
-    node &&
-    (
-      node ===
-        contentEditor ||
-      contentEditor.contains(
-        node.nodeType ===
-          Node.TEXT_NODE
-          ? node.parentNode
-          : node
-      )
-    )
+  if (!node) {
+    return false;
+  }
+
+
+  const element =
+    node.nodeType ===
+      Node.TEXT_NODE
+      ? node.parentNode
+      : node;
+
+
+  return (
+    element === contentEditor ||
+    contentEditor.contains(element)
   );
 }
 
@@ -2293,8 +2202,7 @@ function saveEditorSelection() {
 
   if (
     !selection ||
-    selection.rangeCount ===
-      0 ||
+    selection.rangeCount === 0 ||
     !editorContainsSelection()
   ) {
 
@@ -2304,9 +2212,7 @@ function saveEditorSelection() {
 
   savedEditorRange =
     selection
-      .getRangeAt(
-        0
-      )
+      .getRangeAt(0)
       .cloneRange();
 }
 
@@ -2316,10 +2222,7 @@ function restoreEditorSelection() {
   contentEditor.focus();
 
 
-  if (
-    !savedEditorRange
-  ) {
-
+  if (!savedEditorRange) {
     return;
   }
 
@@ -2329,7 +2232,6 @@ function restoreEditorSelection() {
 
 
   selection.removeAllRanges();
-
 
   selection.addRange(
     savedEditorRange
@@ -2351,12 +2253,153 @@ document.addEventListener(
 );
 
 
-function normalizeEditorMarkup() {
+/* ==================================================
+   EDITOR TARGETS
+================================================== */
+
+function getTargetElements() {
+
+  const target =
+    editorTarget.value;
+
+
+  if (
+    target === "h2"
+  ) {
+
+    return Array.from(
+      contentEditor.querySelectorAll(
+        "h2"
+      )
+    );
+  }
+
+
+  if (
+    target === "h3"
+  ) {
+
+    return Array.from(
+      contentEditor.querySelectorAll(
+        "h3"
+      )
+    );
+  }
+
+
+  if (
+    target === "numbered"
+  ) {
+
+    return Array.from(
+      contentEditor.querySelectorAll(
+        "ol > li"
+      )
+    );
+  }
+
+
+  if (
+    target === "bullets"
+  ) {
+
+    return Array.from(
+      contentEditor.querySelectorAll(
+        "ul > li"
+      )
+    );
+  }
+
+
+  if (
+    target === "body"
+  ) {
+
+    return Array.from(
+      contentEditor.children
+    )
+      .filter(
+        element =>
+
+          (
+            element.tagName === "P" ||
+            element.tagName === "DIV"
+          ) &&
+
+          !element.classList.contains(
+            "gge-inline-cta"
+          )
+      );
+  }
+
+
+  return [];
+}
+
+
+function getCurrentBlock() {
+
+  if (!savedEditorRange) {
+    return null;
+  }
+
+
+  let node =
+    savedEditorRange
+      .commonAncestorContainer;
+
+
+  if (
+    node.nodeType ===
+    Node.TEXT_NODE
+  ) {
+
+    node =
+      node.parentElement;
+  }
+
+
+  while (
+    node &&
+    node !== contentEditor
+  ) {
+
+    if (
+      [
+        "P",
+        "DIV",
+        "H2",
+        "H3",
+        "LI",
+        "BLOCKQUOTE"
+      ].includes(
+        node.tagName
+      )
+    ) {
+
+      return node;
+    }
+
+
+    node =
+      node.parentElement;
+  }
+
+
+  return null;
+}
+
+
+/* ==================================================
+   NORMALISE FONT TAGS
+================================================== */
+
+function normalizeFontTags(
+  forcedSize = ""
+) {
 
   contentEditor
-    .querySelectorAll(
-      "font"
-    )
+    .querySelectorAll("font")
     .forEach(
       font => {
 
@@ -2372,12 +2415,17 @@ function normalizeEditorMarkup() {
           );
 
 
-        if (
-          colour
-        ) {
+        if (colour) {
 
           span.style.color =
             colour;
+        }
+
+
+        if (forcedSize) {
+
+          span.style.fontSize =
+            forcedSize;
         }
 
 
@@ -2399,124 +2447,47 @@ function normalizeEditorMarkup() {
 }
 
 
-function runEditorCommand(
-  command,
-  value = null
-) {
+/* ==================================================
+   COLOUR
+================================================== */
 
-  restoreEditorSelection();
+function applyColour(colour) {
+
+  if (
+    editorTarget.value ===
+    "selected"
+  ) {
+
+    restoreEditorSelection();
 
 
-  document.execCommand(
-    command,
-    false,
-    value
+    document.execCommand(
+      "foreColor",
+      false,
+      colour
+    );
+
+
+    normalizeFontTags();
+
+    saveEditorSelection();
+
+    return;
+  }
+
+
+  const elements =
+    getTargetElements();
+
+
+  elements.forEach(
+    element => {
+
+      element.style.color =
+        colour;
+    }
   );
-
-
-  normalizeEditorMarkup();
-
-
-  saveEditorSelection();
 }
-
-
-document
-  .querySelectorAll(
-    "[data-command]"
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        "mousedown",
-        event => {
-
-          event.preventDefault();
-        }
-      );
-
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          runEditorCommand(
-            button.dataset
-              .command
-          );
-        }
-      );
-    }
-  );
-
-
-document
-  .getElementById(
-    "editor-block"
-  )
-  .addEventListener(
-    "change",
-    function () {
-
-      restoreEditorSelection();
-
-
-      const block =
-        this.value ||
-        "p";
-
-
-      document.execCommand(
-        "formatBlock",
-        false,
-        block
-      );
-
-
-      this.value =
-        "p";
-
-
-      saveEditorSelection();
-    }
-  );
-
-
-function applyTextColour(
-  colour
-) {
-
-  restoreEditorSelection();
-
-
-  document.execCommand(
-    "foreColor",
-    false,
-    colour
-  );
-
-
-  normalizeEditorMarkup();
-
-
-  saveEditorSelection();
-}
-
-
-document
-  .getElementById(
-    "editor-color"
-  )
-  .addEventListener(
-    "change",
-    function () {
-
-      applyTextColour(
-        this.value
-      );
-    }
-  );
 
 
 document
@@ -2527,27 +2498,36 @@ document
     button => {
 
       button.addEventListener(
-        "mousedown",
-        event => {
-
-          event.preventDefault();
-        }
-      );
-
-
-      button.addEventListener(
         "click",
         () => {
 
-          applyTextColour(
-            button.dataset
-              .colour
+          applyColour(
+            button.dataset.colour
           );
         }
       );
     }
   );
 
+
+document
+  .getElementById(
+    "editor-color"
+  )
+  .addEventListener(
+    "change",
+    function () {
+
+      applyColour(
+        this.value
+      );
+    }
+  );
+
+
+/* ==================================================
+   SIZE
+================================================== */
 
 document
   .getElementById(
@@ -2561,10 +2541,403 @@ document
         this.value;
 
 
+      if (!size) {
+        return;
+      }
+
+
       if (
-        !size
+        editorTarget.value ===
+        "selected"
       ) {
 
+        restoreEditorSelection();
+
+
+        document.execCommand(
+          "fontSize",
+          false,
+          "7"
+        );
+
+
+        normalizeFontTags(
+          size
+        );
+
+
+        saveEditorSelection();
+
+      } else {
+
+        getTargetElements()
+          .forEach(
+            element => {
+
+              element.style.fontSize =
+                size;
+            }
+          );
+      }
+
+
+      this.value = "";
+    }
+  );
+
+
+/* ==================================================
+   BOLD / ITALIC / UNDERLINE
+================================================== */
+
+function toggleTargetStyle(
+  property,
+  activeValue,
+  emptyValue,
+  command
+) {
+
+  if (
+    editorTarget.value ===
+    "selected"
+  ) {
+
+    restoreEditorSelection();
+
+
+    document.execCommand(
+      command,
+      false,
+      null
+    );
+
+
+    saveEditorSelection();
+
+    return;
+  }
+
+
+  const elements =
+    getTargetElements();
+
+
+  if (!elements.length) {
+    return;
+  }
+
+
+  const shouldAdd =
+    elements.some(
+      element =>
+        element.style[property] !==
+        activeValue
+    );
+
+
+  elements.forEach(
+    element => {
+
+      element.style[property] =
+        shouldAdd
+          ? activeValue
+          : emptyValue;
+    }
+  );
+}
+
+
+document
+  .getElementById(
+    "editor-bold"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      toggleTargetStyle(
+        "fontWeight",
+        "700",
+        "",
+        "bold"
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-italic"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      toggleTargetStyle(
+        "fontStyle",
+        "italic",
+        "",
+        "italic"
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-underline"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      toggleTargetStyle(
+        "textDecoration",
+        "underline",
+        "",
+        "underline"
+      );
+    }
+  );
+
+
+/* ==================================================
+   ALIGNMENT
+================================================== */
+
+function applyAlignment(
+  alignment,
+  command
+) {
+
+  if (
+    editorTarget.value ===
+    "selected"
+  ) {
+
+    restoreEditorSelection();
+
+
+    document.execCommand(
+      command,
+      false,
+      null
+    );
+
+
+    saveEditorSelection();
+
+    return;
+  }
+
+
+  getTargetElements()
+    .forEach(
+      element => {
+
+        element.style.textAlign =
+          alignment;
+      }
+    );
+}
+
+
+document
+  .getElementById(
+    "align-left"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      applyAlignment(
+        "left",
+        "justifyLeft"
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "align-centre"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      applyAlignment(
+        "center",
+        "justifyCenter"
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "align-right"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      applyAlignment(
+        "right",
+        "justifyRight"
+      );
+    }
+  );
+
+
+/* ==================================================
+   LINE BELOW
+================================================== */
+
+document
+  .getElementById(
+    "editor-line-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      let elements = [];
+
+
+      if (
+        editorTarget.value ===
+        "selected"
+      ) {
+
+        restoreEditorSelection();
+
+
+        const block =
+          getCurrentBlock();
+
+
+        if (block) {
+
+          elements = [block];
+        }
+
+      } else {
+
+        elements =
+          getTargetElements();
+      }
+
+
+      if (!elements.length) {
+
+        showMessage(
+          "Place your cursor inside the write-up first, or choose a group under Apply formatting to.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      const shouldAdd =
+        elements.some(
+          element =>
+            !element.style.borderBottom
+        );
+
+
+      elements.forEach(
+        element => {
+
+          if (shouldAdd) {
+
+            element.style.borderBottom =
+              "2px solid #D5A900";
+
+            element.style.paddingBottom =
+              "8px";
+
+          } else {
+
+            element.style.removeProperty(
+              "border-bottom"
+            );
+
+            element.style.removeProperty(
+              "padding-bottom"
+            );
+          }
+
+        }
+      );
+    }
+  );
+
+
+/* ==================================================
+   CLEAR STYLE
+================================================== */
+
+document
+  .getElementById(
+    "editor-clear-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      if (
+        editorTarget.value ===
+        "selected"
+      ) {
+
+        restoreEditorSelection();
+
+
+        document.execCommand(
+          "removeFormat",
+          false,
+          null
+        );
+
+
+        saveEditorSelection();
+
+        return;
+      }
+
+
+      getTargetElements()
+        .forEach(
+          element => {
+
+            element.removeAttribute(
+              "style"
+            );
+          }
+        );
+    }
+  );
+
+
+/* ==================================================
+   CHANGE CURRENT LINE TYPE
+================================================== */
+
+document
+  .getElementById(
+    "editor-block"
+  )
+  .addEventListener(
+    "change",
+    function () {
+
+      const block =
+        this.value;
+
+
+      if (!block) {
         return;
       }
 
@@ -2573,63 +2946,40 @@ document
 
 
       document.execCommand(
-        "fontSize",
+        "formatBlock",
         false,
-        "7"
+        "<" + block + ">"
       );
 
 
-      contentEditor
-        .querySelectorAll(
-          'font[size="7"]'
-        )
-        .forEach(
-          font => {
-
-            const span =
-              document.createElement(
-                "span"
-              );
+      saveEditorSelection();
 
 
-            span.style.fontSize =
-              size;
+      this.value = "";
+    }
+  );
 
 
-            const colour =
-              font.getAttribute(
-                "color"
-              );
+/* ==================================================
+   LISTS
+================================================== */
+
+document
+  .getElementById(
+    "ordered-list-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      restoreEditorSelection();
 
 
-            if (
-              colour
-            ) {
-
-              span.style.color =
-                colour;
-            }
-
-
-            while (
-              font.firstChild
-            ) {
-
-              span.appendChild(
-                font.firstChild
-              );
-            }
-
-
-            font.replaceWith(
-              span
-            );
-          }
-        );
-
-
-      this.value =
-        "";
+      document.execCommand(
+        "insertOrderedList",
+        false,
+        null
+      );
 
 
       saveEditorSelection();
@@ -2639,16 +2989,30 @@ document
 
 document
   .getElementById(
-    "editor-link-button"
+    "bullet-list-button"
   )
   .addEventListener(
-    "mousedown",
-    event => {
+    "click",
+    () => {
 
-      event.preventDefault();
+      restoreEditorSelection();
+
+
+      document.execCommand(
+        "insertUnorderedList",
+        false,
+        null
+      );
+
+
+      saveEditorSelection();
     }
   );
 
+
+/* ==================================================
+   LINK
+================================================== */
 
 document
   .getElementById(
@@ -2664,10 +3028,7 @@ document
         );
 
 
-      if (
-        !url
-      ) {
-
+      if (!url) {
         return;
       }
 
@@ -2699,26 +3060,28 @@ document
 
 
       if (
-        selection &&
-        selection.rangeCount &&
-        selection
-          .getRangeAt(
-            0
-          )
-          .collapsed
+        !selection ||
+        !selection.rangeCount
       ) {
 
-        const text =
+        return;
+      }
+
+
+      const range =
+        selection.getRangeAt(0);
+
+
+      if (range.collapsed) {
+
+        const words =
           prompt(
             "What words should appear for this link?",
             "Open Link"
           );
 
 
-        if (
-          !text
-        ) {
-
+        if (!words) {
           return;
         }
 
@@ -2727,13 +3090,9 @@ document
           "insertHTML",
           false,
           '<a href="' +
-          escapeHTML(
-            cleanUrl
-          ) +
+          escapeHTML(cleanUrl) +
           '" target="_blank" rel="noopener noreferrer">' +
-          escapeHTML(
-            text
-          ) +
+          escapeHTML(words) +
           "</a>"
         );
 
@@ -2748,19 +3107,9 @@ document
 
 
       contentEditor
-        .querySelectorAll(
-          'a[href="' +
-          CSS.escape(
-            cleanUrl
-          ) +
-          '"]'
-        )
+        .querySelectorAll("a")
         .forEach(
           link => {
-
-            link.target =
-              "_blank";
-
 
             link.rel =
               "noopener noreferrer";
@@ -2773,18 +3122,9 @@ document
   );
 
 
-document
-  .getElementById(
-    "editor-cta-button"
-  )
-  .addEventListener(
-    "mousedown",
-    event => {
-
-      event.preventDefault();
-    }
-  );
-
+/* ==================================================
+   CTA
+================================================== */
 
 document
   .getElementById(
@@ -2801,10 +3141,7 @@ document
         );
 
 
-      if (
-        !label
-      ) {
-
+      if (!label) {
         return;
       }
 
@@ -2816,25 +3153,14 @@ document
 
 
       if (
-        !url
-      ) {
-
-        return;
-      }
-
-
-      const cleanUrl =
-        url.trim();
-
-
-      if (
+        !url ||
         !/^https?:\/\//i.test(
-          cleanUrl
+          url.trim()
         )
       ) {
 
         showMessage(
-          "Please enter a valid https:// link for the CTA.",
+          "Please enter a valid https:// link.",
           "error"
         );
 
@@ -2853,14 +3179,10 @@ document
 
         '<a class="gge-inline-cta-link" ' +
         'href="' +
-        escapeHTML(
-          cleanUrl
-        ) +
+        escapeHTML(url.trim()) +
         '" target="_blank" rel="noopener noreferrer">' +
 
-        escapeHTML(
-          label.trim()
-        ) +
+        escapeHTML(label.trim()) +
 
         "</a>" +
 
@@ -2873,41 +3195,47 @@ document
   );
 
 
-document
-  .getElementById(
-    "editor-clear-button"
-  )
-  .addEventListener(
-    "mousedown",
-    event => {
-
-      event.preventDefault();
-    }
-  );
-
+/* ==================================================
+   UNDO / REDO
+================================================== */
 
 document
   .getElementById(
-    "editor-clear-button"
+    "editor-undo-button"
   )
   .addEventListener(
     "click",
     () => {
 
-      restoreEditorSelection();
-
+      contentEditor.focus();
 
       document.execCommand(
-        "removeFormat",
-        false,
-        null
+        "undo"
       );
-
-
-      saveEditorSelection();
     }
   );
 
+
+document
+  .getElementById(
+    "editor-redo-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      contentEditor.focus();
+
+      document.execCommand(
+        "redo"
+      );
+    }
+  );
+
+
+/* ==================================================
+   PREVIEW
+================================================== */
 
 document
   .getElementById(
@@ -2917,14 +3245,10 @@ document
     "click",
     () => {
 
-      const clean =
+      contentPreview.innerHTML =
         sanitizeRichHTML(
           contentEditor.innerHTML
         );
-
-
-      contentPreview.innerHTML =
-        clean;
 
 
       contentPreview.classList.toggle(
@@ -2937,27 +3261,21 @@ document
           "editor-preview-button"
         )
         .textContent =
+
           contentPreview
             .classList
-            .contains(
-              "open"
-            )
-              ? "Hide Preview"
-              : "Preview";
+            .contains("open")
+
+            ? "Hide Preview"
+
+            : "Preview";
     }
   );
 
 
-/*
-  Paste plain text safely.
-
-  Old article formatting such as:
-  ## Main Heading
-  ### Subheading
-  1. Numbered item
-
-  is automatically converted.
-*/
+/* ==================================================
+   PASTE
+================================================== */
 
 contentEditor.addEventListener(
   "paste",
@@ -2976,28 +3294,25 @@ contentEditor.addEventListener(
         );
 
 
-    if (
-      !text
-    ) {
-
+    if (!text) {
       return;
     }
-
-
-    const html =
-      legacyTextToHTML(
-        text
-      );
 
 
     document.execCommand(
       "insertHTML",
       false,
-      html
+      legacyTextToHTML(
+        text
+      )
     );
   }
 );
 
+
+/* ==================================================
+   LOAD / SAVE EDITOR CONTENT
+================================================== */
 
 function loadEditorContent(
   value
@@ -3042,7 +3357,7 @@ function loadEditorContent(
 
 function getEditorContentForSaving() {
 
-  normalizeEditorMarkup();
+  normalizeFontTags();
 
 
   const clean =
@@ -3057,10 +3372,7 @@ function getEditorContentForSaving() {
     );
 
 
-  if (
-    !plainText
-  ) {
-
+  if (!plainText) {
     return "";
   }
 
@@ -3073,7 +3385,7 @@ function getEditorContentForSaving() {
 
 
 /* ==================================================
-   IMAGE ALT TEXT
+   IMAGE ALT
 ================================================== */
 
 function updateCoverPreviewAlt() {
@@ -3088,9 +3400,11 @@ function updateCoverPreviewAlt() {
     imageAltTextInput
       .value
       .trim() ||
+
     titleInput
       .value
       .trim() ||
+
     "GiftedGift Empire blog image";
 
 
@@ -3113,28 +3427,18 @@ imageAltTextInput.addEventListener(
    SLUG
 ================================================== */
 
-function cleanSlug(
-  value
-) {
+function cleanSlug(value) {
 
   return String(
     value || ""
   )
-    .normalize(
-      "NFD"
-    )
+    .normalize("NFD")
     .replace(
       /[\u0300-\u036f]/g,
       ""
     )
-    .replace(
-      /×/g,
-      "x"
-    )
-    .replace(
-      /&/g,
-      " and "
-    )
+    .replace(/×/g, "x")
+    .replace(/&/g, " and ")
     .toLowerCase()
     .trim()
     .replace(
@@ -3148,48 +3452,36 @@ function cleanSlug(
 }
 
 
-function suggestShortSlug(
-  value
-) {
+function suggestShortSlug(value) {
 
-  const fullSlug =
-    cleanSlug(
-      value
-    );
+  const full =
+    cleanSlug(value);
 
 
-  if (
-    !fullSlug
-  ) {
-
+  if (!full) {
     return "";
   }
 
 
-  return fullSlug
+  return full
     .split("-")
-    .slice(
-      0,
-      8
-    )
+    .slice(0, 8)
     .join("-");
 }
 
 
 function updateSlugPreview() {
 
-  const slug =
-    cleanSlug(
-      slugInput.value
-    );
-
-
   document
     .getElementById(
       "slug-preview"
     )
     .textContent =
-      slug ||
+
+      cleanSlug(
+        slugInput.value
+      ) ||
+
       "article-name";
 }
 
@@ -3198,9 +3490,7 @@ titleInput.addEventListener(
   "input",
   function () {
 
-    if (
-      !slugWasEdited
-    ) {
+    if (!slugWasEdited) {
 
       slugInput.value =
         suggestShortSlug(
@@ -3247,9 +3537,7 @@ function updateSeoCounters() {
       "seo-title-counter"
     )
     .textContent =
-      seoTitleInput
-        .value
-        .length +
+      seoTitleInput.value.length +
       " / 70";
 
 
@@ -3258,9 +3546,7 @@ function updateSeoCounters() {
       "meta-description-counter"
     )
     .textContent =
-      metaDescriptionInput
-        .value
-        .length +
+      metaDescriptionInput.value.length +
       " / 180";
 }
 
@@ -3281,14 +3567,9 @@ metaDescriptionInput.addEventListener(
    YOUTUBE
 ================================================== */
 
-function isValidYouTubeUrl(
-  value
-) {
+function isValidYouTubeUrl(value) {
 
-  if (
-    !value
-  ) {
-
+  if (!value) {
     return true;
   }
 
@@ -3296,9 +3577,7 @@ function isValidYouTubeUrl(
   try {
 
     const url =
-      new URL(
-        value
-      );
+      new URL(value);
 
 
     const host =
@@ -3311,16 +3590,11 @@ function isValidYouTubeUrl(
 
 
     return (
-      url.protocol ===
-        "https:" &&
+      url.protocol === "https:" &&
       (
-        host ===
-          "youtube.com" ||
-        host.endsWith(
-          ".youtube.com"
-        ) ||
-        host ===
-          "youtu.be"
+        host === "youtube.com" ||
+        host.endsWith(".youtube.com") ||
+        host === "youtu.be"
       )
     );
 
@@ -3332,7 +3606,7 @@ function isValidYouTubeUrl(
 
 
 /* ==================================================
-   PROMOTION DEFAULTS
+   PROMOTION
 ================================================== */
 
 promotionTypeInput.addEventListener(
@@ -3404,9 +3678,7 @@ function showPreview(
     );
 
 
-  if (
-    url
-  ) {
+  if (url) {
 
     image.src =
       url;
@@ -3443,83 +3715,53 @@ function showPreview(
 
 function resetForm() {
 
-  editingId =
-    null;
+  editingId = null;
+  existingImageUrl = "";
+  existingPromotionImageUrl = "";
+  existingPublishedAt = null;
+  slugWasEdited = false;
+  savedEditorRange = null;
 
-
-  existingImageUrl =
-    "";
-
-
-  existingPromotionImageUrl =
-    "";
-
-
-  existingPublishedAt =
-    null;
-
-
-  slugWasEdited =
-    false;
-
-
-  savedEditorRange =
-    null;
-
-
-  titleInput.value =
-    "";
-
-
-  categoryInput.value =
-    "";
-
-
+  titleInput.value = "";
+  categoryInput.value = "";
   authorNameInput.value =
     "GiftedGift Empire";
 
+  slugInput.value = "";
+  excerptInput.value = "";
+  seoTitleInput.value = "";
+  metaDescriptionInput.value = "";
+  youtubeUrlInput.value = "";
+  contentInput.value = "";
 
-  slugInput.value =
-    "";
+  contentEditor.innerHTML = "";
 
-
-  updateSlugPreview();
-
-
-  excerptInput.value =
-    "";
-
-
-  seoTitleInput.value =
-    "";
-
-
-  metaDescriptionInput.value =
-    "";
-
-
-  youtubeUrlInput.value =
-    "";
-
-
-  updateSeoCounters();
-
-
-  contentInput.value =
-    "";
-
-
-  contentEditor.innerHTML =
-    "";
-
-
-  contentPreview.innerHTML =
-    "";
-
+  contentPreview.innerHTML = "";
 
   contentPreview.classList.remove(
     "open"
   );
+
+  editorTarget.value =
+    "selected";
+
+  imageAltTextInput.value = "";
+  imageFileInput.value = "";
+
+  promotionTypeInput.value =
+    "none";
+
+  promotionNameInput.value = "";
+  promotionUrlInput.value = "";
+  promotionButtonTextInput.value = "";
+  promotionImageFileInput.value = "";
+
+  publishedInput.checked =
+    false;
+
+
+  updateSlugPreview();
+  updateSeoCounters();
 
 
   document
@@ -3528,38 +3770,6 @@ function resetForm() {
     )
     .textContent =
       "Preview";
-
-
-  imageAltTextInput.value =
-    "";
-
-
-  imageFileInput.value =
-    "";
-
-
-  promotionTypeInput.value =
-    "none";
-
-
-  promotionNameInput.value =
-    "";
-
-
-  promotionUrlInput.value =
-    "";
-
-
-  promotionButtonTextInput.value =
-    "";
-
-
-  promotionImageFileInput.value =
-    "";
-
-
-  publishedInput.checked =
-    false;
 
 
   showPreview(
@@ -3606,9 +3816,7 @@ function resetForm() {
    IMAGE UPLOAD
 ================================================== */
 
-function safeFileName(
-  name
-) {
+function safeFileName(name) {
 
   return String(
     name ||
@@ -3628,9 +3836,7 @@ async function uploadImage(
   currentUrl
 ) {
 
-  if (
-    !file
-  ) {
+  if (!file) {
 
     return currentUrl ||
       null;
@@ -3680,9 +3886,7 @@ async function uploadImage(
       );
 
 
-  if (
-    error
-  ) {
+  if (error) {
 
     throw new Error(
       error.message ||
@@ -3712,12 +3916,11 @@ async function uploadImage(
 
 
 /* ==================================================
-   GLOBAL CLEAN URL PROTECTION
+   CLEAN URL PROTECTION
 ================================================== */
 
 const RESERVED_ROOT_SLUGS =
   new Set([
-
     "index",
     "home",
     "shop",
@@ -3728,12 +3931,10 @@ const RESERVED_ROOT_SLUGS =
     "about",
     "contact",
     "cart",
-
     "product",
     "checkout",
     "affiliate-products",
     "foodstuffs",
-
     "privacy-policy",
     "shipping-policy",
     "returns-refunds",
@@ -3743,10 +3944,8 @@ const RESERVED_ROOT_SLUGS =
     "terms-and-conditions",
     "legal-notice",
     "cookie-policy",
-
     "admin",
     "dashboard",
-
     "manage-blog",
     "manage-daily-inspiration",
     "manage-products",
@@ -3757,66 +3956,45 @@ const RESERVED_ROOT_SLUGS =
     "manage-reviews",
     "manage-orders",
     "shop-settings",
-
     "orders",
-
     "tracking",
     "cookie-consent",
     "sitemap",
     "robots",
     "404"
-
   ]);
 
 
 const GLOBAL_SLUG_TABLES = [
 
   {
-    table:
-      "affiliate_products",
-
-    label:
-      "an Affiliate Product"
+    table: "affiliate_products",
+    label: "an Affiliate Product"
   },
 
   {
-    table:
-      "products",
-
-    label:
-      "a Physical Product"
+    table: "products",
+    label: "a Physical Product"
   },
 
   {
-    table:
-      "digital_products",
-
-    label:
-      "a Digital Product"
+    table: "digital_products",
+    label: "a Digital Product"
   },
 
   {
-    table:
-      "foodstuffs",
-
-    label:
-      "an African Foodstuff"
+    table: "foodstuffs",
+    label: "an African Foodstuff"
   },
 
   {
-    table:
-      "blog_posts",
-
-    label:
-      "another Blog Post"
+    table: "blog_posts",
+    label: "another Blog Post"
   },
 
   {
-    table:
-      "daily_inspirations",
-
-    label:
-      "a Daily Inspiration post"
+    table: "daily_inspirations",
+    label: "a Daily Inspiration post"
   }
 
 ];
@@ -3827,14 +4005,10 @@ async function checkGlobalSlugAvailability(
 ) {
 
   const cleanValue =
-    cleanSlug(
-      slug
-    );
+    cleanSlug(slug);
 
 
-  if (
-    !cleanValue
-  ) {
+  if (!cleanValue) {
 
     throw new Error(
       "Please enter a valid Share Link Name."
@@ -3861,12 +4035,8 @@ async function checkGlobalSlugAvailability(
 
     let query =
       db
-        .from(
-          source.table
-        )
-        .select(
-          "id,slug"
-        )
+        .from(source.table)
+        .select("id,slug")
         .eq(
           "slug",
           cleanValue
@@ -3891,22 +4061,10 @@ async function checkGlobalSlugAvailability(
       data,
       error
     } =
-      await query
-        .limit(
-          1
-        );
+      await query.limit(1);
 
 
-    if (
-      error
-    ) {
-
-      console.error(
-        "Global slug check failed:",
-        source.table,
-        error
-      );
-
+    if (error) {
 
       throw new Error(
         "The Share Link Name could not be checked safely. Please try again."
@@ -3915,11 +4073,8 @@ async function checkGlobalSlugAvailability(
 
 
     if (
-      Array.isArray(
-        data
-      ) &&
-      data.length >
-        0
+      Array.isArray(data) &&
+      data.length > 0
     ) {
 
       throw new Error(
@@ -3934,7 +4089,7 @@ async function checkGlobalSlugAvailability(
 
 
 /* ==================================================
-   SAVE POST
+   SAVE
 ================================================== */
 
 async function savePost() {
@@ -3943,57 +4098,34 @@ async function savePost() {
 
 
   const title =
-    titleInput
-      .value
-      .trim();
-
+    titleInput.value.trim();
 
   const category =
-    categoryInput
-      .value
-      .trim();
-
+    categoryInput.value.trim();
 
   const authorName =
-    authorNameInput
-      .value
-      .trim() ||
+    authorNameInput.value.trim() ||
     "GiftedGift Empire";
-
 
   const slug =
     cleanSlug(
       slugInput.value
     );
 
-
   const excerpt =
-    excerptInput
-      .value
-      .trim();
-
+    excerptInput.value.trim();
 
   const seoTitle =
-    seoTitleInput
-      .value
-      .trim();
-
+    seoTitleInput.value.trim();
 
   const metaDescription =
-    metaDescriptionInput
-      .value
-      .trim();
-
+    metaDescriptionInput.value.trim();
 
   const youtubeUrl =
-    youtubeUrlInput
-      .value
-      .trim();
-
+    youtubeUrlInput.value.trim();
 
   const content =
     getEditorContentForSaving();
-
 
   const imageAltText =
     imageAltTextInput
@@ -4001,23 +4133,18 @@ async function savePost() {
       .trim() ||
     title;
 
-
   const promotionType =
-    promotionTypeInput
-      .value;
-
+    promotionTypeInput.value;
 
   const promotionName =
     promotionNameInput
       .value
       .trim();
 
-
   const promotionUrl =
     promotionUrlInput
       .value
       .trim();
-
 
   let promotionButtonText =
     promotionButtonTextInput
@@ -4025,15 +4152,12 @@ async function savePost() {
       .trim();
 
 
-  if (
-    !title
-  ) {
+  if (!title) {
 
     showMessage(
       "Please enter an article title.",
       "error"
     );
-
 
     titleInput.focus();
 
@@ -4041,15 +4165,12 @@ async function savePost() {
   }
 
 
-  if (
-    !category
-  ) {
+  if (!category) {
 
     showMessage(
       "Please select an article category.",
       "error"
     );
-
 
     categoryInput.focus();
 
@@ -4057,15 +4178,12 @@ async function savePost() {
   }
 
 
-  if (
-    !slug
-  ) {
+  if (!slug) {
 
     showMessage(
       "Please enter a Share Link Name.",
       "error"
     );
-
 
     slugInput.focus();
 
@@ -4073,15 +4191,12 @@ async function savePost() {
   }
 
 
-  if (
-    !excerpt
-  ) {
+  if (!excerpt) {
 
     showMessage(
       "Please enter a short excerpt.",
       "error"
     );
-
 
     excerptInput.focus();
 
@@ -4089,15 +4204,12 @@ async function savePost() {
   }
 
 
-  if (
-    !content
-  ) {
+  if (!content) {
 
     showMessage(
       "Please write the article content.",
       "error"
     );
-
 
     contentEditor.focus();
 
@@ -4117,9 +4229,6 @@ async function savePost() {
       "error"
     );
 
-
-    youtubeUrlInput.focus();
-
     return;
   }
 
@@ -4131,12 +4240,9 @@ async function savePost() {
   ) {
 
     showMessage(
-      "Please enter the Product / Advertiser Link for this promotion.",
+      "Please enter the Product / Advertiser Link.",
       "error"
     );
-
-
-    promotionUrlInput.focus();
 
     return;
   }
@@ -4149,6 +4255,7 @@ async function savePost() {
   ) {
 
     promotionButtonText =
+
       promotionType ===
         "sponsored"
 
@@ -4222,8 +4329,7 @@ async function savePost() {
 
 
     const publishedAt =
-      publishedInput
-        .checked
+      publishedInput.checked
 
         ? (
             existingPublishedAt ||
@@ -4231,10 +4337,6 @@ async function savePost() {
           )
 
         : existingPublishedAt;
-
-
-    contentInput.value =
-      content;
 
 
     const payload = {
@@ -4274,36 +4376,27 @@ async function savePost() {
         promotionType,
 
       promotion_name:
-        promotionType ===
-          "none"
+        promotionType === "none"
           ? null
-          : promotionName ||
-            null,
+          : promotionName || null,
 
       promotion_url:
-        promotionType ===
-          "none"
+        promotionType === "none"
           ? null
-          : promotionUrl ||
-            null,
+          : promotionUrl || null,
 
       promotion_button_text:
-        promotionType ===
-          "none"
+        promotionType === "none"
           ? null
-          : promotionButtonText ||
-            null,
+          : promotionButtonText || null,
 
       promotion_image_url:
-        promotionType ===
-          "none"
+        promotionType === "none"
           ? null
-          : promotionImageUrl ||
-            null,
+          : promotionImageUrl || null,
 
       published:
-        publishedInput
-          .checked,
+        publishedInput.checked,
 
       published_at:
         publishedAt,
@@ -4317,18 +4410,12 @@ async function savePost() {
     let error;
 
 
-    if (
-      editingId
-    ) {
+    if (editingId) {
 
       const result =
         await db
-          .from(
-            "blog_posts"
-          )
-          .update(
-            payload
-          )
+          .from("blog_posts")
+          .update(payload)
           .eq(
             "id",
             editingId
@@ -4342,12 +4429,8 @@ async function savePost() {
 
       const result =
         await db
-          .from(
-            "blog_posts"
-          )
-          .insert(
-            payload
-          );
+          .from("blog_posts")
+          .insert(payload);
 
 
       error =
@@ -4355,14 +4438,7 @@ async function savePost() {
     }
 
 
-    if (
-      error
-    ) {
-
-      console.error(
-        error
-      );
-
+    if (error) {
 
       if (
         error.code ===
@@ -4370,7 +4446,7 @@ async function savePost() {
       ) {
 
         throw new Error(
-          "That Share Link Name is already being used. Please choose another one."
+          "That Share Link Name is already being used."
         );
       }
 
@@ -4383,59 +4459,39 @@ async function savePost() {
 
 
     const wasEditing =
-      Boolean(
-        editingId
-      );
+      Boolean(editingId);
 
 
     showMessage(
+
       wasEditing
+
         ? "Blog post updated successfully."
+
         : "Blog post created successfully."
+
     );
 
 
     resetForm();
 
-
     await loadPosts();
 
 
-  } catch (
-    error
-  ) {
+  } catch (error) {
 
-    console.error(
-      error
-    );
-
-
-    const errorMessage =
-      error instanceof
-        Error
-
-        ? error.message
-
-        : "The blog post could not be saved.";
+    console.error(error);
 
 
     showMessage(
-      errorMessage,
+
+      error instanceof Error
+        ? error.message
+        : "The blog post could not be saved.",
+
       "error"
+
     );
-
-
-    if (
-      errorMessage
-        .toLowerCase()
-        .includes(
-          "share link"
-        )
-    ) {
-
-      slugInput.focus();
-    }
-
 
   } finally {
 
@@ -4444,8 +4500,11 @@ async function savePost() {
 
 
     saveButton.textContent =
+
       editingId
+
         ? "Update Blog Post"
+
         : "Save Blog Post";
   }
 }
@@ -4472,9 +4531,7 @@ async function loadPosts() {
     error
   } =
     await db
-      .from(
-        "blog_posts"
-      )
+      .from("blog_posts")
       .select(
         "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
       )
@@ -4487,13 +4544,9 @@ async function loadPosts() {
       );
 
 
-  if (
-    error
-  ) {
+  if (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     box.innerHTML = `
@@ -4502,23 +4555,17 @@ async function loadPosts() {
       </div>
     `;
 
-
     return;
   }
 
 
   const posts =
-    Array.isArray(
-      data
-    )
+    Array.isArray(data)
       ? data
       : [];
 
 
-  if (
-    posts.length ===
-    0
-  ) {
+  if (!posts.length) {
 
     box.innerHTML = `
       <div class="empty">
@@ -4526,13 +4573,11 @@ async function loadPosts() {
       </div>
     `;
 
-
     return;
   }
 
 
-  box.innerHTML =
-    "";
+  box.innerHTML = "";
 
 
   posts.forEach(
@@ -4563,77 +4608,12 @@ async function loadPosts() {
 
       const publicLink =
         post.slug
+
           ? SITE_URL +
             "/" +
             post.slug
+
           : "";
-
-
-      let promotionInfo =
-        "";
-
-
-      if (
-        post.promotion_type &&
-        post.promotion_type !==
-          "none"
-      ) {
-
-        let typeText =
-          "Promotion";
-
-
-        if (
-          post.promotion_type ===
-          "affiliate"
-        ) {
-
-          typeText =
-            "Affiliate Product";
-
-        } else if (
-          post.promotion_type ===
-          "sponsored"
-        ) {
-
-          typeText =
-            "Sponsored Advertisement";
-
-        } else if (
-          post.promotion_type ===
-          "own_product"
-        ) {
-
-          typeText =
-            "GiftedGift Empire Product";
-        }
-
-
-        promotionInfo = `
-
-          <div class="promotion-preview">
-
-            <strong>
-              ${escapeHTML(
-                typeText
-              )}
-            </strong>
-
-            ${
-              post.promotion_name
-                ? `
-                  <br>
-                  ${escapeHTML(
-                    post.promotion_name
-                  )}
-                `
-                : ""
-            }
-
-          </div>
-
-        `;
-      }
 
 
       card.innerHTML = `
@@ -4666,7 +4646,7 @@ async function loadPosts() {
 
         <h3>
           ${escapeHTML(
-            post.title
+            post.title || ""
           )}
         </h3>
 
@@ -4694,12 +4674,6 @@ async function loadPosts() {
             "GiftedGift Empire"
           )}
 
-          ${
-            post.youtube_url
-              ? " • YouTube video linked"
-              : ""
-          }
-
         </div>
 
 
@@ -4723,9 +4697,7 @@ async function loadPosts() {
 
             ? `
               <div class="date">
-                ${escapeHTML(
-                  date
-                )}
+                ${escapeHTML(date)}
               </div>
             `
 
@@ -4773,9 +4745,6 @@ async function loadPosts() {
         </p>
 
 
-        ${promotionInfo}
-
-
         <button
           class="edit-button"
           type="button"
@@ -4804,9 +4773,7 @@ async function loadPosts() {
           "click",
           () => {
 
-            startEditing(
-              post
-            );
+            startEditing(post);
           }
         );
 
@@ -4827,9 +4794,7 @@ async function loadPosts() {
         );
 
 
-      box.appendChild(
-        card
-      );
+      box.appendChild(card);
     }
   );
 }
@@ -4839,43 +4804,30 @@ async function loadPosts() {
    EDIT POST
 ================================================== */
 
-function startEditing(
-  post
-) {
+function startEditing(post) {
 
   editingId =
     post.id;
 
-
   existingImageUrl =
-    post.image_url ||
-    "";
-
+    post.image_url || "";
 
   existingPromotionImageUrl =
-    post.promotion_image_url ||
-    "";
-
+    post.promotion_image_url || "";
 
   existingPublishedAt =
-    post.published_at ||
-    null;
+    post.published_at || null;
 
 
   titleInput.value =
-    post.title ||
-    "";
-
+    post.title || "";
 
   categoryInput.value =
-    post.category ||
-    "";
-
+    post.category || "";
 
   authorNameInput.value =
     post.author_name ||
     "GiftedGift Empire";
-
 
   slugInput.value =
     post.slug ||
@@ -4883,40 +4835,25 @@ function startEditing(
       post.title
     );
 
-
   slugWasEdited =
     true;
 
 
-  updateSlugPreview();
-
-
   excerptInput.value =
-    post.excerpt ||
-    "";
-
+    post.excerpt || "";
 
   seoTitleInput.value =
-    post.seo_title ||
-    "";
-
+    post.seo_title || "";
 
   metaDescriptionInput.value =
-    post.meta_description ||
-    "";
-
+    post.meta_description || "";
 
   youtubeUrlInput.value =
-    post.youtube_url ||
-    "";
-
-
-  updateSeoCounters();
+    post.youtube_url || "";
 
 
   loadEditorContent(
-    post.content ||
-    ""
+    post.content || ""
   );
 
 
@@ -4930,16 +4867,11 @@ function startEditing(
     post.promotion_type ||
     "none";
 
-
   promotionNameInput.value =
-    post.promotion_name ||
-    "";
-
+    post.promotion_name || "";
 
   promotionUrlInput.value =
-    post.promotion_url ||
-    "";
-
+    post.promotion_url || "";
 
   promotionButtonTextInput.value =
     post.promotion_button_text ||
@@ -4947,16 +4879,15 @@ function startEditing(
 
 
   publishedInput.checked =
-    post.published ===
-    true;
+    post.published === true;
 
 
-  imageFileInput.value =
-    "";
+  imageFileInput.value = "";
+  promotionImageFileInput.value = "";
 
 
-  promotionImageFileInput.value =
-    "";
+  updateSlugPreview();
+  updateSeoCounters();
 
 
   showPreview(
@@ -5009,7 +4940,7 @@ function startEditing(
 
 
 /* ==================================================
-   DELETE POST
+   DELETE
 ================================================== */
 
 async function deletePost(
@@ -5017,14 +4948,10 @@ async function deletePost(
   title
 ) {
 
-  const confirmed =
-    confirm(
-      `Delete "${title}"?`
-    );
-
-
   if (
-    !confirmed
+    !confirm(
+      `Delete "${title}"?`
+    )
   ) {
 
     return;
@@ -5035,31 +4962,18 @@ async function deletePost(
     error
   } =
     await db
-      .from(
-        "blog_posts"
-      )
+      .from("blog_posts")
       .delete()
-      .eq(
-        "id",
-        id
-      );
+      .eq("id", id);
 
 
-  if (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
+  if (error) {
 
     showMessage(
       error.message ||
       "The blog post could not be deleted.",
       "error"
     );
-
 
     return;
   }
@@ -5071,8 +4985,7 @@ async function deletePost(
 
 
   if (
-    editingId ===
-    id
+    editingId === id
   ) {
 
     resetForm();
@@ -5096,9 +5009,7 @@ imageFileInput.addEventListener(
         .files?.[0];
 
 
-    if (
-      !file
-    ) {
+    if (!file) {
 
       showPreview(
         "image-preview",
@@ -5110,16 +5021,10 @@ imageFileInput.addEventListener(
     }
 
 
-    const temporaryUrl =
-      URL.createObjectURL(
-        file
-      );
-
-
     showPreview(
       "image-preview",
       "preview-image",
-      temporaryUrl
+      URL.createObjectURL(file)
     );
   }
 );
@@ -5134,9 +5039,7 @@ promotionImageFileInput.addEventListener(
         .files?.[0];
 
 
-    if (
-      !file
-    ) {
+    if (!file) {
 
       showPreview(
         "promotion-image-preview",
@@ -5148,23 +5051,17 @@ promotionImageFileInput.addEventListener(
     }
 
 
-    const temporaryUrl =
-      URL.createObjectURL(
-        file
-      );
-
-
     showPreview(
       "promotion-image-preview",
       "promotion-preview-image",
-      temporaryUrl
+      URL.createObjectURL(file)
     );
   }
 );
 
 
 /* ==================================================
-   BUTTONS
+   PAGE BUTTONS
 ================================================== */
 
 document
@@ -5188,7 +5085,7 @@ document
 
 
 /* ==================================================
-   ADMIN PROTECTION
+   ADMIN AUTH
 ================================================== */
 
 async function protectPage() {
@@ -5216,7 +5113,6 @@ async function protectPage() {
     window.location.replace(
       "admin.html"
     );
-
 
     return;
   }
@@ -5249,5 +5145,4 @@ protectPage();
 </script>
 
 </body>
-
 </html>
