@@ -67,19 +67,6 @@
       color: #123a8c;
     }
 
-    .promotion-section {
-      margin-top: 30px;
-      padding: 20px;
-      border: 1px solid #e1e1e1;
-      border-radius: 12px;
-      background: #fafafa;
-    }
-
-    .promotion-section h3 {
-      margin-top: 0;
-      color: #123a8c;
-    }
-
     .field {
       margin-bottom: 20px;
     }
@@ -111,8 +98,7 @@
     }
 
     #content {
-      min-height: 280px;
-      line-height: 1.6;
+      display: none;
     }
 
     input[type="file"] {
@@ -150,11 +136,241 @@
       color: #123a8c;
     }
 
+    .promotion-section {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #e1e1e1;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .promotion-section h3 {
+      margin-top: 0;
+      color: #123a8c;
+    }
+
     .counter {
       margin-top: 6px;
       color: #777;
       font-size: 13px;
       text-align: right;
+    }
+
+    /* ==================================================
+       VISUAL ARTICLE EDITOR
+    ================================================== */
+
+    .editor-shell {
+      border: 1px solid #cdd5df;
+      border-radius: 12px;
+      background: white;
+      overflow: hidden;
+    }
+
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 11px;
+      background: #f7f9fc;
+      border-bottom: 1px solid #dce2ea;
+    }
+
+    .editor-toolbar button,
+    .editor-toolbar select {
+      width: auto;
+      min-height: 40px;
+      margin: 0;
+      padding: 8px 11px;
+      border: 1px solid #cbd3dd;
+      border-radius: 8px;
+      background: white;
+      color: #222;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .editor-toolbar button:hover {
+      background: #edf3ff;
+      border-color: #123a8c;
+    }
+
+    .editor-color-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 6px 9px;
+      border: 1px solid #cbd3dd;
+      border-radius: 8px;
+      background: white;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    #editor-color {
+      width: 34px;
+      height: 28px;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+
+    .quick-colour {
+      min-width: 42px;
+    }
+
+    .editor-area {
+      min-height: 400px;
+      padding: 20px;
+      outline: none;
+      color: #333;
+      font-size: 18px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .editor-area:empty::before {
+      content: attr(data-placeholder);
+      color: #9298a1;
+      pointer-events: none;
+    }
+
+    .editor-area p {
+      margin: 0 0 20px;
+    }
+
+    .editor-area h2 {
+      margin: 30px 0 14px;
+      color: #123a8c;
+      font-size: 30px;
+      line-height: 1.3;
+    }
+
+    .editor-area h3 {
+      margin: 25px 0 12px;
+      color: #242424;
+      font-size: 23px;
+      line-height: 1.35;
+    }
+
+    .editor-area ol,
+    .editor-area ul {
+      padding-left: 32px;
+    }
+
+    .editor-area li {
+      margin: 8px 0;
+    }
+
+    .editor-area blockquote {
+      margin: 22px 0;
+      padding: 15px 18px;
+      border-left: 5px solid #d5a900;
+      background: #fffaf0;
+    }
+
+    .editor-area .gge-inline-cta {
+      margin: 22px 0;
+      padding: 18px;
+      border: 1px solid #ead17a;
+      border-left: 5px solid #d5a900;
+      border-radius: 12px;
+      background: #fffaf0;
+    }
+
+    .editor-area .gge-inline-cta-link {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .editor-tip {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #f7faff;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .article-preview {
+      display: none;
+      margin-top: 18px;
+      padding: 22px;
+      border: 1px dashed #aab7c8;
+      border-radius: 12px;
+      background: white;
+      color: #333;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .article-preview.open {
+      display: block;
+    }
+
+    .article-preview h2 {
+      color: #123a8c;
+      font-size: 30px;
+    }
+
+    .article-preview h3 {
+      color: #242424;
+      font-size: 23px;
+    }
+
+    .article-preview blockquote {
+      margin: 22px 0;
+      padding: 15px 18px;
+      border-left: 5px solid #d5a900;
+      background: #fffaf0;
+    }
+
+    .article-preview .gge-inline-cta {
+      margin: 22px 0;
+      padding: 18px;
+      border-left: 5px solid #d5a900;
+      background: #fffaf0;
+      border-radius: 12px;
+    }
+
+    .article-preview .gge-inline-cta-link {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* ==================================================
+       IMAGES / POSTS
+    ================================================== */
+
+    .image-preview {
+      display: none;
+      margin-top: 15px;
+      max-width: 300px;
+    }
+
+    .image-preview img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #f7f7f7;
     }
 
     .category-badge {
@@ -173,21 +389,6 @@
       font-size: 13px;
       line-height: 1.6;
       margin-bottom: 12px;
-    }
-
-    .image-preview {
-      display: none;
-      margin-top: 15px;
-      max-width: 300px;
-    }
-
-    .image-preview img {
-      width: 100%;
-      max-height: 250px;
-      object-fit: contain;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      background: #f7f7f7;
     }
 
     .publish-row {
@@ -265,7 +466,7 @@
       border: 1px solid #ddd;
       border-radius: 12px;
       padding: 18px;
-      background: #fff;
+      background: white;
     }
 
     .post-image {
@@ -364,7 +565,7 @@
       }
 
       .card {
-        padding: 20px;
+        padding: 18px;
       }
 
       .promotion-section,
@@ -375,6 +576,24 @@
       .field-row {
         grid-template-columns: 1fr;
         gap: 0;
+      }
+
+      .editor-toolbar {
+        gap: 6px;
+        padding: 8px;
+      }
+
+      .editor-toolbar button,
+      .editor-toolbar select {
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+
+      .editor-area {
+        min-height: 350px;
+        padding: 16px;
+        font-size: 17px;
       }
 
       .actions {
@@ -409,8 +628,7 @@
   </h1>
 
   <p>
-    Create articles and optionally promote products,
-    affiliate offers or advertisers.
+    Create, format and publish GiftedGift Empire articles.
   </p>
 
 </header>
@@ -472,9 +690,9 @@
           <option>Digital Resources &amp; eBooks</option>
           <option>Fashion &amp; Outfit Inspiration</option>
           <option>Children’s Fashion &amp; Kids Outfit Ideas</option>
-<option>Wedding Fashion &amp; Style Inspiration</option>
-<option>Men’s Fashion &amp; Outfit Inspiration</option>
-<option>DIY Fashion, Sewing &amp; Crafts</option>
+          <option>Wedding Fashion &amp; Style Inspiration</option>
+          <option>Men’s Fashion &amp; Outfit Inspiration</option>
+          <option>DIY Fashion, Sewing &amp; Crafts</option>
           <option>Beauty &amp; Self-Care</option>
           <option>Useful Finds for Everyday Life</option>
           <option>GiftedGift Empire Picks</option>
@@ -504,7 +722,6 @@
 
         <p class="help">
           Choose the main category that best matches this article.
-          Daily Inspiration remains a separate section of the website.
         </p>
 
       </div>
@@ -569,7 +786,7 @@
       </h3>
 
       <p class="help">
-        These fields help search engines, Pinterest and social sharing.
+        These fields help Google, Pinterest and social sharing.
         Leave SEO Title blank to use the normal Article Title.
       </p>
 
@@ -633,7 +850,6 @@
 
         <p class="help">
           Optional. Add one specific YouTube video connected to this article.
-          Your main YouTube channel remains in Website Settings.
         </p>
 
       </div>
@@ -643,31 +859,292 @@
 
     <div class="field">
 
-      <label for="content">
+      <label>
         Full Article
       </label>
 
+      <!--
+        Hidden storage field.
+        Existing database column "content" is still used.
+      -->
       <textarea
         id="content"
-        placeholder="Write the complete article here..."
+        aria-hidden="true"
+        tabindex="-1"
       ></textarea>
-      <p class="help">
-        Article formatting:
-        <br>
-        <code>## Main Heading</code>
-        = large royal-blue heading.
-        <br>
-        <code>### Subheading</code>
-        = smaller dark-charcoal subheading.
-        <br>
-        <code>**Important words**</code>
-        = bold gold text.
-        <br>
-        <code>[CTA|🎥 Watch the Full Video →|https://your-link.com]</code>
-        = a standout clickable CTA button.
-        You can change the CTA text and link to anything you want,
-        and you can add multiple CTAs inside one article.
-      </p>
+
+
+      <div class="editor-shell">
+
+        <div
+          id="editor-toolbar"
+          class="editor-toolbar"
+        >
+
+          <select
+            id="editor-block"
+            aria-label="Text type"
+          >
+
+            <option value="p">
+              Normal Text
+            </option>
+
+            <option value="h2">
+              Main Heading
+            </option>
+
+            <option value="h3">
+              Subheading
+            </option>
+
+            <option value="blockquote">
+              Quote
+            </option>
+
+          </select>
+
+
+          <select
+            id="editor-size"
+            aria-label="Text size"
+          >
+
+            <option value="">
+              Text Size
+            </option>
+
+            <option value="14px">
+              14px
+            </option>
+
+            <option value="16px">
+              16px
+            </option>
+
+            <option value="18px">
+              18px
+            </option>
+
+            <option value="20px">
+              20px
+            </option>
+
+            <option value="22px">
+              22px
+            </option>
+
+            <option value="24px">
+              24px
+            </option>
+
+            <option value="28px">
+              28px
+            </option>
+
+            <option value="32px">
+              32px
+            </option>
+
+            <option value="36px">
+              36px
+            </option>
+
+          </select>
+
+
+          <label
+            class="editor-color-control"
+            for="editor-color"
+          >
+
+            Colour
+
+            <input
+              id="editor-color"
+              type="color"
+              value="#333333"
+            >
+
+          </label>
+
+
+          <button
+            class="quick-colour"
+            type="button"
+            data-colour="#123a8c"
+            title="GiftedGift Blue"
+          >
+            Blue
+          </button>
+
+
+          <button
+            class="quick-colour"
+            type="button"
+            data-colour="#a87900"
+            title="GiftedGift Gold"
+          >
+            Gold
+          </button>
+
+
+          <button
+            class="quick-colour"
+            type="button"
+            data-colour="#333333"
+            title="Dark Charcoal"
+          >
+            Black
+          </button>
+
+
+          <button
+            type="button"
+            data-command="bold"
+            title="Bold"
+          >
+            B
+          </button>
+
+
+          <button
+            type="button"
+            data-command="italic"
+            title="Italic"
+          >
+            <em>I</em>
+          </button>
+
+
+          <button
+            type="button"
+            data-command="underline"
+            title="Underline"
+          >
+            <u>U</u>
+          </button>
+
+
+          <button
+            type="button"
+            data-command="insertOrderedList"
+          >
+            1. List
+          </button>
+
+
+          <button
+            type="button"
+            data-command="insertUnorderedList"
+          >
+            • List
+          </button>
+
+
+          <button
+            type="button"
+            data-command="justifyLeft"
+          >
+            Left
+          </button>
+
+
+          <button
+            type="button"
+            data-command="justifyCenter"
+          >
+            Centre
+          </button>
+
+
+          <button
+            type="button"
+            data-command="justifyRight"
+          >
+            Right
+          </button>
+
+
+          <button
+            id="editor-link-button"
+            type="button"
+          >
+            Link
+          </button>
+
+
+          <button
+            id="editor-cta-button"
+            type="button"
+          >
+            CTA
+          </button>
+
+
+          <button
+            id="editor-clear-button"
+            type="button"
+          >
+            Clear Style
+          </button>
+
+
+          <button
+            type="button"
+            data-command="undo"
+          >
+            Undo
+          </button>
+
+
+          <button
+            type="button"
+            data-command="redo"
+          >
+            Redo
+          </button>
+
+
+          <button
+            id="editor-preview-button"
+            type="button"
+          >
+            Preview
+          </button>
+
+        </div>
+
+
+        <div
+          id="content-editor"
+          class="editor-area"
+          contenteditable="true"
+          role="textbox"
+          aria-multiline="true"
+          data-placeholder="Write or paste your complete article here..."
+        ></div>
+
+      </div>
+
+
+      <div class="editor-tip">
+
+        Highlight any text and choose its
+        <strong>heading, size, colour, bold, italic, list or alignment.</strong>
+
+        You can also paste an article that already contains
+        <strong>## headings, ### subheadings or numbered lists</strong>.
+        The editor will convert them for you.
+
+      </div>
+
+
+      <div
+        id="content-preview"
+        class="article-preview"
+      ></div>
+
     </div>
 
 
@@ -686,6 +1163,32 @@
       <p class="help">
         Upload the main article image from your phone.
       </p>
+
+
+      <div
+        class="field"
+        style="margin-top:16px;"
+      >
+
+        <label for="image-alt-text">
+          Image Title / Alt Text
+        </label>
+
+        <input
+          id="image-alt-text"
+          type="text"
+          maxlength="180"
+          placeholder="Example: 50 Small Business Ideas You Can Start From Home in 2026"
+        >
+
+        <p class="help">
+          Describe the image clearly for Google,
+          Pinterest and accessibility.
+          If left blank, the Article Title will be used automatically.
+        </p>
+
+      </div>
+
 
       <div
         id="image-preview"
@@ -769,11 +1272,6 @@
           placeholder="https://giftedgiftempire.com/product-name"
         >
 
-        <p class="help">
-          You can paste your GiftedGift Empire clean product link,
-          affiliate link or advertiser website.
-        </p>
-
       </div>
 
 
@@ -789,11 +1287,6 @@
           placeholder="Shop This Product"
         >
 
-        <p class="help">
-          Examples: Shop This Product, View Product,
-          Learn More, Visit Advertiser.
-        </p>
-
       </div>
 
 
@@ -808,12 +1301,6 @@
           type="file"
           accept="image/*"
         >
-
-        <p class="help">
-          Optional. Upload a separate product or advertiser image
-          from your phone.
-        </p>
-
 
         <div
           id="promotion-image-preview"
@@ -916,6 +1403,10 @@ const SITE_URL =
   "https://giftedgiftempire.com";
 
 
+const RICH_CONTENT_MARKER =
+  "<!--GGE_RICH_HTML-->";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -942,6 +1433,14 @@ let existingPublishedAt =
 let slugWasEdited =
   false;
 
+
+let savedEditorRange =
+  null;
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
 
 const titleInput =
   document.getElementById(
@@ -997,6 +1496,24 @@ const contentInput =
   );
 
 
+const contentEditor =
+  document.getElementById(
+    "content-editor"
+  );
+
+
+const contentPreview =
+  document.getElementById(
+    "content-preview"
+  );
+
+
+const imageAltTextInput =
+  document.getElementById(
+    "image-alt-text"
+  );
+
+
 const imageFileInput =
   document.getElementById(
     "image-file"
@@ -1039,244 +1556,9 @@ const publishedInput =
   );
 
 
-function cleanSlug(
-  value
-) {
-
-  return String(
-    value || ""
-  )
-    .normalize(
-      "NFD"
-    )
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-    .replace(
-      /×/g,
-      "x"
-    )
-    .replace(
-      /&/g,
-      " and "
-    )
-    .toLowerCase()
-    .trim()
-    .replace(
-      /[^a-z0-9]+/g,
-      "-"
-    )
-    .replace(
-      /^-+|-+$/g,
-      ""
-    );
-}
-
-
-function suggestShortSlug(
-  value
-) {
-
-  const fullSlug =
-    cleanSlug(
-      value
-    );
-
-
-  if (!fullSlug) {
-    return "";
-  }
-
-
-  return fullSlug
-    .split("-")
-    .slice(
-      0,
-      8
-    )
-    .join("-");
-}
-
-
-function updateSlugPreview() {
-
-  const slug =
-    cleanSlug(
-      slugInput.value
-    );
-
-
-  document
-    .getElementById(
-      "slug-preview"
-    )
-    .textContent =
-      slug ||
-      "article-name";
-}
-
-
-titleInput
-  .addEventListener(
-    "input",
-    function() {
-
-      if (
-        slugWasEdited
-      ) {
-        return;
-      }
-
-
-      slugInput.value =
-        suggestShortSlug(
-          this.value
-        );
-
-
-      updateSlugPreview();
-    }
-  );
-
-
-slugInput
-  .addEventListener(
-    "input",
-    function() {
-
-      slugWasEdited =
-        true;
-
-
-      this.value =
-        cleanSlug(
-          this.value
-        );
-
-
-      updateSlugPreview();
-    }
-  );
-
-
-function updateSeoCounters() {
-
-  document.getElementById(
-    "seo-title-counter"
-  ).textContent =
-    seoTitleInput.value.length +
-    " / 70";
-
-
-  document.getElementById(
-    "meta-description-counter"
-  ).textContent =
-    metaDescriptionInput.value.length +
-    " / 180";
-}
-
-
-seoTitleInput.addEventListener(
-  "input",
-  updateSeoCounters
-);
-
-
-metaDescriptionInput.addEventListener(
-  "input",
-  updateSeoCounters
-);
-
-
-function isValidYouTubeUrl(
-  value
-) {
-
-  if (!value) {
-    return true;
-  }
-
-
-  try {
-
-    const url =
-      new URL(
-        value
-      );
-
-
-    const host =
-      url.hostname
-        .toLowerCase()
-        .replace(
-          /^www\./,
-          ""
-        );
-
-
-    return (
-      url.protocol === "https:" &&
-      (
-        host === "youtube.com" ||
-        host.endsWith(".youtube.com") ||
-        host === "youtu.be"
-      )
-    );
-
-  } catch {
-
-    return false;
-  }
-}
-
-
-promotionTypeInput
-  .addEventListener(
-    "change",
-    function() {
-
-      if (
-        promotionButtonTextInput
-          .value
-          .trim()
-      ) {
-        return;
-      }
-
-
-      if (
-        this.value ===
-        "sponsored"
-      ) {
-
-        promotionButtonTextInput.value =
-          "Visit Advertiser";
-
-      } else if (
-        this.value ===
-        "affiliate"
-      ) {
-
-        promotionButtonTextInput.value =
-          "Shop This Product";
-
-      } else if (
-        this.value ===
-        "own_product"
-      ) {
-
-        promotionButtonTextInput.value =
-          "View Product";
-
-      } else {
-
-        promotionButtonTextInput.value =
-          "";
-      }
-    }
-  );
-
+/* ==================================================
+   HELPERS
+================================================== */
 
 function escapeHTML(
   value
@@ -1293,6 +1575,21 @@ function escapeHTML(
 
 
   return div.innerHTML;
+}
+
+
+function cleanText(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
 }
 
 
@@ -1339,6 +1636,1756 @@ function clearMessage() {
 }
 
 
+/* ==================================================
+   RICH HTML SAFETY
+================================================== */
+
+function sanitizeRichHTML(
+  html
+) {
+
+  const template =
+    document.createElement(
+      "template"
+    );
+
+
+  template.innerHTML =
+    String(
+      html || ""
+    );
+
+
+  const allowedTags =
+    new Set([
+      "P",
+      "DIV",
+      "BR",
+      "H2",
+      "H3",
+      "STRONG",
+      "B",
+      "EM",
+      "I",
+      "U",
+      "UL",
+      "OL",
+      "LI",
+      "A",
+      "SPAN",
+      "BLOCKQUOTE"
+    ]);
+
+
+  const allowedStyles =
+    new Set([
+      "color",
+      "font-size",
+      "font-weight",
+      "font-style",
+      "text-decoration",
+      "text-align"
+    ]);
+
+
+  Array.from(
+    template.content
+      .querySelectorAll("*")
+  )
+    .forEach(
+      element => {
+
+        if (
+          !allowedTags.has(
+            element.tagName
+          )
+        ) {
+
+          element.replaceWith(
+            ...element.childNodes
+          );
+
+          return;
+        }
+
+
+        Array.from(
+          element.attributes
+        )
+          .forEach(
+            attribute => {
+
+              const name =
+                attribute.name
+                  .toLowerCase();
+
+
+              if (
+                name === "style"
+              ) {
+
+                const safeStyles =
+                  [];
+
+
+                for (
+                  const property of
+                  element.style
+                ) {
+
+                  if (
+                    !allowedStyles.has(
+                      property
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  const value =
+                    element.style
+                      .getPropertyValue(
+                        property
+                      )
+                      .trim();
+
+
+                  if (
+                    property ===
+                    "font-size" &&
+                    !/^\d{1,2}px$/.test(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  if (
+                    property ===
+                    "text-align" &&
+                    ![
+                      "left",
+                      "center",
+                      "right",
+                      "justify"
+                    ].includes(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  safeStyles.push(
+                    property +
+                    ":" +
+                    value
+                  );
+                }
+
+
+                if (
+                  safeStyles.length
+                ) {
+
+                  element.setAttribute(
+                    "style",
+                    safeStyles.join(";")
+                  );
+
+                } else {
+
+                  element.removeAttribute(
+                    "style"
+                  );
+                }
+
+
+                return;
+              }
+
+
+              if (
+                element.tagName ===
+                  "A" &&
+                [
+                  "href",
+                  "target",
+                  "rel",
+                  "class"
+                ].includes(
+                  name
+                )
+              ) {
+
+                return;
+              }
+
+
+              if (
+                element.tagName ===
+                  "OL" &&
+                name ===
+                  "start"
+              ) {
+
+                return;
+              }
+
+
+              if (
+                name ===
+                "class"
+              ) {
+
+                const allowedClass =
+                  element.classList
+                    .contains(
+                      "gge-inline-cta"
+                    ) ||
+                  element.classList
+                    .contains(
+                      "gge-inline-cta-link"
+                    );
+
+
+                if (
+                  allowedClass
+                ) {
+
+                  return;
+                }
+              }
+
+
+              element.removeAttribute(
+                attribute.name
+              );
+            }
+          );
+
+
+        if (
+          element.tagName ===
+          "A"
+        ) {
+
+          const href =
+            element.getAttribute(
+              "href"
+            ) || "";
+
+
+          if (
+            href &&
+            !/^https?:\/\//i.test(
+              href
+            ) &&
+            !href.startsWith(
+              "/"
+            )
+          ) {
+
+            element.removeAttribute(
+              "href"
+            );
+          }
+
+
+          element.setAttribute(
+            "rel",
+            "noopener noreferrer"
+          );
+        }
+
+      }
+    );
+
+
+  return template.innerHTML;
+}
+
+
+/* ==================================================
+   OLD ARTICLE → VISUAL EDITOR
+================================================== */
+
+function legacyTextToHTML(
+  text
+) {
+
+  const lines =
+    String(
+      text || ""
+    )
+      .replace(
+        /\r\n/g,
+        "\n"
+      )
+      .replace(
+        /\r/g,
+        "\n"
+      )
+      .split(
+        "\n"
+      );
+
+
+  const html =
+    [];
+
+
+  let listType =
+    "";
+
+
+  let listStart =
+    1;
+
+
+  let listItems =
+    [];
+
+
+  function inline(
+    value
+  ) {
+
+    return escapeHTML(
+      value
+    )
+      .replace(
+        /\*\*([^*]+)\*\*/g,
+        "<strong>$1</strong>"
+      );
+  }
+
+
+  function flushList() {
+
+    if (
+      !listType ||
+      !listItems.length
+    ) {
+
+      listType =
+        "";
+
+      listItems =
+        [];
+
+      listStart =
+        1;
+
+      return;
+    }
+
+
+    const openTag =
+      listType ===
+        "ol"
+
+        ? (
+            '<ol start="' +
+            listStart +
+            '">'
+          )
+
+        : "<ul>";
+
+
+    html.push(
+      openTag +
+
+      listItems
+        .map(
+          item =>
+            "<li>" +
+            inline(
+              item
+            ) +
+            "</li>"
+        )
+        .join("") +
+
+      "</" +
+      listType +
+      ">"
+    );
+
+
+    listType =
+      "";
+
+
+    listItems =
+      [];
+
+
+    listStart =
+      1;
+  }
+
+
+  lines.forEach(
+    rawLine => {
+
+      const line =
+        rawLine.trim();
+
+
+      if (
+        !line
+      ) {
+
+        flushList();
+
+        return;
+      }
+
+
+      const h3 =
+        line.match(
+          /^###\s+(.+)/
+        );
+
+
+      if (
+        h3
+      ) {
+
+        flushList();
+
+
+        html.push(
+          "<h3>" +
+          inline(
+            h3[1]
+          ) +
+          "</h3>"
+        );
+
+
+        return;
+      }
+
+
+      const h2 =
+        line.match(
+          /^##\s+(.+)/
+        );
+
+
+      if (
+        h2
+      ) {
+
+        flushList();
+
+
+        html.push(
+          "<h2>" +
+          inline(
+            h2[1]
+          ) +
+          "</h2>"
+        );
+
+
+        return;
+      }
+
+
+      const numbered =
+        line.match(
+          /^(\d+)[.)]\s+(.+)/
+        );
+
+
+      if (
+        numbered
+      ) {
+
+        if (
+          listType &&
+          listType !==
+            "ol"
+        ) {
+
+          flushList();
+        }
+
+
+        if (
+          listType !==
+          "ol"
+        ) {
+
+          listType =
+            "ol";
+
+
+          listStart =
+            Number(
+              numbered[1]
+            ) || 1;
+        }
+
+
+        listItems.push(
+          numbered[2]
+        );
+
+
+        return;
+      }
+
+
+      const bullet =
+        line.match(
+          /^(?:[-*•])\s+(.+)/
+        );
+
+
+      if (
+        bullet
+      ) {
+
+        if (
+          listType &&
+          listType !==
+            "ul"
+        ) {
+
+          flushList();
+        }
+
+
+        listType =
+          "ul";
+
+
+        listItems.push(
+          bullet[1]
+        );
+
+
+        return;
+      }
+
+
+      flushList();
+
+
+      const cta =
+        line.match(
+          /^\[CTA\|(.+?)\|(.+)\]$/i
+        );
+
+
+      if (
+        cta
+      ) {
+
+        const label =
+          cta[1]
+            .trim();
+
+
+        const href =
+          cta[2]
+            .trim();
+
+
+        if (
+          /^https?:\/\//i.test(
+            href
+          )
+        ) {
+
+          html.push(
+            '<p class="gge-inline-cta">' +
+            '<a class="gge-inline-cta-link" ' +
+            'href="' +
+            escapeHTML(
+              href
+            ) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            inline(
+              label
+            ) +
+            "</a></p>"
+          );
+        }
+
+
+        return;
+      }
+
+
+      html.push(
+        "<p>" +
+        inline(
+          line
+        ) +
+        "</p>"
+      );
+    }
+  );
+
+
+  flushList();
+
+
+  return html.join("");
+}
+
+
+/* ==================================================
+   EDITOR
+================================================== */
+
+function editorContainsSelection() {
+
+  const selection =
+    window.getSelection();
+
+
+  if (
+    !selection ||
+    selection.rangeCount ===
+      0
+  ) {
+
+    return false;
+  }
+
+
+  const node =
+    selection.anchorNode;
+
+
+  return Boolean(
+    node &&
+    (
+      node ===
+        contentEditor ||
+      contentEditor.contains(
+        node.nodeType ===
+          Node.TEXT_NODE
+          ? node.parentNode
+          : node
+      )
+    )
+  );
+}
+
+
+function saveEditorSelection() {
+
+  const selection =
+    window.getSelection();
+
+
+  if (
+    !selection ||
+    selection.rangeCount ===
+      0 ||
+    !editorContainsSelection()
+  ) {
+
+    return;
+  }
+
+
+  savedEditorRange =
+    selection
+      .getRangeAt(
+        0
+      )
+      .cloneRange();
+}
+
+
+function restoreEditorSelection() {
+
+  contentEditor.focus();
+
+
+  if (
+    !savedEditorRange
+  ) {
+
+    return;
+  }
+
+
+  const selection =
+    window.getSelection();
+
+
+  selection.removeAllRanges();
+
+
+  selection.addRange(
+    savedEditorRange
+  );
+}
+
+
+document.addEventListener(
+  "selectionchange",
+  () => {
+
+    if (
+      editorContainsSelection()
+    ) {
+
+      saveEditorSelection();
+    }
+  }
+);
+
+
+function normalizeEditorMarkup() {
+
+  contentEditor
+    .querySelectorAll(
+      "font"
+    )
+    .forEach(
+      font => {
+
+        const span =
+          document.createElement(
+            "span"
+          );
+
+
+        const colour =
+          font.getAttribute(
+            "color"
+          );
+
+
+        if (
+          colour
+        ) {
+
+          span.style.color =
+            colour;
+        }
+
+
+        while (
+          font.firstChild
+        ) {
+
+          span.appendChild(
+            font.firstChild
+          );
+        }
+
+
+        font.replaceWith(
+          span
+        );
+      }
+    );
+}
+
+
+function runEditorCommand(
+  command,
+  value = null
+) {
+
+  restoreEditorSelection();
+
+
+  document.execCommand(
+    command,
+    false,
+    value
+  );
+
+
+  normalizeEditorMarkup();
+
+
+  saveEditorSelection();
+}
+
+
+document
+  .querySelectorAll(
+    "[data-command]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "mousedown",
+        event => {
+
+          event.preventDefault();
+        }
+      );
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          runEditorCommand(
+            button.dataset
+              .command
+          );
+        }
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-block"
+  )
+  .addEventListener(
+    "change",
+    function () {
+
+      restoreEditorSelection();
+
+
+      const block =
+        this.value ||
+        "p";
+
+
+      document.execCommand(
+        "formatBlock",
+        false,
+        block
+      );
+
+
+      this.value =
+        "p";
+
+
+      saveEditorSelection();
+    }
+  );
+
+
+function applyTextColour(
+  colour
+) {
+
+  restoreEditorSelection();
+
+
+  document.execCommand(
+    "foreColor",
+    false,
+    colour
+  );
+
+
+  normalizeEditorMarkup();
+
+
+  saveEditorSelection();
+}
+
+
+document
+  .getElementById(
+    "editor-color"
+  )
+  .addEventListener(
+    "change",
+    function () {
+
+      applyTextColour(
+        this.value
+      );
+    }
+  );
+
+
+document
+  .querySelectorAll(
+    "[data-colour]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "mousedown",
+        event => {
+
+          event.preventDefault();
+        }
+      );
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          applyTextColour(
+            button.dataset
+              .colour
+          );
+        }
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-size"
+  )
+  .addEventListener(
+    "change",
+    function () {
+
+      const size =
+        this.value;
+
+
+      if (
+        !size
+      ) {
+
+        return;
+      }
+
+
+      restoreEditorSelection();
+
+
+      document.execCommand(
+        "fontSize",
+        false,
+        "7"
+      );
+
+
+      contentEditor
+        .querySelectorAll(
+          'font[size="7"]'
+        )
+        .forEach(
+          font => {
+
+            const span =
+              document.createElement(
+                "span"
+              );
+
+
+            span.style.fontSize =
+              size;
+
+
+            const colour =
+              font.getAttribute(
+                "color"
+              );
+
+
+            if (
+              colour
+            ) {
+
+              span.style.color =
+                colour;
+            }
+
+
+            while (
+              font.firstChild
+            ) {
+
+              span.appendChild(
+                font.firstChild
+              );
+            }
+
+
+            font.replaceWith(
+              span
+            );
+          }
+        );
+
+
+      this.value =
+        "";
+
+
+      saveEditorSelection();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-link-button"
+  )
+  .addEventListener(
+    "mousedown",
+    event => {
+
+      event.preventDefault();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-link-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const url =
+        prompt(
+          "Paste the link beginning with https://"
+        );
+
+
+      if (
+        !url
+      ) {
+
+        return;
+      }
+
+
+      const cleanUrl =
+        url.trim();
+
+
+      if (
+        !/^https?:\/\//i.test(
+          cleanUrl
+        )
+      ) {
+
+        showMessage(
+          "Please use a link beginning with https://",
+          "error"
+        );
+
+        return;
+      }
+
+
+      restoreEditorSelection();
+
+
+      const selection =
+        window.getSelection();
+
+
+      if (
+        selection &&
+        selection.rangeCount &&
+        selection
+          .getRangeAt(
+            0
+          )
+          .collapsed
+      ) {
+
+        const text =
+          prompt(
+            "What words should appear for this link?",
+            "Open Link"
+          );
+
+
+        if (
+          !text
+        ) {
+
+          return;
+        }
+
+
+        document.execCommand(
+          "insertHTML",
+          false,
+          '<a href="' +
+          escapeHTML(
+            cleanUrl
+          ) +
+          '" target="_blank" rel="noopener noreferrer">' +
+          escapeHTML(
+            text
+          ) +
+          "</a>"
+        );
+
+      } else {
+
+        document.execCommand(
+          "createLink",
+          false,
+          cleanUrl
+        );
+      }
+
+
+      contentEditor
+        .querySelectorAll(
+          'a[href="' +
+          CSS.escape(
+            cleanUrl
+          ) +
+          '"]'
+        )
+        .forEach(
+          link => {
+
+            link.target =
+              "_blank";
+
+
+            link.rel =
+              "noopener noreferrer";
+          }
+        );
+
+
+      saveEditorSelection();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-cta-button"
+  )
+  .addEventListener(
+    "mousedown",
+    event => {
+
+      event.preventDefault();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-cta-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const label =
+        prompt(
+          "CTA button words",
+          "Learn More"
+        );
+
+
+      if (
+        !label
+      ) {
+
+        return;
+      }
+
+
+      const url =
+        prompt(
+          "CTA link beginning with https://"
+        );
+
+
+      if (
+        !url
+      ) {
+
+        return;
+      }
+
+
+      const cleanUrl =
+        url.trim();
+
+
+      if (
+        !/^https?:\/\//i.test(
+          cleanUrl
+        )
+      ) {
+
+        showMessage(
+          "Please enter a valid https:// link for the CTA.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      restoreEditorSelection();
+
+
+      document.execCommand(
+        "insertHTML",
+        false,
+
+        '<p class="gge-inline-cta">' +
+
+        '<a class="gge-inline-cta-link" ' +
+        'href="' +
+        escapeHTML(
+          cleanUrl
+        ) +
+        '" target="_blank" rel="noopener noreferrer">' +
+
+        escapeHTML(
+          label.trim()
+        ) +
+
+        "</a>" +
+
+        "</p><p><br></p>"
+      );
+
+
+      saveEditorSelection();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-clear-button"
+  )
+  .addEventListener(
+    "mousedown",
+    event => {
+
+      event.preventDefault();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-clear-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      restoreEditorSelection();
+
+
+      document.execCommand(
+        "removeFormat",
+        false,
+        null
+      );
+
+
+      saveEditorSelection();
+    }
+  );
+
+
+document
+  .getElementById(
+    "editor-preview-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const clean =
+        sanitizeRichHTML(
+          contentEditor.innerHTML
+        );
+
+
+      contentPreview.innerHTML =
+        clean;
+
+
+      contentPreview.classList.toggle(
+        "open"
+      );
+
+
+      document
+        .getElementById(
+          "editor-preview-button"
+        )
+        .textContent =
+          contentPreview
+            .classList
+            .contains(
+              "open"
+            )
+              ? "Hide Preview"
+              : "Preview";
+    }
+  );
+
+
+/*
+  Paste plain text safely.
+
+  Old article formatting such as:
+  ## Main Heading
+  ### Subheading
+  1. Numbered item
+
+  is automatically converted.
+*/
+
+contentEditor.addEventListener(
+  "paste",
+  event => {
+
+    event.preventDefault();
+
+
+    const text =
+      (
+        event.clipboardData ||
+        window.clipboardData
+      )
+        .getData(
+          "text/plain"
+        );
+
+
+    if (
+      !text
+    ) {
+
+      return;
+    }
+
+
+    const html =
+      legacyTextToHTML(
+        text
+      );
+
+
+    document.execCommand(
+      "insertHTML",
+      false,
+      html
+    );
+  }
+);
+
+
+function loadEditorContent(
+  value
+) {
+
+  const raw =
+    String(
+      value || ""
+    );
+
+
+  if (
+    raw.startsWith(
+      RICH_CONTENT_MARKER
+    )
+  ) {
+
+    contentEditor.innerHTML =
+      sanitizeRichHTML(
+        raw.slice(
+          RICH_CONTENT_MARKER.length
+        )
+      );
+
+  } else {
+
+    contentEditor.innerHTML =
+      legacyTextToHTML(
+        raw
+      );
+  }
+
+
+  contentInput.value =
+    raw;
+
+
+  savedEditorRange =
+    null;
+}
+
+
+function getEditorContentForSaving() {
+
+  normalizeEditorMarkup();
+
+
+  const clean =
+    sanitizeRichHTML(
+      contentEditor.innerHTML
+    );
+
+
+  const plainText =
+    cleanText(
+      contentEditor.innerText
+    );
+
+
+  if (
+    !plainText
+  ) {
+
+    return "";
+  }
+
+
+  return (
+    RICH_CONTENT_MARKER +
+    clean
+  );
+}
+
+
+/* ==================================================
+   IMAGE ALT TEXT
+================================================== */
+
+function updateCoverPreviewAlt() {
+
+  const image =
+    document.getElementById(
+      "preview-image"
+    );
+
+
+  const text =
+    imageAltTextInput
+      .value
+      .trim() ||
+    titleInput
+      .value
+      .trim() ||
+    "GiftedGift Empire blog image";
+
+
+  image.alt =
+    text;
+
+
+  image.title =
+    text;
+}
+
+
+imageAltTextInput.addEventListener(
+  "input",
+  updateCoverPreviewAlt
+);
+
+
+/* ==================================================
+   SLUG
+================================================== */
+
+function cleanSlug(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
+    .toLowerCase()
+    .trim()
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
+}
+
+
+function suggestShortSlug(
+  value
+) {
+
+  const fullSlug =
+    cleanSlug(
+      value
+    );
+
+
+  if (
+    !fullSlug
+  ) {
+
+    return "";
+  }
+
+
+  return fullSlug
+    .split("-")
+    .slice(
+      0,
+      8
+    )
+    .join("-");
+}
+
+
+function updateSlugPreview() {
+
+  const slug =
+    cleanSlug(
+      slugInput.value
+    );
+
+
+  document
+    .getElementById(
+      "slug-preview"
+    )
+    .textContent =
+      slug ||
+      "article-name";
+}
+
+
+titleInput.addEventListener(
+  "input",
+  function () {
+
+    if (
+      !slugWasEdited
+    ) {
+
+      slugInput.value =
+        suggestShortSlug(
+          this.value
+        );
+
+
+      updateSlugPreview();
+    }
+
+
+    updateCoverPreviewAlt();
+  }
+);
+
+
+slugInput.addEventListener(
+  "input",
+  function () {
+
+    slugWasEdited =
+      true;
+
+
+    this.value =
+      cleanSlug(
+        this.value
+      );
+
+
+    updateSlugPreview();
+  }
+);
+
+
+/* ==================================================
+   SEO
+================================================== */
+
+function updateSeoCounters() {
+
+  document
+    .getElementById(
+      "seo-title-counter"
+    )
+    .textContent =
+      seoTitleInput
+        .value
+        .length +
+      " / 70";
+
+
+  document
+    .getElementById(
+      "meta-description-counter"
+    )
+    .textContent =
+      metaDescriptionInput
+        .value
+        .length +
+      " / 180";
+}
+
+
+seoTitleInput.addEventListener(
+  "input",
+  updateSeoCounters
+);
+
+
+metaDescriptionInput.addEventListener(
+  "input",
+  updateSeoCounters
+);
+
+
+/* ==================================================
+   YOUTUBE
+================================================== */
+
+function isValidYouTubeUrl(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return true;
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        value
+      );
+
+
+    const host =
+      url.hostname
+        .toLowerCase()
+        .replace(
+          /^www\./,
+          ""
+        );
+
+
+    return (
+      url.protocol ===
+        "https:" &&
+      (
+        host ===
+          "youtube.com" ||
+        host.endsWith(
+          ".youtube.com"
+        ) ||
+        host ===
+          "youtu.be"
+      )
+    );
+
+  } catch {
+
+    return false;
+  }
+}
+
+
+/* ==================================================
+   PROMOTION DEFAULTS
+================================================== */
+
+promotionTypeInput.addEventListener(
+  "change",
+  function () {
+
+    if (
+      promotionButtonTextInput
+        .value
+        .trim()
+    ) {
+
+      return;
+    }
+
+
+    if (
+      this.value ===
+      "sponsored"
+    ) {
+
+      promotionButtonTextInput.value =
+        "Visit Advertiser";
+
+    } else if (
+      this.value ===
+      "affiliate"
+    ) {
+
+      promotionButtonTextInput.value =
+        "Shop This Product";
+
+    } else if (
+      this.value ===
+      "own_product"
+    ) {
+
+      promotionButtonTextInput.value =
+        "View Product";
+
+    } else {
+
+      promotionButtonTextInput.value =
+        "";
+    }
+  }
+);
+
+
+/* ==================================================
+   IMAGE PREVIEW
+================================================== */
+
 function showPreview(
   wrapperId,
   imageId,
@@ -1368,6 +3415,15 @@ function showPreview(
     wrapper.style.display =
       "block";
 
+
+    if (
+      imageId ===
+      "preview-image"
+    ) {
+
+      updateCoverPreviewAlt();
+    }
+
   } else {
 
     image.removeAttribute(
@@ -1380,6 +3436,10 @@ function showPreview(
   }
 }
 
+
+/* ==================================================
+   RESET
+================================================== */
 
 function resetForm() {
 
@@ -1401,6 +3461,10 @@ function resetForm() {
 
   slugWasEdited =
     false;
+
+
+  savedEditorRange =
+    null;
 
 
   titleInput.value =
@@ -1442,6 +3506,31 @@ function resetForm() {
 
 
   contentInput.value =
+    "";
+
+
+  contentEditor.innerHTML =
+    "";
+
+
+  contentPreview.innerHTML =
+    "";
+
+
+  contentPreview.classList.remove(
+    "open"
+  );
+
+
+  document
+    .getElementById(
+      "editor-preview-button"
+    )
+    .textContent =
+      "Preview";
+
+
+  imageAltTextInput.value =
     "";
 
 
@@ -1487,31 +3576,43 @@ function resetForm() {
   );
 
 
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Add Blog Post";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Add Blog Post";
 
 
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Save Blog Post";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Save Blog Post";
 
 
-  document.getElementById(
-    "cancel-button"
-  ).style.display =
-    "none";
+  document
+    .getElementById(
+      "cancel-button"
+    )
+    .style
+    .display =
+      "none";
 }
 
+
+/* ==================================================
+   IMAGE UPLOAD
+================================================== */
 
 function safeFileName(
   name
 ) {
 
   return String(
-    name || "blog-image"
+    name ||
+    "blog-image"
   )
     .toLowerCase()
     .replace(
@@ -1521,12 +3622,98 @@ function safeFileName(
 }
 
 
-/*
-  =====================================================
-  GLOBAL CLEAN-URL COLLISION PROTECTION
-  =====================================================
-*/
+async function uploadImage(
+  file,
+  folder,
+  currentUrl
+) {
 
+  if (
+    !file
+  ) {
+
+    return currentUrl ||
+      null;
+  }
+
+
+  if (
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    throw new Error(
+      "Please choose an image file."
+    );
+  }
+
+
+  const path =
+    folder +
+    "/" +
+    Date.now() +
+    "-" +
+    safeFileName(
+      file.name
+    );
+
+
+  const {
+    error
+  } =
+    await db
+      .storage
+      .from(
+        "product-images"
+      )
+      .upload(
+        path,
+        file,
+        {
+          cacheControl:
+            "3600",
+
+          upsert:
+            false
+        }
+      );
+
+
+  if (
+    error
+  ) {
+
+    throw new Error(
+      error.message ||
+      "The image could not be uploaded."
+    );
+  }
+
+
+  const {
+    data
+  } =
+    db
+      .storage
+      .from(
+        "product-images"
+      )
+      .getPublicUrl(
+        path
+      );
+
+
+  return (
+    data?.publicUrl ||
+    null
+  );
+}
+
+
+/* ==================================================
+   GLOBAL CLEAN URL PROTECTION
+================================================== */
 
 const RESERVED_ROOT_SLUGS =
   new Set([
@@ -1731,7 +3918,8 @@ async function checkGlobalSlugAvailability(
       Array.isArray(
         data
       ) &&
-      data.length > 0
+      data.length >
+        0
     ) {
 
       throw new Error(
@@ -1745,98 +3933,9 @@ async function checkGlobalSlugAvailability(
 }
 
 
-async function uploadImage(
-  file,
-  folder,
-  currentUrl
-) {
-
-  if (
-    !file
-  ) {
-
-    return currentUrl ||
-      null;
-  }
-
-
-  if (
-    !file.type.startsWith(
-      "image/"
-    )
-  ) {
-
-    throw new Error(
-      "Please choose an image file."
-    );
-  }
-
-
-  const path =
-    folder +
-    "/" +
-    Date.now() +
-    "-" +
-    safeFileName(
-      file.name
-    );
-
-
-  const {
-    error
-  } =
-    await db
-      .storage
-      .from(
-        "product-images"
-      )
-      .upload(
-        path,
-        file,
-        {
-          cacheControl:
-            "3600",
-
-          upsert:
-            false
-        }
-      );
-
-
-  if (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
-
-    throw new Error(
-      "The image could not be uploaded."
-    );
-  }
-
-
-  const {
-    data
-  } =
-    db
-      .storage
-      .from(
-        "product-images"
-      )
-      .getPublicUrl(
-        path
-      );
-
-
-  return (
-    data?.publicUrl ||
-    null
-  );
-}
-
+/* ==================================================
+   SAVE POST
+================================================== */
 
 async function savePost() {
 
@@ -1844,15 +3943,21 @@ async function savePost() {
 
 
   const title =
-    titleInput.value.trim();
+    titleInput
+      .value
+      .trim();
 
 
   const category =
-    categoryInput.value.trim();
+    categoryInput
+      .value
+      .trim();
 
 
   const authorName =
-    authorNameInput.value.trim() ||
+    authorNameInput
+      .value
+      .trim() ||
     "GiftedGift Empire";
 
 
@@ -1863,27 +3968,43 @@ async function savePost() {
 
 
   const excerpt =
-    excerptInput.value.trim();
+    excerptInput
+      .value
+      .trim();
 
 
   const seoTitle =
-    seoTitleInput.value.trim();
+    seoTitleInput
+      .value
+      .trim();
 
 
   const metaDescription =
-    metaDescriptionInput.value.trim();
+    metaDescriptionInput
+      .value
+      .trim();
 
 
   const youtubeUrl =
-    youtubeUrlInput.value.trim();
+    youtubeUrlInput
+      .value
+      .trim();
 
 
   const content =
-    contentInput.value.trim();
+    getEditorContentForSaving();
+
+
+  const imageAltText =
+    imageAltTextInput
+      .value
+      .trim() ||
+    title;
 
 
   const promotionType =
-    promotionTypeInput.value;
+    promotionTypeInput
+      .value;
 
 
   const promotionName =
@@ -1913,6 +4034,7 @@ async function savePost() {
       "error"
     );
 
+
     titleInput.focus();
 
     return;
@@ -1927,6 +4049,7 @@ async function savePost() {
       "Please select an article category.",
       "error"
     );
+
 
     categoryInput.focus();
 
@@ -1943,6 +4066,7 @@ async function savePost() {
       "error"
     );
 
+
     slugInput.focus();
 
     return;
@@ -1957,6 +4081,7 @@ async function savePost() {
       "Please enter a short excerpt.",
       "error"
     );
+
 
     excerptInput.focus();
 
@@ -1973,7 +4098,8 @@ async function savePost() {
       "error"
     );
 
-    contentInput.focus();
+
+    contentEditor.focus();
 
     return;
   }
@@ -1990,6 +4116,7 @@ async function savePost() {
       "Please enter a valid YouTube URL beginning with https://",
       "error"
     );
+
 
     youtubeUrlInput.focus();
 
@@ -2008,6 +4135,7 @@ async function savePost() {
       "error"
     );
 
+
     promotionUrlInput.focus();
 
     return;
@@ -2023,10 +4151,14 @@ async function savePost() {
     promotionButtonText =
       promotionType ===
         "sponsored"
+
         ? "Visit Advertiser"
+
         : promotionType ===
             "affiliate"
+
           ? "Shop This Product"
+
           : "View Product";
   }
 
@@ -2085,16 +4217,24 @@ async function savePost() {
 
 
     const now =
-      new Date().toISOString();
+      new Date()
+        .toISOString();
 
 
     const publishedAt =
-      publishedInput.checked
+      publishedInput
+        .checked
+
         ? (
             existingPublishedAt ||
             now
           )
+
         : existingPublishedAt;
+
+
+    contentInput.value =
+      content;
 
 
     const payload = {
@@ -2127,39 +4267,43 @@ async function savePost() {
       image_url:
         imageUrl,
 
+      image_alt_text:
+        imageAltText,
+
       promotion_type:
         promotionType,
 
       promotion_name:
         promotionType ===
-        "none"
+          "none"
           ? null
           : promotionName ||
             null,
 
       promotion_url:
         promotionType ===
-        "none"
+          "none"
           ? null
           : promotionUrl ||
             null,
 
       promotion_button_text:
         promotionType ===
-        "none"
+          "none"
           ? null
           : promotionButtonText ||
             null,
 
       promotion_image_url:
         promotionType ===
-        "none"
+          "none"
           ? null
           : promotionImageUrl ||
             null,
 
       published:
-        publishedInput.checked,
+        publishedInput
+          .checked,
 
       published_at:
         publishedAt,
@@ -2257,7 +4401,9 @@ async function savePost() {
     await loadPosts();
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     console.error(
       error
@@ -2265,8 +4411,11 @@ async function savePost() {
 
 
     const errorMessage =
-      error instanceof Error
+      error instanceof
+        Error
+
         ? error.message
+
         : "The blog post could not be saved.";
 
 
@@ -2302,6 +4451,10 @@ async function savePost() {
 }
 
 
+/* ==================================================
+   LOAD POSTS
+================================================== */
+
 async function loadPosts() {
 
   const box =
@@ -2323,7 +4476,7 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-        "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
+        "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
       )
       .order(
         "created_at",
@@ -2363,7 +4516,8 @@ async function loadPosts() {
 
 
   if (
-    posts.length === 0
+    posts.length ===
+    0
   ) {
 
     box.innerHTML = `
@@ -2476,17 +4630,6 @@ async function loadPosts() {
                 : ""
             }
 
-            ${
-              post.promotion_url
-                ? `
-                  <br>
-                  ${escapeHTML(
-                    post.promotion_url
-                  )}
-                `
-                : ""
-            }
-
           </div>
 
         `;
@@ -2505,7 +4648,14 @@ async function loadPosts() {
                   post.image_url
                 )}"
                 alt="${escapeHTML(
-                  post.title
+                  post.image_alt_text ||
+                  post.title ||
+                  "GiftedGift Empire article"
+                )}"
+                title="${escapeHTML(
+                  post.image_alt_text ||
+                  post.title ||
+                  "GiftedGift Empire article"
                 )}"
               >
             `
@@ -2599,6 +4749,22 @@ async function loadPosts() {
         }
 
 
+        ${
+          post.image_alt_text
+
+            ? `
+              <div class="post-meta">
+                Image Alt Text:
+                ${escapeHTML(
+                  post.image_alt_text
+                )}
+              </div>
+            `
+
+            : ""
+        }
+
+
         <p>
           ${escapeHTML(
             post.excerpt ||
@@ -2668,6 +4834,10 @@ async function loadPosts() {
   );
 }
 
+
+/* ==================================================
+   EDIT POST
+================================================== */
 
 function startEditing(
   post
@@ -2744,8 +4914,15 @@ function startEditing(
   updateSeoCounters();
 
 
-  contentInput.value =
+  loadEditorContent(
     post.content ||
+    ""
+  );
+
+
+  imageAltTextInput.value =
+    post.image_alt_text ||
+    post.title ||
     "";
 
 
@@ -2796,22 +4973,32 @@ function startEditing(
   );
 
 
-  document.getElementById(
-    "form-title"
-  ).textContent =
-    "Edit Blog Post";
+  updateCoverPreviewAlt();
 
 
-  document.getElementById(
-    "save-button"
-  ).textContent =
-    "Update Blog Post";
+  document
+    .getElementById(
+      "form-title"
+    )
+    .textContent =
+      "Edit Blog Post";
 
 
-  document.getElementById(
-    "cancel-button"
-  ).style.display =
-    "inline-block";
+  document
+    .getElementById(
+      "save-button"
+    )
+    .textContent =
+      "Update Blog Post";
+
+
+  document
+    .getElementById(
+      "cancel-button"
+    )
+    .style
+    .display =
+      "inline-block";
 
 
   window.scrollTo({
@@ -2820,6 +5007,10 @@ function startEditing(
   });
 }
 
+
+/* ==================================================
+   DELETE POST
+================================================== */
 
 async function deletePost(
   id,
@@ -2880,7 +5071,8 @@ async function deletePost(
 
 
   if (
-    editingId === id
+    editingId ===
+    id
   ) {
 
     resetForm();
@@ -2890,6 +5082,114 @@ async function deletePost(
   await loadPosts();
 }
 
+
+/* ==================================================
+   IMAGE INPUTS
+================================================== */
+
+imageFileInput.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      imageFileInput
+        .files?.[0];
+
+
+    if (
+      !file
+    ) {
+
+      showPreview(
+        "image-preview",
+        "preview-image",
+        existingImageUrl
+      );
+
+      return;
+    }
+
+
+    const temporaryUrl =
+      URL.createObjectURL(
+        file
+      );
+
+
+    showPreview(
+      "image-preview",
+      "preview-image",
+      temporaryUrl
+    );
+  }
+);
+
+
+promotionImageFileInput.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      promotionImageFileInput
+        .files?.[0];
+
+
+    if (
+      !file
+    ) {
+
+      showPreview(
+        "promotion-image-preview",
+        "promotion-preview-image",
+        existingPromotionImageUrl
+      );
+
+      return;
+    }
+
+
+    const temporaryUrl =
+      URL.createObjectURL(
+        file
+      );
+
+
+    showPreview(
+      "promotion-image-preview",
+      "promotion-preview-image",
+      temporaryUrl
+    );
+  }
+);
+
+
+/* ==================================================
+   BUTTONS
+================================================== */
+
+document
+  .getElementById(
+    "save-button"
+  )
+  .addEventListener(
+    "click",
+    savePost
+  );
+
+
+document
+  .getElementById(
+    "cancel-button"
+  )
+  .addEventListener(
+    "click",
+    resetForm
+  );
+
+
+/* ==================================================
+   ADMIN PROTECTION
+================================================== */
 
 async function protectPage() {
 
@@ -2922,114 +5222,26 @@ async function protectPage() {
   }
 
 
-  document.getElementById(
-    "loading"
-  ).style.display =
-    "none";
+  document
+    .getElementById(
+      "loading"
+    )
+    .style
+    .display =
+      "none";
 
 
-  document.getElementById(
-    "admin-page"
-  ).style.display =
-    "block";
+  document
+    .getElementById(
+      "admin-page"
+    )
+    .style
+    .display =
+      "block";
 
 
   await loadPosts();
 }
-
-
-imageFileInput
-  .addEventListener(
-    "change",
-    () => {
-
-      const file =
-        imageFileInput
-          .files?.[0];
-
-
-      if (
-        !file
-      ) {
-
-        showPreview(
-          "image-preview",
-          "preview-image",
-          existingImageUrl
-        );
-
-        return;
-      }
-
-
-      const temporaryUrl =
-        URL.createObjectURL(
-          file
-        );
-
-
-      showPreview(
-        "image-preview",
-        "preview-image",
-        temporaryUrl
-      );
-    }
-  );
-
-
-promotionImageFileInput
-  .addEventListener(
-    "change",
-    () => {
-
-      const file =
-        promotionImageFileInput
-          .files?.[0];
-
-
-      if (
-        !file
-      ) {
-
-        showPreview(
-          "promotion-image-preview",
-          "promotion-preview-image",
-          existingPromotionImageUrl
-        );
-
-        return;
-      }
-
-
-      const temporaryUrl =
-        URL.createObjectURL(
-          file
-        );
-
-
-      showPreview(
-        "promotion-image-preview",
-        "promotion-preview-image",
-        temporaryUrl
-      );
-    }
-  );
-
-
-document.getElementById(
-  "save-button"
-).addEventListener(
-  "click",
-  savePost
-);
-
-
-document.getElementById(
-  "cancel-button"
-).addEventListener(
-  "click",
-  resetForm
-);
 
 
 protectPage();
