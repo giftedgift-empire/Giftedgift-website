@@ -63,7 +63,7 @@
 
 
   <!-- =====================================================
-       FACEBOOK / WHATSAPP / OPEN GRAPH
+       OPEN GRAPH
   ====================================================== -->
 
   <meta
@@ -103,7 +103,7 @@
 
 
   <!-- =====================================================
-       TWITTER / X
+       X / TWITTER
   ====================================================== -->
 
   <meta
@@ -336,7 +336,7 @@
 
 
     /* =====================================================
-       HERO / INTRO
+       HERO
     ====================================================== */
 
     .page {
@@ -791,6 +791,23 @@
 
 
     /* =====================================================
+       TURNSTILE
+    ====================================================== */
+
+    .turnstile-wrap {
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      min-height: 65px;
+
+      margin-top: 22px;
+    }
+
+
+    /* =====================================================
        BUTTON
     ====================================================== */
 
@@ -1139,6 +1156,13 @@
         width: 44px;
 
         height: 44px;
+      }
+
+
+      .turnstile-wrap {
+        justify-content: flex-start;
+
+        overflow-x: auto;
       }
 
     }
@@ -1551,6 +1575,19 @@
       </div>
 
 
+      <!-- CLOUDFLARE TURNSTILE -->
+
+      <div class="turnstile-wrap">
+
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAFKglqlEic20q9Ci"
+          data-theme="auto"
+        ></div>
+
+      </div>
+
+
       <!-- SUBMIT -->
 
       <button
@@ -1620,6 +1657,8 @@
       by our authentication provider.
       GiftedGift Empire does not store
       your plain-text password.
+      Automated submissions are protected
+      with Cloudflare Turnstile.
     </div>
 
 
@@ -1709,6 +1748,13 @@
 
 <script
   src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
 ></script>
 
 
@@ -1911,7 +1957,7 @@ function normalizeEmail(
 
 /*
 =====================================================
-FRIENDLY SIGNUP ERRORS
+FRIENDLY ERRORS
 =====================================================
 */
 
@@ -1973,6 +2019,22 @@ function friendlySignupError(
 
     return (
       "Please check your email address and try again."
+    );
+
+  }
+
+
+  if (
+    lower.includes(
+      "security"
+    ) ||
+    lower.includes(
+      "turnstile"
+    )
+  ) {
+
+    return (
+      "Security verification failed. Please complete the security check and try again."
     );
 
   }
@@ -2075,6 +2137,14 @@ document
             "agreement"
           )
           .checked;
+
+
+      const turnstileToken =
+        document
+          .querySelector(
+            '[name="cf-turnstile-response"]'
+          )
+          ?.value || "";
 
 
       const button =
@@ -2223,6 +2293,26 @@ document
 
       /*
       =============================================
+      TURNSTILE
+      =============================================
+      */
+
+      if (
+        !turnstileToken
+      ) {
+
+        showMessage(
+          "Please complete the security check."
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+      =============================================
       DISABLE BUTTON
       =============================================
       */
@@ -2240,64 +2330,70 @@ document
 
         /*
         =============================================
-        CREATE AUTH ACCOUNT
-
-        Keep application_message inside
-        user metadata because the existing
-        affiliate-profile creation process
-        uses it.
+        SEND TO SECURE EDGE FUNCTION
         =============================================
         */
 
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .auth
-            .signUp({
+        const response =
+          await fetch(
+            SUPABASE_URL +
+            "/functions/v1/affiliate-register-submit",
+            {
 
-              email:
-                email,
+              method:
+                "POST",
 
-              password:
-                password,
+              headers: {
 
-              options: {
+                "Content-Type":
+                  "application/json",
 
-                data: {
+              },
 
-                  full_name:
-                    fullName,
+              body:
+                JSON.stringify(
+                  {
 
-                  account_type:
-                    "affiliate",
+                    fullName:
+                      fullName,
 
-                  application_message:
-                    applicationMessage
+                    email:
+                      email,
 
-                }
+                    password:
+                      password,
 
-              }
+                    applicationMessage:
+                      applicationMessage,
 
-            });
+                    agreement:
+                      agreement,
+
+                    turnstileToken:
+                      turnstileToken,
+
+                  }
+                ),
+
+            }
+          );
+
+
+        const result =
+          await response
+            .json()
+            .catch(
+              () => ({})
+            );
 
 
         if (
-          error
-        ) {
-
-          throw error;
-
-        }
-
-
-        if (
-          !data ||
-          !data.user
+          !response.ok ||
+          result.success !== true
         ) {
 
           throw new Error(
+            result.error ||
             "Your affiliate account could not be created."
           );
 
@@ -2326,25 +2422,20 @@ document
             "block";
 
 
-        /*
-        =============================================
-        DO NOT LEAVE NEW AFFILIATE
-        SIGNED IN ON PUBLIC PAGE
-        =============================================
-        */
+        window.scrollTo({
 
-        if (
-          data.session
-        ) {
+          top:
+            0,
 
-          await supabaseClient
-            .auth
-            .signOut();
+          behavior:
+            "smooth"
 
-        }
+        });
 
 
-      } catch (
+      }
+
+      catch (
         error
       ) {
 
@@ -2360,6 +2451,15 @@ document
             error
           )
         );
+
+
+        if (
+          window.turnstile
+        ) {
+
+          window.turnstile.reset();
+
+        }
 
 
         button.disabled =
