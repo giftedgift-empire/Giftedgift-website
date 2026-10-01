@@ -32,6 +32,10 @@
     "/functions/v1/newsletter-subscribe";
 
 
+  const RICH_CONTENT_MARKER =
+    "<!--GGE_RICH_HTML-->";
+
+
   if (
     !window.supabase
   ) {
@@ -51,6 +55,10 @@
     );
 
 
+
+  /* ==================================================
+     BASIC HELPERS
+  ================================================== */
 
   function escapeHTML(
     value
@@ -84,6 +92,65 @@
         " "
       )
       .trim();
+  }
+
+
+
+  function plainTextFromContent(
+    value
+  ) {
+
+    let text =
+      String(
+        value ||
+        ""
+      );
+
+
+    if (
+      text.startsWith(
+        RICH_CONTENT_MARKER
+      )
+    ) {
+
+      text =
+        text.slice(
+          RICH_CONTENT_MARKER.length
+        );
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.innerHTML =
+        text;
+
+
+      return cleanText(
+        div.textContent ||
+        ""
+      );
+    }
+
+
+    return cleanText(
+      text
+        .replace(
+          /^#{2,3}\s+/gm,
+          ""
+        )
+        .replace(
+          /\*\*/g,
+          ""
+        )
+        .replace(
+          /^\[CTA\|(.+?)\|.+\]$/gim,
+          "$1"
+        )
+    );
   }
 
 
@@ -255,6 +322,10 @@
 
 
 
+  /* ==================================================
+     STYLES
+  ================================================== */
+
   function injectStyles() {
 
     if (
@@ -361,6 +432,17 @@
       }
 
 
+      .gge-article-content blockquote {
+        margin: 26px 0;
+        padding: 17px 20px;
+        border-left: 5px solid #d5a900;
+        border-radius: 8px;
+        background: #fffaf0;
+        color: #444;
+        line-height: 1.75;
+      }
+
+
       .gge-inline-cta {
         margin: 26px 0;
         padding: 18px;
@@ -377,36 +459,21 @@
       }
 
 
-      .gge-inline-cta a {
+      .gge-inline-cta a,
+      .gge-inline-cta-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         max-width: 100%;
-
-        padding:
-          12px
-          18px;
-
+        padding: 12px 18px;
         border-radius: 9px;
-
-        background:
-          #123a8c;
-
-        color:
-          #fff;
-
-        text-decoration:
-          none;
-
-        font-size:
-          16px;
-
-        font-weight:
-          800;
-
-        line-height:
-          1.35;
+        background: #123a8c;
+        color: #fff !important;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.35;
 
         transition:
           transform .15s ease,
@@ -415,7 +482,8 @@
       }
 
 
-      .gge-inline-cta a:hover {
+      .gge-inline-cta a:hover,
+      .gge-inline-cta-link:hover {
         background: #0d2d70;
 
         transform:
@@ -477,28 +545,13 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-
-        margin-top:
-          17px;
-
-        padding:
-          12px
-          18px;
-
-        border-radius:
-          9px;
-
-        background:
-          #c90000;
-
-        color:
-          #fff;
-
-        text-decoration:
-          none;
-
-        font-weight:
-          800;
+        margin-top: 17px;
+        padding: 12px 18px;
+        border-radius: 9px;
+        background: #c90000;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 800;
       }
 
 
@@ -511,16 +564,9 @@
 
       .gge-newsletter-grid {
         display: grid;
-
-        grid-template-columns:
-          1fr
-          1fr;
-
-        gap:
-          14px;
-
-        margin-top:
-          18px;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 18px;
       }
 
 
@@ -539,44 +585,21 @@
       .gge-newsletter-card
       input[type="email"] {
         width: 100%;
-
-        padding:
-          12px
-          13px;
-
-        border:
-          1px solid
-          #cfd7e3;
-
-        border-radius:
-          8px;
-
-        background:
-          #fff;
-
-        font:
-          inherit;
+        padding: 12px 13px;
+        border: 1px solid #cfd7e3;
+        border-radius: 8px;
+        background: #fff;
+        font: inherit;
       }
 
 
       .gge-newsletter-consent {
-        display:
-          flex !important;
-
-        align-items:
-          flex-start;
-
-        gap:
-          9px;
-
-        margin-top:
-          15px !important;
-
-        font-weight:
-          400 !important;
-
-        line-height:
-          1.55;
+        display: flex !important;
+        align-items: flex-start;
+        gap: 9px;
+        margin-top: 15px !important;
+        font-weight: 400 !important;
+        line-height: 1.55;
       }
 
 
@@ -587,49 +610,24 @@
 
 
       .gge-newsletter-honeypot {
-        position:
-          absolute !important;
-
-        left:
-          -9999px !important;
-
-        width:
-          1px !important;
-
-        height:
-          1px !important;
-
-        overflow:
-          hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
       }
 
 
       .gge-newsletter-button {
         margin-top: 16px;
-
-        padding:
-          12px
-          20px;
-
+        padding: 12px 20px;
         border: 0;
-
-        border-radius:
-          9px;
-
-        background:
-          #f2bd16;
-
-        color:
-          #111;
-
-        font-weight:
-          800;
-
-        font-size:
-          16px;
-
-        cursor:
-          pointer;
+        border-radius: 9px;
+        background: #f2bd16;
+        color: #111;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
       }
 
 
@@ -641,19 +639,10 @@
 
       .gge-newsletter-message {
         display: none;
-
-        margin-top:
-          14px;
-
-        padding:
-          11px
-          12px;
-
-        border-radius:
-          8px;
-
-        line-height:
-          1.5;
+        margin-top: 14px;
+        padding: 11px 12px;
+        border-radius: 8px;
+        line-height: 1.5;
       }
 
 
@@ -661,10 +650,7 @@
         display: block;
         background: #e8f7ec;
         color: #17652d;
-
-        border:
-          1px solid
-          #b8dfc0;
+        border: 1px solid #b8dfc0;
       }
 
 
@@ -672,10 +658,7 @@
         display: block;
         background: #ffe8e8;
         color: #951d1d;
-
-        border:
-          1px solid
-          #efbbbb;
+        border: 1px solid #efbbbb;
       }
 
 
@@ -696,11 +679,8 @@
             )
           );
 
-        gap:
-          17px;
-
-        margin-top:
-          20px;
+        gap: 17px;
+        margin-top: 20px;
       }
 
 
@@ -709,19 +689,10 @@
         display: flex;
         flex-direction: column;
         min-width: 0;
-
-        border:
-          1px solid
-          #e5e7eb;
-
-        border-radius:
-          12px;
-
-        overflow:
-          hidden;
-
-        background:
-          #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
       }
 
 
@@ -735,30 +706,14 @@
 
       .gge-card-image-placeholder {
         height: 160px;
-
-        display:
-          flex;
-
-        align-items:
-          center;
-
-        justify-content:
-          center;
-
-        padding:
-          18px;
-
-        background:
-          #f2f3f5;
-
-        color:
-          #7b8088;
-
-        font-weight:
-          700;
-
-        text-align:
-          center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background: #f2f3f5;
+        color: #7b8088;
+        font-weight: 700;
+        text-align: center;
       }
 
 
@@ -789,68 +744,32 @@
 
 
       .gge-card-text {
-        margin:
-          9px
-          0
-          0 !important;
-
-        color:
-          #666 !important;
-
-        font-size:
-          14px;
-
-        line-height:
-          1.55 !important;
+        margin: 9px 0 0 !important;
+        color: #666 !important;
+        font-size: 14px;
+        line-height: 1.55 !important;
       }
 
 
       .gge-card-link {
-        display:
-          inline-flex;
-
-        align-items:
-          center;
-
-        justify-content:
-          center;
-
-        align-self:
-          flex-start;
-
-        margin-top:
-          auto;
-
-        padding:
-          10px
-          13px;
-
-        border-radius:
-          8px;
-
-        background:
-          #123a8c;
-
-        color:
-          #fff;
-
-        text-decoration:
-          none;
-
-        font-size:
-          14px;
-
-        font-weight:
-          800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 10px 13px;
+        border-radius: 8px;
+        background: #123a8c;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 800;
       }
 
 
       .gge-ad-slot {
         display: none;
-
-        margin:
-          30px
-          0;
+        margin: 30px 0;
       }
 
 
@@ -861,9 +780,7 @@
 
         .gge-card-grid,
         .gge-newsletter-grid {
-
-          grid-template-columns:
-            1fr;
+          grid-template-columns: 1fr;
         }
 
 
@@ -873,17 +790,23 @@
         }
 
 
-        .gge-article-content h2 {
+        /*
+          Do not force heading size when the new editor
+          has saved a custom inline size.
+        */
+
+        .gge-article-content h2:not([style]) {
           font-size: 26px;
         }
 
 
-        .gge-article-content h3 {
+        .gge-article-content h3:not([style]) {
           font-size: 21px;
         }
 
 
-        .gge-inline-cta a {
+        .gge-inline-cta a,
+        .gge-inline-cta-link {
           width: 100%;
           text-align: center;
         }
@@ -899,6 +822,10 @@
   }
 
 
+
+  /* ==================================================
+     OLD ARTICLE FORMATTING
+  ================================================== */
 
   function inlineFormat(
     text
@@ -969,7 +896,7 @@
     const rel =
       external
         ? ' rel="noopener noreferrer"'
-        : "";
+        : ' rel="noopener"';
 
 
     return (
@@ -998,6 +925,494 @@
 
 
 
+  /* ==================================================
+     NEW VISUAL EDITOR HTML SAFETY
+  ================================================== */
+
+  function sanitizeRichHTML(
+    html
+  ) {
+
+    const template =
+      document.createElement(
+        "template"
+      );
+
+
+    template.innerHTML =
+      String(
+        html ||
+        ""
+      );
+
+
+    const allowedTags =
+      new Set([
+        "P",
+        "DIV",
+        "BR",
+        "H2",
+        "H3",
+        "STRONG",
+        "B",
+        "EM",
+        "I",
+        "U",
+        "UL",
+        "OL",
+        "LI",
+        "A",
+        "SPAN",
+        "BLOCKQUOTE"
+      ]);
+
+
+    const dangerousTags =
+      new Set([
+        "SCRIPT",
+        "STYLE",
+        "IFRAME",
+        "OBJECT",
+        "EMBED",
+        "FORM",
+        "INPUT",
+        "BUTTON",
+        "SVG",
+        "MATH",
+        "META",
+        "LINK"
+      ]);
+
+
+    const allowedStyles =
+      new Set([
+        "color",
+        "font-size",
+        "font-weight",
+        "font-style",
+        "text-decoration",
+        "text-align"
+      ]);
+
+
+    const elements =
+      Array.from(
+        template.content
+          .querySelectorAll(
+            "*"
+          )
+      );
+
+
+    elements.forEach(
+      element => {
+
+        if (
+          dangerousTags.has(
+            element.tagName
+          )
+        ) {
+
+          element.remove();
+
+          return;
+        }
+
+
+        if (
+          !allowedTags.has(
+            element.tagName
+          )
+        ) {
+
+          element.replaceWith(
+            ...element.childNodes
+          );
+
+          return;
+        }
+
+
+        Array.from(
+          element.attributes
+        )
+          .forEach(
+            attribute => {
+
+              const name =
+                attribute.name
+                  .toLowerCase();
+
+
+              /*
+                SAFE INLINE STYLES
+              */
+
+              if (
+                name ===
+                "style"
+              ) {
+
+                const safeStyles =
+                  [];
+
+
+                for (
+                  const property of
+                  element.style
+                ) {
+
+                  if (
+                    !allowedStyles.has(
+                      property
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  const value =
+                    element.style
+                      .getPropertyValue(
+                        property
+                      )
+                      .trim();
+
+
+                  if (
+                    property ===
+                    "font-size"
+                  ) {
+
+                    const match =
+                      value.match(
+                        /^(\d{1,2})px$/
+                      );
+
+
+                    if (
+                      !match
+                    ) {
+
+                      continue;
+                    }
+
+
+                    const size =
+                      Number(
+                        match[1]
+                      );
+
+
+                    if (
+                      size < 10 ||
+                      size > 72
+                    ) {
+
+                      continue;
+                    }
+                  }
+
+
+                  if (
+                    property ===
+                    "text-align" &&
+                    ![
+                      "left",
+                      "center",
+                      "right",
+                      "justify"
+                    ].includes(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  if (
+                    property ===
+                    "font-style" &&
+                    ![
+                      "normal",
+                      "italic"
+                    ].includes(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  if (
+                    property ===
+                    "font-weight" &&
+                    !(
+                      value ===
+                        "normal" ||
+                      value ===
+                        "bold" ||
+                      /^[1-9]00$/.test(
+                        value
+                      )
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  safeStyles.push(
+                    property +
+                    ":" +
+                    value
+                  );
+                }
+
+
+                if (
+                  safeStyles.length
+                ) {
+
+                  element.setAttribute(
+                    "style",
+                    safeStyles.join(
+                      ";"
+                    )
+                  );
+
+                } else {
+
+                  element.removeAttribute(
+                    "style"
+                  );
+                }
+
+
+                return;
+              }
+
+
+              /*
+                LINKS
+              */
+
+              if (
+                element.tagName ===
+                  "A" &&
+                [
+                  "href",
+                  "target",
+                  "rel"
+                ].includes(
+                  name
+                )
+              ) {
+
+                return;
+              }
+
+
+              /*
+                CTA LINK CLASS
+              */
+
+              if (
+                element.tagName ===
+                  "A" &&
+                name ===
+                  "class" &&
+                element.classList
+                  .contains(
+                    "gge-inline-cta-link"
+                  )
+              ) {
+
+                return;
+              }
+
+
+              /*
+                CTA WRAPPER CLASS
+              */
+
+              if (
+                (
+                  element.tagName ===
+                    "P" ||
+                  element.tagName ===
+                    "DIV"
+                ) &&
+                name ===
+                  "class" &&
+                element.classList
+                  .contains(
+                    "gge-inline-cta"
+                  )
+              ) {
+
+                return;
+              }
+
+
+              /*
+                NUMBERED LIST START
+              */
+
+              if (
+                element.tagName ===
+                  "OL" &&
+                name ===
+                  "start"
+              ) {
+
+                const start =
+                  Number(
+                    attribute.value
+                  );
+
+
+                if (
+                  Number.isInteger(
+                    start
+                  ) &&
+                  start > 0
+                ) {
+
+                  return;
+                }
+              }
+
+
+              element.removeAttribute(
+                attribute.name
+              );
+            }
+          );
+
+
+        /*
+          VALIDATE LINKS
+        */
+
+        if (
+          element.tagName ===
+          "A"
+        ) {
+
+          const href =
+            element.getAttribute(
+              "href"
+            ) ||
+            "";
+
+
+          const safeLink =
+            safeURL(
+              href
+            );
+
+
+          if (
+            !safeLink
+          ) {
+
+            element.removeAttribute(
+              "href"
+            );
+
+
+            element.removeAttribute(
+              "target"
+            );
+
+
+            element.removeAttribute(
+              "rel"
+            );
+
+
+            return;
+          }
+
+
+          element.setAttribute(
+            "href",
+            safeLink
+          );
+
+
+          try {
+
+            const external =
+              new URL(
+                safeLink
+              ).origin !==
+              new URL(
+                SITE_URL
+              ).origin;
+
+
+            if (
+              external
+            ) {
+
+              element.setAttribute(
+                "target",
+                "_blank"
+              );
+
+
+              element.setAttribute(
+                "rel",
+                "noopener noreferrer"
+              );
+
+            } else {
+
+              element.removeAttribute(
+                "target"
+              );
+
+
+              element.setAttribute(
+                "rel",
+                "noopener"
+              );
+            }
+
+          } catch (
+            error
+          ) {
+
+            element.removeAttribute(
+              "target"
+            );
+
+
+            element.setAttribute(
+              "rel",
+              "noopener"
+            );
+          }
+        }
+
+      }
+    );
+
+
+    return template.innerHTML;
+  }
+
+
+
+  /* ==================================================
+     ARTICLE CONTENT RENDERER
+  ================================================== */
+
   function renderArticleContent(
     text
   ) {
@@ -1016,11 +1431,60 @@
     }
 
 
-    const lines =
+    const rawText =
       String(
         text ||
         ""
+      );
+
+
+    content.classList.add(
+      "gge-article-content"
+    );
+
+
+    content.style.whiteSpace =
+      "normal";
+
+
+    /*
+      ==================================================
+      NEW VISUAL EDITOR ARTICLES
+      ==================================================
+    */
+
+    if (
+      rawText.startsWith(
+        RICH_CONTENT_MARKER
       )
+    ) {
+
+      const savedHTML =
+        rawText.slice(
+          RICH_CONTENT_MARKER.length
+        );
+
+
+      content.innerHTML =
+        sanitizeRichHTML(
+          savedHTML
+        );
+
+
+      return;
+    }
+
+
+    /*
+      ==================================================
+      OLD ARTICLES
+
+      This keeps your previous articles compatible.
+      ==================================================
+    */
+
+    const lines =
+      rawText
         .replace(
           /\r\n/g,
           "\n"
@@ -1113,11 +1577,14 @@
 
       const openingTag =
 
-        listType === "ol"
+        listType ===
+          "ol"
 
-          ? '<ol start="' +
-            listStart +
-            '">'
+          ? (
+              '<ol start="' +
+              listStart +
+              '">'
+            )
 
           : "<ul>";
 
@@ -1142,8 +1609,11 @@
           ) +
 
         (
-          listType === "ol"
+          listType ===
+            "ol"
+
             ? "</ol>"
+
             : "</ul>"
         )
 
@@ -1183,6 +1653,10 @@
         }
 
 
+        /*
+          CTA
+        */
+
         const cta =
           line.match(
             /^\[CTA\|(.+?)\|(.+)\]$/i
@@ -1219,6 +1693,10 @@
         }
 
 
+        /*
+          SUBHEADING
+        */
+
         const h3 =
           line.match(
             /^###\s+(.+)/
@@ -1237,9 +1715,11 @@
           html.push(
 
             "<h3>" +
+
             inlineFormat(
               h3[1]
             ) +
+
             "</h3>"
 
           );
@@ -1248,6 +1728,10 @@
           return;
         }
 
+
+        /*
+          MAIN HEADING
+        */
 
         const h2 =
           line.match(
@@ -1267,9 +1751,11 @@
           html.push(
 
             "<h2>" +
+
             inlineFormat(
               h2[1]
             ) +
+
             "</h2>"
 
           );
@@ -1278,6 +1764,10 @@
           return;
         }
 
+
+        /*
+          BULLET LIST
+        */
 
         const bullet =
           line.match(
@@ -1315,6 +1805,23 @@
         }
 
 
+        /*
+          NUMBERED LIST
+
+          Important:
+          Every new old-style numbered block remembers
+          the real number written by the author.
+
+          Therefore:
+          1.
+          paragraph
+          2.
+          paragraph
+          3.
+
+          renders as 1, 2, 3 instead of 1, 1, 1.
+        */
+
         const numbered =
           line.match(
             /^(\d+)[.)]\s+(.+)/
@@ -1331,7 +1838,8 @@
           const currentNumber =
             Number(
               numbered[1]
-            ) || 1;
+            ) ||
+            1;
 
 
           if (
@@ -1367,6 +1875,16 @@
         }
 
 
+        /*
+          NORMAL PARAGRAPH
+
+          If a numbered item came immediately before
+          this paragraph, close that list.
+
+          The next numbered item can then use
+          its own real starting number.
+        */
+
         if (
           listType
         ) {
@@ -1388,15 +1906,6 @@
     flushList();
 
 
-    content.classList.add(
-      "gge-article-content"
-    );
-
-
-    content.style.whiteSpace =
-      "normal";
-
-
     content.innerHTML =
       html.join(
         ""
@@ -1404,6 +1913,50 @@
   }
 
 
+
+  /* ==================================================
+     IMAGE ALT / TITLE
+  ================================================== */
+
+  function applyCoverImageText(
+    post
+  ) {
+
+    const cover =
+      document.getElementById(
+        "article-cover"
+      );
+
+
+    if (
+      !cover
+    ) {
+
+      return;
+    }
+
+
+    const text =
+      cleanText(
+        post.image_alt_text ||
+        post.title ||
+        "GiftedGift Empire article"
+      );
+
+
+    cover.alt =
+      text;
+
+
+    cover.title =
+      text;
+  }
+
+
+
+  /* ==================================================
+     ARTICLE META
+  ================================================== */
 
   function addArticleMeta(
     post
@@ -1598,6 +2151,10 @@
 
 
 
+  /* ==================================================
+     FUTURE AD SLOTS
+  ================================================== */
+
   function createAdSlot(
     id,
     placement
@@ -1711,6 +2268,10 @@
 
 
 
+  /* ==================================================
+     YOUTUBE
+  ================================================== */
+
   function addYouTubeCard(
     post
   ) {
@@ -1803,6 +2364,10 @@
   }
 
 
+
+  /* ==================================================
+     NEWSLETTER
+  ================================================== */
 
   function addNewsletterCard() {
 
@@ -2151,8 +2716,11 @@
 
           showMessage(
 
-            error instanceof Error
+            error instanceof
+              Error
+
               ? error.message
+
               : "We could not complete your subscription. Please try again.",
 
             "error"
@@ -2174,6 +2742,10 @@
   }
 
 
+
+  /* ==================================================
+     RELATED ITEM MATCHING
+  ================================================== */
 
   function tokenize(
     value
@@ -2337,6 +2909,10 @@
 
 
 
+  /* ==================================================
+     RELATED ARTICLES
+  ================================================== */
+
   async function loadRelatedArticles(
     post
   ) {
@@ -2369,7 +2945,7 @@
             "blog_posts"
           )
           .select(
-            "id,title,slug,excerpt,image_url,category,published,published_at,created_at"
+            "id,title,slug,excerpt,image_url,image_alt_text,category,published,published_at,created_at"
           )
           .eq(
             "published",
@@ -2424,7 +3000,7 @@
             "blog_posts"
           )
           .select(
-            "id,title,slug,excerpt,image_url,category,published,published_at,created_at"
+            "id,title,slug,excerpt,image_url,image_alt_text,category,published,published_at,created_at"
           )
           .eq(
             "published",
@@ -2549,6 +3125,14 @@
                   );
 
 
+                const imageText =
+                  cleanText(
+                    item.image_alt_text ||
+                    item.title ||
+                    "GiftedGift Empire article"
+                  );
+
+
                 return `
 
                   <article
@@ -2564,8 +3148,10 @@
                             class="gge-card-image"
                             src="${escapeHTML(image)}"
                             alt="${escapeHTML(
-                              item.title ||
-                              "GiftedGift Empire article"
+                              imageText
+                            )}"
+                            title="${escapeHTML(
+                              imageText
                             )}"
                             loading="lazy"
                           >
@@ -2655,6 +3241,10 @@
   }
 
 
+
+  /* ==================================================
+     RELATED RESOURCES
+  ================================================== */
 
   async function loadRelatedResources(
     post
@@ -3023,6 +3613,10 @@
 
 
 
+  /* ==================================================
+     SEO
+  ================================================== */
+
   function updateClientSEO(
     post
   ) {
@@ -3045,12 +3639,18 @@
           " | GiftedGift Empire";
 
 
+    const contentDescription =
+      plainTextFromContent(
+        post.content
+      );
+
+
     const description =
       shortText(
 
         post.meta_description ||
         post.excerpt ||
-        post.content,
+        contentDescription,
 
         160
 
@@ -3071,6 +3671,15 @@
 
       SITE_URL +
       "/my-logo.png";
+
+
+    const imageAlt =
+      cleanText(
+        post.image_alt_text ||
+        post.title ||
+        seoTitle ||
+        "GiftedGift Empire article"
+      );
 
 
     document.title =
@@ -3118,8 +3727,7 @@
       [
         "og-image-alt",
         "content",
-        post.title ||
-        seoTitle
+        imageAlt
       ],
 
       [
@@ -3364,6 +3972,10 @@
 
 
 
+  /* ==================================================
+     FETCH CURRENT ARTICLE
+  ================================================== */
+
   async function fetchPost() {
 
     const result =
@@ -3372,7 +3984,7 @@
           "blog_posts"
         )
         .select(
-          "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
+          "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
         )
         .eq(
           "id",
@@ -3410,6 +4022,10 @@
 
 
 
+  /* ==================================================
+     START
+  ================================================== */
+
   async function init() {
 
     injectStyles();
@@ -3434,6 +4050,11 @@
 
     renderArticleContent(
       post.content
+    );
+
+
+    applyCoverImageText(
+      post
     );
 
 
