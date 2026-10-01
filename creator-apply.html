@@ -871,6 +871,23 @@
 
 
     /* =========================
+       TURNSTILE
+    ========================= */
+
+    .turnstile-wrap {
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      margin-top: 22px;
+
+      min-height: 65px;
+    }
+
+
+    /* =========================
        BUTTONS
     ========================= */
 
@@ -1176,6 +1193,13 @@
           18px;
       }
 
+
+      .turnstile-wrap {
+        justify-content: flex-start;
+
+        overflow-x: auto;
+      }
+
     }
 
   </style>
@@ -1342,10 +1366,10 @@
         </li>
 
         <li>
-  The standard sale split is 90% to the
-  Creator and 10% to GiftedGift Empire,
-  unless another rate has been agreed.
-</li>
+          The standard sale split is 90% to the
+          Creator and 10% to GiftedGift Empire,
+          unless another rate has been agreed.
+        </li>
 
         <li>
           Creator withdrawals have a minimum
@@ -1766,8 +1790,8 @@
             </li>
 
             <li>
-              The default sale split is
-              70% to the Creator and 30% to
+              The standard sale split is
+              90% to the Creator and 10% to
               GiftedGift Empire unless another
               rate has been specifically agreed.
             </li>
@@ -1802,6 +1826,19 @@
             </label>
 
           </div>
+
+        </div>
+
+
+        <!-- CLOUDFLARE TURNSTILE -->
+
+        <div class="turnstile-wrap">
+
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAAFKglqlEic20q9Ci"
+            data-theme="auto"
+          ></div>
 
         </div>
 
@@ -1958,6 +1995,13 @@
 
 <script
   src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+></script>
+
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
 ></script>
 
 
@@ -2153,15 +2197,9 @@ async function initializeApplication() {
 
 
   /*
-    IMPORTANT:
-    Do not redirect a logged-out visitor away
-    from this public page.
-
-    Google and normal visitors can now read
-    the Creator information.
-
-    Authentication is still required before
-    the actual application form is shown.
+    The information page remains public,
+    but authentication is required before
+    the application form itself is shown.
   */
 
   if (
@@ -2483,6 +2521,14 @@ document
           .checked;
 
 
+      const turnstileToken =
+        document
+          .querySelector(
+            '[name="cf-turnstile-response"]'
+          )
+          ?.value || "";
+
+
       /*
       =============================================
       BASIC INFORMATION
@@ -2711,6 +2757,27 @@ document
 
       /*
       =============================================
+      TURNSTILE
+      =============================================
+      */
+
+      if (
+        !turnstileToken
+      ) {
+
+        showMessage(
+          "Please complete the security check.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+      =============================================
       SOCIAL LINKS
       =============================================
       */
@@ -2773,93 +2840,169 @@ document
         "Submitting Application...";
 
 
-      /*
-      =============================================
-      SUBMIT TO SECURE RPC
-      =============================================
-      */
+      let sellerCode =
+        null;
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .rpc(
-            "submit_creator_application",
+
+      try {
+
+        /*
+        =============================================
+        GET FRESH AUTH SESSION
+        =============================================
+        */
+
+        const {
+          data:
+            sessionData,
+
+          error:
+            sessionError
+        } =
+          await supabaseClient
+            .auth
+            .getSession();
+
+
+        const session =
+          sessionData?.session;
+
+
+        if (
+          sessionError ||
+          !session ||
+          !session.access_token
+        ) {
+
+          throw new Error(
+            "Your session has expired. Please log in again."
+          );
+
+        }
+
+
+        /*
+        =============================================
+        SUBMIT THROUGH SECURE EDGE FUNCTION
+        =============================================
+        */
+
+        const response =
+          await fetch(
+            SUPABASE_URL +
+            "/functions/v1/creator-application-submit",
             {
 
-              p_full_name:
-                fullName,
+              method:
+                "POST",
 
-              p_business_name:
-                businessName ||
-                null,
+              headers: {
 
-              p_contact_email:
-                contactEmail,
+                "Content-Type":
+                  "application/json",
 
-              p_phone:
-                phone,
+                "Authorization":
+                  "Bearer " +
+                  session.access_token,
 
-              p_country:
-                country,
+              },
 
-              p_website_url:
-                websiteURL ||
-                null,
+              body:
+                JSON.stringify(
+                  {
 
-              p_social_links:
-                socialLinks,
+                    fullName:
+                      fullName,
 
-              p_application_message:
-                applicationMessage,
+                    businessName:
+                      businessName,
 
-              p_agreement_accepted:
-                true,
+                    phone:
+                      phone,
 
-              p_address_line1:
-                addressLine1,
+                    country:
+                      country,
 
-              p_address_line2:
-                addressLine2 ||
-                null,
+                    websiteURL:
+                      websiteURL,
 
-              p_city:
-                city,
+                    socialLinks:
+                      socialLinks,
 
-              p_state_region:
-                stateRegion ||
-                null,
+                    applicationMessage:
+                      applicationMessage,
 
-              p_postal_code:
-                postalCode ||
-                null
+                    agreementAccepted:
+                      agreementAccepted,
+
+                    addressLine1:
+                      addressLine1,
+
+                    addressLine2:
+                      addressLine2,
+
+                    city:
+                      city,
+
+                    stateRegion:
+                      stateRegion,
+
+                    postalCode:
+                      postalCode,
+
+                    turnstileToken:
+                      turnstileToken,
+
+                  }
+                ),
 
             }
           );
 
 
-      button.disabled =
-        false;
+        const result =
+          await response
+            .json()
+            .catch(
+              () => ({})
+            );
 
 
-      button.textContent =
-        "Submit Creator Application";
+        if (
+          !response.ok ||
+          result.success !== true
+        ) {
+
+          throw new Error(
+            result.error ||
+            "We could not submit your application."
+          );
+
+        }
 
 
-      if (
+        sellerCode =
+          result.sellerCode ||
+          "Creator Application";
+
+      }
+
+      catch (
         error
       ) {
 
         console.error(
-          "Application error:",
+          "Creator application error:",
           error
         );
 
 
         const errorText =
-          error.message ||
-          "We could not submit your application.";
+          error instanceof Error
+
+            ? error.message
+
+            : "We could not submit your application.";
 
 
         if (
@@ -2890,6 +3033,26 @@ document
 
       }
 
+      finally {
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "Submit Creator Application";
+
+
+        if (
+          window.turnstile
+        ) {
+
+          window.turnstile.reset();
+
+        }
+
+      }
+
 
       /*
       =============================================
@@ -2914,7 +3077,7 @@ document
           "seller-code"
         )
         .textContent =
-          data ||
+          sellerCode ||
           "Creator Application";
 
 
