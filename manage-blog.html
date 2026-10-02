@@ -3330,13 +3330,34 @@ function applyFormattingToElements(
     element => {
 
       if (
-        formatChoices.clearExisting
-      ) {
+  formatChoices.clearExisting
+) {
 
-        element.removeAttribute(
+  element.removeAttribute(
+    "style"
+  );
+
+  element
+    .querySelectorAll(
+      "[style], font"
+    )
+    .forEach(
+      child => {
+
+        child.removeAttribute(
           "style"
         );
+
+        child.removeAttribute(
+          "color"
+        );
+
+        child.removeAttribute(
+          "size"
+        );
       }
+    );
+}
 
 
       if (
