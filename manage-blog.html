@@ -3860,6 +3860,336 @@ document
     }
   );
 
+  /* ==================================================
+   SYMBOL / EMOJI PICKER
+================================================== */
+
+const emojiButton =
+  document.getElementById(
+    "editor-emoji-button"
+  );
+
+
+const emojiPanel =
+  document.getElementById(
+    "emoji-panel"
+  );
+
+
+const EMOJI_GROUPS = {
+
+  "Checks & Warnings": [
+    "☑️",
+    "✅",
+    "✔️",
+    "❌",
+    "⛔",
+    "⚠️",
+    "🚷",
+    "📌",
+    "📍",
+    "💡",
+    "🎯",
+    "⭐",
+    "✨"
+  ],
+
+  "Arrows": [
+    "➡️",
+    "⬅️",
+    "⬆️",
+    "⬇️",
+    "↗️",
+    "↘️",
+    "↙️",
+    "↖️"
+  ],
+
+  "Business & Home": [
+    "🏠",
+    "💰",
+    "🛍️",
+    "📱",
+    "💻",
+    "📦",
+    "🎁",
+    "✂️",
+    "🧵",
+    "🍰",
+    "📚",
+    "✍️"
+  ],
+
+  "Nature & People": [
+    "☘️",
+    "🌻",
+    "🌿",
+    "🌸",
+    "🚺",
+    "🚹",
+    "👩",
+    "👨",
+    "👩‍💼",
+    "👨‍💼"
+  ],
+
+  "Music & Media": [
+    "🎵",
+    "🎶",
+    "🎤",
+    "🎧",
+    "🎥",
+    "📸",
+    "▶️"
+  ],
+
+  "Faith & Inspiration": [
+    "🙏",
+    "✝️",
+    "❤️",
+    "🔥",
+    "🕊️",
+    "🙌",
+    "💫"
+  ]
+
+};
+
+
+function buildEmojiPanel() {
+
+  emojiPanel.innerHTML =
+    "";
+
+
+  Object.entries(
+    EMOJI_GROUPS
+  )
+    .forEach(
+      (
+        [
+          groupName,
+          symbols
+        ]
+      ) => {
+
+        const group =
+          document.createElement(
+            "div"
+          );
+
+
+        group.className =
+          "emoji-group";
+
+
+        const title =
+          document.createElement(
+            "div"
+          );
+
+
+        title.className =
+          "emoji-group-title";
+
+
+        title.textContent =
+          groupName;
+
+
+        const grid =
+          document.createElement(
+            "div"
+          );
+
+
+        grid.className =
+          "emoji-grid";
+
+
+        symbols.forEach(
+          symbol => {
+
+            const button =
+              document.createElement(
+                "button"
+              );
+
+
+            button.type =
+              "button";
+
+
+            button.className =
+              "emoji-choice";
+
+
+            button.textContent =
+              symbol;
+
+
+            button.title =
+              "Insert " +
+              symbol;
+
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                insertEmojiAtCursor(
+                  symbol
+                );
+              }
+            );
+
+
+            grid.appendChild(
+              button
+            );
+          }
+        );
+
+
+        group.appendChild(
+          title
+        );
+
+
+        group.appendChild(
+          grid
+        );
+
+
+        emojiPanel.appendChild(
+          group
+        );
+      }
+    );
+}
+
+
+function insertEmojiAtCursor(
+  symbol
+) {
+
+  contentEditor.focus();
+
+
+  const selection =
+    window.getSelection();
+
+
+  if (
+    savedEditorRange
+  ) {
+
+    try {
+
+      selection.removeAllRanges();
+
+
+      selection.addRange(
+        savedEditorRange
+      );
+
+    } catch (
+      error
+    ) {
+
+      savedEditorRange =
+        null;
+    }
+  }
+
+
+  if (
+    !selection.rangeCount
+  ) {
+
+    const range =
+      document.createRange();
+
+
+    range.selectNodeContents(
+      contentEditor
+    );
+
+
+    range.collapse(
+      false
+    );
+
+
+    selection.addRange(
+      range
+    );
+  }
+
+
+  const range =
+    selection.getRangeAt(
+      0
+    );
+
+
+  range.deleteContents();
+
+
+  const textNode =
+    document.createTextNode(
+      symbol + " "
+    );
+
+
+  range.insertNode(
+    textNode
+  );
+
+
+  range.setStartAfter(
+    textNode
+  );
+
+
+  range.collapse(
+    true
+  );
+
+
+  selection.removeAllRanges();
+
+
+  selection.addRange(
+    range
+  );
+
+
+  savedEditorRange =
+    range.cloneRange();
+}
+
+
+emojiButton.addEventListener(
+  "click",
+  () => {
+
+    emojiPanel.classList.toggle(
+      "open"
+    );
+
+
+    emojiButton.classList.toggle(
+      "is-selected",
+      emojiPanel.classList.contains(
+        "open"
+      )
+    );
+  }
+);
+
+
+buildEmojiPanel();
 
 /* ==================================================
    INDIVIDUAL WRITING TOOLS
