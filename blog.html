@@ -3069,13 +3069,32 @@ function renderSingleArticle(
       );
 
 
-  document
-    .getElementById(
-      "article-content"
-    )
-    .textContent =
-      post.content ||
-      "";
+  const articleContent =
+  document.getElementById(
+    "article-content"
+  );
+
+const rawContent =
+  String(
+    post.content ||
+    ""
+  );
+
+if (
+  rawContent.startsWith(
+    "<!--GGE_RICH_HTML-->"
+  )
+) {
+
+  articleContent.textContent =
+    "";
+
+} else {
+
+  articleContent.textContent =
+    rawContent;
+
+}
 
 
   if (
