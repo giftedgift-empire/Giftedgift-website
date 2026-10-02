@@ -2108,37 +2108,35 @@
 
 
     if (
+  updated &&
+  updated !==
+    published
+) {
+
+  parts.push(
+
+    "<span>Updated " +
+    escapeHTML(
+      updated
+    ) +
+    "</span>"
+
+  );
+
+} else if (
+  published
+) {
+
+  parts.push(
+
+    "<span>Published " +
+    escapeHTML(
       published
-    ) {
+    ) +
+    "</span>"
 
-      parts.push(
-
-        "<span>Published " +
-        escapeHTML(
-          published
-        ) +
-        "</span>"
-
-      );
-    }
-
-
-    if (
-      updated &&
-      updated !==
-        published
-    ) {
-
-      parts.push(
-
-        "<span>Updated " +
-        escapeHTML(
-          updated
-        ) +
-        "</span>"
-
-      );
-    }
+  );
+}
 
 
     meta.innerHTML =
