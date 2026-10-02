@@ -277,48 +277,51 @@
 
 
   function formatDate(
-    value
+  value
+) {
+
+  if (
+    !value
   ) {
 
-    if (
-      !value
-    ) {
-
-      return "";
-    }
-
-
-    const date =
-      new Date(
-        value
-      );
-
-
-    if (
-      Number.isNaN(
-        date.getTime()
-      )
-    ) {
-
-      return "";
-    }
-
-
-    return date
-      .toLocaleDateString(
-        undefined,
-        {
-          year:
-            "numeric",
-
-          month:
-            "long",
-
-          day:
-            "numeric"
-        }
-      );
+    return "";
   }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+  }
+
+
+  return date
+    .toLocaleDateString(
+      "en-GB",
+      {
+        timeZone:
+          "Europe/Paris",
+
+        year:
+          "numeric",
+
+        month:
+          "long",
+
+        day:
+          "numeric"
+      }
+    );
+}
 
 
 
