@@ -335,7 +335,65 @@
       margin:
         0
         0
-        35px;
+        24px;
+    }
+
+
+    /* ==================================================
+       BLOG CATEGORY FILTERS
+    ================================================== */
+
+    .blog-category-filters {
+      display: none;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      margin:
+        0
+        auto
+        32px;
+    }
+
+
+    .blog-category-filter {
+      border:
+        1px solid
+        #d7deea;
+
+      border-radius: 999px;
+
+      background: white;
+
+      color: #123a8c;
+
+      padding:
+        9px
+        14px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+    }
+
+
+    .blog-category-filter:hover,
+    .blog-category-filter.is-active {
+      background: #123a8c;
+
+      color: white;
+
+      border-color: #123a8c;
     }
 
 
@@ -528,6 +586,31 @@
       font-size: 13px;
 
       margin-bottom: 10px;
+    }
+
+
+    .post-category-badge {
+      display: inline-flex;
+
+      align-self: flex-start;
+
+      margin-bottom: 12px;
+
+      padding:
+        6px
+        11px;
+
+      border-radius: 999px;
+
+      background: #edf3ff;
+
+      color: #123a8c;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      line-height: 1.3;
     }
 
 
@@ -929,6 +1012,20 @@
       }
 
 
+      .blog-category-filters {
+        justify-content: flex-start;
+      }
+
+
+      .blog-category-filter {
+        font-size: 13px;
+
+        padding:
+          8px
+          12px;
+      }
+
+
       .posts {
         grid-template-columns: 1fr;
       }
@@ -1071,9 +1168,10 @@
 
 
   <p>
-    Helpful shopping guides, product recommendations,
-    lifestyle ideas and useful tips to help you discover
-    better finds and make informed choices.
+    Helpful business ideas, shopping guides,
+    money-making resources, product recommendations,
+    lifestyle ideas and useful information from
+    GiftedGift Empire.
   </p>
 
 </section>
@@ -1094,6 +1192,15 @@
     <h2 class="blog-list-heading">
       Latest From the Blog
     </h2>
+
+
+    <!-- AUTOMATIC CATEGORY FILTERS -->
+
+    <div
+      id="blog-category-filters"
+      class="blog-category-filters"
+      aria-label="Filter blog articles by category"
+    ></div>
 
 
     <div
@@ -1124,8 +1231,8 @@
 
 
       <p>
-        New shopping guides, recommendations,
-        useful finds and lifestyle articles
+        New business ideas, shopping guides,
+        recommendations and useful articles
         are being prepared for you.
       </p>
 
@@ -1443,15 +1550,17 @@ function descriptionPreview(
   ) {
 
     return (
-      "Explore shopping guides, product recommendations, " +
-      "lifestyle ideas and useful tips from GiftedGift Empire."
+      "Explore helpful business ideas, shopping guides, " +
+      "product recommendations and useful information " +
+      "from GiftedGift Empire."
     );
 
   }
 
 
   if (
-    text.length <= 155
+    text.length <=
+      155
   ) {
 
     return text;
@@ -1495,8 +1604,10 @@ function safeImageURL(
 
 
     if (
-      url.protocol === "https:" ||
-      url.protocol === "http:"
+      url.protocol ===
+        "https:" ||
+      url.protocol ===
+        "http:"
     ) {
 
       return url.href;
@@ -1653,9 +1764,10 @@ function setStructuredData(
       "blog-structured-data";
 
 
-    document.head.appendChild(
-      script
-    );
+    document.head
+      .appendChild(
+        script
+      );
 
   }
 
@@ -1681,7 +1793,7 @@ function updateBlogCollectionSEO(
 
 
   const description =
-    "Explore shopping guides, product recommendations, lifestyle ideas and useful tips from GiftedGift Empire.";
+    "Explore business ideas, shopping guides, money-making resources, product recommendations, lifestyle ideas and useful information from GiftedGift Empire.";
 
 
   document.title =
@@ -1829,12 +1941,37 @@ function updateBlogCollectionSEO(
         }
 
 
+        const publishedDate =
+          post.published_at ||
+          post.created_at;
+
+
         if (
-          post.created_at
+          publishedDate
         ) {
 
           entry.datePublished =
-            post.created_at;
+            publishedDate;
+
+        }
+
+
+        if (
+          post.updated_at
+        ) {
+
+          entry.dateModified =
+            post.updated_at;
+
+        }
+
+
+        if (
+          post.category
+        ) {
+
+          entry.articleSection =
+            post.category;
 
         }
 
@@ -2162,12 +2299,37 @@ function updateArticleSEO(
   };
 
 
+  const publishedDate =
+    post.published_at ||
+    post.created_at;
+
+
   if (
-    post.created_at
+    publishedDate
   ) {
 
     articleSchema.datePublished =
-      post.created_at;
+      publishedDate;
+
+  }
+
+
+  if (
+    post.updated_at
+  ) {
+
+    articleSchema.dateModified =
+      post.updated_at;
+
+  }
+
+
+  if (
+    post.category
+  ) {
+
+    articleSchema.articleSection =
+      post.category;
 
   }
 
@@ -2327,21 +2489,25 @@ function formatDate(
   }
 
 
-  return date.toLocaleDateString(
-    undefined,
-    {
+  return date
+    .toLocaleDateString(
+      "en-GB",
+      {
 
-      year:
-        "numeric",
+        timeZone:
+          "Europe/Paris",
 
-      month:
-        "long",
+        year:
+          "numeric",
 
-      day:
-        "numeric"
+        month:
+          "long",
 
-    }
-  );
+        day:
+          "numeric"
+
+      }
+    );
 
 }
 
@@ -2375,8 +2541,10 @@ function validPromotionUrl(
 
 
     return (
-      url.protocol === "https:" ||
-      url.protocol === "http:"
+      url.protocol ===
+        "https:" ||
+      url.protocol ===
+        "http:"
     );
 
 
@@ -2490,6 +2658,7 @@ function createPostCard(
 
   const formattedDate =
     formatDate(
+      post.published_at ||
       post.created_at
     );
 
@@ -2519,6 +2688,35 @@ function createPostCard(
   }
 
 
+  /* CATEGORY */
+
+  if (
+    post.category
+  ) {
+
+    const category =
+      document.createElement(
+        "div"
+      );
+
+
+    category.className =
+      "post-category-badge";
+
+
+    category.textContent =
+      post.category;
+
+
+    body.appendChild(
+      category
+    );
+
+  }
+
+
+  /* TITLE */
+
   const title =
     document.createElement(
       "h2"
@@ -2534,6 +2732,8 @@ function createPostCard(
     title
   );
 
+
+  /* EXCERPT */
 
   const excerpt =
     document.createElement(
@@ -2554,6 +2754,8 @@ function createPostCard(
     excerpt
   );
 
+
+  /* READ ARTICLE */
 
   const link =
     document.createElement(
@@ -2631,7 +2833,8 @@ function renderPromotion(
 
 
   if (
-    type === "none" ||
+    type ===
+      "none" ||
     !post.promotion_url ||
     !validPromotionUrl(
       post.promotion_url
@@ -2675,7 +2878,7 @@ function renderPromotion(
 
   if (
     type ===
-    "affiliate"
+      "affiliate"
   ) {
 
     label.textContent =
@@ -2688,7 +2891,7 @@ function renderPromotion(
 
   } else if (
     type ===
-    "sponsored"
+      "sponsored"
   ) {
 
     label.textContent =
@@ -2758,7 +2961,7 @@ function renderPromotion(
     post.promotion_button_text ||
     (
       type ===
-      "sponsored"
+        "sponsored"
 
         ? "Visit Advertiser"
 
@@ -2776,8 +2979,10 @@ function renderPromotion(
 
 
   if (
-    type === "affiliate" ||
-    type === "sponsored"
+    type ===
+      "affiliate" ||
+    type ===
+      "sponsored"
   ) {
 
     button.target =
@@ -2859,6 +3064,7 @@ function renderSingleArticle(
     )
     .textContent =
       formatDate(
+        post.published_at ||
         post.created_at
       );
 
@@ -2935,7 +3141,7 @@ async function loadSinglePost() {
           "blog_posts"
         )
         .select(
-          "id,title,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,created_at"
+          "id,title,category,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
         )
         .eq(
           "id",
@@ -3014,7 +3220,7 @@ async function loadSinglePost() {
 
           <p>
 
-            <a href="/blog.html">
+            <a href="/blog">
               Return to the Blog
             </a>
 
@@ -3030,6 +3236,234 @@ async function loadSinglePost() {
 
 
 /* ==================================================
+   RENDER BLOG POSTS
+================================================== */
+
+function renderBlogPosts(
+  posts
+) {
+
+  const postsBox =
+    document.getElementById(
+      "posts"
+    );
+
+
+  postsBox.innerHTML =
+    "";
+
+
+  posts.forEach(
+    post => {
+
+      postsBox.appendChild(
+        createPostCard(
+          post
+        )
+      );
+
+    }
+  );
+
+
+  postsBox.style.display =
+    posts.length
+      ? "grid"
+      : "none";
+
+}
+
+
+/* ==================================================
+   CATEGORY FILTERS
+================================================== */
+
+function buildCategoryFilters(
+  posts
+) {
+
+  const filters =
+    document.getElementById(
+      "blog-category-filters"
+    );
+
+
+  if (
+    !filters
+  ) {
+
+    return;
+
+  }
+
+
+  const categories =
+    [
+      ...new Set(
+
+        posts
+          .map(
+            post =>
+              cleanText(
+                post.category
+              )
+          )
+          .filter(
+            Boolean
+          )
+
+      )
+    ]
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          a.localeCompare(
+            b
+          )
+      );
+
+
+  filters.innerHTML =
+    "";
+
+
+  if (
+    !categories.length
+  ) {
+
+    filters.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  const options =
+    [
+      "All",
+      ...categories
+    ];
+
+
+  options.forEach(
+    categoryName => {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "blog-category-filter";
+
+
+      button.textContent =
+        categoryName;
+
+
+      const isAll =
+        categoryName ===
+        "All";
+
+
+      button.setAttribute(
+        "aria-pressed",
+        isAll
+          ? "true"
+          : "false"
+      );
+
+
+      if (
+        isAll
+      ) {
+
+        button.classList.add(
+          "is-active"
+        );
+
+      }
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          filters
+            .querySelectorAll(
+              ".blog-category-filter"
+            )
+            .forEach(
+              item => {
+
+                const active =
+                  item ===
+                  button;
+
+
+                item.classList.toggle(
+                  "is-active",
+                  active
+                );
+
+
+                item.setAttribute(
+                  "aria-pressed",
+                  active
+                    ? "true"
+                    : "false"
+                );
+
+              }
+            );
+
+
+          const filteredPosts =
+            categoryName ===
+              "All"
+
+              ? posts
+
+              : posts.filter(
+                  post =>
+                    cleanText(
+                      post.category
+                    ) ===
+                    categoryName
+                );
+
+
+          renderBlogPosts(
+            filteredPosts
+          );
+
+        }
+      );
+
+
+      filters.appendChild(
+        button
+      );
+
+    }
+  );
+
+
+  filters.style.display =
+    "flex";
+
+}
+
+
+/* ==================================================
    LOAD BLOG LIST
 ================================================== */
 
@@ -3038,12 +3472,6 @@ async function loadPosts() {
   const loading =
     document.getElementById(
       "loading"
-    );
-
-
-  const postsBox =
-    document.getElementById(
-      "posts"
     );
 
 
@@ -3062,7 +3490,7 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-        "id,title,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,created_at"
+        "id,title,category,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
       )
       .eq(
         "published",
@@ -3109,10 +3537,7 @@ async function loadPosts() {
       : [];
 
 
-  /*
-    Update Blog SEO using the
-    real published articles.
-  */
+  /* SEO */
 
   updateBlogCollectionSEO(
     publishedPosts
@@ -3121,7 +3546,7 @@ async function loadPosts() {
 
   if (
     publishedPosts.length ===
-    0
+      0
   ) {
 
     empty.style.display =
@@ -3133,25 +3558,22 @@ async function loadPosts() {
   }
 
 
-  postsBox.innerHTML =
-    "";
+  empty.style.display =
+    "none";
 
 
-  publishedPosts.forEach(
-    post => {
+  /* CREATE CATEGORY BUTTONS */
 
-      postsBox.appendChild(
-        createPostCard(
-          post
-        )
-      );
-
-    }
+  buildCategoryFilters(
+    publishedPosts
   );
 
 
-  postsBox.style.display =
-    "grid";
+  /* SHOW ALL ARTICLES FIRST */
+
+  renderBlogPosts(
+    publishedPosts
+  );
 
 }
 
@@ -3174,8 +3596,9 @@ if (
 }
 
 </script>
-<!-- 
-  ==================================================
+
+
+<!-- ==================================================
      BLOG ARTICLE ENHANCEMENTS
 ================================================== -->
 
@@ -3205,10 +3628,12 @@ if (
       !Number.isInteger(
         articleId
       ) ||
-      articleId <= 0
+      articleId <=
+        0
     ) {
 
       return;
+
     }
 
 
@@ -3229,7 +3654,7 @@ if (
 
     /*
       Wait until the existing Blog system
-      has finished loading the article first.
+      has finished loading the article.
     */
 
     if (
@@ -3243,7 +3668,9 @@ if (
         75
       );
 
+
       return;
+
     }
 
 
@@ -3254,6 +3681,7 @@ if (
     ) {
 
       return;
+
     }
 
 
@@ -3268,12 +3696,13 @@ if (
 
 
     script.src =
-  "/assets/blog-article-enhancements.js?v=20261002-2";
+      "/assets/blog-article-enhancements.js?v=20261002-2";
 
 
-    document.body.appendChild(
-      script
-    );
+    document.body
+      .appendChild(
+        script
+      );
 
   }
 
@@ -3283,6 +3712,7 @@ if (
 })();
 
 </script>
+
 
 <script src="/cookie-consent.js"></script>
 
