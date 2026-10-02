@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -165,7 +166,7 @@
     }
 
     .editor-toolbar {
-      padding: 12px;
+      padding: 13px;
       background: #f7f9fc;
       border-bottom: 1px solid #dce2ea;
     }
@@ -175,7 +176,7 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
     .toolbar-section:last-child {
@@ -185,7 +186,7 @@
     .toolbar-label {
       width: 100%;
       color: #123a8c;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       margin-bottom: 2px;
     }
@@ -193,7 +194,7 @@
     .editor-toolbar button,
     .editor-toolbar select {
       width: auto;
-      min-height: 40px;
+      min-height: 42px;
       margin: 0;
       padding: 8px 11px;
       border: 1px solid #cbd3dd;
@@ -220,7 +221,7 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      min-height: 40px;
+      min-height: 42px;
       padding: 6px 9px;
       border: 1px solid #cbd3dd;
       border-radius: 8px;
@@ -246,11 +247,77 @@
 
     .colour-dot {
       display: inline-block;
-      width: 16px;
-      height: 16px;
+      width: 17px;
+      height: 17px;
       border-radius: 50%;
       border: 1px solid rgba(0,0,0,.18);
       flex-shrink: 0;
+    }
+
+    .editor-toolbar button.is-selected,
+    .editor-colour-control.is-selected {
+      border: 2px solid #123a8c;
+      background: #eaf1ff;
+      color: #123a8c;
+      box-shadow: 0 0 0 2px rgba(18,58,140,.08);
+    }
+
+    .editor-toolbar button.colour-button.is-selected {
+      border-color: #123a8c;
+      background: #eef4ff;
+    }
+
+    #editor-size.has-selection {
+      border: 2px solid #123a8c;
+      color: #123a8c;
+      background: #eef4ff;
+      font-weight: 800;
+    }
+
+    .apply-formatting-wrap {
+      width: 100%;
+      padding-top: 4px;
+    }
+
+    #editor-apply-button {
+      width: 100%;
+      min-height: 54px;
+      border: 2px solid #d3a400;
+      border-radius: 10px;
+      background: #f2bd16;
+      color: #111;
+      font-size: 17px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    }
+
+    #editor-apply-button:active {
+      transform: translateY(1px);
+    }
+
+    .editor-status {
+      display: none;
+      width: 100%;
+      margin-top: 9px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .editor-status.success {
+      display: block;
+      background: #e8f7ec;
+      color: #17652d;
+      border: 1px solid #b8dfc0;
+    }
+
+    .editor-status.error {
+      display: block;
+      background: #ffe8e8;
+      color: #951d1d;
+      border: 1px solid #efbbbb;
     }
 
     .editor-area {
@@ -329,7 +396,7 @@
       background: #f7faff;
       color: #555;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .editor-tip strong {
@@ -505,14 +572,6 @@
       margin: 8px 0 14px;
     }
 
-    .promotion-preview {
-      margin-top: 14px;
-      padding: 13px;
-      background: #fff8dd;
-      border-radius: 9px;
-      font-size: 14px;
-    }
-
     .status {
       display: inline-block;
       padding: 6px 10px;
@@ -584,7 +643,7 @@
       }
 
       .editor-toolbar {
-        padding: 9px;
+        padding: 10px;
       }
 
       .toolbar-section {
@@ -593,13 +652,17 @@
 
       .editor-toolbar button,
       .editor-toolbar select {
-        min-height: 39px;
-        padding: 7px 9px;
+        min-height: 41px;
+        padding: 8px 10px;
         font-size: 13px;
       }
 
       #editor-target {
         width: 100%;
+      }
+
+      #editor-size {
+        min-width: 125px;
       }
 
       .editor-area {
@@ -792,6 +855,7 @@
         SEO & Sharing
       </h3>
 
+
       <div class="field">
 
         <label for="seo-title">
@@ -873,8 +937,6 @@
         >
 
 
-          <!-- APPLY TO -->
-
           <div class="toolbar-section">
 
             <div class="toolbar-label">
@@ -903,7 +965,7 @@
               </option>
 
               <option value="numbered">
-                All Numbered Items
+                All Numbered Titles (1, 2, 3...)
               </option>
 
               <option value="bullets">
@@ -915,18 +977,16 @@
           </div>
 
 
-          <!-- SIZE -->
-
           <div class="toolbar-section">
 
             <div class="toolbar-label">
-              2. Choose size:
+              2. Choose size — optional:
             </div>
 
             <select id="editor-size">
 
               <option value="">
-                Text Size
+                No Size Change
               </option>
 
               <option value="14px">14px</option>
@@ -947,12 +1007,10 @@
           </div>
 
 
-          <!-- COLOURS -->
-
           <div class="toolbar-section">
 
             <div class="toolbar-label">
-              3. Choose colour:
+              3. Choose colour — optional:
             </div>
 
 
@@ -1048,6 +1106,7 @@
 
 
             <label
+              id="custom-colour-control"
               class="editor-colour-control"
               for="editor-color"
             >
@@ -1063,12 +1122,10 @@
           </div>
 
 
-          <!-- STYLE -->
-
           <div class="toolbar-section">
 
             <div class="toolbar-label">
-              4. Extra styling:
+              4. Extra styling — optional:
             </div>
 
             <button
@@ -1124,13 +1181,36 @@
               type="button"
               id="editor-clear-button"
             >
-              Clear Style
+              Clear Existing Style
             </button>
 
           </div>
 
 
-          <!-- INDIVIDUAL TOOLS -->
+          <div class="toolbar-section">
+
+            <div class="toolbar-label">
+              5. Apply:
+            </div>
+
+            <div class="apply-formatting-wrap">
+
+              <button
+                id="editor-apply-button"
+                type="button"
+              >
+                APPLY CHANGES
+              </button>
+
+              <div
+                id="editor-status"
+                class="editor-status"
+              ></div>
+
+            </div>
+
+          </div>
+
 
           <div class="toolbar-section">
 
@@ -1238,17 +1318,22 @@
 
       <div class="editor-tip">
 
-        <strong>Example:</strong>
-        Choose <b>All Subheadings</b>,
-        then tap <b>Golden Yellow</b>,
-        then choose <b>24px</b>.
-        Every subheading changes together.
+        <strong>How it works:</strong>
+        first choose what you want to format,
+        then choose the size, colour and extra styling you want.
+        Nothing changes until you press
+        <strong>APPLY CHANGES</strong>.
+
+        <br><br>
+
+        Example:
+        <strong>All Numbered Titles (1, 2, 3...) → 24px → Golden Yellow → B → APPLY CHANGES.</strong>
 
         <br><br>
 
         <b>U</b> underlines the words.
-        <b>Line Below</b> puts a proper line underneath
-        the heading, paragraph or group you selected.
+        <b>Line Below</b> adds a proper line underneath.
+        <b>Clear Existing Style</b> removes previous styling from the chosen group when you press Apply.
 
       </div>
 
@@ -1317,6 +1402,7 @@
       <h3>
         Optional Product / Advertising Promotion
       </h3>
+
 
       <div class="field">
 
@@ -1500,6 +1586,7 @@ const SITE_URL =
 const RICH_CONTENT_MARKER =
   "<!--GGE_RICH_HTML-->";
 
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -1515,79 +1602,165 @@ let slugWasEdited = false;
 let savedEditorRange = null;
 
 
+/*
+==================================================
+FORMATTING CHOICES
+==================================================
+*/
+
+const formatChoices = {
+
+  colour:
+    "",
+
+  bold:
+    false,
+
+  italic:
+    false,
+
+  underline:
+    false,
+
+  lineBelow:
+    false,
+
+  alignment:
+    "",
+
+  clearExisting:
+    false
+
+};
+
+
 /* ==================================================
    ELEMENTS
 ================================================== */
 
 const titleInput =
-  document.getElementById("title");
+  document.getElementById(
+    "title"
+  );
 
 const categoryInput =
-  document.getElementById("category");
+  document.getElementById(
+    "category"
+  );
 
 const authorNameInput =
-  document.getElementById("author-name");
+  document.getElementById(
+    "author-name"
+  );
 
 const slugInput =
-  document.getElementById("slug");
+  document.getElementById(
+    "slug"
+  );
 
 const excerptInput =
-  document.getElementById("excerpt");
+  document.getElementById(
+    "excerpt"
+  );
 
 const seoTitleInput =
-  document.getElementById("seo-title");
+  document.getElementById(
+    "seo-title"
+  );
 
 const metaDescriptionInput =
-  document.getElementById("meta-description");
+  document.getElementById(
+    "meta-description"
+  );
 
 const youtubeUrlInput =
-  document.getElementById("youtube-url");
+  document.getElementById(
+    "youtube-url"
+  );
 
 const contentInput =
-  document.getElementById("content");
+  document.getElementById(
+    "content"
+  );
 
 const contentEditor =
-  document.getElementById("content-editor");
+  document.getElementById(
+    "content-editor"
+  );
 
 const contentPreview =
-  document.getElementById("content-preview");
+  document.getElementById(
+    "content-preview"
+  );
 
 const editorTarget =
-  document.getElementById("editor-target");
+  document.getElementById(
+    "editor-target"
+  );
+
+const editorSize =
+  document.getElementById(
+    "editor-size"
+  );
+
+const editorStatus =
+  document.getElementById(
+    "editor-status"
+  );
 
 const imageAltTextInput =
-  document.getElementById("image-alt-text");
+  document.getElementById(
+    "image-alt-text"
+  );
 
 const imageFileInput =
-  document.getElementById("image-file");
+  document.getElementById(
+    "image-file"
+  );
 
 const promotionTypeInput =
-  document.getElementById("promotion-type");
+  document.getElementById(
+    "promotion-type"
+  );
 
 const promotionNameInput =
-  document.getElementById("promotion-name");
+  document.getElementById(
+    "promotion-name"
+  );
 
 const promotionUrlInput =
-  document.getElementById("promotion-url");
+  document.getElementById(
+    "promotion-url"
+  );
 
 const promotionButtonTextInput =
-  document.getElementById("promotion-button-text");
+  document.getElementById(
+    "promotion-button-text"
+  );
 
 const promotionImageFileInput =
-  document.getElementById("promotion-image-file");
+  document.getElementById(
+    "promotion-image-file"
+  );
 
 const publishedInput =
-  document.getElementById("published");
+  document.getElementById(
+    "published"
+  );
 
 
 /* ==================================================
    BASIC HELPERS
 ================================================== */
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   div.textContent =
     value ?? "";
@@ -1596,12 +1769,17 @@ function escapeHTML(value) {
 }
 
 
-function cleanText(value) {
+function cleanText(
+  value
+) {
 
   return String(
     value || ""
   )
-    .replace(/\s+/g, " ")
+    .replace(
+      /\s+/g,
+      " "
+    )
     .trim();
 }
 
@@ -1612,7 +1790,9 @@ function showMessage(
 ) {
 
   const box =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
 
   box.className =
     `message ${type}`;
@@ -1621,8 +1801,11 @@ function showMessage(
     text;
 
   box.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
+    behavior:
+      "smooth",
+
+    block:
+      "center"
   });
 }
 
@@ -1630,7 +1813,9 @@ function showMessage(
 function clearMessage() {
 
   const box =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
 
   box.className =
     "message";
@@ -1640,17 +1825,47 @@ function clearMessage() {
 }
 
 
+function showEditorStatus(
+  text,
+  type = "success"
+) {
+
+  editorStatus.className =
+    "editor-status " +
+    type;
+
+  editorStatus.textContent =
+    text;
+}
+
+
+function clearEditorStatus() {
+
+  editorStatus.className =
+    "editor-status";
+
+  editorStatus.textContent =
+    "";
+}
+
+
 /* ==================================================
    SANITIZER
 ================================================== */
 
-function sanitizeRichHTML(html) {
+function sanitizeRichHTML(
+  html
+) {
 
   const template =
-    document.createElement("template");
+    document.createElement(
+      "template"
+    );
 
   template.innerHTML =
-    String(html || "");
+    String(
+      html || ""
+    );
 
 
   const allowedTags =
@@ -1688,7 +1903,10 @@ function sanitizeRichHTML(html) {
 
 
   Array.from(
-    template.content.querySelectorAll("*")
+    template.content
+      .querySelectorAll(
+        "*"
+      )
   )
     .forEach(
       element => {
@@ -1719,7 +1937,8 @@ function sanitizeRichHTML(html) {
 
 
               if (
-                name === "style"
+                name ===
+                "style"
               ) {
 
                 const safeStyles =
@@ -1804,7 +2023,9 @@ function sanitizeRichHTML(html) {
 
                   element.setAttribute(
                     "style",
-                    safeStyles.join(";")
+                    safeStyles.join(
+                      ";"
+                    )
                   );
 
                 } else {
@@ -1820,13 +2041,16 @@ function sanitizeRichHTML(html) {
 
 
               if (
-                element.tagName === "A" &&
+                element.tagName ===
+                  "A" &&
                 [
                   "href",
                   "target",
                   "rel",
                   "class"
-                ].includes(name)
+                ].includes(
+                  name
+                )
               ) {
 
                 return;
@@ -1834,8 +2058,10 @@ function sanitizeRichHTML(html) {
 
 
               if (
-                element.tagName === "OL" &&
-                name === "start"
+                element.tagName ===
+                  "OL" &&
+                name ===
+                  "start"
               ) {
 
                 return;
@@ -1843,14 +2069,17 @@ function sanitizeRichHTML(html) {
 
 
               if (
-                name === "class" &&
+                name ===
+                  "class" &&
                 (
-                  element.classList.contains(
-                    "gge-inline-cta"
-                  ) ||
-                  element.classList.contains(
-                    "gge-inline-cta-link"
-                  )
+                  element.classList
+                    .contains(
+                      "gge-inline-cta"
+                    ) ||
+                  element.classList
+                    .contains(
+                      "gge-inline-cta-link"
+                    )
                 )
               ) {
 
@@ -1866,18 +2095,24 @@ function sanitizeRichHTML(html) {
 
 
         if (
-          element.tagName === "A"
+          element.tagName ===
+          "A"
         ) {
 
           const href =
-            element.getAttribute("href") ||
-            "";
+            element.getAttribute(
+              "href"
+            ) || "";
 
 
           if (
             href &&
-            !/^https?:\/\//i.test(href) &&
-            !href.startsWith("/")
+            !/^https?:\/\//i.test(
+              href
+            ) &&
+            !href.startsWith(
+              "/"
+            )
           ) {
 
             element.removeAttribute(
@@ -1904,25 +2139,50 @@ function sanitizeRichHTML(html) {
    OLD ARTICLE CONVERSION
 ================================================== */
 
-function legacyTextToHTML(text) {
+function legacyTextToHTML(
+  text
+) {
 
   const lines =
-    String(text || "")
-      .replace(/\r\n/g, "\n")
-      .replace(/\r/g, "\n")
-      .split("\n");
+    String(
+      text || ""
+    )
+      .replace(
+        /\r\n/g,
+        "\n"
+      )
+      .replace(
+        /\r/g,
+        "\n"
+      )
+      .split(
+        "\n"
+      );
 
 
-  const html = [];
-
-  let listType = "";
-  let listStart = 1;
-  let listItems = [];
+  const html =
+    [];
 
 
-  function inline(value) {
+  let listType =
+    "";
 
-    return escapeHTML(value)
+
+  let listStart =
+    1;
+
+
+  let listItems =
+    [];
+
+
+  function inline(
+    value
+  ) {
+
+    return escapeHTML(
+      value
+    )
       .replace(
         /\*\*([^*]+)\*\*/g,
         "<strong>$1</strong>"
@@ -1937,16 +2197,22 @@ function legacyTextToHTML(text) {
       !listItems.length
     ) {
 
-      listType = "";
-      listItems = [];
-      listStart = 1;
+      listType =
+        "";
+
+      listItems =
+        [];
+
+      listStart =
+        1;
 
       return;
     }
 
 
     const opening =
-      listType === "ol"
+      listType ===
+        "ol"
 
         ? (
             '<ol start="' +
@@ -1958,26 +2224,39 @@ function legacyTextToHTML(text) {
 
 
     html.push(
+
       opening +
 
       listItems
         .map(
           item =>
             "<li>" +
-            inline(item) +
+            inline(
+              item
+            ) +
             "</li>"
         )
-        .join("") +
+        .join(
+          ""
+        ) +
 
       "</" +
       listType +
       ">"
+
     );
 
 
-    listType = "";
-    listItems = [];
-    listStart = 1;
+    listType =
+      "";
+
+
+    listItems =
+      [];
+
+
+    listStart =
+      1;
   }
 
 
@@ -1988,7 +2267,9 @@ function legacyTextToHTML(text) {
         rawLine.trim();
 
 
-      if (!line) {
+      if (
+        !line
+      ) {
 
         flushList();
 
@@ -2002,15 +2283,23 @@ function legacyTextToHTML(text) {
         );
 
 
-      if (h3) {
+      if (
+        h3
+      ) {
 
         flushList();
 
+
         html.push(
+
           "<h3>" +
-          inline(h3[1]) +
+          inline(
+            h3[1]
+          ) +
           "</h3>"
+
         );
+
 
         return;
       }
@@ -2022,15 +2311,23 @@ function legacyTextToHTML(text) {
         );
 
 
-      if (h2) {
+      if (
+        h2
+      ) {
 
         flushList();
 
+
         html.push(
+
           "<h2>" +
-          inline(h2[1]) +
+          inline(
+            h2[1]
+          ) +
           "</h2>"
+
         );
+
 
         return;
       }
@@ -2042,11 +2339,14 @@ function legacyTextToHTML(text) {
         );
 
 
-      if (numbered) {
+      if (
+        numbered
+      ) {
 
         if (
           listType &&
-          listType !== "ol"
+          listType !==
+            "ol"
         ) {
 
           flushList();
@@ -2054,20 +2354,25 @@ function legacyTextToHTML(text) {
 
 
         if (
-          listType !== "ol"
+          listType !==
+            "ol"
         ) {
 
-          listType = "ol";
+          listType =
+            "ol";
+
 
           listStart =
-            Number(numbered[1]) ||
-            1;
+            Number(
+              numbered[1]
+            ) || 1;
         }
 
 
         listItems.push(
           numbered[2]
         );
+
 
         return;
       }
@@ -2079,22 +2384,28 @@ function legacyTextToHTML(text) {
         );
 
 
-      if (bullet) {
+      if (
+        bullet
+      ) {
 
         if (
           listType &&
-          listType !== "ul"
+          listType !==
+            "ul"
         ) {
 
           flushList();
         }
 
 
-        listType = "ul";
+        listType =
+          "ul";
+
 
         listItems.push(
           bullet[1]
         );
+
 
         return;
       }
@@ -2109,38 +2420,60 @@ function legacyTextToHTML(text) {
         );
 
 
-      if (cta) {
+      if (
+        cta
+      ) {
 
         const label =
-          cta[1].trim();
+          cta[1]
+            .trim();
+
 
         const href =
-          cta[2].trim();
+          cta[2]
+            .trim();
 
 
         if (
-          /^https?:\/\//i.test(href)
+          /^https?:\/\//i.test(
+            href
+          )
         ) {
 
           html.push(
+
             '<p class="gge-inline-cta">' +
+
             '<a class="gge-inline-cta-link" ' +
+
             'href="' +
-            escapeHTML(href) +
+            escapeHTML(
+              href
+            ) +
             '" target="_blank" rel="noopener noreferrer">' +
-            inline(label) +
+
+            inline(
+              label
+            ) +
+
             "</a></p>"
+
           );
         }
+
 
         return;
       }
 
 
       html.push(
+
         "<p>" +
-        inline(line) +
+        inline(
+          line
+        ) +
         "</p>"
+
       );
     }
   );
@@ -2148,7 +2481,10 @@ function legacyTextToHTML(text) {
 
   flushList();
 
-  return html.join("");
+
+  return html.join(
+    ""
+  );
 }
 
 
@@ -2164,7 +2500,8 @@ function editorContainsSelection() {
 
   if (
     !selection ||
-    selection.rangeCount === 0
+    selection.rangeCount ===
+      0
   ) {
 
     return false;
@@ -2175,7 +2512,10 @@ function editorContainsSelection() {
     selection.anchorNode;
 
 
-  if (!node) {
+  if (
+    !node
+  ) {
+
     return false;
   }
 
@@ -2183,13 +2523,18 @@ function editorContainsSelection() {
   const element =
     node.nodeType ===
       Node.TEXT_NODE
+
       ? node.parentNode
+
       : node;
 
 
   return (
-    element === contentEditor ||
-    contentEditor.contains(element)
+    element ===
+      contentEditor ||
+    contentEditor.contains(
+      element
+    )
   );
 }
 
@@ -2202,7 +2547,8 @@ function saveEditorSelection() {
 
   if (
     !selection ||
-    selection.rangeCount === 0 ||
+    selection.rangeCount ===
+      0 ||
     !editorContainsSelection()
   ) {
 
@@ -2212,7 +2558,9 @@ function saveEditorSelection() {
 
   savedEditorRange =
     selection
-      .getRangeAt(0)
+      .getRangeAt(
+        0
+      )
       .cloneRange();
 }
 
@@ -2222,20 +2570,36 @@ function restoreEditorSelection() {
   contentEditor.focus();
 
 
-  if (!savedEditorRange) {
-    return;
+  if (
+    !savedEditorRange
+  ) {
+
+    return false;
   }
 
 
-  const selection =
-    window.getSelection();
+  try {
+
+    const selection =
+      window.getSelection();
 
 
-  selection.removeAllRanges();
+    selection.removeAllRanges();
 
-  selection.addRange(
-    savedEditorRange
-  );
+
+    selection.addRange(
+      savedEditorRange
+    );
+
+
+    return true;
+
+  } catch (
+    error
+  ) {
+
+    return false;
+  }
 }
 
 
@@ -2264,55 +2628,64 @@ function getTargetElements() {
 
 
   if (
-    target === "h2"
+    target ===
+      "h2"
   ) {
 
     return Array.from(
-      contentEditor.querySelectorAll(
-        "h2"
-      )
+      contentEditor
+        .querySelectorAll(
+          "h2"
+        )
     );
   }
 
 
   if (
-    target === "h3"
+    target ===
+      "h3"
   ) {
 
     return Array.from(
-      contentEditor.querySelectorAll(
-        "h3"
-      )
+      contentEditor
+        .querySelectorAll(
+          "h3"
+        )
     );
   }
 
 
   if (
-    target === "numbered"
+    target ===
+      "numbered"
   ) {
 
     return Array.from(
-      contentEditor.querySelectorAll(
-        "ol > li"
-      )
+      contentEditor
+        .querySelectorAll(
+          "ol > li"
+        )
     );
   }
 
 
   if (
-    target === "bullets"
+    target ===
+      "bullets"
   ) {
 
     return Array.from(
-      contentEditor.querySelectorAll(
-        "ul > li"
-      )
+      contentEditor
+        .querySelectorAll(
+          "ul > li"
+        )
     );
   }
 
 
   if (
-    target === "body"
+    target ===
+      "body"
   ) {
 
     return Array.from(
@@ -2322,13 +2695,16 @@ function getTargetElements() {
         element =>
 
           (
-            element.tagName === "P" ||
-            element.tagName === "DIV"
+            element.tagName ===
+              "P" ||
+            element.tagName ===
+              "DIV"
           ) &&
 
-          !element.classList.contains(
-            "gge-inline-cta"
-          )
+          !element.classList
+            .contains(
+              "gge-inline-cta"
+            )
       );
   }
 
@@ -2339,7 +2715,10 @@ function getTargetElements() {
 
 function getCurrentBlock() {
 
-  if (!savedEditorRange) {
+  if (
+    !savedEditorRange
+  ) {
+
     return null;
   }
 
@@ -2351,7 +2730,7 @@ function getCurrentBlock() {
 
   if (
     node.nodeType ===
-    Node.TEXT_NODE
+      Node.TEXT_NODE
   ) {
 
     node =
@@ -2361,7 +2740,8 @@ function getCurrentBlock() {
 
   while (
     node &&
-    node !== contentEditor
+    node !==
+      contentEditor
   ) {
 
     if (
@@ -2391,15 +2771,15 @@ function getCurrentBlock() {
 
 
 /* ==================================================
-   NORMALISE FONT TAGS
+   FONT NORMALISATION
 ================================================== */
 
-function normalizeFontTags(
-  forcedSize = ""
-) {
+function normalizeColourFontTags() {
 
   contentEditor
-    .querySelectorAll("font")
+    .querySelectorAll(
+      "font"
+    )
     .forEach(
       font => {
 
@@ -2415,17 +2795,66 @@ function normalizeFontTags(
           );
 
 
-        if (colour) {
+        if (
+          colour
+        ) {
 
           span.style.color =
             colour;
         }
 
 
-        if (forcedSize) {
+        while (
+          font.firstChild
+        ) {
 
-          span.style.fontSize =
-            forcedSize;
+          span.appendChild(
+            font.firstChild
+          );
+        }
+
+
+        font.replaceWith(
+          span
+        );
+      }
+    );
+}
+
+
+function normalizeSizeFontTags(
+  size
+) {
+
+  contentEditor
+    .querySelectorAll(
+      'font[size="7"]'
+    )
+    .forEach(
+      font => {
+
+        const span =
+          document.createElement(
+            "span"
+          );
+
+
+        span.style.fontSize =
+          size;
+
+
+        const colour =
+          font.getAttribute(
+            "color"
+          );
+
+
+        if (
+          colour
+        ) {
+
+          span.style.color =
+            colour;
         }
 
 
@@ -2448,47 +2877,142 @@ function normalizeFontTags(
 
 
 /* ==================================================
-   COLOUR
+   FORMATTING CHOICE UI
 ================================================== */
 
-function applyColour(colour) {
+function clearColourSelectionUI() {
 
-  if (
-    editorTarget.value ===
-    "selected"
-  ) {
+  document
+    .querySelectorAll(
+      "[data-colour]"
+    )
+    .forEach(
+      button => {
 
-    restoreEditorSelection();
-
-
-    document.execCommand(
-      "foreColor",
-      false,
-      colour
+        button.classList.remove(
+          "is-selected"
+        );
+      }
     );
 
 
-    normalizeFontTags();
-
-    saveEditorSelection();
-
-    return;
-  }
-
-
-  const elements =
-    getTargetElements();
+  document
+    .getElementById(
+      "custom-colour-control"
+    )
+    .classList.remove(
+      "is-selected"
+    );
+}
 
 
-  elements.forEach(
-    element => {
+function setToggleButton(
+  buttonId,
+  enabled
+) {
 
-      element.style.color =
-        colour;
-    }
+  const button =
+    document.getElementById(
+      buttonId
+    );
+
+
+  button.classList.toggle(
+    "is-selected",
+    enabled
   );
 }
 
+
+function resetFormatChoices() {
+
+  formatChoices.colour =
+    "";
+
+  formatChoices.bold =
+    false;
+
+  formatChoices.italic =
+    false;
+
+  formatChoices.underline =
+    false;
+
+  formatChoices.lineBelow =
+    false;
+
+  formatChoices.alignment =
+    "";
+
+  formatChoices.clearExisting =
+    false;
+
+
+  editorSize.value =
+    "";
+
+
+  editorSize.classList.remove(
+    "has-selection"
+  );
+
+
+  clearColourSelectionUI();
+
+
+  [
+    "editor-bold",
+    "editor-italic",
+    "editor-underline",
+    "editor-line-button",
+    "align-left",
+    "align-centre",
+    "align-right",
+    "editor-clear-button"
+  ]
+    .forEach(
+      id => {
+
+        document
+          .getElementById(
+            id
+          )
+          .classList.remove(
+            "is-selected"
+          );
+      }
+    );
+
+
+  clearEditorStatus();
+}
+
+
+/*
+The text size now stays selected.
+*/
+
+editorSize.addEventListener(
+  "change",
+  function () {
+
+    this.classList.toggle(
+      "has-selection",
+      Boolean(
+        this.value
+      )
+    );
+
+
+    clearEditorStatus();
+  }
+);
+
+
+/*
+Colours are only CHOSEN here.
+Nothing is changed in the article yet.
+*/
 
 document
   .querySelectorAll(
@@ -2501,9 +3025,19 @@ document
         "click",
         () => {
 
-          applyColour(
-            button.dataset.colour
+          clearColourSelectionUI();
+
+
+          button.classList.add(
+            "is-selected"
           );
+
+
+          formatChoices.colour =
+            button.dataset.colour;
+
+
+          clearEditorStatus();
         }
       );
     }
@@ -2518,134 +3052,31 @@ document
     "change",
     function () {
 
-      applyColour(
-        this.value
-      );
-    }
-  );
+      clearColourSelectionUI();
 
 
-/* ==================================================
-   SIZE
-================================================== */
+      document
+        .getElementById(
+          "custom-colour-control"
+        )
+        .classList.add(
+          "is-selected"
+        );
 
-document
-  .getElementById(
-    "editor-size"
-  )
-  .addEventListener(
-    "change",
-    function () {
 
-      const size =
+      formatChoices.colour =
         this.value;
 
 
-      if (!size) {
-        return;
-      }
-
-
-      if (
-        editorTarget.value ===
-        "selected"
-      ) {
-
-        restoreEditorSelection();
-
-
-        document.execCommand(
-          "fontSize",
-          false,
-          "7"
-        );
-
-
-        normalizeFontTags(
-          size
-        );
-
-
-        saveEditorSelection();
-
-      } else {
-
-        getTargetElements()
-          .forEach(
-            element => {
-
-              element.style.fontSize =
-                size;
-            }
-          );
-      }
-
-
-      this.value = "";
+      clearEditorStatus();
     }
   );
 
 
-/* ==================================================
-   BOLD / ITALIC / UNDERLINE
-================================================== */
-
-function toggleTargetStyle(
-  property,
-  activeValue,
-  emptyValue,
-  command
-) {
-
-  if (
-    editorTarget.value ===
-    "selected"
-  ) {
-
-    restoreEditorSelection();
-
-
-    document.execCommand(
-      command,
-      false,
-      null
-    );
-
-
-    saveEditorSelection();
-
-    return;
-  }
-
-
-  const elements =
-    getTargetElements();
-
-
-  if (!elements.length) {
-    return;
-  }
-
-
-  const shouldAdd =
-    elements.some(
-      element =>
-        element.style[property] !==
-        activeValue
-    );
-
-
-  elements.forEach(
-    element => {
-
-      element.style[property] =
-        shouldAdd
-          ? activeValue
-          : emptyValue;
-    }
-  );
-}
-
+/*
+Bold / Italic / Underline / Line Below
+are now choices, not immediate actions.
+*/
 
 document
   .getElementById(
@@ -2655,12 +3086,17 @@ document
     "click",
     () => {
 
-      toggleTargetStyle(
-        "fontWeight",
-        "700",
-        "",
-        "bold"
+      formatChoices.bold =
+        !formatChoices.bold;
+
+
+      setToggleButton(
+        "editor-bold",
+        formatChoices.bold
       );
+
+
+      clearEditorStatus();
     }
   );
 
@@ -2673,12 +3109,17 @@ document
     "click",
     () => {
 
-      toggleTargetStyle(
-        "fontStyle",
-        "italic",
-        "",
-        "italic"
+      formatChoices.italic =
+        !formatChoices.italic;
+
+
+      setToggleButton(
+        "editor-italic",
+        formatChoices.italic
       );
+
+
+      clearEditorStatus();
     }
   );
 
@@ -2691,54 +3132,99 @@ document
     "click",
     () => {
 
-      toggleTargetStyle(
-        "textDecoration",
-        "underline",
-        "",
-        "underline"
+      formatChoices.underline =
+        !formatChoices.underline;
+
+
+      setToggleButton(
+        "editor-underline",
+        formatChoices.underline
       );
+
+
+      clearEditorStatus();
     }
   );
 
 
-/* ==================================================
-   ALIGNMENT
-================================================== */
+document
+  .getElementById(
+    "editor-line-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-function applyAlignment(
-  alignment,
-  command
+      formatChoices.lineBelow =
+        !formatChoices.lineBelow;
+
+
+      setToggleButton(
+        "editor-line-button",
+        formatChoices.lineBelow
+      );
+
+
+      clearEditorStatus();
+    }
+  );
+
+
+/*
+Alignment is mutually exclusive.
+*/
+
+function chooseAlignment(
+  alignment
 ) {
 
-  if (
-    editorTarget.value ===
-    "selected"
-  ) {
+  formatChoices.alignment =
+    formatChoices.alignment ===
+      alignment
 
-    restoreEditorSelection();
+      ? ""
 
-
-    document.execCommand(
-      command,
-      false,
-      null
-    );
+      : alignment;
 
 
-    saveEditorSelection();
+  [
+    [
+      "align-left",
+      "left"
+    ],
 
-    return;
-  }
+    [
+      "align-centre",
+      "center"
+    ],
 
-
-  getTargetElements()
+    [
+      "align-right",
+      "right"
+    ]
+  ]
     .forEach(
-      element => {
+      (
+        [
+          id,
+          value
+        ]
+      ) => {
 
-        element.style.textAlign =
-          alignment;
+        document
+          .getElementById(
+            id
+          )
+          .classList.toggle(
+            "is-selected",
+            formatChoices.alignment ===
+              value
+          );
       }
     );
+
+
+  clearEditorStatus();
 }
 
 
@@ -2750,9 +3236,8 @@ document
     "click",
     () => {
 
-      applyAlignment(
-        "left",
-        "justifyLeft"
+      chooseAlignment(
+        "left"
       );
     }
   );
@@ -2766,9 +3251,8 @@ document
     "click",
     () => {
 
-      applyAlignment(
-        "center",
-        "justifyCenter"
+      chooseAlignment(
+        "center"
       );
     }
   );
@@ -2782,102 +3266,17 @@ document
     "click",
     () => {
 
-      applyAlignment(
-        "right",
-        "justifyRight"
+      chooseAlignment(
+        "right"
       );
     }
   );
 
 
-/* ==================================================
-   LINE BELOW
-================================================== */
-
-document
-  .getElementById(
-    "editor-line-button"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      let elements = [];
-
-
-      if (
-        editorTarget.value ===
-        "selected"
-      ) {
-
-        restoreEditorSelection();
-
-
-        const block =
-          getCurrentBlock();
-
-
-        if (block) {
-
-          elements = [block];
-        }
-
-      } else {
-
-        elements =
-          getTargetElements();
-      }
-
-
-      if (!elements.length) {
-
-        showMessage(
-          "Place your cursor inside the write-up first, or choose a group under Apply formatting to.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      const shouldAdd =
-        elements.some(
-          element =>
-            !element.style.borderBottom
-        );
-
-
-      elements.forEach(
-        element => {
-
-          if (shouldAdd) {
-
-            element.style.borderBottom =
-              "2px solid #D5A900";
-
-            element.style.paddingBottom =
-              "8px";
-
-          } else {
-
-            element.style.removeProperty(
-              "border-bottom"
-            );
-
-            element.style.removeProperty(
-              "padding-bottom"
-            );
-          }
-
-        }
-      );
-    }
-  );
-
-
-/* ==================================================
-   CLEAR STYLE
-================================================== */
+/*
+Clear Existing Style is also a choice.
+It is executed only after APPLY CHANGES.
+*/
 
 document
   .getElementById(
@@ -2887,42 +3286,500 @@ document
     "click",
     () => {
 
+      formatChoices.clearExisting =
+        !formatChoices.clearExisting;
+
+
+      setToggleButton(
+        "editor-clear-button",
+        formatChoices.clearExisting
+      );
+
+
+      clearEditorStatus();
+    }
+  );
+
+
+editorTarget.addEventListener(
+  "change",
+  () => {
+
+    clearEditorStatus();
+  }
+);
+
+
+/* ==================================================
+   APPLY TO GROUP
+================================================== */
+
+function applyFormattingToElements(
+  elements
+) {
+
+  if (
+    !elements.length
+  ) {
+
+    return 0;
+  }
+
+
+  elements.forEach(
+    element => {
+
       if (
-        editorTarget.value ===
-        "selected"
+        formatChoices.clearExisting
       ) {
 
-        restoreEditorSelection();
+        element.removeAttribute(
+          "style"
+        );
+      }
 
 
-        document.execCommand(
-          "removeFormat",
-          false,
-          null
+      if (
+        editorSize.value
+      ) {
+
+        element.style.fontSize =
+          editorSize.value;
+      }
+
+
+      if (
+        formatChoices.colour
+      ) {
+
+        element.style.color =
+          formatChoices.colour;
+      }
+
+
+      if (
+        formatChoices.bold
+      ) {
+
+        element.style.fontWeight =
+          "700";
+      }
+
+
+      if (
+        formatChoices.italic
+      ) {
+
+        element.style.fontStyle =
+          "italic";
+      }
+
+
+      if (
+        formatChoices.underline
+      ) {
+
+        element.style.textDecoration =
+          "underline";
+      }
+
+
+      if (
+        formatChoices.alignment
+      ) {
+
+        element.style.textAlign =
+          formatChoices.alignment;
+      }
+
+
+      if (
+        formatChoices.lineBelow
+      ) {
+
+        element.style.borderBottom =
+          "2px solid #D5A900";
+
+
+        element.style.paddingBottom =
+          "8px";
+      }
+
+    }
+  );
+
+
+  return elements.length;
+}
+
+
+/* ==================================================
+   APPLY TO SELECTED TEXT
+================================================== */
+
+function applyFormattingToSelectedText() {
+
+  if (
+    !savedEditorRange
+  ) {
+
+    showEditorStatus(
+      "Highlight the words you want to format first.",
+      "error"
+    );
+
+    return false;
+  }
+
+
+  restoreEditorSelection();
+
+
+  const selection =
+    window.getSelection();
+
+
+  if (
+    !selection ||
+    selection.rangeCount ===
+      0
+  ) {
+
+    showEditorStatus(
+      "Highlight the words you want to format first.",
+      "error"
+    );
+
+    return false;
+  }
+
+
+  const range =
+    selection.getRangeAt(
+      0
+    );
+
+
+  const hasTextSelection =
+    !range.collapsed;
+
+
+  /*
+  Clear selected text formatting.
+  */
+
+  if (
+    formatChoices.clearExisting &&
+    hasTextSelection
+  ) {
+
+    document.execCommand(
+      "removeFormat",
+      false,
+      null
+    );
+  }
+
+
+  /*
+  Size
+  */
+
+  if (
+    editorSize.value &&
+    hasTextSelection
+  ) {
+
+    document.execCommand(
+      "fontSize",
+      false,
+      "7"
+    );
+
+
+    normalizeSizeFontTags(
+      editorSize.value
+    );
+  }
+
+
+  /*
+  Colour
+  */
+
+  if (
+    formatChoices.colour &&
+    hasTextSelection
+  ) {
+
+    document.execCommand(
+      "foreColor",
+      false,
+      formatChoices.colour
+    );
+
+
+    normalizeColourFontTags();
+  }
+
+
+  if (
+    formatChoices.bold &&
+    hasTextSelection
+  ) {
+
+    document.execCommand(
+      "bold",
+      false,
+      null
+    );
+  }
+
+
+  if (
+    formatChoices.italic &&
+    hasTextSelection
+  ) {
+
+    document.execCommand(
+      "italic",
+      false,
+      null
+    );
+  }
+
+
+  if (
+    formatChoices.underline &&
+    hasTextSelection
+  ) {
+
+    document.execCommand(
+      "underline",
+      false,
+      null
+    );
+  }
+
+
+  /*
+  Alignment and Line Below work on
+  the containing paragraph / heading.
+  */
+
+  const currentBlock =
+    getCurrentBlock();
+
+
+  if (
+    currentBlock
+  ) {
+
+    if (
+      formatChoices.clearExisting &&
+      !hasTextSelection
+    ) {
+
+      currentBlock.removeAttribute(
+        "style"
+      );
+    }
+
+
+    if (
+      formatChoices.alignment
+    ) {
+
+      currentBlock.style.textAlign =
+        formatChoices.alignment;
+    }
+
+
+    if (
+      formatChoices.lineBelow
+    ) {
+
+      currentBlock.style.borderBottom =
+        "2px solid #D5A900";
+
+
+      currentBlock.style.paddingBottom =
+        "8px";
+    }
+  }
+
+
+  if (
+    !hasTextSelection &&
+    (
+      editorSize.value ||
+      formatChoices.colour ||
+      formatChoices.bold ||
+      formatChoices.italic ||
+      formatChoices.underline
+    )
+  ) {
+
+    showEditorStatus(
+      "Highlight the words first for size, colour, bold, italic or underline.",
+      "error"
+    );
+
+    return false;
+  }
+
+
+  saveEditorSelection();
+
+
+  return true;
+}
+
+
+/* ==================================================
+   APPLY BUTTON
+================================================== */
+
+document
+  .getElementById(
+    "editor-apply-button"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      clearEditorStatus();
+
+
+      const hasChoice =
+        Boolean(
+          editorSize.value ||
+          formatChoices.colour ||
+          formatChoices.bold ||
+          formatChoices.italic ||
+          formatChoices.underline ||
+          formatChoices.lineBelow ||
+          formatChoices.alignment ||
+          formatChoices.clearExisting
         );
 
 
-        saveEditorSelection();
+      if (
+        !hasChoice
+      ) {
+
+        showEditorStatus(
+          "Choose at least one size, colour or style first.",
+          "error"
+        );
 
         return;
       }
 
 
-      getTargetElements()
-        .forEach(
-          element => {
+      if (
+        editorTarget.value ===
+          "selected"
+      ) {
 
-            element.removeAttribute(
-              "style"
-            );
-          }
+        const success =
+          applyFormattingToSelectedText();
+
+
+        if (
+          success
+        ) {
+
+          showEditorStatus(
+            "Formatting applied to the selected text.",
+            "success"
+          );
+        }
+
+
+        return;
+      }
+
+
+      const elements =
+        getTargetElements();
+
+
+      if (
+        !elements.length
+      ) {
+
+        showEditorStatus(
+          "I could not find anything in this article that matches that group.",
+          "error"
         );
+
+        return;
+      }
+
+
+      const count =
+        applyFormattingToElements(
+          elements
+        );
+
+
+      let targetName =
+        "items";
+
+
+      if (
+        editorTarget.value ===
+          "h2"
+      ) {
+
+        targetName =
+          "main headings";
+
+      } else if (
+        editorTarget.value ===
+          "h3"
+      ) {
+
+        targetName =
+          "subheadings";
+
+      } else if (
+        editorTarget.value ===
+          "body"
+      ) {
+
+        targetName =
+          "normal text sections";
+
+      } else if (
+        editorTarget.value ===
+          "numbered"
+      ) {
+
+        targetName =
+          "numbered titles";
+
+      } else if (
+        editorTarget.value ===
+          "bullets"
+      ) {
+
+        targetName =
+          "bullet items";
+      }
+
+
+      showEditorStatus(
+        `Applied successfully to ${count} ${targetName}.`,
+        "success"
+      );
     }
   );
 
 
 /* ==================================================
-   CHANGE CURRENT LINE TYPE
+   INDIVIDUAL WRITING TOOLS
 ================================================== */
 
 document
@@ -2937,7 +3794,10 @@ document
         this.value;
 
 
-      if (!block) {
+      if (
+        !block
+      ) {
+
         return;
       }
 
@@ -2948,21 +3808,20 @@ document
       document.execCommand(
         "formatBlock",
         false,
-        "<" + block + ">"
+        "<" +
+        block +
+        ">"
       );
 
 
       saveEditorSelection();
 
 
-      this.value = "";
+      this.value =
+        "";
     }
   );
 
-
-/* ==================================================
-   LISTS
-================================================== */
 
 document
   .getElementById(
@@ -3010,10 +3869,6 @@ document
   );
 
 
-/* ==================================================
-   LINK
-================================================== */
-
 document
   .getElementById(
     "editor-link-button"
@@ -3028,7 +3883,10 @@ document
         );
 
 
-      if (!url) {
+      if (
+        !url
+      ) {
+
         return;
       }
 
@@ -3043,7 +3901,7 @@ document
         )
       ) {
 
-        showMessage(
+        showEditorStatus(
           "Please use a link beginning with https://",
           "error"
         );
@@ -3069,10 +3927,14 @@ document
 
 
       const range =
-        selection.getRangeAt(0);
+        selection.getRangeAt(
+          0
+        );
 
 
-      if (range.collapsed) {
+      if (
+        range.collapsed
+      ) {
 
         const words =
           prompt(
@@ -3081,7 +3943,10 @@ document
           );
 
 
-        if (!words) {
+        if (
+          !words
+        ) {
+
           return;
         }
 
@@ -3089,10 +3954,15 @@ document
         document.execCommand(
           "insertHTML",
           false,
+
           '<a href="' +
-          escapeHTML(cleanUrl) +
+          escapeHTML(
+            cleanUrl
+          ) +
           '" target="_blank" rel="noopener noreferrer">' +
-          escapeHTML(words) +
+          escapeHTML(
+            words
+          ) +
           "</a>"
         );
 
@@ -3107,7 +3977,9 @@ document
 
 
       contentEditor
-        .querySelectorAll("a")
+        .querySelectorAll(
+          "a"
+        )
         .forEach(
           link => {
 
@@ -3121,10 +3993,6 @@ document
     }
   );
 
-
-/* ==================================================
-   CTA
-================================================== */
 
 document
   .getElementById(
@@ -3141,7 +4009,10 @@ document
         );
 
 
-      if (!label) {
+      if (
+        !label
+      ) {
+
         return;
       }
 
@@ -3159,7 +4030,7 @@ document
         )
       ) {
 
-        showMessage(
+        showEditorStatus(
           "Please enter a valid https:// link.",
           "error"
         );
@@ -3178,11 +4049,16 @@ document
         '<p class="gge-inline-cta">' +
 
         '<a class="gge-inline-cta-link" ' +
+
         'href="' +
-        escapeHTML(url.trim()) +
+        escapeHTML(
+          url.trim()
+        ) +
         '" target="_blank" rel="noopener noreferrer">' +
 
-        escapeHTML(label.trim()) +
+        escapeHTML(
+          label.trim()
+        ) +
 
         "</a>" +
 
@@ -3195,10 +4071,6 @@ document
   );
 
 
-/* ==================================================
-   UNDO / REDO
-================================================== */
-
 document
   .getElementById(
     "editor-undo-button"
@@ -3209,8 +4081,11 @@ document
 
       contentEditor.focus();
 
+
       document.execCommand(
-        "undo"
+        "undo",
+        false,
+        null
       );
     }
   );
@@ -3226,16 +4101,15 @@ document
 
       contentEditor.focus();
 
+
       document.execCommand(
-        "redo"
+        "redo",
+        false,
+        null
       );
     }
   );
 
-
-/* ==================================================
-   PREVIEW
-================================================== */
 
 document
   .getElementById(
@@ -3264,7 +4138,9 @@ document
 
           contentPreview
             .classList
-            .contains("open")
+            .contains(
+              "open"
+            )
 
             ? "Hide Preview"
 
@@ -3294,7 +4170,10 @@ contentEditor.addEventListener(
         );
 
 
-    if (!text) {
+    if (
+      !text
+    ) {
+
       return;
     }
 
@@ -3352,12 +4231,15 @@ function loadEditorContent(
 
   savedEditorRange =
     null;
+
+
+  resetFormatChoices();
 }
 
 
 function getEditorContentForSaving() {
 
-  normalizeFontTags();
+  normalizeColourFontTags();
 
 
   const clean =
@@ -3372,7 +4254,10 @@ function getEditorContentForSaving() {
     );
 
 
-  if (!plainText) {
+  if (
+    !plainText
+  ) {
+
     return "";
   }
 
@@ -3427,18 +4312,28 @@ imageAltTextInput.addEventListener(
    SLUG
 ================================================== */
 
-function cleanSlug(value) {
+function cleanSlug(
+  value
+) {
 
   return String(
     value || ""
   )
-    .normalize("NFD")
+    .normalize(
+      "NFD"
+    )
     .replace(
       /[\u0300-\u036f]/g,
       ""
     )
-    .replace(/×/g, "x")
-    .replace(/&/g, " and ")
+    .replace(
+      /×/g,
+      "x"
+    )
+    .replace(
+      /&/g,
+      " and "
+    )
     .toLowerCase()
     .trim()
     .replace(
@@ -3452,21 +4347,35 @@ function cleanSlug(value) {
 }
 
 
-function suggestShortSlug(value) {
+function suggestShortSlug(
+  value
+) {
 
   const full =
-    cleanSlug(value);
+    cleanSlug(
+      value
+    );
 
 
-  if (!full) {
+  if (
+    !full
+  ) {
+
     return "";
   }
 
 
   return full
-    .split("-")
-    .slice(0, 8)
-    .join("-");
+    .split(
+      "-"
+    )
+    .slice(
+      0,
+      8
+    )
+    .join(
+      "-"
+    );
 }
 
 
@@ -3490,7 +4399,9 @@ titleInput.addEventListener(
   "input",
   function () {
 
-    if (!slugWasEdited) {
+    if (
+      !slugWasEdited
+    ) {
 
       slugInput.value =
         suggestShortSlug(
@@ -3537,7 +4448,9 @@ function updateSeoCounters() {
       "seo-title-counter"
     )
     .textContent =
-      seoTitleInput.value.length +
+      seoTitleInput
+        .value
+        .length +
       " / 70";
 
 
@@ -3546,7 +4459,9 @@ function updateSeoCounters() {
       "meta-description-counter"
     )
     .textContent =
-      metaDescriptionInput.value.length +
+      metaDescriptionInput
+        .value
+        .length +
       " / 180";
 }
 
@@ -3567,9 +4482,14 @@ metaDescriptionInput.addEventListener(
    YOUTUBE
 ================================================== */
 
-function isValidYouTubeUrl(value) {
+function isValidYouTubeUrl(
+  value
+) {
 
-  if (!value) {
+  if (
+    !value
+  ) {
+
     return true;
   }
 
@@ -3577,7 +4497,9 @@ function isValidYouTubeUrl(value) {
   try {
 
     const url =
-      new URL(value);
+      new URL(
+        value
+      );
 
 
     const host =
@@ -3590,11 +4512,16 @@ function isValidYouTubeUrl(value) {
 
 
     return (
-      url.protocol === "https:" &&
+      url.protocol ===
+        "https:" &&
       (
-        host === "youtube.com" ||
-        host.endsWith(".youtube.com") ||
-        host === "youtu.be"
+        host ===
+          "youtube.com" ||
+        host.endsWith(
+          ".youtube.com"
+        ) ||
+        host ===
+          "youtu.be"
       )
     );
 
@@ -3625,7 +4552,7 @@ promotionTypeInput.addEventListener(
 
     if (
       this.value ===
-      "sponsored"
+        "sponsored"
     ) {
 
       promotionButtonTextInput.value =
@@ -3633,7 +4560,7 @@ promotionTypeInput.addEventListener(
 
     } else if (
       this.value ===
-      "affiliate"
+        "affiliate"
     ) {
 
       promotionButtonTextInput.value =
@@ -3641,7 +4568,7 @@ promotionTypeInput.addEventListener(
 
     } else if (
       this.value ===
-      "own_product"
+        "own_product"
     ) {
 
       promotionButtonTextInput.value =
@@ -3678,7 +4605,9 @@ function showPreview(
     );
 
 
-  if (url) {
+  if (
+    url
+  ) {
 
     image.src =
       url;
@@ -3690,7 +4619,7 @@ function showPreview(
 
     if (
       imageId ===
-      "preview-image"
+        "preview-image"
     ) {
 
       updateCoverPreviewAlt();
@@ -3715,52 +4644,98 @@ function showPreview(
 
 function resetForm() {
 
-  editingId = null;
-  existingImageUrl = "";
-  existingPromotionImageUrl = "";
-  existingPublishedAt = null;
-  slugWasEdited = false;
-  savedEditorRange = null;
+  editingId =
+    null;
 
-  titleInput.value = "";
-  categoryInput.value = "";
+  existingImageUrl =
+    "";
+
+  existingPromotionImageUrl =
+    "";
+
+  existingPublishedAt =
+    null;
+
+  slugWasEdited =
+    false;
+
+  savedEditorRange =
+    null;
+
+
+  titleInput.value =
+    "";
+
+  categoryInput.value =
+    "";
+
   authorNameInput.value =
     "GiftedGift Empire";
 
-  slugInput.value = "";
-  excerptInput.value = "";
-  seoTitleInput.value = "";
-  metaDescriptionInput.value = "";
-  youtubeUrlInput.value = "";
-  contentInput.value = "";
+  slugInput.value =
+    "";
 
-  contentEditor.innerHTML = "";
+  excerptInput.value =
+    "";
 
-  contentPreview.innerHTML = "";
+  seoTitleInput.value =
+    "";
+
+  metaDescriptionInput.value =
+    "";
+
+  youtubeUrlInput.value =
+    "";
+
+  contentInput.value =
+    "";
+
+  contentEditor.innerHTML =
+    "";
+
+  contentPreview.innerHTML =
+    "";
 
   contentPreview.classList.remove(
     "open"
   );
 
+
   editorTarget.value =
     "selected";
 
-  imageAltTextInput.value = "";
-  imageFileInput.value = "";
+
+  resetFormatChoices();
+
+
+  imageAltTextInput.value =
+    "";
+
+  imageFileInput.value =
+    "";
 
   promotionTypeInput.value =
     "none";
 
-  promotionNameInput.value = "";
-  promotionUrlInput.value = "";
-  promotionButtonTextInput.value = "";
-  promotionImageFileInput.value = "";
+  promotionNameInput.value =
+    "";
+
+  promotionUrlInput.value =
+    "";
+
+  promotionButtonTextInput.value =
+    "";
+
+  promotionImageFileInput.value =
+    "";
 
   publishedInput.checked =
     false;
 
 
   updateSlugPreview();
+
+
   updateSeoCounters();
 
 
@@ -3816,7 +4791,9 @@ function resetForm() {
    IMAGE UPLOAD
 ================================================== */
 
-function safeFileName(name) {
+function safeFileName(
+  name
+) {
 
   return String(
     name ||
@@ -3836,7 +4813,9 @@ async function uploadImage(
   currentUrl
 ) {
 
-  if (!file) {
+  if (
+    !file
+  ) {
 
     return currentUrl ||
       null;
@@ -3886,7 +4865,9 @@ async function uploadImage(
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     throw new Error(
       error.message ||
@@ -3968,33 +4949,51 @@ const RESERVED_ROOT_SLUGS =
 const GLOBAL_SLUG_TABLES = [
 
   {
-    table: "affiliate_products",
-    label: "an Affiliate Product"
+    table:
+      "affiliate_products",
+
+    label:
+      "an Affiliate Product"
   },
 
   {
-    table: "products",
-    label: "a Physical Product"
+    table:
+      "products",
+
+    label:
+      "a Physical Product"
   },
 
   {
-    table: "digital_products",
-    label: "a Digital Product"
+    table:
+      "digital_products",
+
+    label:
+      "a Digital Product"
   },
 
   {
-    table: "foodstuffs",
-    label: "an African Foodstuff"
+    table:
+      "foodstuffs",
+
+    label:
+      "an African Foodstuff"
   },
 
   {
-    table: "blog_posts",
-    label: "another Blog Post"
+    table:
+      "blog_posts",
+
+    label:
+      "another Blog Post"
   },
 
   {
-    table: "daily_inspirations",
-    label: "a Daily Inspiration post"
+    table:
+      "daily_inspirations",
+
+    label:
+      "a Daily Inspiration post"
   }
 
 ];
@@ -4005,10 +5004,14 @@ async function checkGlobalSlugAvailability(
 ) {
 
   const cleanValue =
-    cleanSlug(slug);
+    cleanSlug(
+      slug
+    );
 
 
-  if (!cleanValue) {
+  if (
+    !cleanValue
+  ) {
 
     throw new Error(
       "Please enter a valid Share Link Name."
@@ -4035,8 +5038,12 @@ async function checkGlobalSlugAvailability(
 
     let query =
       db
-        .from(source.table)
-        .select("id,slug")
+        .from(
+          source.table
+        )
+        .select(
+          "id,slug"
+        )
         .eq(
           "slug",
           cleanValue
@@ -4061,10 +5068,14 @@ async function checkGlobalSlugAvailability(
       data,
       error
     } =
-      await query.limit(1);
+      await query.limit(
+        1
+      );
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       throw new Error(
         "The Share Link Name could not be checked safely. Please try again."
@@ -4073,8 +5084,11 @@ async function checkGlobalSlugAvailability(
 
 
     if (
-      Array.isArray(data) &&
-      data.length > 0
+      Array.isArray(
+        data
+      ) &&
+      data.length >
+        0
     ) {
 
       throw new Error(
@@ -4098,34 +5112,57 @@ async function savePost() {
 
 
   const title =
-    titleInput.value.trim();
+    titleInput
+      .value
+      .trim();
+
 
   const category =
-    categoryInput.value.trim();
+    categoryInput
+      .value
+      .trim();
+
 
   const authorName =
-    authorNameInput.value.trim() ||
+    authorNameInput
+      .value
+      .trim() ||
     "GiftedGift Empire";
+
 
   const slug =
     cleanSlug(
       slugInput.value
     );
 
+
   const excerpt =
-    excerptInput.value.trim();
+    excerptInput
+      .value
+      .trim();
+
 
   const seoTitle =
-    seoTitleInput.value.trim();
+    seoTitleInput
+      .value
+      .trim();
+
 
   const metaDescription =
-    metaDescriptionInput.value.trim();
+    metaDescriptionInput
+      .value
+      .trim();
+
 
   const youtubeUrl =
-    youtubeUrlInput.value.trim();
+    youtubeUrlInput
+      .value
+      .trim();
+
 
   const content =
     getEditorContentForSaving();
+
 
   const imageAltText =
     imageAltTextInput
@@ -4133,18 +5170,23 @@ async function savePost() {
       .trim() ||
     title;
 
+
   const promotionType =
-    promotionTypeInput.value;
+    promotionTypeInput
+      .value;
+
 
   const promotionName =
     promotionNameInput
       .value
       .trim();
 
+
   const promotionUrl =
     promotionUrlInput
       .value
       .trim();
+
 
   let promotionButtonText =
     promotionButtonTextInput
@@ -4152,7 +5194,9 @@ async function savePost() {
       .trim();
 
 
-  if (!title) {
+  if (
+    !title
+  ) {
 
     showMessage(
       "Please enter an article title.",
@@ -4165,7 +5209,9 @@ async function savePost() {
   }
 
 
-  if (!category) {
+  if (
+    !category
+  ) {
 
     showMessage(
       "Please select an article category.",
@@ -4178,7 +5224,9 @@ async function savePost() {
   }
 
 
-  if (!slug) {
+  if (
+    !slug
+  ) {
 
     showMessage(
       "Please enter a Share Link Name.",
@@ -4191,7 +5239,9 @@ async function savePost() {
   }
 
 
-  if (!excerpt) {
+  if (
+    !excerpt
+  ) {
 
     showMessage(
       "Please enter a short excerpt.",
@@ -4204,7 +5254,9 @@ async function savePost() {
   }
 
 
-  if (!content) {
+  if (
+    !content
+  ) {
 
     showMessage(
       "Please write the article content.",
@@ -4376,24 +5428,40 @@ async function savePost() {
         promotionType,
 
       promotion_name:
-        promotionType === "none"
+        promotionType ===
+          "none"
+
           ? null
-          : promotionName || null,
+
+          : promotionName ||
+            null,
 
       promotion_url:
-        promotionType === "none"
+        promotionType ===
+          "none"
+
           ? null
-          : promotionUrl || null,
+
+          : promotionUrl ||
+            null,
 
       promotion_button_text:
-        promotionType === "none"
+        promotionType ===
+          "none"
+
           ? null
-          : promotionButtonText || null,
+
+          : promotionButtonText ||
+            null,
 
       promotion_image_url:
-        promotionType === "none"
+        promotionType ===
+          "none"
+
           ? null
-          : promotionImageUrl || null,
+
+          : promotionImageUrl ||
+            null,
 
       published:
         publishedInput.checked,
@@ -4410,12 +5478,18 @@ async function savePost() {
     let error;
 
 
-    if (editingId) {
+    if (
+      editingId
+    ) {
 
       const result =
         await db
-          .from("blog_posts")
-          .update(payload)
+          .from(
+            "blog_posts"
+          )
+          .update(
+            payload
+          )
           .eq(
             "id",
             editingId
@@ -4429,8 +5503,12 @@ async function savePost() {
 
       const result =
         await db
-          .from("blog_posts")
-          .insert(payload);
+          .from(
+            "blog_posts"
+          )
+          .insert(
+            payload
+          );
 
 
       error =
@@ -4438,11 +5516,13 @@ async function savePost() {
     }
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
       if (
         error.code ===
-        "23505"
+          "23505"
       ) {
 
         throw new Error(
@@ -4459,7 +5539,9 @@ async function savePost() {
 
 
     const wasEditing =
-      Boolean(editingId);
+      Boolean(
+        editingId
+      );
 
 
     showMessage(
@@ -4475,18 +5557,26 @@ async function savePost() {
 
     resetForm();
 
+
     await loadPosts();
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     showMessage(
 
-      error instanceof Error
+      error instanceof
+        Error
+
         ? error.message
+
         : "The blog post could not be saved.",
 
       "error"
@@ -4531,7 +5621,9 @@ async function loadPosts() {
     error
   } =
     await db
-      .from("blog_posts")
+      .from(
+        "blog_posts"
+      )
       .select(
         "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
       )
@@ -4544,9 +5636,13 @@ async function loadPosts() {
       );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     box.innerHTML = `
@@ -4560,12 +5656,16 @@ async function loadPosts() {
 
 
   const posts =
-    Array.isArray(data)
+    Array.isArray(
+      data
+    )
       ? data
       : [];
 
 
-  if (!posts.length) {
+  if (
+    !posts.length
+  ) {
 
     box.innerHTML = `
       <div class="empty">
@@ -4577,7 +5677,8 @@ async function loadPosts() {
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML =
+    "";
 
 
   posts.forEach(
@@ -4600,9 +5701,11 @@ async function loadPosts() {
 
       const date =
         dateSource
+
           ? new Date(
               dateSource
             ).toLocaleString()
+
           : "";
 
 
@@ -4646,7 +5749,8 @@ async function loadPosts() {
 
         <h3>
           ${escapeHTML(
-            post.title || ""
+            post.title ||
+            ""
           )}
         </h3>
 
@@ -4697,7 +5801,9 @@ async function loadPosts() {
 
             ? `
               <div class="date">
-                ${escapeHTML(date)}
+                ${escapeHTML(
+                  date
+                )}
               </div>
             `
 
@@ -4773,7 +5879,9 @@ async function loadPosts() {
           "click",
           () => {
 
-            startEditing(post);
+            startEditing(
+              post
+            );
           }
         );
 
@@ -4794,7 +5902,9 @@ async function loadPosts() {
         );
 
 
-      box.appendChild(card);
+      box.appendChild(
+        card
+      );
     }
   );
 }
@@ -4804,30 +5914,43 @@ async function loadPosts() {
    EDIT POST
 ================================================== */
 
-function startEditing(post) {
+function startEditing(
+  post
+) {
 
   editingId =
     post.id;
 
+
   existingImageUrl =
-    post.image_url || "";
+    post.image_url ||
+    "";
+
 
   existingPromotionImageUrl =
-    post.promotion_image_url || "";
+    post.promotion_image_url ||
+    "";
+
 
   existingPublishedAt =
-    post.published_at || null;
+    post.published_at ||
+    null;
 
 
   titleInput.value =
-    post.title || "";
+    post.title ||
+    "";
+
 
   categoryInput.value =
-    post.category || "";
+    post.category ||
+    "";
+
 
   authorNameInput.value =
     post.author_name ||
     "GiftedGift Empire";
+
 
   slugInput.value =
     post.slug ||
@@ -4835,25 +5958,34 @@ function startEditing(post) {
       post.title
     );
 
+
   slugWasEdited =
     true;
 
 
   excerptInput.value =
-    post.excerpt || "";
+    post.excerpt ||
+    "";
+
 
   seoTitleInput.value =
-    post.seo_title || "";
+    post.seo_title ||
+    "";
+
 
   metaDescriptionInput.value =
-    post.meta_description || "";
+    post.meta_description ||
+    "";
+
 
   youtubeUrlInput.value =
-    post.youtube_url || "";
+    post.youtube_url ||
+    "";
 
 
   loadEditorContent(
-    post.content || ""
+    post.content ||
+    ""
   );
 
 
@@ -4867,11 +5999,16 @@ function startEditing(post) {
     post.promotion_type ||
     "none";
 
+
   promotionNameInput.value =
-    post.promotion_name || "";
+    post.promotion_name ||
+    "";
+
 
   promotionUrlInput.value =
-    post.promotion_url || "";
+    post.promotion_url ||
+    "";
+
 
   promotionButtonTextInput.value =
     post.promotion_button_text ||
@@ -4879,14 +6016,21 @@ function startEditing(post) {
 
 
   publishedInput.checked =
-    post.published === true;
+    post.published ===
+      true;
 
 
-  imageFileInput.value = "";
-  promotionImageFileInput.value = "";
+  imageFileInput.value =
+    "";
+
+
+  promotionImageFileInput.value =
+    "";
 
 
   updateSlugPreview();
+
+
   updateSeoCounters();
 
 
@@ -4933,8 +6077,11 @@ function startEditing(post) {
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    top:
+      0,
+
+    behavior:
+      "smooth"
   });
 }
 
@@ -4962,12 +6109,19 @@ async function deletePost(
     error
   } =
     await db
-      .from("blog_posts")
+      .from(
+        "blog_posts"
+      )
       .delete()
-      .eq("id", id);
+      .eq(
+        "id",
+        id
+      );
 
 
-  if (error) {
+  if (
+    error
+  ) {
 
     showMessage(
       error.message ||
@@ -4985,7 +6139,8 @@ async function deletePost(
 
 
   if (
-    editingId === id
+    editingId ===
+      id
   ) {
 
     resetForm();
@@ -5009,7 +6164,9 @@ imageFileInput.addEventListener(
         .files?.[0];
 
 
-    if (!file) {
+    if (
+      !file
+    ) {
 
       showPreview(
         "image-preview",
@@ -5024,7 +6181,9 @@ imageFileInput.addEventListener(
     showPreview(
       "image-preview",
       "preview-image",
-      URL.createObjectURL(file)
+      URL.createObjectURL(
+        file
+      )
     );
   }
 );
@@ -5039,7 +6198,9 @@ promotionImageFileInput.addEventListener(
         .files?.[0];
 
 
-    if (!file) {
+    if (
+      !file
+    ) {
 
       showPreview(
         "promotion-image-preview",
@@ -5054,7 +6215,9 @@ promotionImageFileInput.addEventListener(
     showPreview(
       "promotion-image-preview",
       "promotion-preview-image",
-      URL.createObjectURL(file)
+      URL.createObjectURL(
+        file
+      )
     );
   }
 );
@@ -5145,4 +6308,5 @@ protectPage();
 </script>
 
 </body>
+
 </html>
