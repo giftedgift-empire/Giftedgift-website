@@ -10,11 +10,6 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-
-  <!-- ==================================================
-       BASIC SEO
-  ================================================== -->
-
   <title>
     Blog | GiftedGift Empire
   </title>
@@ -42,11 +37,6 @@
     href="https://giftedgiftempire.com/blog"
   >
 
-
-  <!-- ==================================================
-       FAVICON
-  ================================================== -->
-
   <link
     rel="icon"
     type="image/png"
@@ -63,11 +53,6 @@
     rel="apple-touch-icon"
     href="/my-logo.png"
   >
-
-
-  <!-- ==================================================
-       FACEBOOK / WHATSAPP / OPEN GRAPH
-  ================================================== -->
 
   <meta
     id="og-type"
@@ -110,11 +95,6 @@
     content="GiftedGift Empire Blog"
   >
 
-
-  <!-- ==================================================
-       TWITTER / X
-  ================================================== -->
-
   <meta
     name="twitter:card"
     content="summary_large_image"
@@ -145,913 +125,569 @@
       box-sizing: border-box;
     }
 
-
     body {
       margin: 0;
-
-      font-family:
-        Arial,
-        sans-serif;
-
+      font-family: Arial, sans-serif;
       background: #f7f7f7;
-
       color: #222;
     }
 
-
-    /* ==================================================
-       HEADER
-    ================================================== */
-
     header {
       background: #123a8c;
-
       color: white;
-
-      padding:
-        18px
-        20px;
+      padding: 18px 20px;
     }
-
 
     .header-inner {
       max-width: 1200px;
-
       margin: auto;
     }
 
-
     .brand {
       display: flex;
-
       align-items: center;
-
       gap: 11px;
-
       width: fit-content;
-
       margin-bottom: 18px;
-
       text-decoration: none;
     }
 
-
     .brand img {
       width: 58px;
-
       height: 58px;
-
       object-fit: contain;
-
       background: white;
-
       border-radius: 50%;
-
       padding: 3px;
     }
 
-
     .brand-name {
       font-size: 28px;
-
       font-weight: 800;
     }
-
 
     .brand-name .gifted {
       color: white;
     }
 
-
     .brand-name .empire {
       color: #f2bd16;
     }
 
-
-    /* ==================================================
-       NAVIGATION
-    ================================================== */
-
     nav {
       display: flex;
-
       flex-wrap: wrap;
-
-      gap:
-        6px
-        18px;
+      gap: 6px 18px;
     }
-
 
     nav a {
       color: white;
-
       text-decoration: none;
-
       font-weight: bold;
-
-      padding:
-        7px
-        0;
-
-      border-bottom:
-        3px solid transparent;
+      padding: 7px 0;
+      border-bottom: 3px solid transparent;
     }
-
 
     nav a:hover,
     nav a.active {
       color: #f2bd16;
     }
 
-
     nav a.active {
-      border-bottom-color:
-        #f2bd16;
+      border-bottom-color: #f2bd16;
     }
-
-
-    /* ==================================================
-       HERO
-    ================================================== */
 
     .hero {
       background: white;
-
       text-align: center;
-
-      padding:
-        55px
-        20px
-        40px;
+      padding: 55px 20px 40px;
     }
-
 
     .hero h1 {
       color: #123a8c;
-
       font-size: 38px;
-
-      margin:
-        0
-        0
-        15px;
+      margin: 0 0 15px;
     }
-
 
     .hero p {
       max-width: 680px;
-
       margin: auto;
-
       color: #555;
-
       line-height: 1.7;
     }
 
-
-    /* ==================================================
-       BLOG PAGE
-    ================================================== */
-
     .blog {
       max-width: 1100px;
-
       margin: auto;
-
-      padding:
-        45px
-        20px;
+      padding: 45px 20px;
     }
-
 
     .blog-list-heading {
       text-align: center;
-
       font-size: 30px;
-
       color: #123a8c;
-
-      margin:
-        0
-        0
-        24px;
+      margin: 0 0 24px;
     }
-
-
-    /* ==================================================
-       BLOG CATEGORY FILTERS
-    ================================================== */
 
     .blog-category-filters {
       display: none;
-
       flex-wrap: wrap;
-
       justify-content: center;
-
       gap: 10px;
-
-      margin:
-        0
-        auto
-        32px;
+      margin: 0 auto 32px;
     }
 
-
     .blog-category-filter {
-      border:
-        1px solid
-        #d7deea;
-
+      border: 1px solid #d7deea;
       border-radius: 999px;
-
       background: white;
-
       color: #123a8c;
-
-      padding:
-        9px
-        14px;
-
+      padding: 9px 14px;
       font-size: 14px;
-
       font-weight: 700;
-
       cursor: pointer;
-
       transition:
         background .2s ease,
         color .2s ease,
         border-color .2s ease;
     }
 
-
     .blog-category-filter:hover,
     .blog-category-filter.is-active {
       background: #123a8c;
-
       color: white;
-
       border-color: #123a8c;
     }
 
-
     .loading {
       text-align: center;
-
-      padding:
-        45px
-        20px;
-
+      padding: 45px 20px;
       color: #666;
-
       font-weight: bold;
     }
 
-
     .message {
       display: none;
-
       max-width: 700px;
-
-      margin:
-        0
-        auto
-        30px;
-
+      margin: 0 auto 30px;
       padding: 14px;
-
       border-radius: 9px;
-
       text-align: center;
-
       line-height: 1.6;
     }
 
-
     .message.error {
       display: block;
-
       background: #ffe8e8;
-
-      border:
-        1px solid #efbbbb;
-
+      border: 1px solid #efbbbb;
       color: #951d1d;
     }
 
-
-    /* ==================================================
-       EMPTY STATE
-    ================================================== */
-
     .empty {
       display: none;
-
       background: white;
-
       max-width: 700px;
-
       margin: auto;
-
-      padding:
-        35px
-        25px;
-
+      padding: 35px 25px;
       border-radius: 14px;
-
       box-shadow:
-        0
-        3px
-        12px
-        rgba(0,0,0,0.08);
-
+        0 3px 12px rgba(0,0,0,0.08);
       text-align: center;
     }
-
 
     .empty h2,
     .empty h3 {
       color: #123a8c;
-
       margin-top: 0;
     }
 
-
     .empty p {
       color: #555;
-
       line-height: 1.7;
     }
-
 
     .empty a {
       color: #123a8c;
-
       font-weight: bold;
     }
-
-
-    /* ==================================================
-       BLOG POST GRID
-    ================================================== */
 
     .posts {
       display: none;
-
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(
-            280px,
-            1fr
-          )
+          minmax(280px, 1fr)
         );
-
       gap: 25px;
     }
 
-
     .post {
       background: white;
-
       border-radius: 14px;
-
       overflow: hidden;
-
       box-shadow:
-        0
-        3px
-        12px
-        rgba(0,0,0,0.08);
-
+        0 3px 12px rgba(0,0,0,0.08);
       display: flex;
-
       flex-direction: column;
     }
-
 
     .post-image-box {
       width: 100%;
-
       height: 230px;
-
       background: #f1f1f1;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       overflow: hidden;
     }
 
-
     .post-image {
       width: 100%;
-
       height: 100%;
-
       object-fit: cover;
     }
 
-
     .post-no-image {
       color: #888;
-
       text-align: center;
-
       padding: 20px;
-
       font-size: 14px;
     }
 
-
     .post-body {
       padding: 25px;
-
       display: flex;
-
       flex-direction: column;
-
       flex: 1;
     }
 
-
     .post-date {
       color: #777;
-
       font-size: 13px;
-
       margin-bottom: 10px;
     }
 
-
     .post-category-badge {
       display: inline-flex;
-
       align-self: flex-start;
-
       margin-bottom: 12px;
-
-      padding:
-        6px
-        11px;
-
+      padding: 6px 11px;
       border-radius: 999px;
-
       background: #edf3ff;
-
       color: #123a8c;
-
       font-size: 12px;
-
       font-weight: 800;
-
       line-height: 1.3;
     }
-
 
     .post h2 {
       color: #123a8c;
-
       font-size: 23px;
-
       line-height: 1.3;
-
-      margin:
-        0
-        0
-        12px;
+      margin: 0 0 12px;
     }
-
 
     .post-description {
       color: #555;
-
       line-height: 1.7;
-
       margin: 0;
-
       flex-grow: 1;
     }
 
-
     .read-more {
       display: inline-block;
-
       margin-top: 18px;
-
       background: #f2bd16;
-
       color: #111;
-
       text-decoration: none;
-
       font-weight: bold;
-
-      padding:
-        11px
-        18px;
-
+      padding: 11px 18px;
       border-radius: 7px;
-
       align-self: flex-start;
-
       font-size: 15px;
     }
-
 
     .read-more:hover {
       background: #d8a90e;
     }
 
-
-    /* ==================================================
-       SINGLE ARTICLE
-    ================================================== */
-
     .single-article {
       display: none;
-
       max-width: 900px;
-
-      margin:
-        0
-        auto;
+      margin: 0 auto;
     }
-
 
     .article-back {
       display: inline-block;
-
       margin-bottom: 24px;
-
       color: #123a8c;
-
       text-decoration: none;
-
       font-weight: bold;
     }
-
 
     .article-back:hover {
       text-decoration: underline;
     }
 
-
     .article-card {
       background: white;
-
       border-radius: 16px;
-
       overflow: hidden;
-
       box-shadow:
-        0
-        4px
-        18px
-        rgba(0,0,0,0.08);
+        0 4px 18px rgba(0,0,0,0.08);
     }
-
 
     .article-cover {
       display: none;
-
       width: 100%;
-
       max-height: 520px;
-
       object-fit: cover;
-
       background: #f3f3f3;
     }
-
 
     .article-body {
       padding: 34px;
     }
 
-
     .article-title {
       color: #123a8c;
-
       font-size: 36px;
-
       line-height: 1.25;
-
-      margin:
-        0
-        0
-        12px;
-
+      margin: 0 0 12px;
       overflow-wrap: anywhere;
     }
-
 
     .article-date {
       color: #777;
-
       font-size: 14px;
-
       margin-bottom: 26px;
     }
 
-
     .article-content {
       color: #444;
-
       font-size: 17px;
-
       line-height: 1.85;
-
-      white-space: pre-line;
-
       overflow-wrap: anywhere;
     }
 
+    .article-content p {
+      margin: 0 0 20px;
+    }
 
-    /* ==================================================
-       PROMOTION BOX
-    ================================================== */
+    .article-content h2 {
+      color: #123a8c;
+      font-size: 30px;
+      line-height: 1.3;
+      margin: 30px 0 14px;
+    }
+
+    .article-content h3 {
+      color: #242424;
+      font-size: 23px;
+      line-height: 1.35;
+      margin: 25px 0 12px;
+    }
+
+    .article-content ol,
+    .article-content ul {
+      padding-left: 32px;
+    }
+
+    .article-content li {
+      margin: 8px 0;
+    }
+
+    .article-content blockquote {
+      margin: 22px 0;
+      padding: 15px 18px;
+      border-left: 5px solid #d5a900;
+      background: #fffaf0;
+    }
+
+    .article-content .gge-inline-cta {
+      margin: 22px 0;
+      padding: 18px;
+      border: 1px solid #ead17a;
+      border-left: 5px solid #d5a900;
+      border-radius: 12px;
+      background: #fffaf0;
+    }
+
+    .article-content .gge-inline-cta-link {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 9px;
+      background: #123a8c;
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+    }
 
     .promotion-box {
       display: none;
-
       margin-top: 36px;
-
       padding: 24px;
-
-      border:
-        1px solid #e3e3e3;
-
+      border: 1px solid #e3e3e3;
       border-radius: 14px;
-
       background: #fafafa;
     }
 
-
     .promotion-label {
       display: inline-block;
-
       background: #f2bd16;
-
       color: #111;
-
-      padding:
-        6px
-        11px;
-
+      padding: 6px 11px;
       border-radius: 20px;
-
       font-size: 12px;
-
       font-weight: bold;
-
       margin-bottom: 16px;
     }
 
-
     .promotion-image {
       display: none;
-
       width: 100%;
-
       max-height: 430px;
-
       object-fit: contain;
-
       border-radius: 11px;
-
       background: white;
-
       margin-bottom: 20px;
     }
 
-
     .promotion-name {
       display: none;
-
       color: #123a8c;
-
       font-size: 24px;
-
       font-weight: bold;
-
       margin-bottom: 12px;
     }
 
-
     .promotion-disclosure {
       color: #666;
-
       font-size: 13px;
-
       line-height: 1.6;
-
-      margin:
-        12px
-        0
-        18px;
+      margin: 12px 0 18px;
     }
-
 
     .promotion-button {
       display: inline-block;
-
       background: #f2bd16;
-
       color: #111;
-
       text-decoration: none;
-
-      padding:
-        13px
-        20px;
-
+      padding: 13px 20px;
       border-radius: 8px;
-
       font-weight: bold;
     }
-
 
     .promotion-button:hover {
       background: #d8a90e;
     }
 
-
-    /* ==================================================
-       FOOTER
-    ================================================== */
-
     footer {
       margin-top: 40px;
-
       background: #123a8c;
-
       color: white;
-
       text-align: center;
-
-      padding:
-        32px
-        20px;
+      padding: 32px 20px;
     }
-
 
     .footer-logo {
       width: 46px;
-
       height: 46px;
-
       object-fit: contain;
-
       background: white;
-
       border-radius: 50%;
-
       padding: 2px;
-
       margin-bottom: 8px;
     }
 
-
     .footer-brand {
       font-size: 18px;
-
       font-weight: 800;
     }
 
-
     .footer-links {
       display: flex;
-
       justify-content: center;
-
       flex-wrap: wrap;
-
       gap: 14px;
-
-      margin:
-        17px
-        0;
+      margin: 17px 0;
     }
-
 
     .footer-links a {
       color: white;
-
       text-decoration: none;
-
       font-size: 14px;
     }
-
 
     .footer-links a:hover {
       color: #f2bd16;
     }
 
-
     .copyright {
       color: #dbe3f5;
-
       font-size: 13px;
     }
 
-
-    /* ==================================================
-       MOBILE
-    ================================================== */
-
-    @media (
-      max-width: 650px
-    ) {
+    @media (max-width: 650px) {
 
       header {
-        padding:
-          15px
-          16px;
+        padding: 15px 16px;
       }
-
 
       .brand img {
         width: 50px;
-
         height: 50px;
       }
-
 
       .brand-name {
         font-size: 23px;
       }
 
-
       nav {
-        gap:
-          4px
-          14px;
+        gap: 4px 14px;
       }
-
 
       nav a {
         font-size: 14px;
       }
 
-
       .hero h1 {
         font-size: 31px;
       }
 
-
       .blog {
         padding-left: 14px;
-
         padding-right: 14px;
       }
-
 
       .blog-category-filters {
         justify-content: flex-start;
       }
 
-
       .blog-category-filter {
         font-size: 13px;
-
-        padding:
-          8px
-          12px;
+        padding: 8px 12px;
       }
-
 
       .posts {
         grid-template-columns: 1fr;
       }
 
-
       .post-image-box {
         height: 220px;
       }
 
-
       .article-body {
-        padding:
-          24px
-          19px;
+        padding: 24px 19px;
       }
-
 
       .article-title {
         font-size: 29px;
       }
 
-
       .article-content {
         font-size: 16px;
       }
-
 
       .promotion-box {
         padding: 18px;
@@ -1067,14 +703,9 @@
 <body>
 
 
-<!-- ==================================================
-     HEADER
-================================================== -->
-
 <header>
 
   <div class="header-inner">
-
 
     <a
       href="/index.html"
@@ -1088,7 +719,6 @@
         width="58"
         height="58"
       >
-
 
       <div class="brand-name">
 
@@ -1153,10 +783,6 @@
 </header>
 
 
-<!-- ==================================================
-     HERO
-================================================== -->
-
 <section
   id="blog-hero"
   class="hero"
@@ -1165,7 +791,6 @@
   <h1>
     GiftedGift Empire Blog
   </h1>
-
 
   <p>
     Helpful business ideas, shopping guides,
@@ -1177,24 +802,13 @@
 </section>
 
 
-<!-- ==================================================
-     BLOG
-================================================== -->
-
 <main class="blog">
 
-
-  <!-- MAIN BLOG LIST -->
-
   <div id="blog-list-area">
-
 
     <h2 class="blog-list-heading">
       Latest From the Blog
     </h2>
-
-
-    <!-- AUTOMATIC CATEGORY FILTERS -->
 
     <div
       id="blog-category-filters"
@@ -1202,13 +816,11 @@
       aria-label="Filter blog articles by category"
     ></div>
 
-
     <div
       id="message"
       class="message"
       aria-live="polite"
     ></div>
-
 
     <div
       id="loading"
@@ -1219,7 +831,6 @@
       Loading articles...
     </div>
 
-
     <section
       id="empty"
       class="empty"
@@ -1229,7 +840,6 @@
         Articles Coming Soon
       </h2>
 
-
       <p>
         New business ideas, shopping guides,
         recommendations and useful articles
@@ -1238,26 +848,19 @@
 
     </section>
 
-
     <section
       id="posts"
       class="posts"
       aria-label="GiftedGift Empire blog articles"
     ></section>
 
-
   </div>
 
-
-  <!-- ==================================================
-       SINGLE ARTICLE
-  ================================================== -->
 
   <section
     id="single-article"
     class="single-article"
   >
-
 
     <a
       href="/blog"
@@ -1269,28 +872,23 @@
 
     <article class="article-card">
 
-
       <img
         id="article-cover"
         class="article-cover"
         alt=""
       >
 
-
       <div class="article-body">
-
 
         <h1
           id="article-title"
           class="article-title"
         ></h1>
 
-
         <div
           id="article-date"
           class="article-date"
         ></div>
-
 
         <div
           id="article-content"
@@ -1298,19 +896,15 @@
         ></div>
 
 
-        <!-- PROMOTIONAL CONTENT -->
-
         <section
           id="promotion-box"
           class="promotion-box"
         >
 
-
           <div
             id="promotion-label"
             class="promotion-label"
           ></div>
-
 
           <img
             id="promotion-image"
@@ -1318,18 +912,15 @@
             alt=""
           >
 
-
           <div
             id="promotion-name"
             class="promotion-name"
           ></div>
 
-
           <div
             id="promotion-disclosure"
             class="promotion-disclosure"
           ></div>
-
 
           <a
             id="promotion-button"
@@ -1339,27 +930,18 @@
             View Product
           </a>
 
-
         </section>
-
 
       </div>
 
     </article>
 
-
   </section>
-
 
 </main>
 
 
-<!-- ==================================================
-     FOOTER
-================================================== -->
-
 <footer>
-
 
   <img
     src="/my-logo.png"
@@ -1370,11 +952,9 @@
     loading="lazy"
   >
 
-
   <div class="footer-brand">
     GiftedGift Empire
   </div>
-
 
   <div class="footer-links">
 
@@ -1416,7 +996,6 @@
 
   </div>
 
-
   <div class="copyright">
 
     © <span id="year"></span>
@@ -1424,7 +1003,6 @@
     All rights reserved.
 
   </div>
-
 
 </footer>
 
@@ -1435,7 +1013,6 @@
 
 
 <script>
-
 
 /* ==================================================
    CONFIGURATION
@@ -1463,6 +1040,10 @@ const DEFAULT_SOCIAL_IMAGE =
   "/my-logo.png";
 
 
+const RICH_CONTENT_MARKER =
+  "<!--GGE_RICH_HTML-->";
+
+
 const db =
   supabase.createClient(
     SUPABASE_URL,
@@ -1480,7 +1061,7 @@ document
 
 
 /* ==================================================
-   ARTICLE ID / ROUTING
+   ARTICLE ROUTING
 ================================================== */
 
 const urlParams =
@@ -1510,12 +1091,21 @@ const isSingleBlogPost =
   cleanBlogPostId > 0;
 
 
+if (
+  isSingleBlogPost
+) {
+
+  window.__BLOG_POST_ID =
+    cleanBlogPostId;
+}
+
+
 let publishedPosts =
   [];
 
 
 /* ==================================================
-   GENERAL HELPERS
+   HELPERS
 ================================================== */
 
 function cleanText(
@@ -1535,13 +1125,340 @@ function cleanText(
 }
 
 
+/* ==================================================
+   SAFE RICH HTML
+================================================== */
+
+function sanitizeArticleHTML(
+  html
+) {
+
+  const template =
+    document.createElement(
+      "template"
+    );
+
+
+  template.innerHTML =
+    String(
+      html ||
+      ""
+    );
+
+
+  const allowedTags =
+    new Set([
+      "P",
+      "DIV",
+      "BR",
+      "H2",
+      "H3",
+      "STRONG",
+      "B",
+      "EM",
+      "I",
+      "U",
+      "UL",
+      "OL",
+      "LI",
+      "A",
+      "SPAN",
+      "BLOCKQUOTE"
+    ]);
+
+
+  const allowedStyles =
+    new Set([
+      "color",
+      "font-size",
+      "font-weight",
+      "font-style",
+      "text-decoration",
+      "text-align",
+      "border-bottom",
+      "padding-bottom"
+    ]);
+
+
+  Array.from(
+    template.content
+      .querySelectorAll(
+        "*"
+      )
+  )
+    .forEach(
+      element => {
+
+        if (
+          !allowedTags.has(
+            element.tagName
+          )
+        ) {
+
+          element.replaceWith(
+            ...element.childNodes
+          );
+
+          return;
+        }
+
+
+        Array.from(
+          element.attributes
+        )
+          .forEach(
+            attribute => {
+
+              const name =
+                attribute.name
+                  .toLowerCase();
+
+
+              if (
+                name ===
+                  "style"
+              ) {
+
+                const safeStyles =
+                  [];
+
+
+                for (
+                  const property of
+                  element.style
+                ) {
+
+                  if (
+                    !allowedStyles.has(
+                      property
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  const value =
+                    element.style
+                      .getPropertyValue(
+                        property
+                      )
+                      .trim();
+
+
+                  if (
+                    property ===
+                      "font-size" &&
+                    !/^\d{1,2}px$/.test(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  if (
+                    property ===
+                      "text-align" &&
+                    ![
+                      "left",
+                      "center",
+                      "right",
+                      "justify"
+                    ].includes(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  if (
+                    property ===
+                      "padding-bottom" &&
+                    !/^\d{1,2}px$/.test(
+                      value
+                    )
+                  ) {
+
+                    continue;
+                  }
+
+
+                  safeStyles.push(
+                    property +
+                    ":" +
+                    value
+                  );
+                }
+
+
+                if (
+                  safeStyles.length
+                ) {
+
+                  element.setAttribute(
+                    "style",
+                    safeStyles.join(
+                      ";"
+                    )
+                  );
+
+                } else {
+
+                  element.removeAttribute(
+                    "style"
+                  );
+                }
+
+
+                return;
+              }
+
+
+              if (
+                element.tagName ===
+                  "A" &&
+                [
+                  "href",
+                  "target",
+                  "rel",
+                  "class"
+                ].includes(
+                  name
+                )
+              ) {
+
+                return;
+              }
+
+
+              if (
+                element.tagName ===
+                  "OL" &&
+                name ===
+                  "start"
+              ) {
+
+                return;
+              }
+
+
+              if (
+                name ===
+                  "class" &&
+                (
+                  element.classList
+                    .contains(
+                      "gge-inline-cta"
+                    ) ||
+                  element.classList
+                    .contains(
+                      "gge-inline-cta-link"
+                    )
+                )
+              ) {
+
+                return;
+              }
+
+
+              element.removeAttribute(
+                attribute.name
+              );
+            }
+          );
+
+
+        if (
+          element.tagName ===
+            "A"
+        ) {
+
+          const href =
+            element.getAttribute(
+              "href"
+            ) ||
+            "";
+
+
+          if (
+            href &&
+            !/^https?:\/\//i.test(
+              href
+            ) &&
+            !href.startsWith(
+              "/"
+            )
+          ) {
+
+            element.removeAttribute(
+              "href"
+            );
+          }
+
+
+          element.setAttribute(
+            "rel",
+            "noopener noreferrer"
+          );
+        }
+
+      }
+    );
+
+
+  return template.innerHTML;
+
+}
+
+
+/* ==================================================
+   DESCRIPTION
+================================================== */
+
 function descriptionPreview(
   value
 ) {
 
+  let raw =
+    String(
+      value ||
+      ""
+    );
+
+
+  if (
+    raw.startsWith(
+      RICH_CONTENT_MARKER
+    )
+  ) {
+
+    const holder =
+      document.createElement(
+        "div"
+      );
+
+
+    holder.innerHTML =
+      sanitizeArticleHTML(
+        raw.slice(
+          RICH_CONTENT_MARKER.length
+        )
+      );
+
+
+    raw =
+      holder.textContent ||
+      "";
+  }
+
+
   const text =
     cleanText(
-      value
+      raw
     );
 
 
@@ -1578,6 +1495,10 @@ function descriptionPreview(
 
 }
 
+
+/* ==================================================
+   SAFE IMAGE
+================================================== */
 
 function safeImageURL(
   value
@@ -1633,7 +1554,7 @@ function safeImageURL(
 
 
 /* ==================================================
-   META HELPER
+   META
 ================================================== */
 
 function setMetaContent(
@@ -1733,7 +1654,7 @@ function getPostUrl(
 
 
 /* ==================================================
-   STRUCTURED DATA HELPER
+   STRUCTURED DATA
 ================================================== */
 
 function setStructuredData(
@@ -1781,7 +1702,7 @@ function setStructuredData(
 
 
 /* ==================================================
-   MAIN BLOG SEO
+   BLOG COLLECTION SEO
 ================================================== */
 
 function updateBlogCollectionSEO(
@@ -2117,7 +2038,7 @@ function updateBlogCollectionSEO(
 
 
 /* ==================================================
-   INDIVIDUAL ARTICLE SEO
+   ARTICLE SEO
 ================================================== */
 
 function updateArticleSEO(
@@ -2129,13 +2050,25 @@ function updateArticleSEO(
     "Article";
 
 
+  const seoTitle =
+    cleanText(
+      post.seo_title ||
+      title
+    );
+
+
   const pageTitle =
-    title +
-    " | GiftedGift Empire";
+    post.seo_title
+
+      ? seoTitle
+
+      : seoTitle +
+        " | GiftedGift Empire";
 
 
   const description =
     descriptionPreview(
+      post.meta_description ||
       post.excerpt ||
       post.content
     );
@@ -2190,7 +2123,7 @@ function updateArticleSEO(
 
   setMetaContent(
     "og-title",
-    pageTitle
+    seoTitle
   );
 
 
@@ -2214,13 +2147,14 @@ function updateArticleSEO(
 
   setMetaContent(
     "og-image-alt",
+    post.image_alt_text ||
     title
   );
 
 
   setMetaContent(
     "twitter-title",
-    pageTitle
+    seoTitle
   );
 
 
@@ -2234,6 +2168,43 @@ function updateArticleSEO(
     "twitter-image",
     image
   );
+
+
+  const authorName =
+    cleanText(
+      post.author_name ||
+      "GiftedGift Empire"
+    );
+
+
+  const author =
+
+    authorName
+      .toLowerCase() ===
+      "giftedgift empire"
+
+      ? {
+
+          "@type":
+            "Organization",
+
+          "name":
+            "GiftedGift Empire",
+
+          "url":
+            SITE_URL
+
+        }
+
+      : {
+
+          "@type":
+            "Person",
+
+          "name":
+            authorName
+
+        };
 
 
   const articleSchema = {
@@ -2260,18 +2231,8 @@ function updateArticleSEO(
 
     },
 
-    "author": {
-
-      "@type":
-        "Organization",
-
-      "name":
-        "GiftedGift Empire",
-
-      "url":
-        SITE_URL
-
-    },
+    "author":
+      author,
 
     "publisher": {
 
@@ -2432,7 +2393,7 @@ function updateArticleSEO(
 
 
 /* ==================================================
-   ERROR MESSAGE
+   ERROR
 ================================================== */
 
 function showError(
@@ -2443,6 +2404,14 @@ function showError(
     document.getElementById(
       "message"
     );
+
+
+  if (
+    !box
+  ) {
+
+    return;
+  }
 
 
   box.className =
@@ -2513,7 +2482,7 @@ function formatDate(
 
 
 /* ==================================================
-   PROMOTION URL VALIDATION
+   PROMOTION URL
 ================================================== */
 
 function validPromotionUrl(
@@ -2577,8 +2546,6 @@ function createPostCard(
     "post";
 
 
-  /* IMAGE */
-
   const imageBox =
     document.createElement(
       "div"
@@ -2608,6 +2575,7 @@ function createPostCard(
 
 
     image.alt =
+      post.image_alt_text ||
       post.title ||
       "GiftedGift Empire blog article";
 
@@ -2643,8 +2611,6 @@ function createPostCard(
 
   }
 
-
-  /* BODY */
 
   const body =
     document.createElement(
@@ -2688,8 +2654,6 @@ function createPostCard(
   }
 
 
-  /* CATEGORY */
-
   if (
     post.category
   ) {
@@ -2715,8 +2679,6 @@ function createPostCard(
   }
 
 
-  /* TITLE */
-
   const title =
     document.createElement(
       "h2"
@@ -2732,8 +2694,6 @@ function createPostCard(
     title
   );
 
-
-  /* EXCERPT */
 
   const excerpt =
     document.createElement(
@@ -2754,8 +2714,6 @@ function createPostCard(
     excerpt
   );
 
-
-  /* READ ARTICLE */
 
   const link =
     document.createElement(
@@ -2810,7 +2768,7 @@ function createPostCard(
 
 
 /* ==================================================
-   PROMOTION BOX
+   PROMOTION
 ================================================== */
 
 function renderPromotion(
@@ -2966,7 +2924,7 @@ function renderPromotion(
         ? "Visit Advertiser"
 
         : type ===
-          "affiliate"
+            "affiliate"
 
           ? "Shop This Product"
 
@@ -3025,7 +2983,8 @@ function renderSingleArticle(
     .getElementById(
       "blog-list-area"
     )
-    .style.display =
+    .style
+    .display =
       "none";
 
 
@@ -3033,7 +2992,8 @@ function renderSingleArticle(
     .getElementById(
       "blog-hero"
     )
-    .style.display =
+    .style
+    .display =
       "none";
 
 
@@ -3046,6 +3006,12 @@ function renderSingleArticle(
   const cover =
     document.getElementById(
       "article-cover"
+    );
+
+
+  const articleContent =
+    document.getElementById(
+      "article-content"
     );
 
 
@@ -3069,32 +3035,48 @@ function renderSingleArticle(
       );
 
 
-  const articleContent =
-  document.getElementById(
-    "article-content"
-  );
+  const rawContent =
+    String(
+      post.content ||
+      ""
+    );
 
-const rawContent =
-  String(
-    post.content ||
-    ""
-  );
 
-if (
-  rawContent.startsWith(
-    "<!--GGE_RICH_HTML-->"
-  )
-) {
+  /*
+    IMPORTANT FIX:
+    Rich articles are now rendered here directly.
+    The article can no longer disappear while waiting
+    for another JavaScript file.
+  */
 
-  articleContent.textContent =
-    "";
+  if (
+    rawContent.startsWith(
+      RICH_CONTENT_MARKER
+    )
+  ) {
 
-} else {
+    articleContent.innerHTML =
+      sanitizeArticleHTML(
+        rawContent.slice(
+          RICH_CONTENT_MARKER.length
+        )
+      );
 
-  articleContent.textContent =
-    rawContent;
 
-}
+    articleContent.style.whiteSpace =
+      "normal";
+
+
+  } else {
+
+    articleContent.textContent =
+      rawContent;
+
+
+    articleContent.style.whiteSpace =
+      "pre-line";
+
+  }
 
 
   if (
@@ -3106,8 +3088,15 @@ if (
 
 
     cover.alt =
+      post.image_alt_text ||
       post.title ||
       "GiftedGift Empire article";
+
+
+    cover.title =
+      post.image_alt_text ||
+      post.title ||
+      "";
 
 
     cover.style.display =
@@ -3144,7 +3133,7 @@ if (
 
 
 /* ==================================================
-   LOAD INDIVIDUAL ARTICLE
+   LOAD SINGLE ARTICLE
 ================================================== */
 
 async function loadSinglePost() {
@@ -3160,7 +3149,7 @@ async function loadSinglePost() {
           "blog_posts"
         )
         .select(
-          "id,title,category,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
+          "id,title,category,author_name,slug,excerpt,seo_title,meta_description,youtube_url,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
         )
         .eq(
           "id",
@@ -3211,7 +3200,8 @@ async function loadSinglePost() {
       .getElementById(
         "blog-hero"
       )
-      .style.display =
+      .style
+      .display =
         "none";
 
 
@@ -3230,19 +3220,15 @@ async function loadSinglePost() {
             Article Not Available
           </h2>
 
-
           <p>
             This article could not be found
             or is not currently published.
           </p>
 
-
           <p>
-
             <a href="/blog">
               Return to the Blog
             </a>
-
           </p>
 
         </section>
@@ -3255,7 +3241,7 @@ async function loadSinglePost() {
 
 
 /* ==================================================
-   RENDER BLOG POSTS
+   RENDER BLOG LIST
 ================================================== */
 
 function renderBlogPosts(
@@ -3287,7 +3273,9 @@ function renderBlogPosts(
 
   postsBox.style.display =
     posts.length
+
       ? "grid"
+
       : "none";
 
 }
@@ -3509,7 +3497,7 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-        "id,title,category,slug,excerpt,content,image_url,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
+        "id,title,category,slug,excerpt,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
       )
       .eq(
         "published",
@@ -3556,8 +3544,6 @@ async function loadPosts() {
       : [];
 
 
-  /* SEO */
-
   updateBlogCollectionSEO(
     publishedPosts
   );
@@ -3581,14 +3567,10 @@ async function loadPosts() {
     "none";
 
 
-  /* CREATE CATEGORY BUTTONS */
-
   buildCategoryFilters(
     publishedPosts
   );
 
-
-  /* SHOW ALL ARTICLES FIRST */
 
   renderBlogPosts(
     publishedPosts
@@ -3618,122 +3600,26 @@ if (
 
 
 <!-- ==================================================
-     BLOG ARTICLE ENHANCEMENTS
+     ARTICLE FORMATTING / SEO ENHANCEMENTS
 ================================================== -->
 
-<script>
-
-(function () {
-
-  function loadBlogArticleEnhancements() {
-
-    const urlParams =
-      new URLSearchParams(
-        window.location.search
-      );
+<script
+  src="/assets/blog-article-enhancements.js?v=20261003-2"
+></script>
 
 
-    const articleId =
-      Number(
-        window.__BLOG_POST_ID ||
-        urlParams.get(
-          "id"
-        ) ||
-        0
-      );
+<!-- ==================================================
+     LIKE + COMMENTS + SHARE
+================================================== -->
+
+<script
+  src="/assets/blog-engagement.js?v=20261003-2"
+></script>
 
 
-    if (
-      !Number.isInteger(
-        articleId
-      ) ||
-      articleId <=
-        0
-    ) {
-
-      return;
-
-    }
-
-
-    /*
-      Make sure the enhancement file
-      can also work with older ?id= links.
-    */
-
-    window.__BLOG_POST_ID =
-      articleId;
-
-
-    const singleArticle =
-      document.getElementById(
-        "single-article"
-      );
-
-
-    /*
-      Wait until the existing Blog system
-      has finished loading the article.
-    */
-
-    if (
-      !singleArticle ||
-      singleArticle.style.display !==
-        "block"
-    ) {
-
-      setTimeout(
-        loadBlogArticleEnhancements,
-        75
-      );
-
-
-      return;
-
-    }
-
-
-    if (
-      document.getElementById(
-        "gge-blog-enhancement-script"
-      )
-    ) {
-
-      return;
-
-    }
-
-
-    const script =
-      document.createElement(
-        "script"
-      );
-
-
-    script.id =
-      "gge-blog-enhancement-script";
-
-
-    script.src =
-      "/assets/blog-article-enhancements.js?v=20261002-2";
-
-
-    document.body
-      .appendChild(
-        script
-      );
-
-  }
-
-
-  loadBlogArticleEnhancements();
-
-})();
-
-</script>
-<script src="/assets/blog-engagement.js?v=20261002-1"></script>
-
-<script src="/cookie-consent.js"></script>
+<script
+  src="/cookie-consent.js"
+></script>
 
 
 </body>
