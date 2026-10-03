@@ -4047,18 +4047,20 @@
 
 
     addArticleMeta(
-      post
-    );
+  post
+);
 
 
-    renderArticleContent(
-      post.content
-    );
+/*
+  Article content is already rendered safely
+  by blog.html.
+  Do not render it again here.
+*/
 
 
-    applyCoverImageText(
-      post
-    );
+applyCoverImageText(
+  post
+);
 
 
     addFutureAdSlots();
