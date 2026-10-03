@@ -3497,8 +3497,8 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-        "id,title,category,slug,excerpt,content,image_url,image_alt_text,promotion_type,promotion_name,promotion_url,promotion_button_text,promotion_image_url,published,published_at,created_at,updated_at"
-      )
+  "id,title,category,slug,excerpt,image_url,image_alt_text,published,published_at,created_at,updated_at"
+)
       .eq(
         "published",
         true
