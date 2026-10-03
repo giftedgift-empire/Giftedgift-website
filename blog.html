@@ -3241,11 +3241,28 @@ async function loadSinglePost() {
 
 
 /* ==================================================
+   BLOG LIST SETTINGS
+================================================== */
+
+const BLOGS_PER_PAGE =
+  2;
+
+
+let visibleBlogCount =
+  BLOGS_PER_PAGE;
+
+
+let currentBlogPosts =
+  [];
+
+
+/* ==================================================
    RENDER BLOG LIST
 ================================================== */
 
 function renderBlogPosts(
-  posts
+  posts,
+  reset = true
 ) {
 
   const postsBox =
@@ -3254,11 +3271,36 @@ function renderBlogPosts(
     );
 
 
+  if (
+    reset
+  ) {
+
+    visibleBlogCount =
+      BLOGS_PER_PAGE;
+
+  }
+
+
+  currentBlogPosts =
+    Array.isArray(
+      posts
+    )
+      ? posts
+      : [];
+
+
   postsBox.innerHTML =
     "";
 
 
-  posts.forEach(
+  const postsToShow =
+    currentBlogPosts.slice(
+      0,
+      visibleBlogCount
+    );
+
+
+  postsToShow.forEach(
     post => {
 
       postsBox.appendChild(
@@ -3272,11 +3314,125 @@ function renderBlogPosts(
 
 
   postsBox.style.display =
-    posts.length
+    postsToShow.length
 
       ? "grid"
 
       : "none";
+
+
+  renderLoadMoreButton();
+
+}
+
+
+/* ==================================================
+   LOAD MORE BUTTON
+================================================== */
+
+function renderLoadMoreButton() {
+
+  const oldWrap =
+    document.getElementById(
+      "blog-load-more-wrap"
+    );
+
+
+  if (
+    oldWrap
+  ) {
+
+    oldWrap.remove();
+
+  }
+
+
+  if (
+    visibleBlogCount >=
+      currentBlogPosts.length
+  ) {
+
+    return;
+
+  }
+
+
+  const postsBox =
+    document.getElementById(
+      "posts"
+    );
+
+
+  const wrap =
+    document.createElement(
+      "div"
+    );
+
+
+  wrap.id =
+    "blog-load-more-wrap";
+
+
+  wrap.style.textAlign =
+    "center";
+
+
+  wrap.style.marginTop =
+    "30px";
+
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+
+  button.type =
+    "button";
+
+
+  button.className =
+    "read-more";
+
+
+  button.textContent =
+    "Load More";
+
+
+  button.style.border =
+    "0";
+
+
+  button.style.cursor =
+    "pointer";
+
+
+  button.addEventListener(
+    "click",
+    function () {
+
+      visibleBlogCount +=
+        BLOGS_PER_PAGE;
+
+
+      renderBlogPosts(
+        currentBlogPosts,
+        false
+      );
+
+    }
+  );
+
+
+  wrap.appendChild(
+    button
+  );
+
+
+  postsBox.insertAdjacentElement(
+    "afterend",
+    wrap
+  );
 
 }
 
@@ -3449,7 +3605,8 @@ function buildCategoryFilters(
 
 
           renderBlogPosts(
-            filteredPosts
+            filteredPosts,
+            true
           );
 
         }
@@ -3497,8 +3654,8 @@ async function loadPosts() {
         "blog_posts"
       )
       .select(
-  "id,title,category,slug,excerpt,image_url,image_alt_text,published,published_at,created_at,updated_at"
-)
+        "id,title,category,slug,excerpt,image_url,image_alt_text,published,published_at,created_at,updated_at"
+      )
       .eq(
         "published",
         true
@@ -3573,7 +3730,8 @@ async function loadPosts() {
 
 
   renderBlogPosts(
-    publishedPosts
+    publishedPosts,
+    true
   );
 
 }
