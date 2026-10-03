@@ -3343,510 +3343,561 @@ NL = Dutch
 
 
   /*
-  =========================================================
-  CHANGE LANGUAGE
-  =========================================================
-  */
+=========================================================
+CHANGE LANGUAGE
+=========================================================
+*/
 
-  function setLanguage(
-    language
+function setLanguage(
+  language
+) {
+
+  if (
+    !SUPPORTED.includes(
+      language
+    )
   ) {
 
-    if (
-      !SUPPORTED.includes(
-        language
-      )
-    ) {
+    return;
 
-      return;
-
-    }
+  }
 
 
-    currentLanguage =
-      language;
+  const previousLanguage =
+    currentLanguage;
 
 
-    saveLanguage(
-      language
-    );
+  currentLanguage =
+    language;
 
+
+  saveLanguage(
+    language
+  );
+
+
+  /*
+  PERFORMANCE FIX
+
+  If the website is already English and
+  English is selected again, there is no
+  reason to scan the entire page.
+
+  If changing FROM another language back
+  to English, the page must still be scanned
+  once so the original English is restored.
+  */
+
+  if (
+    language === "en" &&
+    previousLanguage === "en"
+  ) {
+
+    document.documentElement.lang =
+      "en";
+
+
+    updateSwitcher();
+
+  } else {
 
     applyToTree(
       document.body
     );
 
+  }
 
-    window.dispatchEvent(
-      new CustomEvent(
-        "giftedgift:languagechange",
-        {
 
-          detail: {
+  window.dispatchEvent(
+    new CustomEvent(
+      "giftedgift:languagechange",
+      {
 
-            language
+        detail: {
 
-          }
+          language
 
         }
-      )
-    );
+
+      }
+    )
+  );
+
+}
+
+
+/*
+=========================================================
+LANGUAGE SELECTOR
+=========================================================
+*/
+
+function createSwitcher() {
+
+  if (
+    document.getElementById(
+      "gge-language-switcher"
+    )
+  ) {
+
+    return;
 
   }
 
 
-  /*
-  =========================================================
-  LANGUAGE SELECTOR
-  =========================================================
-  */
+  const style =
+    document.createElement(
+      "style"
+    );
 
-  function createSwitcher() {
 
-    if (
-      document.getElementById(
-        "gge-language-switcher"
-      )
-    ) {
+  style.id =
+    "gge-language-styles";
 
-      return;
+
+  style.textContent = `
+
+    #gge-language-switcher {
+
+      position:
+        fixed;
+
+      top:
+        96px;
+
+      right:
+        12px;
+
+      z-index:
+        2000;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      padding:
+        7px 10px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.98
+        );
+
+      border:
+        1px solid #d6ddea;
+
+      border-radius:
+        999px;
+
+      box-shadow:
+        0 4px 14px
+        rgba(
+          0,
+          0,
+          0,
+          0.12
+        );
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      transition:
+        opacity 0.18s ease,
+        visibility 0.18s ease;
 
     }
 
 
-    const style =
-      document.createElement(
-        "style"
-      );
+    #gge-language-switcher.gge-language-hidden {
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      pointer-events:
+        none;
+
+    }
 
 
-    style.id =
-      "gge-language-styles";
+    #gge-language-switcher
+    .gge-language-icon {
+
+      font-size:
+        16px;
+
+      line-height:
+        1;
+
+    }
 
 
-    style.textContent = `
+    #gge-language-select {
+
+      border:
+        0;
+
+      outline:
+        0;
+
+      background:
+        transparent;
+
+      color:
+        #123a8c;
+
+      font:
+        inherit;
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+
+      padding:
+        3px 2px;
+
+    }
+
+
+    #gge-language-select:focus-visible {
+
+      outline:
+        2px solid #f2bd16;
+
+      outline-offset:
+        3px;
+
+      border-radius:
+        5px;
+
+    }
+
+
+    @media
+    (max-width: 720px) {
 
       #gge-language-switcher {
 
-        position:
-          fixed;
-
         top:
-          96px;
+          82px;
 
         right:
-          12px;
-
-        z-index:
-          2000;
-
-        display:
-          flex;
-
-        align-items:
-          center;
-
-        gap:
-          7px;
+          10px;
 
         padding:
-          7px 10px;
-
-        background:
-          rgba(
-            255,
-            255,
-            255,
-            0.98
-          );
-
-        border:
-          1px solid #d6ddea;
-
-        border-radius:
-          999px;
-
-        box-shadow:
-          0 4px 14px
-          rgba(
-            0,
-            0,
-            0,
-            0.12
-          );
-
-        font-family:
-          Arial,
-          Helvetica,
-          sans-serif;
-
-        transition:
-          opacity 0.18s ease,
-          visibility 0.18s ease;
+          6px 9px;
 
       }
 
+    }
 
-      #gge-language-switcher.gge-language-hidden {
-
-        opacity:
-          0;
-
-        visibility:
-          hidden;
-
-        pointer-events:
-          none;
-
-      }
+  `;
 
 
-      #gge-language-switcher
-      .gge-language-icon {
-
-        font-size:
-          16px;
-
-        line-height:
-          1;
-
-      }
+  document.head.appendChild(
+    style
+  );
 
 
-      #gge-language-select {
-
-        border:
-          0;
-
-        outline:
-          0;
-
-        background:
-          transparent;
-
-        color:
-          #123a8c;
-
-        font:
-          inherit;
-
-        font-size:
-          13px;
-
-        font-weight:
-          800;
-
-        cursor:
-          pointer;
-
-        padding:
-          3px 2px;
-
-      }
-
-
-      #gge-language-select:focus-visible {
-
-        outline:
-          2px solid #f2bd16;
-
-        outline-offset:
-          3px;
-
-        border-radius:
-          5px;
-
-      }
-
-
-      @media
-      (max-width: 720px) {
-
-        #gge-language-switcher {
-
-          top:
-            82px;
-
-          right:
-            10px;
-
-          padding:
-            6px 9px;
-
-        }
-
-      }
-
-    `;
-
-
-    document.head.appendChild(
-      style
+  const wrapper =
+    document.createElement(
+      "div"
     );
 
 
-    const wrapper =
-      document.createElement(
-        "div"
+  wrapper.id =
+    "gge-language-switcher";
+
+
+  wrapper.setAttribute(
+    "data-gge-no-translate",
+    "true"
+  );
+
+
+  wrapper.setAttribute(
+    "aria-label",
+    "Language selector"
+  );
+
+
+  wrapper.innerHTML = `
+
+    <span
+      class="gge-language-icon"
+      aria-hidden="true"
+    >
+      🌐
+    </span>
+
+    <select
+      id="gge-language-select"
+      aria-label="Language"
+    >
+
+      <option value="en">
+        EN · English
+      </option>
+
+      <option value="fr">
+        FR · Français
+      </option>
+
+      <option value="de">
+        DE · Deutsch
+      </option>
+
+      <option value="nl">
+        NL · Nederlands
+      </option>
+
+    </select>
+
+  `;
+
+
+  const select =
+    wrapper.querySelector(
+      "#gge-language-select"
+    );
+
+
+  select.value =
+    currentLanguage;
+
+
+  select.addEventListener(
+    "change",
+    function () {
+
+      setLanguage(
+        select.value
       );
 
+    }
+  );
 
-    wrapper.id =
-      "gge-language-switcher";
+
+  document.body.appendChild(
+    wrapper
+  );
+
+}
 
 
-    wrapper.setAttribute(
-      "data-gge-no-translate",
-      "true"
+/*
+=========================================================
+UPDATE SELECTOR
+=========================================================
+*/
+
+function updateSwitcher() {
+
+  const select =
+    document.getElementById(
+      "gge-language-select"
     );
 
 
-    wrapper.setAttribute(
-      "aria-label",
-      "Language selector"
-    );
-
-
-    wrapper.innerHTML = `
-
-      <span
-        class="gge-language-icon"
-        aria-hidden="true"
-      >
-        🌐
-      </span>
-
-      <select
-        id="gge-language-select"
-        aria-label="Language"
-      >
-
-        <option value="en">
-          EN · English
-        </option>
-
-        <option value="fr">
-          FR · Français
-        </option>
-
-        <option value="de">
-          DE · Deutsch
-        </option>
-
-        <option value="nl">
-          NL · Nederlands
-        </option>
-
-      </select>
-
-    `;
-
-
-    const select =
-      wrapper.querySelector(
-        "#gge-language-select"
-      );
-
+  if (
+    select &&
+    select.value !==
+      currentLanguage
+  ) {
 
     select.value =
       currentLanguage;
 
+  }
 
-    select.addEventListener(
-      "change",
+}
+
+
+/*
+=========================================================
+GIFTANA POPUP PROTECTION
+
+Hide the floating language selector while the
+Giftana welcome popup is open.
+=========================================================
+*/
+
+function updateGiftanaSwitcherVisibility() {
+
+  const switcher =
+    document.getElementById(
+      "gge-language-switcher"
+    );
+
+
+  if (
+    !switcher
+  ) {
+
+    return;
+
+  }
+
+
+  const overlay =
+    document.getElementById(
+      "giftana-overlay"
+    );
+
+
+  const giftanaOpen =
+    Boolean(
+      overlay &&
+      overlay.classList.contains(
+        "show"
+      )
+    );
+
+
+  switcher.classList.toggle(
+    "gge-language-hidden",
+    giftanaOpen
+  );
+
+}
+
+
+function watchGiftana() {
+
+  const overlay =
+    document.getElementById(
+      "giftana-overlay"
+    );
+
+
+  updateGiftanaSwitcherVisibility();
+
+
+  if (
+    !overlay
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    giftanaObserver
+  ) {
+
+    giftanaObserver.disconnect();
+
+  }
+
+
+  giftanaObserver =
+    new MutationObserver(
       function () {
 
-        setLanguage(
-          select.value
-        );
+        updateGiftanaSwitcherVisibility();
 
       }
     );
 
 
-    document.body.appendChild(
-      wrapper
-    );
+  giftanaObserver.observe(
+    overlay,
+    {
+
+      attributes:
+        true,
+
+      attributeFilter:
+        [
+          "class"
+        ]
+
+    }
+  );
+
+}
+
+
+/*
+=========================================================
+DYNAMIC CONTENT OBSERVER
+
+Performance rule:
+
+English is the original website language.
+When English is active, newly-added website content
+must NOT be scanned and translated again.
+
+French, German and Dutch still translate dynamic
+content normally.
+=========================================================
+*/
+
+function startObserver() {
+
+  if (
+    !document.body
+  ) {
+
+    return;
 
   }
 
 
-  /*
-  =========================================================
-  UPDATE SELECTOR
-  =========================================================
-  */
+  if (
+    observer
+  ) {
 
-  function updateSwitcher() {
-
-    const select =
-      document.getElementById(
-        "gge-language-select"
-      );
-
-
-    if (
-      select &&
-      select.value !==
-        currentLanguage
-    ) {
-
-      select.value =
-        currentLanguage;
-
-    }
+    observer.disconnect();
 
   }
 
 
-  /*
-  =========================================================
-  GIFTANA POPUP PROTECTION
+  observer =
+    new MutationObserver(
+      function (
+        mutations
+      ) {
 
-  Hide the floating language selector while the
-  Giftana welcome popup is open.
-  =========================================================
-  */
+        /*
+        IMPORTANT PERFORMANCE FIX
 
-  function updateGiftanaSwitcherVisibility() {
+        English content is already correct.
 
-    const switcher =
-      document.getElementById(
-        "gge-language-switcher"
-      );
+        Long Blog articles can contain hundreds
+        or thousands of DOM nodes. Reprocessing
+        every newly-added element while English
+        is selected wastes browser resources and
+        can freeze lower-powered devices.
+        */
 
-
-    if (
-      !switcher
-    ) {
-
-      return;
-
-    }
-
-
-    const overlay =
-      document.getElementById(
-        "giftana-overlay"
-      );
-
-
-    const giftanaOpen =
-      Boolean(
-        overlay &&
-        overlay.classList.contains(
-          "show"
-        )
-      );
-
-
-    switcher.classList.toggle(
-      "gge-language-hidden",
-      giftanaOpen
-    );
-
-  }
-
-
-  function watchGiftana() {
-
-    const overlay =
-      document.getElementById(
-        "giftana-overlay"
-      );
-
-
-    updateGiftanaSwitcherVisibility();
-
-
-    if (
-      !overlay
-    ) {
-
-      return;
-
-    }
-
-
-    if (
-      giftanaObserver
-    ) {
-
-      giftanaObserver.disconnect();
-
-    }
-
-
-    giftanaObserver =
-      new MutationObserver(
-        function () {
-
-          updateGiftanaSwitcherVisibility();
-
-        }
-      );
-
-
-    giftanaObserver.observe(
-      overlay,
-      {
-
-        attributes:
-          true,
-
-        attributeFilter:
-          [
-            "class"
-          ]
-
-      }
-    );
-
-  }
-
-
-  /*
-  =========================================================
-  DYNAMIC CONTENT OBSERVER
-
-  Watches newly-added content from Supabase,
-  product cards, blog posts, Daily Inspiration,
-  comments, newsletter blocks and other dynamic UI.
-  =========================================================
-  */
-
-  function startObserver() {
-
-    if (
-      !document.body
-    ) {
-
-      return;
-
-    }
-
-
-    if (
-      observer
-    ) {
-
-      observer.disconnect();
-
-    }
-
-
-    observer =
-      new MutationObserver(
-        function (
-          mutations
+        if (
+          currentLanguage !==
+          "en"
         ) {
-
 
           mutations.forEach(
             function (
               mutation
             ) {
-
 
               mutation.addedNodes
                 .forEach(
@@ -3861,137 +3912,192 @@ NL = Dutch
                   }
                 );
 
-
             }
           );
 
-
-          /*
-          Giftana could be created dynamically.
-          */
+        }
 
 
-          if (
-            document.getElementById(
-              "giftana-overlay"
-            ) &&
-            !giftanaObserver
-          ) {
+        /*
+        Giftana may be inserted dynamically.
+        This small check can continue regardless
+        of the selected language.
+        */
 
-            watchGiftana();
+        if (
+          document.getElementById(
+            "giftana-overlay"
+          ) &&
+          !giftanaObserver
+        ) {
 
-          }
+          watchGiftana();
 
         }
-      );
-
-
-    observer.observe(
-      document.body,
-      {
-
-        childList:
-          true,
-
-        subtree:
-          true
 
       }
     );
 
-  }
+
+  observer.observe(
+    document.body,
+    {
+
+      childList:
+        true,
+
+      subtree:
+        true
+
+    }
+  );
+
+}
+
+
+/*
+=========================================================
+START
+=========================================================
+*/
+
+function initialise() {
+
+  createSwitcher();
 
 
   /*
-  =========================================================
-  START
-  =========================================================
+  PERFORMANCE FIX
+
+  English is already the original website
+  language.
+
+  Do not walk through every paragraph,
+  heading, product, Blog article section,
+  comment and dynamically generated item
+  when the visitor is using English.
+
+  French, German and Dutch still receive
+  the complete translation scan.
   */
 
-  function initialise() {
+  document.documentElement.lang =
+    currentLanguage;
 
-    createSwitcher();
 
+  updateSwitcher();
+
+
+  if (
+    currentLanguage !==
+    "en"
+  ) {
 
     applyToTree(
       document.body
     );
 
-
-    watchGiftana();
-
-
-    startObserver();
-
   }
 
 
-  /*
-  =========================================================
-  PUBLIC LANGUAGE API
-  =========================================================
-  */
-
-  window.GiftedGiftLanguage = {
-
-    get:
-      function () {
-
-        return currentLanguage;
-
-      },
+  watchGiftana();
 
 
-    set:
-      setLanguage,
+  startObserver();
+
+}
 
 
-    refresh:
-      function () {
+/*
+=========================================================
+PUBLIC LANGUAGE API
+=========================================================
+*/
 
-        applyToTree(
-          document.body
-        );
+window.GiftedGiftLanguage = {
 
-      },
+  get:
+    function () {
+
+      return currentLanguage;
+
+    },
 
 
-    supported:
-      function () {
+  set:
+    setLanguage,
 
-        return [
-          ...SUPPORTED
-        ];
+
+  refresh:
+    function () {
+
+      /*
+      Do not perform an expensive full-page
+      scan merely to "refresh" English.
+
+      Other languages still need the scan.
+      */
+
+      if (
+        currentLanguage ===
+        "en"
+      ) {
+
+        document.documentElement.lang =
+          "en";
+
+
+        updateSwitcher();
+
+
+        return;
 
       }
 
-  };
+
+      applyToTree(
+        document.body
+      );
+
+    },
 
 
-  /*
-  =========================================================
-  INITIALISE
-  =========================================================
-  */
+  supported:
+    function () {
 
-  if (
-    document.readyState ===
-    "loading"
-  ) {
+      return [
+        ...SUPPORTED
+      ];
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      initialise,
-      {
-        once:
-          true
-      }
-    );
+    }
 
-  } else {
+};
 
-    initialise();
 
-  }
+/*
+=========================================================
+INITIALISE
+=========================================================
+*/
+
+if (
+  document.readyState ===
+  "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initialise,
+    {
+      once:
+        true
+    }
+  );
+
+} else {
+
+  initialise();
+
+}
 
 })();
