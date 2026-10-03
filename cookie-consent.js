@@ -1554,8 +1554,8 @@ LOAD GIFTEDGIFT LANGUAGE SYSTEM
     "giftedgift-language-script";
 
 
-  script.src =
-"/language.js?v=20261003-2";
+  trackingScript.src =
+  "/tracking.js?v=20261003-3";
 
 
   script.defer =
