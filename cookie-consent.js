@@ -1555,7 +1555,7 @@ LOAD GIFTEDGIFT LANGUAGE SYSTEM
 
 
   script.src =
-"/language.js?v=20261003-1";
+"/language.js?v=20261003-2";
 
 
   script.defer =
