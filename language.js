@@ -3246,100 +3246,178 @@ NL = Dutch
   */
 
   function applyToTree(
-    root =
-      document.body
+  root =
+    document.body
+) {
+
+  if (
+    !root
   ) {
 
+    return;
+
+  }
+
+
+  /*
+  =====================================================
+  PERFORMANCE PROTECTION
+  =====================================================
+
+  Completely skip sections marked:
+
+  data-gge-no-translate="true"
+
+  This is especially important for long Blog articles.
+  We do NOT enter their children at all.
+  =====================================================
+  */
+
+
+  if (
+    root.nodeType ===
+      Node.ELEMENT_NODE &&
+    root.closest?.(
+      "[data-gge-no-translate]"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const stack =
+    [
+      root
+    ];
+
+
+  while (
+    stack.length
+  ) {
+
+    const node =
+      stack.pop();
+
+
     if (
-      !root
+      !node
     ) {
 
-      return;
+      continue;
 
     }
 
 
-    if (
-      root.nodeType ===
-      Node.TEXT_NODE
-    ) {
-
-      applyTextNode(
-        root
-      );
-
-
-      return;
-
-    }
-
+    /*
+    TEXT NODE
+    */
 
     if (
-      root.nodeType !==
-        Node.ELEMENT_NODE &&
-      root.nodeType !==
-        Node.DOCUMENT_NODE &&
-      root.nodeType !==
-        Node.DOCUMENT_FRAGMENT_NODE
-    ) {
-
-      return;
-
-    }
-
-
-    if (
-      root.nodeType ===
-      Node.ELEMENT_NODE
-    ) {
-
-      applyAttributes(
-        root
-      );
-
-    }
-
-
-    root
-      .querySelectorAll?.(
-        "*"
-      )
-      .forEach(
-        applyAttributes
-      );
-
-
-    const walker =
-      document.createTreeWalker(
-        root,
-        NodeFilter.SHOW_TEXT
-      );
-
-
-    let node;
-
-
-    while (
-      (
-        node =
-          walker.nextNode()
-      )
+      node.nodeType ===
+        Node.TEXT_NODE
     ) {
 
       applyTextNode(
         node
       );
 
+      continue;
+
     }
 
 
-    document.documentElement.lang =
-      currentLanguage;
+    /*
+    ONLY PROCESS NORMAL DOM NODES
+    */
+
+    if (
+      node.nodeType !==
+        Node.ELEMENT_NODE &&
+      node.nodeType !==
+        Node.DOCUMENT_NODE &&
+      node.nodeType !==
+        Node.DOCUMENT_FRAGMENT_NODE
+    ) {
+
+      continue;
+
+    }
 
 
-    updateSwitcher();
+    /*
+    DO NOT ENTER PROTECTED CONTENT
+    */
+
+    if (
+      node.nodeType ===
+        Node.ELEMENT_NODE &&
+      node.hasAttribute(
+        "data-gge-no-translate"
+      )
+    ) {
+
+      continue;
+
+    }
+
+
+    /*
+    TRANSLATE ELEMENT ATTRIBUTES
+    */
+
+    if (
+      node.nodeType ===
+        Node.ELEMENT_NODE
+    ) {
+
+      applyAttributes(
+        node
+      );
+
+    }
+
+
+    /*
+    ADD CHILDREN TO STACK.
+
+    Because protected elements are stopped above,
+    their hundreds or thousands of child nodes
+    are never scanned.
+    */
+
+    const children =
+      node.childNodes;
+
+
+    for (
+      let i =
+        children.length - 1;
+
+      i >= 0;
+
+      i -= 1
+    ) {
+
+      stack.push(
+        children[
+          i
+        ]
+      );
+
+    }
 
   }
+
+
+  document.documentElement.lang =
+    currentLanguage;
+
+
+  updateSwitcher();
+
+}
 
 
   /*
