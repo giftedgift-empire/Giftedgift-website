@@ -3618,332 +3618,39 @@
 
     function initialisePayPal() {
 
-      if (
-        !checkoutState
-      ) {
+  if (
+    !checkoutState
+  ) {
 
-        return;
-      }
+    return;
+  }
 
 
-      if (
-        !window.paypal
-      ) {
+  paymentLoading.style.display =
+    "block";
 
-        paymentLoading.style.display =
-          "none";
 
+  paymentLoading.innerHTML = `
 
-        showError(
-          "PayPal could not load. Please refresh the page and try again."
-        );
+    <strong
+      style="
+        display:block;
+        color:#164799;
+        font-size:22px;
+        margin-bottom:8px;
+      "
+    >
+      PayPal — Coming Soon
+    </strong>
 
+    PayPal payments will be available soon.
 
-        return;
-      }
+  `;
 
 
-      paymentLoading.style.display =
-        "none";
-
-
-      paypal.Buttons({
-
-        style: {
-
-          layout:
-            "vertical",
-
-          shape:
-            "rect",
-
-          label:
-            "paypal"
-
-        },
-
-
-        createOrder:
-          async function () {
-
-            clearStatus();
-
-
-            try {
-
-              /*
-                IMPORTANT:
-
-                We send the cart identifiers and
-                customer Fashion selections.
-
-                The server independently verifies:
-                - product price
-                - Deals
-                - Fashion variant
-                - variant stock
-                - optional variant price
-                - Sew on Demand availability
-                - Sew pricing
-                - shipping price
-
-                Browser prices are NOT trusted.
-              */
-
-              const response =
-                await fetch(
-                  CREATE_ORDER_URL,
-                  {
-
-                    method:
-                      "POST",
-
-                    headers: {
-
-                      "Content-Type":
-                        "application/json"
-
-                    },
-
-                    body:
-                      JSON.stringify({
-
-                        cart:
-                          checkoutState.cart,
-
-                        shipping:
-                          checkoutState.shipping,
-
-                        address:
-                          checkoutState.address
-
-                      })
-
-                  }
-                );
-
-
-              const result =
-                await response.json();
-
-
-              if (
-                !response.ok ||
-                !result.paypal_order_id
-              ) {
-
-                throw new Error(
-                  result.error ||
-                  "Could not start PayPal checkout."
-                );
-              }
-
-
-              return result
-                .paypal_order_id;
-
-
-            } catch (
-              error
-            ) {
-
-              console.error(
-                error
-              );
-
-
-              showError(
-                error.message ||
-                "Could not start PayPal checkout."
-              );
-
-
-              throw error;
-            }
-          },
-
-
-        onApprove:
-          async function (
-            data
-          ) {
-
-            clearStatus();
-
-
-            showSuccess(
-              "PayPal approved the payment. Confirming your order..."
-            );
-
-
-            try {
-
-              const response =
-                await fetch(
-                  CAPTURE_ORDER_URL,
-                  {
-
-                    method:
-                      "POST",
-
-                    headers: {
-
-                      "Content-Type":
-                        "application/json"
-
-                    },
-
-                    body:
-                      JSON.stringify({
-
-                        paypal_order_id:
-                          data.orderID
-
-                      })
-
-                  }
-                );
-
-
-              const result =
-                await response.json();
-
-
-              if (
-                !response.ok ||
-                !result.success
-              ) {
-
-                throw new Error(
-                  result.error ||
-                  "Payment could not be confirmed."
-                );
-              }
-
-
-              localStorage.removeItem(
-                CART_KEY
-              );
-
-
-              localStorage.removeItem(
-                SHIPPING_KEY
-              );
-
-
-              statusBox.className =
-                "status";
-
-
-              statusBox.textContent =
-                "";
-
-
-              paypalContainer.style.display =
-                "none";
-
-
-              successCard.style.display =
-                "block";
-
-
-              successMessage.innerHTML = `
-
-                Thank you for your order.
-
-                <br><br>
-
-                <strong>
-                  Order number:
-                </strong>
-
-                ${escapeHtml(
-                  result.physical_order_id
-                )}
-
-                <br>
-
-                <strong>
-                  Amount paid:
-                </strong>
-
-                ${money(
-                  result.total
-                )}
-
-                <br>
-
-                <strong>
-                  Payment status:
-                </strong>
-
-                Paid
-
-              `;
-
-
-              successCard.scrollIntoView({
-
-                behavior:
-                  "smooth",
-
-                block:
-                  "center"
-
-              });
-
-
-            } catch (
-              error
-            ) {
-
-              console.error(
-                error
-              );
-
-
-              statusBox.className =
-                "status error";
-
-
-              statusBox.textContent =
-                error.message ||
-                "There was a problem confirming the payment. Please do not try to pay again until the order is checked.";
-
-            }
-          },
-
-
-        onCancel:
-          function () {
-
-            showError(
-              "PayPal checkout was cancelled. Your cart has not been changed."
-            );
-          },
-
-
-        onError:
-          function (
-            error
-          ) {
-
-            console.error(
-              "PayPal error:",
-              error
-            );
-
-
-            showError(
-              "PayPal encountered an error. No successful payment has been confirmed."
-            );
-          }
-
-      })
-      .render(
-        "#paypal-button-container"
-      );
-    }
+  paypalContainer.style.display =
+    "none";
+}
 
 
     loadCheckout();
