@@ -343,7 +343,7 @@
 
     /*
       =====================================================
-      PAYPAL
+      PAYPAL — COMING SOON
       =====================================================
     */
 
@@ -465,25 +465,6 @@
         background-position: -220% center;
       }
 
-    }
-
-    .payment-tip {
-      margin: 0 0 18px;
-      padding: 12px 14px;
-      background: #f6f8fc;
-      border-radius: 10px;
-      color: #555;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .payment-tip strong {
-      color: #123a8c;
-    }
-
-    #paypal-button {
-      display: block;
-      margin-top: 12px;
     }
 
     .payment-security {
@@ -610,7 +591,6 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
-
 
     .secure-note {
       margin-top: 18px;
@@ -893,7 +873,7 @@
 
         <!--
           ===================================================
-          PAYPAL
+          PAYPAL — COMING SOON
           ===================================================
         -->
 
@@ -908,7 +888,7 @@
             </div>
 
             <div class="paypal-title">
-              PayPal Secure Checkout
+              PayPal — Coming Soon
             </div>
 
           </div>
@@ -917,30 +897,11 @@
           <div class="payment-highlight-box">
 
             <p class="payment-highlight">
-              Pay securely with PayPal. Eligible debit cards,
-              credit cards, and bank accounts may also appear
-              when the secure PayPal window opens.
+              PayPal payments will be available soon.
+              Please use the secure Credit / Debit Card option above.
             </p>
 
           </div>
-
-
-          <div class="payment-tip">
-
-            <strong>
-              You may have more payment choices.
-            </strong>
-
-            After you continue, PayPal will securely show
-            the payment methods available to you.
-
-          </div>
-
-
-          <paypal-button
-            id="paypal-button"
-            type="pay"
-          ></paypal-button>
 
 
           <div class="payment-security">
@@ -950,9 +911,8 @@
             </span>
 
             <span>
-              Your payment information is handled securely by PayPal.
-              GiftedGift Empire does not receive or store your full
-              card or bank details.
+              PayPal will be activated once our live
+              payment setup is complete.
             </span>
 
           </div>
@@ -966,7 +926,7 @@
 
       <!--
         =====================================================
-        DOWNLOAD AFTER SUCCESSFUL PAYPAL PAYMENT
+        DOWNLOAD AFTER SUCCESSFUL PAYMENT
         =====================================================
       -->
 
@@ -1016,7 +976,7 @@
 
 
       <div class="secure-note">
-        Secure digital checkout powered by PayPal and Flutterwave.
+        Secure card checkout powered by Flutterwave. PayPal coming soon.
       </div>
 
 
@@ -1040,8 +1000,20 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_5wjUjC6amD7e2H_3h_7UQw_TY6orH16";
 
 
+/*
+  Existing PayPal Sandbox Client ID is preserved
+  for the old integration code below.
+
+  PAYPAL_ENABLED remains false so no customer
+  can use the PayPal integration.
+*/
+
 const PAYPAL_SANDBOX_CLIENT_ID =
   "AQEwW30fuW09fPr4dtGUuWD0S3tlKblHPpZffcy0POvsuPhSI3b400ykmO893Fp4dO2yXtHR8Ey8nDGI";
+
+
+const PAYPAL_ENABLED =
+  false;
 
 
 const supabaseClient =
@@ -1072,11 +1044,6 @@ const dealId =
 
 function getCheckoutReferralCode() {
 
-  /*
-    First choice:
-    referral code currently in the URL.
-  */
-
   const urlReferral =
     String(
       params.get("ref") || ""
@@ -1093,20 +1060,6 @@ function getCheckoutReferralCode() {
 
   }
 
-
-  /*
-    Second choice:
-    referral previously saved by
-    affiliate-tracking.js.
-
-    Stored format:
-    {
-      referral_code: "...",
-      expires_at: ...
-    }
-
-    Valid for 30 days.
-  */
 
   try {
 
@@ -1145,11 +1098,6 @@ function getCheckoutReferralCode() {
         storedReferral?.expires_at
       );
 
-
-    /*
-      Remove broken or expired
-      affiliate information.
-    */
 
     if (
       !storedCode ||
@@ -1222,12 +1170,6 @@ let paypalConfigured =
 let paymentInProgress =
   false;
 
-
-/*
-  These two flags protect a successfully approved/completed
-  PayPal payment from being overwritten by a late PayPal
-  cancel/error callback.
-*/
 
 let paypalApprovalStarted =
   false;
@@ -1882,6 +1824,26 @@ function openCardCheckout() {
   }
 
 
+  const consent =
+    document.getElementById(
+      "withdrawal-consent"
+    );
+
+
+  if (
+    !consent.checked
+  ) {
+
+    showError(
+      "Please accept the digital-content consent before paying."
+    );
+
+
+    return;
+
+  }
+
+
   const cardCheckoutURL =
     new URL(
       "/flutterwave-checkout.html",
@@ -1950,6 +1912,7 @@ document
 /*
   =========================================================
   PAYPAL
+  PRESERVED FOR FUTURE LIVE ACTIVATION
   =========================================================
 */
 
@@ -2208,13 +2171,6 @@ async function linkPayPalPurchaseToCustomer(
       sessionData?.session;
 
 
-    /*
-      Guest checkout remains allowed.
-      If the buyer is not signed in,
-      the payment still succeeds normally.
-    */
-
-
     if (
       !session?.user
     ) {
@@ -2303,6 +2259,23 @@ async function linkPayPalPurchaseToCustomer(
 async function maybeConfigurePayPal() {
 
 
+  /*
+    MASTER SWITCH.
+
+    PayPal is deliberately disabled until
+    GiftedGift Empire has Live PayPal access.
+  */
+
+
+  if (
+    PAYPAL_ENABLED !== true
+  ) {
+
+    return;
+
+  }
+
+
   if (
     paypalConfigured ||
     !paypalSdkReady ||
@@ -2374,13 +2347,6 @@ async function maybeConfigurePayPal() {
             ) => {
 
 
-              /*
-                PayPal has now approved the order.
-                From this point onward, a late cancel/error
-                callback must not overwrite the real result.
-              */
-
-
               paypalApprovalStarted =
                 true;
 
@@ -2407,23 +2373,8 @@ async function maybeConfigurePayPal() {
                   capture.download_token;
 
 
-                /*
-                  The server has confirmed the payment as COMPLETED.
-                  Protect this success from any late PayPal callback.
-                */
-
-
                 paypalPaymentCompleted =
                   true;
-
-
-                /*
-                  Link this completed purchase to the
-                  authenticated GiftedGift Empire customer.
-
-                  PayPal's payer email does NOT need to match
-                  the GiftedGift Empire customer email.
-                */
 
 
                 const linkedToCustomer =
@@ -2466,12 +2417,6 @@ async function maybeConfigurePayPal() {
                   .style.display =
                     "block";
 
-
-                /*
-                  Show the bonus only when the
-                  purchased product actually has
-                  a saved bonus file.
-                */
 
                 showBonusDownloadIfAvailable();
 
@@ -2529,12 +2474,6 @@ async function maybeConfigurePayPal() {
                 false;
 
 
-              /*
-                Ignore a late cancel callback if PayPal approval
-                has already started or payment is already complete.
-              */
-
-
               if (
                 paypalApprovalStarted ||
                 paypalPaymentCompleted
@@ -2568,12 +2507,6 @@ async function maybeConfigurePayPal() {
                 false;
 
 
-              /*
-                Do not overwrite a real approval/completed
-                payment with a late PayPal SDK error.
-              */
-
-
               if (
                 paypalApprovalStarted ||
                 paypalPaymentCompleted
@@ -2599,6 +2532,15 @@ async function maybeConfigurePayPal() {
       );
 
 
+    if (
+      !paypalButton
+    ) {
+
+      return;
+
+    }
+
+
     paypalButton
       .addEventListener(
         "click",
@@ -2612,16 +2554,6 @@ async function maybeConfigurePayPal() {
             return;
 
           }
-
-
-          /*
-            This is a fresh PayPal attempt.
-            Reset only the approval-started flag.
-
-            paypalPaymentCompleted is deliberately NOT reset.
-            Once the server has confirmed payment, that success
-            must remain protected.
-          */
 
 
           paypalApprovalStarted =
@@ -2659,15 +2591,6 @@ async function maybeConfigurePayPal() {
               true;
 
 
-            /*
-              IMPORTANT:
-              PayPal Web SDK v6 expects
-              the order promise to be
-              passed to session.start().
-              Do not await it here first.
-            */
-
-
             const orderPromise =
               createPayPalOrder();
 
@@ -2693,15 +2616,6 @@ async function maybeConfigurePayPal() {
             console.error(
               error
             );
-
-
-            /*
-              session.start() can sometimes reject after
-              PayPal has already moved into approval.
-
-              Do not replace the genuine approval/completion
-              result with a misleading error message.
-            */
 
 
             if (
@@ -2747,13 +2661,25 @@ async function maybeConfigurePayPal() {
       false;
 
 
-    showError(
+    /*
+      Do not show a PayPal error to customers
+      while PayPal is intentionally disabled.
+    */
 
-      error instanceof Error
-        ? error.message
-        : "PayPal could not be loaded."
 
-    );
+    if (
+      PAYPAL_ENABLED === true
+    ) {
+
+      showError(
+
+        error instanceof Error
+          ? error.message
+          : "PayPal could not be loaded."
+
+      );
+
+    }
 
   }
 
@@ -3089,6 +3015,15 @@ document
 function onPayPalWebSdkLoaded() {
 
 
+  if (
+    PAYPAL_ENABLED !== true
+  ) {
+
+    return;
+
+  }
+
+
   paypalSdkReady =
     true;
 
@@ -3110,11 +3045,12 @@ loadProduct();
 </script>
 
 
-<script
-  async
-  src="https://www.sandbox.paypal.com/web-sdk/v6/core"
-  onload="onPayPalWebSdkLoaded()"
-></script>
+<!--
+  PAYPAL SDK DISABLED.
+
+  No Sandbox PayPal SDK is loaded for customers.
+  PayPal will be activated later when Live access is ready.
+-->
 
 
 <script src="/affiliate-tracking.js"></script>
