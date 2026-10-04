@@ -1457,7 +1457,7 @@
     */
 
     trackingScript.src =
-      "/tracking.js";
+  "/tracking.js?v=20261003-3";
 
 
     trackingScript.async =
@@ -1554,8 +1554,9 @@ LOAD GIFTEDGIFT LANGUAGE SYSTEM
     "giftedgift-language-script";
 
 
-  trackingScript.src =
-  "/tracking.js?v=20261003-3";
+  // cookie-consent.js
+script.src =
+"/language.js?v=20261003-3";
 
 
   script.defer =
