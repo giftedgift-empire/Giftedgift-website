@@ -1495,7 +1495,7 @@ GIFTEDGIFT LANGUAGE SYSTEM — BACKUP LOADER
 
 
     script.src =
-  "/language.js?v=20260930-3";
+  "/language.js?v=20261003-3"
 
 
     script.defer =
