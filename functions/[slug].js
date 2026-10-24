@@ -1986,7 +1986,22 @@ export async function onRequestGet(
 
   try {
 
+    /*
+      =================================================
+      DYNAMIC SITEMAP
+      =================================================
+    */
 
+    if (
+      slug ===
+        "sitemap.xml"
+    ) {
+
+      return serveDynamicSitemap(
+        context
+      );
+
+    }
     /*
       =================================================
       IMPORTANT STATIC FREE-PRODUCT PAGE
