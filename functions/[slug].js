@@ -1672,7 +1672,287 @@ async function serveLandingPage(
 
 }
 
+/*
+  =====================================================
+  DYNAMIC SITEMAP
+  =====================================================
+*/
 
+async function getSitemapSlugs(
+  table,
+  statusColumn
+) {
+
+  const apiURL =
+    SUPABASE_URL +
+    "/rest/v1/" +
+    table +
+    "?select=slug" +
+    "&" +
+    statusColumn +
+    "=eq.true" +
+    "&slug=not.is.null" +
+    "&limit=1000";
+
+
+  const response =
+    await fetch(
+      apiURL,
+      {
+        headers: {
+
+          apikey:
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Authorization:
+            "Bearer " +
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Accept:
+            "application/json"
+
+        }
+      }
+    );
+
+
+  if (
+    !response.ok
+  ) {
+
+    console.error(
+      "Sitemap lookup failed:",
+      table,
+      response.status
+    );
+
+
+    return [];
+
+  }
+
+
+  const items =
+    await response.json();
+
+
+  if (
+    !Array.isArray(
+      items
+    )
+  ) {
+
+    return [];
+
+  }
+
+
+  return items
+    .map(
+      item =>
+        String(
+          item.slug ||
+          ""
+        )
+          .trim()
+          .toLowerCase()
+    )
+    .filter(
+      slug =>
+        /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+          .test(
+            slug
+          )
+    );
+
+}
+
+
+
+function escapeSitemapXML(
+  value
+) {
+
+  return String(
+    value
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&apos;"
+    );
+
+}
+
+
+
+function buildSitemapURL(
+  slug
+) {
+
+  const url =
+    SITE_URL +
+    "/" +
+    encodeURIComponent(
+      slug
+    );
+
+
+  return (
+    "  <url>\n" +
+    "    <loc>" +
+    escapeSitemapXML(
+      url
+    ) +
+    "</loc>\n" +
+    "  </url>"
+  );
+
+}
+
+
+
+async function serveDynamicSitemap(
+  context
+) {
+
+  const assetURL =
+    new URL(
+      context.request.url
+    );
+
+
+  assetURL.pathname =
+    "/sitemap.xml";
+
+
+  assetURL.search =
+    "";
+
+
+  const baseResponse =
+    await context.env.ASSETS.fetch(
+      assetURL
+    );
+
+
+  if (
+    !baseResponse.ok
+  ) {
+
+    return baseResponse;
+
+  }
+
+
+  const baseXML =
+    await baseResponse.text();
+
+
+  const [
+    affiliateSlugs,
+    blogSlugs,
+    inspirationSlugs
+  ] =
+    await Promise.all(
+      [
+
+        getSitemapSlugs(
+          "affiliate_products",
+          "active"
+        ),
+
+        getSitemapSlugs(
+          "blog_posts",
+          "published"
+        ),
+
+        getSitemapSlugs(
+          "daily_inspirations",
+          "published"
+        )
+
+      ]
+    );
+
+
+  const slugs =
+    Array.from(
+      new Set(
+        [
+          ...affiliateSlugs,
+          ...blogSlugs,
+          ...inspirationSlugs
+        ]
+      )
+    );
+
+
+  const dynamicXML =
+    slugs
+      .map(
+        buildSitemapURL
+      )
+      .join(
+        "\n\n"
+      );
+
+
+  let finalXML =
+    baseXML;
+
+
+  if (
+    dynamicXML &&
+    baseXML.includes(
+      "</urlset>"
+    )
+  ) {
+
+    finalXML =
+      baseXML.replace(
+        "</urlset>",
+        dynamicXML +
+        "\n\n</urlset>"
+      );
+
+  }
+
+
+  return new Response(
+    finalXML,
+    {
+      status:
+        200,
+
+      headers: {
+
+        "Content-Type":
+          "application/xml; charset=UTF-8",
+
+        "Cache-Control":
+          "public, max-age=3600"
+
+      }
+    }
+  );
+
+}
 
 /*
   =====================================================
